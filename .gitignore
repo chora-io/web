@@ -1,0 +1,16 @@
+.idea
+
+# mac os
+.DS_Store
+
+# dependencies
+node_modules
+
+# package logs
+lerna-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# gatsby files
+.cache
+public

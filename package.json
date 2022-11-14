@@ -1,0 +1,41 @@
+{
+  "name": "web",
+  "private": true,
+  "description": "website and application interfaces",
+  "version": "0.0.0",
+  "homepage": "https://chora.io",
+  "bugs": {
+    "url": "https://github.com/choraio/web/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/choraio/web"
+  },
+  "workspaces": {
+    "packages": [
+      "main"
+    ]
+  },
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "lint": "lerna run lint --stream",
+    "lint-main": "lerna run --scope main lint --stream",
+    "format": "lerna run format --stream",
+    "format-main": "lerna run --scope main format --stream",
+    "test": "lerna run test --stream",
+    "test-main": "lerna run --scope main test --stream",
+    "build": "lerna run build --stream",
+    "build-main": "lerna run --scope main build --stream",
+    "start": "lerna run start --stream",
+    "start-main": "lerna run --scope main start --stream",
+    "serve": "lerna run serve --stream",
+    "serve-main": "lerna run --scope main serve --stream",
+    "clean": "lerna run clean --stream",
+    "clean-main": "lerna run --scope main clean --stream"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "lerna": "^6.0.3",
+    "typescript": "^4.8.4"
+  }
+}
