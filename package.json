@@ -31,7 +31,8 @@
     "serve": "lerna run serve --stream",
     "serve-main": "lerna run --scope main serve --stream",
     "clean": "lerna run clean --stream",
-    "clean-main": "lerna run --scope main clean --stream"
+    "clean-main": "lerna run --scope main clean --stream",
+    "deploy": "sh ./deploy.sh"
   },
   "devDependencies": {
     "@types/node": "^18.11.9",
