@@ -58,6 +58,6 @@ const Index = () => (
   </Main>
 )
 
-export const Head = () => <Seo title="chora | decentralized protocol research" />
+export const Head = () => <Seo title="" />
 
 export default Index

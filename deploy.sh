@@ -6,11 +6,18 @@ set -e
 # build
 yarn build
 
-# change to build directory
-cd main/public
+# clean up public
+rm -rf public
 
-# deploy to custom domain
-echo 'chora.io' >> CNAME
+# copy public directories
+cp -r main/public public
+cp -r scan/public public/scan
+
+# add CNAME file
+echo 'chora.io' >> public/CNAME
+
+# change to public directory
+cd public
 
 # git init and commit
 git init

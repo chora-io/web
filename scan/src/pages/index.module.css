@@ -1,0 +1,47 @@
+.container {
+  background: var(--color-bg);
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 100vw;
+}
+
+/* banner */
+
+.banner {
+  align-items: center;
+  display: flex;
+  font-size: 1.5rem;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+.banner div {
+  padding: 0 2rem;
+  text-align: center;
+  width: 20rem;
+}
+
+.banner h3 {
+  padding: 0.75rem 0;
+}
+
+.banner p {
+  padding: 0.5rem 0;
+}
+
+.banner i {
+  color: var(--color-primary);
+}
+
+.error {
+  color: var(--color-error);
+}
+
+@media (max-width: 850px) {
+
+  .banner {
+    font-size: 1.2rem;
+  }
+}
