@@ -1,0 +1,66 @@
+@font-face {
+  src: local('Ubuntu'),
+    url('../assets/font/Ubuntu-Bold.ttf'),
+    url('../assets/font/Ubuntu-BoldItalic.ttf'),
+    url('../assets/font/Ubuntu-Italic.ttf'),
+    url('../assets/font/Ubuntu-Light.ttf'),
+    url('../assets/font/Ubuntu-LightItalic.ttf'),
+    url('../assets/font/Ubuntu-Medium.ttf'),
+    url('../assets/font/Ubuntu-MediumItalic.ttf'),
+    url('../assets/font/Ubuntu-Regular.ttf');
+}
+
+:root {
+  --color-bg: #000;
+  --color-text: #FFF;
+  --color-primary: #0CA;
+  --color-error: red;
+  --line-height-loose: 1.75;
+  --line-height-normal: 1.5;
+  --line-height-dense: 1.25;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 64px;
+  --size-content: 54rem;
+  --size-gutter: var(--space-5);
+  --size-gap: var(--space-6);
+  --transition: 0.25s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  cursor: default;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 300;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 400;
+}
+
+p {
+  line-height: var(--line-height-loose);
+}
+
+a, a:active {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  opacity: 0.75;
+}

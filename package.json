@@ -13,6 +13,7 @@
   },
   "workspaces": {
     "packages": [
+      "data",
       "main",
       "scan"
     ]
@@ -20,24 +21,31 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "lint": "lerna run lint --stream",
+    "lint-data": "lerna run --scope data lint --stream",
     "lint-main": "lerna run --scope main lint --stream",
     "lint-scan": "lerna run --scope scan lint --stream",
     "format": "lerna run format --stream",
+    "format-data": "lerna run --scope data format --stream",
     "format-main": "lerna run --scope main format --stream",
     "format-scan": "lerna run --scope scan format --stream",
     "test": "lerna run test --stream",
+    "test-data": "lerna run --scope data test --stream",
     "test-main": "lerna run --scope main test --stream",
     "test-scan": "lerna run --scope scan test --stream",
     "build": "lerna run build --stream",
+    "build-data": "lerna run --scope data build --stream",
     "build-main": "lerna run --scope main build --stream",
     "build-scan": "lerna run --scope scan build --stream",
     "start": "lerna run start --stream",
+    "start-data": "lerna run --scope data start --stream",
     "start-main": "lerna run --scope main start --stream",
     "start-scan": "lerna run --scope scan start --stream",
     "serve": "lerna run serve --stream",
+    "serve-data": "lerna run --scope data serve --stream",
     "serve-main": "lerna run --scope main serve --stream",
     "serve-scan": "lerna run --scope scan serve --stream",
     "clean": "lerna run clean --stream",
+    "clean-data": "lerna run --scope data clean --stream",
     "clean-main": "lerna run --scope main clean --stream",
     "clean-scan": "lerna run --scope scan clean --stream",
     "deploy": "sh ./deploy.sh"

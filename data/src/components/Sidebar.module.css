@@ -1,0 +1,17 @@
+.sidebar {
+  background: rgba(10, 10, 10, 0.8);
+  box-shadow: 0 0 4px rgba(100, 100, 100, 0.5);
+  height: 100vh;
+  position: fixed;
+  width: 280px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 2em;
+}
+
+.sidebar li {
+  font-size: 1.8em;
+  padding: 1em;
+}

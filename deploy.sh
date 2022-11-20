@@ -14,6 +14,7 @@ rm -rf public
 
 # copy public directories
 cp -r main/public public
+cp -r data/public public/data
 cp -r scan/public public/scan
 
 # add CNAME file

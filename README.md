@@ -10,4 +10,3 @@ website and application interfaces
 ## Documentation
 
 - [Chora Documentation](https://docs.chora.io)
-- [Cosmos SDK Documentation](https://docs.cosmos.network)
