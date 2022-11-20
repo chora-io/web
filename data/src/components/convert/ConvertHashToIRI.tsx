@@ -1,36 +1,47 @@
 import * as React from "react"
 import { useState } from "react"
 
-import * as styles from "./MsgAnchor.module.css"
+import * as styles from "./ConvertIRIToHash.module.css"
 
 const localhostUrl = "http://localhost:1317"
 const regenRedwoodUrl = "https://redwood.chora.io/rest"
 const regenHambachUrl = "https://hambach.chora.io/rest"
 
-const txBroadcastUrl = "/cosmos/tx/v1beta1/txs"
+const convertIRIToHash = "/regen/data/v1/convert-hash-to-iri"
 
-const MsgAnchor = () => {
+const hashPlaceholder = `{
+  "content_hash": {
+    "graph": {
+      "hash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+      "digest_algorithm": "DIGEST_ALGORITHM_BLAKE2B_256",
+      "canonicalization_algorithm": "GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015",
+      "merkle_tree": "GRAPH_MERKLE_TREE_NONE_UNSPECIFIED"
+    }
+  }
+}`
 
-  const [data, setData] = useState("");
+const ConvertHashToIRI = () => {
+
+  const [hash, setIri] = useState("");
   const [network, setNetwork] = useState(localhostUrl);
-  const [response, setResponse] = useState("");
+  const [result, setResult] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
 
-    fetch(network + txBroadcastUrl, {
+    fetch(network + convertIRIToHash, {
       method: 'POST',
-      body: data, // TODO: create transaction
+      body: hash,
     })
       .then(res => res.json())
       .then(data => {
         console.log(data)
 
-        if (data.code != 0) {
+        if (data.code) {
           setError(data.message);
         } else {
-          setResponse(data);
+          setResult(data.iri);
         }
       })
       .catch(err => {
@@ -42,12 +53,13 @@ const MsgAnchor = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label htmlFor="data">
-            {"data"}
+          <label htmlFor="hash">
+            {"content hash"}
             <textarea
-              id="data"
-              value={data}
-              onChange={event => setData(event.target.value)}
+              id="hash"
+              value={hash}
+              placeholder={hashPlaceholder}
+              onChange={event => setIri(event.target.value)}
             />
           </label>
           <label htmlFor="network">
@@ -69,7 +81,7 @@ const MsgAnchor = () => {
             </select>
           </label>
           <button type="submit">
-            {"anchor"}
+            {"convert"}
           </button>
         </form>
       </div>
@@ -78,13 +90,15 @@ const MsgAnchor = () => {
           {error}
         </div>
       )}
-      {response != "" && (
+      {result != "" && (
         <div>
-          {response}
+          <pre>
+            {result}
+          </pre>
         </div>
       )}
     </>
   )
 }
 
-export default MsgAnchor
+export default ConvertHashToIRI

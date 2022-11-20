@@ -10,6 +10,9 @@ const Sidebar = () => (
         <Link to="/">{"home"}</Link>
       </li>
       <li>
+        <Link to="/convert">{"convert"}</Link>
+      </li>
+      <li>
         <Link to="/anchor">{"anchor"}</Link>
       </li>
       <li>

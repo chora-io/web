@@ -6,6 +6,7 @@
 }
 
 .form input,
+.form input:active,
 .form textarea,
 .form select {
   background: #111;

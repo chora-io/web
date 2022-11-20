@@ -1,0 +1,33 @@
+.container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: 15vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  width: 85vw;
+}
+
+.container div {
+  margin: 5vh 0;
+}
+
+/* table */
+
+.table {
+  background: rgba(20, 20, 20, 0.5);
+  box-shadow: 0 0 4px rgba(100, 100, 100, 0.5);
+  width: 70vw;
+}
+
+.table div {
+  box-shadow: 0 0 2px rgba(100, 100, 100, 0.5);
+  margin: 2px;
+  padding: 2em;
+}
+
+.tableHeader {
+  background: rgba(20, 20, 20, 0.5);
+  color: var(--color-primary);
+  font-weight: 500;
+}

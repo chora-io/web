@@ -3,6 +3,7 @@ import { useState } from "react"
 
 import * as styles from "./QueryAnchor.module.css"
 
+const localhostUrl = "http://localhost:1317"
 const regenRedwoodUrl = "https://redwood.chora.io/rest"
 const regenHambachUrl = "https://hambach.chora.io/rest"
 
@@ -11,7 +12,7 @@ const queryAnchor = "/regen/data/v1/anchor-by-iri"
 const QueryAnchor = () => {
 
   const [iri, setIri] = useState("");
-  const [network, setNetwork] = useState(regenRedwoodUrl);
+  const [network, setNetwork] = useState(localhostUrl);
   const [response, setResponse] = useState("");
   const [error, setError] = useState("");
 
@@ -23,7 +24,7 @@ const QueryAnchor = () => {
       .then(data => {
         console.log(data)
 
-        if (data.code != 0) {
+        if (data.code) {
           setError(data.message);
         } else {
           setResponse(data);
@@ -53,6 +54,9 @@ const QueryAnchor = () => {
               value={network}
               onChange={event => setNetwork(event.target.value)}
             >
+              <option value={localhostUrl}>
+                {"localhost"}
+              </option>
               <option value={regenRedwoodUrl}>
                 {"regen-redwood-1"}
               </option>

@@ -5,28 +5,26 @@
   margin-bottom: 2em;
 }
 
-.form textarea {
+.form input,
+.form textarea,
+.form select {
   background: #111;
   box-shadow: 0 0 4px rgba(100, 100, 100, 0.5);
   border: none;
   color: #FFF;
   display: block;
-  height: 30em;
   margin: 1em 0;
   outline: none;
   padding: 1em;
+}
+
+.form input {
   width: 50em;
 }
 
-.form select {
-  background: #111;
-  border: none;
-  box-shadow: 0 0 4px rgba(100, 100, 100, 0.5);
-  color: #FFF;
-  display: block;
-  margin: 1em 0;
-  outline: none;
-  padding: 1em;
+.form textarea {
+  height: 30em;
+  width: 50em;
 }
 
 .form button {

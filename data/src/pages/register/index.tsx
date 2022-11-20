@@ -3,7 +3,6 @@ import { useState, useEffect } from "react"
 
 import Main from "../../layouts/Main"
 import Seo from "../../components/Seo"
-import Sidebar from "../../components/Sidebar"
 
 import * as styles from "./index.module.css"
 
