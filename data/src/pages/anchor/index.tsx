@@ -1,7 +1,10 @@
-import * as React from 'react';
+import * as React from "react"
 
 import Main from "../../layouts/Main"
 import Seo from "../../components/Seo"
+import MsgAnchor from "../../components/anchor/MsgAnchor"
+import QueryAnchor from "../../components/anchor/QueryAnchor"
+
 import * as styles from "./index.module.css"
 
 const Anchor = () => {
@@ -16,17 +19,13 @@ const Anchor = () => {
             <div className={styles.tableHeader}>
               {"anchor data"}
             </div>
-            <div>
-              {"..."}
-            </div>
+            <MsgAnchor />
           </div>
           <div className={styles.table}>
             <div className={styles.tableHeader}>
               {"search anchors"}
             </div>
-            <div>
-              {"..."}
-            </div>
+            <QueryAnchor />
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import * as React from "react"
 
 import Main from "../../layouts/Main"
 import Seo from "../../components/Seo"
+
 import * as styles from "./index.module.css"
 
 const NotFound = () => (
@@ -10,10 +11,10 @@ const NotFound = () => (
       <div className={styles.banner}>
         <div>
           <h1>
-            {'404'}
+            {"404"}
           </h1>
           <h2>
-            {'a placeless place'}
+            {"a placeless place"}
           </h2>
         </div>
       </div>

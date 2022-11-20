@@ -2,6 +2,7 @@ import * as React from "react"
 
 import Main from "../../layouts/Main"
 import Seo from "../../components/Seo"
+
 import * as styles from "./index.module.css"
 
 const NotFound = () => (

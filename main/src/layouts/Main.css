@@ -76,3 +76,15 @@ a:hover {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+button {
+  background: var(--color-primary);
+  border: none;
+  border-radius: 1em;
+  transition: var(--transition);
+}
+
+button:hover {
+  cursor: pointer;
+  opacity: 0.75;
+}

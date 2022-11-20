@@ -1,7 +1,7 @@
 {
   "name": "data",
   "private": true,
-  "description": "data module application",
+  "description": "data anchoring and attestations",
   "version": "0.0.0",
   "homepage": "https://data.chora.io",
   "bugs": {

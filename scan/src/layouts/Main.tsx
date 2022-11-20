@@ -5,7 +5,7 @@ import "./Main.css"
 const Main = ({ children }: any) => {
   return (
     <main>
-      <div className={"background"} />
+      <div className="background" />
       {children}
     </main>
   )

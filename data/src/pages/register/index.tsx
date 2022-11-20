@@ -1,15 +1,16 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+import * as React from "react";
+import { useState, useEffect } from "react"
 
 import Main from "../../layouts/Main"
 import Seo from "../../components/Seo"
 import Sidebar from "../../components/Sidebar"
+
 import * as styles from "./index.module.css"
 
-const regenRedwoodUrl = 'https://redwood.chora.io/rest'
-const regenHambachUrl = 'https://hambach.chora.io/rest'
+const regenRedwoodUrl = "https://redwood.chora.io/rest"
+const regenHambachUrl = "https://hambach.chora.io/rest"
 
-const queryResolver = '/regen/data/v1/resolver/1'
+const queryResolver = "/regen/data/v1/resolver/1"
 
 const resolver = {
   id: "",
@@ -46,7 +47,6 @@ const Register = () => {
 
   return (
     <Main>
-      <Sidebar />
       <div className={styles.container}>
         <div>
           <div className={styles.table}>

@@ -64,3 +64,15 @@ a, a:active {
 a:hover {
   opacity: 0.75;
 }
+
+button {
+  background: var(--color-primary);
+  border: none;
+  border-radius: 1em;
+  transition: var(--transition);
+}
+
+button:hover {
+  cursor: pointer;
+  opacity: 0.75;
+}

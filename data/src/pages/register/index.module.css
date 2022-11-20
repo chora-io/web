@@ -29,4 +29,11 @@
 .tableHeader {
   background: rgba(20, 20, 20, 0.5);
   color: var(--color-primary);
+  font-weight: 500;
+}
+
+/* error */
+
+.error {
+  color: var(--color-error);
 }

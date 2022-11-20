@@ -1,16 +1,17 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
-import { formatTimestamp } from '../utils/timestamp';
+import * as React from "react";
+import { useState, useEffect } from "react";
+import { formatTimestamp } from "../utils/timestamp";
 
 import Main from "../layouts/Main"
 import Seo from "../components/Seo"
+
 import * as styles from "./index.module.css"
 
-const choraTestnetUrl = 'https://testnet.chora.io/rest'
-const regenRedwoodUrl = 'https://redwood.chora.io/rest'
-const regenHambachUrl = 'https://hambach.chora.io/rest'
+const choraTestnetUrl = "https://testnet.chora.io/rest"
+const regenRedwoodUrl = "https://redwood.chora.io/rest"
+const regenHambachUrl = "https://hambach.chora.io/rest"
 
-const tendermintBlocksLatest = '/cosmos/base/tendermint/v1beta1/blocks/latest'
+const tendermintBlocksLatest = "/cosmos/base/tendermint/v1beta1/blocks/latest"
 
 const Index = () => {
   const [choraTestnetChainId, setChoraTestnetChainId] = useState<string>("");

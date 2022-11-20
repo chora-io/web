@@ -63,6 +63,10 @@
   width: 100%;
 }
 
+.content-item p {
+  padding: 1rem 0;
+}
+
 @media (max-width: 850px) {
 
   .content {
