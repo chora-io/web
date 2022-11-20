@@ -3,6 +3,9 @@
 # abort on errors
 set -e
 
+# bootstrap
+yarn bootstrap
+
 # build
 yarn build
 
@@ -18,6 +21,9 @@ echo 'chora.io' >> public/CNAME
 
 # change to public directory
 cd public
+
+# clean up git
+rm -rf .git
 
 # git init and commit
 git init

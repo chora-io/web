@@ -6,9 +6,9 @@ import Main from "../layouts/Main"
 import Seo from "../components/Seo"
 import * as styles from "./index.module.css"
 
-const choraTestnetUrl = 'http://testnet.chora.io:1317'
-const regenRedwoodUrl = 'http://redwood.chora.io:1317'
-const regenHambachUrl = 'http://hambach.chora.io:1317'
+const choraTestnetUrl = 'https://testnet.chora.io/rest'
+const regenRedwoodUrl = 'https://redwood.chora.io/rest'
+const regenHambachUrl = 'https://hambach.chora.io/rest'
 
 const tendermintBlocksLatest = '/cosmos/base/tendermint/v1beta1/blocks/latest'
 
