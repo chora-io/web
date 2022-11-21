@@ -3,9 +3,13 @@ import { useState } from "react"
 
 import * as styles from "./ConvertIRIToHash.module.css"
 
-const localhostUrl = "http://localhost:1317"
-const regenRedwoodUrl = "https://redwood.chora.io/rest"
-const regenHambachUrl = "https://hambach.chora.io/rest"
+import {
+  choraLocal,
+  choraTestnet,
+  regenLocal,
+  regenRedwood,
+  regenHambach,
+} from "../../utils/chains"
 
 const convertIRIToHash = "/regen/data/v1/convert-hash-to-iri"
 
@@ -23,21 +27,19 @@ const hashPlaceholder = `{
 const ConvertHashToIRI = () => {
 
   const [hash, setIri] = useState("");
-  const [network, setNetwork] = useState(localhostUrl);
+  const [rest, setRest] = useState(choraLocal.rest);
   const [result, setResult] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
 
-    fetch(network + convertIRIToHash, {
+    fetch(rest + convertIRIToHash, {
       method: 'POST',
       body: hash,
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data)
-
         if (data.code) {
           setError(data.message);
         } else {
@@ -66,17 +68,23 @@ const ConvertHashToIRI = () => {
             {"network"}
             <select
               id="network"
-              value={network}
-              onChange={event => setNetwork(event.target.value)}
+              value={rest}
+              onChange={event => setRest(event.target.value)}
             >
-              <option value={localhostUrl}>
-                {"localhost"}
+              <option value={choraLocal.rest}>
+                {choraLocal.chainId}
               </option>
-              <option value={regenRedwoodUrl}>
-                {"regen-redwood-1"}
+              <option value={choraTestnet.rest}>
+                {choraTestnet.chainId}
               </option>
-              <option value={regenHambachUrl}>
-                {"regen-hambach-2"}
+              <option value={regenLocal.rest}>
+                {regenLocal.chainId}
+              </option>
+              <option value={regenRedwood.rest}>
+                {regenRedwood.chainId}
+              </option>
+              <option value={regenHambach.rest}>
+                {regenHambach.chainId}
               </option>
             </select>
           </label>

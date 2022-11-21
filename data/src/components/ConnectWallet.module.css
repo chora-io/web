@@ -1,11 +1,40 @@
-.button {
+/* form */
+
+.form label {
   display: block;
-  font-size: 1em;
-  padding: 0.5em 1em;
   margin: 0 3em;
 }
 
-.address {
+.form select {
+  background: #111;
+  box-shadow: 0 0 4px rgba(100, 100, 100, 0.5);
+  border: none;
+  color: #FFF;
+  display: block;
+  margin: 1em 0;
+  outline: none;
+  padding: 1em;
+}
+
+.form button {
+  display: block;
+  font-size: 1em;
+  padding: 0.5em 1em;
+  margin: 2em 3.8em;
+}
+
+/* error */
+
+.error {
+  color: var(--color-error);
+  display: block;
+  padding: 0.25em;
+  margin: 1em 3em;
+}
+
+/* response */
+
+.response {
   display: block;
   padding: 0.25em;
   margin: 1em 3em;
