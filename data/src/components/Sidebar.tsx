@@ -1,6 +1,8 @@
 import * as React from "react"
 import { Link } from "gatsby"
 
+import ConnectWallet from "./ConnectWallet"
+
 import * as styles from "./Sidebar.module.css"
 
 const Sidebar = () => (
@@ -22,6 +24,7 @@ const Sidebar = () => (
         <Link to="/register">{"register"}</Link>
       </li>
     </ul>
+    <ConnectWallet />
   </div>
 )
 

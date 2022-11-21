@@ -1,0 +1,12 @@
+.button {
+  display: block;
+  font-size: 1em;
+  padding: 0.5em 1em;
+  margin: 0 3em;
+}
+
+.address {
+  display: block;
+  padding: 0.25em;
+  margin: 1em 3em;
+}
