@@ -23,7 +23,7 @@ const Anchor = () => {
           </div>
           <div className={styles.table}>
             <div className={styles.tableHeader}>
-              {"search anchors"}
+              {"search anchor by iri"}
             </div>
             <QueryAnchor />
           </div>

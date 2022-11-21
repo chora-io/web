@@ -1,84 +1,137 @@
 import * as React from "react"
 import { useState } from "react"
 
-import * as styles from "./MsgAnchor.module.css"
+import { BroadcastMode, SignDoc } from "@keplr-wallet/types";
+import { AuthInfo, TxBody } from "@keplr-wallet/proto-types/cosmos/tx/v1beta1/tx";
 
-import {
-  choraLocal,
-  choraTestnet,
-  regenLocal,
-  regenRedwood,
-  regenHambach,
-} from "../../utils/chains"
+import * as styles from "./MsgAnchor.module.css"
+import { SignMode } from "@keplr-wallet/proto-types/cosmos/tx/signing/v1beta1/signing";
 
 const MsgAnchor = () => {
 
-  const [data, setData] = useState("");
-  const [network, setNetwork] = useState(choraLocal.chainId);
-  const [response, setResponse] = useState<any>(null);
-  const [error, setError] = useState("");
+  // for graph and raw data
+  const [hash, setHash] = useState<string>("");
+  const [digest, setDigest] = useState<string>("");
+  const [type, setType] = useState<string>("");
 
-  const handleSubmit = async (event: { preventDefault: () => void; }) => {
+  // for graph data
+  const [canon, setCanon] = useState<string>("");
+  const [merkle, setMerkle] = useState<string>("");
+
+  // for raw data
+  const [mediaType, setMediaType] = useState<string>("");
+
+  // response and error
+  const [response, setResponse] = useState<string>("");
+  const [error, setError] = useState<string>("");
+
+  const handleSubmit = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
 
-    let chainId
-    switch (network) {
-      case choraLocal.chainId:
-        chainId = choraLocal
-        break
-      case choraTestnet.chainId:
-        chainId = choraTestnet
-        break
-      case regenLocal.chainId:
-        chainId = regenLocal
-        break
-      case regenRedwood.chainId:
-        chainId = regenRedwood
-        break
-      case regenHambach.chainId:
-        chainId = regenHambach
-        break
+    let msg: any
+    if (type == "graph") {
+      msg = {
+        sender: "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx", // TODO
+        content_hash: {
+          graph: {
+            hash: hash,
+            digest_algorithm: digest,
+            canonicalization_algorithm: canon,
+            merkle_tree: merkle,
+          }
+        },
+      }
+    } else if (type == "raw") {
+      msg = {
+        sender: "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx", // TODO
+        content_hash: {
+          raw: {
+            hash: hash,
+            digest_algorithm: digest,
+            media_type: mediaType,
+          }
+        },
+      }
+    } else {
+      setError("data type is required")
+      return // exit on error
     }
+
+    // TODO: refactor connect wallet state
+    const chainId = "regen-redwood-1"
 
     // TODO: refactor connect wallet state
     const signer = "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx"
 
-    // TODO: generate body bytes
-    const bodeBytes = null
-
-    // TODO: generate auth info bytes
-    const authInfoBytes = null
-
-    // TODO: fetch account number
-    const accountNumber = null
-
-    const signDoc = {
-      bodeBytes: bodeBytes,
-      authInfoBytes: authInfoBytes,
-      chainId: chainId,
-      accountNumber: accountNumber,
+    const txBody: TxBody = {
+      messages: [msg],
+      memo: "testing",
+      timeoutHeight: "0",
+      extensionOptions: [],
+      nonCriticalExtensionOptions: []
     }
 
-    // @ts-ignore
-    window.keplr.signDirect(chainId, signer, signDoc).then(res => {
-      console.log(res)
-      setResponse(res)
-    }).catch(err => {
-      console.log(err.message)
-      setError(err.message)
-      return // exit on error
-    })
+    // TODO: Request failed with status code 501 / Request rejected
+    // body_bytes is protobuf serialization of a TxBody that matches the
+    // representation in TxRaw.
+    const bodyBytes = new TextEncoder().encode(JSON.stringify(txBody))
 
-    // TODO: generate tx bytes
-    const tx = null
+    const authInfo: AuthInfo = {
+      signerInfos: [
+        {
+          publicKey: undefined,
+          modeInfo: {
+            single: {
+              mode: SignMode.SIGN_MODE_DIRECT
+            },
+            multi: {
+              bitarray: undefined,
+              modeInfos: [],
+            }
+          },
+          sequence: ""
+        }
+      ],
+      fee: {
+        amount: [
+          {
+            denom: "uregen",
+            amount: "0"
+          }
+        ],
+        gasLimit: "0",
+        payer: "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx",
+        granter: ""
+      }
+    }
 
-    // TODO: choose broadcast mode
-    const mode = null
+    // TODO: Request failed with status code 501 / Request rejected
+    // auth_info_bytes is a protobuf serialization of an AuthInfo that matches the
+    // representation in TxRaw.
+    const authInfoBytes = new TextEncoder().encode(JSON.stringify(authInfo))
 
-    // @ts-ignore
-    window.keplr.sendTx(chainId, tx, mode).then(res => {
-      console.log(res)
-      setResponse(res)
+    // TODO: fetch account number
+    const accountNumber = 1
+
+    const signDoc: SignDoc = { bodyBytes, authInfoBytes, chainId, accountNumber }
+
+    window?.keplr?.signDirect(chainId, signer, signDoc).then(tx => {
+      setResponse(JSON.stringify(tx, null, "\t"))
+
+      // TODO: generate tx bytes
+      const txBytes =  new TextEncoder().encode(JSON.stringify(tx))
+
+      // TODO: choose broadcast mode
+      const mode = "sync" as BroadcastMode
+
+      window?.keplr?.sendTx(chainId, txBytes, mode).then(res => {
+        console.log("send tx success", res)
+        setResponse(JSON.stringify(res, null, "\t"))
+      }).catch(err => {
+        console.log(err.message)
+        setError(err.message)
+      })
+
     }).catch(err => {
       console.log(err.message)
       setError(err.message)
@@ -89,40 +142,121 @@ const MsgAnchor = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label htmlFor="data">
-            {"data"}
-            <textarea
-              id="data"
-              value={data}
-              onChange={event => setData(event.target.value)}
+          <label htmlFor="hash">
+            {"hash"}
+            <input
+              id="hash"
+              value={hash}
+              onChange={event => setHash(event.target.value)}
             />
           </label>
-          <label htmlFor="network">
-            {"network"}
+          <label htmlFor="digest">
+            {"digest algorithm"}
             <select
-              id="network"
-              value={network}
-              onChange={event => setNetwork(event.target.value)}
+              id="digest"
+              value={digest}
+              onChange={event => setDigest(event.target.value)}
             >
-              <option value={choraLocal.chainId}>
-                {choraLocal.chainId}
+              <option>
+                {"unspecified"}
               </option>
-              <option value={choraTestnet.chainId}>
-                {choraTestnet.chainId}
-              </option>
-              <option value={regenLocal.chainId}>
-                {regenLocal.chainId}
-              </option>
-              <option value={regenRedwood.chainId}>
-                {regenRedwood.chainId}
-              </option>
-              <option value={regenHambach.chainId}>
-                {regenHambach.chainId}
+              <option value="DIGEST_ALGORITHM_BLAKE2B_256">
+                {"BLAKE2b-256"}
               </option>
             </select>
           </label>
+          <label htmlFor="type">
+            {"data type"}
+            <select
+              id="type"
+              value={type}
+              onChange={event => setType(event.target.value)}
+            >
+              <option>
+                {"---select---"}
+              </option>
+              <option value="graph">
+                {"graph"}
+              </option>
+              <option value="raw">
+                {"raw"}
+              </option>
+            </select>
+          </label>
+          {type == "graph" &&
+            <>
+              <label htmlFor="canon">
+                {"graph canonicalization algorithm"}
+                <select
+                  id="canon"
+                  value={canon}
+                  onChange={event => setCanon(event.target.value)}
+                >
+                  <option>
+                    {"unspecified"}
+                  </option>
+                  <option value="GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015">
+                    {"URDNA2015"}
+                  </option>
+                </select>
+              </label>
+              <label htmlFor="merkle">
+                {"graph merkle tree type"}
+                <select
+                  id="merkle"
+                  value={merkle}
+                  onChange={event => setMerkle(event.target.value)}
+                >
+                  <option>
+                    {"unspecified"}
+                  </option>
+                </select>
+              </label>
+            </>
+          }
+          {type == "raw" &&
+            <label htmlFor="media-type">
+              {"raw media type"}
+              <select
+                id="media-type"
+                value={mediaType}
+                onChange={event => setMediaType(event.target.value)}
+              >
+                <option>
+                  {"unspecified"}
+                </option>
+                <option value="RAW_MEDIA_TYPE_TEXT_PLAIN">
+                  {"TXT"}
+                </option>
+                <option value="RAW_MEDIA_TYPE_JSON">
+                  {"JSON"}
+                </option>
+                <option value="RAW_MEDIA_TYPE_CSV">
+                  {"CSV"}
+                </option>
+                <option value="RAW_MEDIA_TYPE_XML">
+                  {"XML"}
+                </option>
+                <option value="RAW_MEDIA_TYPE_PDF">
+                  {"PDF"}
+                </option>
+                <option value="RAW_MEDIA_TYPE_TIFF">
+                  {"TIFF"}
+                </option>
+                <option value="RAW_MEDIA_TYPE_JPG">
+                  {"JPG"}
+                </option>
+                <option value="RAW_MEDIA_TYPE_PNG">
+                  {"PNG"}
+                </option>
+                <option value="RAW_MEDIA_TYPE_SVG">
+                  {"SVG"}
+                </option>
+              </select>
+            </label>
+          }
           <button type="submit">
-            {"anchor"}
+            {"anchor data"}
           </button>
         </form>
       </div>
@@ -133,7 +267,9 @@ const MsgAnchor = () => {
       )}
       {response != "" && (
         <div>
+          <pre>
           {response}
+          </pre>
         </div>
       )}
     </>

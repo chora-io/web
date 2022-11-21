@@ -43,7 +43,7 @@ const QueryAnchor = () => {
         <form className={styles.form} onSubmit={handleSubmit}>
           <label htmlFor="iri">
             {"iri"}
-            <textarea
+            <input
               id="iri"
               value={iri}
               onChange={event => setIri(event.target.value)}
