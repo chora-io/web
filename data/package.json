@@ -12,6 +12,7 @@
     "url": "https://github.com/choraio/web"
   },
   "scripts": {
+    "proto": "sh ./scripts/protocgen.sh",
     "lint": "echo \"lint not yet configured\"",
     "format": "echo \"format not yet configured\"",
     "test": "echo \"test not yet configured\"",
@@ -32,6 +33,7 @@
   },
   "devDependencies": {
     "@keplr-wallet/proto-types": "^0.11.17",
-    "@keplr-wallet/types": "^0.11.17"
+    "@keplr-wallet/types": "^0.11.17",
+    "ts-proto": "^1.133.0"
   }
 }

@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package regen.data.v1;
+
+import "cosmos/msg/v1/msg.proto";
+import "google/protobuf/timestamp.proto";
+import "regen/data/v1/types.proto";
+
+// MsgAnchor is the Msg/Anchor request type.
+message MsgAnchor {
+  option (cosmos.msg.v1.signer) = "sender";
+
+  // sender is the address of the sender of the transaction. The sender in
+  // Anchor is not attesting to the veracity of the underlying data. They
+  // can simply be an intermediary providing services.
+  string sender = 1;
+
+  // content_hash is the content hash for the data to anchor.
+  ContentHash content_hash = 2;
+}
+
+// MsgAnchor is the Msg/Anchor response type.
+message MsgAnchorResponse {
+
+  // iri is the IRI of the data that was anchored.
+  string iri = 1;
+
+  // timestamp is the time at which the data was anchored.
+  google.protobuf.Timestamp timestamp = 2;
+}

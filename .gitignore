@@ -14,3 +14,6 @@ yarn-error.log*
 # gatsby files
 .cache
 public
+
+# generated api
+api

@@ -20,6 +20,8 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
+    "proto": "lerna run proto --stream",
+    "proto-data": "lerna run --scope data proto --stream",
     "lint": "lerna run lint --stream",
     "lint-data": "lerna run --scope data lint --stream",
     "lint-main": "lerna run --scope main lint --stream",

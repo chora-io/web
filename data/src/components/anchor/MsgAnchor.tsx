@@ -1,54 +1,66 @@
 import * as React from "react"
 import { useState } from "react"
 
-import { BroadcastMode, SignDoc } from "@keplr-wallet/types";
-import { AuthInfo, TxBody } from "@keplr-wallet/proto-types/cosmos/tx/v1beta1/tx";
+import { BroadcastMode, SignDoc } from "@keplr-wallet/types"
+import { AuthInfo, TxBody } from "@keplr-wallet/proto-types/cosmos/tx/v1beta1/tx"
+import { SignMode } from "@keplr-wallet/proto-types/cosmos/tx/signing/v1beta1/signing"
+
+import { MsgAnchor } from "../../../api/regen/data/v1/tx"
+import {
+  DigestAlgorithm,
+  GraphCanonicalizationAlgorithm,
+  GraphMerkleTree,
+  RawMediaType,
+} from "../../../api/regen/data/v1/types"
 
 import * as styles from "./MsgAnchor.module.css"
-import { SignMode } from "@keplr-wallet/proto-types/cosmos/tx/signing/v1beta1/signing";
 
-const MsgAnchor = () => {
+const MsgAnchorView = () => {
 
-  // for graph and raw data
-  const [hash, setHash] = useState<string>("");
-  const [digest, setDigest] = useState<string>("");
-  const [type, setType] = useState<string>("");
-
-  // for graph data
-  const [canon, setCanon] = useState<string>("");
-  const [merkle, setMerkle] = useState<string>("");
-
-  // for raw data
-  const [mediaType, setMediaType] = useState<string>("");
+  // form input
+  const [hash, setHash] = useState<string>("")
+  const [digest, setDigest] = useState<string>("")
+  const [type, setType] = useState<string>("")
+  const [canon, setCanon] = useState<string>("")
+  const [merkle, setMerkle] = useState<string>("")
+  const [mediaType, setMediaType] = useState<string>("")
 
   // response and error
-  const [response, setResponse] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [response, setResponse] = useState<string>("")
+  const [error, setError] = useState<string>("")
 
-  const handleSubmit = (event: { preventDefault: () => void; }) => {
-    event.preventDefault();
+  const handleSubmit = (event: { preventDefault: () => void }) => {
+    event.preventDefault()
 
-    let msg: any
+    let encoder = new TextEncoder()
+
+    let msg: MsgAnchor
     if (type == "graph") {
       msg = {
+        $type: "regen.data.v1.MsgAnchor",
         sender: "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx", // TODO
-        content_hash: {
+        contentHash: {
+          $type: "regen.data.v1.ContentHash",
           graph: {
-            hash: hash,
-            digest_algorithm: digest,
-            canonicalization_algorithm: canon,
-            merkle_tree: merkle,
+            $type: "regen.data.v1.ContentHash.Graph",
+            hash:  encoder.encode(hash),
+            digestAlgorithm:  DigestAlgorithm.DIGEST_ALGORITHM_BLAKE2B_256, // TODO
+            canonicalizationAlgorithm: GraphCanonicalizationAlgorithm.GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015, // TODO
+            merkleTree: GraphMerkleTree.GRAPH_MERKLE_TREE_NONE_UNSPECIFIED, // TODO
           }
         },
       }
     } else if (type == "raw") {
       msg = {
+        $type: "regen.data.v1.MsgAnchor",
         sender: "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx", // TODO
-        content_hash: {
+        contentHash: {
+          $type: "regen.data.v1.ContentHash",
           raw: {
-            hash: hash,
-            digest_algorithm: digest,
-            media_type: mediaType,
+            $type: "regen.data.v1.ContentHash.Raw",
+            hash:  encoder.encode(hash),
+            digestAlgorithm:  DigestAlgorithm.DIGEST_ALGORITHM_BLAKE2B_256, // TODO
+            mediaType: RawMediaType.UNRECOGNIZED, // TODO
           }
         },
       }
@@ -64,8 +76,9 @@ const MsgAnchor = () => {
     const signer = "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx"
 
     const txBody: TxBody = {
+      // @ts-ignore // TODO ?
       messages: [msg],
-      memo: "testing",
+      memo: "test memo",
       timeoutHeight: "0",
       extensionOptions: [],
       nonCriticalExtensionOptions: []
@@ -276,4 +289,4 @@ const MsgAnchor = () => {
   )
 }
 
-export default MsgAnchor
+export default MsgAnchorView
