@@ -1,6 +1,7 @@
 import * as React from "react"
-import { useState } from "react"
-import { ChainInfo } from "@keplr-wallet/types"
+import { useContext } from "react"
+
+import { WalletContext } from "../context/wallet"
 
 import * as styles from "./ConnectWallet.module.css"
 
@@ -14,104 +15,8 @@ import {
 
 const ConnectWallet = () => {
 
-  const [network, setNetwork] = useState<string>(choraLocal.chainId);
-  const [response, setResponse] = useState<string>("");
-  const [keplr, setKeplr] = useState<any>()
-  const [key, setKey] = useState<any>()
-  const [error, setError] = useState<string>("")
-
-  const getKeplr = async (event: { preventDefault: () => void }) => {
-    event.preventDefault();
-
-    if (window.keplr) {
-      console.log(window.keplr)
-      setKeplr(window.keplr)
-
-      let chainInfo: ChainInfo
-      switch (network) {
-        case choraLocal.chainId:
-          chainInfo = choraLocal
-          break
-        case choraTestnet.chainId:
-          chainInfo = choraTestnet
-          break
-        case regenLocal.chainId:
-          chainInfo = regenLocal
-          break
-        case regenRedwood.chainId:
-          chainInfo = regenRedwood
-          break
-        case regenHambach.chainId:
-          chainInfo = regenHambach
-          break
-      }
-
-      // enable chain
-      await window.keplr.enable(network).then(() => {
-        console.log(network + " enabled")
-        setResponse(network + " enabled")
-      }).catch(async err => {
-        console.log(err.message)
-        setError(err.message)
-
-        // @ts-ignore
-        await window.keplr.experimentalSuggestChain(chainInfo).then(() => {
-          console.log("added " + network)
-          setResponse("added " + network)
-          setError("")
-        }).catch(err => {
-          console.log(err.message)
-          setError(err.message)
-        })
-      })
-
-      // get active key
-      await window.keplr.getKey(network).then(key => {
-        console.log(network + " key", key)
-        setKey(key)
-        setError("")
-      }).catch(err => {
-        console.log(err.message)
-        setError(err.message)
-      })
-    }
-
-    if (document.readyState === "complete") {
-      console.log("ready state complete", window.keplr)
-      setKeplr(window.keplr)
-      setError("")
-    }
-
-    const windowStateChange = async (event: Event) => {
-      console.log("window state change", event)
-
-      // get active key
-      if (window && window.keplr) {
-        await window.keplr.getKey(network).then((key: any) => {
-          console.log(network + " key", key)
-          setKey(key)
-          setError("")
-        }).catch((err: { message: string }) => {
-          console.log(err.message)
-          setError(err.message)
-        })
-      }
-    }
-
-    const documentStateChange = (event: Event) => {
-      console.log("document state change", event)
-
-      if (event.target && (event.target as Document).readyState === "complete") {
-        console.log("ready state complete", event)
-
-        document.removeEventListener("readystatechange", documentStateChange)
-        window.removeEventListener("keplr_keystorechange", windowStateChange)
-      }
-    }
-
-    document.addEventListener("readystatechange", documentStateChange)
-    window.addEventListener("keplr_keystorechange", windowStateChange)
-  }
+  // @ts-ignore
+  const { getKeplr, network, setNetwork, response, keplr, wallet, error } = useContext(WalletContext)
 
   return (
     <div>
@@ -153,9 +58,9 @@ const ConnectWallet = () => {
           {error}
         </div>
       }
-      {key != null &&
+      {wallet != null &&
         <div className={styles.response}>
-          {key.bech32Address.substring(0, 10) + "..." + key.bech32Address.substring(38, 44)}
+          {wallet.bech32Address.substring(0, 10) + "..." + wallet.bech32Address.substring(38, 44)}
         </div>
       }
       {response != "" &&

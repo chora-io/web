@@ -1,18 +1,14 @@
 import * as React from "react"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Buffer } from "buffer"
 
-import { Coin } from "@keplr-wallet/proto-types/cosmos/base/v1beta1/coin"
-import { PubKey } from "@keplr-wallet/proto-types/cosmos/crypto/secp256k1/keys"
 import { SignMode } from "@keplr-wallet/proto-types/cosmos/tx/signing/v1beta1/signing"
 import { AuthInfo, Fee, TxBody, TxRaw } from "@keplr-wallet/proto-types/cosmos/tx/v1beta1/tx"
-import { Any } from "@keplr-wallet/proto-types/google/protobuf/any"
 import { BroadcastMode, SignDoc } from "@keplr-wallet/types"
 
+import { WalletContext } from "../../context/wallet"
 import { MsgAnchor } from "../../../api/regen/data/v1/tx"
 import {
-  ContentHash,
-  ContentHash_Graph,
   DigestAlgorithm,
   GraphCanonicalizationAlgorithm,
   GraphMerkleTree,
@@ -22,6 +18,9 @@ import {
 import * as styles from "./MsgAnchor.module.css"
 
 const MsgAnchorView = () => {
+
+  // @ts-ignore
+  const { keplr, network, wallet } = useContext(WalletContext)
 
   // form input
   const [hash, setHash] = useState<string>("")
@@ -38,74 +37,73 @@ const MsgAnchorView = () => {
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
-    let msg: MsgAnchor
-    let encoder = new TextEncoder()
+    const sender = wallet.bech32Address
 
+    // TODO: account sequence ?
+    // <chainInfo.rest>/cosmos/auth/v1beta1/accounts/<address>
+    const accountSequence = "1"
+
+    // TODO: account number ?
+    // <chainInfo.rest>/cosmos/auth/v1beta1/accounts/<address>
+    const accountNumber = 0
+
+    console.log("handleSubmit kepler", keplr)
+    console.log("handleSubmit network", network)
+    console.log("handleSubmit sender", sender)
+
+    let msg: MsgAnchor
     if (type == "graph") {
-      msg = MsgAnchor.fromJSON({
+      msg = {
         $type: "regen.data.v1.MsgAnchor",
-        sender: "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx", // TODO
+        sender: wallet.bech32Address,
         contentHash: {
           $type: "regen.data.v1.ContentHash",
           graph: {
             $type: "regen.data.v1.ContentHash.Graph",
-            hash:  encoder.encode(hash),
+            hash:  Buffer.from("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", "base64"), // TODO
             digestAlgorithm:  DigestAlgorithm.DIGEST_ALGORITHM_BLAKE2B_256, // TODO
             canonicalizationAlgorithm: GraphCanonicalizationAlgorithm.GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015, // TODO
             merkleTree: GraphMerkleTree.GRAPH_MERKLE_TREE_NONE_UNSPECIFIED, // TODO
-          }
+          },
         },
-      })
+      }
     } else if (type == "raw") {
-      msg = MsgAnchor.fromJSON({
+      msg = {
         $type: "regen.data.v1.MsgAnchor",
-        sender: "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx", // TODO
+        sender: wallet.bech32Address,
         contentHash: {
           $type: "regen.data.v1.ContentHash",
           raw: {
             $type: "regen.data.v1.ContentHash.Raw",
-            hash:  encoder.encode(hash),
+            hash:  Buffer.from("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", "base64"), // TODO
             digestAlgorithm:  DigestAlgorithm.DIGEST_ALGORITHM_BLAKE2B_256, // TODO
             mediaType: RawMediaType.UNRECOGNIZED, // TODO
-          }
+          },
         },
-      })
+      }
     } else {
       setError("data type is required")
       return // exit on error
     }
 
-    // TODO: refactor connect wallet state
-    const chainId = "regen-redwood-1"
+    console.log("handleSubmit msg", msg)
 
-    // TODO: refactor connect wallet state
-    const signer = "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx"
-
-    const msgValue = Buffer.from(JSON.stringify(msg))
-
-    const msgAny = Any.encode({
-      typeUrl: `/${msg.$type}`,
-      value: msgValue,
-    }).finish()
-
-    const msgAnyString = Buffer.from(JSON.stringify(msgAny)).toString('base64')
-
-    const txBody = TxBody.fromJSON({
+    const bodyBytes = TxBody.encode({
       messages: [
         {
           typeUrl: `/${msg.$type}`,
-          value: msgAnyString,
+          value: MsgAnchor.encode(msg).finish(),
         },
       ],
       memo: "test",
       timeoutHeight: "0",
-      extensionOptions: undefined,
-      nonCriticalExtensionOptions: undefined
-    })
+      extensionOptions: [],
+      nonCriticalExtensionOptions: [],
+    }).finish()
 
-    const bodyBytes = TxBody.encode(txBody).finish()
+    console.log("handleSubmit bodyBytes", bodyBytes)
 
-    const authInfo = AuthInfo.fromJSON({
+    const authInfoBytes = AuthInfo.encode({
       signerInfos: [
         {
           publicKey: undefined,
@@ -115,80 +113,39 @@ const MsgAnchorView = () => {
             },
             multi: undefined,
           },
-          sequence: "1"
-        }
+          sequence: accountSequence,
+        },
       ],
       fee: {
-        gasLimit: "0",
+        amount: [
+          {
+            denom: "uregen",
+            amount: "0",
+          },
+        ],
+        gasLimit: "1000000",
         payer: "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx",
-        granter: ""
+        granter: "",
       }
-    })
+    }).finish()
 
-    const authInfoBytes = AuthInfo.encode(authInfo).finish()
+    console.log("handleSubmit authInfoBytes", authInfoBytes)
 
-    // TODO: fetch account number
-    const accountNumber = 1
+    const signDoc: SignDoc = {
+      bodyBytes,
+      authInfoBytes,
+      chainId: network,
+      accountNumber,
+    }
 
-    const signDoc: SignDoc = { bodyBytes, authInfoBytes, chainId, accountNumber }
+    console.log("handleSubmit signDoc", signDoc)
 
-    window?.keplr?.signDirect(chainId, signer, signDoc).then(signResponse => {
+    window?.keplr?.signDirect(network, sender, signDoc).then(signResponse => {
       console.log("sign success", signResponse)
 
       const signedTx = TxRaw.encode({
-        bodyBytes: TxBody.encode(
-          TxBody.fromPartial({
-            messages: [ // TODO
-              {
-                typeUrl: msg.$type,
-                value: MsgAnchor.encode({
-                  $type: "regen.data.v1.MsgAnchor",
-                  sender: "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx", // TODO
-                  contentHash: ContentHash.encode({
-                    $type: "regen.data.v1.ContentHash",
-                    graph: ContentHash_Graph.encode({
-                      $type: "regen.data.v1.ContentHash.Graph",
-                      hash:  encoder.encode(hash),
-                      digestAlgorithm:  DigestAlgorithm.DIGEST_ALGORITHM_BLAKE2B_256, // TODO
-                      canonicalizationAlgorithm: GraphCanonicalizationAlgorithm.GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015, // TODO
-                      merkleTree: GraphMerkleTree.GRAPH_MERKLE_TREE_NONE_UNSPECIFIED, // TODO
-                    }).finish()
-                  }).finish(),
-                }).finish(),
-              },
-            ],
-            memo: "test", // signResponse.signed.memo,
-            extensionOptions: undefined,
-            nonCriticalExtensionOptions: undefined,
-          })
-        ).finish(),
-        authInfoBytes: AuthInfo.encode({
-          signerInfos: [
-            {
-              publicKey: {
-                typeUrl: "/cosmos.crypto.secp256k1.PubKey",
-                value: PubKey.encode({
-                  key: Buffer.from(signResponse.signature.pub_key.value, "base64"),
-                }).finish(),
-              },
-              modeInfo: {
-                single: {
-                  mode: SignMode.SIGN_MODE_DIRECT,
-                },
-                multi: undefined,
-              },
-              sequence: "1", // signResponse.signed.sequence,
-            },
-          ],
-          fee: Fee.fromPartial({
-            amount: Coin.encode({
-              denom: "uregen",
-              amount: "0",
-            }).finish(), // signResponse.signed.fee.amount as Coin[],
-            gasLimit: "0", // signResponse.signed.fee.gas,
-            payer: "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx", // signResponse.signed.fee["feePayer"]
-          }),
-        }).finish(),
+        bodyBytes: signResponse.signed.bodyBytes,
+        authInfoBytes: signResponse.signed.authInfoBytes,
         signatures: [
             Buffer.from(signResponse.signature.signature, "base64"),
         ],
@@ -198,7 +155,7 @@ const MsgAnchorView = () => {
 
       const mode = "sync" as BroadcastMode
 
-      window?.keplr?.sendTx(chainId, signedTx, mode).then(res => {
+      window?.keplr?.sendTx(network, signedTx, mode).then(res => {
         console.log("send success", res)
         setResponse(JSON.stringify(res, null, "\t"))
 
