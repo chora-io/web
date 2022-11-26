@@ -17,10 +17,11 @@ const SelectNetwork = () => {
   const { network, setChainInfo, setNetwork } = useContext(WalletContext)
 
   let local = false
-  if (
+  if (typeof window !== "undefined" && (
       window.location.hostname == "0.0.0.0" ||
       window.location.hostname == "127.0.0.1" ||
       window.location.hostname == "localhost"
+    )
   ) {
     local = true
   }
