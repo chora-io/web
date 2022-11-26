@@ -1,0 +1,12 @@
+/* header */
+
+.header {
+  background: rgba(10, 10, 10, 0.8);
+  box-shadow: 0 0 4px rgba(100, 100, 100, 0.5);
+  display: flex;
+  height: var(--header-height);
+  justify-content: flex-end;
+  position: fixed;
+  width: 100vw;
+  z-index: 1;
+}

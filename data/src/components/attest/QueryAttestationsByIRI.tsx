@@ -51,7 +51,7 @@ const QueryAttestationsByIRI = () => {
               onChange={event => setIri(event.target.value)}
             />
           </label>
-          <SelectNetwork />
+          <SelectNetwork withLabel={true} />
           <button type="submit">
             {"search"}
           </button>

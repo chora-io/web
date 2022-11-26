@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 
 import { WalletContext } from "../context/WalletContext"
 import SelectNetwork from "./SelectNetwork"
@@ -9,12 +9,27 @@ import * as styles from "./ConnectWallet.module.css"
 const ConnectWallet = () => {
 
   // @ts-ignore
-  const { getKeplr, keplr, wallet, error, success } = useContext(WalletContext)
+  const { getKeplr, loadKeplr, keplr, wallet, error } = useContext(WalletContext)
+
+  // reload wallet context
+  useEffect(() => {
+    if (wallet == undefined) {
+      loadKeplr()
+    }
+  })
 
   return (
-    <div>
+    <div className={styles.connect}>
+      <span className={styles.error}>
+        {error}
+      </span>
+      {wallet != null &&
+        <span className={styles.address}>
+          {wallet.bech32Address.substring(0, 9) + "..." + wallet.bech32Address.substring(41, 44)}
+        </span>
+      }
       <form className={styles.form} onSubmit={getKeplr}>
-        <SelectNetwork />
+        <SelectNetwork withLabel={false} />
         <button type="submit">
           {keplr == null ?
             <span>{"connect wallet"}</span>
@@ -23,21 +38,6 @@ const ConnectWallet = () => {
           }
         </button>
       </form>
-      {error != "" &&
-        <div className={styles.error}>
-          {error}
-        </div>
-      }
-      {wallet != null &&
-        <div className={styles.success}>
-          {wallet.bech32Address.substring(0, 10) + "..." + wallet.bech32Address.substring(38, 44)}
-        </div>
-      }
-      {success != "" &&
-        <div className={styles.success}>
-          {success}
-        </div>
-      }
     </div>
   )
 }

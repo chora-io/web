@@ -134,7 +134,7 @@ const ConvertHashToIRI = () => {
                 setMedia={setMedia}
               />
             }
-            <SelectNetwork />
+            <SelectNetwork withLabel={true} />
             <button type="submit">
               {"convert"}
             </button>
@@ -145,7 +145,7 @@ const ConvertHashToIRI = () => {
               json={json}
               setJson={setJson}
             />
-            <SelectNetwork />
+            <SelectNetwork withLabel={true} />
             <button type="submit">
               {"convert"}
             </button>

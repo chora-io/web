@@ -134,7 +134,7 @@ const QueryResolversByHash = () => {
                 setMedia={setMedia}
               />
             }
-            <SelectNetwork />
+            <SelectNetwork withLabel={true} />
             <button type="submit">
               {"search"}
             </button>
@@ -145,7 +145,7 @@ const QueryResolversByHash = () => {
               json={json}
               setJson={setJson}
             />
-            <SelectNetwork />
+            <SelectNetwork withLabel={true} />
             <button type="submit">
               {"search"}
             </button>

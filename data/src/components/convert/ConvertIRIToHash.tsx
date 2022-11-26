@@ -51,7 +51,7 @@ const ConvertIRIToHash = () => {
               onChange={event => setIri(event.target.value)}
             />
           </label>
-          <SelectNetwork />
+          <SelectNetwork withLabel={true} />
           <button type="submit">
             {"convert"}
           </button>

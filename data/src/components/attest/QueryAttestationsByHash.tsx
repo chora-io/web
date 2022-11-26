@@ -101,7 +101,7 @@ const QueryAttestationsByHash = () => {
               merkle={merkle}
               setMerkle={setMerkle}
             />
-            <SelectNetwork />
+            <SelectNetwork withLabel={true} />
             <button type="submit">
               {"search"}
             </button>
@@ -112,7 +112,7 @@ const QueryAttestationsByHash = () => {
               json={json}
               setJson={setJson}
             />
-            <SelectNetwork />
+            <SelectNetwork withLabel={true} />
             <button type="submit">
               {"search"}
             </button>

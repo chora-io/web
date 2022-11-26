@@ -54,7 +54,7 @@ const QueryResolversByURL = () => {
               onChange={event => setUrl(event.target.value)}
             />
           </label>
-          <SelectNetwork />
+          <SelectNetwork withLabel={true} />
           <button type="submit">
             {"search"}
           </button>

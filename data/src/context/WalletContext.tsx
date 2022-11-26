@@ -19,18 +19,31 @@ const WalletContextProvider = (props: any) => {
   const [chainInfo, setChainInfo] = useState<ChainInfo>(choraTestnet);
   const [keplr, setKeplr] = useState<any>() // TODO
   const [wallet, setWallet] = useState<any>() // TODO
-
   const [error, setError] = useState<string>("")
-  const [success, setSuccess] = useState<string>("");
+
+  const documentStateChange = (event: Event) => {
+    if (event.target && (event.target as Document).readyState === "complete") {
+      document.removeEventListener("readystatechange", documentStateChange)
+      window.removeEventListener("keplr_keystorechange", windowStateChange)
+    }
+  }
+
+  const windowStateChange = async (event: Event) => {
+
+    // get active key
+    await window?.keplr?.getKey(network).then((wallet: Key) => {
+        setWallet(wallet)
+      }).catch((err: { message: string }) => {
+        setError(err.message)
+      })
+  }
 
   const getKeplr = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
     setError("")
-    setSuccess("")
 
     if (window.keplr) {
-      console.log("keplr", window.keplr)
       setKeplr(window.keplr)
 
       switch (network) {
@@ -53,58 +66,63 @@ const WalletContextProvider = (props: any) => {
 
       // enable chain
       await window.keplr.enable(network).then(() => {
-        setSuccess(network)
+        console.log(network + " enabled")
       }).catch(async err => {
-        console.log(err.message)
         setError(err.message)
 
         await window.keplr?.experimentalSuggestChain(chainInfo).then(() => {
-          setSuccess(network)
+          console.log(network + " added")
         }).catch(err => {
-          console.log(err.message)
           setError(err.message)
         })
       })
 
       // get active key
       await window.keplr.getKey(network).then(wallet => {
-        console.log(" wallet", wallet)
         setWallet(wallet)
       }).catch(err => {
-        console.log(err.message)
         setError(err.message)
       })
+    } else {
+        setError("keplr not installed")
     }
 
     if (document.readyState === "complete") {
-      console.log("ready state complete", window.keplr)
       setKeplr(window.keplr)
     }
 
-    const windowStateChange = async (event: Event) => {
-      console.log("window state change", event)
+    document.addEventListener("readystatechange", documentStateChange)
+    window.addEventListener("keplr_keystorechange", windowStateChange)
+  }
+
+  const loadKeplr = async () => {
+    if (window.keplr) {
+      setKeplr(window.keplr)
+
+      switch (network) {
+        case choraLocal.chainId:
+          setChainInfo(choraLocal)
+          break
+        case choraTestnet.chainId:
+          setChainInfo(choraTestnet)
+          break
+        case regenLocal.chainId:
+          setChainInfo(regenLocal)
+          break
+        case regenRedwood.chainId:
+          setChainInfo(regenRedwood)
+          break
+        case regenHambach.chainId:
+          setChainInfo(regenHambach)
+          break
+      }
 
       // get active key
-      if (window && window.keplr) {
-        await window.keplr.getKey(network).then((wallet: Key) => {
-          console.log(network + " wallet", wallet)
-          setWallet(wallet)
-        }).catch((err: { message: string }) => {
-          console.log(err.message)
-          setError(err.message)
-        })
-      }
-    }
-
-    const documentStateChange = (event: Event) => {
-      console.log("document state change", event)
-
-      if (event.target && (event.target as Document).readyState === "complete") {
-        console.log("ready state complete", event)
-
-        document.removeEventListener("readystatechange", documentStateChange)
-        window.removeEventListener("keplr_keystorechange", windowStateChange)
-      }
+      await window.keplr.getKey(network).then(wallet => {
+        setWallet(wallet)
+      }).catch(err => {
+        setError(err.message)
+      })
     }
 
     document.addEventListener("readystatechange", documentStateChange)
@@ -114,14 +132,14 @@ const WalletContextProvider = (props: any) => {
   return (
     <WalletContext.Provider value={{
       getKeplr,
+      loadKeplr,
+      keplr,
+      wallet,
+      error,
       chainInfo,
       setChainInfo,
       network,
       setNetwork,
-      success,
-      keplr,
-      wallet,
-      error,
     }}>
       {props.children}
     </WalletContext.Provider>

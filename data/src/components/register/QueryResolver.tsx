@@ -51,7 +51,7 @@ const QueryResolver = () => {
               onChange={event => setId(event.target.value)}
             />
           </label>
-          <SelectNetwork />
+          <SelectNetwork withLabel={true} />
           <button type="submit">
             {"search"}
           </button>

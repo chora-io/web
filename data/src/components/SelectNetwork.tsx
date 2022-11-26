@@ -11,7 +11,7 @@ import {
   regenHambach,
 } from "../utils/chains"
 
-const SelectNetwork = () => {
+const SelectNetwork = ({ withLabel }: any) => {
 
   // @ts-ignore
   const { network, setChainInfo, setNetwork } = useContext(WalletContext)
@@ -52,7 +52,7 @@ const SelectNetwork = () => {
 
   return (
     <label htmlFor="network">
-      {"network"}
+      {withLabel ? "network" : ""}
       <select
         id="network"
         value={network}

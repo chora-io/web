@@ -2,14 +2,16 @@
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-left: 15vw;
+  margin-left: var(--sidebar-width);
   min-height: 100vh;
-  overflow-x: hidden;
-  width: 85vw;
 }
 
 .container div {
-  margin: 5vh 0;
+  margin: 2em 0;
+}
+
+.container div:first-child {
+  margin-top: var(--header-height);
 }
 
 /* table */
@@ -30,10 +32,4 @@
   background: rgba(20, 20, 20, 0.5);
   color: var(--color-primary);
   font-weight: 500;
-}
-
-/* error */
-
-.error {
-  color: var(--color-error);
 }

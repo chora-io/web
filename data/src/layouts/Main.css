@@ -15,18 +15,8 @@
   --color-text: #FFF;
   --color-primary: #0CA;
   --color-error: red;
-  --line-height-loose: 1.75;
-  --line-height-normal: 1.5;
-  --line-height-dense: 1.25;
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 16px;
-  --space-4: 24px;
-  --space-5: 32px;
-  --space-6: 64px;
-  --size-content: 54rem;
-  --size-gutter: var(--space-5);
-  --size-gap: var(--space-6);
+  --header-height: 80px;
+  --sidebar-width: 240px;
   --transition: 0.25s;
 }
 
@@ -52,7 +42,7 @@ h1, h2, h3, h4, h5 {
 }
 
 p {
-  line-height: var(--line-height-loose);
+  line-height: 1.75;
 }
 
 a, a:active {
