@@ -46,8 +46,8 @@ export const choraLocal = {
 export const choraTestnet = {
     chainId: "chora-testnet-1",
     chainName: "Chora Testnet",
-    rpc: "http://testnet.chora.io/rpc",
-    rest: "http://testnet.chora.io/rest",
+    rpc: "https://testnet.chora.io/rpc",
+    rest: "https://testnet.chora.io/rest",
     bip44: {
         coinType: 118,
     },

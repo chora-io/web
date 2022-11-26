@@ -15,8 +15,8 @@ const WalletContext = createContext({}) // TODO
 
 const WalletContextProvider = (props: any) => {
 
-  const [network, setNetwork] = useState<string>(choraLocal.chainId);
-  const [chainInfo, setChainInfo] = useState<ChainInfo>(choraLocal);
+  const [network, setNetwork] = useState<string>(choraTestnet.chainId);
+  const [chainInfo, setChainInfo] = useState<ChainInfo>(choraTestnet);
   const [keplr, setKeplr] = useState<any>() // TODO
   const [wallet, setWallet] = useState<any>() // TODO
 

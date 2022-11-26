@@ -138,7 +138,7 @@ const MsgAnchorView = () => {
           },
         ],
         gasLimit: "100000",
-        payer: "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx",
+        payer: sender,
         granter: "",
       }
     }).finish()

@@ -58,25 +58,26 @@ const SelectNetwork = () => {
         value={network}
         onChange={handleChange}
       >
-        {local && (
-          <option value={choraLocal.chainId}>
-            {choraLocal.chainId}
-          </option>
-        )}
+
         <option value={choraTestnet.chainId}>
           {choraTestnet.chainId}
         </option>
-        {local && (
-          <option value={regenLocal.chainId}>
-            {regenLocal.chainId}
-          </option>
-        )}
         <option value={regenRedwood.chainId}>
           {regenRedwood.chainId}
         </option>
         <option value={regenHambach.chainId}>
           {regenHambach.chainId}
         </option>
+        {local && (
+          <option value={choraLocal.chainId}>
+            {choraLocal.chainId}
+          </option>
+        )}
+        {local && (
+          <option value={regenLocal.chainId}>
+            {regenLocal.chainId}
+          </option>
+        )}
       </select>
     </label>
   )
