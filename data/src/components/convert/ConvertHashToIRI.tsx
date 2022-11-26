@@ -25,13 +25,13 @@ const ConvertHashToIRI = () => {
 
   const [hash, setIri] = useState("")
   const [error, setError] = useState("")
-  const [result, setResult] = useState("")
+  const [success, setSuccess] = useState("")
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
     setError("")
-    setResult("")
+    setSuccess("")
 
     fetch(chainInfo.rest + convertIRIToHash, {
       method: "POST",
@@ -42,7 +42,7 @@ const ConvertHashToIRI = () => {
         if (data.code) {
           setError(data.message)
         } else {
-          setResult(data.iri)
+          setSuccess(data.iri)
         }
       })
       .catch(err => {
@@ -74,10 +74,10 @@ const ConvertHashToIRI = () => {
           {error}
         </div>
       )}
-      {result != "" && (
+      {success != "" && (
         <div>
           <pre>
-            {result}
+            {success}
           </pre>
         </div>
       )}

@@ -3,7 +3,8 @@ import * as React from "react"
 import Main from "../../layouts/Main"
 import Seo from "../../components/Seo"
 import MsgAnchor from "../../components/anchor/MsgAnchor"
-import QueryAnchor from "../../components/anchor/QueryAnchor"
+import QueryAnchorByIRI from "../../components/anchor/QueryAnchorByIRI"
+import QueryAnchorByHash from "../../components/anchor/QueryAnchorByHash"
 
 import * as styles from "./index.module.css"
 
@@ -23,9 +24,15 @@ const Anchor = () => {
           </div>
           <div className={styles.table}>
             <div className={styles.tableHeader}>
-              {"search anchor by iri"}
+              {"search data anchor by iri"}
             </div>
-            <QueryAnchor />
+            <QueryAnchorByIRI />
+          </div>
+          <div className={styles.table}>
+            <div className={styles.tableHeader}>
+              {"search data anchor by content hash"}
+            </div>
+            <QueryAnchorByHash />
           </div>
         </div>
       </div>

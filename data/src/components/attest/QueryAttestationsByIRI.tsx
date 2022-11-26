@@ -4,33 +4,33 @@ import { useContext, useState } from "react"
 import { WalletContext } from "../../context/WalletContext"
 import SelectNetwork from "../SelectNetwork"
 
-import * as styles from "./QueryAnchor.module.css"
+import * as styles from "./QueryAttestationsByIRI.module.css"
 
-const queryAnchor = "/regen/data/v1/anchor-by-iri"
+const queryAttestationsByIRI = "/regen/data/v1/attestations-by-iri"
 const iriPlaceholder = "regen:13toVfvC2YxrrfSXWB5h2BGHiXZURsKxWUz72uDRDSPMCrYPguGUXSC.rdf"
 
-const QueryAnchor = () => {
+const QueryAttestationsByIRI = () => {
 
   // @ts-ignore
   const { chainInfo } = useContext(WalletContext)
 
   const [iri, setIri] = useState("")
   const [error, setError] = useState("")
-  const [result, setResult] = useState("")
+  const [success, setSuccess] = useState("")
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
     setError("")
-    setResult("")
+    setSuccess("")
 
-    fetch(chainInfo.rest + queryAnchor + "/" + iri)
+    fetch(chainInfo.rest + queryAttestationsByIRI + "/" + iri)
       .then(res => res.json())
       .then(data => {
         if (data.code) {
           setError(data.message)
         } else {
-          setResult(JSON.stringify(data, null, "\t"))
+          setSuccess(JSON.stringify(data, null, "\t"))
         }
       })
       .catch(err => {
@@ -62,10 +62,10 @@ const QueryAnchor = () => {
           {error}
         </div>
       )}
-      {result != "" && (
+      {success != "" && (
         <div>
           <pre>
-            {result}
+            {success}
           </pre>
         </div>
       )}
@@ -73,4 +73,4 @@ const QueryAnchor = () => {
   )
 }
 
-export default QueryAnchor
+export default QueryAttestationsByIRI

@@ -21,10 +21,13 @@ const WalletContextProvider = (props: any) => {
   const [wallet, setWallet] = useState<any>() // TODO
 
   const [error, setError] = useState<string>("")
-  const [result, setResult] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
 
   const getKeplr = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
+
+    setError("")
+    setSuccess("")
 
     if (window.keplr) {
       console.log("keplr", window.keplr)
@@ -50,14 +53,13 @@ const WalletContextProvider = (props: any) => {
 
       // enable chain
       await window.keplr.enable(network).then(() => {
-        setResult(network)
+        setSuccess(network)
       }).catch(async err => {
         console.log(err.message)
         setError(err.message)
 
         await window.keplr?.experimentalSuggestChain(chainInfo).then(() => {
-          setResult(network)
-          setError("")
+          setSuccess(network)
         }).catch(err => {
           console.log(err.message)
           setError(err.message)
@@ -68,7 +70,6 @@ const WalletContextProvider = (props: any) => {
       await window.keplr.getKey(network).then(wallet => {
         console.log(" wallet", wallet)
         setWallet(wallet)
-        setError("")
       }).catch(err => {
         console.log(err.message)
         setError(err.message)
@@ -78,7 +79,6 @@ const WalletContextProvider = (props: any) => {
     if (document.readyState === "complete") {
       console.log("ready state complete", window.keplr)
       setKeplr(window.keplr)
-      setError("")
     }
 
     const windowStateChange = async (event: Event) => {
@@ -89,7 +89,6 @@ const WalletContextProvider = (props: any) => {
         await window.keplr.getKey(network).then((wallet: Key) => {
           console.log(network + " wallet", wallet)
           setWallet(wallet)
-          setError("")
         }).catch((err: { message: string }) => {
           console.log(err.message)
           setError(err.message)
@@ -114,15 +113,15 @@ const WalletContextProvider = (props: any) => {
 
   return (
     <WalletContext.Provider value={{
-        getKeplr,
-        chainInfo,
-        setChainInfo,
-        network,
-        setNetwork,
-        result,
-        keplr,
-        wallet,
-        error,
+      getKeplr,
+      chainInfo,
+      setChainInfo,
+      network,
+      setNetwork,
+      success,
+      keplr,
+      wallet,
+      error,
     }}>
       {props.children}
     </WalletContext.Provider>

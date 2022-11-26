@@ -22,8 +22,12 @@
   width: 50em;
 }
 
+.form select {
+  min-width: 10em;
+}
+
 .form textarea {
-  height: 30em;
+  height: 12em;
   width: 50em;
 }
 

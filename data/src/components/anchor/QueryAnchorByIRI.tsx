@@ -4,12 +4,12 @@ import { useContext, useState } from "react"
 import { WalletContext } from "../../context/WalletContext"
 import SelectNetwork from "../SelectNetwork"
 
-import * as styles from "./ConvertIRIToHash.module.css"
+import * as styles from "./QueryAnchorByIRI.module.css"
 
-const convertIRIToHash = "/regen/data/v1/convert-iri-to-hash"
+const queryAnchorByIRI = "/regen/data/v1/anchor-by-iri"
 const iriPlaceholder = "regen:13toVfvC2YxrrfSXWB5h2BGHiXZURsKxWUz72uDRDSPMCrYPguGUXSC.rdf"
 
-const ConvertIRIToHash = () => {
+const QueryAnchorByIRI = () => {
 
   // @ts-ignore
   const { chainInfo } = useContext(WalletContext)
@@ -24,13 +24,13 @@ const ConvertIRIToHash = () => {
     setError("")
     setSuccess("")
 
-    fetch(chainInfo.rest + convertIRIToHash + "/" + iri)
+    fetch(chainInfo.rest + queryAnchorByIRI + "/" + iri)
       .then(res => res.json())
       .then(data => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data.content_hash, null, "\t"))
+          setSuccess(JSON.stringify(data, null, "\t"))
         }
       })
       .catch(err => {
@@ -53,7 +53,7 @@ const ConvertIRIToHash = () => {
           </label>
           <SelectNetwork />
           <button type="submit">
-            {"convert"}
+            {"search"}
           </button>
         </form>
       </div>
@@ -73,4 +73,4 @@ const ConvertIRIToHash = () => {
   )
 }
 
-export default ConvertIRIToHash
+export default QueryAnchorByIRI

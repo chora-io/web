@@ -9,7 +9,7 @@ import * as styles from "./ConnectWallet.module.css"
 const ConnectWallet = () => {
 
   // @ts-ignore
-  const { getKeplr, keplr, wallet, error, result } = useContext(WalletContext)
+  const { getKeplr, keplr, wallet, error, success } = useContext(WalletContext)
 
   return (
     <div>
@@ -29,13 +29,13 @@ const ConnectWallet = () => {
         </div>
       }
       {wallet != null &&
-        <div className={styles.result}>
+        <div className={styles.success}>
           {wallet.bech32Address.substring(0, 10) + "..." + wallet.bech32Address.substring(38, 44)}
         </div>
       }
-      {result != "" &&
-        <div className={styles.result}>
-          {result}
+      {success != "" &&
+        <div className={styles.success}>
+          {success}
         </div>
       }
     </div>

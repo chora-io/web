@@ -58,7 +58,6 @@ const SelectNetwork = () => {
         value={network}
         onChange={handleChange}
       >
-
         <option value={choraTestnet.chainId}>
           {choraTestnet.chainId}
         </option>
