@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { WalletContextProvider } from "../context/wallet";
+import { WalletContextProvider } from "../context/WalletContext";
 import Sidebar from "../components/Sidebar"
 
 import "./Main.css"

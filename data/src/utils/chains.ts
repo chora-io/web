@@ -1,8 +1,8 @@
 export const choraLocal = {
     chainId: "chora-local",
     chainName: "Chora Local",
-    rpc: "http://localhost:26657",
-    rest: "http://localhost:1317",
+    rpc: "http://127.0.0.1:26657",
+    rest: "http://127.0.0.1:1317",
     bip44: {
         coinType: 118,
     },
@@ -91,8 +91,8 @@ export const choraTestnet = {
 export const regenLocal = {
     chainId: "regen-local",
     chainName: "Regen Local",
-    rpc: "http://localhost:26657",
-    rest: "http://localhost:1317",
+    rpc: "http://127.0.0.1:26657",
+    rest: "http://127.0.0.1:1317",
     bip44: {
         coinType: 118,
     },

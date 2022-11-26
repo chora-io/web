@@ -15,6 +15,7 @@ const WalletContext = createContext({}) // TODO
 
 const WalletContextProvider = (props: any) => {
   const [network, setNetwork] = useState<string>(choraLocal.chainId);
+  const [chainInfo, setChainInfo] = useState<ChainInfo>(choraLocal);
   const [response, setResponse] = useState<string>("");
   const [keplr, setKeplr] = useState<any>() // TODO
   const [wallet, setWallet] = useState<any>() // TODO
@@ -27,22 +28,21 @@ const WalletContextProvider = (props: any) => {
       console.log("keplr", window.keplr)
       setKeplr(window.keplr)
 
-      let chainInfo: ChainInfo
       switch (network) {
         case choraLocal.chainId:
-          chainInfo = choraLocal
+          setChainInfo(choraLocal)
           break
         case choraTestnet.chainId:
-          chainInfo = choraTestnet
+          setChainInfo(choraTestnet)
           break
         case regenLocal.chainId:
-          chainInfo = regenLocal
+          setChainInfo(regenLocal)
           break
         case regenRedwood.chainId:
-          chainInfo = regenRedwood
+          setChainInfo(regenRedwood)
           break
         case regenHambach.chainId:
-          chainInfo = regenHambach
+          setChainInfo(regenHambach)
           break
       }
 
@@ -113,6 +113,7 @@ const WalletContextProvider = (props: any) => {
   return (
     <WalletContext.Provider value={{
         getKeplr,
+        chainInfo,
         network,
         setNetwork,
         response,
