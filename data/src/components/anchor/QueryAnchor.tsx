@@ -1,41 +1,42 @@
 import * as React from "react"
-import { useState } from "react"
+import { useContext, useState } from "react"
+
+import { WalletContext } from "../../context/WalletContext"
+import SelectNetwork from "../SelectNetwork"
 
 import * as styles from "./QueryAnchor.module.css"
 
-import {
-  choraLocal,
-  choraTestnet,
-  regenLocal,
-  regenRedwood,
-  regenHambach,
-} from "../../utils/chains"
-
 const queryAnchor = "/regen/data/v1/anchor-by-iri"
+const iriPlaceholder = "regen:13toVfvC2YxrrfSXWB5h2BGHiXZURsKxWUz72uDRDSPMCrYPguGUXSC.rdf"
 
 const QueryAnchor = () => {
 
-  const [iri, setIri] = useState("");
-  const [rest, setRest] = useState(choraLocal.rest);
-  const [response, setResponse] = useState("");
-  const [error, setError] = useState("");
+  // @ts-ignore
+  const { chainInfo } = useContext(WalletContext)
 
-  const handleSubmit = async (event: { preventDefault: () => void; }) => {
-    event.preventDefault();
+  const [iri, setIri] = useState("")
+  const [error, setError] = useState("")
+  const [result, setResult] = useState("")
 
-    fetch(rest + queryAnchor + "/" + iri)
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
+    event.preventDefault()
+
+    setError("")
+    setResult("")
+
+    fetch(chainInfo.rest + queryAnchor + "/" + iri)
       .then(res => res.json())
       .then(data => {
         if (data.code) {
-          setError(data.message);
+          setError(data.message)
         } else {
-          setResponse(data);
+          setResult(JSON.stringify(data, null, "\t"))
         }
       })
       .catch(err => {
-        setError(err.message);
-      });
-  };
+        setError(err.message)
+      })
+  }
 
   return (
     <>
@@ -46,33 +47,11 @@ const QueryAnchor = () => {
             <input
               id="iri"
               value={iri}
+              placeholder={iriPlaceholder}
               onChange={event => setIri(event.target.value)}
             />
           </label>
-          <label htmlFor="network">
-            {"network"}
-            <select
-              id="network"
-              value={rest}
-              onChange={event => setRest(event.target.value)}
-            >
-              <option value={choraLocal.rest}>
-                {choraLocal.chainId}
-              </option>
-              <option value={choraTestnet.rest}>
-                {choraTestnet.chainId}
-              </option>
-              <option value={regenLocal.rest}>
-                {regenLocal.chainId}
-              </option>
-              <option value={regenRedwood.rest}>
-                {regenRedwood.chainId}
-              </option>
-              <option value={regenHambach.rest}>
-                {regenHambach.chainId}
-              </option>
-            </select>
-          </label>
+          <SelectNetwork />
           <button type="submit">
             {"search"}
           </button>
@@ -83,9 +62,11 @@ const QueryAnchor = () => {
           {error}
         </div>
       )}
-      {response != "" && (
+      {result != "" && (
         <div>
-          {response}
+          <pre>
+            {result}
+          </pre>
         </div>
       )}
     </>

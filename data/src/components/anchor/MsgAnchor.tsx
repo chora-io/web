@@ -33,12 +33,15 @@ const MsgAnchorView = () => {
   const [merkle, setMerkle] = useState<number>(0)
   const [media, setMediaType] = useState<number>(0)
 
-  // response and error
-  const [response, setResponse] = useState<string>("")
+  // error and result
   const [error, setError] = useState<string>("")
+  const [result, setResult] = useState<string>("")
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
+
+    setError("")
+    setResult("")
 
     const sender = wallet.bech32Address
 
@@ -157,7 +160,7 @@ const MsgAnchorView = () => {
       }).finish()
 
       window?.keplr?.sendTx(chainInfo.chainId, signedTx, mode).then(res => {
-        setResponse(Buffer.from(res).toString("hex"))
+        setResult(Buffer.from(res).toString("hex"))
         setError("")
 
       }).catch(err => {
@@ -300,11 +303,11 @@ const MsgAnchorView = () => {
           {error}
         </div>
       )}
-      {response != "" && (
+      {result != "" && (
         <div>
           <pre>
-            <a href={chainInfo.rest + queryTx + "/" + response}>
-              {chainInfo.rest + queryTx + "/" + response}
+            <a href={chainInfo.rest + queryTx + "/" + result}>
+              {chainInfo.rest + queryTx + "/" + result}
             </a>
           </pre>
         </div>

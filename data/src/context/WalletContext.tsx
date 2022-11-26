@@ -14,12 +14,14 @@ import {
 const WalletContext = createContext({}) // TODO
 
 const WalletContextProvider = (props: any) => {
+
   const [network, setNetwork] = useState<string>(choraLocal.chainId);
   const [chainInfo, setChainInfo] = useState<ChainInfo>(choraLocal);
-  const [response, setResponse] = useState<string>("");
   const [keplr, setKeplr] = useState<any>() // TODO
   const [wallet, setWallet] = useState<any>() // TODO
+
   const [error, setError] = useState<string>("")
+  const [result, setResult] = useState<string>("");
 
   const getKeplr = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -48,13 +50,13 @@ const WalletContextProvider = (props: any) => {
 
       // enable chain
       await window.keplr.enable(network).then(() => {
-        setResponse(network)
+        setResult(network)
       }).catch(async err => {
         console.log(err.message)
         setError(err.message)
 
         await window.keplr?.experimentalSuggestChain(chainInfo).then(() => {
-          setResponse(network)
+          setResult(network)
           setError("")
         }).catch(err => {
           console.log(err.message)
@@ -114,9 +116,10 @@ const WalletContextProvider = (props: any) => {
     <WalletContext.Provider value={{
         getKeplr,
         chainInfo,
+        setChainInfo,
         network,
         setNetwork,
-        response,
+        result,
         keplr,
         wallet,
         error,
