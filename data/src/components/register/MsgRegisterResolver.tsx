@@ -1,13 +1,14 @@
 import * as React from "react"
 import { useContext, useState } from "react"
 import { Buffer } from "buffer"
+import * as Long from 'long'
 
 import { SignMode } from "@keplr-wallet/proto-types/cosmos/tx/signing/v1beta1/signing"
 import { AuthInfo, TxBody, TxRaw } from "@keplr-wallet/proto-types/cosmos/tx/v1beta1/tx"
 import { BroadcastMode, SignDoc } from "@keplr-wallet/types"
 
 import { WalletContext } from "../../context/WalletContext"
-import { MsgAnchor } from "../../../api/regen/data/v1/tx"
+import { MsgRegisterResolver } from "../../../api/regen/data/v1/tx"
 import {
   DigestAlgorithm,
   GraphCanonicalizationAlgorithm,
@@ -15,21 +16,23 @@ import {
   RawMediaType,
 } from "../../../api/regen/data/v1/types"
 
-import * as styles from "./MsgAnchor.module.css"
+import * as styles from "./MsgRegisterResolver.module.css"
 
 const queryAccount = "/cosmos/auth/v1beta1/accounts"
 const queryTx = "/cosmos/tx/v1beta1/txs"
+const idPlaceholder = "1"
 const hashPlaceholder = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
 
-const MsgAnchorView = () => {
+const MsgRegisterResolverView = () => {
 
   // @ts-ignore
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // form input
+  const [id, setId] = useState<string>("")
   const [hash, setHash] = useState<string>("")
-  const [digest, setDigest] = useState<number>(0)
   const [type, setType] = useState<string>("")
+  const [digest, setDigest] = useState<number>(0)
   const [canon, setCanon] = useState<number>(0)
   const [merkle, setMerkle] = useState<number>(0)
   const [media, setMedia] = useState<number>(0)
@@ -69,36 +72,42 @@ const MsgAnchorView = () => {
       return // exit if fetch account unsuccessful
     }
 
-    let msg: MsgAnchor
+    let msg: MsgRegisterResolver
 
     if (type == "graph") {
       msg = {
-        $type: "regen.data.v1.MsgAnchor",
-        sender: sender,
-        contentHash: {
-          $type: "regen.data.v1.ContentHash",
-          graph: {
-            $type: "regen.data.v1.ContentHash.Graph",
-            hash: Buffer.from(hash, "base64"),
-            digestAlgorithm: digest,
-            canonicalizationAlgorithm: canon,
-            merkleTree: merkle,
+        $type: "regen.data.v1.MsgRegisterResolver",
+        manager: sender,
+        resolverId: Long.fromString(id),
+        contentHashes: [
+          {
+            $type: "regen.data.v1.ContentHash",
+            graph: {
+              $type: "regen.data.v1.ContentHash.Graph",
+              hash: Buffer.from(hash, "base64"),
+              digestAlgorithm: digest,
+              canonicalizationAlgorithm: canon,
+              merkleTree: merkle,
+            },
           },
-        },
+        ],
       }
     } else if (type == "raw") {
       msg = {
-        $type: "regen.data.v1.MsgAnchor",
-        sender: sender,
-        contentHash: {
-          $type: "regen.data.v1.ContentHash",
-          raw: {
-            $type: "regen.data.v1.ContentHash.Raw",
-            hash: Buffer.from(hash, "base64"),
-            digestAlgorithm: digest,
-            mediaType: media,
+        $type: "regen.data.v1.MsgRegisterResolver",
+        manager: sender,
+        resolverId: Long.fromString(id),
+        contentHashes: [
+          {
+            $type: "regen.data.v1.ContentHash",
+            raw: {
+              $type: "regen.data.v1.ContentHash.Raw",
+              hash: Buffer.from(hash, "base64"),
+              digestAlgorithm: digest,
+              mediaType: media,
+            },
           },
-        },
+        ],
       }
     } else {
       setError("data type is required")
@@ -109,7 +118,7 @@ const MsgAnchorView = () => {
       messages: [
         {
           typeUrl: `/${msg.$type}`,
-          value: MsgAnchor.encode(msg).finish(),
+          value: MsgRegisterResolver.encode(msg).finish(),
         },
       ],
       memo: "",
@@ -176,6 +185,15 @@ const MsgAnchorView = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
+          <label htmlFor="id">
+            {"resolver id"}
+            <input
+              id="id"
+              value={id}
+              placeholder={idPlaceholder}
+              onChange={event => setId(event.target.value)}
+            />
+          </label>
           <label htmlFor="hash">
             {"hash"}
             <input
@@ -317,4 +335,4 @@ const MsgAnchorView = () => {
   )
 }
 
-export default MsgAnchorView
+export default MsgRegisterResolverView

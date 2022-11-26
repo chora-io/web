@@ -25,19 +25,19 @@ const Attest = () => {
           </div>
           <div className={styles.table}>
             <div className={styles.tableHeader}>
-              {"search attestations by attestor"}
+              {"search data attestations by attestor"}
             </div>
             <QueryAttestationsByAttestor />
           </div>
           <div className={styles.table}>
             <div className={styles.tableHeader}>
-              {"search attestations by iri"}
+              {"search data attestations by iri"}
             </div>
             <QueryAttestationsByIRI />
           </div>
           <div className={styles.table}>
             <div className={styles.tableHeader}>
-              {"search attestations by content hash"}
+              {"search data attestations by content hash"}
             </div>
             <QueryAttestationsByHash />
           </div>

@@ -4,17 +4,17 @@ import { useContext, useState } from "react"
 import { WalletContext } from "../../context/WalletContext"
 import SelectNetwork from "../SelectNetwork"
 
-import * as styles from "./ConvertIRIToHash.module.css"
+import * as styles from "./QueryResolversByURL.module.css"
 
-const convertIRIToHash = "/regen/data/v1/convert-iri-to-hash"
-const iriPlaceholder = "regen:13toVfvC2YxrrfSXWB5h2BGHiXZURsKxWUz72uDRDSPMCrYPguGUXSC.rdf"
+const queryResolversByURL = "/regen/data/v1/resolvers-by-url"
+const urlPlaceholder = "https://data.chora.io"
 
-const ConvertIRIToHash = () => {
+const QueryResolversByURL = () => {
 
   // @ts-ignore
   const { chainInfo } = useContext(WalletContext)
 
-  const [iri, setIri] = useState("")
+  const [url, setUrl] = useState("")
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
 
@@ -24,13 +24,16 @@ const ConvertIRIToHash = () => {
     setError("")
     setSuccess("")
 
-    fetch(chainInfo.rest + convertIRIToHash + "/" + iri)
+    fetch(chainInfo.rest + queryResolversByURL, {
+      method: "POST",
+      body: `{"url": "${url}"}`,
+    })
       .then(res => res.json())
       .then(data => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data.content_hash, null, "\t"))
+          setSuccess(JSON.stringify(data, null, "\t"))
         }
       })
       .catch(err => {
@@ -42,18 +45,18 @@ const ConvertIRIToHash = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label htmlFor="iri">
-            {"iri"}
+          <label htmlFor="url">
+            {"url"}
             <input
-              id="iri"
-              value={iri}
-              placeholder={iriPlaceholder}
-              onChange={event => setIri(event.target.value)}
+              id="url"
+              value={url}
+              placeholder={urlPlaceholder}
+              onChange={event => setUrl(event.target.value)}
             />
           </label>
           <SelectNetwork />
           <button type="submit">
-            {"submit"}
+            {"search"}
           </button>
         </form>
       </div>
@@ -73,4 +76,4 @@ const ConvertIRIToHash = () => {
   )
 }
 
-export default ConvertIRIToHash
+export default QueryResolversByURL

@@ -7,29 +7,21 @@ import { AuthInfo, TxBody, TxRaw } from "@keplr-wallet/proto-types/cosmos/tx/v1b
 import { BroadcastMode, SignDoc } from "@keplr-wallet/types"
 
 import { WalletContext } from "../../context/WalletContext"
-import { MsgAttest } from "../../../api/regen/data/v1/tx"
-import {
-  DigestAlgorithm,
-  GraphCanonicalizationAlgorithm,
-  GraphMerkleTree,
-} from "../../../api/regen/data/v1/types"
+import { MsgDefineResolver } from "../../../api/regen/data/v1/tx"
 
-import * as styles from "./MsgAttest.module.css"
+import * as styles from "./MsgDefineResolver.module.css"
 
 const queryAccount = "/cosmos/auth/v1beta1/accounts"
 const queryTx = "/cosmos/tx/v1beta1/txs"
-const hashPlaceholder = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+const urlPlaceholder = "https://data.chora.io"
 
-const MsgAttestView = () => {
+const MsgDefineResolverView = () => {
 
   // @ts-ignore
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // form input
-  const [hash, setHash] = useState<string>("")
-  const [digest, setDigest] = useState<number>(0)
-  const [canon, setCanon] = useState<number>(0)
-  const [merkle, setMerkle] = useState<number>(0)
+  const [url, setUrl] = useState<string>("")
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -66,25 +58,17 @@ const MsgAttestView = () => {
       return // exit if fetch account unsuccessful
     }
 
-    const msg: MsgAttest = {
-      $type: "regen.data.v1.MsgAttest",
-      attestor: sender,
-      contentHashes: [
-        {
-          $type: "regen.data.v1.ContentHash.Graph",
-          hash: Buffer.from(hash, "base64"),
-          digestAlgorithm: digest,
-          canonicalizationAlgorithm: canon,
-          merkleTree: merkle,
-        },
-      ],
+    const msg: MsgDefineResolver = {
+      $type: "regen.data.v1.MsgDefineResolver",
+      manager: sender,
+      resolverUrl: url,
     }
 
     const bodyBytes = TxBody.encode({
       messages: [
         {
           typeUrl: `/${msg.$type}`,
-          value: MsgAttest.encode(msg).finish(),
+          value: MsgDefineResolver.encode(msg).finish(),
         },
       ],
       memo: "",
@@ -151,59 +135,14 @@ const MsgAttestView = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label htmlFor="hash">
-            {"hash"}
+          <label htmlFor="url">
+            {"url"}
             <input
-              id="hash"
-              value={hash}
-              placeholder={hashPlaceholder}
-              onChange={event => setHash(event.target.value)}
+              id="url"
+              value={url}
+              placeholder={urlPlaceholder}
+              onChange={event => setUrl(event.target.value)}
             />
-          </label>
-          <label htmlFor="digest">
-            {"digest algorithm"}
-            <select
-              id="digest"
-              value={digest}
-              // @ts-ignore
-              onChange={event => setDigest(event.target.value)}
-            >
-              <option value={DigestAlgorithm.DIGEST_ALGORITHM_UNSPECIFIED}>
-                {"unspecified"}
-              </option>
-              <option value={DigestAlgorithm.DIGEST_ALGORITHM_BLAKE2B_256}>
-                {"BLAKE2b-256"}
-              </option>
-            </select>
-          </label>
-          <label htmlFor="canon">
-            {"graph canonicalization algorithm"}
-            <select
-              id="canon"
-              value={canon}
-              // @ts-ignore
-              onChange={event => setCanon(event.target.value)}
-            >
-              <option value={GraphCanonicalizationAlgorithm.GRAPH_CANONICALIZATION_ALGORITHM_UNSPECIFIED}>
-                {"unspecified"}
-              </option>
-              <option value={GraphCanonicalizationAlgorithm.GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015}>
-                {"URDNA2015"}
-              </option>
-            </select>
-          </label>
-          <label htmlFor="merkle">
-            {"graph merkle tree type"}
-            <select
-              id="merkle"
-              value={merkle}
-              // @ts-ignore
-              onChange={event => setMerkle(event.target.value)}
-            >
-              <option value={GraphMerkleTree.GRAPH_MERKLE_TREE_NONE_UNSPECIFIED}>
-                {"unspecified"}
-              </option>
-            </select>
           </label>
           <button type="submit">
             {"submit"}
@@ -228,4 +167,4 @@ const MsgAttestView = () => {
   )
 }
 
-export default MsgAttestView
+export default MsgDefineResolverView

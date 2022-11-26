@@ -65,7 +65,7 @@ const ConvertHashToIRI = () => {
           </label>
           <SelectNetwork />
           <button type="submit">
-            {"convert"}
+            {"submit"}
           </button>
         </form>
       </div>
