@@ -8,23 +8,27 @@ import { BroadcastMode, SignDoc } from "@keplr-wallet/types"
 
 import { WalletContext } from "../../context/WalletContext"
 import { MsgAnchor } from "../../../api/regen/data/v1/tx"
-import {
-  DigestAlgorithm,
-  GraphCanonicalizationAlgorithm,
-  GraphMerkleTree,
-  RawMediaType,
-} from "../../../api/regen/data/v1/types"
+import InputHash from "../InputHash"
+import InputHashJSON from "../InputHashJSON"
+import SelectDataType from "../SelectDataType"
+import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
+import SelectInput from "../SelectInput"
+import SelectGraphCanon from "../SelectGraphCanon"
+import SelectGraphMerkle from "../SelectGraphMerkle"
+import SelectRawMedia from "../SelectRawMedia"
 
 import * as styles from "./MsgAnchor.module.css"
 
 const queryAccount = "/cosmos/auth/v1beta1/accounts"
 const queryTx = "/cosmos/tx/v1beta1/txs"
-const hashPlaceholder = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
 
 const MsgAnchorView = () => {
 
   // @ts-ignore
   const { chainInfo, wallet } = useContext(WalletContext)
+
+  // input option
+  const [input, setInput] = useState("form")
 
   // form input
   const [hash, setHash] = useState<string>("")
@@ -33,6 +37,9 @@ const MsgAnchorView = () => {
   const [canon, setCanon] = useState<number>(0)
   const [merkle, setMerkle] = useState<number>(0)
   const [media, setMedia] = useState<number>(0)
+
+  // json input
+  const [json, setJson] = useState<string>("")
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -70,39 +77,45 @@ const MsgAnchorView = () => {
     }
 
     let msg: MsgAnchor
-
-    if (type == "graph") {
-      msg = {
-        $type: "regen.data.v1.MsgAnchor",
-        sender: sender,
-        contentHash: {
-          $type: "regen.data.v1.ContentHash",
-          graph: {
-            $type: "regen.data.v1.ContentHash.Graph",
-            hash: Buffer.from(hash, "base64"),
-            digestAlgorithm: digest,
-            canonicalizationAlgorithm: canon,
-            merkleTree: merkle,
+    if (input == "form") {
+      if (type == "graph") {
+        msg = {
+          $type: "regen.data.v1.MsgAnchor",
+          sender: sender,
+          contentHash: {
+            $type: "regen.data.v1.ContentHash",
+            graph: {
+              $type: "regen.data.v1.ContentHash.Graph",
+              hash: Buffer.from(hash, "base64"),
+              digestAlgorithm: digest,
+              canonicalizationAlgorithm: canon,
+              merkleTree: merkle,
+            },
           },
-        },
-      }
-    } else if (type == "raw") {
-      msg = {
-        $type: "regen.data.v1.MsgAnchor",
-        sender: sender,
-        contentHash: {
-          $type: "regen.data.v1.ContentHash",
-          raw: {
-            $type: "regen.data.v1.ContentHash.Raw",
-            hash: Buffer.from(hash, "base64"),
-            digestAlgorithm: digest,
-            mediaType: media,
+        }
+      } else if (type == "raw") {
+        msg = {
+          $type: "regen.data.v1.MsgAnchor",
+          sender: sender,
+          contentHash: {
+            $type: "regen.data.v1.ContentHash",
+            raw: {
+              $type: "regen.data.v1.ContentHash.Raw",
+              hash: Buffer.from(hash, "base64"),
+              digestAlgorithm: digest,
+              mediaType: media,
+            },
           },
-        },
+        }
+      } else {
+        setError("data type is required")
+        return // exit with error
       }
     } else {
-      setError("data type is required")
-      return // exit on error
+      msg = MsgAnchor.fromJSON({
+        sender: sender,
+        contentHash: JSON.parse(json).contentHash,
+      })
     }
 
     const bodyBytes = TxBody.encode({
@@ -174,130 +187,60 @@ const MsgAnchorView = () => {
 
   return (
     <>
+      <SelectInput
+        input={input}
+        setInput={setInput}
+        setError={setError}
+        setSuccess={setSuccess}
+      />
       <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <label htmlFor="hash">
-            {"hash"}
-            <input
-              id="hash"
-              value={hash}
-              placeholder={hashPlaceholder}
-              onChange={event => setHash(event.target.value)}
+        {input == "form" ? (
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <InputHash
+              hash={hash}
+              setHash={setHash}
             />
-          </label>
-          <label htmlFor="digest">
-            {"digest algorithm"}
-            <select
-              id="digest"
-              value={digest}
-              // @ts-ignore
-              onChange={event => setDigest(event.target.value)}
-            >
-              <option value={DigestAlgorithm.DIGEST_ALGORITHM_UNSPECIFIED}>
-                {"unspecified"}
-              </option>
-              <option value={DigestAlgorithm.DIGEST_ALGORITHM_BLAKE2B_256}>
-                {"BLAKE2b-256"}
-              </option>
-            </select>
-          </label>
-          <label htmlFor="type">
-            {"data type"}
-            <select
-              id="type"
-              value={type}
-              onChange={event => setType(event.target.value)}
-            >
-              <option>
-                {"---select---"}
-              </option>
-              <option value="graph">
-                {"graph"}
-              </option>
-              <option value="raw">
-                {"raw"}
-              </option>
-            </select>
-          </label>
-          {type == "graph" &&
-            <>
-              <label htmlFor="canon">
-                {"graph canonicalization algorithm"}
-                <select
-                  id="canon"
-                  value={canon}
-                  // @ts-ignore
-                  onChange={event => setCanon(event.target.value)}
-                >
-                  <option value={GraphCanonicalizationAlgorithm.GRAPH_CANONICALIZATION_ALGORITHM_UNSPECIFIED}>
-                    {"unspecified"}
-                  </option>
-                  <option value={GraphCanonicalizationAlgorithm.GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015}>
-                    {"URDNA2015"}
-                  </option>
-                </select>
-              </label>
-              <label htmlFor="merkle">
-                {"graph merkle tree type"}
-                <select
-                  id="merkle"
-                  value={merkle}
-                  // @ts-ignore
-                  onChange={event => setMerkle(event.target.value)}
-                >
-                  <option value={GraphMerkleTree.GRAPH_MERKLE_TREE_NONE_UNSPECIFIED}>
-                    {"unspecified"}
-                  </option>
-                </select>
-              </label>
+            <SelectDigestAlgorithm
+              digest={digest}
+              setDigest={setDigest}
+            />
+            <SelectDataType
+              type={type}
+              setType={setType}
+            />
+            {type == "graph" &&
+              <>
+                <SelectGraphCanon
+                  canon={canon}
+                  setCanon={setCanon}
+                />
+                <SelectGraphMerkle
+                  merkle={merkle}
+                  setMerkle={setMerkle}
+                />
             </>
-          }
-          {type == "raw" &&
-            <label htmlFor="media-type">
-              {"raw media type"}
-              <select
-                id="media-type"
-                value={media}
-                // @ts-ignore
-                onChange={event => setMedia(event.target.value)}
-              >
-                <option>
-                  {"unspecified"}
-                </option>
-                <option value={RawMediaType.RAW_MEDIA_TYPE_TEXT_PLAIN}>
-                  {"TXT"}
-                </option>
-                <option value={RawMediaType.RAW_MEDIA_TYPE_JSON}>
-                  {"JSON"}
-                </option>
-                <option value={RawMediaType.RAW_MEDIA_TYPE_CSV}>
-                  {"CSV"}
-                </option>
-                <option value={RawMediaType.RAW_MEDIA_TYPE_XML}>
-                  {"XML"}
-                </option>
-                <option value={RawMediaType.RAW_MEDIA_TYPE_PDF}>
-                  {"PDF"}
-                </option>
-                <option value={RawMediaType.RAW_MEDIA_TYPE_TIFF}>
-                  {"TIFF"}
-                </option>
-                <option value={RawMediaType.RAW_MEDIA_TYPE_JPG}>
-                  {"JPG"}
-                </option>
-                <option value={RawMediaType.RAW_MEDIA_TYPE_PNG}>
-                  {"PNG"}
-                </option>
-                <option value={RawMediaType.RAW_MEDIA_TYPE_SVG}>
-                  {"SVG"}
-                </option>
-              </select>
-            </label>
-          }
-          <button type="submit">
-            {"submit"}
-          </button>
-        </form>
+            }
+            {type == "raw" &&
+              <SelectRawMedia
+                media={media}
+                setMedia={setMedia}
+              />
+            }
+            <button type="submit">
+              {"submit"}
+            </button>
+          </form>
+        ) : (
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <InputHashJSON
+              json={json}
+              setJson={setJson}
+            />
+            <button type="submit">
+              {"submit"}
+            </button>
+          </form>
+        )}
       </div>
       {error != "" && (
         <div className={styles.error}>

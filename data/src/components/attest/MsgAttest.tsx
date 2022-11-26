@@ -8,28 +8,34 @@ import { BroadcastMode, SignDoc } from "@keplr-wallet/types"
 
 import { WalletContext } from "../../context/WalletContext"
 import { MsgAttest } from "../../../api/regen/data/v1/tx"
-import {
-  DigestAlgorithm,
-  GraphCanonicalizationAlgorithm,
-  GraphMerkleTree,
-} from "../../../api/regen/data/v1/types"
+import InputHash from "../InputHash"
+import InputHashJSON from "../InputHashJSON"
+import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
+import SelectInput from "../SelectInput"
+import SelectGraphCanon from "../SelectGraphCanon"
+import SelectGraphMerkle from "../SelectGraphMerkle"
 
 import * as styles from "./MsgAttest.module.css"
 
 const queryAccount = "/cosmos/auth/v1beta1/accounts"
 const queryTx = "/cosmos/tx/v1beta1/txs"
-const hashPlaceholder = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
 
 const MsgAttestView = () => {
 
   // @ts-ignore
   const { chainInfo, wallet } = useContext(WalletContext)
 
+  // input option
+  const [input, setInput] = useState("form")
+
   // form input
   const [hash, setHash] = useState<string>("")
   const [digest, setDigest] = useState<number>(0)
   const [canon, setCanon] = useState<number>(0)
   const [merkle, setMerkle] = useState<number>(0)
+
+  // json input
+  const [json, setJson] = useState<string>("")
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -66,18 +72,28 @@ const MsgAttestView = () => {
       return // exit if fetch account unsuccessful
     }
 
-    const msg: MsgAttest = {
-      $type: "regen.data.v1.MsgAttest",
-      attestor: sender,
-      contentHashes: [
-        {
-          $type: "regen.data.v1.ContentHash.Graph",
-          hash: Buffer.from(hash, "base64"),
-          digestAlgorithm: digest,
-          canonicalizationAlgorithm: canon,
-          merkleTree: merkle,
-        },
-      ],
+    let msg: MsgAttest
+    if (input == "form") {
+      msg = {
+        $type: "regen.data.v1.MsgAttest",
+        attestor: sender,
+        contentHashes: [
+          {
+            $type: "regen.data.v1.ContentHash.Graph",
+            hash: Buffer.from(hash, "base64"),
+            digestAlgorithm: digest,
+            canonicalizationAlgorithm: canon,
+            merkleTree: merkle,
+          },
+        ],
+      }
+    } else {
+      msg = MsgAttest.fromJSON({
+        attestor: sender,
+        contentHashes: [
+          JSON.parse(json).contentHash.graph,
+        ]
+      })
     }
 
     const bodyBytes = TxBody.encode({
@@ -149,66 +165,46 @@ const MsgAttestView = () => {
 
   return (
     <>
+      <SelectInput
+        input={input}
+        setInput={setInput}
+        setError={setError}
+        setSuccess={setSuccess}
+      />
       <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <label htmlFor="hash">
-            {"hash"}
-            <input
-              id="hash"
-              value={hash}
-              placeholder={hashPlaceholder}
-              onChange={event => setHash(event.target.value)}
+        {input == "form" ? (
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <InputHash
+              hash={hash}
+              setHash={setHash}
             />
-          </label>
-          <label htmlFor="digest">
-            {"digest algorithm"}
-            <select
-              id="digest"
-              value={digest}
-              // @ts-ignore
-              onChange={event => setDigest(event.target.value)}
-            >
-              <option value={DigestAlgorithm.DIGEST_ALGORITHM_UNSPECIFIED}>
-                {"unspecified"}
-              </option>
-              <option value={DigestAlgorithm.DIGEST_ALGORITHM_BLAKE2B_256}>
-                {"BLAKE2b-256"}
-              </option>
-            </select>
-          </label>
-          <label htmlFor="canon">
-            {"graph canonicalization algorithm"}
-            <select
-              id="canon"
-              value={canon}
-              // @ts-ignore
-              onChange={event => setCanon(event.target.value)}
-            >
-              <option value={GraphCanonicalizationAlgorithm.GRAPH_CANONICALIZATION_ALGORITHM_UNSPECIFIED}>
-                {"unspecified"}
-              </option>
-              <option value={GraphCanonicalizationAlgorithm.GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015}>
-                {"URDNA2015"}
-              </option>
-            </select>
-          </label>
-          <label htmlFor="merkle">
-            {"graph merkle tree type"}
-            <select
-              id="merkle"
-              value={merkle}
-              // @ts-ignore
-              onChange={event => setMerkle(event.target.value)}
-            >
-              <option value={GraphMerkleTree.GRAPH_MERKLE_TREE_NONE_UNSPECIFIED}>
-                {"unspecified"}
-              </option>
-            </select>
-          </label>
-          <button type="submit">
-            {"submit"}
-          </button>
-        </form>
+            <SelectDigestAlgorithm
+              digest={digest}
+              setDigest={setDigest}
+            />
+            <SelectGraphCanon
+              canon={canon}
+              setCanon={setCanon}
+            />
+            <SelectGraphMerkle
+              merkle={merkle}
+              setMerkle={setMerkle}
+            />
+            <button type="submit">
+              {"submit"}
+            </button>
+          </form>
+        ) : (
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <InputHashJSON
+              json={json}
+              setJson={setJson}
+            />
+            <button type="submit">
+              {"submit"}
+            </button>
+          </form>
+        )}
       </div>
       {error != "" && (
         <div className={styles.error}>

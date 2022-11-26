@@ -53,7 +53,7 @@ const ConvertIRIToHash = () => {
           </label>
           <SelectNetwork />
           <button type="submit">
-            {"submit"}
+            {"convert"}
           </button>
         </form>
       </div>
