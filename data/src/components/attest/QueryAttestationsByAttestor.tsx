@@ -20,7 +20,7 @@ const QueryAttestationsByAttestor = () => {
   const [success, setSuccess] = useState("")
 
   let attestorPlaceholder: string
-  if (chainInfo.chainId.includes("chora")) {
+  if (chainInfo?.chainId.includes("chora")) {
     attestorPlaceholder = choraAttestorPlaceholder
   } else {
     attestorPlaceholder = regenAttestorPlaceholder

@@ -1,40 +1,55 @@
 import * as React from "react"
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 
 import { WalletContext } from "../context/WalletContext"
 import SelectNetwork from "./SelectNetwork"
 
 import * as styles from "./ConnectWallet.module.css"
 
+const connectedKey = "chora-header-connected"
+const addressKey = "chora-header-address"
+const networkKey = "chora-header-network"
+
 const ConnectWallet = () => {
 
   // @ts-ignore
-  const { getKeplr, loadKeplr, keplr, wallet, error } = useContext(WalletContext)
+  const { getKeplr, network, chainInfo, wallet, error } = useContext(WalletContext)
 
-  // reload wallet context
-  useEffect(() => {
-    if (wallet == undefined) {
-      loadKeplr()
-    }
-  })
+  let connected: boolean, address: string, selected: string
+
+  if (wallet == null) {
+    connected = (localStorage.getItem(connectedKey) === "true")
+    address = localStorage.getItem(addressKey) || ""
+    selected = localStorage.getItem(networkKey) || network
+  } else {
+    connected = (network == chainInfo?.chainId)
+    address = wallet.bech32Address
+    selected = network
+    localStorage.setItem(connectedKey, (connected ? "true" : "false"))
+    localStorage.setItem(addressKey, address)
+    localStorage.setItem(networkKey, network)
+  }
 
   return (
     <div className={styles.connect}>
       <span className={styles.error}>
         {error}
       </span>
-      {wallet != null &&
+      {connected &&
         <span className={styles.address}>
-          {wallet.bech32Address.substring(0, 9) + "..." + wallet.bech32Address.substring(41, 44)}
+          {address.substring(0, 9) + "..." + address.substring(41, 44)}
         </span>
       }
       <form className={styles.form} onSubmit={getKeplr}>
-        <SelectNetwork withLabel={false} />
-        <button type="submit">
-          {keplr == null ?
-            <span>{"connect wallet"}</span>
-          :
+        <SelectNetwork
+            value={selected}
+            withLabel={false}
+        />
+        <button type="submit" className={connected ? styles.connected : null}>
+          {connected ?
             <span>{"wallet connected"}</span>
+          :
+            <span>{"connect wallet"}</span>
           }
         </button>
       </form>
