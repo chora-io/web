@@ -1,14 +1,12 @@
+/* container */
+
 .container {
   background: var(--color-bg);
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  width: 100vw;
 }
 
-/* banner */
+/* section-main */
 
-.banner {
+.section-main {
   align-items: center;
   display: flex;
   font-size: 1.5rem;
@@ -17,37 +15,36 @@
   width: 100vw;
 }
 
-.banner div {
+.section-main div {
   margin-bottom: 2%;
   padding: 0 2rem;
   text-align: center;
 }
 
-.banner h1 {
+.section-main h1 {
   padding: 0.75rem 0;
 }
 
-.banner p {
+.section-main p {
   padding: 0.5rem 0;
 }
 
-.banner i {
+.section-main i {
   color: var(--color-primary);
 }
 
 @media (max-width: 850px) {
 
-  .banner {
+  .section-main {
     font-size: 1.2rem;
   }
 }
 
-/* content */
+/* section-text */
 
-.content {
+.section-text {
   align-items: center;
   background: #000;
-  color: #FFF;
   display: flex;
   font-size: 1.2rem;
   justify-content: center;
@@ -55,7 +52,16 @@
   width: 100vw;
 }
 
-.content-item {
+@media (max-width: 850px) {
+
+  .section-text {
+    font-size: 1rem;
+  }
+}
+
+/* text */
+
+.text {
   display: block;
   margin-bottom: 5%;
   max-width: 650px;
@@ -63,18 +69,13 @@
   width: 100%;
 }
 
-.content-item p {
+.text p {
   padding: 1rem 0;
 }
 
 @media (max-width: 850px) {
 
-  .content {
-    font-size: 1rem;
-    padding-left: 0;
-  }
-
-  .content-item {
+  .text {
     padding: 2rem;
   }
 }

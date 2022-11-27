@@ -1,11 +1,11 @@
+/* container */
+
 .container {
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-left: 15vw;
+  margin-left: var(--sidebar-width);
   min-height: 100vh;
-  overflow-x: hidden;
-  width: 85vw;
 }
 
 .container h1 {

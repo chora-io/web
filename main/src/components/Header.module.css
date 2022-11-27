@@ -10,3 +10,25 @@
   width: 100%;
   z-index: 1;
 }
+
+/* menu */
+
+.menu {
+  display: flex;
+}
+
+.menu ul {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  list-style: none inside none;
+  margin-right: 4em;
+}
+
+.menu li {
+  margin: 1em;
+}
+
+.menu a {
+  font-weight: 400;
+}

@@ -11,7 +11,8 @@
 }
 
 :root {
-  --color-bg: #000;
+  --color-bg: rgba(0, 0, 0, 0.9);
+  --color-bg-solid: #000;
   --color-text: #FFF;
   --color-primary: #0CA;
   --color-error: red;
@@ -27,14 +28,14 @@
 
 html {
   cursor: default;
-  overflow-x: hidden;
 }
 
 body {
-  background: var(--color-bg);
+  background: var(--color-bg-solid);
   color: var(--color-text);
   font-family: 'Ubuntu', sans-serif;
   font-weight: 300;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5 {

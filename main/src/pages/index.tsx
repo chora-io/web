@@ -2,13 +2,15 @@ import * as React from "react"
 
 import Main from "../layouts/Main"
 import Seo from "../components/Seo"
+import Background from "../components/Background"
 
 import * as styles from "./index.module.css"
 
 const Index = () => (
   <Main>
+    <Background />
     <div className={styles.container} >
-      <div className={styles.banner}>
+      <div className={styles.sectionMain}>
         <div>
           <h1>
             {"chora"}
@@ -23,8 +25,8 @@ const Index = () => (
           </p>
         </div>
       </div>
-      <div className={styles.content}>
-        <div className={styles.contentItem}>
+      <div className={styles.sectionText}>
+        <div className={styles.text}>
           <p>
             {'We are a small team of researchers, engineers, and creatives who share a mission to explore "outside the city proper" (see '}
             <a href="https://en.wikipedia.org/wiki/Kh%C3%B4ra" target="_blank">
@@ -45,7 +47,7 @@ const Index = () => (
           </div>
         </div>
       </div>
-      <div className={styles.banner}>
+      <div className={styles.sectionMain}>
         <div>
           <h1>
             {"connect"}

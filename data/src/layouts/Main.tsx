@@ -6,19 +6,14 @@ import Sidebar from "../components/Sidebar"
 
 import "./Main.css"
 
-const Main = ({ children }: any) => {
-
-  // ...
-
-  return (
-    <WalletContextProvider>
-      <main>
-        <Header />
-        <Sidebar />
-        {children}
-      </main>
-    </WalletContextProvider>
-  )
-}
+const Main = ({ children }: any) => (
+  <WalletContextProvider>
+    <main>
+      <Header />
+      <Sidebar />
+      {children}
+    </main>
+  </WalletContextProvider>
+)
 
 export default Main

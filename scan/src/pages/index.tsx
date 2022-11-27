@@ -4,6 +4,7 @@ import { formatTimestamp } from "../utils/timestamp";
 
 import Main from "../layouts/Main"
 import Seo from "../components/Seo"
+import Background from "../components/Background"
 
 import * as styles from "./index.module.css"
 
@@ -70,8 +71,9 @@ const Index = () => {
 
   return (
     <Main>
+      <Background />
       <div className={styles.container} >
-        <div className={styles.banner}>
+        <div className={styles.content}>
           {choraTestnetError == "" ? (
             <div>
               <h3>

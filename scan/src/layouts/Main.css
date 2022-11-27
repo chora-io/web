@@ -12,21 +12,10 @@
 
 :root {
   --color-bg: rgba(0, 0, 0, 0.9);
-  --color-text: #EEE;
+  --color-bg-solid: #000;
+  --color-text: #FFF;
   --color-primary: #0CA;
-  --color-error: red;
-  --line-height-loose: 1.75;
-  --line-height-normal: 1.5;
-  --line-height-dense: 1.25;
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 16px;
-  --space-4: 24px;
-  --space-5: 32px;
-  --space-6: 64px;
-  --size-content: 54rem;
-  --size-gutter: var(--space-5);
-  --size-gap: var(--space-6);
+  --header-height: 80px;
   --transition: 0.25s;
 }
 
@@ -40,9 +29,11 @@ html {
 }
 
 body {
+  background: var(--color-bg);
   color: var(--color-text);
   font-family: 'Ubuntu', sans-serif;
   font-weight: 300;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5 {
@@ -50,7 +41,7 @@ h1, h2, h3, h4, h5 {
 }
 
 p {
-  line-height: var(--line-height-loose);
+  line-height: 1.75;
 }
 
 a, a:active {
@@ -61,20 +52,6 @@ a, a:active {
 
 a:hover {
   opacity: 0.75;
-}
-
-.background {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  z-index: -1;
-}
-
-.background {
-  background-image: url('../assets/images/chora_dark.png');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 button {

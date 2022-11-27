@@ -17,17 +17,23 @@ const ConnectWallet = () => {
 
   let connected: boolean, address: string, selected: string
 
-  if (wallet == null) {
-    connected = (localStorage.getItem(connectedKey) === "true")
-    address = localStorage.getItem(addressKey) || ""
-    selected = localStorage.getItem(networkKey) || network
+  if (typeof localStorage !== "undefined") {
+    if (wallet == null) {
+      connected = (localStorage.getItem(connectedKey) === "true")
+      address = localStorage.getItem(addressKey) || ""
+      selected = localStorage.getItem(networkKey) || network
+    } else {
+      connected = (network == chainInfo?.chainId)
+      address = wallet.bech32Address
+      selected = network
+      localStorage.setItem(connectedKey, (connected ? "true" : "false"))
+      localStorage.setItem(addressKey, address)
+      localStorage.setItem(networkKey, network)
+    }
   } else {
     connected = (network == chainInfo?.chainId)
-    address = wallet.bech32Address
+    address = wallet?.bech32Address
     selected = network
-    localStorage.setItem(connectedKey, (connected ? "true" : "false"))
-    localStorage.setItem(addressKey, address)
-    localStorage.setItem(networkKey, network)
   }
 
   return (
