@@ -1,0 +1,37 @@
+/* content */
+
+.content {
+  font-size: 1.5rem;
+  padding: 0 2rem;
+  text-align: center;
+  width: 20rem;
+}
+
+.content h3 {
+  padding: 0.75rem 0;
+}
+
+.content p {
+  padding: 0.5rem 0;
+}
+
+.content i {
+  color: var(--color-primary);
+}
+
+.content a {
+  font-size: 1.25rem;
+}
+
+@media (max-width: 850px) {
+
+  .content {
+    font-size: 1.2rem;
+  }
+}
+
+/* error */
+
+.error {
+  color: var(--color-error);
+}
