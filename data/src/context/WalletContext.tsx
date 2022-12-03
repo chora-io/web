@@ -11,6 +11,8 @@ import {
   regenHambach,
 } from "../utils/chains"
 
+const cachedAddressKey = "chora-header-address"
+const cachedConnectedKey = "chora-header-connected"
 const cachedNetworkKey = "chora-network"
 
 const WalletContext = createContext({}) // TODO
@@ -65,16 +67,28 @@ const WalletContextProvider = (props: any) => {
           break
       }
 
-      // get wallet from selected network
-      window.keplr?.getKey(network).then(wallet => {
-        setChainInfo(chain)
-        setWallet(wallet)
-        setError("")
-      }).catch(err => {
+      // check if network is still enabled
+      window.keplr?.enable(network).then(() => {
 
-        // skip setting error if request rejected or no chain info (no action taken)
-        if (err.message != "Request rejected" && !err.message.includes("no chain info")) {
-          setError(err.message)
+        // get wallet from connected network
+        window.keplr?.getKey(network).then(wallet => {
+          setChainInfo(chain)
+          setWallet(wallet)
+          setError("")
+        }).catch(err => {
+
+          // clean up local storage if request rejected
+          if (err.message == "Request rejected") {
+            localStorage.removeItem(cachedConnectedKey)
+            localStorage.removeItem(cachedAddressKey)
+          }
+        })
+       }).catch(err => {
+
+        // clean up local storage if no longer enabled
+        if (err.message.includes("no chain info")) {
+          localStorage.removeItem(cachedConnectedKey)
+          localStorage.removeItem(cachedAddressKey)
         }
       })
     }
@@ -174,4 +188,10 @@ const WalletContextProvider = (props: any) => {
   )
 }
 
-export { cachedNetworkKey, WalletContext, WalletContextProvider }
+export {
+  cachedAddressKey,
+  cachedConnectedKey,
+  cachedNetworkKey,
+  WalletContext,
+  WalletContextProvider,
+}

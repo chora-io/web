@@ -14,7 +14,7 @@ import {
 const SelectNetwork = ({ value, withLabel }: any) => {
 
   // @ts-ignore
-  const { network, setNetwork, setWallet, setError } = useContext(WalletContext)
+  const { network, setNetwork, setError } = useContext(WalletContext)
 
   let local = false
   if (typeof window !== "undefined" && (

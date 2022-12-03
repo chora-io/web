@@ -1,38 +1,40 @@
 import * as React from "react"
 import { useContext } from "react"
 
-import { WalletContext } from "../context/WalletContext"
+import {
+  cachedAddressKey,
+  cachedConnectedKey,
+  cachedNetworkKey,
+  WalletContext,
+} from "../context/WalletContext"
+
 import SelectNetwork from "./SelectNetwork"
 
 import * as styles from "./ConnectWallet.module.css"
-
-const connectedKey = "chora-header-connected"
-const addressKey = "chora-header-address"
-const networkKey = "chora-header-network"
 
 const ConnectWallet = () => {
 
   // @ts-ignore
   const { getKeplr, network, chainInfo, wallet, error } = useContext(WalletContext)
 
-  let connected: boolean, address: string, selected: string
+  let address: string, connected: boolean, selected: string
 
   if (typeof localStorage !== "undefined") {
     if (wallet == null) {
-      connected = (localStorage.getItem(connectedKey) === "true")
-      address = localStorage.getItem(addressKey) || ""
-      selected = localStorage.getItem(networkKey) || network
+      address = localStorage.getItem(cachedAddressKey) || ""
+      connected = (localStorage.getItem(cachedConnectedKey) === "true")
+      selected = localStorage.getItem(cachedNetworkKey) || network
     } else {
-      connected = (network == chainInfo?.chainId)
       address = wallet.bech32Address
+      connected = (network == chainInfo?.chainId)
       selected = network
-      localStorage.setItem(connectedKey, (connected ? "true" : "false"))
-      localStorage.setItem(addressKey, address)
-      localStorage.setItem(networkKey, network)
+      localStorage.setItem(cachedAddressKey, address)
+      localStorage.setItem(cachedConnectedKey, (connected ? "true" : "false"))
+      localStorage.setItem(cachedNetworkKey, network)
     }
   } else {
-    connected = (network == chainInfo?.chainId)
     address = wallet?.bech32Address
+    connected = (network == chainInfo?.chainId)
     selected = network
   }
 
