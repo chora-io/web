@@ -1,0 +1,13 @@
+/* container */
+
+.container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+}
+
+.container h1 {
+  margin-bottom: 2em;
+}

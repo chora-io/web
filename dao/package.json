@@ -1,0 +1,39 @@
+{
+  "name": "dao",
+  "private": true,
+  "description": "dao creation and management",
+  "version": "0.0.0",
+  "homepage": "https://dao.chora.io",
+  "bugs": {
+    "url": "https://github.com/choraio/web/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/choraio/web"
+  },
+  "scripts": {
+    "proto": "sh ./scripts/protocgen.sh",
+    "lint": "echo \"lint not yet configured\"",
+    "format": "echo \"format not yet configured\"",
+    "test": "echo \"test not yet configured\"",
+    "build": "node_modules/.bin/gatsby build --prefix-paths",
+    "start": "node_modules/.bin/gatsby develop -p 8003",
+    "serve": "node_modules/.bin/gatsby serve -p 8003",
+    "clean": "node_modules/.bin/gatsby clean"
+  },
+  "dependencies": {
+    "gatsby": "^5.0.0",
+    "gatsby-plugin-image": "^3.0.0",
+    "gatsby-plugin-manifest": "^5.0.0",
+    "gatsby-plugin-sharp": "^5.0.0",
+    "gatsby-source-filesystem": "^5.0.0",
+    "gatsby-transformer-sharp": "^5.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@keplr-wallet/proto-types": "^0.11.17",
+    "@keplr-wallet/types": "^0.11.17",
+    "ts-proto": "^1.133.0"
+  }
+}
