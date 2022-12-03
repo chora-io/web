@@ -11,9 +11,9 @@ import {
   regenHambach,
 } from "../utils/chains"
 
-const cachedAddressKey = "chora-header-address"
-const cachedConnectedKey = "chora-header-connected"
-const cachedNetworkKey = "chora-network"
+const cachedAddressKey = "chora-web-address"
+const cachedConnectedKey = "chora-web-connected"
+const cachedNetworkKey = "chora-web-network"
 
 const WalletContext = createContext({}) // TODO
 
