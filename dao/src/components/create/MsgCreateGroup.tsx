@@ -16,13 +16,25 @@ import * as styles from "./MsgCreateGroup.module.css"
 const queryAccount = "/cosmos/auth/v1beta1/accounts"
 const queryTx = "/cosmos/tx/v1beta1/txs"
 
+type member = {
+  address: string;
+  weight: string;
+  metadata: string;
+}
+
+const member = {
+  address: "",
+  weight: "",
+  metadata: "",
+}
+
 const MsgCreateGroupView = () => {
 
   // @ts-ignore
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // form input
-  const [members, setMembers] = useState<string>("")
+  const [members, setMembers] = useState<member[]>([member])
   const [metadata, setMetadata] = useState<string>("")
 
   // error and success
@@ -60,12 +72,12 @@ const MsgCreateGroupView = () => {
       return // exit if fetch account unsuccessful
     }
 
-    const msg: MsgCreateGroup = {
+    const msg = {
       $type: "cosmos.group.v1.MsgCreateGroup",
       admin: sender,
       members: members,
       metadata: metadata,
-    }
+    } as MsgCreateGroup
 
     const bodyBytes = TxBody.encode({
       messages: [
@@ -100,7 +112,7 @@ const MsgCreateGroupView = () => {
             amount: "0",
           },
         ],
-        gasLimit: "100000",
+        gasLimit: "200000",
         payer: sender,
         granter: "",
       }

@@ -50,6 +50,11 @@ const Header = () => {
         ) : (
           <ul>
             <li>
+              <a href={"/dao"}>
+                {"dao"}
+              </a>
+            </li>
+            <li>
               <a href={"/data"}>
                 {"data"}
               </a>

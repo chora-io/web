@@ -1,0 +1,11 @@
+/* options */
+
+.options {
+  display: flex;
+}
+
+.options button {
+  background: none;
+  color: var(--color-primary);
+  margin: 1em 0 !important;
+}
