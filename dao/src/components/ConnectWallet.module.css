@@ -2,6 +2,7 @@
 
 .connect {
   display: flex;
+  margin-right: 2em;
 }
 
 /* error */
@@ -26,7 +27,6 @@
 .form {
   align-items: center;
   display: flex;
-  margin: 0 2em 0 1em;
 }
 
 .form select {

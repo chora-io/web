@@ -1,7 +1,5 @@
 import * as React from "react"
 
-import ConnectWallet from "./ConnectWallet"
-
 import * as styles from "./Header.module.css"
 import icon from "../assets/images/chora_dark_icon.png"
 
@@ -30,7 +28,6 @@ const Header = () => {
             </a>
           </li>
         </ul>
-        <ConnectWallet />
       </div>
     </div>
   )

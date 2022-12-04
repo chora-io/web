@@ -1,6 +1,8 @@
 import * as React from "react"
+import { Link } from "gatsby"
 
 import * as styles from "./Header.module.css"
+import icon from "../assets/images/chora_dark_icon.png"
 
 const Header = () => {
 
@@ -15,15 +17,32 @@ const Header = () => {
   return (
     <div className={styles.header}>
       <div className={styles.menu}>
+        <ul>
+          <li>
+            <Link to="/">
+              <div className={styles.title}>
+                <img src={icon} />
+                <div>
+                  {"chora"}
+                </div>
+              </div>
+            </Link>
+          </li>
+        </ul>
         {local ? (
           <ul>
+            <li>
+              <a href={"http://" + window.location.hostname + ":8001"}>
+                {"dao"}
+              </a>
+            </li>
             <li>
               <a href={"http://" + window.location.hostname + ":8002"}>
                 {"data"}
               </a>
             </li>
             <li>
-              <a href={"http://" + window.location.hostname + ":8001"}>
+              <a href={"http://" + window.location.hostname + ":8003"}>
                 {"scan"}
               </a>
             </li>
