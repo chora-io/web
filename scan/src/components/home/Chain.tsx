@@ -21,9 +21,6 @@ const Chain = ({ link, rest }: any) => {
     fetch(rest + queryBlocksLatest)
       .then(res => res.json())
       .then(data => {
-
-        console.log("latest block", data)
-
         setChainId(data.block.header.chain_id)
         setHeight(data.block.header.height)
         setTimestamp(formatTimestamp(data.block.header.time))

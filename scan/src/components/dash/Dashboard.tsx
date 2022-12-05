@@ -1,22 +1,31 @@
 import * as React from "react"
 import { Link } from "gatsby"
 
+import Validators from "./Validators"
+
 import * as styles from "./Dashboard.module.css"
 
-const Dashboard = ({ name }: any) => {
+const Dashboard = ({ chainId, chainName, rest }: any) => {
 
   // ...
 
   return (
-    <div className={styles.container}>
-      <div>
-        {name + " Dashboard"}
+    <div>
+      <div className={styles.title}>
+        <div>
+          {chainName + " Dashboard"}
+        </div>
+        <div>
+          <Link to={"/"}>
+            {"back"}
+          </Link>
+        </div>
       </div>
-      <div>
-        <Link to={"/"}>
-          {"back"}
-        </Link>
-      </div>
+      <Validators
+        chainId={chainId}
+        chainName={chainName}
+        rest={rest}
+      />
     </div>
   )
 }

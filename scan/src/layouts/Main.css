@@ -15,6 +15,7 @@
   --color-bg-solid: #000;
   --color-text: #FFF;
   --color-primary: #0CA;
+  --color-error: red;
   --header-height: 80px;
   --transition: 0.25s;
 }

@@ -1,5 +1,7 @@
 /* container */
 
 .container {
-  background: var(--color-bg);
+  background: var(--color-bg-solid);
+  min-height: 100vh;
+  padding-top: var(--header-height);
 }

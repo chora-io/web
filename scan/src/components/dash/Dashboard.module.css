@@ -1,13 +1,11 @@
-/* container */
+/* title */
 
-.container {
-  align-items: center;
+.title {
   display: flex;
   justify-content: center;
-  min-height: 100vh;
-  width: 100vw;
+  margin-top: 4em;
 }
 
-.container div {
+.title div {
   margin: 1em;
 }

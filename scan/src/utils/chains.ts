@@ -1,5 +1,5 @@
 export const choraLocal = {
-    // chainId: "chora-local",
+    chainId: "chora-local",
     chainName: "Chora Local",
     // rpc: "http://127.0.0.1:26657",
     rest: "http://127.0.0.1:1317",
@@ -44,7 +44,7 @@ export const choraLocal = {
 }
 
 export const choraTestnet = {
-    // chainId: "chora-testnet-1",
+    chainId: "chora-testnet-1",
     chainName: "Chora Testnet",
     // rpc: "https://testnet.chora.io/rpc",
     rest: "https://testnet.chora.io/rest",
@@ -89,7 +89,7 @@ export const choraTestnet = {
 }
 
 export const regenLocal = {
-    // chainId: "regen-local",
+    chainId: "regen-local",
     chainName: "Regen Local",
     // rpc: "http://127.0.0.1:26657",
     rest: "http://127.0.0.1:1317",
@@ -134,7 +134,7 @@ export const regenLocal = {
 }
 
 export const regenRedwood = {
-    // chainId: "regen-redwood-1",
+    chainId: "regen-redwood-1",
     chainName: "Regen Redwood",
     // rpc: "https://redwood.chora.io/rpc",
     rest: "https://redwood.chora.io/rest",
@@ -179,7 +179,7 @@ export const regenRedwood = {
 }
 
 export const regenHambach = {
-    // chainId: "regen-hambach-2",
+    chainId: "regen-hambach-2",
     chainName: "Regen Hambach",
     // rpc: "https://hambach.chora.io/rpc",
     rest: "https://hambach.chora.io/rest",
