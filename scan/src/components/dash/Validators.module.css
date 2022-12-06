@@ -24,6 +24,21 @@
   margin: 1em;
 }
 
+@media (max-width: 1250px) {
+
+  .container table {
+    display: flex;
+  }
+
+  .container thead td {
+    display: block;
+  }
+
+  .container tbody td {
+    display: block;
+  }
+}
+
 /* jailed */
 
 .jailed {

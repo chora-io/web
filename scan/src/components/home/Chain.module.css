@@ -23,6 +23,14 @@
   font-size: 1.25rem;
 }
 
+@media (max-width: 1250px) {
+
+  .content {
+    padding: 2rem 0;
+    width: 100vw;
+  }
+}
+
 @media (max-width: 850px) {
 
   .content {

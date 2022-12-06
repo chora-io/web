@@ -15,6 +15,8 @@ const Chain = ({ link, rest }: any) => {
   const [timestamp, setTimestamp] = useState<string>("")
   const [error, setError] = useState<string>("")
 
+  const [count, setCount] = useState<number>(0)
+
   useEffect(() => {
 
     // fetch latest block header data
@@ -28,7 +30,11 @@ const Chain = ({ link, rest }: any) => {
       .catch(err => {
         setError(err.message)
       })
-  })
+
+    setTimeout(() => {
+      setCount(count+1)
+    }, 3000)
+  }, [count])
 
   return (
     <div className={styles.content}>

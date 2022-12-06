@@ -30,66 +30,70 @@ const Validators = ({ rest }) => {
   }, [validators.length])
 
   return (
-    <div className={styles.container}>
-      <table>
-        <thead>
-          <tr>
-            <td>
-              {"moniker"}
-            </td>
-            <td>
-              {"tokens"}
-            </td>
-            <td>
-              {"delegator shares"}
-            </td>
-            <td>
-              {"commission rate"}
-            </td>
-            <td>
-              {"max commission rate"}
-            </td>
-            <td>
-              {"max change rate"}
-            </td>
-            <td>
-              {"jailed"}
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-          {validators.length > 0 && validators.map((v, i) => (
-            <tr key={i} className={v.jailed ? styles.jailed : null}>
+    <div>
+      <div className={styles.container}>
+        <table>
+          <thead>
+            <tr>
               <td>
-                {v.description.moniker}
+                {"moniker"}
               </td>
               <td>
-                {v.tokens}
+                {"tokens"}
               </td>
               <td>
-                {Number(v.delegator_shares).toFixed()}
+                {"delegator shares"}
               </td>
               <td>
-                {Number(v.commission.commission_rates.rate).toFixed(2)}
+                {"commission rate"}
               </td>
               <td>
-                {Number(v.commission.commission_rates.max_rate).toFixed(2)}
+                {"max commission rate"}
               </td>
               <td>
-                {Number(v.commission.commission_rates.max_change_rate).toFixed(2)}
+                {"max change rate"}
               </td>
               <td>
-                {v.jailed.toString()}
+                {"jailed"}
               </td>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      {error != "" && (
-        <div className={styles.error}>
-          {error}
-        </div>
-      )}
+          </thead>
+          <tbody>
+            {validators.length > 0 && validators.map((v, i) => (
+              <tr key={i} className={v.jailed ? styles.jailed : null}>
+                <td>
+                  {v.description.moniker}
+                </td>
+                <td>
+                  {v.tokens}
+                </td>
+                <td>
+                  {Number(v.delegator_shares).toFixed()}
+                </td>
+                <td>
+                  {Number(v.commission.commission_rates.rate).toFixed(2)}
+                </td>
+                <td>
+                  {Number(v.commission.commission_rates.max_rate).toFixed(2)}
+                </td>
+                <td>
+                  {Number(v.commission.commission_rates.max_change_rate).toFixed(2)}
+                </td>
+                <td>
+                  {v.jailed.toString()}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className={styles.container}>
+        {error != "" && (
+          <div className={styles.error}>
+            {error}
+          </div>
+        )}
+      </div>
     </div>
   )
 }
