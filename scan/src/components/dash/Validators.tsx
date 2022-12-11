@@ -17,12 +17,17 @@ const Validators = ({ rest }) => {
       .then(res => res.json())
       .then(data => {
 
+        // sort validators by tokens status
+        const sort1 = data.validators.sort((a, b) => {
+          return Number(b.tokens) - Number(a.tokens)
+        })
+
         // sort validators by jailed status
-        const sorted = data.validators.sort((a, b) => {
+        const sort2 = sort1.sort((a, b) => {
           return Number(a.jailed) - Number(b.jailed)
         })
 
-        setValidators(sorted)
+        setValidators(sort2)
       })
       .catch(err => {
         setError(err.message)
@@ -32,7 +37,7 @@ const Validators = ({ rest }) => {
   return (
     <div>
       <div className={styles.container}>
-        <table>
+        <table className={styles.table}>
           <thead>
             <tr>
               <td>
@@ -52,9 +57,6 @@ const Validators = ({ rest }) => {
               </td>
               <td>
                 {"max change rate"}
-              </td>
-              <td>
-                {"jailed"}
               </td>
             </tr>
           </thead>
@@ -78,9 +80,6 @@ const Validators = ({ rest }) => {
                 </td>
                 <td>
                   {Number(v.commission.commission_rates.max_change_rate).toFixed(2)}
-                </td>
-                <td>
-                  {v.jailed.toString()}
                 </td>
               </tr>
             ))}

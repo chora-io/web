@@ -9,7 +9,6 @@ import * as styles from "./index.module.css"
 
 const Index = () => (
   <Main>
-    <Background />
     <div className={styles.container} >
       <Chains />
     </div>

@@ -17,10 +17,53 @@ const Chains = () => {
 
   return (
     <div className={styles.container}>
-      <Chain link="/testnet" rest={choraTestnet.rest} />
-      <Chain link="/regen" rest={regenMainnet.rest} />
-      <Chain link="/redwood" rest={regenRedwood.rest} />
-      <Chain link="/hambach" rest={regenHambach.rest} />
+      <div>
+        <h1>
+          {"networks"}
+        </h1>
+        <p>
+          {"chora is providing network services for the following blockchains"}
+        </p>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <td>
+                {"chain id"}
+              </td>
+              <td>
+                {"latest block date"}
+              </td>
+              <td>
+                {"latest block time"}
+              </td>
+              <td>
+                {"latest block height"}
+              </td>
+              <td>
+                {"dashboard"}
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <Chain
+              chainInfo={regenMainnet}
+              dashboardUrl="/regen"
+            />
+            <Chain
+              chainInfo={regenRedwood}
+              dashboardUrl="/redwood"
+            />
+            <Chain
+              chainInfo={regenHambach}
+              dashboardUrl="/hambach"
+            />
+            <Chain
+              chainInfo={choraTestnet}
+              dashboardUrl="/testnet"
+            />
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

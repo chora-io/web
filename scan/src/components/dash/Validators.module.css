@@ -5,36 +5,35 @@
   justify-content: center;
 }
 
-.container table {
+/* table */
+
+.table {
   border-collapse: collapse;
   margin: 2em;
 }
 
-.container thead {
+.table thead {
   color: var(--color-primary);
   font-style: italic;
 }
 
-.container th, td {
-  border: 1px solid rgba(100, 100, 100, 0.25);
-  padding: 1em;
-}
-
-.container div {
-  margin: 1em;
+.table th,
+.table td {
+  padding: 1.25em;
+  text-align: center;
 }
 
 @media (max-width: 1250px) {
 
-  .container table {
+  .table {
     display: flex;
   }
 
-  .container thead td {
+  .table thead td {
     display: block;
   }
 
-  .container tbody td {
+  .table tbody td {
     display: block;
   }
 }
