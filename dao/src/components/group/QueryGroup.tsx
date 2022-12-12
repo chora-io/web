@@ -3,7 +3,7 @@ import { useContext, useState } from "react"
 
 import { WalletContext } from "../../context/WalletContext"
 import SelectNetwork from "../SelectNetwork"
-import InputId from "../InputId"
+import InputNumber from "../InputNumber"
 
 import * as styles from "./QueryGroup.module.css"
 
@@ -45,9 +45,11 @@ const QueryGroup = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputId
-            id={id}
-            setId={setId}
+          <InputNumber
+            id="group-id"
+            label="group id"
+            number={id}
+            setNumber={setId}
           />
           <SelectNetwork withLabel={true} />
           <button type="submit">

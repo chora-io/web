@@ -1,7 +1,14 @@
+/* member */
+
+.member label:first-child {
+  margin-top: 2em;
+}
+
 /* options */
 
 .options {
   display: flex;
+  margin-bottom: 2em;
 }
 
 .options button {

@@ -3,19 +3,19 @@ import { useContext, useState } from "react"
 
 import { WalletContext } from "../../context/WalletContext"
 import SelectNetwork from "../SelectNetwork"
-import InputId from "../InputId"
+import InputAddress from "../InputAddress"
 
-import * as styles from "./QueryGroup.module.css"
+import * as styles from "./QueryGroupPolicy.module.css"
 
-const queryGroupMembers = "/cosmos/group/v1/group_members"
+const queryGroupPolicy = "/cosmos/group/v1/group_policy_info"
 
-const QueryGroupMembers = () => {
+const QueryPolicy = () => {
 
   // @ts-ignore
   const { chainInfo } = useContext(WalletContext)
 
   // form input
-  const [id, setId] = useState<string>("")
+  const [address, setAddress] = useState<string>("")
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -27,7 +27,7 @@ const QueryGroupMembers = () => {
     setError("")
     setSuccess("")
 
-    fetch(chainInfo.rest + queryGroupMembers + "/" + id)
+    fetch(chainInfo.rest + queryGroupPolicy + "/" + address)
       .then(res => res.json())
       .then(data => {
         if (data.code) {
@@ -45,9 +45,12 @@ const QueryGroupMembers = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputId
-            id={id}
-            setId={setId}
+          <InputAddress
+            id="policy-address"
+            label="policy address"
+            long={true}
+            address={address}
+            setAddress={setAddress}
           />
           <SelectNetwork withLabel={true} />
           <button type="submit">
@@ -71,4 +74,4 @@ const QueryGroupMembers = () => {
   )
 }
 
-export default QueryGroupMembers
+export default QueryPolicy

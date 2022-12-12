@@ -11,7 +11,7 @@ const regenAddressPlaceholder = "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx"
 const weightPlaceholder = "1"
 const metadataPlaceholder = "regen:13toVfvC2YxrrfSXWB5h2BGHiXZURsKxWUz72uDRDSPMCrYPguGUXSC.rdf"
 
-const InputMembers = ({ members, setMembers }: any) => {
+const InputMembers = ({ label, members, setMembers }: any) => {
 
   // @ts-ignore
   const { network } = useContext(WalletContext)
@@ -23,9 +23,9 @@ const InputMembers = ({ members, setMembers }: any) => {
     addressPlaceholder = regenAddressPlaceholder
   }
 
-  const handleChange = (i, id, event) => {
+  const handleChange = (i, prop, event) => {
     let m = members[i]
-    m[id] = event.target.value
+    m[prop] = event.target.value
 
     let ms = [...members]
     ms[i] = m
@@ -54,41 +54,50 @@ const InputMembers = ({ members, setMembers }: any) => {
   }
 
   return (
-    <label htmlFor="members">
-      {"members"}
+    <>
       {members.length > 0 && members.map((m, i) => (
-        <span key={i}>
-          <input
-            id="address"
-            value={m.address}
-            placeholder={addressPlaceholder}
-            onChange={event => handleChange(i, "address", event)}
-          />
-          <input
-            id="weight"
-            value={m.weight}
-            placeholder={weightPlaceholder}
-            onChange={event => handleChange(i, "weight", event)}
-          />
-          <input
-            id="metadata"
-            value={m.metadata}
-            placeholder={metadataPlaceholder}
-            onChange={event => handleChange(i, "metadata", event)}
-          />
+        <span className={styles.member} key={i}>
+          {label ? label + " " + (i+1) : "member " + (i+1)}
+          <label htmlFor="address">
+            {"member address"}
+            <input
+              id="member-address"
+              value={m.address}
+              placeholder={addressPlaceholder}
+              onChange={event => handleChange(i, "address", event)}
+            />
+          </label>
+          <label htmlFor="weight">
+            {"member weight"}
+            <input
+              id="member-weight"
+              value={m.weight}
+              placeholder={weightPlaceholder}
+              onChange={event => handleChange(i, "weight", event)}
+            />
+          </label>
+          <label htmlFor="metadata">
+            {"member metadata"}
+            <input
+              id="member-metadata"
+              value={m.metadata}
+              placeholder={metadataPlaceholder}
+              onChange={event => handleChange(i, "metadata", event)}
+            />
+          </label>
         </span>
       ))}
       <span className={styles.options}>
         <button onClick={handleAddMember}>
-          {"add member"}
+          {label ? "add " + label : "add member"}
         </button>
         {members.length > 0 && (
           <button onClick={handleRemoveMember}>
-            {"remove member"}
+          {label ? "remove " + label : "remove member"}
           </button>
         )}
       </span>
-    </label>
+    </>
   )
 }
 
