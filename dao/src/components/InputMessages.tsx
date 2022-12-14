@@ -9,7 +9,7 @@ const choraPlaceholder = `[
   {
     "typeUrl": "/cosmos.bank.v1beta1.MsgSend",
     "value": {
-      "fromAddress": "chora1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsdnjkmu",
+      "fromAddress": "chora1l2pwmzk96ftmmt5egpjulyqtneygmmzns8r2ea",
       "toAddress": "chora1jx34255cgvxpthkg572ma6rhq6crwl6xh7g0md",
       "amount": [
         {
@@ -25,7 +25,7 @@ const regenPlaceholder = `[
   {
     "typeUrl": "/cosmos.bank.v1beta1.MsgSend",
     "value": {
-      "from_address": "regen1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsdnjkmu",
+      "from_address": "regen1l2pwmzk96ftmmt5egpjulyqtneygmmzns8r2ea",
       "to_address": "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx",
       "amount": [
         {

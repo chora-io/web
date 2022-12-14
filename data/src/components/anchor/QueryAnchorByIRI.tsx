@@ -2,12 +2,12 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "../../context/WalletContext"
+import InputIRI from "../InputIRI"
 import SelectNetwork from "../SelectNetwork"
 
 import * as styles from "./QueryAnchorByIRI.module.css"
 
 const queryAnchorByIRI = "/regen/data/v1/anchor-by-iri"
-const iriPlaceholder = "regen:13toVfvC2YxrrfSXWB5h2BGHiXZURsKxWUz72uDRDSPMCrYPguGUXSC.rdf"
 
 const QueryAnchorByIRI = () => {
 
@@ -42,15 +42,10 @@ const QueryAnchorByIRI = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label htmlFor="iri">
-            {"iri"}
-            <input
-              id="iri"
-              value={iri}
-              placeholder={iriPlaceholder}
-              onChange={event => setIri(event.target.value)}
-            />
-          </label>
+          <InputIRI
+            iri={iri}
+            setIri={setIri}
+          />
           <SelectNetwork withLabel={true} />
           <button type="submit">
             {"search"}

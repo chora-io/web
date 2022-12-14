@@ -9,7 +9,9 @@ const choraAddressPlaceholder = "chora1jx34255cgvxpthkg572ma6rhq6crwl6xh7g0md"
 const regenAddressPlaceholder = "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx"
 
 const weightPlaceholder = "1"
-const metadataPlaceholder = "regen:13toVfvC2YxrrfSXWB5h2BGHiXZURsKxWUz72uDRDSPMCrYPguGUXSC.rdf"
+
+const choraMetadataPlaceholder = "chora:13toVfvC2YxrrfSXWB5h2BGHiXZURsKxWUz72uDRDSPMCrYPguGUXSC.rdf"
+const regenMetadataPlaceholder = "regen:13toVfvC2YxrrfSXWB5h2BGHiXZURsKxWUz72uDRDSPMCrYPguGUXSC.rdf"
 
 const InputMembers = ({ label, members, setMembers }: any) => {
 
@@ -17,10 +19,13 @@ const InputMembers = ({ label, members, setMembers }: any) => {
   const { network } = useContext(WalletContext)
 
   let addressPlaceholder: string
+  let metadataPlaceholder: string
   if (network.includes("chora")) {
     addressPlaceholder = choraAddressPlaceholder
+    metadataPlaceholder = choraMetadataPlaceholder
   } else {
     addressPlaceholder = regenAddressPlaceholder
+    metadataPlaceholder = regenMetadataPlaceholder
   }
 
   const handleChange = (i, prop, event) => {
