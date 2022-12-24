@@ -3,3 +3,12 @@
 .long {
   height: 33em !important;
 }
+
+/* button */
+
+.button {
+  background: none;
+  color: var(--color-primary);
+  margin: 2em 0 !important;
+  padding: 0 !important;
+}

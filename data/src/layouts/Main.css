@@ -67,3 +67,8 @@ button:hover {
   cursor: pointer;
   opacity: 0.75;
 }
+
+pre {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
