@@ -13,7 +13,7 @@ const Sidebar = () => {
           <Link to="/" activeStyle={activeStyle}>{"home"}</Link>
         </li>
         <li>
-          <Link to="/data" activeStyle={activeStyle}>{"data"}</Link>
+          <Link to="/json" activeStyle={activeStyle}>{"json"}</Link>
         </li>
         <li>
           <Link to="/convert" activeStyle={activeStyle}>{"convert"}</Link>

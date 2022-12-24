@@ -96,7 +96,7 @@ const GenerateHash = () => {
 
     if (digest == 1) {
       // generate hash bytes using blake2b
-      const bz = blake.blake2b(canonized, null, 32)
+      const bz = blake.blake2b(canonized, undefined, 32)
 
       // convert hash bytes to base64 string
       const hash = Buffer.from(bz).toString("base64")

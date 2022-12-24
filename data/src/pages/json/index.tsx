@@ -3,9 +3,9 @@ import * as React from "react"
 import Main from "../../layouts/Main"
 import Seo from "../../components/Seo"
 
-import GetData from "../../components/data/GetData"
-import GenerateHash from "../../components/data/GenerateHash"
-import PostData from "../../components/data/PostData"
+import GetData from "../../components/json/GetData"
+import GenerateHash from "../../components/json/GenerateHash"
+import PostData from "../../components/json/PostData"
 
 import * as styles from "./index.module.css"
 
