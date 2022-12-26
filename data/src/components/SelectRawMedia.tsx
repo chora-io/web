@@ -8,37 +8,36 @@ const SelectRawMedia = ({ media, setMedia }: any) => (
     <select
       id="raw-media"
       value={media}
-      // @ts-ignore
       onChange={event => setMedia(event.target.value)}
     >
       <option>
-        {"unspecified"}
+        {"BIN"}
       </option>
-      <option value={RawMediaType.RAW_MEDIA_TYPE_TEXT_PLAIN}>
+      <option value={RawMediaType["RAW_MEDIA_TYPE_TEXT_PLAIN"]}>
         {"TXT"}
       </option>
-      <option value={RawMediaType.RAW_MEDIA_TYPE_JSON}>
+      <option value={RawMediaType["RAW_MEDIA_TYPE_JSON"]}>
         {"JSON"}
       </option>
-      <option value={RawMediaType.RAW_MEDIA_TYPE_CSV}>
+      <option value={RawMediaType["RAW_MEDIA_TYPE_CSV"]}>
         {"CSV"}
       </option>
-      <option value={RawMediaType.RAW_MEDIA_TYPE_XML}>
+      <option value={RawMediaType["RAW_MEDIA_TYPE_XML"]}>
         {"XML"}
       </option>
-      <option value={RawMediaType.RAW_MEDIA_TYPE_PDF}>
+      <option value={RawMediaType["RAW_MEDIA_TYPE_PDF"]}>
         {"PDF"}
       </option>
-      <option value={RawMediaType.RAW_MEDIA_TYPE_TIFF}>
+      <option value={RawMediaType["RAW_MEDIA_TYPE_TIFF"]}>
         {"TIFF"}
       </option>
-      <option value={RawMediaType.RAW_MEDIA_TYPE_JPG}>
+      <option value={RawMediaType["RAW_MEDIA_TYPE_JPG"]}>
         {"JPG"}
       </option>
-      <option value={RawMediaType.RAW_MEDIA_TYPE_PNG}>
+      <option value={RawMediaType["RAW_MEDIA_TYPE_PNG"]}>
         {"PNG"}
       </option>
-      <option value={RawMediaType.RAW_MEDIA_TYPE_SVG}>
+      <option value={RawMediaType["RAW_MEDIA_TYPE_SVG"]}>
         {"SVG"}
       </option>
     </select>

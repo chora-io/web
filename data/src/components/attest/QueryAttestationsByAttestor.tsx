@@ -38,7 +38,7 @@ const QueryAttestationsByAttestor = () => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "\t"))
+          setSuccess(JSON.stringify(data, null, "  "))
         }
       })
       .catch(err => {

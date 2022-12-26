@@ -30,9 +30,6 @@ const MsgAttestView = () => {
 
   // form input
   const [hash, setHash] = useState<string>("")
-  const [digest, setDigest] = useState<number>(0)
-  const [canon, setCanon] = useState<number>(0)
-  const [merkle, setMerkle] = useState<number>(0)
 
   // json input
   const [json, setJson] = useState<string>("")
@@ -81,18 +78,23 @@ const MsgAttestView = () => {
           {
             $type: "regen.data.v1.ContentHash.Graph",
             hash: Buffer.from(hash, "base64"),
-            digestAlgorithm: digest,
-            canonicalizationAlgorithm: canon,
-            merkleTree: merkle,
+            digestAlgorithm: 1, // DIGEST_ALGORITHM_BLAKE2B_256
+            canonicalizationAlgorithm: 1, // GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015
+            merkleTree: 0, // GRAPH_MERKLE_TREE_NONE_UNSPECIFIED
           },
         ],
       }
     } else {
+      let contentHash = ""
+      try {
+        contentHash = JSON.parse(json)
+      } catch (err) {
+        setError(err.message)
+        return // exit on error
+      }
       msg = MsgAttest.fromJSON({
         attestor: sender,
-        contentHashes: [
-          JSON.parse(json).contentHash.graph,
-        ]
+        contentHashes: [contentHash.graph]
       })
     }
 
@@ -178,18 +180,9 @@ const MsgAttestView = () => {
               hash={hash}
               setHash={setHash}
             />
-            <SelectDigestAlgorithm
-              digest={digest}
-              setDigest={setDigest}
-            />
-            <SelectGraphCanon
-              canon={canon}
-              setCanon={setCanon}
-            />
-            <SelectGraphMerkle
-              merkle={merkle}
-              setMerkle={setMerkle}
-            />
+            <SelectDigestAlgorithm />
+            <SelectGraphCanon />
+            <SelectGraphMerkle />
             <button type="submit">
               {"submit"}
             </button>

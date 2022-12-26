@@ -2,19 +2,16 @@ import * as React from "react"
 
 import { GraphCanonicalizationAlgorithm } from "../../api/regen/data/v1/types"
 
-const SelectGraphCanon = ({ canon, setCanon }: any) => (
-  <label htmlFor="graph-canon">
-    {"graph canonicalization algorithm"}
+const SelectGraphCanon = ({ id, label, canon, setCanon }: any) => (
+  <label htmlFor={id ? id : "canon"}>
+    {label ? label : "canonicalization algorithm"}
     <select
-      id="graph-canon"
+      id={id ? id : "canon"}
       value={canon}
-      // @ts-ignore
       onChange={event => setCanon(event.target.value)}
+      disabled
     >
-      <option value={GraphCanonicalizationAlgorithm.GRAPH_CANONICALIZATION_ALGORITHM_UNSPECIFIED}>
-        {"unspecified"}
-      </option>
-      <option value={GraphCanonicalizationAlgorithm.GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015}>
+      <option value={GraphCanonicalizationAlgorithm["GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015"]}>
         {"URDNA2015"}
       </option>
     </select>

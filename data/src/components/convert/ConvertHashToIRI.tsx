@@ -26,10 +26,7 @@ const ConvertHashToIRI = () => {
 
   // form input
   const [hash, setHash] = useState("")
-  const [digest, setDigest] = useState<number>(0)
   const [type, setType] = useState<string>("")
-  const [canon, setCanon] = useState<number>(0)
-  const [merkle, setMerkle] = useState<number>(0)
   const [media, setMedia] = useState<number>(0)
 
   // json input
@@ -52,9 +49,9 @@ const ConvertHashToIRI = () => {
           content_hash: {
             graph: {
               hash: hash,
-              digest_algorithm: Number(digest),
-              canonicalization_algorithm: Number(canon),
-              merkle_tree: Number(merkle),
+              digest_algorithm: "DIGEST_ALGORITHM_BLAKE2B_256",
+              canonicalization_algorithm: "GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015",
+              merkle_tree: "GRAPH_MERKLE_TREE_NONE_UNSPECIFIED",
             }
           }
         })
@@ -63,17 +60,26 @@ const ConvertHashToIRI = () => {
           content_hash: {
             raw: {
               hash: hash,
-              digest_algorithm: Number(digest),
+              digest_algorithm: "DIGEST_ALGORITHM_BLAKE2B_256",
               media_type: Number(media),
             }
           }
         })
       } else {
         setError("data type is required")
-        return // exit with error
+        return // exit on error
       }
     } else {
-      body = json
+      let contentHash = ""
+      try {
+        contentHash = JSON.parse(json)
+      } catch (err) {
+        setError(err.message)
+        return // exit on error
+      }
+      body = JSON.stringify({
+        contentHash: contentHash
+      })
     }
 
     fetch(chainInfo.rest + convertIRIToHash, {
@@ -108,24 +114,15 @@ const ConvertHashToIRI = () => {
               hash={hash}
               setHash={setHash}
             />
-            <SelectDigestAlgorithm
-              digest={digest}
-              setDigest={setDigest}
-            />
+            <SelectDigestAlgorithm />
             <SelectDataType
               type={type}
               setType={setType}
             />
             {type == "graph" &&
               <>
-                <SelectGraphCanon
-                  canon={canon}
-                  setCanon={setCanon}
-                />
-                <SelectGraphMerkle
-                  merkle={merkle}
-                  setMerkle={setMerkle}
-                />
+                <SelectGraphCanon />
+                <SelectGraphMerkle />
             </>
             }
             {type == "raw" &&

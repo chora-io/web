@@ -8,12 +8,12 @@ import { BroadcastMode, SignDoc } from "@keplr-wallet/types"
 
 import { WalletContext } from "../../context/WalletContext"
 import { MsgDefineResolver } from "../../../api/regen/data/v1/tx"
+import InputResolverUrl from "../InputResolverUrl"
 
 import * as styles from "./MsgDefineResolver.module.css"
 
 const queryAccount = "/cosmos/auth/v1beta1/accounts"
 const queryTx = "/cosmos/tx/v1beta1/txs"
-const urlPlaceholder = "https://data.chora.io"
 
 const MsgDefineResolverView = () => {
 
@@ -135,15 +135,10 @@ const MsgDefineResolverView = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label htmlFor="url">
-            {"url"}
-            <input
-              id="url"
-              value={url}
-              placeholder={urlPlaceholder}
-              onChange={event => setUrl(event.target.value)}
-            />
-          </label>
+          <InputResolverUrl
+            url={url}
+            setUrl={setUrl}
+          />
           <button type="submit">
             {"submit"}
           </button>

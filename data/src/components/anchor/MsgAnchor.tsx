@@ -32,10 +32,7 @@ const MsgAnchorView = () => {
 
   // form input
   const [hash, setHash] = useState<string>("")
-  const [digest, setDigest] = useState<number>(0)
   const [type, setType] = useState<string>("")
-  const [canon, setCanon] = useState<number>(0)
-  const [merkle, setMerkle] = useState<number>(0)
   const [media, setMedia] = useState<number>(0)
 
   // json input
@@ -87,9 +84,9 @@ const MsgAnchorView = () => {
             graph: {
               $type: "regen.data.v1.ContentHash.Graph",
               hash: Buffer.from(hash, "base64"),
-              digestAlgorithm: digest,
-              canonicalizationAlgorithm: canon,
-              merkleTree: merkle,
+              digestAlgorithm: 1, // DIGEST_ALGORITHM_BLAKE2B_256
+              canonicalizationAlgorithm: 1, // GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015
+              merkleTree: 0, // GRAPH_MERKLE_TREE_NONE_UNSPECIFIED
             },
           },
         }
@@ -102,19 +99,26 @@ const MsgAnchorView = () => {
             raw: {
               $type: "regen.data.v1.ContentHash.Raw",
               hash: Buffer.from(hash, "base64"),
-              digestAlgorithm: digest,
+              digestAlgorithm: 1, // DIGEST_ALGORITHM_BLAKE2B_256
               mediaType: media,
             },
           },
         }
       } else {
         setError("data type is required")
-        return // exit with error
+        return // exit on error
       }
     } else {
+      let contentHash = ""
+      try {
+        contentHash = JSON.parse(json)
+      } catch (err) {
+        setError(err.message)
+        return // exit on error
+      }
       msg = MsgAnchor.fromJSON({
         sender: sender,
-        contentHash: JSON.parse(json).contentHash,
+        contentHash: contentHash,
       })
     }
 
@@ -200,24 +204,15 @@ const MsgAnchorView = () => {
               hash={hash}
               setHash={setHash}
             />
-            <SelectDigestAlgorithm
-              digest={digest}
-              setDigest={setDigest}
-            />
+            <SelectDigestAlgorithm />
             <SelectDataType
               type={type}
               setType={setType}
             />
             {type == "graph" &&
               <>
-                <SelectGraphCanon
-                  canon={canon}
-                  setCanon={setCanon}
-                />
-                <SelectGraphMerkle
-                  merkle={merkle}
-                  setMerkle={setMerkle}
-                />
+                <SelectGraphCanon />
+                <SelectGraphMerkle />
             </>
             }
             {type == "raw" &&

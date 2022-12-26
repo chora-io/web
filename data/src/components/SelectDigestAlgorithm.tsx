@@ -2,20 +2,17 @@ import * as React from "react"
 
 import { DigestAlgorithm } from "../../api/regen/data/v1/types"
 
-const SelectDigestAlgorithm = ({ digest, setDigest }: any) => (
-  <label htmlFor="digest">
-    {"digest algorithm"}
+const SelectDigestAlgorithm = ({ id, label, digest, setDigest }: any) => (
+  <label htmlFor={id ? id : "digest"}>
+    {label ? label : "digest algorithm"}
     <select
-      id="digest"
+      id={id ? id : "digest"}
       value={digest}
-      // @ts-ignore
       onChange={event => setDigest(event.target.value)}
+      disabled
     >
-      <option value={DigestAlgorithm.DIGEST_ALGORITHM_UNSPECIFIED}>
-        {"unspecified"}
-      </option>
-      <option value={DigestAlgorithm.DIGEST_ALGORITHM_BLAKE2B_256}>
-        {"BLAKE2b-256"}
+      <option value={DigestAlgorithm["DIGEST_ALGORITHM_BLAKE2B_256"]}>
+        {"BLAKE2B_256"}
       </option>
     </select>
   </label>

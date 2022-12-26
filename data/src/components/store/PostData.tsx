@@ -3,11 +3,12 @@ import { useEffect, useState } from "react"
 import * as jsonld from "jsonld"
 
 import InputJSON from "../InputJSON"
-import SelectSchema from "../SelectSchema"
+import SelectGraphCanon from "../SelectGraphCanon"
+import SelectSchemaContext from "../SelectSchemaContext"
 
 import * as styles from "./PostData.module.css"
 
-const schemaUrl = "https://schema.chora.io/contexts/index.jsonld"
+const contextUrl = "https://schema.chora.io/contexts/index.jsonld"
 
 const localServerUrl = "http://localhost:3000/data"
 const remoteServerUrl = "https://server.chora.io/data"
@@ -23,8 +24,8 @@ const PostData = () => {
   ) { serverUrl = localServerUrl }
 
   // data schema
-  const [schema, setSchema] = useState<string>("")
-  const [schemas, setSchemas] = useState<string[]>([])
+  const [context, setContext] = useState<string>("")
+  const [contexts, setContexts] = useState<string[]>([])
   const [example, setExample] = useState<string>("")
   const [template, setTemplate] = useState<string>("")
 
@@ -35,21 +36,21 @@ const PostData = () => {
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
-  // fetch available schemas
+  // fetch available contexts
   useEffect(() => {
-    fetch(schemaUrl)
+    fetch(contextUrl)
       .then(res => res.json())
       .then(data => {
         const urls = []
         for (const p in data) {
           urls.push(data[p])
         }
-        setSchemas(urls)
+        setContexts(urls)
       })
       .catch(err => {
         setError(err.message)
       })
-  }, [schemas.length])
+  }, [contexts.length])
 
   const handleGenJson = (event) => {
     event.preventDefault()
@@ -63,10 +64,39 @@ const PostData = () => {
     setError("")
   }
 
-  const handleSetSchema = (value) => {
-    setSchema(value)
+  const handleSetContext = (event) => {
+    event.preventDefault()
+
+    setContext(event.target.value)
     setJson("")
     setError("")
+
+    if (event.target.value != "") {
+
+      // fetch schema example
+      fetch(event.target.value.replace("contexts", "examples"))
+        .then(res => res.json())
+        .then(data => {
+          setExample(JSON.stringify(data,null, "  "))
+        })
+        .catch(err => {
+          setExample(err.message)
+        })
+
+      // fetch schema template
+      fetch(event.target.value.replace("contexts", "templates"))
+        .then(res => res.json())
+        .then(data => {
+          setTemplate(JSON.stringify(data,null, "  "))
+        })
+        .catch(err => {
+          setTemplate(err.message)
+        })
+
+    } else {
+      setExample("")
+      setTemplate("")
+    }
   }
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
@@ -100,7 +130,7 @@ const PostData = () => {
 
     const body = {
       canon: "URDNA2015",
-      context: schema,
+      context: context,
       jsonld: json,
     }
 
@@ -113,7 +143,7 @@ const PostData = () => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "\t"))
+          setSuccess(JSON.stringify(data, null, "  "))
         }
       })
       .catch(err => {
@@ -125,25 +155,19 @@ const PostData = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label htmlFor="canon">
-            {"canon"}
-            <input value="URDNA2015" disabled />
-          </label>
-          <SelectSchema
-            schema={schema}
-            schemas={schemas}
-            setExample={setExample}
-            setSchema={handleSetSchema}
-            setTemplate={setTemplate}
+          <SelectSchemaContext
+            context={context}
+            contexts={contexts}
+            setContext={handleSetContext}
           />
-          {schema.length > 0 && (
-            <InputJSON
-              json={json}
-              placeholder={example}
-              setJson={handleSetJson}
-              useTemplate={handleGenJson}
-            />
-          )}
+          <InputJSON
+            json={json}
+            placeholder={example}
+            setJson={handleSetJson}
+            useTemplate={handleGenJson}
+            showUseTemplate={context.length > 0}
+          />
+          <SelectGraphCanon />
           <button type="submit">
             {"post data"}
           </button>

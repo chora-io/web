@@ -9,7 +9,7 @@ const SelectDataType = ({ type, setType }: any) => (
       onChange={event => setType(event.target.value)}
     >
       <option>
-        {"---select---"}
+        {"--- select ---"}
       </option>
       <option value="graph">
         {"graph"}

@@ -2,12 +2,13 @@ import * as React from "react"
 
 import Main from "../../layouts/Main"
 import Seo from "../../components/Seo"
-import ConvertHashToIRI from "../../components/convert/ConvertHashToIRI"
-import ConvertIRIToHash from "../../components/convert/ConvertIRIToHash"
+
+import GetData from "../../components/store/GetData"
+import PostData from "../../components/store/PostData"
 
 import * as styles from "./index.module.css"
 
-const Convert = () => {
+const Store = () => {
 
   // ...
 
@@ -17,15 +18,15 @@ const Convert = () => {
         <div>
           <div className={styles.table}>
             <div className={styles.tableHeader}>
-              {"convert content hash to IRI"}
+              {"post data to server"}
             </div>
-            <ConvertHashToIRI />
+            <PostData />
           </div>
           <div className={styles.table}>
             <div className={styles.tableHeader}>
-              {"convert IRI to content hash"}
+              {"get data from server"}
             </div>
-            <ConvertIRIToHash />
+            <GetData />
           </div>
         </div>
       </div>
@@ -35,4 +36,4 @@ const Convert = () => {
 
 export const Head = () => <Seo title="" />
 
-export default Convert
+export default Store

@@ -24,9 +24,6 @@ const QueryAttestationsByHash = () => {
 
   // form input
   const [hash, setHash] = useState<string>("")
-  const [digest, setDigest] = useState<number>(0)
-  const [canon, setCanon] = useState<number>(0)
-  const [merkle, setMerkle] = useState<number>(0)
 
   // json input
   const [json, setJson] = useState<string>("")
@@ -44,17 +41,26 @@ const QueryAttestationsByHash = () => {
     let body: string
     if (input == "form") {
       body = JSON.stringify({
-        content_hash: {
+        contentHash: {
           graph: {
             hash: hash,
-            digest_algorithm: Number(digest),
-            canonicalization_algorithm: Number(canon),
-            merkle_tree: Number(merkle),
+            digestAlgorithm: 1, // DIGEST_ALGORITHM_BLAKE2B_256
+            canonicalizationAlgorithm: 1, // GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015
+            merkleTree: 0, // GRAPH_MERKLE_TREE_NONE_UNSPECIFIED
           }
         }
       })
     } else {
-      body = json
+      let contentHash = ""
+      try {
+        contentHash = JSON.parse(json)
+      } catch (err) {
+        setError(err.message)
+        return // exit on error
+      }
+      body = JSON.stringify({
+        contentHash: contentHash
+      })
     }
 
     fetch(chainInfo.rest + queryAttestationsByHash, {
@@ -66,7 +72,7 @@ const QueryAttestationsByHash = () => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "\t"))
+          setSuccess(JSON.stringify(data, null, "  "))
         }
       })
       .catch(err => {
@@ -89,18 +95,9 @@ const QueryAttestationsByHash = () => {
               hash={hash}
               setHash={setHash}
             />
-            <SelectDigestAlgorithm
-              digest={digest}
-              setDigest={setDigest}
-            />
-            <SelectGraphCanon
-              canon={canon}
-              setCanon={setCanon}
-            />
-            <SelectGraphMerkle
-              merkle={merkle}
-              setMerkle={setMerkle}
-            />
+            <SelectDigestAlgorithm />
+            <SelectGraphCanon />
+            <SelectGraphMerkle />
             <SelectNetwork withLabel={true} />
             <button type="submit">
               {"search"}

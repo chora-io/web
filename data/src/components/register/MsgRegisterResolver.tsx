@@ -38,9 +38,6 @@ const MsgRegisterResolverView = () => {
   // content hash form input
   const [hash, setHash] = useState<string>("")
   const [type, setType] = useState<string>("")
-  const [digest, setDigest] = useState<number>(0)
-  const [canon, setCanon] = useState<number>(0)
-  const [merkle, setMerkle] = useState<number>(0)
   const [media, setMedia] = useState<number>(0)
 
   // content hash json input
@@ -94,9 +91,9 @@ const MsgRegisterResolverView = () => {
               graph: {
                 $type: "regen.data.v1.ContentHash.Graph",
                 hash: Buffer.from(hash, "base64"),
-                digestAlgorithm: digest,
-                canonicalizationAlgorithm: canon,
-                merkleTree: merkle,
+                digestAlgorithm: 1, // DIGEST_ALGORITHM_BLAKE2B_256
+                canonicalizationAlgorithm: 1, // GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015
+                merkleTree: 0, // GRAPH_MERKLE_TREE_NONE_UNSPECIFIED
               },
             },
           ],
@@ -112,7 +109,7 @@ const MsgRegisterResolverView = () => {
               raw: {
                 $type: "regen.data.v1.ContentHash.Raw",
                 hash: Buffer.from(hash, "base64"),
-                digestAlgorithm: digest,
+                digestAlgorithm: 1, // DIGEST_ALGORITHM_BLAKE2B_256
                 mediaType: media,
               },
             },
@@ -120,15 +117,20 @@ const MsgRegisterResolverView = () => {
         }
       } else {
         setError("data type is required")
-        return // exit with error
+        return // exit on error
       }
     } else {
+      let contentHash = ""
+      try {
+        contentHash = JSON.parse(json)
+      } catch (err) {
+        setError(err.message)
+        return // exit on error
+      }
       msg = MsgRegisterResolver.fromJSON({
         resolverId: Long.fromString(id),
         manager: sender,
-        contentHashes: [
-          JSON.parse(json).contentHash,
-        ],
+        contentHashes: [contentHash],
       })
     }
 
@@ -218,24 +220,15 @@ const MsgRegisterResolverView = () => {
               hash={hash}
               setHash={setHash}
             />
-            <SelectDigestAlgorithm
-              digest={digest}
-              setDigest={setDigest}
-            />
+            <SelectDigestAlgorithm />
             <SelectDataType
               type={type}
               setType={setType}
             />
             {type == "graph" &&
               <>
-                <SelectGraphCanon
-                  canon={canon}
-                  setCanon={setCanon}
-                />
-                <SelectGraphMerkle
-                  merkle={merkle}
-                  setMerkle={setMerkle}
-                />
+                <SelectGraphCanon />
+                <SelectGraphMerkle />
             </>
             }
             {type == "raw" &&

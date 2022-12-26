@@ -2,7 +2,7 @@ import * as React from "react"
 
 const placeholder = "1"
 
-const InputHashJSON = ({ id, setId }: any) => (
+const InputResolverId = ({ id, setId }: any) => (
   <label htmlFor="resolver-id">
     {"resolver id"}
     <input
@@ -14,4 +14,4 @@ const InputHashJSON = ({ id, setId }: any) => (
   </label>
 )
 
-export default InputHashJSON
+export default InputResolverId

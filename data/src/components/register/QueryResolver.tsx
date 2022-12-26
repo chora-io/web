@@ -2,12 +2,12 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "../../context/WalletContext"
+import InputResolverId from "../InputResolverId";
 import SelectNetwork from "../SelectNetwork"
 
 import * as styles from "./QueryResolver.module.css"
 
 const queryResolver = "/regen/data/v1/resolver"
-const idPlaceholder = "1"
 
 const QueryResolver = () => {
 
@@ -30,7 +30,7 @@ const QueryResolver = () => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "\t"))
+          setSuccess(JSON.stringify(data, null, "  "))
         }
       })
       .catch(err => {
@@ -42,15 +42,10 @@ const QueryResolver = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label htmlFor="id">
-            {"id"}
-            <input
-              id="id"
-              value={id}
-              placeholder={idPlaceholder}
-              onChange={event => setId(event.target.value)}
-            />
-          </label>
+          <InputResolverId
+            id={id}
+            setId={setId}
+          />
           <SelectNetwork withLabel={true} />
           <button type="submit">
             {"search"}

@@ -2,14 +2,16 @@ import * as React from "react"
 
 import * as styles from "./InputJSON.module.css"
 
-const InputJSON = ({ json, placeholder, setJson, useTemplate }: any) => (
-  <label htmlFor="json">
-    {"json-ld"}
-    <button className={styles.button} onClick={useTemplate}>
-      {json.length > 0 ? "reset template" : "use template"}
-    </button>
+const InputJSON = ({ id, label, json, placeholder, setJson, useTemplate, showUseTemplate }: any) => (
+  <label htmlFor={id ? id : "json"}>
+    {label ? label : "json-ld object"}
+    {showUseTemplate && (
+      <button className={styles.button} onClick={useTemplate}>
+        {json.length > 0 ? "reset template" : "use template"}
+      </button>
+    )}
     <textarea
-      id="json"
+      id={id ? id : "json"}
       value={json}
       className={styles.long}
       placeholder={placeholder || "{}"}

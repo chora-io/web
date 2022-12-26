@@ -31,7 +31,7 @@ const ConvertIRIToHash = () => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data.content_hash, null, "\t"))
+          setSuccess(JSON.stringify(data.content_hash, null, "  "))
         }
       })
       .catch(err => {

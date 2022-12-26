@@ -3,11 +3,11 @@ import { useContext, useState } from "react"
 
 import { WalletContext } from "../../context/WalletContext"
 import SelectNetwork from "../SelectNetwork"
+import InputResolverUrl from "../InputResolverUrl";
 
 import * as styles from "./QueryResolversByURL.module.css"
 
 const queryResolversByURL = "/regen/data/v1/resolvers-by-url"
-const urlPlaceholder = "https://data.chora.io"
 
 const QueryResolversByURL = () => {
 
@@ -33,7 +33,7 @@ const QueryResolversByURL = () => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "\t"))
+          setSuccess(JSON.stringify(data, null, "  "))
         }
       })
       .catch(err => {
@@ -45,15 +45,10 @@ const QueryResolversByURL = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label htmlFor="url">
-            {"url"}
-            <input
-              id="url"
-              value={url}
-              placeholder={urlPlaceholder}
-              onChange={event => setUrl(event.target.value)}
-            />
-          </label>
+          <InputResolverUrl
+            url={url}
+            setUrl={setUrl}
+          />
           <SelectNetwork withLabel={true} />
           <button type="submit">
             {"search"}

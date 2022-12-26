@@ -5,26 +5,25 @@ import * as blake from "blakejs"
 import * as jsonld from "jsonld"
 
 import InputJSON from "../InputJSON"
-import SelectSchema from "../SelectSchema"
 import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
+import SelectGraphCanon from "../SelectGraphCanon"
+import SelectGraphMerkle from "../SelectGraphMerkle"
+import SelectSchemaContext from "../SelectSchemaContext"
 
 import * as styles from "./GenerateHash.module.css"
 
-const schemaUrl = "https://schema.chora.io/contexts/index.jsonld"
+const contextUrl = "https://schema.chora.io/contexts/index.jsonld"
 
 const GenerateHash = () => {
 
   // data schema
-  const [schema, setSchema] = useState<string>("")
-  const [schemas, setSchemas] = useState<string[]>([])
+  const [context, setContext] = useState<string>("")
+  const [contexts, setContexts] = useState<string[]>([])
   const [example, setExample] = useState<string>("")
   const [template, setTemplate] = useState<string>("")
 
   // json input
   const [json, setJson] = useState<string>("")
-
-  // digest input
-  const [digest, setDigest] = useState<number>(0)
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -33,19 +32,19 @@ const GenerateHash = () => {
   useEffect(() => {
 
     // fetch available schemas
-    fetch(schemaUrl)
+    fetch(contextUrl)
       .then(res => res.json())
       .then(data => {
         const urls = []
         for (const p in data) {
           urls.push(data[p])
         }
-        setSchemas(urls)
+        setContexts(urls)
       })
       .catch(err => {
         setError(err.message)
       })
-  }, [schemas.length])
+  }, [contexts.length])
 
   const handleGenJson = (event) => {
     event.preventDefault()
@@ -59,10 +58,39 @@ const GenerateHash = () => {
     setError("")
   }
 
-  const handleSetSchema = (value) => {
-    setSchema(value)
+  const handleSetContext = (event) => {
+    event.preventDefault()
+
+    setContext(event.target.value)
     setJson("")
     setError("")
+
+    if (event.target.value != "") {
+
+      // fetch schema example
+      fetch(event.target.value.replace("contexts", "examples"))
+        .then(res => res.json())
+        .then(data => {
+          setExample(JSON.stringify(data,null, "  "))
+        })
+        .catch(err => {
+          setExample(err.message)
+        })
+
+      // fetch schema template
+      fetch(event.target.value.replace("contexts", "templates"))
+        .then(res => res.json())
+        .then(data => {
+          setTemplate(JSON.stringify(data,null, "  "))
+        })
+        .catch(err => {
+          setTemplate(err.message)
+        })
+
+    } else {
+      setExample("")
+      setTemplate("")
+    }
   }
 
   const handleSubmit = async (event) => {
@@ -94,46 +122,36 @@ const GenerateHash = () => {
       return
     }
 
-    if (digest == 1) {
-      // generate hash bytes using blake2b
-      const bz = blake.blake2b(canonized, undefined, 32)
+    // generate hash bytes using blake2b
+    const bz = blake.blake2b(canonized, undefined, 32)
 
-      // convert hash bytes to base64 string
-      const hash = Buffer.from(bz).toString("base64")
-
-      setSuccess(hash)
-    } else {
-      setError("digest algorithm cannot be unspecified")
-    }
+    setSuccess(JSON.stringify({
+      hash: Buffer.from(bz).toString("base64"),
+      digestAlgorithm: "DIGEST_ALGORITHM_BLAKE2B_256",
+      canonicalizationAlgorithm: "GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015",
+      merkleTree: "GRAPH_MERKLE_TREE_NONE_UNSPECIFIED"
+    }, null, "  "))
   }
 
   return (
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label htmlFor="canon">
-            {"canon"}
-            <input value="URDNA2015" disabled />
-          </label>
-          <SelectSchema
-            schema={schema}
-            schemas={schemas}
-            setExample={setExample}
-            setSchema={handleSetSchema}
-            setTemplate={setTemplate}
+          <SelectSchemaContext
+            context={context}
+            contexts={contexts}
+            setContext={handleSetContext}
           />
-          {schema.length > 0 && (
-            <InputJSON
-              json={json}
-              placeholder={example}
-              setJson={handleSetJson}
-              useTemplate={handleGenJson}
-            />
-          )}
-          <SelectDigestAlgorithm
-            digest={digest}
-            setDigest={setDigest}
+          <InputJSON
+            json={json}
+            placeholder={example}
+            setJson={handleSetJson}
+            useTemplate={handleGenJson}
+            showUseTemplate={context.length > 0}
           />
+          <SelectDigestAlgorithm />
+          <SelectGraphCanon />
+          <SelectGraphMerkle />
           <button type="submit">
             {"generate hash"}
           </button>

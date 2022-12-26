@@ -26,10 +26,7 @@ const QueryAnchorByHash = () => {
 
   // form input
   const [hash, setHash] = useState<string>("")
-  const [digest, setDigest] = useState<number>(0)
   const [type, setType] = useState<string>("")
-  const [canon, setCanon] = useState<number>(0)
-  const [merkle, setMerkle] = useState<number>(0)
   const [media, setMedia] = useState<number>(0)
 
   // json input
@@ -49,31 +46,40 @@ const QueryAnchorByHash = () => {
     if (input == "form") {
       if (type == "graph") {
         body = JSON.stringify({
-          content_hash: {
+          contentHash: {
             graph: {
               hash: hash,
-              digest_algorithm: Number(digest),
-              canonicalization_algorithm: Number(canon),
-              merkle_tree: Number(merkle),
+              digestAlgorithm: 1, // DIGEST_ALGORITHM_BLAKE2B_256
+              canonicalizationAlgorithm: 1, // GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015
+              merkleTree: 0, // GRAPH_MERKLE_TREE_NONE_UNSPECIFIED
             }
           }
         })
       } else if (type == "raw") {
         body = JSON.stringify({
-          content_hash: {
+          contentHash: {
             raw: {
               hash: hash,
-              digest_algorithm: Number(digest),
-              media_type: Number(media),
+              digestAlgorithm: 1, // DIGEST_ALGORITHM_BLAKE2B_256
+              mediaType: Number(media),
             }
           }
         })
       } else {
         setError("data type is required")
-        return // exit with error
+        return // exit on error
       }
     } else {
-      body = json
+      let contentHash = ""
+      try {
+        contentHash = JSON.parse(json)
+      } catch (err) {
+        setError(err.message)
+        return // exit on error
+      }
+      body = JSON.stringify({
+        contentHash: contentHash
+      })
     }
 
     fetch(chainInfo.rest + queryAnchorByHash, {
@@ -85,7 +91,7 @@ const QueryAnchorByHash = () => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "\t"))
+          setSuccess(JSON.stringify(data, null, "  "))
         }
       })
       .catch(err => {
@@ -108,24 +114,15 @@ const QueryAnchorByHash = () => {
               hash={hash}
               setHash={setHash}
             />
-            <SelectDigestAlgorithm
-              digest={digest}
-              setDigest={setDigest}
-            />
+            <SelectDigestAlgorithm />
             <SelectDataType
               type={type}
               setType={setType}
             />
             {type == "graph" &&
               <>
-                <SelectGraphCanon
-                  canon={canon}
-                  setCanon={setCanon}
-                />
-                <SelectGraphMerkle
-                  merkle={merkle}
-                  setMerkle={setMerkle}
-                />
+                <SelectGraphCanon />
+                <SelectGraphMerkle />
             </>
             }
             {type == "raw" &&
