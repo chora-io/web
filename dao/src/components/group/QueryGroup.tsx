@@ -2,8 +2,10 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "../../context/WalletContext"
-import SelectNetwork from "../SelectNetwork"
+
 import InputNumber from "../InputNumber"
+import Result from "../Result"
+import SelectNetwork from "../SelectNetwork"
 
 import * as styles from "./QueryGroup.module.css"
 
@@ -33,7 +35,7 @@ const QueryGroup = () => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "\t"))
+          setSuccess(JSON.stringify(data, null, "  "))
         }
       })
       .catch(err => {
@@ -57,18 +59,10 @@ const QueryGroup = () => {
           </button>
         </form>
       </div>
-      {error != "" && (
-        <div className={styles.error}>
-          {error}
-        </div>
-      )}
-      {success != "" && (
-        <div>
-          <pre>
-            {success}
-          </pre>
-        </div>
-      )}
+      <Result
+        error={error}
+        success={success}
+      />
     </>
   )
 }

@@ -1,0 +1,5 @@
+/* error */
+
+.error {
+  color: var(--color-error);
+}

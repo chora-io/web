@@ -1,19 +1,14 @@
 import * as React from "react"
 import { useContext, useState } from "react"
-import { Buffer } from "buffer"
-
-import { SignMode } from "@keplr-wallet/proto-types/cosmos/tx/signing/v1beta1/signing"
-import { AuthInfo, TxBody, TxRaw } from "@keplr-wallet/proto-types/cosmos/tx/v1beta1/tx"
-import { BroadcastMode, SignDoc } from "@keplr-wallet/types"
 
 import { WalletContext } from "../../context/WalletContext"
 import { MsgUpdateGroupPolicyAdmin } from "../../../api/cosmos/group/v1/tx"
+import { signAndBroadcast } from "../../utils/tx"
+
 import InputAddress from "../InputAddress"
+import ResultTx from "../ResultTx"
 
 import * as styles from "./MsgCreateGroupPolicy.module.css"
-
-const queryAccount = "/cosmos/auth/v1beta1/accounts"
-const queryTx = "/cosmos/tx/v1beta1/txs"
 
 const MsgUpdateGroupPolicyAdminView = () => {
 
@@ -34,103 +29,21 @@ const MsgUpdateGroupPolicyAdminView = () => {
     setError("")
     setSuccess("")
 
-    const sender = wallet.bech32Address
-
-    let accountSequence: string
-    let accountNumber: number
-
-    // fetch account number and sequence
-    await fetch(chainInfo.rest + queryAccount + "/" + sender)
-      .then(res => res.json())
-      .then(data => {
-        if (data.code) {
-          setError("error fetching account: " + data.message)
-        } else {
-          accountNumber = data.account.account_number
-          accountSequence = data.account.sequence
-        }
-      })
-      .catch(err => {
-        setError("error fetching account: " + err.message)
-      })
-
-    // @ts-ignore
-    if (accountSequence == undefined || accountNumber == undefined) {
-      return // exit if fetch account unsuccessful
-    }
-
     const msg = {
       $type: "cosmos.group.v1.MsgUpdateGroupPolicyAdmin",
-      admin: sender,
+      admin: wallet.bech32Address,
       groupPolicyAddress: address,
       newAdmin: admin,
     } as MsgUpdateGroupPolicyAdmin
 
-    const bodyBytes = TxBody.encode({
-      messages: [
-        {
-          typeUrl: `/${msg.$type}`,
-          value: MsgUpdateGroupPolicyAdmin.encode(msg).finish(),
-        },
-      ],
-      memo: "",
-      timeoutHeight: "0",
-      extensionOptions: [],
-      nonCriticalExtensionOptions: [],
-    }).finish()
+    const encMsg = MsgUpdateGroupPolicyAdmin.encode(msg).finish()
 
-    const authInfoBytes = AuthInfo.encode({
-      signerInfos: [
-        {
-          publicKey: undefined,
-          modeInfo: {
-            single: {
-              mode: SignMode.SIGN_MODE_DIRECT
-            },
-            multi: undefined,
-          },
-          sequence: accountSequence,
-        },
-      ],
-      fee: {
-        amount: [
-          {
-            denom: chainInfo.feeCurrencies[0].coinMinimalDenom,
-            amount: "0",
-          },
-        ],
-        gasLimit: "200000",
-        payer: sender,
-        granter: "",
-      }
-    }).finish()
-
-    const signDoc: SignDoc = {
-      bodyBytes,
-      authInfoBytes,
-      chainId: chainInfo.chainId,
-      accountNumber,
-    }
-
-    window?.keplr?.signDirect(chainInfo.chainId, sender, signDoc).then(res => {
-
-      const mode = "block" as BroadcastMode
-      const signedTx = TxRaw.encode({
-        bodyBytes: res.signed.bodyBytes,
-        authInfoBytes: res.signed.authInfoBytes,
-        signatures: [Buffer.from(res.signature.signature, "base64")],
-      }).finish()
-
-      window?.keplr?.sendTx(chainInfo.chainId, signedTx, mode).then(res => {
-        setSuccess(Buffer.from(res).toString("hex"))
-
+    await signAndBroadcast(chainInfo, wallet.bech32Address, msg, encMsg)
+      .then(res => {
+        setSuccess(res)
       }).catch(err => {
-        setError("send error: " + err.message)
+        setError(err.message)
       })
-
-    }).catch(err => {
-      setError("sign error: " + err.message)
-    })
   }
 
   return (
@@ -155,20 +68,11 @@ const MsgUpdateGroupPolicyAdminView = () => {
           </button>
         </form>
       </div>
-      {error != "" && (
-        <div className={styles.error}>
-          {error}
-        </div>
-      )}
-      {success != "" && (
-        <div>
-          <pre>
-            <a href={chainInfo.rest + queryTx + "/" + success}>
-              {chainInfo.rest + queryTx + "/" + success}
-            </a>
-          </pre>
-        </div>
-      )}
+      <ResultTx
+        error={error}
+        rest={chainInfo?.rest}
+        success={success}
+      />
     </>
   )
 }

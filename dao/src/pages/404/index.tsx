@@ -1,6 +1,7 @@
 import * as React from "react"
 
 import Seo from "../../components/Seo"
+
 import Background from "../../components/Background"
 
 import * as styles from "./index.module.css"
@@ -8,8 +9,8 @@ import * as styles from "./index.module.css"
 const NotFound = () => (
   <>
     <Background />
-    <div className={styles.container}>
-      <div className={styles.content}>
+    <div className={styles.page}>
+      <div className={styles.section}>
         <div>
           <h1>
             {'404'}

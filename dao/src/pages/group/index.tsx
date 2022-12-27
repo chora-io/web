@@ -2,6 +2,7 @@ import * as React from "react"
 
 import Main from "../../layouts/Main"
 import Seo from "../../components/Seo"
+
 import MsgCreateGroup from "../../components/group/MsgCreateGroup"
 import MsgCreateGroupWithPolicy from "../../components/group/MsgCreateGroupWithPolicy"
 import MsgLeaveGroup from "../../components/group/MsgLeaveGroup"
@@ -13,67 +14,62 @@ import QueryGroupMembers from "../../components/group/QueryGroupMembers"
 
 import * as styles from "./index.module.css"
 
-const Create = () => {
-
-  // ...
-
-  return (
-    <Main>
-      <div className={styles.container}>
-        <div>
-          <div className={styles.table}>
-            <div className={styles.tableHeader}>
-              {"create group"}
-            </div>
-            <MsgCreateGroup />
+const Create = () => (
+  <Main>
+    <div className={styles.page}>
+      <div>
+        <div className={styles.section}>
+          <div>
+            {"create group"}
           </div>
-          <div className={styles.table}>
-            <div className={styles.tableHeader}>
-              {"create group with policy"}
-            </div>
-            <MsgCreateGroupWithPolicy />
+          <MsgCreateGroup />
+        </div>
+        <div className={styles.section}>
+          <div>
+            {"create group with policy"}
           </div>
-          <div className={styles.table}>
-            <div className={styles.tableHeader}>
-              {"update group admin"}
-            </div>
-            <MsgUpdateGroupAdmin />
+          <MsgCreateGroupWithPolicy />
+        </div>
+        <div className={styles.section}>
+          <div>
+            {"update group admin"}
           </div>
-          <div className={styles.table}>
-            <div className={styles.tableHeader}>
-              {"update group members"}
-            </div>
-            <MsgUpdateGroupMembers />
+          <MsgUpdateGroupAdmin />
+        </div>
+        <div className={styles.section}>
+          <div>
+            {"update group members"}
           </div>
-          <div className={styles.table}>
-            <div className={styles.tableHeader}>
-              {"update group metadata"}
-            </div>
-            <MsgUpdateGroupMetadata />
+          <MsgUpdateGroupMembers />
+        </div>
+        <div className={styles.section}>
+          <div>
+            {"update group metadata"}
           </div>
-          <div className={styles.table}>
-            <div className={styles.tableHeader}>
-              {"leave group"}
-            </div>
-            <MsgLeaveGroup />
+          <MsgUpdateGroupMetadata />
+        </div>
+        <div className={styles.section}>
+          <div>
+            {"leave group"}
           </div>
-          <div className={styles.table}>
-            <div className={styles.tableHeader}>
-              {"search group by id"}
-            </div>
-            <QueryGroup />
+          <MsgLeaveGroup />
+        </div>
+        <div className={styles.section}>
+          <div>
+            {"search group by id"}
           </div>
-          <div className={styles.table}>
-            <div className={styles.tableHeader}>
-              {"search group members by id"}
-            </div>
-            <QueryGroupMembers />
+          <QueryGroup />
+        </div>
+        <div className={styles.section}>
+          <div>
+            {"search group members by id"}
           </div>
+          <QueryGroupMembers />
         </div>
       </div>
-    </Main>
-  )
-}
+    </div>
+  </Main>
+)
 
 export const Head = () => <Seo title="" />
 
