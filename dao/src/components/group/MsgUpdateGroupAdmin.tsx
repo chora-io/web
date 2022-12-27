@@ -2,7 +2,7 @@ import * as React from "react"
 import { useContext, useState } from "react"
 import * as Long from "long"
 
-import { WalletContext } from "../../context/WalletContext"
+import { WalletContext } from "../../contexts/WalletContext"
 import { MsgUpdateGroupAdmin } from "../../../api/cosmos/group/v1/tx"
 import { signAndBroadcast } from "../../utils/tx"
 

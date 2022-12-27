@@ -1,0 +1,7 @@
+/* page */
+
+.page {
+  background: var(--color-bg-solid);
+  min-height: calc(100vh - var(--header-height));
+  padding-top: var(--header-height);
+}

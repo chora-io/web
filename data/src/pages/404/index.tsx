@@ -10,7 +10,7 @@ const NotFound = () => (
   <>
     <Background />
     <div className={styles.page}>
-      <div className={styles.section}>
+      <div className={styles.content}>
         <div>
           <h1>
             {'404'}

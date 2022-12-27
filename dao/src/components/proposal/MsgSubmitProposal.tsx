@@ -3,7 +3,7 @@ import { useContext, useState } from "react"
 
 import { MsgSend } from "@keplr-wallet/proto-types/cosmos/bank/v1beta1/tx"
 
-import { WalletContext } from "../../context/WalletContext"
+import { WalletContext } from "../../contexts/WalletContext"
 import { MsgSubmitProposal } from "../../../api/cosmos/group/v1/tx"
 import { signAndBroadcast } from "../../utils/tx"
 

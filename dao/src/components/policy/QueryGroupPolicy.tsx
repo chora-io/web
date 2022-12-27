@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useContext, useState } from "react"
 
-import { WalletContext } from "../../context/WalletContext"
+import { WalletContext } from "../../contexts/WalletContext"
 
 import InputAddress from "../InputAddress"
 import Result from "../Result"

@@ -1,7 +1,8 @@
-import * as React from "react";
+import * as React from "react"
 
 import Main from "../../layouts/Main"
 import Seo from "../../components/Seo"
+
 import Dashboard from "../../components/dash/Dashboard"
 
 import * as styles from "./index.module.css"
@@ -10,7 +11,7 @@ import { choraTestnet } from "../../utils/chains"
 
 const Testnet = () => (
   <Main>
-    <div className={styles.container} >
+    <div className={styles.page} >
       <Dashboard
         chainId={choraTestnet.chainId}
         chainName={choraTestnet.chainName}

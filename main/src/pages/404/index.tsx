@@ -8,7 +8,7 @@ import * as styles from "./index.module.css"
 const NotFound = () => (
   <>
     <Background />
-    <div className={styles.container}>
+    <div className={styles.page}>
       <div className={styles.content}>
         <div>
           <h1>

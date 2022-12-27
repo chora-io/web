@@ -3,7 +3,7 @@ import { useContext, useState } from "react"
 
 import { WalletContext } from "../../contexts/WalletContext"
 
-import InputResolverId from "../InputResolverId";
+import InputResolverId from "../InputResolverId"
 import Result from "../Result"
 import SelectNetwork from "../SelectNetwork"
 

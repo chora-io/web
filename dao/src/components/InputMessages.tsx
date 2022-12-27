@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useContext } from "react"
 
-import { WalletContext } from "../context/WalletContext"
+import { WalletContext } from "../contexts/WalletContext"
 
 import * as styles from "./InputMessages.module.css"
 
