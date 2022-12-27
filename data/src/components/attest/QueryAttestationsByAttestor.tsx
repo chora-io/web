@@ -1,7 +1,9 @@
 import * as React from "react"
 import { useContext, useState } from "react"
 
-import { WalletContext } from "../../context/WalletContext"
+import { WalletContext } from "../../contexts/WalletContext"
+
+import Result from "../Result"
 import SelectNetwork from "../SelectNetwork"
 
 import * as styles from "./QueryAttestationsByAttestor.module.css"
@@ -65,18 +67,10 @@ const QueryAttestationsByAttestor = () => {
           </button>
         </form>
       </div>
-      {error != "" && (
-        <div className={styles.error}>
-          {error}
-        </div>
-      )}
-      {success != "" && (
-        <div>
-          <pre>
-            {success}
-          </pre>
-        </div>
-      )}
+      <Result
+        error={error}
+        success={success}
+      />
     </>
   )
 }

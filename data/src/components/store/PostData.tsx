@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import * as jsonld from "jsonld"
 
 import InputJSON from "../InputJSON"
+import Result from "../Result"
 import SelectGraphCanon from "../SelectGraphCanon"
 import SelectSchemaContext from "../SelectSchemaContext"
 
@@ -173,18 +174,10 @@ const PostData = () => {
           </button>
         </form>
       </div>
-      {error != "" && (
-        <div className={styles.error}>
-          {error}
-        </div>
-      )}
-      {success != "" && (
-        <div>
-          <pre>
-            {success}
-          </pre>
-        </div>
-      )}
+      <Result
+        error={error}
+        success={success}
+      />
     </>
   )
 }

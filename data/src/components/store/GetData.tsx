@@ -1,6 +1,9 @@
 import * as React from "react"
 import { useState } from "react"
 
+import InputDataId from "../InputDataId"
+import Result from "../Result"
+
 import * as styles from "./GetData.module.css"
 
 const localServerUrl = "http://localhost:3000/data"
@@ -47,31 +50,19 @@ const GetData = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label htmlFor="id">
-            {"id"}
-            <input
-              value={id}
-              placeholder={"1"}
-              onChange={event => setId(event.target.value)}
-            />
-          </label>
+          <InputDataId
+            id={id}
+            setId={setId}
+          />
           <button type="submit">
             {"get data"}
           </button>
         </form>
       </div>
-      {error != "" && (
-        <div className={styles.error}>
-          {error}
-        </div>
-      )}
-      {success != "" && (
-        <div>
-          <pre>
-            {success}
-          </pre>
-        </div>
-      )}
+      <Result
+        error={error}
+        success={success}
+      />
     </>
   )
 }

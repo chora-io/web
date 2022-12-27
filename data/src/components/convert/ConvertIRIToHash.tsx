@@ -1,14 +1,15 @@
 import * as React from "react"
 import { useContext, useState } from "react"
 
-import { WalletContext } from "../../context/WalletContext"
+import { WalletContext } from "../../contexts/WalletContext"
+
 import InputIRI from "../InputIRI"
+import Result from "../Result"
 import SelectNetwork from "../SelectNetwork"
 
 import * as styles from "./ConvertIRIToHash.module.css"
 
 const convertIRIToHash = "/regen/data/v1/convert-iri-to-hash"
-const iriPlaceholder = "regen:13toVfvC2YxrrfSXWB5h2BGHiXZURsKxWUz72uDRDSPMCrYPguGUXSC.rdf"
 
 const ConvertIRIToHash = () => {
 
@@ -53,18 +54,10 @@ const ConvertIRIToHash = () => {
           </button>
         </form>
       </div>
-      {error != "" && (
-        <div className={styles.error}>
-          {error}
-        </div>
-      )}
-      {success != "" && (
-        <div>
-          <pre>
-            {success}
-          </pre>
-        </div>
-      )}
+      <Result
+        error={error}
+        success={success}
+      />
     </>
   )
 }

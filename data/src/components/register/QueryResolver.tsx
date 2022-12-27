@@ -1,8 +1,10 @@
 import * as React from "react"
 import { useContext, useState } from "react"
 
-import { WalletContext } from "../../context/WalletContext"
+import { WalletContext } from "../../contexts/WalletContext"
+
 import InputResolverId from "../InputResolverId";
+import Result from "../Result"
 import SelectNetwork from "../SelectNetwork"
 
 import * as styles from "./QueryResolver.module.css"
@@ -52,18 +54,10 @@ const QueryResolver = () => {
           </button>
         </form>
       </div>
-      {error != "" && (
-        <div className={styles.error}>
-          {error}
-        </div>
-      )}
-      {success != "" && (
-        <div>
-          <pre>
-            {success}
-          </pre>
-        </div>
-      )}
+      <Result
+        error={error}
+        success={success}
+      />
     </>
   )
 }

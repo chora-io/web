@@ -5,6 +5,7 @@ import * as blake from "blakejs"
 import * as jsonld from "jsonld"
 
 import InputJSON from "../InputJSON"
+import Result from "../Result"
 import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
 import SelectGraphCanon from "../SelectGraphCanon"
 import SelectGraphMerkle from "../SelectGraphMerkle"
@@ -157,18 +158,10 @@ const GenerateHash = () => {
           </button>
         </form>
       </div>
-      {error != "" && (
-        <div className={styles.error}>
-          {error}
-        </div>
-      )}
-      {success != "" && (
-        <div>
-          <pre>
-            {success}
-          </pre>
-        </div>
-      )}
+      <Result
+        error={error}
+        success={success}
+      />
     </>
   )
 }

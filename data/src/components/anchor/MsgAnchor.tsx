@@ -2,25 +2,21 @@ import * as React from "react"
 import { useContext, useState } from "react"
 import { Buffer } from "buffer"
 
-import { SignMode } from "@keplr-wallet/proto-types/cosmos/tx/signing/v1beta1/signing"
-import { AuthInfo, TxBody, TxRaw } from "@keplr-wallet/proto-types/cosmos/tx/v1beta1/tx"
-import { BroadcastMode, SignDoc } from "@keplr-wallet/types"
-
-import { WalletContext } from "../../context/WalletContext"
+import { WalletContext } from "../../contexts/WalletContext"
 import { MsgAnchor } from "../../../api/regen/data/v1/tx"
+import { signAndBroadcast } from "../../utils/tx"
+
 import InputHash from "../InputHash"
 import InputHashJSON from "../InputHashJSON"
+import ResultTx from "../ResultTx"
 import SelectDataType from "../SelectDataType"
 import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
-import SelectInput from "../SelectInput"
 import SelectGraphCanon from "../SelectGraphCanon"
 import SelectGraphMerkle from "../SelectGraphMerkle"
+import SelectInput from "../SelectInput"
 import SelectRawMedia from "../SelectRawMedia"
 
 import * as styles from "./MsgAnchor.module.css"
-
-const queryAccount = "/cosmos/auth/v1beta1/accounts"
-const queryTx = "/cosmos/tx/v1beta1/txs"
 
 const MsgAnchorView = () => {
 
@@ -48,37 +44,12 @@ const MsgAnchorView = () => {
     setError("")
     setSuccess("")
 
-    const sender = wallet.bech32Address
-
-    let accountSequence: string
-    let accountNumber: number
-
-    // fetch account number and sequence
-    await fetch(chainInfo.rest + queryAccount + "/" + sender)
-      .then(res => res.json())
-      .then(data => {
-        if (data.code) {
-          setError("error fetching account: " + data.message)
-        } else {
-          accountNumber = data.account.account_number
-          accountSequence = data.account.sequence
-        }
-      })
-      .catch(err => {
-        setError("error fetching account: " + err.message)
-      })
-
-    // @ts-ignore
-    if (accountSequence == undefined || accountNumber == undefined) {
-      return // exit if fetch account unsuccessful
-    }
-
     let msg: MsgAnchor
     if (input == "form") {
       if (type == "graph") {
         msg = {
           $type: "regen.data.v1.MsgAnchor",
-          sender: sender,
+          sender: wallet.bech32Address,
           contentHash: {
             $type: "regen.data.v1.ContentHash",
             graph: {
@@ -93,7 +64,7 @@ const MsgAnchorView = () => {
       } else if (type == "raw") {
         msg = {
           $type: "regen.data.v1.MsgAnchor",
-          sender: sender,
+          sender: wallet.bech32Address,
           contentHash: {
             $type: "regen.data.v1.ContentHash",
             raw: {
@@ -117,76 +88,19 @@ const MsgAnchorView = () => {
         return // exit on error
       }
       msg = MsgAnchor.fromJSON({
-        sender: sender,
+        sender: wallet.bech32Address,
         contentHash: contentHash,
       })
     }
 
-    const bodyBytes = TxBody.encode({
-      messages: [
-        {
-          typeUrl: `/${msg.$type}`,
-          value: MsgAnchor.encode(msg).finish(),
-        },
-      ],
-      memo: "",
-      timeoutHeight: "0",
-      extensionOptions: [],
-      nonCriticalExtensionOptions: [],
-    }).finish()
+    const encMsg = MsgAnchor.encode(msg).finish()
 
-    const authInfoBytes = AuthInfo.encode({
-      signerInfos: [
-        {
-          publicKey: undefined,
-          modeInfo: {
-            single: {
-              mode: SignMode.SIGN_MODE_DIRECT
-            },
-            multi: undefined,
-          },
-          sequence: accountSequence,
-        },
-      ],
-      fee: {
-        amount: [
-          {
-            denom: chainInfo.feeCurrencies[0].coinMinimalDenom,
-            amount: "0",
-          },
-        ],
-        gasLimit: "100000",
-        payer: sender,
-        granter: "",
-      }
-    }).finish()
-
-    const signDoc: SignDoc = {
-      bodyBytes,
-      authInfoBytes,
-      chainId: chainInfo.chainId,
-      accountNumber,
-    }
-
-    window?.keplr?.signDirect(chainInfo.chainId, sender, signDoc).then(res => {
-
-      const mode = "block" as BroadcastMode
-      const signedTx = TxRaw.encode({
-        bodyBytes: res.signed.bodyBytes,
-        authInfoBytes: res.signed.authInfoBytes,
-        signatures: [Buffer.from(res.signature.signature, "base64")],
-      }).finish()
-
-      window?.keplr?.sendTx(chainInfo.chainId, signedTx, mode).then(res => {
-        setSuccess(Buffer.from(res).toString("hex"))
-
+    await signAndBroadcast(chainInfo, wallet.bech32Address, msg, encMsg)
+      .then(res => {
+        setSuccess(res)
       }).catch(err => {
-        setError("send error: " + err.message)
+        setError(err.message)
       })
-
-    }).catch(err => {
-      setError("sign error: " + err.message)
-    })
   }
 
   return (
@@ -237,20 +151,11 @@ const MsgAnchorView = () => {
           </form>
         )}
       </div>
-      {error != "" && (
-        <div className={styles.error}>
-          {error}
-        </div>
-      )}
-      {success != "" && (
-        <div>
-          <pre>
-            <a href={chainInfo.rest + queryTx + "/" + success}>
-              {chainInfo.rest + queryTx + "/" + success}
-            </a>
-          </pre>
-        </div>
-      )}
+      <ResultTx
+        error={error}
+        rest={chainInfo?.rest}
+        success={success}
+      />
     </>
   )
 }

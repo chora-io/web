@@ -2,6 +2,7 @@ import * as React from "react";
 
 import Main from "../../layouts/Main"
 import Seo from "../../components/Seo"
+
 import MsgDefineResolver from "../../components/register/MsgDefineResolver"
 import MsgRegisterResolver from "../../components/register/MsgRegisterResolver"
 import QueryResolver from "../../components/register/QueryResolver"
@@ -11,55 +12,50 @@ import QueryResolversByHash from "../../components/register/QueryResolversByHash
 
 import * as styles from "./index.module.css"
 
-const Register = () => {
-
-  // ...
-
-  return (
-    <Main>
-      <div className={styles.container}>
-        <div>
-          <div className={styles.table}>
-            <div className={styles.tableHeader}>
-              {"define resolver"}
-            </div>
-            <MsgDefineResolver />
+const Register = () => (
+  <Main>
+    <div className={styles.page}>
+      <div>
+        <div className={styles.section}>
+          <div>
+            {"define resolver"}
           </div>
-          <div className={styles.table}>
-            <div className={styles.tableHeader}>
-              {"register data to resolver"}
-            </div>
-            <MsgRegisterResolver />
+          <MsgDefineResolver />
+        </div>
+        <div className={styles.section}>
+          <div>
+            {"register data to resolver"}
           </div>
-          <div className={styles.table}>
-            <div className={styles.tableHeader}>
-              {"search resolvers by id"}
-            </div>
-            <QueryResolver />
+          <MsgRegisterResolver />
+        </div>
+        <div className={styles.section}>
+          <div>
+            {"search resolvers by id"}
           </div>
-          <div className={styles.table}>
-            <div className={styles.tableHeader}>
-              {"search resolvers by url"}
-            </div>
-            <QueryResolversByURL />
+          <QueryResolver />
+        </div>
+        <div className={styles.section}>
+          <div>
+            {"search resolvers by url"}
           </div>
-          <div className={styles.table}>
-            <div className={styles.tableHeader}>
-              {"search resolvers by data iri"}
-            </div>
-            <QueryResolversByIRI />
+          <QueryResolversByURL />
+        </div>
+        <div className={styles.section}>
+          <div>
+            {"search resolvers by data iri"}
           </div>
-          <div className={styles.table}>
-            <div className={styles.tableHeader}>
-              {"search resolvers by data content hash"}
-            </div>
-            <QueryResolversByHash />
+          <QueryResolversByIRI />
+        </div>
+        <div className={styles.section}>
+          <div>
+            {"search resolvers by data content hash"}
           </div>
+          <QueryResolversByHash />
         </div>
       </div>
-    </Main>
-  )
-}
+    </div>
+  </Main>
+)
 
 export const Head = () => <Seo title="" />
 

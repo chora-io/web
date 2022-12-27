@@ -2,23 +2,19 @@ import * as React from "react"
 import { useContext, useState } from "react"
 import { Buffer } from "buffer"
 
-import { SignMode } from "@keplr-wallet/proto-types/cosmos/tx/signing/v1beta1/signing"
-import { AuthInfo, TxBody, TxRaw } from "@keplr-wallet/proto-types/cosmos/tx/v1beta1/tx"
-import { BroadcastMode, SignDoc } from "@keplr-wallet/types"
-
-import { WalletContext } from "../../context/WalletContext"
+import { WalletContext } from "../../contexts/WalletContext"
 import { MsgAttest } from "../../../api/regen/data/v1/tx"
+import { signAndBroadcast } from "../../utils/tx"
+
 import InputHash from "../InputHash"
 import InputHashJSON from "../InputHashJSON"
+import ResultTx from "../ResultTx"
 import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
-import SelectInput from "../SelectInput"
 import SelectGraphCanon from "../SelectGraphCanon"
 import SelectGraphMerkle from "../SelectGraphMerkle"
+import SelectInput from "../SelectInput"
 
 import * as styles from "./MsgAttest.module.css"
-
-const queryAccount = "/cosmos/auth/v1beta1/accounts"
-const queryTx = "/cosmos/tx/v1beta1/txs"
 
 const MsgAttestView = () => {
 
@@ -44,36 +40,11 @@ const MsgAttestView = () => {
     setError("")
     setSuccess("")
 
-    const sender = wallet.bech32Address
-
-    let accountSequence: string
-    let accountNumber: number
-
-    // fetch account number and sequence
-    await fetch(chainInfo.rest + queryAccount + "/" + sender)
-      .then(res => res.json())
-      .then(data => {
-        if (data.code) {
-          setError("error fetching account: " + data.message)
-        } else {
-          accountNumber = data.account.account_number
-          accountSequence = data.account.sequence
-        }
-      })
-      .catch(err => {
-        setError("error fetching account: " + err.message)
-      })
-
-    // @ts-ignore
-    if (accountSequence == undefined || accountNumber == undefined) {
-      return // exit if fetch account unsuccessful
-    }
-
     let msg: MsgAttest
     if (input == "form") {
       msg = {
         $type: "regen.data.v1.MsgAttest",
-        attestor: sender,
+        attestor: wallet.bech32Address,
         contentHashes: [
           {
             $type: "regen.data.v1.ContentHash.Graph",
@@ -93,76 +64,19 @@ const MsgAttestView = () => {
         return // exit on error
       }
       msg = MsgAttest.fromJSON({
-        attestor: sender,
+        attestor: wallet.bech32Address,
         contentHashes: [contentHash.graph]
       })
     }
 
-    const bodyBytes = TxBody.encode({
-      messages: [
-        {
-          typeUrl: `/${msg.$type}`,
-          value: MsgAttest.encode(msg).finish(),
-        },
-      ],
-      memo: "",
-      timeoutHeight: "0",
-      extensionOptions: [],
-      nonCriticalExtensionOptions: [],
-    }).finish()
+    const encMsg = MsgAttest.encode(msg).finish()
 
-    const authInfoBytes = AuthInfo.encode({
-      signerInfos: [
-        {
-          publicKey: undefined,
-          modeInfo: {
-            single: {
-              mode: SignMode.SIGN_MODE_DIRECT
-            },
-            multi: undefined,
-          },
-          sequence: accountSequence,
-        },
-      ],
-      fee: {
-        amount: [
-          {
-            denom: chainInfo.feeCurrencies[0].coinMinimalDenom,
-            amount: "0",
-          },
-        ],
-        gasLimit: "100000",
-        payer: sender,
-        granter: "",
-      }
-    }).finish()
-
-    const signDoc: SignDoc = {
-      bodyBytes,
-      authInfoBytes,
-      chainId: chainInfo.chainId,
-      accountNumber,
-    }
-
-    window?.keplr?.signDirect(chainInfo.chainId, sender, signDoc).then(res => {
-
-      const mode = "block" as BroadcastMode
-      const signedTx = TxRaw.encode({
-        bodyBytes: res.signed.bodyBytes,
-        authInfoBytes: res.signed.authInfoBytes,
-        signatures: [Buffer.from(res.signature.signature, "base64")],
-      }).finish()
-
-      window?.keplr?.sendTx(chainInfo.chainId, signedTx, mode).then(res => {
-        setSuccess(Buffer.from(res).toString("hex"))
-
+    await signAndBroadcast(chainInfo, wallet.bech32Address, msg, encMsg)
+      .then(res => {
+        setSuccess(res)
       }).catch(err => {
-        setError("send error: " + err.message)
+        setError(err.message)
       })
-
-    }).catch(err => {
-      setError("sign error: " + err.message)
-    })
   }
 
   return (
@@ -199,20 +113,11 @@ const MsgAttestView = () => {
           </form>
         )}
       </div>
-      {error != "" && (
-        <div className={styles.error}>
-          {error}
-        </div>
-      )}
-      {success != "" && (
-        <div>
-          <pre>
-            <a href={chainInfo.rest + queryTx + "/" + success}>
-              {chainInfo.rest + queryTx + "/" + success}
-            </a>
-          </pre>
-        </div>
-      )}
+      <ResultTx
+        error={error}
+        rest={chainInfo?.rest}
+        success={success}
+      />
     </>
   )
 }

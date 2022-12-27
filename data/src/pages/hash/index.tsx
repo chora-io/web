@@ -7,25 +7,20 @@ import GenerateHash from "../../components/hash/GenerateHash"
 
 import * as styles from "./index.module.css"
 
-const Hash = () => {
-
-  // ...
-
-  return (
-    <Main>
-      <div className={styles.container}>
-        <div>
-          <div className={styles.table}>
-            <div className={styles.tableHeader}>
-              {"generate hash"}
-            </div>
-            <GenerateHash />
+const Hash = () => (
+  <Main>
+    <div className={styles.page}>
+      <div>
+        <div className={styles.section}>
+          <div>
+            {"generate hash"}
           </div>
+          <GenerateHash />
         </div>
       </div>
-    </Main>
-  )
-}
+    </div>
+  </Main>
+)
 
 export const Head = () => <Seo title="" />
 

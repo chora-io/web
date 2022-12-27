@@ -6,7 +6,7 @@ import {
   cachedConnectedKey,
   cachedNetworkKey,
   WalletContext,
-} from "../context/WalletContext"
+} from "../contexts/WalletContext"
 
 import SelectNetwork from "./SelectNetwork"
 

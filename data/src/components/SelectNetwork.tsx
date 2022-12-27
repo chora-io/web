@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useContext } from "react"
 
-import { cachedNetworkKey, WalletContext } from "../context/WalletContext"
+import { cachedNetworkKey, WalletContext } from "../contexts/WalletContext"
 
 import {
   choraLocal,

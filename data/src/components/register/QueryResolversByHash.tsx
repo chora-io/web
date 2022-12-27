@@ -1,15 +1,17 @@
 import * as React from "react"
 import { useContext, useState } from "react"
 
-import { WalletContext } from "../../context/WalletContext"
-import SelectNetwork from "../SelectNetwork"
+import { WalletContext } from "../../contexts/WalletContext"
+
 import InputHash from "../InputHash"
 import InputHashJSON from "../InputHashJSON"
+import Result from "../Result"
 import SelectDataType from "../SelectDataType"
 import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
-import SelectInput from "../SelectInput"
 import SelectGraphCanon from "../SelectGraphCanon"
 import SelectGraphMerkle from "../SelectGraphMerkle"
+import SelectInput from "../SelectInput"
+import SelectNetwork from "../SelectNetwork"
 import SelectRawMedia from "../SelectRawMedia"
 
 import * as styles from "./QueryResolversByHash.module.css"
@@ -149,18 +151,10 @@ const QueryResolversByHash = () => {
           </form>
         )}
       </div>
-      {error != "" && (
-        <div className={styles.error}>
-          {error}
-        </div>
-      )}
-      {success != "" && (
-        <div>
-          <pre>
-            {success}
-          </pre>
-        </div>
-      )}
+      <Result
+        error={error}
+        success={success}
+      />
     </>
   )
 }

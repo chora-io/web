@@ -1,37 +1,7 @@
-/* container */
-
-.container {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  margin-left: var(--sidebar-width);
-  min-height: 100vh;
+.page {
+    composes: page from "../../styles/page.css";
 }
 
-.container div {
-  margin: 2em 0;
-}
-
-.container div:first-child {
-  margin-top: var(--header-height);
-}
-
-/* table */
-
-.table {
-  background: rgba(20, 20, 20, 0.5);
-  box-shadow: 0 0 4px rgba(100, 100, 100, 0.5);
-  width: 70vw;
-}
-
-.table div {
-  box-shadow: 0 0 2px rgba(100, 100, 100, 0.5);
-  margin: 2px;
-  padding: 2em;
-}
-
-.tableHeader {
-  background: rgba(20, 20, 20, 0.5);
-  color: var(--color-primary);
-  font-weight: 500;
+.section {
+    composes: section from "../../styles/section.css";
 }

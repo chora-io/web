@@ -8,31 +8,26 @@ import PostData from "../../components/store/PostData"
 
 import * as styles from "./index.module.css"
 
-const Store = () => {
-
-  // ...
-
-  return (
-    <Main>
-      <div className={styles.container}>
-        <div>
-          <div className={styles.table}>
-            <div className={styles.tableHeader}>
-              {"post data to server"}
-            </div>
-            <PostData />
+const Store = () => (
+  <Main>
+    <div className={styles.page}>
+      <div>
+        <div className={styles.section}>
+          <div>
+            {"post data to server"}
           </div>
-          <div className={styles.table}>
-            <div className={styles.tableHeader}>
-              {"get data from server"}
-            </div>
-            <GetData />
+          <PostData />
+        </div>
+        <div className={styles.section}>
+          <div>
+            {"get data from server"}
           </div>
+          <GetData />
         </div>
       </div>
-    </Main>
-  )
-}
+    </div>
+  </Main>
+)
 
 export const Head = () => <Seo title="" />
 

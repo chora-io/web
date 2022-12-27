@@ -7,7 +7,7 @@ import * as styles from "./index.module.css"
 
 const Index = () => (
   <Main>
-    <div className={styles.container} >
+    <div className={styles.page} >
       <h1>
         {"data anchoring and attestations"}
       </h1>

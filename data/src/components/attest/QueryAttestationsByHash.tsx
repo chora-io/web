@@ -1,14 +1,16 @@
 import * as React from "react"
 import { useContext, useState } from "react"
 
-import { WalletContext } from "../../context/WalletContext"
-import SelectNetwork from "../SelectNetwork"
+import { WalletContext } from "../../contexts/WalletContext"
+
 import InputHash from "../InputHash"
 import InputHashJSON from "../InputHashJSON"
+import Result from "../Result"
 import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
-import SelectInput from "../SelectInput"
 import SelectGraphCanon from "../SelectGraphCanon"
 import SelectGraphMerkle from "../SelectGraphMerkle"
+import SelectInput from "../SelectInput"
+import SelectNetwork from "../SelectNetwork"
 
 import * as styles from "./QueryAttestationsByHash.module.css"
 
@@ -116,18 +118,10 @@ const QueryAttestationsByHash = () => {
           </form>
         )}
       </div>
-      {error != "" && (
-        <div className={styles.error}>
-          {error}
-        </div>
-      )}
-      {success != "" && (
-        <div>
-          <pre>
-            {success}
-          </pre>
-        </div>
-      )}
+      <Result
+        error={error}
+        success={success}
+      />
     </>
   )
 }
