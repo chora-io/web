@@ -4,8 +4,8 @@
 module.exports = {
   pathPrefix: `/geo`,
   siteMetadata: {
-    title: `geo | geospatial entity management`,
-    description: `geospatial entity management.`,
+    title: `geo | geospatial node management`,
+    description: `geospatial node management.`,
     author: `@choraio`,
     siteUrl: `https://chora.io/geo`,
   },

@@ -65,7 +65,7 @@ export const signAndBroadcast = async (chainInfo, address, msg, encMsg) => {
           amount: "0",
         },
       ],
-      gasLimit: "100000",
+      gasLimit: "200000",
       payer: account.address,
       granter: "",
     }

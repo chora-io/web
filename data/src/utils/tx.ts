@@ -7,7 +7,7 @@ import { BroadcastMode, SignDoc } from "@keplr-wallet/types"
 const queryAccount = "/cosmos/auth/v1beta1/accounts"
 
 // signAndBroadcast signs and broadcasts a transaction
-export const signAndBroadcast = async (chainInfo, address, msg, msgImpl) => {
+export const signAndBroadcast = async (chainInfo, address, msg, encMsg) => {
 
   // account information
   let account = undefined
@@ -35,7 +35,7 @@ export const signAndBroadcast = async (chainInfo, address, msg, msgImpl) => {
     messages: [
       {
         typeUrl: `/${msg.$type}`,
-        value: msgImpl.encode(msg).finish(),
+        value: encMsg,
       },
     ],
     memo: "",
@@ -65,7 +65,7 @@ export const signAndBroadcast = async (chainInfo, address, msg, msgImpl) => {
           amount: "0",
         },
       ],
-      gasLimit: "100000",
+      gasLimit: "200000",
       payer: account.address,
       granter: "",
     }

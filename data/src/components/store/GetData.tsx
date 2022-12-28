@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useState } from "react"
 
-import InputDataId from "../InputDataId"
+import InputIRI from "../InputIRI"
 import Result from "../Result"
 
 import * as styles from "./GetData.module.css"
@@ -20,7 +20,7 @@ const GetData = () => {
   ) { serverUrl = localServerUrl }
 
   // data input
-  const [id, setId] = useState<string>("")
+  const [iri, setIri] = useState<string>("")
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -32,7 +32,7 @@ const GetData = () => {
     setError("")
     setSuccess("")
 
-    fetch(serverUrl + "/" + id)
+    fetch(serverUrl + "/" + iri)
       .then(res => res.json())
       .then(data => {
         if (data.code) {
@@ -50,9 +50,9 @@ const GetData = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputDataId
-            id={id}
-            setId={setId}
+          <InputIRI
+            iri={iri}
+            setIri={setIri}
           />
           <button type="submit">
             {"get data"}

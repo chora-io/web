@@ -1,7 +1,7 @@
 {
   "name": "geo",
   "private": true,
-  "description": "geospatial entity management",
+  "description": "geospatial node management",
   "version": "0.0.0",
   "homepage": "https://geo.chora.io",
   "bugs": {
@@ -17,8 +17,8 @@
     "format": "echo \"format not yet configured\"",
     "test": "echo \"test not yet configured\"",
     "build": "node_modules/.bin/gatsby build --prefix-paths",
-    "start": "node_modules/.bin/gatsby develop -p 8004",
-    "serve": "node_modules/.bin/gatsby serve -p 8004",
+    "start": "node_modules/.bin/gatsby develop -p 8003",
+    "serve": "node_modules/.bin/gatsby serve -p 8003",
     "clean": "node_modules/.bin/gatsby clean"
   },
   "dependencies": {

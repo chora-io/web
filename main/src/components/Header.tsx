@@ -43,6 +43,11 @@ const Header = () => {
             </li>
             <li>
               <a href={"http://" + window.location.hostname + ":8003"}>
+                {"geo"}
+              </a>
+            </li>
+            <li>
+              <a href={"http://" + window.location.hostname + ":8004"}>
                 {"scan"}
               </a>
             </li>
@@ -57,6 +62,11 @@ const Header = () => {
             <li>
               <a href={"/data"}>
                 {"data"}
+              </a>
+            </li>
+            <li>
+              <a href={"/geo"}>
+                {"geo"}
               </a>
             </li>
             <li>

@@ -4,7 +4,9 @@ import * as jsonld from "jsonld"
 
 import InputJSON from "../InputJSON"
 import Result from "../Result"
+import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
 import SelectGraphCanon from "../SelectGraphCanon"
+import SelectGraphMerkle from "../SelectGraphMerkle"
 import SelectSchemaContext from "../SelectSchemaContext"
 
 import * as styles from "./PostData.module.css"
@@ -132,7 +134,9 @@ const PostData = () => {
     const body = {
       canon: "URDNA2015",
       context: context,
+      digest: "BLAKE2B_256",
       jsonld: json,
+      merkle: "UNSPECIFIED"
     }
 
     fetch(serverUrl, {
@@ -168,7 +172,9 @@ const PostData = () => {
             useTemplate={handleGenJson}
             showUseTemplate={context.length > 0}
           />
+          <SelectDigestAlgorithm />
           <SelectGraphCanon />
+          <SelectGraphMerkle />
           <button type="submit">
             {"post data"}
           </button>
