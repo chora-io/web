@@ -16,6 +16,7 @@ rm -rf public
 cp -r main/public public
 cp -r dao/public public/dao
 cp -r data/public public/data
+cp -r geo/public public/geo
 cp -r scan/public public/scan
 
 # add CNAME file
