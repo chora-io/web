@@ -18,7 +18,7 @@ export const signAndBroadcast = async (chainInfo, address, msg, encMsg) => {
     .then(res => {
 
       // throw error if response includes error code
-      if (res.code != undefined) {
+      if (res.code !== undefined) {
         throw Error(res.message)
       }
 

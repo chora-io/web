@@ -74,7 +74,7 @@ const PostData = () => {
     setJson("")
     setError("")
 
-    if (event.target.value != "") {
+    if (event.target.value !== "") {
 
       // fetch schema example
       fetch(event.target.value.replace("contexts", "examples"))

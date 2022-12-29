@@ -19,7 +19,6 @@ import * as styles from "./MsgSubmitProposal.module.css"
 
 const MsgSubmitProposalView = () => {
 
-  // @ts-ignore
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // form input

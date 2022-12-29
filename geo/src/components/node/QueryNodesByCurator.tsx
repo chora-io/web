@@ -3,21 +3,24 @@ import { useContext, useState } from "react"
 
 import { WalletContext } from "../../contexts/WalletContext"
 
-import InputIRI from "../InputIRI"
+import InputAddress from "../InputAddress"
 import Result from "../Result"
 import SelectNetwork from "../SelectNetwork"
 
-import * as styles from "./QueryResolversByIRI.module.css"
+import * as styles from "./QueryNode.module.css"
 
-const queryResolversByIRI = "/regen/data/v1/resolvers-by-iri"
+const queryNodesByCurator = "/chora/geonode/v1/nodes-by-curator"
 
-const QueryResolversByIRI = () => {
+const QueryNodesByCurator = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  const [iri, setIri] = useState("")
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState("")
+  // form input
+  const [curator, setCurator] = useState<string>("")
+
+  // error and success
+  const [error, setError] = useState<string>("")
+  const [success, setSuccess] = useState<string>("")
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
@@ -25,7 +28,7 @@ const QueryResolversByIRI = () => {
     setError("")
     setSuccess("")
 
-    fetch(chainInfo.rest + queryResolversByIRI + "/" + iri)
+    fetch(chainInfo.rest + queryNodesByCurator + "/" + curator)
       .then(res => res.json())
       .then(data => {
         if (data.code) {
@@ -43,11 +46,13 @@ const QueryResolversByIRI = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputIRI
-            iri={iri}
-            setIri={setIri}
+          <InputAddress
+            id="node-curator"
+            label="node curator"
+            address={curator}
+            setAddress={setCurator}
           />
-          <SelectNetwork withLabel={true} />
+          <SelectNetwork />
           <button type="submit">
             {"search"}
           </button>
@@ -61,4 +66,4 @@ const QueryResolversByIRI = () => {
   )
 }
 
-export default QueryResolversByIRI
+export default QueryNodesByCurator

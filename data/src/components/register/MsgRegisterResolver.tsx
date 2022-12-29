@@ -22,7 +22,6 @@ import * as styles from "./MsgRegisterResolver.module.css"
 
 const MsgRegisterResolverView = () => {
 
-  // @ts-ignore
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // input option

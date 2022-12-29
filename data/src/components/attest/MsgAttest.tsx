@@ -18,7 +18,6 @@ import * as styles from "./MsgAttest.module.css"
 
 const MsgAttestView = () => {
 
-  // @ts-ignore
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // input option

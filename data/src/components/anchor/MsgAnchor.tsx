@@ -20,7 +20,6 @@ import * as styles from "./MsgAnchor.module.css"
 
 const MsgAnchorView = () => {
 
-  // @ts-ignore
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // input option

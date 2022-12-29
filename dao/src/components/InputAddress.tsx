@@ -10,11 +10,10 @@ const regenLongPlaceholder = "regen1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqg
 
 const InputAddress = ({ id, label, long, address, setAddress }: any) => {
 
-  // @ts-ignore
   const { network } = useContext(WalletContext)
 
   let placeholder: string
-  if (network.includes("chora")) {
+  if (network === undefined || network.includes("chora")) {
     if (long) {
       placeholder = choraLongPlaceholder
     } else {

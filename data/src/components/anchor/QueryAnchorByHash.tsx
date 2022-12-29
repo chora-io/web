@@ -20,7 +20,6 @@ const queryAnchorByHash = "/regen/data/v1/anchor-by-hash"
 
 const QueryAnchorByHash = () => {
 
-  // @ts-ignore
   const { chainInfo } = useContext(WalletContext)
 
   // input option

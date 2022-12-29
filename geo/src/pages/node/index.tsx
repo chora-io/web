@@ -6,11 +6,12 @@ import Seo from "../../components/Seo"
 import MsgCreate from "../../components/node/MsgCreate"
 import MsgUpdate from "../../components/node/MsgUpdate"
 import QueryNode from "../../components/node/QueryNode"
-import QueryNodeByCurator from "../../components/node/QueryNodeByCurator"
+import QueryNodes from "../../components/node/QueryNodes"
+import QueryNodesByCurator from "../../components/node/QueryNodesByCurator"
 
 import * as styles from "./index.module.css"
 
-const Create = () => (
+const Node = () => (
   <Main>
     <div className={styles.page}>
       <div>
@@ -34,9 +35,15 @@ const Create = () => (
         </div>
         <div className={styles.section}>
           <div>
+            {"search all nodes"}
+          </div>
+          <QueryNodes />
+        </div>
+        <div className={styles.section}>
+          <div>
             {"search nodes by curator"}
           </div>
-          <QueryNodeByCurator />
+          <QueryNodesByCurator />
         </div>
       </div>
     </div>
@@ -45,4 +52,4 @@ const Create = () => (
 
 export const Head = () => <Seo title="" />
 
-export default Create
+export default Node

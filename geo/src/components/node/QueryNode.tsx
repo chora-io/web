@@ -13,7 +13,6 @@ const queryNode = "/chora/geonode/v1/node"
 
 const QueryNode = () => {
 
-  // @ts-ignore
   const { chainInfo } = useContext(WalletContext)
 
   // form input
@@ -53,7 +52,7 @@ const QueryNode = () => {
             number={id}
             setNumber={setId}
           />
-          <SelectNetwork withLabel={true} />
+          <SelectNetwork />
           <button type="submit">
             {"search"}
           </button>

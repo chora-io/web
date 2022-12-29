@@ -39,7 +39,7 @@ const Chain = ({ chainInfo, dashboardUrl }: any) => {
   }, [count])
 
   return (
-    <tr className={error != "" ? styles.error : null}>
+    <tr className={error !== "" ? styles.error : null}>
       <td>
         {chainInfo.chainId || ""}
       </td>
@@ -52,7 +52,7 @@ const Chain = ({ chainInfo, dashboardUrl }: any) => {
       <td>
         {error || height || ""}
       </td>
-      {error != "" ? (
+      {error !== "" ? (
         <td>
           {"NA"}
         </td>

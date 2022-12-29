@@ -16,11 +16,8 @@ import { Exec, VoteOption } from "../../../api/cosmos/group/v1/types"
 
 import * as styles from "./MsgSubmitProposal.module.css"
 
-const queryAccount = "/cosmos/auth/v1beta1/accounts"
-
 const MsgVoteView = () => {
 
-  // @ts-ignore
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // form input

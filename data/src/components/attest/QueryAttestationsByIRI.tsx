@@ -13,7 +13,6 @@ const queryAttestationsByIRI = "/regen/data/v1/attestations-by-iri"
 
 const QueryAttestationsByIRI = () => {
 
-  // @ts-ignore
   const { chainInfo } = useContext(WalletContext)
 
   const [iri, setIri] = useState("")

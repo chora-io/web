@@ -12,7 +12,6 @@ import * as styles from "./MsgCreateGroupPolicy.module.css"
 
 const MsgUpdateGroupPolicyAdminView = () => {
 
-  // @ts-ignore
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // form input

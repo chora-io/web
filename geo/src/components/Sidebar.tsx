@@ -15,6 +15,9 @@ const Sidebar = () => {
         <li>
           <Link to="/node" activeStyle={activeStyle}>{"node"}</Link>
         </li>
+        <li>
+          <Link to="/nodes" activeStyle={activeStyle}>{"nodes"}</Link>
+        </li>
       </ul>
     </div>
   )

@@ -13,7 +13,6 @@ import * as styles from "./MsgSubmitProposal.module.css"
 
 const MsgExecView = () => {
 
-  // @ts-ignore
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // form input

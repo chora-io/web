@@ -13,7 +13,6 @@ const queryResolversByURL = "/regen/data/v1/resolvers-by-url"
 
 const QueryResolversByURL = () => {
 
-  // @ts-ignore
   const { chainInfo } = useContext(WalletContext)
 
   const [url, setUrl] = useState("")

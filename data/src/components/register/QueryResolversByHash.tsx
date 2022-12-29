@@ -20,7 +20,6 @@ const queryResolversByHash = "/regen/data/v1/resolvers-by-hash"
 
 const QueryResolversByHash = () => {
 
-  // @ts-ignore
   const { chainInfo } = useContext(WalletContext)
 
   // input option

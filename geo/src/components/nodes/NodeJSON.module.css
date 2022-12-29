@@ -1,0 +1,11 @@
+/* error */
+
+.error {
+  color: var(--color-error);
+}
+
+/* json */
+
+.json > div {
+  margin: 1em 0;
+}

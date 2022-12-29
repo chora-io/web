@@ -4,12 +4,12 @@ import * as styles from "./Result.module.css"
 
 const Result = ({ error, success }: any) => (
   <>
-    {error != "" && (
+    {error !== undefined && error !== "" && (
       <div className={styles.error}>
         {error}
       </div>
     )}
-    {success != "" && (
+    {success !== undefined && success !== "" && (
       <div>
         <pre>
           {success}

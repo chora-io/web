@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useContext } from "react"
 
-import { cachedNetworkKey, WalletContext } from "../contexts/WalletContext"
+import { WalletContext } from "../contexts/WalletContext"
 
 import {
   choraLocal,
@@ -11,10 +11,9 @@ import {
   regenHambach,
 } from "../utils/chains"
 
-const SelectNetwork = ({ value, withLabel }: any) => {
+const SelectNetwork = ({ id, label, selected }: any) => {
 
-  // @ts-ignore
-  const { network, setNetwork, setError } = useContext(WalletContext)
+  const { network, setNetwork } = useContext(WalletContext)
 
   let local = false
   if (typeof window !== "undefined" && (
@@ -24,21 +23,13 @@ const SelectNetwork = ({ value, withLabel }: any) => {
     )
   ) { local = true }
 
-  const handleChange = (event: any) => {
-    event.preventDefault()
-    setError("")
-    setNetwork(event.target.value)
-    // store network in local storage to reset on page reload
-    localStorage.setItem(cachedNetworkKey, event.target.value)
-  }
-
   return (
-    <label htmlFor="network">
-      {withLabel ? "network" : ""}
+    <label htmlFor={id ? id : "network"}>
+      {label ? label : "network"}
       <select
-        id="network"
-        value={value || network}
-        onChange={handleChange}
+        id={id ? id : "network"}
+        value={selected || network}
+        onChange={event => setNetwork(event.target.value)}
       >
         <option value={choraTestnet.chainId}>
           {choraTestnet.chainId}

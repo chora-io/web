@@ -13,7 +13,6 @@ const convertIRIToHash = "/regen/data/v1/convert-iri-to-hash"
 
 const ConvertIRIToHash = () => {
 
-  // @ts-ignore
   const { chainInfo } = useContext(WalletContext)
 
   const [iri, setIri] = useState("")

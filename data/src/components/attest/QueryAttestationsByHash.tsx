@@ -18,7 +18,6 @@ const queryAttestationsByHash = "/regen/data/v1/attestations-by-hash"
 
 const QueryAttestationsByHash = () => {
 
-  // @ts-ignore
   const { chainInfo } = useContext(WalletContext)
 
   // input option

@@ -13,7 +13,6 @@ const queryGroupPolicy = "/cosmos/group/v1/group_policy_info"
 
 const QueryPolicy = () => {
 
-  // @ts-ignore
   const { chainInfo } = useContext(WalletContext)
 
   // form input

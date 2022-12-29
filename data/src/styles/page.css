@@ -8,10 +8,6 @@
   min-height: 100vh;
 }
 
-.page div {
-  margin: 2em 0;
-}
-
-.page div:first-child {
+.page > div:first-child {
   margin-top: var(--header-height);
 }

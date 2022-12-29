@@ -13,7 +13,6 @@ import * as styles from "./MsgUpdateGroupAdmin.module.css"
 
 const MsgLeaveGroupView = () => {
 
-  // @ts-ignore
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // form input

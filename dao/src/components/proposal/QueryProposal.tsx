@@ -13,7 +13,6 @@ const queryProposal = "/cosmos/group/v1/proposal"
 
 const QueryPolicy = () => {
 
-  // @ts-ignore
   const { chainInfo } = useContext(WalletContext)
 
   // form input

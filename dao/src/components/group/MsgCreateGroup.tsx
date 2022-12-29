@@ -25,7 +25,6 @@ const member = {
 
 const MsgCreateGroupView = () => {
 
-  // @ts-ignore
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // form input

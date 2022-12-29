@@ -12,7 +12,6 @@ import * as styles from "./MsgDefineResolver.module.css"
 
 const MsgDefineResolverView = () => {
 
-  // @ts-ignore
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // form input

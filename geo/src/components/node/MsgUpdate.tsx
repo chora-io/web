@@ -14,7 +14,6 @@ import * as styles from "./MsgUpdate.module.css"
 
 const MsgUpdateView = () => {
 
-  // @ts-ignore
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // form input

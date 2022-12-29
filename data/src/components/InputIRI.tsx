@@ -8,11 +8,10 @@ const regenPlaceholder = "regen:13toVfvC2YxrrfSXWB5h2BGHiXZURsKxWUz72uDRDSPMCrYP
 
 const InputIRI = ({ id, label, iri, setIri }: any) => {
 
-  // @ts-ignore
   const { network } = useContext(WalletContext)
 
   let placeholder: string
-  if (network.includes("chora")) {
+  if (network === undefined || network.includes("chora")) {
     placeholder = choraPlaceholder
   } else {
     placeholder = regenPlaceholder

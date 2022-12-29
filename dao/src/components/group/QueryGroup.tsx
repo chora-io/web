@@ -13,7 +13,6 @@ const queryGroup = "/cosmos/group/v1/group_info"
 
 const QueryGroup = () => {
 
-  // @ts-ignore
   const { chainInfo } = useContext(WalletContext)
 
   // form input

@@ -15,12 +15,11 @@ const regenMetadataPlaceholder = "regen:13toVfvC2YxrrfSXWB5h2BGHiXZURsKxWUz72uDR
 
 const InputMembers = ({ label, members, setMembers }: any) => {
 
-  // @ts-ignore
   const { network } = useContext(WalletContext)
 
   let addressPlaceholder: string
   let metadataPlaceholder: string
-  if (network.includes("chora")) {
+  if (network === undefined || network.includes("chora")) {
     addressPlaceholder = choraAddressPlaceholder
     metadataPlaceholder = choraMetadataPlaceholder
   } else {

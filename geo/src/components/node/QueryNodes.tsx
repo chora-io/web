@@ -3,21 +3,16 @@ import { useContext, useState } from "react"
 
 import { WalletContext } from "../../contexts/WalletContext"
 
-import InputAddress from "../InputAddress"
 import Result from "../Result"
 import SelectNetwork from "../SelectNetwork"
 
-import * as styles from "./QueryNode.module.css"
+import * as styles from "./QueryNodes.module.css"
 
-const queryNodeByCurator = "/chora/geonode/v1/node-by-curator"
+const queryNodes = "/chora/geonode/v1/nodes"
 
-const QueryNodeByCurator = () => {
+const QueryNodes = () => {
 
-  // @ts-ignore
   const { chainInfo } = useContext(WalletContext)
-
-  // form input
-  const [curator, setCurator] = useState<string>("")
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -29,7 +24,7 @@ const QueryNodeByCurator = () => {
     setError("")
     setSuccess("")
 
-    fetch(chainInfo.rest + queryNodeByCurator + "/" + curator)
+    fetch(chainInfo.rest + queryNodes)
       .then(res => res.json())
       .then(data => {
         if (data.code) {
@@ -47,13 +42,7 @@ const QueryNodeByCurator = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputAddress
-            id="node-curator"
-            label="node curator"
-            address={curator}
-            setAddress={setCurator}
-          />
-          <SelectNetwork withLabel={true} />
+          <SelectNetwork />
           <button type="submit">
             {"search"}
           </button>
@@ -67,4 +56,4 @@ const QueryNodeByCurator = () => {
   )
 }
 
-export default QueryNodeByCurator
+export default QueryNodes

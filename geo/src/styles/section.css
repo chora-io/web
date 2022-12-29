@@ -3,16 +3,17 @@
 .section {
   background: rgba(20, 20, 20, 0.5);
   box-shadow: 0 0 4px rgba(100, 100, 100, 0.5);
+  margin: 4em 0;
   width: 70vw;
 }
 
-.section div {
+.section > div {
   box-shadow: 0 0 2px rgba(100, 100, 100, 0.5);
   margin: 2px;
   padding: 2em;
 }
 
-.section div:first-child {
+.section > div:first-child {
   background: rgba(20, 20, 20, 0.5);
   color: var(--color-primary);
   font-weight: 500;

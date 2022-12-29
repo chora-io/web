@@ -34,7 +34,6 @@ const initialPolicy = {
 
 const MsgCreateGroupPolicyView = () => {
 
-  // @ts-ignore
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // form input
@@ -63,7 +62,7 @@ const MsgCreateGroupPolicyView = () => {
 
     let decisionPolicy: any
 
-    if (policy.threshold != "") {
+    if (policy.threshold !== "") {
       decisionPolicy = {
         typeUrl: "/cosmos.group.v1.ThresholdDecisionPolicy",
         value: ThresholdDecisionPolicy.encode({
@@ -71,7 +70,7 @@ const MsgCreateGroupPolicyView = () => {
           windows: windows,
         }).finish(),
       }
-    } else if (policy.percentage != "") {
+    } else if (policy.percentage !== "") {
       decisionPolicy = {
         typeUrl: "/cosmos.group.v1.PercentageDecisionPolicy",
         value: PercentageDecisionPolicy.encode({

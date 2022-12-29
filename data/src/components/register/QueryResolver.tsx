@@ -13,7 +13,6 @@ const queryResolver = "/regen/data/v1/resolver"
 
 const QueryResolver = () => {
 
-  // @ts-ignore
   const { chainInfo } = useContext(WalletContext)
 
   const [id, setId] = useState("")

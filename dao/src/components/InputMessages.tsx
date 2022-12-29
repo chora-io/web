@@ -39,11 +39,10 @@ const regenPlaceholder = `[
 
 const InputMessages = ({ id, label, messages, setMessages }: any) => {
 
-  // @ts-ignore
   const { network } = useContext(WalletContext)
 
   let placeholder: string
-  if (network.includes("chora")) {
+  if (network === undefined || network.includes("chora")) {
     placeholder = choraPlaceholder
   } else {
     placeholder = regenPlaceholder

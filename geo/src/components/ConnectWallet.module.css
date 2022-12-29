@@ -19,7 +19,7 @@
 .address {
   align-items: center;
   display: flex;
-  margin-left: 1em;
+  margin: 0 1em;
 }
 
 /* form */
@@ -45,7 +45,7 @@
   padding: 0.5em;
   text-align: center;
   transition: 0.25s;
-  width: 150px;
+  width: 110px;
 }
 
 .form button.connected {

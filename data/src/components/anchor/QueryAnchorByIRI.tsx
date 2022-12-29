@@ -13,7 +13,6 @@ const queryAnchorByIRI = "/regen/data/v1/anchor-by-iri"
 
 const QueryAnchorByIRI = () => {
 
-  // @ts-ignore
   const { chainInfo } = useContext(WalletContext)
 
   const [iri, setIri] = useState("")

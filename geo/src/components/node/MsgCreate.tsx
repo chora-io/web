@@ -12,7 +12,6 @@ import * as styles from "./MsgCreate.module.css"
 
 const MsgCreateView = () => {
 
-  // @ts-ignore
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // form input

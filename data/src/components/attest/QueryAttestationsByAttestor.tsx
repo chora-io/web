@@ -14,7 +14,6 @@ const regenAttestorPlaceholder = "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx"
 
 const QueryAttestationsByAttestor = () => {
 
-  // @ts-ignore
   const { chainInfo, network } = useContext(WalletContext)
 
   const [attestor, setAttestor] = useState("")
@@ -22,7 +21,7 @@ const QueryAttestationsByAttestor = () => {
   const [success, setSuccess] = useState("")
 
   let attestorPlaceholder: string
-  if (network.includes("chora")) {
+  if (network === undefined || network.includes("chora")) {
     attestorPlaceholder = choraAttestorPlaceholder
   } else {
     attestorPlaceholder = regenAttestorPlaceholder
