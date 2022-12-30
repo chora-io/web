@@ -2,6 +2,7 @@ import { Buffer } from "buffer"
 
 import { SignMode } from "@keplr-wallet/proto-types/cosmos/tx/signing/v1beta1/signing"
 import { AuthInfo, TxBody, TxRaw } from "@keplr-wallet/proto-types/cosmos/tx/v1beta1/tx"
+import { Any } from "@keplr-wallet/proto-types/google/protobuf/any"
 import { BroadcastMode, SignDoc } from "@keplr-wallet/types"
 
 const queryAccount = "/cosmos/auth/v1beta1/accounts"
@@ -48,7 +49,7 @@ export const signAndBroadcast = async (chainInfo, address, msg, encMsg) => {
   const authInfoBytes = AuthInfo.encode({
     signerInfos: [
       {
-        publicKey: undefined,
+        publicKey: Any.encode(account.pub_key).finish(),
         modeInfo: {
           single: {
             mode: SignMode.SIGN_MODE_DIRECT
@@ -76,7 +77,7 @@ export const signAndBroadcast = async (chainInfo, address, msg, encMsg) => {
     bodyBytes,
     authInfoBytes,
     chainId: chainInfo.chainId,
-    accountNumber: account.number,
+    accountNumber: account.account_number,
   }
 
   // transaction hash

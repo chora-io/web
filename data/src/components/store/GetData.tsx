@@ -6,8 +6,8 @@ import Result from "../Result"
 
 import * as styles from "./GetData.module.css"
 
-const localServerUrl = "http://localhost:3000/data"
-const remoteServerUrl = "https://server.chora.io/data"
+const localServerUrl = "http://localhost:3000"
+const remoteServerUrl = "https://server.chora.io"
 
 const GetData = () => {
 

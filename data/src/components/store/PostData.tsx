@@ -3,18 +3,20 @@ import { useEffect, useState } from "react"
 import * as jsonld from "jsonld"
 
 import InputJSON from "../InputJSON"
+import InputsFromJSON from "../InputsFromJSON"
 import Result from "../Result"
 import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
 import SelectGraphCanon from "../SelectGraphCanon"
 import SelectGraphMerkle from "../SelectGraphMerkle"
+import SelectInput from "../SelectInput"
 import SelectSchemaContext from "../SelectSchemaContext"
 
 import * as styles from "./PostData.module.css"
 
 const contextUrl = "https://schema.chora.io/contexts/index.jsonld"
 
-const localServerUrl = "http://localhost:3000/data"
-const remoteServerUrl = "https://server.chora.io/data"
+const localServerUrl = "http://localhost:3000"
+const remoteServerUrl = "https://server.chora.io"
 
 const PostData = () => {
 
@@ -25,6 +27,9 @@ const PostData = () => {
       window.location.hostname == "localhost"
     )
   ) { serverUrl = localServerUrl }
+
+  // input option
+  const [input, setInput] = useState("form")
 
   // data schema
   const [context, setContext] = useState<string>("")
@@ -156,27 +161,54 @@ const PostData = () => {
 
   return (
     <>
+      <SelectInput
+        input={input}
+        setInput={setInput}
+        setError={setError}
+        setSuccess={setJson}
+      />
       <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <SelectSchemaContext
-            context={context}
-            contexts={contexts}
-            setContext={handleSetContext}
-          />
-          <InputJSON
-            json={json}
-            placeholder={example}
-            setJson={handleSetJson}
-            useTemplate={handleGenJson}
-            showUseTemplate={context.length > 0}
-          />
-          <SelectDigestAlgorithm />
-          <SelectGraphCanon />
-          <SelectGraphMerkle />
-          <button type="submit">
-            {"post data"}
-          </button>
-        </form>
+        {input == "form" ? (
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <SelectSchemaContext
+              context={context}
+              contexts={contexts}
+              setContext={handleSetContext}
+            />
+            <InputsFromJSON
+              example={example}
+              json={json}
+              setJson={setJson}
+            />
+            <SelectDigestAlgorithm />
+            <SelectGraphCanon />
+            <SelectGraphMerkle />
+            <button type="submit">
+              {"post data"}
+            </button>
+          </form>
+        ) : (
+          <form className={styles.form} onSubmit={handleSubmit}>
+            <SelectSchemaContext
+              context={context}
+              contexts={contexts}
+              setContext={handleSetContext}
+            />
+            <InputJSON
+              json={json}
+              placeholder={example}
+              setJson={handleSetJson}
+              useTemplate={handleGenJson}
+              showUseTemplate={context.length > 0}
+            />
+            <SelectDigestAlgorithm />
+            <SelectGraphCanon />
+            <SelectGraphMerkle />
+            <button type="submit">
+              {"post data"}
+            </button>
+          </form>
+        )}
       </div>
       <Result
         error={error}

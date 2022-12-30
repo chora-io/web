@@ -3,8 +3,8 @@ import { useEffect, useState } from "react"
 
 import * as styles from "./NodeJSON.module.css"
 
-const localServerUrl = "http://localhost:3000/data"
-const remoteServerUrl = "https://server.chora.io/data"
+const localServerUrl = "http://localhost:3000"
+const remoteServerUrl = "https://server.chora.io"
 
 const NodeJSON = ({ iri }) => {
 
