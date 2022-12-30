@@ -29,7 +29,7 @@ const NodeJSON = ({ iri }) => {
         if (res.error) {
           setError(res.error)
           setJSON(null)
-        } else if (res.context !== "https://schema.chora.io/contexts/place.jsonld") {
+        } else if (res.context !== "https://schema.chora.io/contexts/geonode.jsonld") {
           setError("unsupported metadata schema")
           setJSON(null)
         } else {

@@ -4,7 +4,8 @@ import Main from "../../layouts/Main"
 import Seo from "../../components/Seo"
 
 import MsgCreate from "../../components/node/MsgCreate"
-import MsgUpdate from "../../components/node/MsgUpdate"
+import MsgUpdateCurator from "../../components/node/MsgUpdateCurator"
+import MsgUpdateMetadata from "../../components/node/MsgUpdateMetadata"
 import QueryNode from "../../components/node/QueryNode"
 import QueryNodes from "../../components/node/QueryNodes"
 import QueryNodesByCurator from "../../components/node/QueryNodesByCurator"
@@ -23,9 +24,15 @@ const Node = () => (
         </div>
         <div className={styles.section}>
           <div>
-            {"update node"}
+            {"update node curator"}
           </div>
-          <MsgUpdate />
+          <MsgUpdateCurator />
+        </div>
+        <div className={styles.section}>
+          <div>
+            {"update node metadata"}
+          </div>
+          <MsgUpdateMetadata />
         </div>
         <div className={styles.section}>
           <div>

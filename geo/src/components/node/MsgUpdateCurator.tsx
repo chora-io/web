@@ -3,22 +3,22 @@ import { useContext, useState } from "react"
 import * as Long from "long"
 
 import { WalletContext } from "../../contexts/WalletContext"
-import { MsgUpdate } from "../../../api/chora/geonode/v1/msg"
+import { MsgUpdateCurator } from "../../../api/chora/geonode/v1/msg"
 import { signAndBroadcast } from "../../utils/tx"
 
+import InputAddress from "../InputAddress"
 import InputNumber from "../InputNumber"
-import InputMetadata from "../InputMetadata"
 import ResultTx from "../ResultTx"
 
-import * as styles from "./MsgUpdate.module.css"
+import * as styles from "./MsgUpdateMetadata.module.css"
 
-const MsgUpdateView = () => {
+const MsgUpdateCuratorView = () => {
 
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // form input
   const [id, setId] = useState<string>("")
-  const [metadata, setMetadata] = useState<string>("")
+  const [curator, setCurator] = useState<string>("")
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -31,13 +31,13 @@ const MsgUpdateView = () => {
     setSuccess("")
 
     const msg = {
-      $type: "chora.geonode.v1.MsgUpdate",
-      curator: wallet.bech32Address,
+      $type: "chora.geonode.v1.MsgUpdateCurator",
       id: Long.fromString(id),
-      newMetadata: metadata,
-    } as MsgUpdate
+      curator: wallet.bech32Address,
+      newCurator: curator,
+    } as MsgUpdateCurator
 
-    const encMsg = MsgUpdate.encode(msg).finish()
+    const encMsg = MsgUpdateCurator.encode(msg).finish()
 
     await signAndBroadcast(chainInfo, wallet.bech32Address, msg, encMsg)
       .then(res => {
@@ -57,11 +57,11 @@ const MsgUpdateView = () => {
             number={id}
             setNumber={setId}
           />
-          <InputMetadata
-            id="new-metadata"
-            label="new metadata"
-            metadata={metadata}
-            setMetadata={setMetadata}
+          <InputAddress
+            id="new-curator"
+            label="new curator"
+            address={curator}
+            setAddress={setCurator}
           />
           <button type="submit">
             {"submit"}
@@ -77,4 +77,4 @@ const MsgUpdateView = () => {
   )
 }
 
-export default MsgUpdateView
+export default MsgUpdateCuratorView
