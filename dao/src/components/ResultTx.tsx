@@ -8,16 +8,20 @@ const ResultTx = ({ error, rest, success }: any) => {
   const txUrl = rest + "/" + queryTx + "/" + success
   return (
     <>
-      {error !== undefined && error !== "" && (
-        <div className={styles.error}>
-          {error}
+      {error && (
+        <div>
+          <pre className={styles.error}>
+            {error}
+          </pre>
         </div>
       )}
-      {success !== undefined && success !== "" && (
+      {success && (
         <div>
-          <a href={txUrl}>
-            {txUrl}
-          </a>
+          <pre>
+            <a href={txUrl}>
+              {txUrl}
+            </a>
+          </pre>
         </div>
       )}
     </>
