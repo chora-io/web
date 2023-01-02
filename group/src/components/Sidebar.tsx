@@ -13,7 +13,10 @@ const Sidebar = () => {
           <Link to="/" activeStyle={activeStyle}>{"home"}</Link>
         </li>
         <li>
-          <Link to="/group" activeStyle={activeStyle}>{"group"}</Link>
+          <Link to="/create" activeStyle={activeStyle}>{"create"}</Link>
+        </li>
+        <li>
+          <Link to="/update" activeStyle={activeStyle}>{"update"}</Link>
         </li>
         <li>
           <Link to="/policy" activeStyle={activeStyle}>{"policy"}</Link>

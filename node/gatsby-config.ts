@@ -2,12 +2,12 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
-  pathPrefix: `/dao`,
+  pathPrefix: `/node`,
   siteMetadata: {
-    title: `dao | dao creation and management`,
-    description: `dao creation and management.`,
+    title: `node | node demo application`,
+    description: `node demo application.`,
     author: `@choraio`,
-    siteUrl: `https://chora.io/dao`,
+    siteUrl: `https://chora.io/node`,
   },
   plugins: [
     `gatsby-plugin-image`,

@@ -2,12 +2,12 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
-  pathPrefix: `/geo`,
+  pathPrefix: `/group`,
   siteMetadata: {
-    title: `geo | geospatial node management`,
-    description: `geospatial node management.`,
+    title: `group | group demo application`,
+    description: `group demo application.`,
     author: `@choraio`,
-    siteUrl: `https://chora.io/geo`,
+    siteUrl: `https://chora.io/group`,
   },
   plugins: [
     `gatsby-plugin-image`,

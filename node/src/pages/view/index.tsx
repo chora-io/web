@@ -3,11 +3,11 @@ import * as React from "react"
 import Main from "../../layouts/Main"
 import Seo from "../../components/Seo"
 
-import ViewNodes from "../../components/nodes/ViewNodes"
+import ViewNodes from "../../components/view/ViewNodes"
 
 import * as styles from "./index.module.css"
 
-const Nodes = () => (
+const View = () => (
   <Main>
     <div className={styles.page}>
       <div>
@@ -24,4 +24,4 @@ const Nodes = () => (
 
 export const Head = () => <Seo title="" />
 
-export default Nodes
+export default View

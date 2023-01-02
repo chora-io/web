@@ -9,7 +9,7 @@ const Index = () => (
   <Main>
     <div className={styles.page} >
       <h1>
-        {"dao creation and management"}
+        {"node demo application"}
       </h1>
     </div>
   </Main>

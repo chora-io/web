@@ -9,7 +9,7 @@ const Index = () => (
   <Main>
     <div className={styles.page} >
       <h1>
-        {"geospatial node management"}
+        {"group demo application"}
       </h1>
     </div>
   </Main>

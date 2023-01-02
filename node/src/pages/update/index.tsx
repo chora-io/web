@@ -3,25 +3,18 @@ import * as React from "react"
 import Main from "../../layouts/Main"
 import Seo from "../../components/Seo"
 
-import MsgCreate from "../../components/node/MsgCreate"
-import MsgUpdateCurator from "../../components/node/MsgUpdateCurator"
-import MsgUpdateMetadata from "../../components/node/MsgUpdateMetadata"
-import QueryNode from "../../components/node/QueryNode"
-import QueryNodes from "../../components/node/QueryNodes"
-import QueryNodesByCurator from "../../components/node/QueryNodesByCurator"
+import MsgUpdateCurator from "../../components/update/MsgUpdateCurator"
+import MsgUpdateMetadata from "../../components/update/MsgUpdateMetadata"
+import QueryNode from "../../components/create/QueryNode"
+import QueryNodes from "../../components/create/QueryNodes"
+import QueryNodesByCurator from "../../components/create/QueryNodesByCurator"
 
 import * as styles from "./index.module.css"
 
-const Node = () => (
+const Update = () => (
   <Main>
     <div className={styles.page}>
       <div>
-        <div className={styles.section}>
-          <div>
-            {"create node"}
-          </div>
-          <MsgCreate />
-        </div>
         <div className={styles.section}>
           <div>
             {"update node curator"}
@@ -59,4 +52,4 @@ const Node = () => (
 
 export const Head = () => <Seo title="" />
 
-export default Node
+export default Update

@@ -33,17 +33,17 @@ const Header = () => {
           <ul>
             <li>
               <a href={"http://" + window.location.hostname + ":8001"}>
-                {"dao"}
-              </a>
-            </li>
-            <li>
-              <a href={"http://" + window.location.hostname + ":8002"}>
                 {"data"}
               </a>
             </li>
             <li>
+              <a href={"http://" + window.location.hostname + ":8002"}>
+                {"group"}
+              </a>
+            </li>
+            <li>
               <a href={"http://" + window.location.hostname + ":8003"}>
-                {"geo"}
+                {"node"}
               </a>
             </li>
             <li>
@@ -55,18 +55,18 @@ const Header = () => {
         ) : (
           <ul>
             <li>
-              <a href={"/dao"}>
-                {"dao"}
-              </a>
-            </li>
-            <li>
               <a href={"/data"}>
                 {"data"}
               </a>
             </li>
             <li>
-              <a href={"/geo"}>
-                {"geo"}
+              <a href={"/group"}>
+                {"group"}
+              </a>
+            </li>
+            <li>
+              <a href={"/node"}>
+                {"node"}
               </a>
             </li>
             <li>

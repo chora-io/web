@@ -1,7 +1,7 @@
 {
   "name": "data",
   "private": true,
-  "description": "data anchoring and attestations",
+  "description": "data demo application",
   "version": "0.0.0",
   "homepage": "https://data.chora.io",
   "bugs": {
@@ -17,8 +17,8 @@
     "format": "echo \"format not yet configured\"",
     "test": "echo \"test not yet configured\"",
     "build": "node_modules/.bin/gatsby build --prefix-paths",
-    "start": "node_modules/.bin/gatsby develop -p 8002",
-    "serve": "node_modules/.bin/gatsby serve -p 8002",
+    "start": "node_modules/.bin/gatsby develop -p 8001",
+    "serve": "node_modules/.bin/gatsby serve -p 8001",
     "clean": "node_modules/.bin/gatsby clean"
   },
   "dependencies": {

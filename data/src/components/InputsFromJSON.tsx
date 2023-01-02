@@ -46,7 +46,7 @@ const InputsFromJSON = ({ example, json, setJson }: any) => {
           const i = inputs.findIndex(e => e.id === p)
 
           // update id and label of nested property
-          inputs[i].id = k + ":" + inputs[i].id
+          inputs[i].id = k + "/" + inputs[i].id
           inputs[i].label = k + " " + inputs[i].label
         }
       }
@@ -59,10 +59,10 @@ const InputsFromJSON = ({ example, json, setJson }: any) => {
     let obj = JSON.parse(json || `{"@context": "${parsedExample["@context"]}"}`)
 
     // check nested property
-    if (id.includes(":")) {
+    if (id.includes("/")) {
 
       // get nested ids
-      const ids = id.split(":")
+      const ids = id.split("/")
 
       // set nested property
       if (obj[ids[0]] !== undefined) {
