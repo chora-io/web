@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useContext, useState } from "react"
 
-import { WalletContext } from "../../contexts/WalletContext"
+import { WalletContext } from "chora"
 
 import InputHash from "../InputHash"
 import InputHashJSON from "../InputHashJSON"

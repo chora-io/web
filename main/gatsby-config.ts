@@ -14,7 +14,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/assets/images`,
+        path: `${__dirname}/../chora/assets/images`,
       },
     },
     `gatsby-transformer-sharp`,
@@ -27,7 +27,7 @@ module.exports = {
         start_url: `/`,
         background_color: `#000`,
         display: `standalone`,
-        icon: `src/assets/images/favicon.ico`,
+        icon: `${__dirname}/../chora/assets/images/favicon.ico`,
       },
     },
   ],

@@ -13,7 +13,7 @@
     "strict": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
- },
+  },
   "exclude": [
     "node_modules"
   ]

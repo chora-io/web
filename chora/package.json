@@ -1,0 +1,38 @@
+{
+  "name": "chora",
+  "private": true,
+  "description": "chora webkit",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "index.ts",
+  "homepage": "https://chora.io",
+  "bugs": {
+    "url": "https://github.com/choraio/web/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/choraio/web"
+  },
+  "scripts": {
+    "lint": "echo 'lint not configured'",
+    "format": "echo 'format not configured'",
+    "test": "echo 'test not configured'",
+    "build": "ts-node ./build.ts",
+    "start": "echo 'start not configured'",
+    "serve": "echo 'serve not configured'",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@keplr-wallet/proto-types": "^0.11.17",
+    "@keplr-wallet/types": "^0.11.17",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "rollup": "^3.9.1",
+    "rollup-plugin-postcss": "^4.0.2",
+    "ts-node": "^10.9.1"
+  }
+}

@@ -1,13 +1,13 @@
 import * as React from "react"
 import { useContext, useState } from "react"
 
-import { WalletContext } from "../contexts/WalletContext"
+import { WalletContext } from "chora"
 
 import {
   choraTestnet,
   regenRedwood,
   regenHambach,
-} from "../utils/chains"
+} from "chora/utils/chains"
 
 import * as styles from "./Faucet.module.css"
 

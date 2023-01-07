@@ -12,15 +12,16 @@
     "url": "https://github.com/choraio/web"
   },
   "scripts": {
-    "lint": "echo \"lint not yet configured\"",
-    "format": "echo \"format not yet configured\"",
-    "test": "echo \"test not yet configured\"",
+    "lint": "echo 'lint not configured'",
+    "format": "echo 'format not configured'",
+    "test": "echo 'test not configured'",
     "build": "node_modules/.bin/gatsby build",
     "start": "node_modules/.bin/gatsby develop",
     "serve": "node_modules/.bin/gatsby serve",
     "clean": "node_modules/.bin/gatsby clean"
   },
   "dependencies": {
+    "chora": "./chora",
     "gatsby": "^5.0.0",
     "gatsby-plugin-image": "^3.0.0",
     "gatsby-plugin-manifest": "^5.0.0",

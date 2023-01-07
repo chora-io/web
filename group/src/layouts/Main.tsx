@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { WalletContextProvider } from "../contexts/WalletContext"
+import { WalletContextProvider } from "chora"
 
 import Header from "../components/Header"
 import Sidebar from "../components/Sidebar"

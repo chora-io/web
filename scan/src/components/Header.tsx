@@ -1,7 +1,8 @@
 import * as React from "react"
 
+import icon from "chora/assets/images/chora_dark_icon.png"
+
 import * as styles from "./Header.module.css"
-import icon from "../assets/images/chora_dark_icon.png"
 
 const Header = () => {
 

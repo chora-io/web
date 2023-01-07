@@ -2,9 +2,10 @@ import * as React from "react"
 import { useContext, useState } from "react"
 import * as Long from "long"
 
-import { WalletContext } from "../../contexts/WalletContext"
+import { WalletContext } from "chora"
+import { signAndBroadcast } from "chora/utils/tx"
+
 import { MsgUpdateCurator } from "../../../api/chora/geonode/v1/msg"
-import { signAndBroadcast } from "../../utils/tx"
 
 import InputAddress from "../InputAddress"
 import InputNumber from "../InputNumber"

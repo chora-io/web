@@ -2,10 +2,11 @@ import * as React from "react"
 import { useContext, useState } from "react"
 import * as Long from "long"
 
-import { WalletContext } from "../../contexts/WalletContext"
+import { WalletContext } from "chora"
+import { signAndBroadcast } from "chora/utils/tx"
+
 import { MsgUpdateGroupPolicyDecisionPolicy } from "../../../api/cosmos/group/v1/tx"
 import { PercentageDecisionPolicy, ThresholdDecisionPolicy } from "../../../api/cosmos/group/v1/types"
-import { signAndBroadcast } from "../../utils/tx"
 
 import InputAddress from "../InputAddress"
 import InputPolicy from "../InputPolicy"

@@ -1,9 +1,10 @@
 import * as React from "react"
 
+import icon from "chora/assets/images/chora_dark_icon.png"
+
 import ConnectWallet from "./ConnectWallet"
 
 import * as styles from "./Header.module.css"
-import icon from "../assets/images/chora_dark_icon.png"
 
 const Header = () => {
 

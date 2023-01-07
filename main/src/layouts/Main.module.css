@@ -1,13 +1,13 @@
 @font-face {
   src: local('Ubuntu'),
-    url('../assets/font/Ubuntu-Bold.ttf'),
-    url('../assets/font/Ubuntu-BoldItalic.ttf'),
-    url('../assets/font/Ubuntu-Italic.ttf'),
-    url('../assets/font/Ubuntu-Light.ttf'),
-    url('../assets/font/Ubuntu-LightItalic.ttf'),
-    url('../assets/font/Ubuntu-Medium.ttf'),
-    url('../assets/font/Ubuntu-MediumItalic.ttf'),
-    url('../assets/font/Ubuntu-Regular.ttf');
+    url('chora/assets/font/Ubuntu-Bold.ttf'),
+    url('chora/assets/font/Ubuntu-BoldItalic.ttf'),
+    url('chora/assets/font/Ubuntu-Italic.ttf'),
+    url('chora/assets/font/Ubuntu-Light.ttf'),
+    url('chora/assets/font/Ubuntu-LightItalic.ttf'),
+    url('chora/assets/font/Ubuntu-Medium.ttf'),
+    url('chora/assets/font/Ubuntu-MediumItalic.ttf'),
+    url('chora/assets/font/Ubuntu-Regular.ttf');
 }
 
 :root {

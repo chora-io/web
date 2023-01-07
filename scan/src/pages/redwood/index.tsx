@@ -7,7 +7,7 @@ import Dashboard from "../../components/dash/Dashboard"
 
 import * as styles from "./index.module.css"
 
-import { regenRedwood } from "../../utils/chains"
+import { regenRedwood } from "chora/utils/chains"
 
 const Redwood = () => (
   <Main>

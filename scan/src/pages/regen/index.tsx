@@ -7,7 +7,7 @@ import Dashboard from "../../components/dash/Dashboard"
 
 import * as styles from "./index.module.css"
 
-import { regenMainnet } from "../../utils/chains"
+import { regenMainnet } from "chora/utils/chains"
 
 const Regen = () => (
   <Main>

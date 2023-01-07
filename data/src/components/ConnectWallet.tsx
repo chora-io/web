@@ -7,7 +7,7 @@ import {
   cachedNetworkKey,
   defaultNetwork,
   WalletContext,
-} from "../contexts/WalletContext"
+} from "chora"
 
 import SelectNetwork from "./SelectNetwork"
 

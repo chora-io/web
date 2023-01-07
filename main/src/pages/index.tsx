@@ -1,9 +1,9 @@
 import * as React from "react"
 
+import Background from "chora/components/Background"
+
 import Main from "../layouts/Main"
 import Seo from "../components/Seo"
-
-import Background from "../components/Background"
 
 import * as styles from "./index.module.css"
 

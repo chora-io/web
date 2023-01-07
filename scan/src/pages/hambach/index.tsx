@@ -7,7 +7,7 @@ import Dashboard from "../../components/dash/Dashboard"
 
 import * as styles from "./index.module.css"
 
-import { regenHambach } from "../../utils/chains"
+import { regenHambach } from "chora/utils/chains"
 
 const Hambach = () => (
   <Main>

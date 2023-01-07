@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useContext, useEffect, useState } from "react"
 
-import { WalletContext } from "../../contexts/WalletContext"
+import { WalletContext } from "chora"
 
 import NodeJSON from "./NodeJSON"
 import Result from "../Result"

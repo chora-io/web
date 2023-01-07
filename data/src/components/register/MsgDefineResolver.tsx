@@ -1,9 +1,10 @@
 import * as React from "react"
 import { useContext, useState } from "react"
 
-import { WalletContext } from "../../contexts/WalletContext"
+import { WalletContext } from "chora"
+import { signAndBroadcast } from "chora/utils/tx"
+
 import { MsgDefineResolver } from "../../../api/regen/data/v1/tx"
-import { signAndBroadcast } from "../../utils/tx"
 
 import InputResolverUrl from "../InputResolverUrl"
 import ResultTx from "../ResultTx"

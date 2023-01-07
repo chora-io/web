@@ -9,7 +9,7 @@ import {
   regenMainnet,
   regenRedwood,
   regenHambach,
-} from "../../utils/chains"
+} from "chora/utils/chains"
 
 const Chains = () => {
 

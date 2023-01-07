@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useContext } from "react"
 
-import { WalletContext } from "../contexts/WalletContext"
+import { WalletContext } from "chora"
 
 const choraPlaceholder = "chora:13toVfvC2YxrrfSXWB5h2BGHiXZURsKxWUz72uDRDSPMCrYPguGUXSC.rdf"
 const regenPlaceholder = "regen:13toVfvC2YxrrfSXWB5h2BGHiXZURsKxWUz72uDRDSPMCrYPguGUXSC.rdf"

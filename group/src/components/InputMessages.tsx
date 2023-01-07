@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useContext } from "react"
 
-import { WalletContext } from "../contexts/WalletContext"
+import { WalletContext } from "chora"
 
 import * as styles from "./InputMessages.module.css"
 

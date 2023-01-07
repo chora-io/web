@@ -1,9 +1,10 @@
 import * as React from "react"
 import { useContext, useState } from "react"
 
-import { WalletContext } from "../../contexts/WalletContext"
+import { WalletContext } from "chora"
+import { signAndBroadcast } from "chora/utils/tx"
+
 import { MsgCreateGroup } from "../../../api/cosmos/group/v1/tx"
-import { signAndBroadcast } from "../../utils/tx"
 
 import InputMembers from "../InputMembers"
 import InputMetadata from "../InputMetadata"

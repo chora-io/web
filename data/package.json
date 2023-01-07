@@ -3,7 +3,7 @@
   "private": true,
   "description": "data demo application",
   "version": "0.0.0",
-  "homepage": "https://data.chora.io",
+  "homepage": "https://chora.io",
   "bugs": {
     "url": "https://github.com/choraio/web/issues"
   },
@@ -13,16 +13,20 @@
   },
   "scripts": {
     "proto": "sh ./scripts/protocgen.sh",
-    "lint": "echo \"lint not yet configured\"",
-    "format": "echo \"format not yet configured\"",
-    "test": "echo \"test not yet configured\"",
+    "lint": "echo 'lint not configured'",
+    "format": "echo 'format not configured'",
+    "test": "echo 'test not configured'",
     "build": "node_modules/.bin/gatsby build --prefix-paths",
     "start": "node_modules/.bin/gatsby develop -p 8001",
     "serve": "node_modules/.bin/gatsby serve -p 8001",
     "clean": "node_modules/.bin/gatsby clean"
   },
   "dependencies": {
+    "@keplr-wallet/proto-types": "^0.11.17",
+    "@keplr-wallet/types": "^0.11.17",
+    "@types/jsonld": "^1.5.6",
     "blakejs": "^1.2.1",
+    "chora": "./chora",
     "gatsby": "^5.0.0",
     "gatsby-plugin-image": "^3.0.0",
     "gatsby-plugin-manifest": "^5.0.0",
@@ -34,9 +38,6 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@keplr-wallet/proto-types": "^0.11.17",
-    "@keplr-wallet/types": "^0.11.17",
-    "@types/jsonld": "^1.5.6",
     "ts-proto": "^1.133.0"
   }
 }

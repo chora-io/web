@@ -7,7 +7,7 @@ import Dashboard from "../../components/dash/Dashboard"
 
 import * as styles from "./index.module.css"
 
-import { choraTestnet } from "../../utils/chains"
+import { choraTestnet } from "chora/utils/chains"
 
 const Testnet = () => (
   <Main>

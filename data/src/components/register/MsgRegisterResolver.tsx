@@ -3,9 +3,10 @@ import { useContext, useState } from "react"
 import { Buffer } from "buffer"
 import * as Long from "long"
 
-import { WalletContext } from "../../contexts/WalletContext"
+import { WalletContext } from "chora"
+import { signAndBroadcast } from "chora/utils/tx"
+
 import { MsgRegisterResolver } from "../../../api/regen/data/v1/tx"
-import { signAndBroadcast } from "../../utils/tx"
 
 import InputHash from "../InputHash"
 import InputHashJSON from "../InputHashJSON"
