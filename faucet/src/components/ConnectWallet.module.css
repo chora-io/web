@@ -1,0 +1,55 @@
+/* connect */
+
+.connect {
+  display: flex;
+  margin-right: 2em;
+}
+
+/* error */
+
+.error {
+  align-items: center;
+  display: flex;
+  color: var(--color-error);
+  margin: 1em;
+}
+
+/* address */
+
+.address {
+  align-items: center;
+  display: flex;
+  margin: 0 1em;
+}
+
+/* form */
+
+.form {
+  align-items: center;
+  display: flex;
+}
+
+.form select {
+  background: #111;
+  box-shadow: 0 0 4px rgba(100, 100, 100, 0.5);
+  border: none;
+  color: #FFF;
+  outline: none;
+  margin: 1em;
+  padding: 1em;
+}
+
+.form button {
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.5em;
+  text-align: center;
+  transition: 0.25s;
+  width: 110px;
+}
+
+.form button.connected {
+  background: #111;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+}

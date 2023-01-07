@@ -2,12 +2,12 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
-  pathPrefix: `/scan`,
+  pathPrefix: `/faucet`,
   siteMetadata: {
-    title: `scan | chora chain scanner`,
-    description: `chora chain scanner`,
+    title: `faucet | chora testnet faucet`,
+    description: `chora testnet faucet`,
     author: `@choraio`,
-    siteUrl: `https://chora.io/scan`,
+    siteUrl: `https://chora.io/faucet`,
   },
   plugins: [
     `gatsby-plugin-image`,

@@ -15,6 +15,7 @@ rm -rf public
 # copy public directories
 cp -r main/public public
 cp -r data/public public/data
+cp -r faucet/public public/faucet
 cp -r group/public public/group
 cp -r node/public public/node
 cp -r scan/public public/scan

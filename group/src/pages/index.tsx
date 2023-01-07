@@ -7,7 +7,7 @@ import * as styles from "./index.module.css"
 
 const Index = () => (
   <Main>
-    <div className={styles.page} >
+    <div className={styles.page}>
       <h1>
         {"group demo application"}
       </h1>

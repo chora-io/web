@@ -11,7 +11,7 @@ import { regenHambach } from "../../utils/chains"
 
 const Hambach = () => (
   <Main>
-    <div className={styles.page} >
+    <div className={styles.page}>
       <Dashboard
         chainId={regenHambach.chainId}
         chainName={regenHambach.chainName}

@@ -3,14 +3,14 @@ import * as React from "react"
 import Main from "../layouts/Main"
 import Seo from "../components/Seo"
 
-import Chains from "../components/home/Chains"
+import Faucet from "../components/Faucet"
 
 import * as styles from "./index.module.css"
 
 const Index = () => (
   <Main>
     <div className={styles.page}>
-      <Chains />
+      <Faucet />
     </div>
   </Main>
 )

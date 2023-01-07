@@ -1,9 +1,9 @@
 {
-  "name": "scan",
+  "name": "faucet",
   "private": true,
-  "description": "chora chain scanner",
+  "description": "chora testnet faucet",
   "version": "0.0.0",
-  "homepage": "https://scan.chora.io",
+  "homepage": "https://faucet.chora.io",
   "bugs": {
     "url": "https://github.com/choraio/web/issues"
   },
@@ -16,8 +16,8 @@
     "format": "echo \"format not yet configured\"",
     "test": "echo \"test not yet configured\"",
     "build": "node_modules/.bin/gatsby build --prefix-paths",
-    "start": "node_modules/.bin/gatsby develop -p 8004",
-    "serve": "node_modules/.bin/gatsby serve -p 8004",
+    "start": "node_modules/.bin/gatsby develop -p 8005",
+    "serve": "node_modules/.bin/gatsby serve -p 8005",
     "clean": "node_modules/.bin/gatsby clean"
   },
   "dependencies": {

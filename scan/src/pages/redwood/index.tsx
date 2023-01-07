@@ -11,7 +11,7 @@ import { regenRedwood } from "../../utils/chains"
 
 const Redwood = () => (
   <Main>
-    <div className={styles.page} >
+    <div className={styles.page}>
       <Dashboard
         chainId={regenRedwood.chainId}
         chainName={regenRedwood.chainName}

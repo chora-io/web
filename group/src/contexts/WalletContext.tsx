@@ -50,6 +50,9 @@ const WalletContextProvider = (props: any) => {
 
     if (cachedNetwork === "" && network === undefined) {
       setNetwork(defaultNetwork)
+
+      // cache default network to initialize local storage
+      localStorage.setItem(cachedNetworkKey, defaultNetwork)
     }
 
     if (cachedNetwork !== "" && cachedNetwork !== chainInfo?.chainId) {

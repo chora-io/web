@@ -11,7 +11,7 @@ import { choraTestnet } from "../../utils/chains"
 
 const Testnet = () => (
   <Main>
-    <div className={styles.page} >
+    <div className={styles.page}>
       <Dashboard
         chainId={choraTestnet.chainId}
         chainName={choraTestnet.chainName}

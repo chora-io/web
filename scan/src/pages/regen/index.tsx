@@ -11,7 +11,7 @@ import { regenMainnet } from "../../utils/chains"
 
 const Regen = () => (
   <Main>
-    <div className={styles.page} >
+    <div className={styles.page}>
       <Dashboard
         chainId={regenMainnet.chainId}
         chainName={regenMainnet.chainName}
