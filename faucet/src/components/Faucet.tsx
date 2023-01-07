@@ -37,13 +37,13 @@ const Faucet = () => {
 
     switch (chainInfo.chainId) {
       case choraTestnet.chainId:
-        faucetUrl = "https://testnet.chora.io/faucet"
+        faucetUrl = "https://testnet.chora.io/faucet/"
         break
       case regenRedwood.chainId:
-        faucetUrl = "https://redwood.chora.io/faucet"
+        faucetUrl = "https://redwood.chora.io/faucet/"
         break
       case regenHambach.chainId:
-        faucetUrl = "https://hambach.chora.io/faucet"
+        faucetUrl = "https://hambach.chora.io/faucet/"
         break
     }
 
@@ -53,8 +53,8 @@ const Faucet = () => {
     })
       .then(res => res.json())
       .then(data => {
-        if (data.code) {
-          setError(data.message)
+        if (data.error) {
+          setError(data.error)
         } else {
           setSuccess(JSON.stringify(data, null, "  "))
         }
