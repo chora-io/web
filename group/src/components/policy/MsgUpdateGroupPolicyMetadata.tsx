@@ -3,18 +3,17 @@ import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
 import { signAndBroadcast } from "chora/utils/tx"
+import InputAddress from "chora/components/InputAddress"
+import InputIRI from "chora/components/InputIRI"
+import ResultTx from "chora/components/ResultTx"
 
 import { MsgUpdateGroupPolicyMetadata } from "../../../api/cosmos/group/v1/tx"
-
-import InputAddress from "../InputAddress"
-import InputMetadata from "../InputMetadata"
-import ResultTx from "../ResultTx"
 
 import * as styles from "./MsgCreateGroupPolicy.module.css"
 
 const MsgUpdateGroupPolicyMetadataView = () => {
 
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // form input
   const [address, setAddress] = useState<string>("")
@@ -54,15 +53,17 @@ const MsgUpdateGroupPolicyMetadataView = () => {
           <InputAddress
             id="policy-address"
             label="policy address"
+            network={network}
             long={true}
             address={address}
             setAddress={setAddress}
           />
-          <InputMetadata
+          <InputIRI
             id="new-policy-metadata"
             label="new policy metadata"
-            metadata={metadata}
-            setMetadata={setMetadata}
+            network={network}
+            iri={metadata}
+            setIri={setMetadata}
           />
           <button type="submit">
             {"submit"}

@@ -4,14 +4,14 @@ import * as Long from "long"
 
 import { WalletContext } from "chora"
 import { signAndBroadcast } from "chora/utils/tx"
+import InputIRI from "chora/components/InputIRI"
+import InputNumber from "chora/components/InputNumber"
+import ResultTx from "chora/components/ResultTx"
 
 import { MsgCreateGroupPolicy } from "../../../api/cosmos/group/v1/tx"
 import { PercentageDecisionPolicy, ThresholdDecisionPolicy } from "../../../api/cosmos/group/v1/types"
 
-import InputMetadata from "../InputMetadata"
-import InputNumber from "../InputNumber"
 import InputPolicy from "../InputPolicy"
-import ResultTx from "../ResultTx"
 
 import * as styles from "./MsgCreateGroupPolicy.module.css"
 
@@ -35,7 +35,7 @@ const initialPolicy = {
 
 const MsgCreateGroupPolicyView = () => {
 
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // form input
   const [id, setId] = useState<string>("")
@@ -109,11 +109,12 @@ const MsgCreateGroupPolicyView = () => {
             number={id}
             setNumber={setId}
           />
-          <InputMetadata
+          <InputIRI
             id="policy-metadata"
             label="policy metadata"
-            metadata={metadata}
-            setMetadata={setMetadata}
+            network={network}
+            iri={metadata}
+            setIri={setMetadata}
           />
           <InputPolicy
             label="decision policy"

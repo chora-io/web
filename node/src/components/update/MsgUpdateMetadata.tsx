@@ -4,18 +4,17 @@ import * as Long from "long"
 
 import { WalletContext } from "chora"
 import { signAndBroadcast } from "chora/utils/tx"
+import InputIRI from "chora/components/InputIRI"
+import InputNumber from "chora/components/InputNumber"
+import ResultTx from "chora/components/ResultTx"
 
 import { MsgUpdateMetadata } from "../../../api/chora/geonode/v1/msg"
-
-import InputNumber from "../InputNumber"
-import InputMetadata from "../InputMetadata"
-import ResultTx from "../ResultTx"
 
 import * as styles from "./MsgUpdateMetadata.module.css"
 
 const MsgUpdateMetadataView = () => {
 
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // form input
   const [id, setId] = useState<string>("")
@@ -58,11 +57,12 @@ const MsgUpdateMetadataView = () => {
             number={id}
             setNumber={setId}
           />
-          <InputMetadata
+          <InputIRI
             id="new-metadata"
             label="new metadata"
-            metadata={metadata}
-            setMetadata={setMetadata}
+            network={network}
+            iri={metadata}
+            setIri={setMetadata}
           />
           <button type="submit">
             {"submit"}

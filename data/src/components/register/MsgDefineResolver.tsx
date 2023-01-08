@@ -3,11 +3,10 @@ import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
 import { signAndBroadcast } from "chora/utils/tx"
+import InputURL from "chora/components/InputURL"
+import ResultTx from "chora/components/ResultTx"
 
 import { MsgDefineResolver } from "../../../api/regen/data/v1/tx"
-
-import InputResolverUrl from "../InputResolverUrl"
-import ResultTx from "../ResultTx"
 
 import * as styles from "./MsgDefineResolver.module.css"
 
@@ -48,7 +47,10 @@ const MsgDefineResolverView = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputResolverUrl
+          <InputURL
+            id="resolver-url"
+            label="resolver url"
+            placeholder="https://server.chora.io"
             url={url}
             setUrl={setUrl}
           />

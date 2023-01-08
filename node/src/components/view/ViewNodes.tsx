@@ -2,9 +2,9 @@ import * as React from "react"
 import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
+import Result from "chora/components/Result"
 
 import NodeJSON from "./NodeJSON"
-import Result from "../Result"
 
 import * as styles from "./ViewNodes.module.css"
 

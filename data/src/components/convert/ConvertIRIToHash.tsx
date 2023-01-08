@@ -2,10 +2,9 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-
-import InputIRI from "../InputIRI"
-import Result from "../Result"
-import SelectNetwork from "../SelectNetwork"
+import InputIRI from "chora/components/InputIRI"
+import Result from "chora/components/Result"
+import SelectNetwork from "chora/components/SelectNetwork"
 
 import * as styles from "./ConvertIRIToHash.module.css"
 
@@ -13,7 +12,7 @@ const convertIRIToHash = "/regen/data/v1/convert-iri-to-hash"
 
 const ConvertIRIToHash = () => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network, setNetwork } = useContext(WalletContext)
 
   const [iri, setIri] = useState("")
   const [error, setError] = useState("")
@@ -44,10 +43,14 @@ const ConvertIRIToHash = () => {
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
           <InputIRI
+            network={network}
             iri={iri}
             setIri={setIri}
           />
-          <SelectNetwork withLabel={true} />
+          <SelectNetwork
+            network={network}
+            setNetwork={setNetwork}
+          />
           <button type="submit">
             {"convert"}
           </button>

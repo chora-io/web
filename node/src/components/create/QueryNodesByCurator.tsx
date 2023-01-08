@@ -2,10 +2,9 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-
-import InputAddress from "../InputAddress"
-import Result from "../Result"
-import SelectNetwork from "../SelectNetwork"
+import InputAddress from "chora/components/InputAddress"
+import Result from "chora/components/Result"
+import SelectNetwork from "chora/components/SelectNetwork"
 
 import * as styles from "./QueryNode.module.css"
 
@@ -13,7 +12,7 @@ const queryNodesByCurator = "/chora/geonode/v1/nodes-by-curator"
 
 const QueryNodesByCurator = () => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network, setNetwork } = useContext(WalletContext)
 
   // form input
   const [curator, setCurator] = useState<string>("")
@@ -49,10 +48,14 @@ const QueryNodesByCurator = () => {
           <InputAddress
             id="node-curator"
             label="node curator"
+            network={network}
             address={curator}
             setAddress={setCurator}
           />
-          <SelectNetwork />
+          <SelectNetwork
+            network={network}
+            setNetwork={setNetwork}
+          />
           <button type="submit">
             {"search"}
           </button>

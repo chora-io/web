@@ -4,12 +4,12 @@ import { Buffer } from "buffer"
 
 import { WalletContext } from "chora"
 import { signAndBroadcast } from "chora/utils/tx"
+import ResultTx from "chora/components/ResultTx"
 
 import { MsgAttest } from "../../../api/regen/data/v1/tx"
 
 import InputHash from "../InputHash"
 import InputHashJSON from "../InputHashJSON"
-import ResultTx from "../ResultTx"
 import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
 import SelectGraphCanon from "../SelectGraphCanon"
 import SelectGraphMerkle from "../SelectGraphMerkle"

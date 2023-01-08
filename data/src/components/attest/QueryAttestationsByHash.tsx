@@ -2,15 +2,15 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
+import Result from "chora/components/Result"
+import SelectNetwork from "chora/components/SelectNetwork"
 
 import InputHash from "../InputHash"
 import InputHashJSON from "../InputHashJSON"
-import Result from "../Result"
 import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
 import SelectGraphCanon from "../SelectGraphCanon"
 import SelectGraphMerkle from "../SelectGraphMerkle"
 import SelectInput from "../SelectInput"
-import SelectNetwork from "../SelectNetwork"
 
 import * as styles from "./QueryAttestationsByHash.module.css"
 
@@ -18,7 +18,7 @@ const queryAttestationsByHash = "/regen/data/v1/attestations-by-hash"
 
 const QueryAttestationsByHash = () => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network, setNetwork } = useContext(WalletContext)
 
   // input option
   const [input, setInput] = useState("form")
@@ -99,7 +99,10 @@ const QueryAttestationsByHash = () => {
             <SelectDigestAlgorithm />
             <SelectGraphCanon />
             <SelectGraphMerkle />
-            <SelectNetwork withLabel={true} />
+            <SelectNetwork
+              network={network}
+              setNetwork={setNetwork}
+            />
             <button type="submit">
               {"search"}
             </button>

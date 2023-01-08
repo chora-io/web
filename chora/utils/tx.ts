@@ -3,12 +3,17 @@ import { Buffer } from "buffer"
 import { PubKey } from "@keplr-wallet/proto-types/cosmos/crypto/secp256k1/keys"
 import { SignMode } from "@keplr-wallet/proto-types/cosmos/tx/signing/v1beta1/signing"
 import { AuthInfo, TxBody, TxRaw } from "@keplr-wallet/proto-types/cosmos/tx/v1beta1/tx"
-import { BroadcastMode, SignDoc } from "@keplr-wallet/types"
+import { BroadcastMode, ChainInfo, SignDoc } from "@keplr-wallet/types"
 
 const queryAccount = "/cosmos/auth/v1beta1/accounts"
 
 // signAndBroadcast signs and broadcasts a transaction
-export const signAndBroadcast = async (chainInfo, address, msg, encMsg) => {
+export const signAndBroadcast = async (
+    chainInfo: ChainInfo,
+    address: string,
+    msg: any,
+    encMsg: Uint8Array,
+) => {
 
   // account information
   let account = undefined
@@ -23,6 +28,11 @@ export const signAndBroadcast = async (chainInfo, address, msg, encMsg) => {
         throw Error(res.message)
       }
 
+      // throw error if account is undefined
+      if (res.account === undefined) {
+        throw Error("error fetching account: account is undefined")
+      }
+
       // set account information
       account = res.account
 
@@ -30,6 +40,11 @@ export const signAndBroadcast = async (chainInfo, address, msg, encMsg) => {
     .catch(err => {
       throw Error("error fetching account: " + err.message)
     })
+
+  // throw error if account is undefined
+  if (account === undefined) {
+    throw Error("error fetching account: account is undefined")
+  }
 
   // transaction body bytes
   const bodyBytes = TxBody.encode({
@@ -51,7 +66,7 @@ export const signAndBroadcast = async (chainInfo, address, msg, encMsg) => {
       {
         publicKey: {
           typeUrl: "/cosmos.crypto.secp256k1.PubKey",
-          value: PubKey.encode(account.pub_key).finish(),
+          value: PubKey.encode(account["pub_key"]).finish(),
         },
         modeInfo: {
           single: {
@@ -59,7 +74,7 @@ export const signAndBroadcast = async (chainInfo, address, msg, encMsg) => {
           },
           multi: undefined,
         },
-        sequence: account.sequence,
+        sequence: account["sequence"],
       },
     ],
     fee: {
@@ -70,7 +85,7 @@ export const signAndBroadcast = async (chainInfo, address, msg, encMsg) => {
         },
       ],
       gasLimit: "200000",
-      payer: account.address,
+      payer: account["address"],
       granter: "",
     }
   }).finish()
@@ -80,7 +95,7 @@ export const signAndBroadcast = async (chainInfo, address, msg, encMsg) => {
     bodyBytes,
     authInfoBytes,
     chainId: chainInfo.chainId,
-    accountNumber: account.account_number,
+    accountNumber: account["account_number"],
   }
 
   // transaction hash
@@ -90,10 +105,10 @@ export const signAndBroadcast = async (chainInfo, address, msg, encMsg) => {
   const mode = "block" as BroadcastMode
 
   // signed transaction
-  let signedTx: Uint8Array
+  let signedTx = new Uint8Array(0)
 
   // sign transaction using sign document
-  await window?.keplr?.signDirect(chainInfo.chainId, account.address, signDoc).then(res => {
+  await window?.keplr?.signDirect(chainInfo.chainId, account["address"], signDoc).then(res => {
 
     // encode signed transaction
     signedTx = TxRaw.encode({

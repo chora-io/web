@@ -9,11 +9,11 @@ const placeholder = `{
   }
 }`
 
-const InputHashJSON = ({ json, setJson }: any) => (
-  <label htmlFor="hash-json">
-    {"content hash json"}
+const InputHashJSON = ({ id, label, json, setJson }: any) => (
+  <label htmlFor={id ? id : "content-hash-json"}>
+    {label ? label : "content hash json"}
     <textarea
-      id="hash-json"
+      id={id ? id : "content-hash-json"}
       value={json}
       placeholder={placeholder}
       onChange={event => setJson(event.target.value)}

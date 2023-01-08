@@ -10,7 +10,7 @@ import {
   regenMainnet,
   regenRedwood,
   regenHambach,
-} from "chora/utils/chains"
+} from "../utils/chains"
 
 const cachedAddressKey = "chora-web-address"
 const cachedConnectedKey = "chora-web-connected"
@@ -123,6 +123,9 @@ const WalletContextProvider = (props: any) => {
         case regenHambach.chainId:
           chain = regenHambach
           break
+        default:
+          chain = choraTestnet
+          break
       }
 
       setChainInfo(chain)
@@ -176,7 +179,7 @@ const WalletContextProvider = (props: any) => {
     }
   }
 
-  const handleSetNetwork = (value) => {
+  const handleSetNetwork = (value: string) => {
     setError("")
     setNetwork(value)
     setWallet(undefined)

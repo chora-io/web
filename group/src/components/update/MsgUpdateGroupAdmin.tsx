@@ -4,18 +4,17 @@ import * as Long from "long"
 
 import { WalletContext } from "chora"
 import { signAndBroadcast } from "chora/utils/tx"
+import InputAddress from "chora/components/InputAddress"
+import InputNumber from "chora/components/InputNumber"
+import ResultTx from "chora/components/ResultTx"
 
 import { MsgUpdateGroupAdmin } from "../../../api/cosmos/group/v1/tx"
-
-import InputNumber from "../InputNumber"
-import InputAddress from "../InputAddress"
-import ResultTx from "../ResultTx"
 
 import * as styles from "./MsgUpdateGroupAdmin.module.css"
 
 const MsgUpdateGroupAdminView = () => {
 
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // form input
   const [id, setId] = useState<string>("")
@@ -61,6 +60,7 @@ const MsgUpdateGroupAdminView = () => {
           <InputAddress
             id="new-admin"
             label="new admin"
+            network={network}
             address={admin}
             setAddress={setAdmin}
           />

@@ -2,9 +2,8 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-
-import Result from "../Result"
-import SelectNetwork from "../SelectNetwork"
+import Result from "chora/components/Result"
+import SelectNetwork from "chora/components/SelectNetwork"
 
 import * as styles from "./QueryAttestationsByAttestor.module.css"
 
@@ -14,7 +13,7 @@ const regenAttestorPlaceholder = "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx"
 
 const QueryAttestationsByAttestor = () => {
 
-  const { chainInfo, network } = useContext(WalletContext)
+  const { chainInfo, network, setNetwork } = useContext(WalletContext)
 
   const [attestor, setAttestor] = useState("")
   const [error, setError] = useState("")
@@ -60,7 +59,10 @@ const QueryAttestationsByAttestor = () => {
               onChange={event => setAttestor(event.target.value)}
             />
           </label>
-          <SelectNetwork withLabel={true} />
+          <SelectNetwork
+            network={network}
+            setNetwork={setNetwork}
+          />
           <button type="submit">
             {"search"}
           </button>

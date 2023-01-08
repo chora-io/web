@@ -4,12 +4,12 @@ import * as Long from "long"
 
 import { WalletContext } from "chora"
 import { signAndBroadcast } from "chora/utils/tx"
+import InputNumber from "chora/components/InputNumber"
+import ResultTx from "chora/components/ResultTx"
 
 import { MsgUpdateGroupMembers } from "../../../api/cosmos/group/v1/tx"
 
-import InputNumber from "../InputNumber"
 import InputMembers from "../InputMembers"
-import ResultTx from "../ResultTx"
 
 import * as styles from "./MsgUpdateGroupAdmin.module.css"
 

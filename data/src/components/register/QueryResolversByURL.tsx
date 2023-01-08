@@ -2,10 +2,9 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-
-import InputResolverUrl from "../InputResolverUrl"
-import Result from "../Result"
-import SelectNetwork from "../SelectNetwork"
+import InputURL from "chora/components/InputURL"
+import Result from "chora/components/Result"
+import SelectNetwork from "chora/components/SelectNetwork"
 
 import * as styles from "./QueryResolversByURL.module.css"
 
@@ -13,7 +12,7 @@ const queryResolversByURL = "/regen/data/v1/resolvers-by-url"
 
 const QueryResolversByURL = () => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network, setNetwork } = useContext(WalletContext)
 
   const [url, setUrl] = useState("")
   const [error, setError] = useState("")
@@ -46,11 +45,17 @@ const QueryResolversByURL = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputResolverUrl
+          <InputURL
+            id="resolver-url"
+            label="resolver url"
+            placeholder="https://server.chora.io"
             url={url}
             setUrl={setUrl}
           />
-          <SelectNetwork withLabel={true} />
+          <SelectNetwork
+            network={network}
+            setNetwork={setNetwork}
+          />
           <button type="submit">
             {"search"}
           </button>

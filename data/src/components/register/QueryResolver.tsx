@@ -2,10 +2,9 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-
-import InputResolverId from "../InputResolverId"
-import Result from "../Result"
-import SelectNetwork from "../SelectNetwork"
+import InputNumber from "chora/components/InputNumber"
+import Result from "chora/components/Result"
+import SelectNetwork from "chora/components/SelectNetwork"
 
 import * as styles from "./QueryResolver.module.css"
 
@@ -13,7 +12,7 @@ const queryResolver = "/regen/data/v1/resolver"
 
 const QueryResolver = () => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network, setNetwork } = useContext(WalletContext)
 
   const [id, setId] = useState("")
   const [error, setError] = useState("")
@@ -43,11 +42,16 @@ const QueryResolver = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputResolverId
-            id={id}
-            setId={setId}
+          <InputNumber
+            id="resolver-id"
+            label="resolver id"
+            number={id}
+            setNumber={setId}
           />
-          <SelectNetwork withLabel={true} />
+          <SelectNetwork
+            network={network}
+            setNetwork={setNetwork}
+          />
           <button type="submit">
             {"search"}
           </button>

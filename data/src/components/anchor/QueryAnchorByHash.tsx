@@ -2,16 +2,16 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
+import Result from "chora/components/Result"
+import SelectNetwork from "chora/components/SelectNetwork"
 
 import InputHash from "../InputHash"
 import InputHashJSON from "../InputHashJSON"
-import Result from "../Result"
 import SelectDataType from "../SelectDataType"
 import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
 import SelectGraphCanon from "../SelectGraphCanon"
 import SelectGraphMerkle from "../SelectGraphMerkle"
 import SelectInput from "../SelectInput"
-import SelectNetwork from "../SelectNetwork"
 import SelectRawMedia from "../SelectRawMedia"
 
 import * as styles from "./QueryAnchorByHash.module.css"
@@ -20,7 +20,7 @@ const queryAnchorByHash = "/regen/data/v1/anchor-by-hash"
 
 const QueryAnchorByHash = () => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network, setNetwork } = useContext(WalletContext)
 
   // input option
   const [input, setInput] = useState("form")
@@ -132,7 +132,10 @@ const QueryAnchorByHash = () => {
                 setMedia={setMedia}
               />
             }
-            <SelectNetwork withLabel={true} />
+            <SelectNetwork
+              network={network}
+              setNetwork={setNetwork}
+            />
             <button type="submit">
               {"search"}
             </button>

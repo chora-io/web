@@ -1,7 +1,4 @@
 import * as React from "react"
-import { useContext } from "react"
-
-import { WalletContext } from "chora"
 
 import {
   choraLocal,
@@ -11,9 +8,10 @@ import {
   regenHambach,
 } from "chora/utils/chains"
 
-const SelectNetwork = ({ id, label, selected }: any) => {
+const defaultId = "network"
+const defaultLabel = "network"
 
-  const { network, setNetwork } = useContext(WalletContext)
+const SelectNetwork = ({ id, label, selected, network, setNetwork }: any) => {
 
   let local = false
   if (typeof window !== "undefined" && (
@@ -24,10 +22,10 @@ const SelectNetwork = ({ id, label, selected }: any) => {
   ) { local = true }
 
   return (
-    <label htmlFor={id ? id : "network"}>
-      {label ? label : "network"}
+    <label htmlFor={id ? id : defaultId}>
+      {label ? label : defaultLabel}
       <select
-        id={id ? id : "network"}
+        id={id ? id : defaultId}
         value={selected || network}
         onChange={event => setNetwork(event.target.value)}
       >

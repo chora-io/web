@@ -1,29 +1,27 @@
 import * as React from "react"
-import { useContext } from "react"
 
-import { WalletContext } from "chora"
+const defaultId = "iri"
+const defaultLabel = "iri"
 
 const choraPlaceholder = "chora:13toVfvC2YxrrfSXWB5h2BGHiXZURsKxWUz72uDRDSPMCrYPguGUXSC.rdf"
 const regenPlaceholder = "regen:13toVfvC2YxrrfSXWB5h2BGHiXZURsKxWUz72uDRDSPMCrYPguGUXSC.rdf"
 
-const InputIRI = ({ id, label, iri, setIri }: any) => {
+const InputIRI = ({ id, label, placeholder, network, iri, setIri }: any) => {
 
-  const { network } = useContext(WalletContext)
-
-  let placeholder: string
+  let defaultPlaceholder: string
   if (network === undefined || network.includes("chora")) {
-    placeholder = choraPlaceholder
+    defaultPlaceholder = choraPlaceholder
   } else {
-    placeholder = regenPlaceholder
+    defaultPlaceholder = regenPlaceholder
   }
 
   return (
-    <label htmlFor={id ? id : "iri"}>
-      {label ? label : "iri"}
+    <label htmlFor={id ? id : defaultId}>
+      {label ? label : defaultLabel}
       <input
-        id={id ? id : "iri"}
+        id={id ? id : defaultId}
         value={iri}
-        placeholder={placeholder}
+        placeholder={placeholder || defaultPlaceholder}
         onChange={event => setIri(event.target.value)}
       />
     </label>

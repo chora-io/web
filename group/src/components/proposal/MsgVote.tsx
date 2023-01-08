@@ -4,12 +4,12 @@ import * as Long from "long"
 
 import { WalletContext } from "chora"
 import { signAndBroadcast } from "chora/utils/tx"
+import InputIRI from "chora/components/InputIRI"
+import InputNumber from "chora/components/InputNumber"
+import ResultTx from "chora/components/ResultTx"
 
 import { MsgVote } from "../../../api/cosmos/group/v1/tx"
 
-import InputMetadata from "../InputMetadata"
-import InputNumber from "../InputNumber"
-import ResultTx from "../ResultTx"
 import SelectExecution from "../SelectExecution"
 import SelectVote from "../SelectVote"
 
@@ -19,7 +19,7 @@ import * as styles from "./MsgSubmitProposal.module.css"
 
 const MsgVoteView = () => {
 
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // form input
   const [id, setId] = useState<string>("")
@@ -72,11 +72,12 @@ const MsgVoteView = () => {
             vote={vote}
             setVote={setVote}
           />
-          <InputMetadata
+          <InputIRI
             id="vote-metadata"
             label="vote metadata"
-            metadata={metadata}
-            setMetadata={setMetadata}
+            network={network}
+            iri={metadata}
+            setIri={setMetadata}
           />
           <SelectExecution
             id="vote-execution"

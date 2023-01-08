@@ -2,9 +2,10 @@ import * as React from "react"
 import { useEffect, useState } from "react"
 import * as jsonld from "jsonld"
 
+import Result from "chora/components/Result"
+
 import InputJSON from "../InputJSON"
 import InputsFromJSON from "../InputsFromJSON"
-import Result from "../Result"
 import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
 import SelectGraphCanon from "../SelectGraphCanon"
 import SelectGraphMerkle from "../SelectGraphMerkle"

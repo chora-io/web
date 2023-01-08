@@ -5,13 +5,13 @@ import { MsgSend } from "@keplr-wallet/proto-types/cosmos/bank/v1beta1/tx"
 
 import { WalletContext } from "chora"
 import { signAndBroadcast } from "chora/utils/tx"
+import InputAddress from "chora/components/InputAddress"
+import InputIRI from "chora/components/InputIRI"
+import ResultTx from "chora/components/ResultTx"
 
 import { MsgSubmitProposal } from "../../../api/cosmos/group/v1/tx"
 
-import InputAddress from "../InputAddress"
 import InputMessages from "../InputMessages"
-import InputMetadata from "../InputMetadata"
-import ResultTx from "../ResultTx"
 import SelectExecution from "../SelectExecution"
 
 import { Exec } from "../../../api/cosmos/group/v1/types"
@@ -20,7 +20,7 @@ import * as styles from "./MsgSubmitProposal.module.css"
 
 const MsgSubmitProposalView = () => {
 
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // form input
   const [address, setAddress] = useState<string>("")
@@ -67,15 +67,17 @@ const MsgSubmitProposalView = () => {
           <InputAddress
             id="policy-address"
             label="policy address"
+            network={network}
             long={true}
             address={address}
             setAddress={setAddress}
           />
-          <InputMetadata
+          <InputIRI
             id="proposal-metadata"
             label="proposal metadata"
-            metadata={metadata}
-            setMetadata={setMetadata}
+            network={network}
+            iri={metadata}
+            setIri={setMetadata}
           />
           <InputMessages
             id="proposal-messages"

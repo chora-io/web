@@ -3,17 +3,16 @@ import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
 import { signAndBroadcast } from "chora/utils/tx"
+import InputIRI from "chora/components/InputIRI"
+import ResultTx from "chora/components/ResultTx"
 
 import { MsgCreate } from "../../../api/chora/geonode/v1/msg"
-
-import InputMetadata from "../InputMetadata"
-import ResultTx from "../ResultTx"
 
 import * as styles from "./MsgCreate.module.css"
 
 const MsgCreateView = () => {
 
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // form input
   const [metadata, setMetadata] = useState<string>("")
@@ -48,9 +47,12 @@ const MsgCreateView = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputMetadata
-            metadata={metadata}
-            setMetadata={setMetadata}
+          <InputIRI
+            id="node-metadata"
+            label="node metadata"
+            network={network}
+            iri={metadata}
+            setIRI={setMetadata}
           />
           <button type="submit">
             {"submit"}

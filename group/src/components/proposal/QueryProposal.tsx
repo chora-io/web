@@ -2,10 +2,9 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-
-import InputNumber from "../InputNumber"
-import Result from "../Result"
-import SelectNetwork from "../SelectNetwork"
+import InputNumber from "chora/components/InputNumber"
+import Result from "chora/components/Result"
+import SelectNetwork from "chora/components/SelectNetwork"
 
 import * as styles from "./QueryProposal.module.css"
 
@@ -13,7 +12,7 @@ const queryProposal = "/cosmos/group/v1/proposal"
 
 const QueryPolicy = () => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network, setNetwork } = useContext(WalletContext)
 
   // form input
   const [id, setId] = useState<string>("")
@@ -52,7 +51,10 @@ const QueryPolicy = () => {
             number={id}
             setNumber={setId}
           />
-          <SelectNetwork withLabel={true} />
+          <SelectNetwork
+            network={network}
+            setNetwork={setNetwork}
+          />
           <button type="submit">
             {"search"}
           </button>

@@ -1,21 +1,17 @@
 import * as React from "react"
-import { useContext } from "react"
 
 import {
   cachedAddressKey,
   cachedConnectedKey,
   cachedNetworkKey,
   defaultNetwork,
-  WalletContext,
-} from "chora"
+} from "../contexts/WalletContext"
 
 import SelectNetwork from "./SelectNetwork"
 
 import * as styles from "./ConnectWallet.module.css"
 
-const ConnectWallet = () => {
-
-  const { getKeplr, network, wallet, loading, error } = useContext(WalletContext)
+const ConnectWallet = ({ getKeplr, network, setNetwork, wallet, loading, error }: any) => {
 
   let address: string
   let connected: boolean
@@ -76,6 +72,8 @@ const ConnectWallet = () => {
       <form className={styles.form} onSubmit={getKeplr}>
         <SelectNetwork
           label=" "
+          network={network}
+          setNetwork={setNetwork}
           selected={selected}
         />
         <button type="submit" className={connected ? styles.connected : null}>

@@ -5,13 +5,13 @@ import * as Long from "long"
 
 import { WalletContext } from "chora"
 import { signAndBroadcast } from "chora/utils/tx"
+import InputNumber from "chora/components/InputNumber"
+import ResultTx from "chora/components/ResultTx"
 
 import { MsgRegisterResolver } from "../../../api/regen/data/v1/tx"
 
 import InputHash from "../InputHash"
 import InputHashJSON from "../InputHashJSON"
-import InputResolverId from "../InputResolverId"
-import ResultTx from "../ResultTx"
 import SelectDataType from "../SelectDataType"
 import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
 import SelectGraphCanon from "../SelectGraphCanon"
@@ -126,9 +126,11 @@ const MsgRegisterResolverView = () => {
       <div>
         {input == "form" ? (
           <form className={styles.form} onSubmit={handleSubmit}>
-            <InputResolverId
-              id={id}
-              setId={setId}
+            <InputNumber
+              id="resolver-id"
+              label="resolver id"
+              number={id}
+              setNumber={setId}
             />
             <InputHash
               hash={hash}
@@ -157,9 +159,11 @@ const MsgRegisterResolverView = () => {
           </form>
         ) : (
           <form className={styles.form} onSubmit={handleSubmit}>
-            <InputResolverId
-              id={id}
-              setId={setId}
+            <InputNumber
+              id="resolver-id"
+              label="resolver id"
+              number={id}
+              setNumber={setId}
             />
             <InputHashJSON
               json={json}

@@ -4,13 +4,13 @@ import * as Long from "long"
 
 import { WalletContext } from "chora"
 import { signAndBroadcast } from "chora/utils/tx"
+import InputAddress from "chora/components/InputAddress"
+import ResultTx from "chora/components/ResultTx"
 
 import { MsgUpdateGroupPolicyDecisionPolicy } from "../../../api/cosmos/group/v1/tx"
 import { PercentageDecisionPolicy, ThresholdDecisionPolicy } from "../../../api/cosmos/group/v1/types"
 
-import InputAddress from "../InputAddress"
 import InputPolicy from "../InputPolicy"
-import ResultTx from "../ResultTx"
 
 import * as styles from "./MsgCreateGroupPolicy.module.css"
 
@@ -34,7 +34,7 @@ const initialPolicy = {
 
 const MsgUpdateGroupPolicyDecisionPolicyView = () => {
 
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // form input
   const [address, setAddress] = useState<string>("")
@@ -103,6 +103,7 @@ const MsgUpdateGroupPolicyDecisionPolicyView = () => {
           <InputAddress
             id="policy-address"
             label="policy address"
+            network={network}
             long={true}
             address={address}
             setAddress={setAddress}

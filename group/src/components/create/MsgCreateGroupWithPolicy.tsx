@@ -4,14 +4,14 @@ import * as Long from "long"
 
 import { WalletContext } from "chora"
 import { signAndBroadcast } from "chora/utils/tx"
+import InputIRI from "chora/components/InputIRI"
+import ResultTx from "chora/components/ResultTx"
 
 import { MsgCreateGroupWithPolicy } from "../../../api/cosmos/group/v1/tx"
 import { PercentageDecisionPolicy, ThresholdDecisionPolicy } from "../../../api/cosmos/group/v1/types"
 
 import InputMembers from "../InputMembers"
-import InputMetadata from "../InputMetadata"
 import InputPolicy from "../InputPolicy"
-import ResultTx from "../ResultTx"
 
 import * as styles from "./MsgCreateGroupWithPolicy.module.css"
 
@@ -47,7 +47,7 @@ const initialPolicy = {
 
 const MsgCreateGroupWithPolicyView = () => {
 
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // form input
   const [members, setMembers] = useState<member[]>([member])
@@ -118,21 +118,26 @@ const MsgCreateGroupWithPolicyView = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputMetadata
-            metadata={metadata}
-            setMetadata={setMetadata}
+          <InputIRI
+            id="create-group-with-policy-metadata"
+            label="metadata"
+            network={network}
+            iri={metadata}
+            setIri={setMetadata}
           />
           <InputMembers
             members={members}
             setMembers={setMembers}
           />
-          <InputMetadata
-            id="policy-metadata"
+          <InputIRI
+            id="create-group-with-policy-policy-metadata"
             label="policy metadata"
-            metadata={policyMetadata}
-            setMetadata={setPolicyMetadata}
+            network={network}
+            iri={policyMetadata}
+            setIri={setPolicyMetadata}
           />
           <InputPolicy
+            id="create-group-with-policy-decision-policy"
             label="decision policy"
             policy={policy}
             setPolicy={setPolicy}

@@ -1,8 +1,9 @@
 import * as React from "react"
-import { useState } from "react"
+import { useContext, useState } from "react"
 
-import InputIRI from "../InputIRI"
-import Result from "../Result"
+import { WalletContext } from "chora"
+import InputIRI from "chora/components/InputIRI"
+import Result from "chora/components/Result"
 
 import * as styles from "./GetData.module.css"
 
@@ -10,6 +11,8 @@ const localServerUrl = "http://localhost:3000"
 const remoteServerUrl = "https://server.chora.io"
 
 const GetData = () => {
+
+  const { network } = useContext(WalletContext)
 
   let serverUrl = remoteServerUrl
   if (typeof window !== "undefined" && (
@@ -51,6 +54,7 @@ const GetData = () => {
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
           <InputIRI
+            network={network}
             iri={iri}
             setIri={setIri}
           />

@@ -2,9 +2,8 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-
-import Result from "../Result"
-import SelectNetwork from "../SelectNetwork"
+import Result from "chora/components/Result"
+import SelectNetwork from "chora/components/SelectNetwork"
 
 import * as styles from "./QueryNodes.module.css"
 
@@ -12,7 +11,7 @@ const queryNodes = "/chora/geonode/v1/nodes"
 
 const QueryNodes = () => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network, setNetwork } = useContext(WalletContext)
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -42,7 +41,10 @@ const QueryNodes = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <SelectNetwork />
+          <SelectNetwork
+            network={network}
+            setNetwork={setNetwork}
+          />
           <button type="submit">
             {"search"}
           </button>

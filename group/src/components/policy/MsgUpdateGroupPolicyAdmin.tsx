@@ -3,17 +3,16 @@ import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
 import { signAndBroadcast } from "chora/utils/tx"
+import InputAddress from "chora/components/InputAddress"
+import ResultTx from "chora/components/ResultTx"
 
 import { MsgUpdateGroupPolicyAdmin } from "../../../api/cosmos/group/v1/tx"
-
-import InputAddress from "../InputAddress"
-import ResultTx from "../ResultTx"
 
 import * as styles from "./MsgCreateGroupPolicy.module.css"
 
 const MsgUpdateGroupPolicyAdminView = () => {
 
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // form input
   const [address, setAddress] = useState<string>("")
@@ -53,6 +52,7 @@ const MsgUpdateGroupPolicyAdminView = () => {
           <InputAddress
             id="policy-address"
             label="policy address"
+            network={network}
             long={true}
             address={address}
             setAddress={setAddress}
@@ -60,6 +60,7 @@ const MsgUpdateGroupPolicyAdminView = () => {
           <InputAddress
             id="new-policy-admin"
             label="new policy admin"
+            network={network}
             address={admin}
             setAddress={setAdmin}
           />

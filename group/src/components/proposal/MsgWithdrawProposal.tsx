@@ -4,11 +4,10 @@ import * as Long from "long"
 
 import { WalletContext } from "chora"
 import { signAndBroadcast } from "chora/utils/tx"
+import InputNumber from "chora/components/InputNumber"
+import ResultTx from "chora/components/ResultTx"
 
 import { MsgWithdrawProposal } from "../../../api/cosmos/group/v1/tx"
-
-import InputNumber from "../InputNumber"
-import ResultTx from "../ResultTx"
 
 import * as styles from "./MsgSubmitProposal.module.css"
 
