@@ -8,7 +8,7 @@
 }
 
 .background {
-  background-image: url('chora/assets/images/chora_dark.png');
+  background-image: url('../assets/images/chora_dark.png');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
