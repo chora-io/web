@@ -1,0 +1,14 @@
+/* page */
+
+.page {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+}
+
+.page > div:first-child {
+  margin-top: var(--header-height);
+  padding-top: 4em;
+}

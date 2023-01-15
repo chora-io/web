@@ -33,6 +33,11 @@ const Header = () => {
         {local ? (
           <ul>
             <li>
+              <a href={"http://" + window.location.hostname + ":8080"}>
+                {"coop"}
+              </a>
+            </li>
+            <li>
               <a href={"http://" + window.location.hostname + ":8001"}>
                 {"data"}
               </a>
@@ -55,6 +60,11 @@ const Header = () => {
           </ul>
         ) : (
           <ul>
+            <li>
+              <a href={"/coop"}>
+                {"coop"}
+              </a>
+            </li>
             <li>
               <a href={"/data"}>
                 {"data"}
