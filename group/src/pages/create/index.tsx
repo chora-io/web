@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import Main from "../../layouts/Main"
-import Seo from "../../components/Seo"
+import Seo from "../../components/SeoWrapper"
 
 import MsgCreateGroup from "../../components/create/MsgCreateGroup"
 import MsgCreateGroupWithPolicy from "../../components/create/MsgCreateGroupWithPolicy"

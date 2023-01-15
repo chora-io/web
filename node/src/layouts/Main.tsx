@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { WalletContextProvider } from "chora"
 
-import Header from "../components/Header"
+import Header from "../components/HeaderWrapper"
 import Sidebar from "../components/Sidebar"
 
 import "./Main.module.css"

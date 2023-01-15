@@ -9,7 +9,7 @@ import {
 
 import * as styles from "./Faucet.module.css"
 
-const Faucet = ({ chainInfo, wallet }) => {
+const Faucet = ({ chainInfo, wallet }: any) => {
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -61,7 +61,7 @@ const Faucet = ({ chainInfo, wallet }) => {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.title}>
         <div>
           {chainInfo ? chainInfo.chainName + " Faucet" : "Testnet Faucet"}

@@ -1,13 +1,12 @@
 import * as React from "react"
-import { useContext } from "react"
 
-import { WalletContext } from "chora"
-import icon from "chora/assets/images/chora_dark_icon.png"
-import ConnectWallet from "chora/components/ConnectWallet"
+import ConnectWallet from "./ConnectWallet"
+
+import icon from "../assets/images/chora_dark_icon.png"
 
 import * as styles from "./Header.module.css"
 
-const Header = () => {
+const Header = ({ context }: any) => {
 
   let local = false
   if (typeof window !== "undefined" && (
@@ -32,7 +31,7 @@ const Header = () => {
             </a>
           </li>
         </ul>
-        <ConnectWallet {...useContext(WalletContext)} />
+        {context && <ConnectWallet {...context} />}
       </div>
     </div>
   )

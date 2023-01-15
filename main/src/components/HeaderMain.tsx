@@ -3,9 +3,9 @@ import { Link } from "gatsby"
 
 import icon from "chora/assets/images/chora_dark_icon.png"
 
-import * as styles from "./Header.module.css"
+import * as styles from "./HeaderMain.module.css"
 
-const Header = () => {
+const HeaderMain = () => {
 
   let local = false
   if (typeof window !== "undefined" && (
@@ -92,4 +92,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default HeaderMain

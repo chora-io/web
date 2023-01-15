@@ -2,7 +2,7 @@ import * as React from "react"
 
 import Main from "../../layouts/Main"
 import GroupProposals from "../../components/proposals/GroupProposals";
-import Seo from "../../components/Seo"
+import Seo from "../../components/SeoWrapper"
 
 import * as styles from "./index.module.css"
 

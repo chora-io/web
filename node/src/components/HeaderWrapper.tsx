@@ -4,7 +4,7 @@ import { useContext } from "react"
 import { WalletContext } from "chora"
 import Header from "chora/components/Header"
 
-const HeaderWallet = () => {
+const HeaderWrapper = () => {
 
   const context = useContext(WalletContext)
 
@@ -15,4 +15,4 @@ const HeaderWallet = () => {
   )
 }
 
-export default HeaderWallet
+export default HeaderWrapper
