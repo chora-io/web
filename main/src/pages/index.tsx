@@ -7,7 +7,7 @@ import Seo from "../components/Seo"
 
 import * as styles from "./index.module.css"
 
-const Index = () => (
+const Home = () => (
   <Main>
     <Background />
     <div className={styles.container} >
@@ -64,4 +64,4 @@ const Index = () => (
 
 export const Head = () => <Seo title="" />
 
-export default Index
+export default Home

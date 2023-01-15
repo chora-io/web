@@ -1,7 +1,5 @@
 import * as React from "react"
-import { useContext, useState } from "react"
-
-import { WalletContext } from "chora"
+import { useState } from "react"
 
 import {
   choraTestnet,
@@ -11,9 +9,7 @@ import {
 
 import * as styles from "./Faucet.module.css"
 
-const Faucet = () => {
-
-  const { chainInfo, wallet } = useContext(WalletContext)
+const Faucet = ({ chainInfo, wallet }) => {
 
   // error and success
   const [error, setError] = useState<string>("")

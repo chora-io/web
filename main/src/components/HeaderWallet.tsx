@@ -5,9 +5,9 @@ import { WalletContext } from "chora"
 import icon from "chora/assets/images/chora_dark_icon.png"
 import ConnectWallet from "chora/components/ConnectWallet"
 
-import * as styles from "./Header.module.css"
+import * as styles from "./HeaderWallet.module.css"
 
-const Header = () => {
+const HeaderWallet = () => {
 
   let local = false
   if (typeof window !== "undefined" && (
@@ -38,4 +38,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default HeaderWallet
