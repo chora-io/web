@@ -4,22 +4,22 @@ import { useContext, useEffect, useState } from "react"
 import { WalletContext } from "chora"
 import { choraTestnet } from "chora/utils/chains"
 
-import * as styles from "./Geonode.module.css"
+import * as styles from "./Voucher.module.css"
 
-const queryNode = "chora/geonode/v1/node"
+const queryVoucher = "chora/voucher/v1/voucher"
 const serverUrl = "https://server.chora.io"
 
-const Geonode = ({ nodeId }) => {
+const Voucher = ({ voucherId }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
   // error and success
   const [error, setError] = useState<string>("")
-  const [node, setNode] = useState<any>(null)
+  const [voucher, setVoucher] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
 
   useEffect(() => {
-    setNode(null)
+    setVoucher(null)
     setError("")
 
     // error if network is not chora-testnet-1
@@ -27,35 +27,35 @@ const Geonode = ({ nodeId }) => {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch node if network is chora-testnet-1
+    // fetch voucher if network is chora-testnet-1
     if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
 
       // async function workaround
-      const fetchNodeAndMetadata = async () => {
+      const fetchVoucherAndMetadata = async () => {
 
-        // node metadata
+        // voucher metadata
         let iri: string
 
-        // fetch node from selected network
-        await fetch(chainInfo.rest + "/" + queryNode + "/" + nodeId)
+        // fetch voucher from selected network
+        await fetch(chainInfo.rest + "/" + queryVoucher + "/" + voucherId)
           .then(res => res.json())
           .then(res => {
             if (res.code) {
               setError(res.message)
             } else {
-              setNode(res)
+              setVoucher(res)
               iri = res["metadata"]
             }
           })
 
-        // fetch node data from chora server
+        // fetch voucher data from chora server
         await fetch(serverUrl + "/" + iri)
           .then(res => res.json())
           .then(res => {
             if (res.error) {
               setError(res.error)
               setMetadata(null)
-            } else if (res.context !== "https://schema.chora.io/contexts/geonode.jsonld") {
+            } else if (res.context !== "https://schema.chora.io/contexts/voucher.jsonld") {
               setError("unsupported metadata schema")
               setMetadata(null)
             } else {
@@ -69,7 +69,7 @@ const Geonode = ({ nodeId }) => {
       }
 
       // call async function
-      fetchNodeAndMetadata().catch(err => {
+      fetchVoucherAndMetadata().catch(err => {
         setError(err.message)
       })
     }
@@ -77,12 +77,12 @@ const Geonode = ({ nodeId }) => {
 
   return (
     <div className={styles.container}>
-      {!node && !metadata && !error && (
+      {!voucher && !metadata && !error && (
         <div>
           {"loading..."}
         </div>
       )}
-      {node && metadata && !error && (
+      {voucher && metadata && !error && (
         <div>
           <div className={styles.item}>
             <h3>
@@ -102,26 +102,10 @@ const Geonode = ({ nodeId }) => {
           </div>
           <div className={styles.item}>
             <h3>
-              {"curator"}
+              {"issuer"}
             </h3>
             <p>
-              {node["curator"]}
-            </p>
-          </div>
-          <div className={styles.item}>
-            <h3>
-              {"latitude"}
-            </h3>
-            <p>
-              {metadata["geo"]["latitude"]}
-            </p>
-          </div>
-          <div className={styles.item}>
-            <h3>
-              {"longitude"}
-            </h3>
-            <p>
-              {metadata["geo"]["longitude"]}
+              {voucher["issuer"]}
             </p>
           </div>
         </div>
@@ -135,4 +119,4 @@ const Geonode = ({ nodeId }) => {
   )
 }
 
-export default Geonode
+export default Voucher

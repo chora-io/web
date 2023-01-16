@@ -52,7 +52,7 @@ const MsgCreateView = () => {
             label="node metadata"
             network={network}
             iri={metadata}
-            setIRI={setMetadata}
+            setIri={setMetadata}
           />
           <button type="submit">
             {"submit"}
