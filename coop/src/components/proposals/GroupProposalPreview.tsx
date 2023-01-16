@@ -49,57 +49,55 @@ const GroupProposalPreview = ({ proposal }) => {
 
   return (
     <div className={styles.container}>
-      <div>
-        {!proposal && !metadata && !error && (
-          <div>
-            {"loading..."}
+      {!proposal && !metadata && !error && (
+        <div>
+          {"loading..."}
+        </div>
+      )}
+      {proposal && metadata && !error && (
+        <>
+          <div className={styles.item}>
+            <h3>
+              {"status"}
+            </h3>
+            <p>
+              {proposal["status"]}
+            </p>
           </div>
-        )}
-        {proposal && metadata && !error && (
-          <div>
-            <div className={styles.item}>
-              <h3>
-                {"status"}
-              </h3>
-              <p>
-                {proposal["status"]}
-              </p>
-            </div>
-            <div className={styles.item}>
-              <h3>
-                {"name"}
-              </h3>
-              <p>
-                {metadata["name"]}
-              </p>
-            </div>
-            <div className={styles.item}>
-              <h3>
-                {"description"}
-              </h3>
-              <p>
-                {metadata["description"]}
-              </p>
-            </div>
-            <div className={styles.item}>
-              <h3>
-                {"voting period end"}
-              </h3>
-              <p>
-                {formatTimestamp(proposal["voting_period_end"])}
-              </p>
-            </div>
-            <Link to={`/proposals/?id=${proposal["id"]}`}>
-              {"view proposal"}
-            </Link>
+          <div className={styles.item}>
+            <h3>
+              {"name"}
+            </h3>
+            <p>
+              {metadata["name"]}
+            </p>
           </div>
-        )}
-        {error && (
-          <div>
-            {error}
+          <div className={styles.item}>
+            <h3>
+              {"description"}
+            </h3>
+            <p>
+              {metadata["description"]}
+            </p>
           </div>
-        )}
-      </div>
+          <div className={styles.item}>
+            <h3>
+              {"voting period end"}
+            </h3>
+            <p>
+              {formatTimestamp(proposal["voting_period_end"])}
+            </p>
+          </div>
+          <Link to={`/proposals/?id=${proposal["id"]}`}>
+            {"view proposal"}
+          </Link>
+        </>
+      )}
+      {error && (
+        <div>
+          {error}
+        </div>
+      )}
     </div>
   )
 }

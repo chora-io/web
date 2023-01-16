@@ -21,6 +21,9 @@ const Sidebar = () => {
         <li>
           <Link to="/proposals" activeStyle={activeStyle}>{"proposals"}</Link>
         </li>
+        <li>
+          <Link to="/geonodes" activeStyle={activeStyle}>{"geonodes"}</Link>
+        </li>
       </ul>
     </div>
   )

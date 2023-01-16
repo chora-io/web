@@ -55,24 +55,22 @@ const GroupMembers = () => {
 
   return (
     <div className={styles.container}>
-      <div>
-        {!members && !error && (
-          <div>
-            {"loading..."}
-          </div>
-        )}
-        {members && members.map(member => (
-          <GroupMemberPreview
-            key={member["member"]["address"]}
-            member={member["member"]}
-          />
-        ))}
-        {error && (
-          <div>
-            {error}
-          </div>
-        )}
-      </div>
+      {!members && !error && (
+        <div>
+          {"loading..."}
+        </div>
+      )}
+      {members && members.map(member => (
+        <GroupMemberPreview
+          key={member["member"]["address"]}
+          member={member["member"]}
+        />
+      ))}
+      {error && (
+        <div>
+          {error}
+        </div>
+      )}
     </div>
   )
 }

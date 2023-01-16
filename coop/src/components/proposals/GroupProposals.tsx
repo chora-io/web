@@ -58,7 +58,7 @@ const GroupProposals = () => {
             .then(res => {
               if (res.code) {
                 setError(res.message)
-              } else {
+              } else if (res["proposals"].length > 0) {
                 const ps = proposals || []
                 res["proposals"].map(p => ps.push(p))
                 setProposals(ps)
@@ -76,24 +76,22 @@ const GroupProposals = () => {
 
   return (
     <div className={styles.container}>
-      <div>
-        {!proposals && !error && (
-          <div>
-            {"loading..."}
-          </div>
-        )}
-        {proposals && proposals.map(proposal => (
-          <GroupProposalPreview
-            key={proposal["id"]}
-            proposal={proposal}
-          />
-        ))}
-        {error && (
-          <div>
-            {error}
-          </div>
-        )}
-      </div>
+      {!proposals && !error && (
+        <div>
+          {"loading..."}
+        </div>
+      )}
+      {proposals && proposals.map(proposal => (
+        <GroupProposalPreview
+          key={proposal["id"]}
+          proposal={proposal}
+        />
+      ))}
+      {error && (
+        <div>
+          {error}
+        </div>
+      )}
     </div>
   )
 }

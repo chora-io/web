@@ -2,7 +2,7 @@ import * as React from "react"
 import { useEffect, useState } from "react"
 import { Link } from "gatsby"
 
-import * as styles from "./GroupPolicy.module.css"
+import * as styles from "./GroupPolicyPreview.module.css"
 
 const serverUrl = "https://server.chora.io"
 
@@ -47,41 +47,39 @@ const GroupPolicy = ({ policy }) => {
 
   return (
     <div className={styles.container}>
-      <div>
-        {!policy && !metadata && !error && (
-          <div>
-            {"loading..."}
+      {!policy && !metadata && !error && (
+        <div>
+          {"loading..."}
+        </div>
+      )}
+      {policy && metadata && !error && (
+        <>
+          <div className={styles.item}>
+            <h3>
+              {"name"}
+            </h3>
+            <p>
+              {metadata["name"]}
+            </p>
           </div>
-        )}
-        {policy && metadata && !error && (
-          <div>
-            <div className={styles.item}>
-              <h3>
-                {"name"}
-              </h3>
-              <p>
-                {metadata["name"]}
-              </p>
-            </div>
-            <div className={styles.item}>
-              <h3>
-                {"description"}
-              </h3>
-              <p>
-                {metadata["description"]}
-              </p>
-            </div>
-            <Link to={`/policies/?address=${policy["address"]}`}>
-              {"view policy"}
-            </Link>
+          <div className={styles.item}>
+            <h3>
+              {"description"}
+            </h3>
+            <p>
+              {metadata["description"]}
+            </p>
           </div>
-        )}
-        {error && (
-          <div>
-            {error}
-          </div>
-        )}
-      </div>
+          <Link to={`/policies/?address=${policy["address"]}`}>
+            {"view policy"}
+          </Link>
+        </>
+      )}
+      {error && (
+        <div>
+          {error}
+        </div>
+      )}
     </div>
   )
 }

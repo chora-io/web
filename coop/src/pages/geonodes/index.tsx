@@ -1,36 +1,38 @@
 import * as React from "react"
 
 import Main from "../../layouts/Main"
-import GroupPolicies from "../../components/policies/GroupPolicies"
-import GroupPolicy from "../../components/policies/GroupPolicy"
+import Geonode from "../../components/geonodes/Geonode"
+import Geonodes from "../../components/geonodes/Geonodes"
 import Seo from "../../components/SeoWrapper"
 
 import * as styles from "./index.module.css"
 
-const Policies = ({ location }) => {
+const GeonodesPage = ({ location }) => {
 
   const urlParams = new URLSearchParams(location["search"])
-  const policyAddress = urlParams.get("address")
+  const nodeId = urlParams.get("id")
 
   return (
     <Main>
       <div className={styles.page}>
-        {policyAddress ? (
+        {nodeId ? (
           <div>
             <h1>
-              {"group policy"}
+              {"geonode"}
             </h1>
             <div className={styles.section}>
-              <GroupPolicy policyAddress={policyAddress} />
+              <Geonode
+                nodeId={nodeId}
+              />
             </div>
           </div>
         ) : (
           <div>
             <h1>
-              {"group policies"}
+              {"geonodes"}
             </h1>
             <div className={styles.section}>
-              <GroupPolicies />
+              <Geonodes />
             </div>
           </div>
         )}
@@ -41,4 +43,4 @@ const Policies = ({ location }) => {
 
 export const Head = () => <Seo title="" />
 
-export default Policies
+export default GeonodesPage

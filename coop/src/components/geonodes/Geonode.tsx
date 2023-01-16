@@ -4,25 +4,23 @@ import { useContext, useEffect, useState } from "react"
 import { WalletContext } from "chora"
 import { choraTestnet } from "chora/utils/chains"
 
-import { formatTimestamp } from "chora/utils/timestamp"
-
-import * as styles from "./GroupMember.module.css"
+import * as styles from "./Geonode.module.css"
 
 const groupId = "1" // TODO: configuration file
-const queryMembers = "cosmos/group/v1/group_members" // TODO(cosmos-sdk): group member query
+const queryNode = "chora/geonode/v1/node"
 const serverUrl = "https://server.chora.io"
 
-const GroupMember = ({ memberAddress }) => {
+const Geonode = ({ nodeId }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
   // error and success
   const [error, setError] = useState<string>("")
-  const [member, setMember] = useState<any>(null)
+  const [node, setNode] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
 
   useEffect(() => {
-    setMember(null)
+    setNode(null)
     setError("")
 
     // error if network is not chora-testnet-1
@@ -30,36 +28,35 @@ const GroupMember = ({ memberAddress }) => {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch members if network is chora-testnet-1
+    // fetch node if network is chora-testnet-1
     if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
 
       // async function workaround
-      const fetchMemberAndMetadata = async () => {
+      const fetchNodeAndMetadata = async () => {
 
-        // member metadata
+        // node metadata
         let iri: string
 
-        // fetch members from selected network
-        await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
+        // fetch node from selected network
+        await fetch(chainInfo.rest + "/" + queryNode + "/" + groupId)
           .then(res => res.json())
           .then(res => {
             if (res.code) {
               setError(res.message)
             } else {
-              const member = res["members"].find(m => m["member"]["address"] === memberAddress)
-              setMember(member["member"])
-              iri = member["member"]["metadata"]
+              setNode(res)
+              iri = res["metadata"]
             }
           })
 
-        // fetch member data from chora server
+        // fetch node data from chora server
         await fetch(serverUrl + "/" + iri)
           .then(res => res.json())
           .then(res => {
             if (res.error) {
               setError(res.error)
               setMetadata(null)
-            } else if (res.context !== "https://schema.chora.io/contexts/group_member.jsonld") {
+            } else if (res.context !== "https://schema.chora.io/contexts/geonode.jsonld") {
               setError("unsupported metadata schema")
               setMetadata(null)
             } else {
@@ -73,7 +70,7 @@ const GroupMember = ({ memberAddress }) => {
       }
 
       // call async function
-      fetchMemberAndMetadata().catch(err => {
+      fetchNodeAndMetadata().catch(err => {
         setError(err.message)
       })
     }
@@ -81,12 +78,12 @@ const GroupMember = ({ memberAddress }) => {
 
   return (
     <div className={styles.container}>
-      {!member && !metadata && !error && (
+      {!node && !metadata && !error && (
         <div>
           {"loading..."}
         </div>
       )}
-      {member && metadata && !error && (
+      {node && metadata && !error && (
         <div>
           <div className={styles.item}>
             <h3>
@@ -98,26 +95,34 @@ const GroupMember = ({ memberAddress }) => {
           </div>
           <div className={styles.item}>
             <h3>
-              {"address"}
+              {"description"}
             </h3>
             <p>
-              {member["address"]}
+              {metadata["description"]}
             </p>
           </div>
           <div className={styles.item}>
             <h3>
-              {"added at"}
+              {"curator"}
             </h3>
             <p>
-              {formatTimestamp(member["added_at"])}
+              {node["curator"]}
             </p>
           </div>
           <div className={styles.item}>
             <h3>
-              {"weight"}
+              {"latitude"}
             </h3>
             <p>
-              {member["weight"]}
+              {metadata["geo"]["latitude"]}
+            </p>
+          </div>
+          <div className={styles.item}>
+            <h3>
+              {"longitude"}
+            </h3>
+            <p>
+              {metadata["geo"]["longitude"]}
             </p>
           </div>
         </div>
@@ -131,4 +136,4 @@ const GroupMember = ({ memberAddress }) => {
   )
 }
 
-export default GroupMember
+export default Geonode

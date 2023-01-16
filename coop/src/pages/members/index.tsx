@@ -7,7 +7,7 @@ import Seo from "../../components/SeoWrapper"
 
 import * as styles from "./index.module.css"
 
-const Members = () => {
+const Members = ({ location }) => {
 
   const urlParams = new URLSearchParams(location["search"])
   const memberAddress = urlParams.get("address")

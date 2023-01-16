@@ -4,23 +4,24 @@ import { useContext, useEffect, useState } from "react"
 import { WalletContext } from "chora"
 import { choraTestnet } from "chora/utils/chains"
 
-import GroupPolicyPreview from "./GroupPolicyPreview"
+import GeonodePreview from "./GeonodePreview"
 
-import * as styles from "./GroupPolicies.module.css"
+import * as styles from "./Geonodes.module.css"
 
 const groupId = "1" // TODO: configuration file
+const queryGeonodes = "chora/geonode/v1/nodes-by-curator"
 const queryPolicies = "cosmos/group/v1/group_policies_by_group"
 
-const GroupPolicies = () => {
+const Geonodes = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
   // error and success
   const [error, setError] = useState<string>("")
-  const [policies, setPolicies] = useState<any>(null)
+  const [nodes, setNodes] = useState<any>(null)
 
   useEffect(() => {
-    setPolicies(null)
+    setNodes(null)
     setError("")
 
     // error if network is not chora-testnet-1
@@ -32,7 +33,9 @@ const GroupPolicies = () => {
     if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
 
       // async function workaround
-      const fetchPolicies = async () => {
+      const fetchPoliciesAndNodes = async () => {
+
+        let addresses: string[] = []
 
         // fetch policies from selected network
         await fetch(chainInfo.rest + "/" + queryPolicies + "/" + groupId)
@@ -41,13 +44,34 @@ const GroupPolicies = () => {
             if (res.code) {
               setError(res.message)
             } else {
-              setPolicies(res["group_policies"])
+              res["group_policies"].map(policy => {
+                addresses.push(policy["address"])
+              })
             }
           })
+
+        addresses && addresses.map(async address => {
+
+          // fetch nodes from selected network
+          await fetch(chainInfo.rest + "/" + queryGeonodes + "/" + address)
+            .then(res => res.json())
+            .then(res => {
+              if (res.code) {
+                setError(res.message)
+              } else if (res["nodes"].length > 0) {
+                const ns = nodes || []
+                res["nodes"].map(n => ns.push({
+                  curator: address,
+                  ...n,
+                }))
+                setNodes(ns)
+              }
+            })
+        })
       }
 
       // call async function
-      fetchPolicies().catch(err => {
+      fetchPoliciesAndNodes().catch(err => {
         setError(err.message)
       })
     }
@@ -55,15 +79,15 @@ const GroupPolicies = () => {
 
   return (
     <div className={styles.container}>
-      {!policies && !error && (
+      {!nodes && !error && (
         <div>
           {"loading..."}
         </div>
       )}
-      {policies && policies.map(policy => (
-        <GroupPolicyPreview
-          key={policy["address"]}
-          policy={policy}
+      {nodes && nodes.map(node => (
+        <GeonodePreview
+          key={node["id"]}
+          node={node}
         />
       ))}
       {error && (
@@ -75,4 +99,4 @@ const GroupPolicies = () => {
   )
 }
 
-export default GroupPolicies
+export default Geonodes

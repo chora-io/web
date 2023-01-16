@@ -79,106 +79,104 @@ const GroupPolicy = ({ policyAddress }) => {
 
   return (
     <div className={styles.container}>
-      <div>
-        {!policy && !metadata && !error && (
-          <div>
-            {"loading..."}
+      {!policy && !metadata && !error && (
+        <div>
+          {"loading..."}
+        </div>
+      )}
+      {policy && metadata && !error && (
+        <div>
+          <div className={styles.item}>
+            <h3>
+              {"name"}
+            </h3>
+            <p>
+              {metadata["name"]}
+            </p>
           </div>
-        )}
-        {policy && metadata && !error && (
-          <div>
-            <div className={styles.item}>
-              <h3>
-                {"name"}
-              </h3>
-              <p>
-                {metadata["name"]}
-              </p>
-            </div>
-            <div className={styles.item}>
-              <h3>
-                {"description"}
-              </h3>
-              <p>
-                {metadata["description"]}
-              </p>
-            </div>
-            <div className={styles.item}>
-              <h3>
-                {"admin"}
-              </h3>
-              <p>
-                {policy["admin"]}
-              </p>
-            </div>
-            <div className={styles.item}>
-              <h3>
-                {"address"}
-              </h3>
-              <p>
-                {policy["address"]}
-              </p>
-            </div>
-            {policy["decision_policy"]["@type"] === "/cosmos.group.v1.ThresholdDecisionPolicy" && (
-              <div className={styles.item}>
-                <h3>
-                  {"threshold"}
-                </h3>
-                <p>
-                  {policy["decision_policy"]["threshold"]}
-                </p>
-              </div>
-            )}
-            {policy["decision_policy"]["@type"] === "/cosmos.group.v1.PercentageDecisionPolicy" && (
-              <div className={styles.item}>
-                <h3>
-                  {"percentage"}
-                </h3>
-                <p>
-                  {policy["decision_policy"]["percentage"]}
-                </p>
-              </div>
-            )}
-            <div className={styles.item}>
-              <h3>
-                {"voting period"}
-              </h3>
-              <p>
-                {policy["decision_policy"]["windows"]["voting_period"]}
-              </p>
-            </div>
-            <div className={styles.item}>
-              <h3>
-                {"min execution period"}
-              </h3>
-              <p>
-                {policy["decision_policy"]["windows"]["min_execution_period"]}
-              </p>
-            </div>
-            <div className={styles.item}>
-              <h3>
-                {"created at"}
-              </h3>
-              <p>
-                {formatTimestamp(policy["created_at"])}
-              </p>
-            </div>
-            <div className={styles.item}>
-              <h3>
-                {"version"}
-              </h3>
-              <p>
-                {policy["version"]}
-              </p>
-            </div>
+          <div className={styles.item}>
+            <h3>
+              {"description"}
+            </h3>
+            <p>
+              {metadata["description"]}
+            </p>
           </div>
-        )}
-        {error && (
-          <div>
-            {error}
+          <div className={styles.item}>
+            <h3>
+              {"admin"}
+            </h3>
+            <p>
+              {policy["admin"]}
+            </p>
           </div>
-        )}
-      </div>
+          <div className={styles.item}>
+            <h3>
+              {"address"}
+            </h3>
+            <p>
+              {policy["address"]}
+            </p>
+          </div>
+          {policy["decision_policy"]["@type"] === "/cosmos.group.v1.ThresholdDecisionPolicy" && (
+            <div className={styles.item}>
+              <h3>
+                {"threshold"}
+              </h3>
+              <p>
+                {policy["decision_policy"]["threshold"]}
+              </p>
+            </div>
+          )}
+          {policy["decision_policy"]["@type"] === "/cosmos.group.v1.PercentageDecisionPolicy" && (
+            <div className={styles.item}>
+              <h3>
+                {"percentage"}
+              </h3>
+              <p>
+                {policy["decision_policy"]["percentage"]}
+              </p>
+            </div>
+          )}
+          <div className={styles.item}>
+            <h3>
+              {"voting period"}
+            </h3>
+            <p>
+              {policy["decision_policy"]["windows"]["voting_period"]}
+            </p>
+          </div>
+          <div className={styles.item}>
+            <h3>
+              {"min execution period"}
+            </h3>
+            <p>
+              {policy["decision_policy"]["windows"]["min_execution_period"]}
+            </p>
+          </div>
+          <div className={styles.item}>
+            <h3>
+              {"created at"}
+            </h3>
+            <p>
+              {formatTimestamp(policy["created_at"])}
+            </p>
+          </div>
+          <div className={styles.item}>
+            <h3>
+              {"version"}
+            </h3>
+            <p>
+              {policy["version"]}
+            </p>
+          </div>
+        </div>
+      )}
+      {error && (
+        <div>
+          {error}
+        </div>
+      )}
     </div>
   )
 }

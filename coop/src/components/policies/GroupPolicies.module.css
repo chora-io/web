@@ -4,22 +4,3 @@
   color: #FFF !important;
   font-weight: 300 !important;
 }
-
-/* item */
-
-.item {
-  margin: 2em 0;
-}
-
-.item:first-child,
-.item:last-child {
-  margin: 0;
-}
-
-.item h3 {
-  color: var(--color-primary);
-}
-
-.item p {
-  margin: 0.5em 0;
-}
