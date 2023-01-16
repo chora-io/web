@@ -1,48 +1,83 @@
 import * as React from "react"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+
+import { WalletContext } from "chora"
+import { choraTestnet } from "chora/utils/chains"
+
+import { formatTimestamp } from "chora/utils/timestamp"
 
 import * as styles from "./GroupMember.module.css"
 
+const groupId = "1" // TODO: configuration file
+const queryMembers = "cosmos/group/v1/group_members" // TODO(cosmos-sdk): group member query
 const serverUrl = "https://server.chora.io"
 
-const GroupMember = ({ groupId, member }) => {
+const GroupMember = ({ memberAddress }) => {
+
+  const { chainInfo } = useContext(WalletContext)
 
   // error and success
   const [error, setError] = useState<string>("")
+  const [member, setMember] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
 
   useEffect(() => {
-    setMetadata(null)
+    setMember(null)
     setError("")
 
-    // async function workaround
-    const fetchMetadata = async () => {
-
-      // fetch member data from chora server
-      await fetch(serverUrl + "/" + member["metadata"])
-        .then(res => res.json())
-        .then(res => {
-          if (res.error) {
-            setError(res.error)
-            setMetadata(null)
-          } else if (res.context !== "https://schema.chora.io/contexts/group_member.jsonld") {
-            setError("unsupported metadata schema")
-            setMetadata(null)
-          } else {
-            setError("")
-            setMetadata(JSON.parse(res["jsonld"]))
-          }
-        })
-        .catch(err => {
-          setError(err.message)
-        })
+    // error if network is not chora-testnet-1
+    if (chainInfo && chainInfo.chainId !== choraTestnet.chainId) {
+      setError("switch to chora-testnet-1")
     }
 
-    // call async function
-    fetchMetadata().catch(err => {
-      setError(err.message)
-    })
-  }, [member["metadata"]])
+    // fetch members if network is chora-testnet-1
+    if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
+
+      // async function workaround
+      const fetchMemberAndMetadata = async () => {
+
+        // member metadata
+        let iri: string
+
+        // fetch members from selected network
+        await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
+          .then(res => res.json())
+          .then(res => {
+            if (res.code) {
+              setError(res.message)
+            } else {
+              const member = res["members"].find(m => m["member"]["address"] === memberAddress)
+              setMember(member["member"])
+              iri = member["member"]["metadata"]
+            }
+          })
+
+        // fetch member data from chora server
+        await fetch(serverUrl + "/" + iri)
+          .then(res => res.json())
+          .then(res => {
+            if (res.error) {
+              setError(res.error)
+              setMetadata(null)
+            } else if (res.context !== "https://schema.chora.io/contexts/group_member.jsonld") {
+              setError("unsupported metadata schema")
+              setMetadata(null)
+            } else {
+              setError("")
+              setMetadata(JSON.parse(res["jsonld"]))
+            }
+          })
+          .catch(err => {
+            setError(err.message)
+          })
+      }
+
+      // call async function
+      fetchMemberAndMetadata().catch(err => {
+        setError(err.message)
+      })
+    }
+  }, [chainInfo])
 
   return (
     <div className={styles.container}>
@@ -56,18 +91,10 @@ const GroupMember = ({ groupId, member }) => {
           <div>
             <div className={styles.item}>
               <h3>
-                {"group id"}
+                {"name"}
               </h3>
               <p>
-                {groupId}
-              </p>
-            </div>
-            <div className={styles.item}>
-              <h3>
-                {"added at"}
-              </h3>
-              <p>
-                {member["added_at"]}
+                {metadata["name"]}
               </p>
             </div>
             <div className={styles.item}>
@@ -80,26 +107,18 @@ const GroupMember = ({ groupId, member }) => {
             </div>
             <div className={styles.item}>
               <h3>
+                {"added at"}
+              </h3>
+              <p>
+                {formatTimestamp(member["added_at"])}
+              </p>
+            </div>
+            <div className={styles.item}>
+              <h3>
                 {"weight"}
               </h3>
               <p>
                 {member["weight"]}
-              </p>
-            </div>
-            <div className={styles.item}>
-              <h3>
-                {"metadata"}
-              </h3>
-              <p>
-                {member["metadata"]}
-              </p>
-            </div>
-            <div className={styles.item}>
-              <h3>
-                {"metadata name"}
-              </h3>
-              <p>
-                {metadata["name"]}
               </p>
             </div>
           </div>

@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react"
 import { WalletContext } from "chora"
 import { choraTestnet } from "chora/utils/chains"
 
-import GroupPolicy from "./GroupPolicy"
+import GroupPolicyPreview from "./GroupPolicyPreview"
 
 import * as styles from "./GroupPolicies.module.css"
 
@@ -62,7 +62,7 @@ const GroupPolicies = () => {
           </div>
         )}
         {policies && policies.map(policy => (
-          <GroupPolicy
+          <GroupPolicyPreview
             key={policy["address"]}
             policy={policy}
           />

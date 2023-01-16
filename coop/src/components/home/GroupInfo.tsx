@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
 import { choraTestnet } from "chora/utils/chains"
+import { formatTimestamp } from "chora/utils/timestamp"
 
 import * as styles from "./GroupInfo.module.css"
 
@@ -90,26 +91,18 @@ const GroupInfo = () => {
           <div>
             <div className={styles.item}>
               <h3>
-                {"id"}
+                {"name"}
               </h3>
               <p>
-                {group["id"]}
+                {metadata["name"]}
               </p>
             </div>
             <div className={styles.item}>
               <h3>
-                {"version"}
+                {"description"}
               </h3>
               <p>
-                {group["version"]}
-              </p>
-            </div>
-            <div className={styles.item}>
-              <h3>
-                {"created at"}
-              </h3>
-              <p>
-                {group["created_at"]}
+                {metadata["description"]}
               </p>
             </div>
             <div className={styles.item}>
@@ -122,26 +115,18 @@ const GroupInfo = () => {
             </div>
             <div className={styles.item}>
               <h3>
-                {"metadata"}
+                {"created at"}
               </h3>
               <p>
-                {group["metadata"]}
+                {formatTimestamp(group["created_at"])}
               </p>
             </div>
             <div className={styles.item}>
               <h3>
-                {"metadata name"}
+                {"version"}
               </h3>
               <p>
-                {metadata["name"]}
-              </p>
-            </div>
-            <div className={styles.item}>
-              <h3>
-                {"metadata description"}
-              </h3>
-              <p>
-                {metadata["description"]}
+                {group["version"]}
               </p>
             </div>
           </div>

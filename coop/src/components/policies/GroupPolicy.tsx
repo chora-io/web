@@ -1,48 +1,81 @@
 import * as React from "react"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+
+import { WalletContext } from "chora"
+import { choraTestnet } from "chora/utils/chains"
+
+import { formatTimestamp } from "chora/utils/timestamp"
 
 import * as styles from "./GroupPolicy.module.css"
 
+const queryPolicy = "cosmos/group/v1/group_policy_info"
 const serverUrl = "https://server.chora.io"
 
-const GroupPolicy = ({ policy }) => {
+const GroupPolicy = ({ policyAddress }) => {
+
+  const { chainInfo } = useContext(WalletContext)
 
   // error and success
   const [error, setError] = useState<string>("")
+  const [policy, setPolicy] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
 
   useEffect(() => {
-    setMetadata(null)
+    setPolicy(null)
     setError("")
 
-    // async function workaround
-    const fetchMetadata = async () => {
-
-      // fetch policy data from chora server
-      await fetch(serverUrl + "/" + policy["metadata"])
-        .then(res => res.json())
-        .then(res => {
-          if (res.error) {
-            setError(res.error)
-            setMetadata(null)
-          } else if (res.context !== "https://schema.chora.io/contexts/group_policy.jsonld") {
-            setError("unsupported metadata schema")
-            setMetadata(null)
-          } else {
-            setError("")
-            setMetadata(JSON.parse(res["jsonld"]))
-          }
-        })
-        .catch(err => {
-          setError(err.message)
-        })
+    // error if network is not chora-testnet-1
+    if (chainInfo && chainInfo.chainId !== choraTestnet.chainId) {
+      setError("switch to chora-testnet-1")
     }
 
-    // call async function
-    fetchMetadata().catch(err => {
-      setError(err.message)
-    })
-  }, [policy["metadata"]])
+    // fetch policies if network is chora-testnet-1
+    if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
+
+      // async function workaround
+      const fetchPolicyAndMetadata = async () => {
+
+        // policy metadata
+        let iri: string
+
+        // fetch policies from selected network
+        await fetch(chainInfo.rest + "/" + queryPolicy + "/" + policyAddress)
+          .then(res => res.json())
+          .then(res => {
+            if (res.code) {
+              setError(res.message)
+            } else {
+              setPolicy(res["info"])
+              iri = res["info"]["metadata"]
+            }
+          })
+
+        // fetch policy data from chora server
+        await fetch(serverUrl + "/" + iri)
+          .then(res => res.json())
+          .then(res => {
+            if (res.error) {
+              setError(res.error)
+              setMetadata(null)
+            } else if (res.context !== "https://schema.chora.io/contexts/group_policy.jsonld") {
+              setError("unsupported metadata schema")
+              setMetadata(null)
+            } else {
+              setError("")
+              setMetadata(JSON.parse(res["jsonld"]))
+            }
+          })
+          .catch(err => {
+            setError(err.message)
+          })
+      }
+
+      // call async function
+      fetchPolicyAndMetadata().catch(err => {
+        setError(err.message)
+      })
+    }
+  }, [chainInfo])
 
   return (
     <div className={styles.container}>
@@ -56,26 +89,18 @@ const GroupPolicy = ({ policy }) => {
           <div>
             <div className={styles.item}>
               <h3>
-                {"group id"}
+                {"name"}
               </h3>
               <p>
-                {policy["group_id"]}
+                {metadata["name"]}
               </p>
             </div>
             <div className={styles.item}>
               <h3>
-                {"version"}
+                {"description"}
               </h3>
               <p>
-                {policy["version"]}
-              </p>
-            </div>
-            <div className={styles.item}>
-              <h3>
-                {"created at"}
-              </h3>
-              <p>
-                {policy["created_at"]}
+                {metadata["description"]}
               </p>
             </div>
             <div className={styles.item}>
@@ -94,36 +119,56 @@ const GroupPolicy = ({ policy }) => {
                 {policy["address"]}
               </p>
             </div>
+            {policy["decision_policy"]["@type"] === "/cosmos.group.v1.ThresholdDecisionPolicy" && (
+              <div className={styles.item}>
+                <h3>
+                  {"threshold"}
+                </h3>
+                <p>
+                  {policy["decision_policy"]["threshold"]}
+                </p>
+              </div>
+            )}
+            {policy["decision_policy"]["@type"] === "/cosmos.group.v1.PercentageDecisionPolicy" && (
+              <div className={styles.item}>
+                <h3>
+                  {"percentage"}
+                </h3>
+                <p>
+                  {policy["decision_policy"]["percentage"]}
+                </p>
+              </div>
+            )}
             <div className={styles.item}>
               <h3>
-                {"decision policy"}
+                {"voting period"}
               </h3>
               <p>
-                {JSON.stringify(policy["decision_policy"])}
+                {policy["decision_policy"]["windows"]["voting_period"]}
               </p>
             </div>
             <div className={styles.item}>
               <h3>
-                {"metadata"}
+                {"min execution period"}
               </h3>
               <p>
-                {policy["metadata"]}
+                {policy["decision_policy"]["windows"]["min_execution_period"]}
               </p>
             </div>
             <div className={styles.item}>
               <h3>
-                {"metadata name"}
+                {"created at"}
               </h3>
               <p>
-                {metadata["name"]}
+                {formatTimestamp(policy["created_at"])}
               </p>
             </div>
             <div className={styles.item}>
               <h3>
-                {"metadata description"}
+                {"version"}
               </h3>
               <p>
-                {metadata["description"]}
+                {policy["version"]}
               </p>
             </div>
           </div>

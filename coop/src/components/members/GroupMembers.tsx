@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react"
 import { WalletContext } from "chora"
 import { choraTestnet } from "chora/utils/chains"
 
-import GroupMember from "./GroupMember"
+import GroupMemberPreview from "./GroupMemberPreview"
 
 import * as styles from "./GroupMembers.module.css"
 
@@ -62,9 +62,8 @@ const GroupMembers = () => {
           </div>
         )}
         {members && members.map(member => (
-          <GroupMember
+          <GroupMemberPreview
             key={member["member"]["address"]}
-            groupId={member["group_id"]}
             member={member["member"]}
           />
         ))}

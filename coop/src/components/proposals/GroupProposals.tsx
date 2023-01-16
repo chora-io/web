@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react"
 import { WalletContext } from "chora"
 import { choraTestnet } from "chora/utils/chains"
 
-import GroupProposal from "./GroupProposal"
+import GroupProposalPreview from "./GroupProposalPreview"
 
 import * as styles from "./GroupProposals.module.css"
 
@@ -83,7 +83,7 @@ const GroupProposals = () => {
           </div>
         )}
         {proposals && proposals.map(proposal => (
-          <GroupProposal
+          <GroupProposalPreview
             key={proposal["id"]}
             proposal={proposal}
           />
