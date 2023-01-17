@@ -64,10 +64,10 @@ const GroupPolicy = ({ policy }) => {
           </div>
           <div className={styles.item}>
             <h3>
-              {"description"}
+              {"address"}
             </h3>
             <p>
-              {metadata["description"]}
+              {policy["address"]}
             </p>
           </div>
           <Link to={`/policies/?address=${policy["address"]}`}>

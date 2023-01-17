@@ -60,10 +60,7 @@ const Geonodes = () => {
                 setError(res.message)
               } else if (res["nodes"].length > 0) {
                 const ns = nodes || []
-                res["nodes"].map(n => ns.push({
-                  curator: address,
-                  ...n,
-                }))
+                res["nodes"].map(n => ns.push({ curator: address, ...n }))
                 setNodes(ns)
               }
             })

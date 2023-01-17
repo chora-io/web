@@ -11,9 +11,12 @@
   margin: 2em 0;
 }
 
-.item:first-child,
+.item:first-child {
+  margin-top: 0;
+}
+
 .item:last-child {
-  margin: 0;
+  margin-bottom: 0;
 }
 
 .item h3 {

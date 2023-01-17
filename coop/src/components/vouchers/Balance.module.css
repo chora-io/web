@@ -5,6 +5,22 @@
   font-weight: 300 !important;
 }
 
+/* balance */
+
+.balance {
+  border-top: 1px solid #333;
+  padding: 2em 0;
+}
+
+.balance:first-child {
+  padding-top: 0;
+}
+
+.balance:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
 /* item */
 
 .item {

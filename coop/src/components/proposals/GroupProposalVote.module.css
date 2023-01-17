@@ -5,6 +5,22 @@
   font-weight: 300 !important;
 }
 
+/* vote */
+
+.vote {
+  border-bottom: 1px solid #333;
+  padding: 2em 0;
+}
+
+.vote:first-child {
+  padding-top: 0;
+}
+
+.vote:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
 /* item */
 
 .item {
