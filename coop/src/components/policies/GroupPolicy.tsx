@@ -50,6 +50,11 @@ const GroupPolicy = ({ policyAddress }) => {
             }
           })
 
+        // return on error (iri never set)
+        if (typeof iri === "undefined") {
+          return
+        }
+
         // fetch policy data from chora server
         await fetch(serverUrl + "/" + iri)
           .then(res => res.json())

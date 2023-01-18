@@ -52,6 +52,11 @@ const GroupMember = ({ memberAddress }) => {
             }
           })
 
+        // return on error (iri never set)
+        if (typeof iri === "undefined") {
+          return
+        }
+
         // fetch member data from chora server
         await fetch(serverUrl + "/" + iri)
           .then(res => res.json())

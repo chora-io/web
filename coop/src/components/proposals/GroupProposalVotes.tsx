@@ -7,6 +7,7 @@ import { choraTestnet } from "chora/utils/chains"
 
 import * as styles from "./GroupProposalVotes.module.css"
 
+const queryProposal = "cosmos/group/v1/proposal"
 const queryVotes = "cosmos/group/v1/votes_by_proposal"
 
 const GroupProposalVotes = ({ proposalId }) => {
@@ -15,6 +16,7 @@ const GroupProposalVotes = ({ proposalId }) => {
 
   // error and success
   const [error, setError] = useState<string>("")
+  const [proposal, setProposal] = useState<any>(null)
   const [votes, setVotes] = useState<any>(null)
 
   useEffect(() => {
@@ -30,7 +32,18 @@ const GroupProposalVotes = ({ proposalId }) => {
     if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
 
       // async function workaround
-      const fetchVotes = async () => {
+      const fetchProposalAndVotes = async () => {
+
+        // fetch proposal from selected network
+        await fetch(chainInfo.rest + "/" + queryProposal + "/" + proposalId)
+          .then(res => res.json())
+          .then(res => {
+            if (res.code) {
+              setError(res.message)
+            } else {
+              setProposal(res["proposal"])
+            }
+          })
 
         // fetch votes from selected network
         await fetch(chainInfo.rest + "/" + queryVotes + "/" + proposalId)
@@ -45,11 +58,20 @@ const GroupProposalVotes = ({ proposalId }) => {
       }
 
       // call async function
-      fetchVotes().catch(err => {
+      fetchProposalAndVotes().catch(err => {
         setError(err.message)
       })
     }
   }, [chainInfo])
+
+  // whether votes have been finalized
+  const votesFinalized = (
+    proposal &&
+    (
+      proposal["status"] === "PROPOSAL_STATUS_ACCEPTED" ||
+      proposal["status"] === "PROPOSAL_STATUS_REJECTED"
+    )
+  )
 
   return (
     <div className={styles.container}>
@@ -81,9 +103,9 @@ const GroupProposalVotes = ({ proposalId }) => {
           </Link>
         </div>
       ))}
-      {votes && !error && votes.length === 0 && (
+      {votes && votes.length === 0 && !error && (
         <div>
-          {"no votes found"}
+          {votesFinalized ? "votes have been finalized and removed from state" : "no votes found"}
         </div>
       )}
       {error && (

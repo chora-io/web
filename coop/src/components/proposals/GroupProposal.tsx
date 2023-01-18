@@ -50,6 +50,11 @@ const GroupProposal = ({ proposalId }) => {
             }
           })
 
+        // return on error (iri never set)
+        if (typeof iri === "undefined") {
+          return
+        }
+
         // fetch proposal data from chora server
         await fetch(serverUrl + "/" + iri)
           .then(res => res.json())
@@ -76,6 +81,15 @@ const GroupProposal = ({ proposalId }) => {
       })
     }
   }, [chainInfo])
+
+  // whether votes have been finalized
+  const votesFinalized = (
+    proposal &&
+    (
+      proposal["status"] === "PROPOSAL_STATUS_ACCEPTED" ||
+      proposal["status"] === "PROPOSAL_STATUS_REJECTED"
+    )
+  )
 
   return (
     <div className={styles.container}>
@@ -166,53 +180,57 @@ const GroupProposal = ({ proposalId }) => {
               </p>
             )}
             {proposal["messages"].length > 0 && (
-              <p>
-                <pre>
+              <pre>
+                <p>
                   {JSON.stringify(proposal["messages"], null, " ")}
-                </pre>
-              </p>
+                </p>
+              </pre>
             )}
           </div>
-          <div className={styles.item}>
-            <h3>
-              {"final tally yes"}
-            </h3>
-            <p>
-              {proposal["final_tally_result"]["yes_count"]}
-            </p>
-          </div>
-          <div className={styles.item}>
-            <h3>
-              {"final tally abstain"}
-            </h3>
-            <p>
-              {proposal["final_tally_result"]["abstain_count"]}
-            </p>
-          </div>
-          <div className={styles.item}>
-            <h3>
-              {"final tally no"}
-            </h3>
-            <p>
-              {proposal["final_tally_result"]["no_count"]}
-            </p>
-          </div>
-          <div className={styles.item}>
-            <h3>
-              {"final tally no with veto"}
-            </h3>
-            <p>
-              {proposal["final_tally_result"]["no_with_veto_count"]}
-            </p>
-          </div>
-          <div className={styles.item}>
-            <h3>
-              {"executor result"}
-            </h3>
-            <p>
-              {proposal["executor_result"]}
-            </p>
-          </div>
+          {votesFinalized && (
+            <>
+              <div className={styles.item}>
+                <h3>
+                  {"final tally yes"}
+                </h3>
+                <p>
+                  {proposal["final_tally_result"]["yes_count"]}
+                </p>
+              </div>
+              <div className={styles.item}>
+                <h3>
+                  {"final tally abstain"}
+                </h3>
+                <p>
+                  {proposal["final_tally_result"]["abstain_count"]}
+                </p>
+              </div>
+              <div className={styles.item}>
+                <h3>
+                  {"final tally no"}
+                </h3>
+                <p>
+                  {proposal["final_tally_result"]["no_count"]}
+                </p>
+              </div>
+              <div className={styles.item}>
+                <h3>
+                  {"final tally no with veto"}
+                </h3>
+                <p>
+                  {proposal["final_tally_result"]["no_with_veto_count"]}
+                </p>
+              </div>
+              <div className={styles.item}>
+                <h3>
+                  {"executor result"}
+                </h3>
+                <p>
+                  {proposal["executor_result"]}
+                </p>
+              </div>
+            </>
+          )}
           <div className={styles.item}>
             <h3>
               {"group version"}

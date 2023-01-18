@@ -52,6 +52,11 @@ const GroupInfo = () => {
             }
           })
 
+        // return on error (iri never set)
+        if (typeof iri === "undefined") {
+          return
+        }
+
         // fetch group data from chora server
         await fetch(serverUrl + "/" + iri)
           .then(res => res.json())

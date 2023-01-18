@@ -18,10 +18,10 @@ const Vouchers = () => {
 
   // error and success
   const [error, setError] = useState<string>("")
-  const [vouchers, setNodes] = useState<any>(null)
+  const [vouchers, setVouchers] = useState<any>(null)
 
   useEffect(() => {
-    setNodes(null)
+    setVouchers(null)
     setError("")
 
     // error if network is not chora-testnet-1
@@ -50,7 +50,10 @@ const Vouchers = () => {
             }
           })
 
-        addresses && addresses.map(async address => {
+        const vs = vouchers || []
+
+        // create promise for all async fetch calls
+        const promise = addresses && addresses.map(async address => {
 
           // fetch vouchers from selected network
           await fetch(chainInfo.rest + "/" + queryVouchers + "/" + address)
@@ -58,15 +61,15 @@ const Vouchers = () => {
             .then(res => {
               if (res.code) {
                 setError(res.message)
-              } else if (res["vouchers"].length > 0) {
-                const ns = vouchers || []
-                res["vouchers"].map(v => ns.push({
-                  issuer: address,
-                  ...v,
-                }))
-                setNodes(ns)
+              } else {
+                res["vouchers"].map(v => vs.push({ issuer: address, ...v }))
               }
             })
+        })
+
+        // set state after promise all complete
+        await Promise.all(promise).then(() => {
+          setVouchers(vs)
         })
       }
 
@@ -90,6 +93,11 @@ const Vouchers = () => {
           voucher={voucher}
         />
       ))}
+      {vouchers && vouchers.length === 0 && !error && (
+        <div>
+          {"no vouchers found"}
+        </div>
+      )}
       {error && (
         <div>
           {error}

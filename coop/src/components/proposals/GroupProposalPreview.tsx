@@ -2,8 +2,6 @@ import * as React from "react"
 import { useEffect, useState } from "react"
 import { Link } from "gatsby"
 
-import { formatTimestamp } from "chora/utils/timestamp"
-
 import * as styles from "./GroupProposalPreview.module.css"
 
 const serverUrl = "https://server.chora.io"
@@ -70,22 +68,6 @@ const GroupProposalPreview = ({ proposal }) => {
             </h3>
             <p>
               {metadata["name"]}
-            </p>
-          </div>
-          <div className={styles.item}>
-            <h3>
-              {"description"}
-            </h3>
-            <p>
-              {metadata["description"]}
-            </p>
-          </div>
-          <div className={styles.item}>
-            <h3>
-              {"voting period end"}
-            </h3>
-            <p>
-              {formatTimestamp(proposal["voting_period_end"])}
             </p>
           </div>
           <Link to={`/proposals/?id=${proposal["id"]}`}>

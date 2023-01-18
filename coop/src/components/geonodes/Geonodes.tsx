@@ -50,7 +50,10 @@ const Geonodes = () => {
             }
           })
 
-        addresses && addresses.map(async address => {
+        const ns = nodes || []
+
+        // create promise for all async fetch calls
+        const promise = addresses && addresses.map(async address => {
 
           // fetch nodes from selected network
           await fetch(chainInfo.rest + "/" + queryGeonodes + "/" + address)
@@ -58,12 +61,15 @@ const Geonodes = () => {
             .then(res => {
               if (res.code) {
                 setError(res.message)
-              } else if (res["nodes"].length > 0) {
-                const ns = nodes || []
+              } else {
                 res["nodes"].map(n => ns.push({ curator: address, ...n }))
-                setNodes(ns)
               }
             })
+        })
+
+        // set state after promise all complete
+        await Promise.all(promise).then(() => {
+          setNodes(ns)
         })
       }
 
@@ -87,6 +93,11 @@ const Geonodes = () => {
           node={node}
         />
       ))}
+      {nodes && nodes.length === 0 && !error && (
+        <div>
+          {"no nodes found"}
+        </div>
+      )}
       {error && (
         <div>
           {error}

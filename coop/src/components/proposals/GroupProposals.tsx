@@ -50,7 +50,10 @@ const GroupProposals = () => {
             }
           })
 
-        addresses && addresses.map(async address => {
+        const ps = proposals || []
+
+        // create promise for all async fetch calls
+        const promise = addresses && addresses.map(async address => {
 
           // fetch proposals from selected network
           await fetch(chainInfo.rest + "/" + queryProposals + "/" + address)
@@ -58,12 +61,15 @@ const GroupProposals = () => {
             .then(res => {
               if (res.code) {
                 setError(res.message)
-              } else if (res["proposals"].length > 0) {
-                const ps = proposals || []
+              } else {
                 res["proposals"].map(p => ps.push(p))
-                setProposals(ps)
               }
             })
+        })
+
+        // set state after promise all complete
+        await Promise.all(promise).then(() => {
+          setProposals(ps)
         })
       }
 
@@ -87,6 +93,11 @@ const GroupProposals = () => {
           proposal={proposal}
         />
       ))}
+      {proposals && proposals.length === 0 && !error && (
+        <div>
+          {"no proposals found"}
+        </div>
+      )}
       {error && (
         <div>
           {error}

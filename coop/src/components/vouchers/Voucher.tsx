@@ -48,6 +48,11 @@ const Voucher = ({ voucherId }) => {
             }
           })
 
+        // return on error (iri never set)
+        if (typeof iri === "undefined") {
+          return
+        }
+
         // fetch voucher data from chora server
         await fetch(serverUrl + "/" + iri)
           .then(res => res.json())
