@@ -5,3 +5,8 @@
 .section {
     composes: section from "../../styles/section.css";
 }
+
+.link {
+    font-size: 1.2em;
+    margin: 2em 0;
+}

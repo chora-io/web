@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Link } from "gatsby"
 
 import Main from "../../layouts/Main"
 import GroupProposal from "../../components/proposals/GroupProposal"
@@ -23,6 +24,11 @@ const Proposals = ({ location }) => {
             <h1>
               {"group proposals"}
             </h1>
+            <div className={styles.link}>
+              <Link to="/proposals/submit">
+                {"new proposal"}
+              </Link>
+            </div>
             <div className={styles.section}>
               <GroupProposals />
             </div>

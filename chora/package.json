@@ -17,10 +17,10 @@
     "lint": "echo 'lint not configured'",
     "format": "echo 'format not configured'",
     "test": "echo 'test not configured'",
-    "build": "ts-node ./build.ts",
+    "build": "sh ./scripts/protocgen.sh && ts-node ./build.ts",
     "start": "echo 'start not configured'",
     "serve": "echo 'serve not configured'",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf api dist"
   },
   "dependencies": {
     "@keplr-wallet/proto-types": "^0.11.17",
