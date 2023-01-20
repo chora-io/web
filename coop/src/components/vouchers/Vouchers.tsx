@@ -53,7 +53,7 @@ const Vouchers = () => {
         const vs = vouchers || []
 
         // create promise for all async fetch calls
-        const promise = addresses && addresses.map(async address => {
+        const promise = addresses.map(async address => {
 
           // fetch vouchers from selected network
           await fetch(chainInfo.rest + "/" + queryVouchers + "/" + address)

@@ -53,7 +53,7 @@ const GroupProposals = () => {
         const ps = proposals || []
 
         // create promise for all async fetch calls
-        const promise = addresses && addresses.map(async address => {
+        const promise = addresses.map(async address => {
 
           // fetch proposals from selected network
           await fetch(chainInfo.rest + "/" + queryProposals + "/" + address)

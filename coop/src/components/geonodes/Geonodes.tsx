@@ -53,7 +53,7 @@ const Geonodes = () => {
         const ns = nodes || []
 
         // create promise for all async fetch calls
-        const promise = addresses && addresses.map(async address => {
+        const promise = addresses.map(async address => {
 
           // fetch nodes from selected network
           await fetch(chainInfo.rest + "/" + queryGeonodes + "/" + address)
