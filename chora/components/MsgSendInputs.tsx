@@ -4,25 +4,32 @@ import { useEffect, useState } from "react"
 import { MsgSend } from "@keplr-wallet/proto-types/cosmos/bank/v1beta1/tx"
 
 import InputAddress from "./InputAddress"
-import InputAmount from "./InputAmount"
+import InputDenom from "./InputDenom"
+import InputNumber from "./InputNumber"
 
 const MsgSendInputs = ({ network, setMessage }: any) => {
 
   const [fromAddress, setFromAddress] = useState<string>("")
   const [toAddress, setToAddress] = useState<string>("")
+  const [denom, setDenom] = useState<string>("")
   const [amount, setAmount] = useState<string>("")
 
   useEffect(() => {
 
     const msg = {
         $type: "cosmos.bank.v1beta1.MsgSend",
-        fromAddress: fromAddress ? fromAddress : undefined,
-        toAddress: toAddress ? toAddress : undefined,
-        amount: amount ? amount : undefined,
+        fromAddress: fromAddress,
+        toAddress: toAddress,
+        amount: [
+          {
+            denom: denom,
+            amount: amount,
+          }
+        ],
     } as MsgSend
 
     const msgAny = {
-        typeUrl: "/chora.voucher.v1.MsgIssue",
+        typeUrl: "/cosmos.bank.v1beta1.MsgSend",
         value: MsgSend.encode(msg).finish(),
     }
 
@@ -43,18 +50,22 @@ const MsgSendInputs = ({ network, setMessage }: any) => {
       <InputAddress
         id="msg-send-to-address"
         label="to address"
-        long={true}
         network={network}
         address={toAddress}
         setAddress={setToAddress}
       />
-      <InputAmount
+      <InputDenom
+        id="msg-send-denom"
+        label="denom"
+        network={network}
+        denom={denom}
+        setDenom={setDenom}
+      />
+      <InputNumber
         id="msg-send-amount"
         label="amount"
-        long={true}
-        network={network}
-        amount={amount}
-        setAmount={setAmount}
+        number={amount}
+        setNumber={setAmount}
       />
     </>
   )

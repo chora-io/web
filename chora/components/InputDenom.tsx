@@ -1,12 +1,12 @@
 import * as React from "react"
 
-const defaultId = "amount"
-const defaultLabel = "amount"
+const defaultId = "denom"
+const defaultLabel = "denom"
 
-const choraAmount = "20uchora"
-const regenAmount = "20uregen"
+const choraAmount = "uchora"
+const regenAmount = "uregen"
 
-const InputAmount = ({ id, label, placeholder, network, amount, setAmount }: any) => {
+const InputDenom = ({ id, label, placeholder, network, denom, setDenom }: any) => {
 
   let defaultPlaceholder: string
   if (network === undefined || network.includes("chora")) {
@@ -20,12 +20,12 @@ const InputAmount = ({ id, label, placeholder, network, amount, setAmount }: any
       {label ? label : defaultLabel}
       <input
         id={id ? id : defaultId}
-        value={amount}
+        value={denom}
         placeholder={placeholder || defaultPlaceholder}
-        onChange={event => setAmount(event.target.value)}
+        onChange={event => setDenom(event.target.value)}
       />
     </label>
   )
 }
 
-export default InputAmount
+export default InputDenom
