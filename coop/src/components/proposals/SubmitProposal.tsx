@@ -7,9 +7,10 @@ import { Exec } from "chora/api/cosmos/group/v1/types"
 import { signAndBroadcast } from "chora/utils/tx"
 
 import InputAddress from "chora/components/InputAddress"
-import SelectMessage from "chora/components/SelectMessage"
 import InputIRI from "chora/components/InputIRI"
 import ResultTx from "chora/components/ResultTx"
+import SelectExecution from "chora/components/SelectExecution"
+import SelectMessage from "chora/components/SelectMessage"
 
 import * as styles from "./SubmitProposal.module.css"
 
@@ -21,6 +22,7 @@ const SubmitProposal = () => {
   const [address, setAddress] = useState<string>("")
   const [metadata, setMetadata] = useState<string>("")
   const [message, setMessage] = useState<string>("")
+  const [execution, setExecution] = useState<number>(Exec["EXEC_UNSPECIFIED"])
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -38,7 +40,7 @@ const SubmitProposal = () => {
       groupPolicyAddress: address,
       metadata: metadata,
       messages: [message],
-      exec: Exec["EXEC_UNSPECIFIED"],
+      exec: execution,
     } as MsgSubmitProposal
 
     const encMsg = MsgSubmitProposal.encode(msg).finish()
@@ -73,8 +75,13 @@ const SubmitProposal = () => {
           <SelectMessage
             id="proposal-message"
             label="proposal message"
-            message={message}
             setMessage={setMessage}
+          />
+          <SelectExecution
+            id="proposal-execution"
+            label="proposal execution"
+            execution={execution}
+            setExecution={setExecution}
           />
           <button type="submit">
             {"submit"}

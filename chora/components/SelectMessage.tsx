@@ -1,6 +1,7 @@
 import * as React from "react"
 import { useState } from "react"
 
+import MsgIssueInputs from "./MsgIssueInputs"
 import MsgSendInputs from "./MsgSendInputs"
 
 const defaultId = "message"
@@ -8,10 +9,11 @@ const defaultLabel = "message"
 
 // all available messages
 const defaultOptions = [
+  "chora.voucher.v1.MsgIssue",
   "cosmos.bank.v1beta1.MsgSend",
 ]
 
-const SelectMessage = ({ id, label, options, network, message, setMessage }: any) => {
+const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
 
   const opts = options || defaultOptions
 
@@ -30,16 +32,21 @@ const SelectMessage = ({ id, label, options, network, message, setMessage }: any
             {"--- select ---"}
           </option>
           {opts.map((o: string) => (
-            <option value={o}>
+            <option key={o} value={o}>
               {o}
             </option>
           ))}
         </select>
       </label>
+      {selected === "chora.voucher.v1.MsgIssue" && (
+        <MsgIssueInputs
+          network={network}
+          setMessage={setMessage}
+        />
+      )}
       {selected === "cosmos.bank.v1beta1.MsgSend" && (
         <MsgSendInputs
           network={network}
-          message={message}
           setMessage={setMessage}
         />
       )}

@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package chora.voucher.v1;
+
+import "cosmos/msg/v1/msg.proto";
+import "gogoproto/gogo.proto";
+import "google/protobuf/timestamp.proto";
+
+// MsgCreate is the Msg/Create request type.
+message MsgCreate {
+  option (cosmos.msg.v1.signer) = "issuer";
+
+  // issuer is the address of the voucher issuer.
+  string issuer = 1;
+
+  // metadata is the metadata of the voucher.
+  string metadata = 2;
+}
+
+// MsgIssue is the Msg/Issue request type.
+message MsgIssue {
+  option (cosmos.msg.v1.signer) = "issuer";
+
+  // id is the unique identifier of the voucher.
+  uint64 id = 1;
+
+  // issuer is the address of the voucher issuer.
+  string issuer = 2;
+
+  // recipient is the address of the recipient.
+  string recipient = 3;
+
+  // amount is the amount of vouchers to issue.
+  string amount = 4;
+
+  // expiration is the expiration of the vouchers.
+  google.protobuf.Timestamp expiration = 5 [ (gogoproto.stdtime) = true ];
+
+  // metadata is the metadata of the issuance.
+  string metadata = 6;
+}
+
+// MsgUpdateIssuer is the Msg/UpdateIssuer request type.
+message MsgUpdateIssuer {
+  option (cosmos.msg.v1.signer) = "issuer";
+
+  // id is the unique identifier of the voucher.
+  uint64 id = 1;
+
+  // issuer is the address of the voucher issuer.
+  string issuer = 2;
+
+  // new_issuer is the address of the new issuer.
+  string new_issuer = 3;
+}
+
+// MsgUpdateMetadata is the Msg/UpdateMetadata request type.
+message MsgUpdateMetadata {
+  option (cosmos.msg.v1.signer) = "issuer";
+
+  // id is the unique identifier of the voucher.
+  uint64 id = 1;
+
+  // issuer is the address of the voucher issuer.
+  string issuer = 2;
+
+  // new_metadata is the new metadata of the voucher.
+  string new_metadata = 3;
+}

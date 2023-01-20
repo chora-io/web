@@ -45,8 +45,8 @@ const GroupProposalVote = ({ proposalId, voterAddress }) => {
             if (res.code) {
               setError(res.message)
             } else {
-              setVote(res)
-              iri = res["metadata"]
+              setVote(res["vote"])
+              iri = res["vote"]["metadata"]
             }
           })
 
