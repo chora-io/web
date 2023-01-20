@@ -81,7 +81,7 @@ const GroupProposalVotes = ({ proposalId }) => {
         </div>
       )}
       {votes && !error && votes.map(vote => (
-        <div className={styles.votes}>
+        <div className={styles.votes} key={vote["voter"]}>
           <div className={styles.item}>
             <h3>
               {"voter"}

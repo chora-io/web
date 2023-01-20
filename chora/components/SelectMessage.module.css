@@ -1,0 +1,11 @@
+/* message */
+
+.message {
+  box-shadow: 0 0 4px rgba(100, 100, 100, 0.5);
+  margin-bottom: 2em;
+  padding: 2em 2em 0.5em;
+}
+
+.message h3 {
+  padding-bottom: 2em;
+}

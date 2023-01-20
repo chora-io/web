@@ -2,12 +2,12 @@ import * as React from "react"
 import { useEffect, useState } from "react"
 import * as Long from "long"
 
-import { MsgIssue } from "../api/chora/voucher/v1/msg"
+import { MsgIssue } from "../../api/chora/voucher/v1/msg"
 
-import InputAddress from "./InputAddress"
-import InputIRI from "./InputIRI"
-import InputNumber from "./InputNumber"
-import InputTimestamp from "./InputTimestamp"
+import InputAddress from "../InputAddress"
+import InputIRI from "../InputIRI"
+import InputNumber from "../InputNumber"
+import InputTimestamp from "../InputTimestamp"
 
 const MsgIssueInputs = ({ network, setMessage }: any) => {
 
@@ -26,7 +26,7 @@ const MsgIssueInputs = ({ network, setMessage }: any) => {
         issuer: issuer,
         recipient: recipient,
         amount: amount,
-        expiration: new Date(expiration).toISOString(),
+        expiration: new Date(expiration),
         metadata: metadata,
     } as MsgIssue
 
@@ -42,8 +42,8 @@ const MsgIssueInputs = ({ network, setMessage }: any) => {
   return (
     <>
       <InputNumber
-        id="msg-issue-voucher-id"
-        label="voucher id"
+        id="msg-issue-id"
+        label="id"
         network={network}
         number={id}
         setNumber={setId}

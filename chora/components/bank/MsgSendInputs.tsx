@@ -3,9 +3,9 @@ import { useEffect, useState } from "react"
 
 import { MsgSend } from "@keplr-wallet/proto-types/cosmos/bank/v1beta1/tx"
 
-import InputAddress from "./InputAddress"
-import InputDenom from "./InputDenom"
-import InputNumber from "./InputNumber"
+import InputAddress from "../InputAddress"
+import InputDenom from "../InputDenom"
+import InputNumber from "../InputNumber"
 
 const MsgSendInputs = ({ network, setMessage }: any) => {
 

@@ -1,5 +1,6 @@
 import * as React from "react"
 import { useContext, useEffect, useState } from "react"
+import * as jsonld from "jsonld"
 
 import { WalletContext } from "chora"
 import { MsgSubmitProposal } from "chora/api/cosmos/group/v1/tx"
@@ -7,7 +8,7 @@ import { Exec } from "chora/api/cosmos/group/v1/types"
 import { choraTestnet } from "chora/utils/chains"
 import { signAndBroadcast } from "chora/utils/tx"
 
-import InputIRI from "chora/components/InputIRI"
+import InputString from "chora/components/InputString"
 import ResultTx from "chora/components/ResultTx"
 import SelectAccount from "chora/components/SelectAccount"
 import SelectExecution from "chora/components/SelectExecution"
@@ -21,19 +22,17 @@ const serverUrl = "https://server.chora.io"
 
 const SubmitProposal = () => {
 
-  const { chainInfo, network, wallet } = useContext(WalletContext)
+  const { chainInfo, wallet } = useContext(WalletContext)
 
   // policies
   const [policies, setPolicies] = useState<any>(null)
 
   // form input
   const [address, setAddress] = useState<string>("")
-  const [metadata, setMetadata] = useState<string>("")
+  const [name, setName] = useState<string>("")
+  const [description, setDescription] = useState<string>("")
   const [message, setMessage] = useState<string>("")
   const [execution, setExecution] = useState<number>(Exec["EXEC_UNSPECIFIED"])
-
-  // form input metadata
-  // ...
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -54,7 +53,7 @@ const SubmitProposal = () => {
       // async function workaround
       const fetchPoliciesAndMetadata = async () => {
 
-      const ps = []
+      let ps = []
 
         // fetch policies from selected network
         await fetch(chainInfo.rest + "/" + queryPolicies + "/" + groupId)
@@ -94,6 +93,20 @@ const SubmitProposal = () => {
 
         // set state after promise all complete
         await Promise.all(promise).then(() => {
+
+          // sort policies by name
+          ps = ps.sort((a, b) => {
+            const nameA = a.name.toUpperCase()
+            const nameB = b.name.toUpperCase()
+            if (nameA < nameB) {
+              return -1
+            }
+            if (nameA > nameB) {
+              return 1
+            }
+            return 0
+          })
+
           setPolicies(ps)
         })
       }
@@ -111,11 +124,63 @@ const SubmitProposal = () => {
     setError("")
     setSuccess("")
 
+    // set doc
+    const doc = {
+      "@context": "https://schema.chora.io/contexts/group_proposal.jsonld",
+      name: name,
+      description: description,
+    }
+
+    // check and canonize JSON-LD
+    const canonized = await jsonld.canonize(doc, {
+      algorithm: "URDNA2015",
+      format: "application/n-quads",
+    }).catch(err => {
+      setError(err.message)
+      return
+    })
+
+    if (canonized == "") {
+      setError("JSON-LD empty after canonized")
+      return
+    }
+
+    const body = {
+      canon: "URDNA2015",
+      context: "https://schema.chora.io/contexts/group_proposal.jsonld",
+      digest: "BLAKE2B_256",
+      jsonld: JSON.stringify(doc),
+      merkle: "UNSPECIFIED"
+    }
+
+    let iri: string
+
+    await fetch(serverUrl, {
+      method: "POST",
+      body: JSON.stringify(body),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.code) {
+          setError(data.message)
+        } else {
+          iri = data["iri"]
+        }
+      })
+      .catch(err => {
+        setError(err.message)
+      })
+
+    // return on error (iri never set)
+    if (typeof iri === "undefined") {
+      return
+    }
+
     const msg = {
       $type: "cosmos.group.v1.MsgSubmitProposal",
       proposers: [wallet.bech32Address],
       groupPolicyAddress: address,
-      metadata: metadata,
+      metadata: iri,
       messages: [message],
       exec: execution,
     } as MsgSubmitProposal
@@ -135,18 +200,25 @@ const SubmitProposal = () => {
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
           <SelectAccount
-            id="policy"
-            label="policy"
+            id="proposal-policy"
+            label="proposal policy"
             options={policies}
             address={address}
             setAddress={setAddress}
           />
-          <InputIRI
-            id="proposal-metadata"
-            label="proposal metadata"
-            network={network}
-            iri={metadata}
-            setIri={setMetadata}
+          <InputString
+            id="proposal-name"
+            label="proposal name"
+            placeholder="New Proposal"
+            string={name}
+            setString={setName}
+          />
+          <InputString
+            id="proposal-description"
+            label="proposal description"
+            placeholder="A proposal for group members to vote on."
+            string={description}
+            setString={setDescription}
           />
           <SelectMessage
             id="proposal-message"
