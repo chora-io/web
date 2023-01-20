@@ -24,10 +24,6 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "proto": "lerna run proto --stream",
-    "proto-data": "lerna run --scope data proto --stream",
-    "proto-group": "lerna run --scope group proto --stream",
-    "proto-node": "lerna run --scope node proto --stream",
     "lint": "lerna run lint --stream",
     "lint-chora": "lerna run --scope chora lint --stream",
     "lint-coop": "lerna run --scope coop lint --stream",

@@ -12,7 +12,6 @@
     "url": "https://github.com/choraio/web"
   },
   "scripts": {
-    "proto": "sh ./scripts/protocgen.sh",
     "lint": "echo 'lint not configured'",
     "format": "echo 'format not configured'",
     "test": "echo 'test not configured'",
@@ -22,8 +21,6 @@
     "clean": "node_modules/.bin/gatsby clean"
   },
   "dependencies": {
-    "@keplr-wallet/proto-types": "^0.11.17",
-    "@keplr-wallet/types": "^0.11.17",
     "@types/jsonld": "^1.5.6",
     "blakejs": "^1.2.1",
     "chora": "./chora",
@@ -36,8 +33,5 @@
     "jsonld": "^5.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
-    "ts-proto": "^1.133.0"
   }
 }

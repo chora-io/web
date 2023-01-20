@@ -3,12 +3,12 @@ import { useContext, useState } from "react"
 import * as Long from "long"
 
 import { WalletContext } from "chora"
+import { MsgUpdateGroupPolicyDecisionPolicy } from "chora/api/cosmos/group/v1/tx"
+import { PercentageDecisionPolicy, ThresholdDecisionPolicy } from "chora/api/cosmos/group/v1/types"
 import { signAndBroadcast } from "chora/utils/tx"
+
 import InputAddress from "chora/components/InputAddress"
 import ResultTx from "chora/components/ResultTx"
-
-import { MsgUpdateGroupPolicyDecisionPolicy } from "../../../api/cosmos/group/v1/tx"
-import { PercentageDecisionPolicy, ThresholdDecisionPolicy } from "../../../api/cosmos/group/v1/types"
 
 import InputPolicy from "../InputPolicy"
 

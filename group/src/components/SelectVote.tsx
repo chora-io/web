@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { VoteOption } from "../../api/cosmos/group/v1/types"
+import { VoteOption } from "chora/api/cosmos/group/v1/types"
 
 const SelectVote = ({ id, label, vote, setVote }: any) => {
 

@@ -3,12 +3,12 @@ import { useContext, useState } from "react"
 import * as Long from "long"
 
 import { WalletContext } from "chora"
+import { MsgUpdateCurator } from "chora/api/chora/geonode/v1/msg"
 import { signAndBroadcast } from "chora/utils/tx"
+
 import InputAddress from "chora/components/InputAddress"
 import InputNumber from "chora/components/InputNumber"
 import ResultTx from "chora/components/ResultTx"
-
-import { MsgUpdateCurator } from "../../../api/chora/geonode/v1/msg"
 
 import * as styles from "./MsgUpdateMetadata.module.css"
 

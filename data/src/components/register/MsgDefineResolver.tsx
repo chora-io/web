@@ -2,11 +2,11 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
+import { MsgDefineResolver } from "chora/api/regen/data/v1/tx"
 import { signAndBroadcast } from "chora/utils/tx"
+
 import InputURL from "chora/components/InputURL"
 import ResultTx from "chora/components/ResultTx"
-
-import { MsgDefineResolver } from "../../../api/regen/data/v1/tx"
 
 import * as styles from "./MsgDefineResolver.module.css"
 

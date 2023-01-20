@@ -1,20 +1,16 @@
 import * as React from "react"
 import { useContext, useState } from "react"
 
-import { MsgSend } from "@keplr-wallet/proto-types/cosmos/bank/v1beta1/tx"
-
 import { WalletContext } from "chora"
+import { MsgSubmitProposal } from "chora/api/cosmos/group/v1/tx"
+import { Exec } from "chora/api/cosmos/group/v1/types"
 import { signAndBroadcast } from "chora/utils/tx"
+
 import InputAddress from "chora/components/InputAddress"
 import InputIRI from "chora/components/InputIRI"
 import ResultTx from "chora/components/ResultTx"
-
-import { MsgSubmitProposal } from "../../../api/cosmos/group/v1/tx"
-
-import InputMessages from "../InputMessages"
-import SelectExecution from "../SelectExecution"
-
-import { Exec } from "../../../api/cosmos/group/v1/types"
+import SelectExecution from "chora/components/SelectExecution"
+import SelectMessage from "chora/components/SelectMessage"
 
 import * as styles from "./MsgSubmitProposal.module.css"
 
@@ -25,7 +21,7 @@ const MsgSubmitProposalView = () => {
   // form input
   const [address, setAddress] = useState<string>("")
   const [metadata, setMetadata] = useState<string>("")
-  const [messages, setMessages] = useState<string>("")
+  const [message, setMessage] = useState<any>(null)
   const [execution, setExecution] = useState<number>(Exec["EXEC_UNSPECIFIED"])
 
   // error and success
@@ -43,10 +39,7 @@ const MsgSubmitProposalView = () => {
       proposers: [wallet.bech32Address],
       groupPolicyAddress: address,
       metadata: metadata,
-      messages: JSON.parse(messages).map(msg => ({
-        typeUrl: msg.typeUrl,
-        value: MsgSend.encode(msg.value).finish(),
-      })),
+      messages: [message],
       exec: execution,
     } as MsgSubmitProposal
 
@@ -79,11 +72,10 @@ const MsgSubmitProposalView = () => {
             iri={metadata}
             setIri={setMetadata}
           />
-          <InputMessages
-            id="proposal-messages"
-            label="proposal messages"
-            messages={messages}
-            setMessages={setMessages}
+          <SelectMessage
+            id="proposal-message"
+            label="proposal message"
+            setMessage={setMessage}
           />
           <SelectExecution
             id="proposal-execution"

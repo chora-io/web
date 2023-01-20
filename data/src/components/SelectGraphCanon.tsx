@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { GraphCanonicalizationAlgorithm } from "../../api/regen/data/v1/types"
+import { GraphCanonicalizationAlgorithm } from "chora/api/regen/data/v1/types"
 
 const SelectGraphCanon = ({ id, label, canon, setCanon }: any) => (
   <label htmlFor={id ? id : "canon"}>

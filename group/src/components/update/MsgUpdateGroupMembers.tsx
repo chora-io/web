@@ -3,11 +3,11 @@ import { useContext, useState } from "react"
 import * as Long from "long"
 
 import { WalletContext } from "chora"
+import { MsgUpdateGroupMembers } from "chora/api/cosmos/group/v1/tx"
 import { signAndBroadcast } from "chora/utils/tx"
+
 import InputNumber from "chora/components/InputNumber"
 import ResultTx from "chora/components/ResultTx"
-
-import { MsgUpdateGroupMembers } from "../../../api/cosmos/group/v1/tx"
 
 import InputMembers from "../InputMembers"
 

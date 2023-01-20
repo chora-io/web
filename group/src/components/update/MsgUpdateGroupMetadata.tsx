@@ -3,12 +3,12 @@ import { useContext, useState } from "react"
 import * as Long from "long"
 
 import { WalletContext } from "chora"
+import { MsgUpdateGroupMetadata } from "chora/api/cosmos/group/v1/tx"
 import { signAndBroadcast } from "chora/utils/tx"
+
 import InputIRI from "chora/components/InputIRI"
 import InputNumber from "chora/components/InputNumber"
 import ResultTx from "chora/components/ResultTx"
-
-import { MsgUpdateGroupMetadata } from "../../../api/cosmos/group/v1/tx"
 
 import * as styles from "./MsgUpdateGroupAdmin.module.css"
 

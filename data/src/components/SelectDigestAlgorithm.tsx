@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { DigestAlgorithm } from "../../api/regen/data/v1/types"
+import { DigestAlgorithm } from "chora/api/regen/data/v1/types"
 
 const SelectDigestAlgorithm = ({ id, label, digest, setDigest }: any) => (
   <label htmlFor={id ? id : "digest"}>

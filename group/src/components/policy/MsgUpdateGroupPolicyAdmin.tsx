@@ -2,11 +2,11 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
+import { MsgUpdateGroupPolicyAdmin } from "chora/api/cosmos/group/v1/tx"
 import { signAndBroadcast } from "chora/utils/tx"
+
 import InputAddress from "chora/components/InputAddress"
 import ResultTx from "chora/components/ResultTx"
-
-import { MsgUpdateGroupPolicyAdmin } from "../../../api/cosmos/group/v1/tx"
 
 import * as styles from "./MsgCreateGroupPolicy.module.css"
 

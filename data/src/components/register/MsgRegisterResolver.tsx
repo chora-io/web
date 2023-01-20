@@ -4,11 +4,11 @@ import { Buffer } from "buffer"
 import * as Long from "long"
 
 import { WalletContext } from "chora"
+import { MsgRegisterResolver } from "chora/api/regen/data/v1/tx"
 import { signAndBroadcast } from "chora/utils/tx"
+
 import InputNumber from "chora/components/InputNumber"
 import ResultTx from "chora/components/ResultTx"
-
-import { MsgRegisterResolver } from "../../../api/regen/data/v1/tx"
 
 import InputHash from "../InputHash"
 import InputHashJSON from "../InputHashJSON"

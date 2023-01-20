@@ -3,11 +3,11 @@ import { useContext, useState } from "react"
 import * as Long from "long"
 
 import { WalletContext } from "chora"
+import { MsgExec } from "chora/api/cosmos/group/v1/tx"
 import { signAndBroadcast } from "chora/utils/tx"
+
 import InputNumber from "chora/components/InputNumber"
 import ResultTx from "chora/components/ResultTx"
-
-import { MsgExec } from "../../../api/cosmos/group/v1/tx"
 
 import * as styles from "./MsgSubmitProposal.module.css"
 

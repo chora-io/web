@@ -3,10 +3,10 @@ import { useContext, useState } from "react"
 import { Buffer } from "buffer"
 
 import { WalletContext } from "chora"
+import { MsgAttest } from "chora/api/regen/data/v1/tx"
 import { signAndBroadcast } from "chora/utils/tx"
-import ResultTx from "chora/components/ResultTx"
 
-import { MsgAttest } from "../../../api/regen/data/v1/tx"
+import ResultTx from "chora/components/ResultTx"
 
 import InputHash from "../InputHash"
 import InputHashJSON from "../InputHashJSON"

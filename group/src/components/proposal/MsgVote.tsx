@@ -3,17 +3,16 @@ import { useContext, useState } from "react"
 import * as Long from "long"
 
 import { WalletContext } from "chora"
+import { MsgVote } from "chora/api/cosmos/group/v1/tx"
+import { Exec, VoteOption } from "chora/api/cosmos/group/v1/types"
 import { signAndBroadcast } from "chora/utils/tx"
+
 import InputIRI from "chora/components/InputIRI"
 import InputNumber from "chora/components/InputNumber"
 import ResultTx from "chora/components/ResultTx"
+import SelectExecution from "chora/components/SelectExecution"
 
-import { MsgVote } from "../../../api/cosmos/group/v1/tx"
-
-import SelectExecution from "../SelectExecution"
 import SelectVote from "../SelectVote"
-
-import { Exec, VoteOption } from "../../../api/cosmos/group/v1/types"
 
 import * as styles from "./MsgSubmitProposal.module.css"
 
@@ -80,8 +79,8 @@ const MsgVoteView = () => {
             setIri={setMetadata}
           />
           <SelectExecution
-            id="vote-execution"
-            label="vote execution"
+            id="proposal-execution"
+            label="proposal execution"
             execution={execution}
             setExecution={setExecution}
           />

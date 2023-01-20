@@ -2,11 +2,11 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
+import { MsgCreateGroup } from "chora/api/cosmos/group/v1/tx"
 import { signAndBroadcast } from "chora/utils/tx"
+
 import InputIRI from "chora/components/InputIRI"
 import ResultTx from "chora/components/ResultTx"
-
-import { MsgCreateGroup } from "../../../api/cosmos/group/v1/tx"
 
 import InputMembers from "../InputMembers"
 

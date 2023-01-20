@@ -22,6 +22,7 @@
     "clean": "node_modules/.bin/gatsby clean"
   },
   "dependencies": {
+    "@types/jsonld": "^1.5.6",
     "chora": "./chora",
     "gatsby": "^5.0.0",
     "gatsby-plugin-image": "^3.0.0",

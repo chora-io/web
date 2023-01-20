@@ -31,7 +31,7 @@ const SubmitProposal = () => {
   const [address, setAddress] = useState<string>("")
   const [name, setName] = useState<string>("")
   const [description, setDescription] = useState<string>("")
-  const [message, setMessage] = useState<string>("")
+  const [message, setMessage] = useState<any>(null)
   const [execution, setExecution] = useState<number>(Exec["EXEC_UNSPECIFIED"])
 
   // error and success
