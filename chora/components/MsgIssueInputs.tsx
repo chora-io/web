@@ -22,12 +22,12 @@ const MsgIssueInputs = ({ network, setMessage }: any) => {
 
     const msg = {
         $type: "chora.voucher.v1.MsgIssue",
-        id: id ? Long.fromString(id) : undefined,
-        issuer: issuer ? issuer : undefined,
-        recipient: recipient ? recipient : undefined,
-        amount: amount ? amount : undefined,
-        expiration: expiration ? new Date(expiration) : undefined,
-        metadata: metadata ? metadata : undefined,
+        id: Long.fromString(id || "0"),
+        issuer: issuer,
+        recipient: recipient,
+        amount: amount,
+        expiration: new Date(expiration).toISOString(),
+        metadata: metadata,
     } as MsgIssue
 
     const msgAny = {
