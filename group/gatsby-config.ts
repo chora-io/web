@@ -4,7 +4,7 @@
 module.exports = {
   pathPrefix: `/group`,
   siteMetadata: {
-    title: `group | group demo application`,
+    title: `group | demo application`,
     description: `group demo application.`,
     author: `@choraio`,
     siteUrl: `https://chora.io/group`,

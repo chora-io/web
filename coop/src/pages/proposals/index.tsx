@@ -26,7 +26,7 @@ const Proposals = ({ location }) => {
             </h1>
             <div className={styles.link}>
               <Link to="/proposals/submit">
-                {"new proposal"}
+                {"submit proposal"}
               </Link>
             </div>
             <div className={styles.section}>

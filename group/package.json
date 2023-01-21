@@ -16,8 +16,8 @@
     "format": "echo 'format not configured'",
     "test": "echo 'test not configured'",
     "build": "node_modules/.bin/gatsby build --prefix-paths",
-    "start": "node_modules/.bin/gatsby develop -p 8002",
-    "serve": "node_modules/.bin/gatsby serve -p 8002",
+    "start": "node_modules/.bin/gatsby develop -p 8003",
+    "serve": "node_modules/.bin/gatsby serve -p 8003",
     "clean": "node_modules/.bin/gatsby clean"
   },
   "dependencies": {

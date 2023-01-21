@@ -4,7 +4,7 @@
 module.exports = {
   pathPrefix: `/data`,
   siteMetadata: {
-    title: `data | data demo application`,
+    title: `data | demo application`,
     description: `data demo application`,
     author: `@choraio`,
     siteUrl: `https://chora.io/data`,

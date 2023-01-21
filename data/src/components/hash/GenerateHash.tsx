@@ -113,8 +113,8 @@ const GenerateHash = () => {
       return
     }
 
-    // check and canonize JSON-LD
-    const canonized = await jsonld.canonize(doc, {
+    // check and normalize object
+    const normalized = await jsonld.normalize(doc, {
       algorithm: "URDNA2015",
       format: "application/n-quads",
     }).catch(err => {
@@ -122,13 +122,13 @@ const GenerateHash = () => {
       return
     })
 
-    if (canonized == "") {
-      setError("JSON-LD empty after canonized")
+    if (normalized == "") {
+      setError("JSON-LD empty after normalized")
       return
     }
 
     // generate hash bytes using blake2b
-    const bz = blake.blake2b(canonized, undefined, 32)
+    const bz = blake.blake2b(normalized, undefined, 32)
 
     setSuccess(JSON.stringify({
       hash: Buffer.from(bz).toString("base64"),

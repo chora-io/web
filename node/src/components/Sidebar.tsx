@@ -18,9 +18,6 @@ const Sidebar = () => {
         <li>
           <Link to="/update" activeStyle={activeStyle}>{"update"}</Link>
         </li>
-        <li>
-          <Link to="/view" activeStyle={activeStyle}>{"view"}</Link>
-        </li>
       </ul>
     </div>
   )

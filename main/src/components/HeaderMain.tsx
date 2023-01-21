@@ -33,27 +33,27 @@ const HeaderMain = () => {
         {local ? (
           <ul>
             <li>
-              <a href={"http://" + window.location.hostname + ":8080"}>
+              <a href={"http://" + window.location.hostname + ":8001"}>
                 {"coop"}
               </a>
             </li>
             <li>
-              <a href={"http://" + window.location.hostname + ":8001"}>
+              <a href={"http://" + window.location.hostname + ":8002"}>
                 {"data"}
               </a>
             </li>
             <li>
-              <a href={"http://" + window.location.hostname + ":8002"}>
+              <a href={"http://" + window.location.hostname + ":8003"}>
                 {"group"}
               </a>
             </li>
             <li>
-              <a href={"http://" + window.location.hostname + ":8003"}>
+              <a href={"http://" + window.location.hostname + ":8004"}>
                 {"node"}
               </a>
             </li>
             <li>
-              <a href={"http://" + window.location.hostname + ":8004"}>
+              <a href={"http://" + window.location.hostname + ":8005"}>
                 {"scan"}
               </a>
             </li>

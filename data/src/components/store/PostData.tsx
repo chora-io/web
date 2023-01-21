@@ -121,8 +121,8 @@ const PostData = () => {
       return
     }
 
-    // check and canonize JSON-LD
-    const canonized = await jsonld.canonize(doc, {
+    // check and normalize JSON-LD
+    const normalized = await jsonld.normalize(doc, {
       algorithm: "URDNA2015",
       format: "application/n-quads",
     }).catch(err => {
@@ -130,8 +130,8 @@ const PostData = () => {
       return
     })
 
-    if (canonized == "") {
-      setError("JSON-LD empty after canonized")
+    if (normalized == "") {
+      setError("JSON-LD empty after normalized")
       return
     }
 

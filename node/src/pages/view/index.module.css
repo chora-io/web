@@ -1,7 +1,0 @@
-.page {
-    composes: page from "../../styles/page.css";
-}
-
-.section {
-    composes: section from "../../styles/section.css";
-}

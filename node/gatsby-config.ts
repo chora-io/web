@@ -4,7 +4,7 @@
 module.exports = {
   pathPrefix: `/node`,
   siteMetadata: {
-    title: `node | node demo application`,
+    title: `node | demo application`,
     description: `node demo application.`,
     author: `@choraio`,
     siteUrl: `https://chora.io/node`,

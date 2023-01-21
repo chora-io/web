@@ -8,8 +8,8 @@
   },
   "include": [
     "index.ts",
+    "global.d.ts",
     "module.d.ts",
-    "window.d.ts",
     "api",
     "components",
     "contexts",

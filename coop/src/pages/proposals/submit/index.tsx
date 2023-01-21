@@ -1,5 +1,4 @@
 import * as React from "react"
-import { Link } from "gatsby"
 
 import Main from "../../../layouts/Main"
 import SubmitProposal from "../../../components/proposals/SubmitProposal"
