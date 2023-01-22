@@ -1,12 +1,12 @@
 import * as React from "react"
 import { useEffect, useState } from "react"
 
-import { MsgCreate } from "../../api/chora/voucher/v1/msg"
+import { MsgCreate as Msg } from "../../api/chora/voucher/v1/msg"
 
 import InputAddress from "../InputAddress"
 import InputIRI from "../InputIRI"
 
-const MsgCreateInputs = ({ network, setMessage }: any) => {
+const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
 
   const [issuer, setIssuer] = useState<string>("")
   const [metadata, setMetadata] = useState<string>("")
@@ -15,29 +15,31 @@ const MsgCreateInputs = ({ network, setMessage }: any) => {
 
     const msg = {
         $type: "chora.voucher.v1.MsgCreate",
-        issuer: issuer,
+        issuer: wallet ? wallet.bech32Address : issuer,
         metadata: metadata,
-    } as MsgCreate
+    } as Msg
 
     const msgAny = {
         typeUrl: "/chora.voucher.v1.MsgCreate",
-        value: MsgCreate.encode(msg).finish(),
+        value: Msg.encode(msg).finish(),
     }
 
     setMessage(msgAny)
 
-  }, [issuer, metadata])
+  }, [issuer, metadata, wallet])
 
   return (
     <>
-      <InputAddress
-        id="msg-create-issuer"
-        label="issuer"
-        long={true}
-        network={network}
-        address={issuer}
-        setAddress={setIssuer}
-      />
+      {!useWallet && (
+        <InputAddress
+          id="msg-create-issuer"
+          label="issuer"
+          long={true}
+          network={network}
+          address={issuer}
+          setAddress={setIssuer}
+        />
+      )}
       <InputIRI
         id="msg-create-metadata"
         label="metadata"
@@ -48,4 +50,4 @@ const MsgCreateInputs = ({ network, setMessage }: any) => {
   )
 }
 
-export default MsgCreateInputs
+export default MsgCreate

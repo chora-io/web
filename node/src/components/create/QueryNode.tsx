@@ -2,6 +2,7 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
+
 import InputNumber from "chora/components/InputNumber"
 import Result from "chora/components/Result"
 import SelectNetwork from "chora/components/SelectNetwork"
@@ -46,7 +47,7 @@ const QueryNode = () => {
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
           <InputNumber
-            id="node-id"
+            id="query-node-id"
             label="node id"
             number={id}
             setNumber={setId}

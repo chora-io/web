@@ -2,11 +2,12 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
+
 import InputNumber from "chora/components/InputNumber"
 import Result from "chora/components/Result"
 import SelectNetwork from "chora/components/SelectNetwork"
 
-import * as styles from "./QueryGroup.module.css"
+import * as styles from "./QueryGroupMembers.module.css"
 
 const queryGroupMembers = "/cosmos/group/v1/group_members"
 
@@ -46,7 +47,7 @@ const QueryGroupMembers = () => {
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
           <InputNumber
-            id="group-id"
+            id="query-group-members-id"
             label="group id"
             number={id}
             setNumber={setId}

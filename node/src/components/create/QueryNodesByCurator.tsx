@@ -2,11 +2,12 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
+
 import InputAddress from "chora/components/InputAddress"
 import Result from "chora/components/Result"
 import SelectNetwork from "chora/components/SelectNetwork"
 
-import * as styles from "./QueryNode.module.css"
+import * as styles from "./QueryNodesByCurator.module.css"
 
 const queryNodesByCurator = "/chora/geonode/v1/nodes-by-curator"
 
@@ -46,8 +47,8 @@ const QueryNodesByCurator = () => {
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
           <InputAddress
-            id="node-curator"
-            label="node curator"
+            id="query-nodes-by-curator-curator"
+            label="curator"
             network={network}
             address={curator}
             setAddress={setCurator}

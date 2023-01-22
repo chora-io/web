@@ -2,14 +2,14 @@ import * as React from "react"
 import { useEffect, useState } from "react"
 import * as Long from "long"
 
-import { MsgIssue } from "../../api/chora/voucher/v1/msg"
+import { MsgIssue as Msg } from "../../api/chora/voucher/v1/msg"
 
 import InputAddress from "../InputAddress"
 import InputIRI from "../InputIRI"
 import InputNumber from "../InputNumber"
 import InputTimestamp from "../InputTimestamp"
 
-const MsgIssueInputs = ({ network, setMessage }: any) => {
+const MsgIssue = ({ network, setMessage, useWallet, wallet }: any) => {
 
   const [id, setId] = useState<string>("")
   const [issuer, setIssuer] = useState<string>("")
@@ -23,39 +23,41 @@ const MsgIssueInputs = ({ network, setMessage }: any) => {
     const msg = {
         $type: "chora.voucher.v1.MsgIssue",
         id: Long.fromString(id || "0"),
-        issuer: issuer,
+        issuer: wallet ? wallet.bech32Address : issuer,
         recipient: recipient,
         amount: amount,
         expiration: new Date(expiration),
         metadata: metadata,
-    } as MsgIssue
+    } as Msg
 
     const msgAny = {
         typeUrl: "/chora.voucher.v1.MsgIssue",
-        value: MsgIssue.encode(msg).finish(),
+        value: Msg.encode(msg).finish(),
     }
 
     setMessage(msgAny)
 
-  }, [id, issuer, recipient, amount, expiration, metadata])
+  }, [id, issuer, recipient, amount, expiration, metadata, wallet])
 
   return (
     <>
       <InputNumber
         id="msg-issue-id"
-        label="id"
+        label="voucher id"
         network={network}
         number={id}
         setNumber={setId}
       />
-      <InputAddress
-        id="msg-issue-issuer"
-        label="issuer"
-        long={true}
-        network={network}
-        address={issuer}
-        setAddress={setIssuer}
-      />
+      {!useWallet && (
+        <InputAddress
+          id="msg-issue-issuer"
+          label="issuer"
+          long={true}
+          network={network}
+          address={issuer}
+          setAddress={setIssuer}
+        />
+      )}
       <InputAddress
         id="msg-issue-recipient"
         label="recipient"
@@ -86,4 +88,4 @@ const MsgIssueInputs = ({ network, setMessage }: any) => {
   )
 }
 
-export default MsgIssueInputs
+export default MsgIssue

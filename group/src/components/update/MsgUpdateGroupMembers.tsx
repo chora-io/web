@@ -1,39 +1,19 @@
 import * as React from "react"
 import { useContext, useState } from "react"
-import * as Long from "long"
 
 import { WalletContext } from "chora"
-import { MsgUpdateGroupMembers } from "chora/api/cosmos/group/v1/tx"
-import { signAndBroadcast } from "chora/utils/tx"
+import { signAndBroadcast2 } from "chora/utils/tx"
 
-import InputNumber from "chora/components/InputNumber"
+import MsgInputs from "chora/components/group/MsgUpdateGroupMembers"
 import ResultTx from "chora/components/ResultTx"
-
-import InputMembers from "../InputMembers"
 
 import * as styles from "./MsgUpdateGroupAdmin.module.css"
 
-type member = {
-  address: string;
-  weight: string;
-  metadata: string;
-}
+const MsgUpdateGroupMembers = () => {
 
-const member = {
-  address: "",
-  weight: "",
-  metadata: "",
-}
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
-const MsgUpdateGroupMembersView = () => {
-
-  const { chainInfo, wallet } = useContext(WalletContext)
-
-  // form input
-  const [id, setId] = useState<string>("")
-  const [updates, setUpdates] = useState<member[]>([member])
-
-  // error and success
+  const [message, setMessage] = useState<any>(undefined)
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
@@ -43,16 +23,7 @@ const MsgUpdateGroupMembersView = () => {
     setError("")
     setSuccess("")
 
-    const msg = {
-      $type: "cosmos.group.v1.MsgUpdateGroupMembers",
-      admin: wallet.bech32Address,
-      groupId: Long.fromString(id),
-      memberUpdates: updates,
-    } as MsgUpdateGroupMembers
-
-    const encMsg = MsgUpdateGroupMembers.encode(msg).finish()
-
-    await signAndBroadcast(chainInfo, wallet.bech32Address, msg, encMsg)
+    await signAndBroadcast2(chainInfo, wallet["bech32Address"], [message])
       .then(res => {
         setSuccess(res)
       }).catch(err => {
@@ -64,16 +35,11 @@ const MsgUpdateGroupMembersView = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputNumber
-            id="group-id"
-            label="group id"
-            number={id}
-            setNumber={setId}
-          />
-          <InputMembers
-            label="update"
-            members={updates}
-            setMembers={setUpdates}
+          <MsgInputs
+            network={network}
+            setMessage={setMessage}
+            useWallet={true}
+            wallet={wallet}
           />
           <button type="submit">
             {"submit"}
@@ -89,4 +55,4 @@ const MsgUpdateGroupMembersView = () => {
   )
 }
 
-export default MsgUpdateGroupMembersView
+export default MsgUpdateGroupMembers

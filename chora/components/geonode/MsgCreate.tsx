@@ -1,12 +1,12 @@
 import * as React from "react"
 import { useEffect, useState } from "react"
 
-import { MsgCreate } from "../../api/chora/geonode/v1/msg"
+import { MsgCreate as Msg } from "../../api/chora/geonode/v1/msg"
 
 import InputAddress from "../InputAddress"
 import InputIRI from "../InputIRI"
 
-const MsgCreateInputs = ({ network, setMessage }: any) => {
+const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
 
   const [curator, setCurator] = useState<string>("")
   const [metadata, setMetadata] = useState<string>("")
@@ -15,29 +15,31 @@ const MsgCreateInputs = ({ network, setMessage }: any) => {
 
     const msg = {
         $type: "chora.geonode.v1.MsgCreate",
-        curator: curator,
+        curator: wallet ? wallet.bech32Address : curator,
         metadata: metadata,
-    } as MsgCreate
+    } as Msg
 
     const msgAny = {
         typeUrl: "/chora.geonode.v1.MsgCreate",
-        value: MsgCreate.encode(msg).finish(),
+        value: Msg.encode(msg).finish(),
     }
 
     setMessage(msgAny)
 
-  }, [curator, metadata])
+  }, [curator, metadata, wallet])
 
   return (
     <>
-      <InputAddress
-        id="msg-create-curator"
-        label="curator"
-        long={true}
-        network={network}
-        address={curator}
-        setAddress={setCurator}
-      />
+      {!useWallet && (
+        <InputAddress
+          id="msg-create-curator"
+          label="curator"
+          long={true}
+          network={network}
+          address={curator}
+          setAddress={setCurator}
+        />
+      )}
       <InputIRI
         id="msg-create-metadata"
         label="metadata"
@@ -48,4 +50,4 @@ const MsgCreateInputs = ({ network, setMessage }: any) => {
   )
 }
 
-export default MsgCreateInputs
+export default MsgCreate

@@ -2,37 +2,18 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-import { MsgCreateGroup } from "chora/api/cosmos/group/v1/tx"
-import { signAndBroadcast } from "chora/utils/tx"
+import { signAndBroadcast2 } from "chora/utils/tx"
 
-import InputIRI from "chora/components/InputIRI"
+import MsgInputs from "chora/components/group/MsgCreateGroup"
 import ResultTx from "chora/components/ResultTx"
-
-import InputMembers from "../InputMembers"
 
 import * as styles from "./MsgCreateGroup.module.css"
 
-type member = {
-  address: string;
-  weight: string;
-  metadata: string;
-}
-
-const member = {
-  address: "",
-  weight: "",
-  metadata: "",
-}
-
-const MsgCreateGroupView = () => {
+const MsgCreateGroup = () => {
 
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
-  // form input
-  const [members, setMembers] = useState<member[]>([member])
-  const [metadata, setMetadata] = useState<string>("")
-
-  // error and success
+  const [message, setMessage] = useState<any>(undefined)
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
@@ -42,16 +23,7 @@ const MsgCreateGroupView = () => {
     setError("")
     setSuccess("")
 
-    const msg = {
-      $type: "cosmos.group.v1.MsgCreateGroup",
-      admin: wallet.bech32Address,
-      members: members,
-      metadata: metadata,
-    } as MsgCreateGroup
-
-    const encMsg = MsgCreateGroup.encode(msg).finish()
-
-    await signAndBroadcast(chainInfo, wallet.bech32Address, msg, encMsg)
+    await signAndBroadcast2(chainInfo, wallet["bech32Address"], [message])
       .then(res => {
         setSuccess(res)
       }).catch(err => {
@@ -63,16 +35,11 @@ const MsgCreateGroupView = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputIRI
-            id="create-group-metadata"
-            label="metadata"
+          <MsgInputs
             network={network}
-            iri={metadata}
-            setIri={setMetadata}
-          />
-          <InputMembers
-            members={members}
-            setMembers={setMembers}
+            setMessage={setMessage}
+            useWallet={true}
+            wallet={wallet}
           />
           <button type="submit">
             {"submit"}
@@ -88,4 +55,4 @@ const MsgCreateGroupView = () => {
   )
 }
 
-export default MsgCreateGroupView
+export default MsgCreateGroup

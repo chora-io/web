@@ -1,13 +1,13 @@
 import * as React from "react"
 import { useEffect, useState } from "react"
 
-import { MsgCreateGroup } from "../../api/cosmos/group/v1/tx"
+import { MsgCreateGroup as Msg } from "../../api/cosmos/group/v1/tx"
 
 import InputAddress from "../InputAddress"
 import InputIRI from "../InputIRI"
 import InputMembers from "../InputMembers"
 
-const MsgCreateGroupInputs = ({ network, setMessage }: any) => {
+const MsgCreateGroup = ({ network, setMessage, useWallet, wallet }: any) => {
 
   const [admin, setAdmin] = useState<string>("")
   const [metadata, setMetadata] = useState<string>("")
@@ -16,31 +16,33 @@ const MsgCreateGroupInputs = ({ network, setMessage }: any) => {
   useEffect(() => {
 
     const msg = {
-        $type: "cosmos.group.v1.MsgCreateGroup",
-        admin: admin,
-        members: members,
-        metadata: metadata,
-    } as MsgCreateGroup
+      $type: "cosmos.group.v1.MsgCreateGroup",
+      admin: wallet ? wallet.bech32Address : admin,
+      members: members,
+      metadata: metadata,
+    } as Msg
 
     const msgAny = {
-        typeUrl: "/cosmos.group.v1.MsgCreateGroup",
-        value: MsgCreateGroup.encode(msg).finish(),
+      typeUrl: "/cosmos.group.v1.MsgCreateGroup",
+      value: Msg.encode(msg).finish(),
     }
 
     setMessage(msgAny)
 
-  }, [admin, members, metadata])
+  }, [admin, members, metadata, wallet])
 
   return (
     <>
-      <InputAddress
-        id="msg-create-group-admin"
-        label="admin"
-        long={true}
-        network={network}
-        address={admin}
-        setAddress={setAdmin}
-      />
+      {!useWallet &&
+        <InputAddress
+          id="msg-create-group-admin"
+          label="admin"
+          long={true}
+          network={network}
+          address={admin}
+          setAddress={setAdmin}
+        />
+      }
       <InputIRI
         id="msg-create-group-metadata"
         label="metadata"
@@ -57,4 +59,4 @@ const MsgCreateGroupInputs = ({ network, setMessage }: any) => {
   )
 }
 
-export default MsgCreateGroupInputs
+export default MsgCreateGroup

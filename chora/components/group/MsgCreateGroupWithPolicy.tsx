@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useEffect, useState } from "react"
 
-import { MsgCreateGroupWithPolicy } from "../../api/cosmos/group/v1/tx"
+import { MsgCreateGroupWithPolicy as Msg } from "../../api/cosmos/group/v1/tx"
 
 import InputAddress from "../InputAddress"
 import InputIRI from "../InputIRI"
@@ -9,7 +9,7 @@ import InputMembers from "../InputMembers"
 import InputPolicy from "../InputPolicy"
 import SelectBoolean from "../SelectBoolean"
 
-const MsgCreateGroupWithPolicyInputs = ({ network, setMessage }: any) => {
+const MsgCreateGroupWithPolicy = ({network, setMessage, useWallet, wallet }: any) => {
 
   // group inputs
   const [admin, setAdmin] = useState<string>("")
@@ -24,34 +24,36 @@ const MsgCreateGroupWithPolicyInputs = ({ network, setMessage }: any) => {
   useEffect(() => {
 
     const msg = {
-        $type: "cosmos.group.v1.MsgCreateGroupWithPolicy",
-        admin: admin,
-        members: members,
-        groupMetadata: metadata,
-        groupPolicyMetadata: policyMetadata,
-        groupPolicyAsAdmin: policyAsAdmin === "true",
-        decisionPolicy: decisionPolicy,
-    } as MsgCreateGroupWithPolicy
+      $type: "cosmos.group.v1.MsgCreateGroupWithPolicy",
+      admin: wallet ? wallet.bech32Address : admin,
+      members: members,
+      groupMetadata: metadata,
+      groupPolicyMetadata: policyMetadata,
+      groupPolicyAsAdmin: policyAsAdmin === "true",
+      decisionPolicy: decisionPolicy,
+    } as Msg
 
     const msgAny = {
-        typeUrl: "/cosmos.group.v1.MsgCreateGroupWithPolicy",
-        value: MsgCreateGroupWithPolicy.encode(msg).finish(),
+      typeUrl: "/cosmos.group.v1.MsgCreateGroupWithPolicy",
+      value: Msg.encode(msg).finish(),
     }
 
     setMessage(msgAny)
 
-  }, [admin, members, metadata, policyMetadata, policyAsAdmin, decisionPolicy])
+  }, [admin, members, metadata, policyMetadata, policyAsAdmin, decisionPolicy, wallet])
 
   return (
     <>
-      <InputAddress
-        id="msg-create-group-with-policy-admin"
-        label="admin"
-        long={true}
-        network={network}
-        address={admin}
-        setAddress={setAdmin}
-      />
+      {!useWallet &&
+        <InputAddress
+          id="msg-create-group-with-policy-admin"
+          label="admin"
+          long={true}
+          network={network}
+          address={admin}
+          setAddress={setAdmin}
+        />
+      }
       <InputIRI
         id="msg-create-group-with-policy-metadata"
         label="metadata"
@@ -85,4 +87,4 @@ const MsgCreateGroupWithPolicyInputs = ({ network, setMessage }: any) => {
   )
 }
 
-export default MsgCreateGroupWithPolicyInputs
+export default MsgCreateGroupWithPolicy

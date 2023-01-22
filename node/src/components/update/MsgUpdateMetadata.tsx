@@ -1,26 +1,19 @@
 import * as React from "react"
 import { useContext, useState } from "react"
-import * as Long from "long"
 
 import { WalletContext } from "chora"
-import { MsgUpdateMetadata } from "chora/api/chora/geonode/v1/msg"
-import { signAndBroadcast } from "chora/utils/tx"
+import { signAndBroadcast2 } from "chora/utils/tx"
 
-import InputIRI from "chora/components/InputIRI"
-import InputNumber from "chora/components/InputNumber"
+import MsgInputs from "chora/components/geonode/MsgUpdateMetadata"
 import ResultTx from "chora/components/ResultTx"
 
 import * as styles from "./MsgUpdateMetadata.module.css"
 
-const MsgUpdateMetadataView = () => {
+const MsgUpdateMetadata = () => {
 
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
-  // form input
-  const [id, setId] = useState<string>("")
-  const [metadata, setMetadata] = useState<string>("")
-
-  // error and success
+  const [message, setMessage] = useState<any>(undefined)
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
@@ -30,16 +23,7 @@ const MsgUpdateMetadataView = () => {
     setError("")
     setSuccess("")
 
-    const msg = {
-      $type: "chora.geonode.v1.MsgUpdateMetadata",
-      id: Long.fromString(id),
-      curator: wallet.bech32Address,
-      newMetadata: metadata,
-    } as MsgUpdateMetadata
-
-    const encMsg = MsgUpdateMetadata.encode(msg).finish()
-
-    await signAndBroadcast(chainInfo, wallet.bech32Address, msg, encMsg)
+    await signAndBroadcast2(chainInfo, wallet["bech32Address"], [message])
       .then(res => {
         setSuccess(res)
       }).catch(err => {
@@ -51,18 +35,11 @@ const MsgUpdateMetadataView = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputNumber
-            id="node-id"
-            label="node id"
-            number={id}
-            setNumber={setId}
-          />
-          <InputIRI
-            id="new-metadata"
-            label="new metadata"
+          <MsgInputs
             network={network}
-            iri={metadata}
-            setIri={setMetadata}
+            setMessage={setMessage}
+            useWallet={true}
+            wallet={wallet}
           />
           <button type="submit">
             {"submit"}
@@ -78,4 +55,4 @@ const MsgUpdateMetadataView = () => {
   )
 }
 
-export default MsgUpdateMetadataView
+export default MsgUpdateMetadata

@@ -2,12 +2,12 @@ import * as React from "react"
 import { useEffect, useState } from "react"
 import * as Long from "long"
 
-import { MsgUpdateCurator } from "../../api/chora/geonode/v1/msg"
+import { MsgUpdateCurator as Msg } from "../../api/chora/geonode/v1/msg"
 
 import InputAddress from "../InputAddress"
 import InputNumber from "../InputNumber"
 
-const MsgUpdateCuratorInputs = ({ network, setMessage }: any) => {
+const MsgUpdateCurator = ({ network, setMessage, useWallet, wallet }: any) => {
 
   const [id, setId] = useState<string>("")
   const [curator, setCurator] = useState<string>("")
@@ -18,36 +18,38 @@ const MsgUpdateCuratorInputs = ({ network, setMessage }: any) => {
     const msg = {
         $type: "chora.voucher.v1.MsgUpdateCurator",
         id: Long.fromString(id || "0"),
-        curator: curator,
+        curator: wallet ? wallet.bech32Address : curator,
         newCurator: newCurator,
-    } as MsgUpdateCurator
+    } as Msg
 
     const msgAny = {
         typeUrl: "/chora.voucher.v1.MsgUpdateCurator",
-        value: MsgUpdateCurator.encode(msg).finish(),
+        value: Msg.encode(msg).finish(),
     }
 
     setMessage(msgAny)
 
-  }, [id, curator, newCurator])
+  }, [id, curator, newCurator, wallet])
 
   return (
     <>
       <InputNumber
         id="msg-update-curator-id"
-        label="id"
+        label="node id"
         network={network}
         number={id}
         setNumber={setId}
       />
-      <InputAddress
-        id="msg-update-curator-curator"
-        label="curator"
-        long={true}
-        network={network}
-        address={curator}
-        setAddress={setCurator}
-      />
+      {!useWallet && (
+        <InputAddress
+          id="msg-update-curator-curator"
+          label="curator"
+          long={true}
+          network={network}
+          address={curator}
+          setAddress={setCurator}
+        />
+      )}
       <InputAddress
         id="msg-update-curator-new-curator"
         label="new curator"
@@ -60,4 +62,4 @@ const MsgUpdateCuratorInputs = ({ network, setMessage }: any) => {
   )
 }
 
-export default MsgUpdateCuratorInputs
+export default MsgUpdateCurator

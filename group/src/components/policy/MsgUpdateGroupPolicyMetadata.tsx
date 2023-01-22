@@ -2,24 +2,18 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-import { MsgUpdateGroupPolicyMetadata } from "chora/api/cosmos/group/v1/tx"
-import { signAndBroadcast } from "chora/utils/tx"
+import { signAndBroadcast2 } from "chora/utils/tx"
 
-import InputAddress from "chora/components/InputAddress"
-import InputIRI from "chora/components/InputIRI"
+import MsgInputs from "chora/components/group/MsgUpdateGroupPolicyMetadata"
 import ResultTx from "chora/components/ResultTx"
 
-import * as styles from "./MsgCreateGroupPolicy.module.css"
+import * as styles from "./MsgUpdateGroupPolicyMetadata.module.css"
 
-const MsgUpdateGroupPolicyMetadataView = () => {
+const MsgUpdateGroupPolicyMetadata = () => {
 
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
-  // form input
-  const [address, setAddress] = useState<string>("")
-  const [metadata, setMetadata] = useState<string>("")
-
-  // error and success
+  const [message, setMessage] = useState<any>(undefined)
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
@@ -29,16 +23,7 @@ const MsgUpdateGroupPolicyMetadataView = () => {
     setError("")
     setSuccess("")
 
-    const msg = {
-      $type: "cosmos.group.v1.MsgUpdateGroupPolicyMetadata",
-      admin: wallet.bech32Address,
-      groupPolicyAddress: address,
-      metadata: metadata,
-    } as MsgUpdateGroupPolicyMetadata
-
-    const encMsg = MsgUpdateGroupPolicyMetadata.encode(msg).finish()
-
-    await signAndBroadcast(chainInfo, wallet.bech32Address, msg, encMsg)
+    await signAndBroadcast2(chainInfo, wallet["bech32Address"], [message])
       .then(res => {
         setSuccess(res)
       }).catch(err => {
@@ -50,20 +35,11 @@ const MsgUpdateGroupPolicyMetadataView = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputAddress
-            id="policy-address"
-            label="policy address"
+          <MsgInputs
             network={network}
-            long={true}
-            address={address}
-            setAddress={setAddress}
-          />
-          <InputIRI
-            id="new-policy-metadata"
-            label="new policy metadata"
-            network={network}
-            iri={metadata}
-            setIri={setMetadata}
+            setMessage={setMessage}
+            useWallet={true}
+            wallet={wallet}
           />
           <button type="submit">
             {"submit"}
@@ -79,4 +55,4 @@ const MsgUpdateGroupPolicyMetadataView = () => {
   )
 }
 
-export default MsgUpdateGroupPolicyMetadataView
+export default MsgUpdateGroupPolicyMetadata

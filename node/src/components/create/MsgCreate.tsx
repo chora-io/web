@@ -2,22 +2,18 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-import { MsgCreate } from "chora/api/chora/geonode/v1/msg"
-import { signAndBroadcast } from "chora/utils/tx"
+import { signAndBroadcast2 } from "chora/utils/tx"
 
-import InputIRI from "chora/components/InputIRI"
+import MsgInputs from "chora/components/geonode/MsgCreate"
 import ResultTx from "chora/components/ResultTx"
 
 import * as styles from "./MsgCreate.module.css"
 
-const MsgCreateView = () => {
+const MsgCreate = () => {
 
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
-  // form input
-  const [metadata, setMetadata] = useState<string>("")
-
-  // error and success
+  const [message, setMessage] = useState<any>(undefined)
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
@@ -27,15 +23,7 @@ const MsgCreateView = () => {
     setError("")
     setSuccess("")
 
-    const msg = {
-      $type: "chora.geonode.v1.MsgCreate",
-      curator: wallet.bech32Address,
-      metadata: metadata,
-    } as MsgCreate
-
-    const encMsg = MsgCreate.encode(msg).finish()
-
-    await signAndBroadcast(chainInfo, wallet.bech32Address, msg, encMsg)
+    await signAndBroadcast2(chainInfo, wallet["bech32Address"], [message])
       .then(res => {
         setSuccess(res)
       }).catch(err => {
@@ -47,12 +35,11 @@ const MsgCreateView = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputIRI
-            id="node-metadata"
-            label="node metadata"
+          <MsgInputs
             network={network}
-            iri={metadata}
-            setIri={setMetadata}
+            setMessage={setMessage}
+            useWallet={true}
+            wallet={wallet}
           />
           <button type="submit">
             {"submit"}
@@ -68,4 +55,4 @@ const MsgCreateView = () => {
   )
 }
 
-export default MsgCreateView
+export default MsgCreate

@@ -35,7 +35,7 @@ const Policy = () => (
         </div>
         <div className={styles.section}>
           <div>
-            {"update policy decision"}
+            {"update decision policy"}
           </div>
           <MsgUpdateGroupPolicyDecisionPolicy />
         </div>

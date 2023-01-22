@@ -1,11 +1,11 @@
 import * as React from "react"
 import { useEffect, useState } from "react"
 
-import { MsgUpdateGroupPolicyAdmin } from "../../api/cosmos/group/v1/tx"
+import { MsgUpdateGroupPolicyAdmin as Msg } from "../../api/cosmos/group/v1/tx"
 
 import InputAddress from "../InputAddress"
 
-const MsgUpdateGroupPolicyAdminInputs = ({ network, setMessage }: any) => {
+const MsgUpdateGroupPolicyAdmin = ({ network, setMessage, useWallet, wallet }: any) => {
 
   const [admin, setAdmin] = useState<string>("")
   const [address, setAddress] = useState<string>("")
@@ -14,31 +14,23 @@ const MsgUpdateGroupPolicyAdminInputs = ({ network, setMessage }: any) => {
   useEffect(() => {
 
     const msg = {
-        $type: "cosmos.group.v1.MsgUpdateGroupPolicyAdmin",
-        admin: admin,
-        groupPolicyAddress: address,
-        newAdmin: newAdmin,
-    } as MsgUpdateGroupPolicyAdmin
+      $type: "cosmos.group.v1.MsgUpdateGroupPolicyAdmin",
+      admin: wallet ? wallet.bech32Address : admin,
+      groupPolicyAddress: address,
+      newAdmin: newAdmin,
+    } as Msg
 
     const msgAny = {
-        typeUrl: "/cosmos.group.v1.MsgUpdateGroupPolicyAdmin",
-        value: MsgUpdateGroupPolicyAdmin.encode(msg).finish(),
+      typeUrl: "/cosmos.group.v1.MsgUpdateGroupPolicyAdmin",
+      value: Msg.encode(msg).finish(),
     }
 
     setMessage(msgAny)
 
-  }, [admin, address, newAdmin])
+  }, [admin, address, newAdmin, wallet])
 
   return (
     <>
-      <InputAddress
-        id="msg-update-group-policy-admin-admin"
-        label="policy admin"
-        long={true}
-        network={network}
-        address={admin}
-        setAddress={setAdmin}
-      />
       <InputAddress
         id="msg-update-group-policy-admin-address"
         label="policy address"
@@ -47,6 +39,16 @@ const MsgUpdateGroupPolicyAdminInputs = ({ network, setMessage }: any) => {
         address={address}
         setAddress={setAddress}
       />
+      {!useWallet &&
+        <InputAddress
+          id="msg-update-group-policy-admin-admin"
+          label="policy admin"
+          long={true}
+          network={network}
+          address={admin}
+          setAddress={setAdmin}
+        />
+      }
       <InputAddress
         id="msg-update-group-policy-admin-new-admin"
         label="new policy admin"
@@ -59,4 +61,4 @@ const MsgUpdateGroupPolicyAdminInputs = ({ network, setMessage }: any) => {
   )
 }
 
-export default MsgUpdateGroupPolicyAdminInputs
+export default MsgUpdateGroupPolicyAdmin

@@ -2,30 +2,30 @@ import * as React from "react"
 import { useState } from "react"
 
 // chora.geonode.v1
-import GeonodeMsgCreateInputs from "./geonode/MsgCreateInputs"
-import GeonodeMsgUpdateCuratorInputs from "./geonode/MsgUpdateCuratorInputs"
-import GeonodeMsgUpdateMetadataInputs from "./geonode/MsgUpdateMetadataInputs"
+import GeonodeMsgCreate from "./geonode/MsgCreate"
+import GeonodeMsgUpdateCurator from "./geonode/MsgUpdateCurator"
+import GeonodeMsgUpdateMetadata from "./geonode/MsgUpdateMetadata"
 
 // chora.voucher.v1
-import VoucherMsgCreateInputs from "./voucher/MsgCreateInputs"
-import VoucherMsgIssueInputs from "./voucher/MsgIssueInputs"
-import VoucherMsgUpdateIssuerInputs from "./voucher/MsgUpdateIssuerInputs"
-import VoucherMsgUpdateMetadataInputs from "./voucher/MsgUpdateMetadataInputs"
+import VoucherMsgCreate from "./voucher/MsgCreate"
+import VoucherMsgIssue from "./voucher/MsgIssue"
+import VoucherMsgUpdateIssuer from "./voucher/MsgUpdateIssuer"
+import VoucherMsgUpdateMetadata from "./voucher/MsgUpdateMetadata"
 
 // cosmos.bank.v1beta1
-import BankMsgSendInputs from "./bank/MsgSendInputs"
+import BankMsgSend from "./bank/MsgSend"
 
 // cosmos.group.v1
-import GroupMsgCreateGroupInputs from "./group/MsgCreateGroupInputs"
-import GroupMsgCreateGroupPolicyInputs from "./group/MsgCreateGroupPolicyInputs"
-import GroupMsgCreateGroupWithPolicyInputs from "./group/MsgCreateGroupWithPolicyInputs"
-import GroupMsgLeaveGroupInputs from "./group/MsgLeaveGroupInputs"
-import GroupMsgUpdateGroupAdminInputs from "./group/MsgUpdateGroupAdminInputs"
-import GroupMsgUpdateGroupMembersInputs from "./group/MsgUpdateGroupMembersInputs"
-import GroupMsgUpdateGroupMetadataInputs from "./group/MsgUpdateGroupMetadataInputs"
-import GroupMsgUpdateGroupPolicyAdminInputs from "./group/MsgUpdateGroupPolicyAdminInputs"
-import GroupMsgUpdateGroupPolicyDecisionPolicyInputs from "./group/MsgUpdateGroupPolicyDecisionPolicyInputs"
-import GroupMsgUpdateGroupPolicyMetadataInputs from "./group/MsgUpdateGroupPolicyMetadataInputs"
+import GroupMsgCreateGroup from "./group/MsgCreateGroup"
+import GroupMsgCreateGroupPolicy from "./group/MsgCreateGroupPolicy"
+import GroupMsgCreateGroupWithPolicy from "./group/MsgCreateGroupWithPolicy"
+import GroupMsgLeaveGroup from "./group/MsgLeaveGroup"
+import GroupMsgUpdateGroupAdmin from "./group/MsgUpdateGroupAdmin"
+import GroupMsgUpdateGroupMembers from "./group/MsgUpdateGroupMembers"
+import GroupMsgUpdateGroupMetadata from "./group/MsgUpdateGroupMetadata"
+import GroupMsgUpdateGroupPolicyAdmin from "./group/MsgUpdateGroupPolicyAdmin"
+import GroupMsgUpdateGroupPolicyDecisionPolicy from "./group/MsgUpdateGroupPolicyDecisionPolicy"
+import GroupMsgUpdateGroupPolicyMetadata from "./group/MsgUpdateGroupPolicyMetadata"
 
 import * as styles from "./SelectMessage.module.css"
 
@@ -84,7 +84,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           <h3>
             {selected}
           </h3>
-          <GeonodeMsgCreateInputs
+          <GeonodeMsgCreate
             network={network}
             setMessage={setMessage}
           />
@@ -95,7 +95,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           <h3>
             {selected}
           </h3>
-          <GeonodeMsgUpdateCuratorInputs
+          <GeonodeMsgUpdateCurator
             network={network}
             setMessage={setMessage}
           />
@@ -106,7 +106,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           <h3>
             {selected}
           </h3>
-          <GeonodeMsgUpdateMetadataInputs
+          <GeonodeMsgUpdateMetadata
             network={network}
             setMessage={setMessage}
           />
@@ -117,7 +117,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           <h3>
             {selected}
           </h3>
-          <VoucherMsgCreateInputs
+          <VoucherMsgCreate
             network={network}
             setMessage={setMessage}
           />
@@ -128,7 +128,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           <h3>
             {selected}
           </h3>
-          <VoucherMsgIssueInputs
+          <VoucherMsgIssue
             network={network}
             setMessage={setMessage}
           />
@@ -139,7 +139,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           <h3>
             {selected}
           </h3>
-          <VoucherMsgUpdateIssuerInputs
+          <VoucherMsgUpdateIssuer
             network={network}
             setMessage={setMessage}
           />
@@ -150,7 +150,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           <h3>
             {selected}
           </h3>
-          <VoucherMsgUpdateMetadataInputs
+          <VoucherMsgUpdateMetadata
             network={network}
             setMessage={setMessage}
           />
@@ -161,7 +161,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           <h3>
             {selected}
           </h3>
-          <BankMsgSendInputs
+          <BankMsgSend
             network={network}
             setMessage={setMessage}
           />
@@ -172,7 +172,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           <h3>
             {selected}
           </h3>
-          <GroupMsgCreateGroupInputs
+          <GroupMsgCreateGroup
             network={network}
             setMessage={setMessage}
           />
@@ -183,7 +183,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           <h3>
             {selected}
           </h3>
-          <GroupMsgCreateGroupPolicyInputs
+          <GroupMsgCreateGroupPolicy
             network={network}
             setMessage={setMessage}
           />
@@ -194,7 +194,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           <h3>
             {selected}
           </h3>
-          <GroupMsgCreateGroupWithPolicyInputs
+          <GroupMsgCreateGroupWithPolicy
             network={network}
             setMessage={setMessage}
           />
@@ -205,7 +205,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           <h3>
             {selected}
           </h3>
-          <GroupMsgLeaveGroupInputs
+          <GroupMsgLeaveGroup
             network={network}
             setMessage={setMessage}
           />
@@ -216,7 +216,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           <h3>
             {selected}
           </h3>
-          <GroupMsgUpdateGroupAdminInputs
+          <GroupMsgUpdateGroupAdmin
             network={network}
             setMessage={setMessage}
           />
@@ -227,7 +227,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           <h3>
             {selected}
           </h3>
-          <GroupMsgUpdateGroupMembersInputs
+          <GroupMsgUpdateGroupMembers
             network={network}
             setMessage={setMessage}
           />
@@ -238,7 +238,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           <h3>
             {selected}
           </h3>
-          <GroupMsgUpdateGroupMetadataInputs
+          <GroupMsgUpdateGroupMetadata
             network={network}
             setMessage={setMessage}
           />
@@ -249,7 +249,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           <h3>
             {selected}
           </h3>
-          <GroupMsgUpdateGroupPolicyAdminInputs
+          <GroupMsgUpdateGroupPolicyAdmin
             network={network}
             setMessage={setMessage}
           />
@@ -260,7 +260,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           <h3>
             {selected}
           </h3>
-          <GroupMsgUpdateGroupPolicyDecisionPolicyInputs
+          <GroupMsgUpdateGroupPolicyDecisionPolicy
             network={network}
             setMessage={setMessage}
           />
@@ -271,7 +271,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           <h3>
             {selected}
           </h3>
-          <GroupMsgUpdateGroupPolicyMetadataInputs
+          <GroupMsgUpdateGroupPolicyMetadata
             network={network}
             setMessage={setMessage}
           />

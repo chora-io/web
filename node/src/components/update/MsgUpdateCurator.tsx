@@ -1,26 +1,19 @@
 import * as React from "react"
 import { useContext, useState } from "react"
-import * as Long from "long"
 
 import { WalletContext } from "chora"
-import { MsgUpdateCurator } from "chora/api/chora/geonode/v1/msg"
-import { signAndBroadcast } from "chora/utils/tx"
+import { signAndBroadcast2 } from "chora/utils/tx"
 
-import InputAddress from "chora/components/InputAddress"
-import InputNumber from "chora/components/InputNumber"
+import MsgInputs from "chora/components/geonode/MsgUpdateCurator"
 import ResultTx from "chora/components/ResultTx"
 
-import * as styles from "./MsgUpdateMetadata.module.css"
+import * as styles from "./MsgUpdateCurator.module.css"
 
-const MsgUpdateCuratorView = () => {
+const MsgUpdateCurator = () => {
 
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
-  // form input
-  const [id, setId] = useState<string>("")
-  const [curator, setCurator] = useState<string>("")
-
-  // error and success
+  const [message, setMessage] = useState<any>(undefined)
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
@@ -30,16 +23,7 @@ const MsgUpdateCuratorView = () => {
     setError("")
     setSuccess("")
 
-    const msg = {
-      $type: "chora.geonode.v1.MsgUpdateCurator",
-      id: Long.fromString(id),
-      curator: wallet.bech32Address,
-      newCurator: curator,
-    } as MsgUpdateCurator
-
-    const encMsg = MsgUpdateCurator.encode(msg).finish()
-
-    await signAndBroadcast(chainInfo, wallet.bech32Address, msg, encMsg)
+    await signAndBroadcast2(chainInfo, wallet["bech32Address"], [message])
       .then(res => {
         setSuccess(res)
       }).catch(err => {
@@ -51,18 +35,11 @@ const MsgUpdateCuratorView = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputNumber
-            id="node-id"
-            label="node id"
-            number={id}
-            setNumber={setId}
-          />
-          <InputAddress
-            id="new-curator"
-            label="new curator"
+          <MsgInputs
             network={network}
-            address={curator}
-            setAddress={setCurator}
+            setMessage={setMessage}
+            useWallet={true}
+            wallet={wallet}
           />
           <button type="submit">
             {"submit"}
@@ -78,4 +55,4 @@ const MsgUpdateCuratorView = () => {
   )
 }
 
-export default MsgUpdateCuratorView
+export default MsgUpdateCurator

@@ -2,6 +2,7 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
+
 import InputAddress from "chora/components/InputAddress"
 import Result from "chora/components/Result"
 import SelectNetwork from "chora/components/SelectNetwork"
@@ -46,7 +47,7 @@ const QueryPolicy = () => {
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
           <InputAddress
-            id="policy-address"
+            id="query-group-policy-address"
             label="policy address"
             network={network}
             long={true}

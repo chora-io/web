@@ -2,6 +2,7 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
+
 import InputNumber from "chora/components/InputNumber"
 import Result from "chora/components/Result"
 import SelectNetwork from "chora/components/SelectNetwork"
@@ -46,7 +47,7 @@ const QueryGroup = () => {
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
           <InputNumber
-            id="group-id"
+            id="query-group-id"
             label="group id"
             number={id}
             setNumber={setId}

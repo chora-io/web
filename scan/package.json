@@ -13,7 +13,7 @@
   },
   "scripts": {
     "lint": "echo 'lint not configured'",
-    "format": "echo 'format not configured''",
+    "format": "echo 'format not configured'",
     "test": "echo 'test not configured'",
     "build": "node_modules/.bin/gatsby build --prefix-paths",
     "start": "node_modules/.bin/gatsby develop -p 8005",

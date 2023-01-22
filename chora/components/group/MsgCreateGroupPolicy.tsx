@@ -1,14 +1,15 @@
 import * as React from "react"
 import { useEffect, useState } from "react"
+import * as Long from "long"
 
-import { MsgCreateGroupPolicy } from "../../api/cosmos/group/v1/tx"
+import { MsgCreateGroupPolicy as Msg } from "../../api/cosmos/group/v1/tx"
 
 import InputAddress from "../InputAddress"
 import InputIRI from "../InputIRI"
 import InputNumber from "../InputNumber"
 import InputPolicy from "../InputPolicy"
 
-const MsgCreateGroupPolicyInputs = ({ network, setMessage }: any) => {
+const MsgCreateGroupPolicy = ({ network, setMessage, useWallet, wallet }: any) => {
 
   // group inputs
   const [admin, setAdmin] = useState<string>("")
@@ -19,41 +20,44 @@ const MsgCreateGroupPolicyInputs = ({ network, setMessage }: any) => {
   useEffect(() => {
 
     const msg = {
-        $type: "cosmos.group.v1.MsgCreateGroupPolicy",
-        admin: admin,
-        groupId: groupId,
-        metadata: metadata,
-        decisionPolicy: decisionPolicy,
-    } as MsgCreateGroupPolicy
+      $type: "cosmos.group.v1.MsgCreateGroupPolicy",
+      admin: wallet ? wallet.bech32Address : admin,
+      groupId: Long.fromString(groupId || "0"),
+      metadata: metadata,
+      decisionPolicy: decisionPolicy,
+    } as Msg
 
     const msgAny = {
-        typeUrl: "/cosmos.group.v1.MsgCreateGroupPolicy",
-        value: MsgCreateGroupPolicy.encode(msg).finish(),
+      typeUrl: "/cosmos.group.v1.MsgCreateGroupPolicy",
+      value: Msg.encode(msg).finish(),
     }
 
     setMessage(msgAny)
 
-  }, [admin, groupId, metadata, decisionPolicy])
+  }, [admin, groupId, metadata, decisionPolicy, wallet])
 
   return (
     <>
-      <InputAddress
-        id="msg-create-group-policy-admin"
-        label="admin"
-        long={true}
-        network={network}
-        address={admin}
-        setAddress={setAdmin}
-      />
       <InputNumber
         id="msg-create-group-policy-group-id"
+        label="group id"
         network={network}
         number={groupId}
         setNumber={setGroupId}
       />
+      {!useWallet &&
+        <InputAddress
+          id="msg-create-group-policy-admin"
+          label="policy admin"
+          long={true}
+          network={network}
+          address={admin}
+          setAddress={setAdmin}
+        />
+      }
       <InputIRI
         id="msg-create-group-policy-metadata"
-        label="metadata"
+        label="policy metadata"
         iri={metadata}
         setIri={setMetadata}
       />
@@ -66,4 +70,4 @@ const MsgCreateGroupPolicyInputs = ({ network, setMessage }: any) => {
   )
 }
 
-export default MsgCreateGroupPolicyInputs
+export default MsgCreateGroupPolicy

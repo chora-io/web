@@ -1,13 +1,13 @@
 import * as React from "react"
 import { useEffect, useState } from "react"
 
-import { MsgSend } from "@keplr-wallet/proto-types/cosmos/bank/v1beta1/tx"
+import { MsgSend as Msg } from "@keplr-wallet/proto-types/cosmos/bank/v1beta1/tx"
 
 import InputAddress from "../InputAddress"
 import InputDenom from "../InputDenom"
 import InputNumber from "../InputNumber"
 
-const MsgSendInputs = ({ network, setMessage }: any) => {
+const MsgSend = ({ network, setMessage, useWallet, wallet }: any) => {
 
   const [fromAddress, setFromAddress] = useState<string>("")
   const [toAddress, setToAddress] = useState<string>("")
@@ -18,7 +18,7 @@ const MsgSendInputs = ({ network, setMessage }: any) => {
 
     const msg = {
         $type: "cosmos.bank.v1beta1.MsgSend",
-        fromAddress: fromAddress,
+        fromAddress: wallet ? wallet.bech32Address : fromAddress,
         toAddress: toAddress,
         amount: [
           {
@@ -26,27 +26,29 @@ const MsgSendInputs = ({ network, setMessage }: any) => {
             amount: amount,
           }
         ],
-    } as MsgSend
+    } as Msg
 
     const msgAny = {
         typeUrl: "/cosmos.bank.v1beta1.MsgSend",
-        value: MsgSend.encode(msg).finish(),
+        value: Msg.encode(msg).finish(),
     }
 
     setMessage(msgAny)
 
-  }, [fromAddress, toAddress, amount])
+  }, [fromAddress, toAddress, amount, wallet])
 
   return (
     <>
-      <InputAddress
-        id="msg-send-from-address"
-        label="from address"
-        long={true}
-        network={network}
-        address={fromAddress}
-        setAddress={setFromAddress}
-      />
+      {!useWallet && (
+        <InputAddress
+          id="msg-send-from-address"
+          label="from address"
+          long={true}
+          network={network}
+          address={fromAddress}
+          setAddress={setFromAddress}
+        />
+      )}
       <InputAddress
         id="msg-send-to-address"
         label="to address"
@@ -71,4 +73,4 @@ const MsgSendInputs = ({ network, setMessage }: any) => {
   )
 }
 
-export default MsgSendInputs
+export default MsgSend
