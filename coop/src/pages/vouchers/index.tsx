@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import Main from "../../layouts/Main"
-import Balance from "../../components/vouchers/Balance";
+import Balance from "../../components/vouchers/Balance"
 import Balances from "../../components/vouchers/Balances"
 import Voucher from "../../components/vouchers/Voucher"
 import Vouchers from "../../components/vouchers/Vouchers"

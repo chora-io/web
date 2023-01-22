@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import Main from "../layouts/Main"
-import GroupInfo from "../components/home/GroupInfo";
+import GroupInfo from "../components/home/GroupInfo"
 import Seo from "../components/SeoWrapper"
 
 import * as styles from "./index.module.css"

@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { RawMediaType } from "chora/api/regen/data/v1/types"
+import { RawMediaType } from "../api/regen/data/v1/types"
 
 const defaultId = "raw-media"
 const defaultLabel = "media type"

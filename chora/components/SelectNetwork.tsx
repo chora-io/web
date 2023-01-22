@@ -6,7 +6,7 @@ import {
   regenLocal,
   regenRedwood,
   regenHambach,
-} from "chora/utils/chains"
+} from "../utils/chains"
 
 const defaultId = "network"
 const defaultLabel = "network"

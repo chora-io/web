@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { GraphCanonicalizationAlgorithm } from "chora/api/regen/data/v1/types"
+import { GraphCanonicalizationAlgorithm } from "../api/regen/data/v1/types"
 
 const defaultId = "graph-canon"
 const defaultLabel = "canonicalization algorithm"

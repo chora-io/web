@@ -5,8 +5,8 @@ import Seo from "../../components/SeoWrapper"
 
 import MsgCreateGroupPolicy from "../../components/policy/MsgCreateGroupPolicy"
 import MsgUpdateGroupPolicyAdmin from "../../components/policy/MsgUpdateGroupPolicyAdmin"
-import MsgUpdateGroupPolicyMetadata from "../../components/policy/MsgUpdateGroupPolicyMetadata"
 import MsgUpdateGroupPolicyDecisionPolicy from "../../components/policy/MsgUpdateGroupPolicyDecisionPolicy"
+import MsgUpdateGroupPolicyMetadata from "../../components/policy/MsgUpdateGroupPolicyMetadata"
 import QueryGroupPolicy from "../../components/policy/QueryGroupPolicy"
 
 import * as styles from "./index.module.css"

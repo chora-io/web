@@ -4,8 +4,8 @@ import Main from "../../layouts/Main"
 import Seo from "../../components/SeoWrapper"
 
 import MsgAnchor from "../../components/anchor/MsgAnchor"
-import QueryAnchorByIRI from "../../components/anchor/QueryAnchorByIRI"
 import QueryAnchorByHash from "../../components/anchor/QueryAnchorByHash"
+import QueryAnchorByIRI from "../../components/anchor/QueryAnchorByIRI"
 
 import * as styles from "./index.module.css"
 

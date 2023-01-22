@@ -86,8 +86,8 @@ const InputContentHash = ({ id, onlyGraph, setContentHash }: any) => {
           />
           <SelectGraphMerkle
             id={(id || defaultId) + "-graph-merkle"}
-            canon={""} // disabled until multiple options exist
-            setCanon={() => {}} // disabled until multiple options exist
+            merkle={""} // disabled until multiple options exist
+            setMerkle={() => {}} // disabled until multiple options exist
           />
         </>
       ) : (

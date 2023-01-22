@@ -5,7 +5,6 @@ import { WalletContext } from "chora"
 
 import InputNumber from "chora/components/InputNumber"
 import Result from "chora/components/Result"
-import SelectNetwork from "chora/components/SelectNetwork"
 
 import * as styles from "./QueryGroupMembers.module.css"
 
@@ -13,7 +12,7 @@ const queryGroupMembers = "/cosmos/group/v1/group_members"
 
 const QueryGroupMembers = () => {
 
-  const { chainInfo, network, setNetwork } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
 
   // form input
   const [id, setId] = useState<string>("")
@@ -51,10 +50,6 @@ const QueryGroupMembers = () => {
             label="group id"
             number={id}
             setNumber={setId}
-          />
-          <SelectNetwork
-            network={network}
-            setNetwork={setNetwork}
           />
           <button type="submit">
             {"search"}

@@ -2,17 +2,17 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
+
 import InputIRI from "chora/components/InputIRI"
 import Result from "chora/components/Result"
-import SelectNetwork from "chora/components/SelectNetwork"
 
 import * as styles from "./ConvertIRIToHash.module.css"
 
-const convertIRIToHash = "/regen/data/v1/convert-iri-to-hash"
+const convertIriToHash = "/regen/data/v1/convert-iri-to-hash"
 
 const ConvertIRIToHash = () => {
 
-  const { chainInfo, network, setNetwork } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   const [iri, setIri] = useState("")
   const [error, setError] = useState("")
@@ -24,13 +24,13 @@ const ConvertIRIToHash = () => {
     setError("")
     setSuccess("")
 
-    fetch(chainInfo.rest + convertIRIToHash + "/" + iri)
+    fetch(chainInfo.rest + convertIriToHash + "/" + iri)
       .then(res => res.json())
       .then(data => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data.content_hash, null, "  "))
+          setSuccess(JSON.stringify(data["content_hash"], null, "  "))
         }
       })
       .catch(err => {
@@ -46,10 +46,6 @@ const ConvertIRIToHash = () => {
             network={network}
             iri={iri}
             setIri={setIri}
-          />
-          <SelectNetwork
-            network={network}
-            setNetwork={setNetwork}
           />
           <button type="submit">
             {"convert"}

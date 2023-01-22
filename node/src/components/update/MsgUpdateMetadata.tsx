@@ -2,7 +2,7 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-import { signAndBroadcast2 } from "chora/utils/tx"
+import { signAndBroadcast } from "chora/utils/tx"
 
 import MsgInputs from "chora/components/geonode/MsgUpdateMetadata"
 import ResultTx from "chora/components/ResultTx"
@@ -23,7 +23,7 @@ const MsgUpdateMetadata = () => {
     setError("")
     setSuccess("")
 
-    await signAndBroadcast2(chainInfo, wallet["bech32Address"], [message])
+    await signAndBroadcast(chainInfo, wallet["bech32Address"], [message])
       .then(res => {
         setSuccess(res)
       }).catch(err => {

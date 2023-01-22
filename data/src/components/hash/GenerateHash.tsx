@@ -5,14 +5,14 @@ import * as blake from "blakejs"
 import * as jsonld from "jsonld"
 
 import Result from "chora/components/Result"
+import SelectDigestAlgorithm from "chora/components/SelectDigestAlgorithm"
+import SelectGraphCanon from "chora/components/SelectGraphCanon"
+import SelectGraphMerkle from "chora/components/SelectGraphMerkle"
 
 import InputJSON from "../InputJSON"
 import InputsFromJSON from "../InputsFromJSON"
-import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
-import SelectGraphCanon from "../SelectGraphCanon"
-import SelectGraphMerkle from "../SelectGraphMerkle"
+import SelectContext from "../SelectContext"
 import SelectInput from "../SelectInput"
-import SelectSchemaContext from "../SelectSchemaContext"
 
 import * as styles from "./GenerateHash.module.css"
 
@@ -43,7 +43,7 @@ const GenerateHash = () => {
       .then(res => res.json())
       .then(data => {
         const urls = []
-        data.itemListElement.map(e => urls.push(e.item["@id"]))
+        data["itemListElement"].map(e => urls.push(e.item["@id"]))
         setContexts(urls)
       })
       .catch(err => {
@@ -138,18 +138,22 @@ const GenerateHash = () => {
     }, null, "  "))
   }
 
+  const handleSetInput = (input) => {
+    setInput(input)
+    setError("")
+    setSuccess("")
+  }
+
   return (
     <>
       <SelectInput
         input={input}
-        setInput={setInput}
-        setError={setError}
-        setSuccess={setJson}
+        setInput={handleSetInput}
       />
       <div>
         {input == "form" ? (
           <form className={styles.form} onSubmit={handleSubmit}>
-            <SelectSchemaContext
+            <SelectContext
               context={context}
               contexts={contexts}
               setContext={handleSetContext}
@@ -159,16 +163,25 @@ const GenerateHash = () => {
               json={json}
               setJson={setJson}
             />
-            <SelectDigestAlgorithm />
-            <SelectGraphCanon />
-            <SelectGraphMerkle />
+            <SelectDigestAlgorithm
+              digest={""} // disabled until multiple options exist
+              setDigest={() => {}} // disabled until multiple options exist
+            />
+            <SelectGraphCanon
+              canon={""} // disabled until multiple options exist
+              setCanon={() => {}} // disabled until multiple options exist
+            />
+            <SelectGraphMerkle
+              merkle={""} // disabled until multiple options exist
+              setMerkle={() => {}} // disabled until multiple options exist
+            />
             <button type="submit">
               {"generate hash"}
             </button>
           </form>
         ) : (
           <form className={styles.form} onSubmit={handleSubmit}>
-            <SelectSchemaContext
+            <SelectContext
               context={context}
               contexts={contexts}
               setContext={handleSetContext}
@@ -180,9 +193,18 @@ const GenerateHash = () => {
               useTemplate={handleGenJson}
               showUseTemplate={context.length > 0}
             />
-            <SelectDigestAlgorithm />
-            <SelectGraphCanon />
-            <SelectGraphMerkle />
+            <SelectDigestAlgorithm
+              digest={""} // disabled until multiple options exist
+              setDigest={() => {}} // disabled until multiple options exist
+            />
+            <SelectGraphCanon
+              canon={""} // disabled until multiple options exist
+              setCanon={() => {}} // disabled until multiple options exist
+            />
+            <SelectGraphMerkle
+              merkle={""} // disabled until multiple options exist
+              setMerkle={() => {}} // disabled until multiple options exist
+            />
             <button type="submit">
               {"generate hash"}
             </button>

@@ -40,7 +40,7 @@ const MsgAttestJSON = ({ network, setMessage, useWallet, wallet }: any) => {
     <>
       {!useWallet && (
         <InputAddress
-          id="msg-anchor-attestor"
+          id="msg-attest-attestor"
           label="attestor"
           long={true}
           network={network}
@@ -49,7 +49,7 @@ const MsgAttestJSON = ({ network, setMessage, useWallet, wallet }: any) => {
         />
       )}
       <InputContentHashJSON
-        id="msg-anchor-content-hash"
+        id="msg-attest-content-hash"
         label="content hash"
         json={contentHashJson}
         setJson={setContentHashJson}

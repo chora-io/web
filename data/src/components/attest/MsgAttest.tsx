@@ -2,7 +2,7 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-import { signAndBroadcast2 } from "chora/utils/tx"
+import { signAndBroadcast } from "chora/utils/tx"
 
 import MsgInputs from "chora/components/data/MsgAttest"
 import MsgInputsJSON from "chora/components/data/MsgAttestJSON"
@@ -27,7 +27,7 @@ const MsgAttest = () => {
     setError("")
     setSuccess("")
 
-    await signAndBroadcast2(chainInfo, wallet["bech32Address"], [message])
+    await signAndBroadcast(chainInfo, wallet["bech32Address"], [message])
       .then(res => {
         setSuccess(res)
       }).catch(err => {

@@ -185,9 +185,12 @@ const SubmitProposal = () => {
       exec: execution,
     } as MsgSubmitProposal
 
-    const encMsg = MsgSubmitProposal.encode(msg).finish()
+    const msgAny = {
+      typeUrl: "/chora.voucher.v1.MsgCreate",
+      value: MsgSubmitProposal.encode(msg).finish(),
+    }
 
-    await signAndBroadcast(chainInfo, wallet.bech32Address, msg, encMsg)
+    await signAndBroadcast(chainInfo, wallet["bech32Address"], [msgAny])
       .then(res => {
         setSuccess(res)
       }).catch(err => {

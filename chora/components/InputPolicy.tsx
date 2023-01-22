@@ -2,10 +2,7 @@ import * as React from "react"
 import { useEffect, useState } from "react"
 import * as Long from "long"
 
-import {
-  PercentageDecisionPolicy,
-  ThresholdDecisionPolicy,
-} from "../api/cosmos/group/v1/types"
+import { PercentageDecisionPolicy, ThresholdDecisionPolicy } from "../api/cosmos/group/v1/types"
 
 import InputNumber from "./InputNumber"
 import SelectPolicyType from "./SelectPolicyType"
@@ -71,7 +68,7 @@ const InputPolicy = ({ id, label, setPolicy }: any) => {
   return (
     <span className={styles.policy}>
       <SelectPolicyType
-        id={(id || defaultId) + "-policy-type"}
+        id={(id || defaultId) + "-type"}
         type={type}
         setType={setType}
       />

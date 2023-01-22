@@ -5,7 +5,6 @@ import { WalletContext } from "chora"
 
 import InputAddress from "chora/components/InputAddress"
 import Result from "chora/components/Result"
-import SelectNetwork from "chora/components/SelectNetwork"
 
 import * as styles from "./QueryGroupPolicy.module.css"
 
@@ -13,7 +12,7 @@ const queryGroupPolicy = "/cosmos/group/v1/group_policy_info"
 
 const QueryPolicy = () => {
 
-  const { chainInfo, network, setNetwork } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // form input
   const [address, setAddress] = useState<string>("")
@@ -53,10 +52,6 @@ const QueryPolicy = () => {
             long={true}
             address={address}
             setAddress={setAddress}
-          />
-          <SelectNetwork
-            network={network}
-            setNetwork={setNetwork}
           />
           <button type="submit">
             {"search"}

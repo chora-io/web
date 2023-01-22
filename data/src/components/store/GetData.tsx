@@ -2,25 +2,17 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
+
 import InputIRI from "chora/components/InputIRI"
 import Result from "chora/components/Result"
 
 import * as styles from "./GetData.module.css"
 
-const localServerUrl = "http://localhost:3000"
-const remoteServerUrl = "https://server.chora.io"
+const serverUrl = "https://server.chora.io"
 
 const GetData = () => {
 
   const { network } = useContext(WalletContext)
-
-  let serverUrl = remoteServerUrl
-  if (typeof window !== "undefined" && (
-      window.location.hostname == "0.0.0.0" ||
-      window.location.hostname == "127.0.0.1" ||
-      window.location.hostname == "localhost"
-    )
-  ) { serverUrl = localServerUrl }
 
   // data input
   const [iri, setIri] = useState<string>("")

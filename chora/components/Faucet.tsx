@@ -5,7 +5,7 @@ import {
   choraTestnet,
   regenRedwood,
   regenHambach,
-} from "chora/utils/chains"
+} from "../utils/chains"
 
 import * as styles from "./Faucet.module.css"
 

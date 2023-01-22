@@ -41,7 +41,7 @@ const MsgDefineResolver = ({ network, setMessage, useWallet, wallet }: any) => {
         />
       )}
       <InputURL
-        id="msg-define-resolver-yrl"
+        id="msg-define-resolver-url"
         label="resolver url"
         url={resolverUrl}
         setUrl={setResolverUrl}

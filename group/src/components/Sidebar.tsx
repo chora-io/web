@@ -4,6 +4,7 @@ import { Link } from "gatsby"
 import * as styles from "./Sidebar.module.css"
 
 const Sidebar = () => {
+
   const activeStyle = { fontWeight: "600" }
 
   return (

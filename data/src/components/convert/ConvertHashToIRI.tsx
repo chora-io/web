@@ -2,38 +2,24 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-import Result from "chora/components/Result"
-import SelectNetwork from "chora/components/SelectNetwork"
 
-import InputHash from "../InputHash"
-import InputHashJSON from "../InputHashJSON"
-import SelectDataType from "../SelectDataType"
-import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
-import SelectGraphCanon from "../SelectGraphCanon"
-import SelectGraphMerkle from "../SelectGraphMerkle"
+import InputContentHash from "chora/components/InputContentHash"
+import InputContentHashJSON from "chora/components/InputContentHashJSON"
+import Result from "chora/components/Result"
+
 import SelectInput from "../SelectInput"
-import SelectRawMedia from "../SelectRawMedia"
 
 import * as styles from "./ConvertHashToIRI.module.css"
 
-const convertIRIToHash = "/regen/data/v1/convert-hash-to-iri"
+const convertHashToIri = "/regen/data/v1/convert-hash-to-iri"
 
 const ConvertHashToIRI = () => {
 
-  const { chainInfo, network, setNetwork } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
 
-  // input option
   const [input, setInput] = useState("form")
-
-  // form input
-  const [hash, setHash] = useState("")
-  const [type, setType] = useState<string>("")
-  const [media, setMedia] = useState<number>(0)
-
-  // json input
-  const [json, setJson] = useState<string>("")
-
-  // error and success
+  const [contentHash, setContentHash] = useState<any>(undefined)
+  const [contentHashJson, setContentHashJson] = useState<string>("")
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
 
@@ -44,46 +30,21 @@ const ConvertHashToIRI = () => {
     setSuccess("")
 
     let body: string
+
     if (input == "form") {
-      if (type == "graph") {
-        body = JSON.stringify({
-          content_hash: {
-            graph: {
-              hash: hash,
-              digest_algorithm: "DIGEST_ALGORITHM_BLAKE2B_256",
-              canonicalization_algorithm: "GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015",
-              merkle_tree: "GRAPH_MERKLE_TREE_NONE_UNSPECIFIED",
-            }
-          }
-        })
-      } else if (type == "raw") {
-        body = JSON.stringify({
-          content_hash: {
-            raw: {
-              hash: hash,
-              digest_algorithm: "DIGEST_ALGORITHM_BLAKE2B_256",
-              media_type: Number(media),
-            }
-          }
-        })
-      } else {
-        setError("data type is required")
-        return // exit on error
-      }
+        body = JSON.stringify({ contentHash: contentHash })
     } else {
-      let contentHash = ""
+      let ch = ""
       try {
-        contentHash = JSON.parse(json)
+        ch = JSON.parse(contentHashJson)
       } catch (err) {
         setError(err.message)
         return // exit on error
       }
-      body = JSON.stringify({
-        contentHash: contentHash
-      })
+      body = JSON.stringify({ contentHash: ch })
     }
 
-    fetch(chainInfo.rest + convertIRIToHash, {
+    fetch(chainInfo.rest + convertHashToIri, {
       method: "POST",
       body: body,
     })
@@ -100,41 +61,24 @@ const ConvertHashToIRI = () => {
       })
   }
 
+  const handleSetInput = (input) => {
+    setInput(input)
+    setError("")
+    setSuccess("")
+  }
+
   return (
     <>
       <SelectInput
         input={input}
-        setInput={setInput}
-        setError={setError}
-        setSuccess={setSuccess}
+        setInput={handleSetInput}
       />
       <div>
         {input == "form" ? (
           <form className={styles.form} onSubmit={handleSubmit}>
-            <InputHash
-              hash={hash}
-              setHash={setHash}
-            />
-            <SelectDigestAlgorithm />
-            <SelectDataType
-              type={type}
-              setType={setType}
-            />
-            {type == "graph" &&
-              <>
-                <SelectGraphCanon />
-                <SelectGraphMerkle />
-            </>
-            }
-            {type == "raw" &&
-              <SelectRawMedia
-                media={media}
-                setMedia={setMedia}
-              />
-            }
-            <SelectNetwork
-              network={network}
-              setNetwork={setNetwork}
+            <InputContentHash
+              contentHash={contentHash}
+              setContentHash={setContentHash}
             />
             <button type="submit">
               {"convert"}
@@ -142,11 +86,10 @@ const ConvertHashToIRI = () => {
           </form>
         ) : (
           <form className={styles.form} onSubmit={handleSubmit}>
-            <InputHashJSON
-              json={json}
-              setJson={setJson}
+            <InputContentHashJSON
+              json={contentHashJson}
+              setJson={setContentHashJson}
             />
-            <SelectNetwork withLabel={true} />
             <button type="submit">
               {"convert"}
             </button>

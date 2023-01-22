@@ -3,31 +3,21 @@ import { useEffect, useState } from "react"
 import * as jsonld from "jsonld"
 
 import Result from "chora/components/Result"
+import SelectDigestAlgorithm from "chora/components/SelectDigestAlgorithm"
+import SelectGraphCanon from "chora/components/SelectGraphCanon"
+import SelectGraphMerkle from "chora/components/SelectGraphMerkle"
 
 import InputJSON from "../InputJSON"
 import InputsFromJSON from "../InputsFromJSON"
-import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
-import SelectGraphCanon from "../SelectGraphCanon"
-import SelectGraphMerkle from "../SelectGraphMerkle"
+import SelectContext from "../SelectContext"
 import SelectInput from "../SelectInput"
-import SelectSchemaContext from "../SelectSchemaContext"
 
 import * as styles from "./PostData.module.css"
 
 const contextUrl = "https://schema.chora.io/contexts/index.jsonld"
-
-const localServerUrl = "http://localhost:3000"
-const remoteServerUrl = "https://server.chora.io"
+const serverUrl = "https://server.chora.io"
 
 const PostData = () => {
-
-  let serverUrl = remoteServerUrl
-  if (typeof window !== "undefined" && (
-      window.location.hostname == "0.0.0.0" ||
-      window.location.hostname == "127.0.0.1" ||
-      window.location.hostname == "localhost"
-    )
-  ) { serverUrl = localServerUrl }
 
   // input option
   const [input, setInput] = useState("form")
@@ -51,7 +41,7 @@ const PostData = () => {
       .then(res => res.json())
       .then(data => {
         const urls = []
-        data.itemListElement.map(e => urls.push(e.item["@id"]))
+        data["itemListElement"].map(e => urls.push(e.item["@id"]))
         setContexts(urls)
       })
       .catch(err => {
@@ -160,18 +150,22 @@ const PostData = () => {
       })
   }
 
+  const handleSetInput = (input) => {
+    setInput(input)
+    setError("")
+    setSuccess("")
+  }
+
   return (
     <>
       <SelectInput
         input={input}
-        setInput={setInput}
-        setError={setError}
-        setSuccess={setJson}
+        setInput={handleSetInput}
       />
       <div>
         {input == "form" ? (
           <form className={styles.form} onSubmit={handleSubmit}>
-            <SelectSchemaContext
+            <SelectContext
               context={context}
               contexts={contexts}
               setContext={handleSetContext}
@@ -181,16 +175,25 @@ const PostData = () => {
               json={json}
               setJson={setJson}
             />
-            <SelectDigestAlgorithm />
-            <SelectGraphCanon />
-            <SelectGraphMerkle />
+            <SelectDigestAlgorithm
+              digest={""} // disabled until multiple options exist
+              setDigest={() => {}} // disabled until multiple options exist
+            />
+            <SelectGraphCanon
+              canon={""} // disabled until multiple options exist
+              setCanon={() => {}} // disabled until multiple options exist
+            />
+            <SelectGraphMerkle
+              merkle={""} // disabled until multiple options exist
+              setMerkle={() => {}} // disabled until multiple options exist
+            />
             <button type="submit">
               {"post data"}
             </button>
           </form>
         ) : (
           <form className={styles.form} onSubmit={handleSubmit}>
-            <SelectSchemaContext
+            <SelectContext
               context={context}
               contexts={contexts}
               setContext={handleSetContext}
@@ -202,9 +205,18 @@ const PostData = () => {
               useTemplate={handleGenJson}
               showUseTemplate={context.length > 0}
             />
-            <SelectDigestAlgorithm />
-            <SelectGraphCanon />
-            <SelectGraphMerkle />
+            <SelectDigestAlgorithm
+              digest={""} // disabled until multiple options exist
+              setDigest={() => {}} // disabled until multiple options exist
+            />
+            <SelectGraphCanon
+              canon={""} // disabled until multiple options exist
+              setCanon={() => {}} // disabled until multiple options exist
+            />
+            <SelectGraphMerkle
+              merkle={""} // disabled until multiple options exist
+              setMerkle={() => {}} // disabled until multiple options exist
+            />
             <button type="submit">
               {"post data"}
             </button>

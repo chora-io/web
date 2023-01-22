@@ -3,10 +3,10 @@ import * as React from "react"
 import Main from "../../layouts/Main"
 import Seo from "../../components/SeoWrapper"
 
-import MsgSubmitProposal from "../../components/proposal/MsgSubmitProposal"
-import MsgWithdrawProposal from "../../components/proposal/MsgWithdrawProposal"
 import MsgExec from "../../components/proposal/MsgExec"
+import MsgSubmitProposal from "../../components/proposal/MsgSubmitProposal"
 import MsgVote from "../../components/proposal/MsgVote"
+import MsgWithdrawProposal from "../../components/proposal/MsgWithdrawProposal"
 import QueryProposal from "../../components/proposal/QueryProposal"
 
 import * as styles from "./index.module.css"

@@ -2,9 +2,9 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
+
 import InputNumber from "chora/components/InputNumber"
 import Result from "chora/components/Result"
-import SelectNetwork from "chora/components/SelectNetwork"
 
 import * as styles from "./QueryResolver.module.css"
 
@@ -12,7 +12,7 @@ const queryResolver = "/regen/data/v1/resolver"
 
 const QueryResolver = () => {
 
-  const { chainInfo, network, setNetwork } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
 
   const [id, setId] = useState("")
   const [error, setError] = useState("")
@@ -47,10 +47,6 @@ const QueryResolver = () => {
             label="resolver id"
             number={id}
             setNumber={setId}
-          />
-          <SelectNetwork
-            network={network}
-            setNetwork={setNetwork}
           />
           <button type="submit">
             {"search"}

@@ -1,6 +1,6 @@
 import * as React from "react"
 
-const SelectSchemaContext = ({ id, label, context, contexts, setContext }: any) => (
+const SelectContext = ({ id, label, context, contexts, setContext }: any) => (
   <label htmlFor={id ? id : "context"}>
     {label ? label : "schema context"}
     <select
@@ -20,4 +20,4 @@ const SelectSchemaContext = ({ id, label, context, contexts, setContext }: any) 
   </label>
 )
 
-export default SelectSchemaContext
+export default SelectContext

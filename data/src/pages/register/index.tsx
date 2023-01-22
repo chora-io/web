@@ -6,9 +6,9 @@ import Seo from "../../components/SeoWrapper"
 import MsgDefineResolver from "../../components/register/MsgDefineResolver"
 import MsgRegisterResolver from "../../components/register/MsgRegisterResolver"
 import QueryResolver from "../../components/register/QueryResolver"
-import QueryResolversByURL from "../../components/register/QueryResolversByURL"
-import QueryResolversByIRI from "../../components/register/QueryResolversByIRI"
 import QueryResolversByHash from "../../components/register/QueryResolversByHash"
+import QueryResolversByIRI from "../../components/register/QueryResolversByIRI"
+import QueryResolversByURL from "../../components/register/QueryResolversByURL"
 
 import * as styles from "./index.module.css"
 

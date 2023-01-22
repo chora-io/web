@@ -1,7 +1,7 @@
 import * as React from "react"
 
-const defaultId = "message"
-const defaultLabel = "message"
+const defaultId = "account"
+const defaultLabel = "account"
 
 const SelectAccount = ({ id, label, options, address, setAddress }: any) => (
   <label htmlFor={id ? id : defaultId}>

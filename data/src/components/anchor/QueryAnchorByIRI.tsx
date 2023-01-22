@@ -2,9 +2,9 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
+
 import InputIRI from "chora/components/InputIRI"
 import Result from "chora/components/Result"
-import SelectNetwork from "chora/components/SelectNetwork"
 
 import * as styles from "./QueryAnchorByIRI.module.css"
 
@@ -12,7 +12,7 @@ const queryAnchorByIRI = "/regen/data/v1/anchor-by-iri"
 
 const QueryAnchorByIRI = () => {
 
-  const { chainInfo, network, setNetwork } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   const [iri, setIri] = useState("")
   const [error, setError] = useState("")
@@ -46,10 +46,6 @@ const QueryAnchorByIRI = () => {
             network={network}
             iri={iri}
             setIri={setIri}
-          />
-          <SelectNetwork
-            network={network}
-            setNetwork={setNetwork}
           />
           <button type="submit">
             {"search"}

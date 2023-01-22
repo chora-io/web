@@ -5,8 +5,8 @@ import Seo from "../../components/SeoWrapper"
 
 import MsgAttest from "../../components/attest/MsgAttest"
 import QueryAttestationsByAttestor from "../../components/attest/QueryAttestationsByAttestor"
-import QueryAttestationsByIRI from "../../components/attest/QueryAttestationsByIRI"
 import QueryAttestationsByHash from "../../components/attest/QueryAttestationsByHash"
+import QueryAttestationsByIRI from "../../components/attest/QueryAttestationsByIRI"
 
 import * as styles from "./index.module.css"
 

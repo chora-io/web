@@ -2,17 +2,17 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
+
 import InputURL from "chora/components/InputURL"
 import Result from "chora/components/Result"
-import SelectNetwork from "chora/components/SelectNetwork"
 
 import * as styles from "./QueryResolversByURL.module.css"
 
-const queryResolversByURL = "/regen/data/v1/resolvers-by-url"
+const queryResolversByUrl = "/regen/data/v1/resolvers-by-url"
 
 const QueryResolversByURL = () => {
 
-  const { chainInfo, network, setNetwork } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
 
   const [url, setUrl] = useState("")
   const [error, setError] = useState("")
@@ -24,9 +24,9 @@ const QueryResolversByURL = () => {
     setError("")
     setSuccess("")
 
-    fetch(chainInfo.rest + queryResolversByURL, {
+    fetch(chainInfo.rest + queryResolversByUrl, {
       method: "POST",
-      body: `{"url": "${url}"}`,
+      body: JSON.stringify({ url: url }),
     })
       .then(res => res.json())
       .then(data => {
@@ -51,10 +51,6 @@ const QueryResolversByURL = () => {
             placeholder="https://server.chora.io"
             url={url}
             setUrl={setUrl}
-          />
-          <SelectNetwork
-            network={network}
-            setNetwork={setNetwork}
           />
           <button type="submit">
             {"search"}

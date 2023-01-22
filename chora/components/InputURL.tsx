@@ -2,7 +2,7 @@ import * as React from "react"
 
 const defaultId = "url"
 const defaultLabel = "url"
-const defaultPlaceholder = "https://server.chora.io"
+const defaultPlaceholder = "https://chora.io"
 
 const InputURL = ({ id, label, placeholder, url, setUrl }: any) => (
   <label htmlFor={id ? id : defaultId}>
