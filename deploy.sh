@@ -3,11 +3,31 @@
 # abort on errors
 set -e
 
+# update chora
+(cd chora && yarn)
+
+# build chora
+yarn build-chora
+
+# clean up modules
+rm -rf node_modules
+rm -rf main/node_modules
+rm -rf coop/node_modules
+rm -rf data/node_modules
+rm -rf group/node_modules
+rm -rf node/node_modules
+rm -rf scan/node_modules
+
 # bootstrap
 yarn bootstrap
 
-# build
-yarn build
+# build apps
+yarn build-main
+yarn build-coop
+yarn build-data
+yarn build-group
+yarn build-node
+yarn build-scan
 
 # clean up public
 rm -rf public

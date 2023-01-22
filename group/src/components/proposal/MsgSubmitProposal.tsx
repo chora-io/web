@@ -2,29 +2,18 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-import { MsgSubmitProposal } from "chora/api/cosmos/group/v1/tx"
-import { Exec } from "chora/api/cosmos/group/v1/types"
-import { signAndBroadcast } from "chora/utils/tx"
+import { signAndBroadcast2 } from "chora/utils/tx"
 
-import InputAddress from "chora/components/InputAddress"
-import InputIRI from "chora/components/InputIRI"
+import MsgInputs from "chora/components/group/MsgSubmitProposal"
 import ResultTx from "chora/components/ResultTx"
-import SelectExecution from "chora/components/SelectExecution"
-import SelectMessage from "chora/components/SelectMessage"
 
 import * as styles from "./MsgSubmitProposal.module.css"
 
-const MsgSubmitProposalView = () => {
+const MsgSubmitProposal = () => {
 
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
-  // form input
-  const [address, setAddress] = useState<string>("")
-  const [metadata, setMetadata] = useState<string>("")
-  const [message, setMessage] = useState<any>(null)
-  const [execution, setExecution] = useState<number>(Exec["EXEC_UNSPECIFIED"])
-
-  // error and success
+  const [message, setMessage] = useState<any>(undefined)
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
@@ -34,18 +23,7 @@ const MsgSubmitProposalView = () => {
     setError("")
     setSuccess("")
 
-    const msg = {
-      $type: "cosmos.group.v1.MsgSubmitProposal",
-      proposers: [wallet.bech32Address],
-      groupPolicyAddress: address,
-      metadata: metadata,
-      messages: [message],
-      exec: execution,
-    } as MsgSubmitProposal
-
-    const encMsg = MsgSubmitProposal.encode(msg).finish()
-
-    await signAndBroadcast(chainInfo, wallet.bech32Address, msg, encMsg)
+    await signAndBroadcast2(chainInfo, wallet["bech32Address"], [message])
       .then(res => {
         setSuccess(res)
       }).catch(err => {
@@ -57,31 +35,11 @@ const MsgSubmitProposalView = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputAddress
-            id="policy-address"
-            label="policy address"
+          <MsgInputs
             network={network}
-            long={true}
-            address={address}
-            setAddress={setAddress}
-          />
-          <InputIRI
-            id="proposal-metadata"
-            label="proposal metadata"
-            network={network}
-            iri={metadata}
-            setIri={setMetadata}
-          />
-          <SelectMessage
-            id="proposal-message"
-            label="proposal message"
             setMessage={setMessage}
-          />
-          <SelectExecution
-            id="proposal-execution"
-            label="proposal execution"
-            execution={execution}
-            setExecution={setExecution}
+            useWallet={true}
+            wallet={wallet}
           />
           <button type="submit">
             {"submit"}
@@ -97,4 +55,4 @@ const MsgSubmitProposalView = () => {
   )
 }
 
-export default MsgSubmitProposalView
+export default MsgSubmitProposal

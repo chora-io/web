@@ -1,24 +1,19 @@
 import * as React from "react"
 import { useContext, useState } from "react"
-import * as Long from "long"
 
 import { WalletContext } from "chora"
-import { MsgExec } from "chora/api/cosmos/group/v1/tx"
-import { signAndBroadcast } from "chora/utils/tx"
+import { signAndBroadcast2 } from "chora/utils/tx"
 
-import InputNumber from "chora/components/InputNumber"
+import MsgInputs from "chora/components/group/MsgExec"
 import ResultTx from "chora/components/ResultTx"
 
-import * as styles from "./MsgSubmitProposal.module.css"
+import * as styles from "./MsgExec.module.css"
 
-const MsgExecView = () => {
+const MsgExec = () => {
 
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
-  // form input
-  const [id, setId] = useState<string>("")
-
-  // error and success
+  const [message, setMessage] = useState<any>(undefined)
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
@@ -28,15 +23,7 @@ const MsgExecView = () => {
     setError("")
     setSuccess("")
 
-    const msg = {
-      $type: "cosmos.group.v1.MsgExec",
-      executor: wallet.bech32Address,
-      proposalId: Long.fromString(id),
-    } as MsgExec
-
-    const encMsg = MsgExec.encode(msg).finish()
-
-    await signAndBroadcast(chainInfo, wallet.bech32Address, msg, encMsg)
+    await signAndBroadcast2(chainInfo, wallet["bech32Address"], [message])
       .then(res => {
         setSuccess(res)
       }).catch(err => {
@@ -48,11 +35,11 @@ const MsgExecView = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputNumber
-            id="proposal-id"
-            label="proposal id"
-            number={id}
-            setNumber={setId}
+          <MsgInputs
+            network={network}
+            setMessage={setMessage}
+            useWallet={true}
+            wallet={wallet}
           />
           <button type="submit">
             {"submit"}
@@ -68,4 +55,4 @@ const MsgExecView = () => {
   )
 }
 
-export default MsgExecView
+export default MsgExec

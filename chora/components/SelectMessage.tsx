@@ -19,13 +19,17 @@ import BankMsgSend from "./bank/MsgSend"
 import GroupMsgCreateGroup from "./group/MsgCreateGroup"
 import GroupMsgCreateGroupPolicy from "./group/MsgCreateGroupPolicy"
 import GroupMsgCreateGroupWithPolicy from "./group/MsgCreateGroupWithPolicy"
+import GroupMsgExec from "./group/MsgExec"
 import GroupMsgLeaveGroup from "./group/MsgLeaveGroup"
+import GroupMsgSubmitProposal from "./group/MsgSubmitProposal"
 import GroupMsgUpdateGroupAdmin from "./group/MsgUpdateGroupAdmin"
 import GroupMsgUpdateGroupMembers from "./group/MsgUpdateGroupMembers"
 import GroupMsgUpdateGroupMetadata from "./group/MsgUpdateGroupMetadata"
 import GroupMsgUpdateGroupPolicyAdmin from "./group/MsgUpdateGroupPolicyAdmin"
 import GroupMsgUpdateGroupPolicyDecisionPolicy from "./group/MsgUpdateGroupPolicyDecisionPolicy"
 import GroupMsgUpdateGroupPolicyMetadata from "./group/MsgUpdateGroupPolicyMetadata"
+import GroupMsgVote from "./group/MsgVote"
+import GroupMsgWithdrawProposal from "./group/MsgWithdrawProposal"
 
 import * as styles from "./SelectMessage.module.css"
 
@@ -45,13 +49,17 @@ const defaultOptions = [
   "cosmos.group.v1.MsgCreateGroup",
   "cosmos.group.v1.MsgCreateGroupPolicy",
   "cosmos.group.v1.MsgCreateGroupWithPolicy",
+  "cosmos.group.v1.MsgExec",
   "cosmos.group.v1.MsgLeaveGroup",
+  "cosmos.group.v1.MsgSubmitProposal",
   "cosmos.group.v1.MsgUpdateGroupAdmin",
   "cosmos.group.v1.MsgUpdateGroupMembers",
   "cosmos.group.v1.MsgUpdateGroupMetadata",
   "cosmos.group.v1.MsgUpdateGroupPolicyAdmin",
   "cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy",
   "cosmos.group.v1.MsgUpdateGroupPolicyMetadata",
+  "cosmos.group.v1.MsgVote",
+  "cosmos.group.v1.MsgWithdrawProposal",
 ]
 
 const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
@@ -200,12 +208,34 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
+      {selected === "cosmos.group.v1.MsgExec" && (
+        <div className={styles.message}>
+          <h3>
+            {selected}
+          </h3>
+          <GroupMsgExec
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
       {selected === "cosmos.group.v1.MsgLeaveGroup" && (
         <div className={styles.message}>
           <h3>
             {selected}
           </h3>
           <GroupMsgLeaveGroup
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {selected === "cosmos.group.v1.MsgSubmitProposal" && (
+        <div className={styles.message}>
+          <h3>
+            {selected}
+          </h3>
+          <GroupMsgSubmitProposal
             network={network}
             setMessage={setMessage}
           />
@@ -272,6 +302,28 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
             {selected}
           </h3>
           <GroupMsgUpdateGroupPolicyMetadata
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {selected === "cosmos.group.v1.MsgVote" && (
+        <div className={styles.message}>
+          <h3>
+            {selected}
+          </h3>
+          <GroupMsgVote
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {selected === "cosmos.group.v1.MsgWithdrawProposal" && (
+        <div className={styles.message}>
+          <h3>
+            {selected}
+          </h3>
+          <GroupMsgWithdrawProposal
             network={network}
             setMessage={setMessage}
           />

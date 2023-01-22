@@ -1,32 +1,19 @@
 import * as React from "react"
 import { useContext, useState } from "react"
-import * as Long from "long"
 
 import { WalletContext } from "chora"
-import { MsgVote } from "chora/api/cosmos/group/v1/tx"
-import { Exec, VoteOption } from "chora/api/cosmos/group/v1/types"
-import { signAndBroadcast } from "chora/utils/tx"
+import { signAndBroadcast2 } from "chora/utils/tx"
 
-import InputIRI from "chora/components/InputIRI"
-import InputNumber from "chora/components/InputNumber"
+import MsgInputs from "chora/components/group/MsgVote"
 import ResultTx from "chora/components/ResultTx"
-import SelectExecution from "chora/components/SelectExecution"
 
-import SelectVote from "../SelectVote"
+import * as styles from "./MsgVote.module.css"
 
-import * as styles from "./MsgSubmitProposal.module.css"
-
-const MsgVoteView = () => {
+const MsgVote = () => {
 
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
-  // form input
-  const [id, setId] = useState<string>("")
-  const [vote, setVote] = useState<number>(VoteOption["VOTE_OPTION_UNSPECIFIED"])
-  const [metadata, setMetadata] = useState<string>("")
-  const [execution, setExecution] = useState<number>(Exec["EXEC_UNSPECIFIED"])
-
-  // error and success
+  const [message, setMessage] = useState<any>(undefined)
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
@@ -36,18 +23,7 @@ const MsgVoteView = () => {
     setError("")
     setSuccess("")
 
-    const msg = {
-      $type: "cosmos.group.v1.MsgVote",
-      voter: wallet.bech32Address,
-      proposalId: Long.fromString(id),
-      option: vote,
-      metadata: metadata,
-      exec: execution,
-    } as MsgVote
-
-    const encMsg = MsgVote.encode(msg).finish()
-
-    await signAndBroadcast(chainInfo, wallet.bech32Address, msg, encMsg)
+    await signAndBroadcast2(chainInfo, wallet["bech32Address"], [message])
       .then(res => {
         setSuccess(res)
       }).catch(err => {
@@ -59,30 +35,11 @@ const MsgVoteView = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputNumber
-            id="proposal-id"
-            label="proposal id"
-            number={id}
-            setNumber={setId}
-          />
-          <SelectVote
-            id="vote-option"
-            label="vote option"
-            vote={vote}
-            setVote={setVote}
-          />
-          <InputIRI
-            id="vote-metadata"
-            label="vote metadata"
+          <MsgInputs
             network={network}
-            iri={metadata}
-            setIri={setMetadata}
-          />
-          <SelectExecution
-            id="proposal-execution"
-            label="proposal execution"
-            execution={execution}
-            setExecution={setExecution}
+            setMessage={setMessage}
+            useWallet={true}
+            wallet={wallet}
           />
           <button type="submit">
             {"submit"}
@@ -98,4 +55,4 @@ const MsgVoteView = () => {
   )
 }
 
-export default MsgVoteView
+export default MsgVote

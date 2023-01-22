@@ -10,10 +10,10 @@ const SelectExecution = ({ id, label, execution, setExecution }: any) => (
       value={execution}
       onChange={event => setExecution(event.target.value)}
     >
-      <option value={Exec.EXEC_UNSPECIFIED}>
+      <option value={Exec["EXEC_UNSPECIFIED"]}>
         {"separate"}
       </option>
-      <option value={Exec.EXEC_TRY}>
+      <option value={Exec["EXEC_TRY"]}>
         {"immediate"}
       </option>
     </select>
