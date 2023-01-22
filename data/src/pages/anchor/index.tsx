@@ -9,7 +9,7 @@ import QueryAnchorByIRI from "../../components/anchor/QueryAnchorByIRI"
 
 import * as styles from "./index.module.css"
 
-const Anchor = () => (
+const AnchorPage = () => (
   <Main>
     <div className={styles.page}>
       <div>
@@ -38,4 +38,4 @@ const Anchor = () => (
 
 export const Head = () => <Seo title="" />
 
-export default Anchor
+export default AnchorPage

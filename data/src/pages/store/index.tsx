@@ -8,7 +8,7 @@ import PostData from "../../components/store/PostData"
 
 import * as styles from "./index.module.css"
 
-const Store = () => (
+const StorePage = () => (
   <Main>
     <div className={styles.page}>
       <div>
@@ -31,4 +31,4 @@ const Store = () => (
 
 export const Head = () => <Seo title="" />
 
-export default Store
+export default StorePage

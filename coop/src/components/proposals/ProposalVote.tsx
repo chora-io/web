@@ -6,23 +6,22 @@ import { choraTestnet } from "chora/utils/chains"
 
 import { formatTimestamp } from "chora/utils/timestamp"
 
-import * as styles from "./GroupMember.module.css"
+import * as styles from "./ProposalVote.module.css"
 
-const groupId = "1" // TODO: configuration file
-const queryMembers = "cosmos/group/v1/group_members" // TODO(cosmos-sdk): group member query
+const queryVote = "cosmos/group/v1/vote_by_proposal_voter"
 const serverUrl = "https://server.chora.io"
 
-const GroupMember = ({ memberAddress }) => {
+const ProposalVote = ({ proposalId, voterAddress }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
   // error and success
   const [error, setError] = useState<string>("")
-  const [member, setMember] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
+  const [vote, setVote] = useState<any>(null)
 
   useEffect(() => {
-    setMember(null)
+    setVote(null)
     setError("")
 
     // error if network is not chora-testnet-1
@@ -30,25 +29,24 @@ const GroupMember = ({ memberAddress }) => {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch members if network is chora-testnet-1
+    // fetch vote if network is chora-testnet-1
     if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
 
       // async function workaround
-      const fetchMemberAndMetadata = async () => {
+      const fetchVoteAndMetadata = async () => {
 
-        // member metadata
+        // vote metadata
         let iri: string
 
-        // fetch members from selected network
-        await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
+        // fetch vote from selected network
+        await fetch(chainInfo.rest + "/" + queryVote + "/" + proposalId + "/" + voterAddress)
           .then(res => res.json())
           .then(res => {
             if (res.code) {
               setError(res.message)
             } else {
-              const member = res["members"].find(m => m["member"]["address"] === memberAddress)
-              setMember(member["member"])
-              iri = member["member"]["metadata"]
+              setVote(res["vote"])
+              iri = res["vote"]["metadata"]
             }
           })
 
@@ -57,14 +55,14 @@ const GroupMember = ({ memberAddress }) => {
           return
         }
 
-        // fetch member data from chora server
+        // fetch proposal data from chora server
         await fetch(serverUrl + "/" + iri)
           .then(res => res.json())
           .then(res => {
             if (res.error) {
               setError(res.error)
               setMetadata(null)
-            } else if (res.context !== "https://schema.chora.io/contexts/group_member.jsonld") {
+            } else if (res.context !== "https://schema.chora.io/contexts/group_vote.jsonld") {
               setError("unsupported metadata schema")
               setMetadata(null)
             } else {
@@ -78,7 +76,7 @@ const GroupMember = ({ memberAddress }) => {
       }
 
       // call async function
-      fetchMemberAndMetadata().catch(err => {
+      fetchVoteAndMetadata().catch(err => {
         setError(err.message)
       })
     }
@@ -86,43 +84,43 @@ const GroupMember = ({ memberAddress }) => {
 
   return (
     <div className={styles.container}>
-      {!member && !metadata && !error && (
+      {!vote && !metadata && !error && (
         <div>
           {"loading..."}
         </div>
       )}
-      {member && metadata && !error && (
-        <div>
+      {vote && metadata && !error && (
+        <div className={styles.vote}>
           <div className={styles.item}>
             <h3>
-              {"name"}
+              {"voter"}
             </h3>
             <p>
-              {metadata["name"]}
+              {vote["voter"]}
             </p>
           </div>
           <div className={styles.item}>
             <h3>
-              {"address"}
+              {"option"}
             </h3>
             <p>
-              {member["address"]}
+              {vote["option"]}
             </p>
           </div>
           <div className={styles.item}>
             <h3>
-              {"added at"}
+              {"reason"}
             </h3>
             <p>
-              {formatTimestamp(member["added_at"])}
+              {metadata["reason"]}
             </p>
           </div>
           <div className={styles.item}>
             <h3>
-              {"weight"}
+              {"submit time"}
             </h3>
             <p>
-              {member["weight"]}
+              {formatTimestamp(vote["submit_time"])}
             </p>
           </div>
         </div>
@@ -136,4 +134,4 @@ const GroupMember = ({ memberAddress }) => {
   )
 }
 
-export default GroupMember
+export default ProposalVote

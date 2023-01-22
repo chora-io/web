@@ -1,13 +1,13 @@
 import * as React from "react"
 
 import Main from "../../layouts/Main"
-import GroupMember from "../../components/members/GroupMember"
-import GroupMembers from "../../components/members/GroupMembers"
+import Member from "../../components/members/Member"
+import Members from "../../components/members/Members"
 import Seo from "../../components/SeoWrapper"
 
 import * as styles from "./index.module.css"
 
-const Members = ({ location }) => {
+const MembersPage = ({ location }) => {
 
   const urlParams = new URLSearchParams(location["search"])
   const memberAddress = urlParams.get("address")
@@ -21,7 +21,7 @@ const Members = ({ location }) => {
               {"group member"}
             </h1>
             <div className={styles.section}>
-              <GroupMember memberAddress={memberAddress} />
+              <Member memberAddress={memberAddress} />
             </div>
           </div>
         ) : (
@@ -30,7 +30,7 @@ const Members = ({ location }) => {
               {"group members"}
             </h1>
             <div className={styles.section}>
-              <GroupMembers />
+              <Members />
             </div>
           </div>
         )}
@@ -41,4 +41,4 @@ const Members = ({ location }) => {
 
 export const Head = () => <Seo title="" />
 
-export default Members
+export default MembersPage

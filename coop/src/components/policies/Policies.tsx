@@ -4,23 +4,23 @@ import { useContext, useEffect, useState } from "react"
 import { WalletContext } from "chora"
 import { choraTestnet } from "chora/utils/chains"
 
-import GroupMemberPreview from "./GroupMemberPreview"
+import GroupPolicyPreview from "./PolicyPreview"
 
-import * as styles from "./GroupMembers.module.css"
+import * as styles from "./Policies.module.css"
 
 const groupId = "1" // TODO: configuration file
-const queryMembers = "cosmos/group/v1/group_members"
+const queryPolicies = "cosmos/group/v1/group_policies_by_group"
 
-const GroupMembers = () => {
+const Policies = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
   // error and success
   const [error, setError] = useState<string>("")
-  const [members, setMembers] = useState<any>(null)
+  const [policies, setPolicies] = useState<any>(null)
 
   useEffect(() => {
-    setMembers(null)
+    setPolicies(null)
     setError("")
 
     // error if network is not chora-testnet-1
@@ -28,26 +28,26 @@ const GroupMembers = () => {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch members if network is chora-testnet-1
+    // fetch policies if network is chora-testnet-1
     if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
 
       // async function workaround
-      const fetchMembers = async () => {
+      const fetchPolicies = async () => {
 
-        // fetch members from selected network
-        await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
+        // fetch policies from selected network
+        await fetch(chainInfo.rest + "/" + queryPolicies + "/" + groupId)
           .then(res => res.json())
           .then(res => {
             if (res.code) {
               setError(res.message)
             } else {
-              setMembers(res["members"])
+              setPolicies(res["group_policies"])
             }
           })
       }
 
       // call async function
-      fetchMembers().catch(err => {
+      fetchPolicies().catch(err => {
         setError(err.message)
       })
     }
@@ -55,15 +55,15 @@ const GroupMembers = () => {
 
   return (
     <div className={styles.container}>
-      {!members && !error && (
+      {!policies && !error && (
         <div>
           {"loading..."}
         </div>
       )}
-      {members && members.map(member => (
-        <GroupMemberPreview
-          key={member["member"]["address"]}
-          member={member["member"]}
+      {policies && policies.map(policy => (
+        <GroupPolicyPreview
+          key={policy["address"]}
+          policy={policy}
         />
       ))}
       {error && (
@@ -75,4 +75,4 @@ const GroupMembers = () => {
   )
 }
 
-export default GroupMembers
+export default Policies

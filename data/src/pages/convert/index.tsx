@@ -8,7 +8,7 @@ import ConvertIRIToHash from "../../components/convert/ConvertIRIToHash"
 
 import * as styles from "./index.module.css"
 
-const Convert = () => (
+const ConvertPage = () => (
   <Main>
     <div className={styles.page}>
       <div>
@@ -31,4 +31,4 @@ const Convert = () => (
 
 export const Head = () => <Seo title="" />
 
-export default Convert
+export default ConvertPage

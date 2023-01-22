@@ -9,7 +9,7 @@ import * as styles from "./index.module.css"
 
 import { regenHambach } from "chora/utils/chains"
 
-const Hambach = () => (
+const HambachPage = () => (
   <Main>
     <div className={styles.page}>
       <Dashboard
@@ -23,4 +23,4 @@ const Hambach = () => (
 
 export const Head = () => <Seo title="scan | regen hambach" />
 
-export default Hambach
+export default HambachPage

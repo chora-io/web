@@ -1,13 +1,13 @@
 import * as React from "react"
 
 import Main from "../../layouts/Main"
-import GroupPolicies from "../../components/policies/GroupPolicies"
-import GroupPolicy from "../../components/policies/GroupPolicy"
+import Policies from "../../components/policies/Policies"
+import Policy from "../../components/policies/Policy"
 import Seo from "../../components/SeoWrapper"
 
 import * as styles from "./index.module.css"
 
-const Policies = ({ location }) => {
+const PoliciesPage = ({ location }) => {
 
   const urlParams = new URLSearchParams(location["search"])
   const policyAddress = urlParams.get("address")
@@ -21,7 +21,7 @@ const Policies = ({ location }) => {
               {"group policy"}
             </h1>
             <div className={styles.section}>
-              <GroupPolicy policyAddress={policyAddress} />
+              <Policy policyAddress={policyAddress} />
             </div>
           </div>
         ) : (
@@ -30,7 +30,7 @@ const Policies = ({ location }) => {
               {"group policies"}
             </h1>
             <div className={styles.section}>
-              <GroupPolicies />
+              <Policies />
             </div>
           </div>
         )}
@@ -41,4 +41,4 @@ const Policies = ({ location }) => {
 
 export const Head = () => <Seo title="" />
 
-export default Policies
+export default PoliciesPage

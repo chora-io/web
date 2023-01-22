@@ -6,12 +6,12 @@ import { choraTestnet } from "chora/utils/chains"
 
 import { formatTimestamp } from "chora/utils/timestamp"
 
-import * as styles from "./GroupPolicy.module.css"
+import * as styles from "./Policy.module.css"
 
 const queryPolicy = "cosmos/group/v1/group_policy_info"
 const serverUrl = "https://server.chora.io"
 
-const GroupPolicy = ({ policyAddress }) => {
+const Policy = ({ policyAddress }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
@@ -186,4 +186,4 @@ const GroupPolicy = ({ policyAddress }) => {
   )
 }
 
-export default GroupPolicy
+export default Policy

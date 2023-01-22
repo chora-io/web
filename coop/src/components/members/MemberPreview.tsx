@@ -2,11 +2,11 @@ import * as React from "react"
 import { useEffect, useState } from "react"
 import { Link } from "gatsby"
 
-import * as styles from "./GroupMemberPreview.module.css"
+import * as styles from "./MemberPreview.module.css"
 
 const serverUrl = "https://server.chora.io"
 
-const GroupMemberPreview = ({ member }) => {
+const MemberPreview = ({ member }) => {
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -86,4 +86,4 @@ const GroupMemberPreview = ({ member }) => {
   )
 }
 
-export default GroupMemberPreview
+export default MemberPreview

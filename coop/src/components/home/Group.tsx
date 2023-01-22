@@ -5,13 +5,13 @@ import { WalletContext } from "chora"
 import { choraTestnet } from "chora/utils/chains"
 import { formatTimestamp } from "chora/utils/timestamp"
 
-import * as styles from "./GroupInfo.module.css"
+import * as styles from "./Group.module.css"
 
 const groupId = "1" // TODO: configuration file
 const queryGroup = "cosmos/group/v1/group_info"
 const serverUrl = "https://server.chora.io"
 
-const GroupInfo = () => {
+const Group = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
@@ -146,4 +146,4 @@ const GroupInfo = () => {
   )
 }
 
-export default GroupInfo
+export default Group

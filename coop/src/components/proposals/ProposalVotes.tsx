@@ -5,12 +5,12 @@ import { Link } from "gatsby"
 import { WalletContext } from "chora"
 import { choraTestnet } from "chora/utils/chains"
 
-import * as styles from "./GroupProposalVotes.module.css"
+import * as styles from "./ProposalVotes.module.css"
 
 const queryProposal = "cosmos/group/v1/proposal"
 const queryVotes = "cosmos/group/v1/votes_by_proposal"
 
-const GroupProposalVotes = ({ proposalId }) => {
+const ProposalVotes = ({ proposalId }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
@@ -117,4 +117,4 @@ const GroupProposalVotes = ({ proposalId }) => {
   )
 }
 
-export default GroupProposalVotes
+export default ProposalVotes

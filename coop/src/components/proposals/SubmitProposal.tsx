@@ -186,7 +186,7 @@ const SubmitProposal = () => {
     } as MsgSubmitProposal
 
     const msgAny = {
-      typeUrl: "/chora.voucher.v1.MsgCreate",
+      typeUrl: "/cosmos.group.v1.MsgSubmitProposal",
       value: MsgSubmitProposal.encode(msg).finish(),
     }
 

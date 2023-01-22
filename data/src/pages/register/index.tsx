@@ -12,7 +12,7 @@ import QueryResolversByURL from "../../components/register/QueryResolversByURL"
 
 import * as styles from "./index.module.css"
 
-const Register = () => (
+const RegisterPage = () => (
   <Main>
     <div className={styles.page}>
       <div>
@@ -59,4 +59,4 @@ const Register = () => (
 
 export const Head = () => <Seo title="" />
 
-export default Register
+export default RegisterPage

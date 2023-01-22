@@ -2,11 +2,11 @@ import * as React from "react"
 import { useEffect, useState } from "react"
 import { Link } from "gatsby"
 
-import * as styles from "./GroupPolicyPreview.module.css"
+import * as styles from "./ProposalPreview.module.css"
 
 const serverUrl = "https://server.chora.io"
 
-const GroupPolicy = ({ policy }) => {
+const ProposalPreview = ({ proposal }) => {
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -19,14 +19,14 @@ const GroupPolicy = ({ policy }) => {
     // async function workaround
     const fetchMetadata = async () => {
 
-      // fetch policy data from chora server
-      await fetch(serverUrl + "/" + policy["metadata"])
+      // fetch proposal data from chora server
+      await fetch(serverUrl + "/" + proposal["metadata"])
         .then(res => res.json())
         .then(res => {
           if (res.error) {
             setError(res.error)
             setMetadata(null)
-          } else if (res.context !== "https://schema.chora.io/contexts/group_policy.jsonld") {
+          } else if (res.context !== "https://schema.chora.io/contexts/group_proposal.jsonld") {
             setError("unsupported metadata schema")
             setMetadata(null)
           } else {
@@ -43,17 +43,25 @@ const GroupPolicy = ({ policy }) => {
     fetchMetadata().catch(err => {
       setError(err.message)
     })
-  }, [policy["metadata"]])
+  }, [proposal["metadata"]])
 
   return (
     <div className={styles.container}>
-      {!policy && !metadata && !error && (
+      {!proposal && !metadata && !error && (
         <div>
           {"loading..."}
         </div>
       )}
-      {policy && metadata && !error && (
+      {proposal && metadata && !error && (
         <>
+          <div className={styles.item}>
+            <h3>
+              {"status"}
+            </h3>
+            <p>
+              {proposal["status"]}
+            </p>
+          </div>
           <div className={styles.item}>
             <h3>
               {"name"}
@@ -62,16 +70,8 @@ const GroupPolicy = ({ policy }) => {
               {metadata["name"]}
             </p>
           </div>
-          <div className={styles.item}>
-            <h3>
-              {"address"}
-            </h3>
-            <p>
-              {policy["address"]}
-            </p>
-          </div>
-          <Link to={`/policies/?address=${policy["address"]}`}>
-            {"view policy"}
+          <Link to={`/proposals/?id=${proposal["id"]}`}>
+            {"view proposal"}
           </Link>
         </>
       )}
@@ -84,4 +84,4 @@ const GroupPolicy = ({ policy }) => {
   )
 }
 
-export default GroupPolicy
+export default ProposalPreview

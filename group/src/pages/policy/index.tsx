@@ -11,7 +11,7 @@ import QueryGroupPolicy from "../../components/policy/QueryGroupPolicy"
 
 import * as styles from "./index.module.css"
 
-const Policy = () => (
+const PolicyPage = () => (
   <Main>
     <div className={styles.page}>
       <div>
@@ -52,4 +52,4 @@ const Policy = () => (
 
 export const Head = () => <Seo title="" />
 
-export default Policy
+export default PolicyPage

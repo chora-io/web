@@ -11,7 +11,7 @@ import QueryProposal from "../../components/proposal/QueryProposal"
 
 import * as styles from "./index.module.css"
 
-const Proposal = () => (
+const ProposalPage = () => (
   <Main>
     <div className={styles.page}>
       <div>
@@ -52,4 +52,4 @@ const Proposal = () => (
 
 export const Head = () => <Seo title="" />
 
-export default Proposal
+export default ProposalPage

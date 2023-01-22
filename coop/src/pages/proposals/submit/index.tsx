@@ -6,7 +6,7 @@ import Seo from "../../../components/SeoWrapper"
 
 import * as styles from "./index.module.css"
 
-const Submit = () => (
+const SubmitPage = () => (
   <Main>
     <div className={styles.page}>
       <div>
@@ -23,4 +23,4 @@ const Submit = () => (
 
 export const Head = () => <Seo title="" />
 
-export default Submit
+export default SubmitPage

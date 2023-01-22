@@ -2,15 +2,15 @@ import * as React from "react"
 import { Link } from "gatsby"
 
 import Main from "../../layouts/Main"
-import GroupProposal from "../../components/proposals/GroupProposal"
-import GroupProposals from "../../components/proposals/GroupProposals"
-import GroupProposalVote from "../../components/proposals/GroupProposalVote"
-import GroupProposalVotes from "../../components/proposals/GroupProposalVotes"
+import Proposal from "../../components/proposals/Proposal"
+import Proposals from "../../components/proposals/Proposals"
+import ProposalVote from "../../components/proposals/ProposalVote"
+import ProposalVotes from "../../components/proposals/ProposalVotes"
 import Seo from "../../components/SeoWrapper"
 
 import * as styles from "./index.module.css"
 
-const Proposals = ({ location }) => {
+const ProposalsPage = ({ location }) => {
 
   const urlParams = new URLSearchParams(location["search"])
   const proposalId = urlParams.get("id")
@@ -30,7 +30,7 @@ const Proposals = ({ location }) => {
               </Link>
             </div>
             <div className={styles.section}>
-              <GroupProposals />
+              <Proposals />
             </div>
           </div>
         )}
@@ -40,7 +40,7 @@ const Proposals = ({ location }) => {
               {"group proposal"}
             </h1>
             <div className={styles.section}>
-              <GroupProposal
+              <Proposal
                 proposalId={proposalId}
               />
             </div>
@@ -48,7 +48,7 @@ const Proposals = ({ location }) => {
               {"group proposal votes"}
             </h1>
             <div className={styles.section}>
-              <GroupProposalVotes
+              <ProposalVotes
                 proposalId={proposalId}
               />
             </div>
@@ -60,7 +60,7 @@ const Proposals = ({ location }) => {
               {"group proposal vote"}
             </h1>
             <div className={styles.section}>
-              <GroupProposalVote
+              <ProposalVote
                 proposalId={proposalId}
                 voterAddress={voterAddress}
               />
@@ -74,4 +74,4 @@ const Proposals = ({ location }) => {
 
 export const Head = () => <Seo title="" />
 
-export default Proposals
+export default ProposalsPage

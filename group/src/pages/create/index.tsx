@@ -10,7 +10,7 @@ import QueryGroupMembers from "../../components/create/QueryGroupMembers"
 
 import * as styles from "./index.module.css"
 
-const Create = () => (
+const CreatePage = () => (
   <Main>
     <div className={styles.page}>
       <div>
@@ -45,4 +45,4 @@ const Create = () => (
 
 export const Head = () => <Seo title="" />
 
-export default Create
+export default CreatePage

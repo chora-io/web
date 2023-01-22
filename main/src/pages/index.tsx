@@ -7,7 +7,7 @@ import Seo from "../components/SeoWrapper"
 
 import * as styles from "./index.module.css"
 
-const Home = () => (
+const HomePage = () => (
   <Main>
     <Background />
     <div className={styles.container} >
@@ -64,4 +64,4 @@ const Home = () => (
 
 export const Head = () => <Seo title="" />
 
-export default Home
+export default HomePage

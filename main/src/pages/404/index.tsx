@@ -6,7 +6,7 @@ import Seo from "../../components/SeoWrapper"
 
 import * as styles from "./index.module.css"
 
-const NotFound = () => (
+const NotFoundPage = () => (
   <>
     <Background />
     <div className={styles.page}>
@@ -26,4 +26,4 @@ const NotFound = () => (
 
 export const Head = () => <Seo title="404 | a placeless place" />
 
-export default NotFound
+export default NotFoundPage

@@ -9,7 +9,7 @@ import * as styles from "./index.module.css"
 
 import { regenRedwood } from "chora/utils/chains"
 
-const Redwood = () => (
+const RedwoodPage = () => (
   <Main>
     <div className={styles.page}>
       <Dashboard
@@ -23,4 +23,4 @@ const Redwood = () => (
 
 export const Head = () => <Seo title="scan | regen redwood" />
 
-export default Redwood
+export default RedwoodPage

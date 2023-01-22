@@ -1,12 +1,12 @@
 import * as React from "react"
 
 import Main from "../layouts/Main"
-import GroupInfo from "../components/home/GroupInfo"
+import Group from "../components/home/Group"
 import Seo from "../components/SeoWrapper"
 
 import * as styles from "./index.module.css"
 
-const Home = () => (
+const HomePage = () => (
   <Main>
     <div className={styles.page}>
       <div>
@@ -14,7 +14,7 @@ const Home = () => (
           {"group information"}
         </h1>
         <div className={styles.section}>
-          <GroupInfo />
+          <Group />
         </div>
       </div>
     </div>
@@ -23,4 +23,4 @@ const Home = () => (
 
 export const Head = () => <Seo title="" />
 
-export default Home
+export default HomePage

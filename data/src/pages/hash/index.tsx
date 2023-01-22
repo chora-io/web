@@ -7,7 +7,7 @@ import GenerateHash from "../../components/hash/GenerateHash"
 
 import * as styles from "./index.module.css"
 
-const Hash = () => (
+const HashPage = () => (
   <Main>
     <div className={styles.page}>
       <div>
@@ -24,4 +24,4 @@ const Hash = () => (
 
 export const Head = () => <Seo title="" />
 
-export default Hash
+export default HashPage

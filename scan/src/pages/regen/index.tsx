@@ -9,7 +9,7 @@ import * as styles from "./index.module.css"
 
 import { regenMainnet } from "chora/utils/chains"
 
-const Regen = () => (
+const RegenPage = () => (
   <Main>
     <div className={styles.page}>
       <Dashboard
@@ -23,4 +23,4 @@ const Regen = () => (
 
 export const Head = () => <Seo title="scan | regen" />
 
-export default Regen
+export default RegenPage

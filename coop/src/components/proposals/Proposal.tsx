@@ -6,12 +6,12 @@ import { choraTestnet } from "chora/utils/chains"
 
 import { formatTimestamp } from "chora/utils/timestamp"
 
-import * as styles from "./GroupProposal.module.css"
+import * as styles from "./Proposal.module.css"
 
 const queryProposal = "cosmos/group/v1/proposal"
 const serverUrl = "https://server.chora.io"
 
-const GroupProposal = ({ proposalId }) => {
+const Proposal = ({ proposalId }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
@@ -258,4 +258,4 @@ const GroupProposal = ({ proposalId }) => {
   )
 }
 
-export default GroupProposal
+export default Proposal

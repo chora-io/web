@@ -1,20 +1,19 @@
 import * as React from "react"
 
 import Main from "../../layouts/Main"
+import Faucet from "../../components/FaucetWrapper"
 import Seo from "../../components/SeoWrapper"
-
-import FaucetWrapper from "../../components/FaucetWrapper"
 
 import * as styles from "./index.module.css"
 
-const Faucet = () => (
+const FaucetPage = () => (
   <Main withWallet={true}>
     <div className={styles.page}>
-      <FaucetWrapper />
+      <Faucet />
     </div>
   </Main>
 )
 
 export const Head = () => <Seo title="chora | testnet faucet" />
 
-export default Faucet
+export default FaucetPage

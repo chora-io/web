@@ -10,7 +10,7 @@ import QueryAttestationsByIRI from "../../components/attest/QueryAttestationsByI
 
 import * as styles from "./index.module.css"
 
-const Attest = () => (
+const AttestPage = () => (
   <Main>
     <div className={styles.page}>
       <div>
@@ -45,4 +45,4 @@ const Attest = () => (
 
 export const Head = () => <Seo title="" />
 
-export default Attest
+export default AttestPage

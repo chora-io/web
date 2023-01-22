@@ -12,7 +12,7 @@ import QueryGroupMembers from "../../components/create/QueryGroupMembers"
 
 import * as styles from "./index.module.css"
 
-const Update = () => (
+const UpdatePage = () => (
   <Main>
     <div className={styles.page}>
       <div>
@@ -59,4 +59,4 @@ const Update = () => (
 
 export const Head = () => <Seo title="" />
 
-export default Update
+export default UpdatePage

@@ -9,7 +9,7 @@ import * as styles from "./index.module.css"
 
 import { choraTestnet } from "chora/utils/chains"
 
-const Testnet = () => (
+const TestnetPage = () => (
   <Main>
     <div className={styles.page}>
       <Dashboard
@@ -23,4 +23,4 @@ const Testnet = () => (
 
 export const Head = () => <Seo title="scan | chora testnet" />
 
-export default Testnet
+export default TestnetPage

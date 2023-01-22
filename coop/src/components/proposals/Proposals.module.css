@@ -1,0 +1,26 @@
+/* container */
+
+.container {
+  color: #FFF !important;
+  font-weight: 300 !important;
+}
+
+/* listOptions */
+
+.listOptions {
+  border-bottom: 1px solid #333;
+  padding-bottom: 2em;
+}
+
+.listOptions button {
+  background: none;
+  color: var(--color-primary);
+  font-size: 1em;
+  margin-right: 2em;
+}
+
+/* message */
+
+.message {
+  padding-top: 2em;
+}

@@ -7,7 +7,7 @@ import Chains from "../components/home/Chains"
 
 import * as styles from "./index.module.css"
 
-const Home = () => (
+const HomePage = () => (
   <Main>
     <div className={styles.page}>
       <Chains />
@@ -17,4 +17,4 @@ const Home = () => (
 
 export const Head = () => <Seo title="" />
 
-export default Home
+export default HomePage
