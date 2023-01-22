@@ -21,13 +21,13 @@ const MsgIssue = ({ network, setMessage, useWallet, wallet }: any) => {
   useEffect(() => {
 
     const msg = {
-        $type: "chora.voucher.v1.MsgIssue",
-        id: Long.fromString(id || "0"),
-        issuer: wallet ? wallet.bech32Address : issuer,
-        recipient: recipient,
-        amount: amount,
-        expiration: new Date(expiration),
-        metadata: metadata,
+      $type: "chora.voucher.v1.MsgIssue",
+      id: Long.fromString(id || "0"),
+      issuer: wallet ? wallet.bech32Address : issuer,
+      recipient: recipient,
+      amount: amount,
+      expiration: new Date(expiration),
+      metadata: metadata,
     } as Msg
 
     const msgAny = {

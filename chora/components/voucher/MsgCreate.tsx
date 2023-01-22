@@ -14,14 +14,14 @@ const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
   useEffect(() => {
 
     const msg = {
-        $type: "chora.voucher.v1.MsgCreate",
-        issuer: wallet ? wallet.bech32Address : issuer,
-        metadata: metadata,
+      $type: "chora.voucher.v1.MsgCreate",
+      issuer: wallet ? wallet.bech32Address : issuer,
+      metadata: metadata,
     } as Msg
 
     const msgAny = {
-        typeUrl: "/chora.voucher.v1.MsgCreate",
-        value: Msg.encode(msg).finish(),
+      typeUrl: "/chora.voucher.v1.MsgCreate",
+      value: Msg.encode(msg).finish(),
     }
 
     setMessage(msgAny)

@@ -16,15 +16,15 @@ const MsgUpdateIssuer = ({ network, setMessage, useWallet, wallet }: any) => {
   useEffect(() => {
 
     const msg = {
-        $type: "chora.voucher.v1.MsgUpdateIssuer",
-        id: Long.fromString(id || "0"),
-        issuer: wallet ? wallet.bech32Address : issuer,
-        newIssuer: newIssuer,
+      $type: "chora.voucher.v1.MsgUpdateIssuer",
+      id: Long.fromString(id || "0"),
+      issuer: wallet ? wallet.bech32Address : issuer,
+      newIssuer: newIssuer,
     } as Msg
 
     const msgAny = {
-        typeUrl: "/chora.voucher.v1.MsgUpdateIssuer",
-        value: Msg.encode(msg).finish(),
+      typeUrl: "/chora.voucher.v1.MsgUpdateIssuer",
+      value: Msg.encode(msg).finish(),
     }
 
     setMessage(msgAny)

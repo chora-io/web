@@ -7,7 +7,8 @@ import {
   ThresholdDecisionPolicy,
 } from "../api/cosmos/group/v1/types"
 
-import InputNumber from "./InputNumber";
+import InputNumber from "./InputNumber"
+import SelectPolicyType from "./SelectPolicyType"
 
 import * as styles from "./InputPolicy.module.css"
 
@@ -69,21 +70,11 @@ const InputPolicy = ({ id, label, setPolicy }: any) => {
 
   return (
     <span className={styles.policy}>
-      <label htmlFor={(id || defaultId) + "-type"}>
-        {(label || defaultLabel) + " type"}
-        <select
-          id={(id || defaultId) + "-type"}
-          value={type}
-          onChange={event => setType(event.target.value)}
-        >
-          <option value="threshold">
-            {"threshold"}
-          </option>
-          <option value="percentage">
-            {"percentage"}
-          </option>
-        </select>
-      </label>
+      <SelectPolicyType
+        id={(id || defaultId) + "-policy-type"}
+        type={type}
+        setType={setType}
+      />
       {type == "threshold" ? (
         <InputNumber
           id={(id || defaultId) + "-threshold"}

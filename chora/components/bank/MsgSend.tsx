@@ -17,15 +17,15 @@ const MsgSend = ({ network, setMessage, useWallet, wallet }: any) => {
   useEffect(() => {
 
     const msg = {
-        $type: "cosmos.bank.v1beta1.MsgSend",
-        fromAddress: wallet ? wallet.bech32Address : fromAddress,
-        toAddress: toAddress,
-        amount: [
-          {
-            denom: denom,
-            amount: amount,
-          }
-        ],
+      $type: "cosmos.bank.v1beta1.MsgSend",
+      fromAddress: wallet ? wallet.bech32Address : fromAddress,
+      toAddress: toAddress,
+      amount: [
+        {
+          denom: denom,
+          amount: amount,
+        }
+      ],
     } as Msg
 
     const msgAny = {

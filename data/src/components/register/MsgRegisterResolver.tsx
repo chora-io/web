@@ -1,23 +1,14 @@
 import * as React from "react"
 import { useContext, useState } from "react"
-import { Buffer } from "buffer"
-import * as Long from "long"
 
 import { WalletContext } from "chora"
-import { MsgRegisterResolver } from "chora/api/regen/data/v1/tx"
-import { signAndBroadcast } from "chora/utils/tx"
+import { signAndBroadcast2 } from "chora/utils/tx"
 
-import InputNumber from "chora/components/InputNumber"
+import MsgInputs from "chora/components/data/MsgRegisterResolver"
+import MsgInputsJSON from "chora/components/data/MsgRegisterResolverJSON"
 import ResultTx from "chora/components/ResultTx"
 
-import InputHash from "../InputHash"
-import InputHashJSON from "../InputHashJSON"
-import SelectDataType from "../SelectDataType"
-import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
-import SelectGraphCanon from "../SelectGraphCanon"
-import SelectGraphMerkle from "../SelectGraphMerkle"
 import SelectInput from "../SelectInput"
-import SelectRawMedia from "../SelectRawMedia"
 
 import * as styles from "./MsgRegisterResolver.module.css"
 
@@ -25,21 +16,8 @@ const MsgRegisterResolverView = () => {
 
   const { chainInfo, wallet } = useContext(WalletContext)
 
-  // input option
   const [input, setInput] = useState("form")
-
-  // resolver id input
-  const [id, setId] = useState<string>("")
-
-  // content hash form input
-  const [hash, setHash] = useState<string>("")
-  const [type, setType] = useState<string>("")
-  const [media, setMedia] = useState<number>(0)
-
-  // content hash json input
-  const [json, setJson] = useState<string>("")
-
-  // error and success
+  const [message, setMessage] = useState<any>(undefined)
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
@@ -49,65 +27,7 @@ const MsgRegisterResolverView = () => {
     setError("")
     setSuccess("")
 
-    let msg: MsgRegisterResolver
-    if (input == "form") {
-      if (type == "graph") {
-        msg = {
-          $type: "regen.data.v1.MsgRegisterResolver",
-          manager: wallet.bech32Address,
-          resolverId: Long.fromString(id),
-          contentHashes: [
-            {
-              $type: "regen.data.v1.ContentHash",
-              graph: {
-                $type: "regen.data.v1.ContentHash.Graph",
-                hash: Buffer.from(hash, "base64"),
-                digestAlgorithm: 1, // DIGEST_ALGORITHM_BLAKE2B_256
-                canonicalizationAlgorithm: 1, // GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015
-                merkleTree: 0, // GRAPH_MERKLE_TREE_NONE_UNSPECIFIED
-              },
-            },
-          ],
-        }
-      } else if (type == "raw") {
-        msg = {
-          $type: "regen.data.v1.MsgRegisterResolver",
-          manager: wallet.bech32Address,
-          resolverId: Long.fromString(id),
-          contentHashes: [
-            {
-              $type: "regen.data.v1.ContentHash",
-              raw: {
-                $type: "regen.data.v1.ContentHash.Raw",
-                hash: Buffer.from(hash, "base64"),
-                digestAlgorithm: 1, // DIGEST_ALGORITHM_BLAKE2B_256
-                mediaType: media,
-              },
-            },
-          ],
-        }
-      } else {
-        setError("data type is required")
-        return // exit on error
-      }
-    } else {
-      let contentHash = ""
-      try {
-        contentHash = JSON.parse(json)
-      } catch (err) {
-        setError(err.message)
-        return // exit on error
-      }
-      msg = MsgRegisterResolver.fromJSON({
-        resolverId: Long.fromString(id),
-        manager: wallet.bech32Address,
-        contentHashes: [contentHash],
-      })
-    }
-
-    const encMsg = MsgRegisterResolver.encode(msg).finish()
-
-    await signAndBroadcast(chainInfo, wallet.bech32Address, msg, encMsg)
+    await signAndBroadcast2(chainInfo, wallet["bech32Address"], [message])
       .then(res => {
         setSuccess(res)
       }).catch(err => {
@@ -115,59 +35,36 @@ const MsgRegisterResolverView = () => {
       })
   }
 
+  const handleSetInput = (input) => {
+    setInput(input)
+    setError("")
+    setSuccess("")
+  }
+
   return (
     <>
       <SelectInput
         input={input}
-        setInput={setInput}
-        setError={setError}
-        setSuccess={setSuccess}
+        setInput={handleSetInput}
       />
       <div>
         {input == "form" ? (
           <form className={styles.form} onSubmit={handleSubmit}>
-            <InputNumber
-              id="resolver-id"
-              label="resolver id"
-              number={id}
-              setNumber={setId}
+            <MsgInputs
+              setMessage={setMessage}
+              useWallet={true}
+              wallet={wallet}
             />
-            <InputHash
-              hash={hash}
-              setHash={setHash}
-            />
-            <SelectDigestAlgorithm />
-            <SelectDataType
-              type={type}
-              setType={setType}
-            />
-            {type == "graph" &&
-              <>
-                <SelectGraphCanon />
-                <SelectGraphMerkle />
-            </>
-            }
-            {type == "raw" &&
-              <SelectRawMedia
-                media={media}
-                setMedia={setMedia}
-              />
-            }
             <button type="submit">
               {"submit"}
             </button>
           </form>
         ) : (
           <form className={styles.form} onSubmit={handleSubmit}>
-            <InputNumber
-              id="resolver-id"
-              label="resolver id"
-              number={id}
-              setNumber={setId}
-            />
-            <InputHashJSON
-              json={json}
-              setJson={setJson}
+            <MsgInputsJSON
+              setMessage={setMessage}
+              useWallet={true}
+              wallet={wallet}
             />
             <button type="submit">
               {"submit"}

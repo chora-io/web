@@ -2,22 +2,18 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-import { MsgDefineResolver } from "chora/api/regen/data/v1/tx"
-import { signAndBroadcast } from "chora/utils/tx"
+import { signAndBroadcast2 } from "chora/utils/tx"
 
-import InputURL from "chora/components/InputURL"
+import MsgInputs from "chora/components/data/MsgDefineResolver"
 import ResultTx from "chora/components/ResultTx"
 
 import * as styles from "./MsgDefineResolver.module.css"
 
-const MsgDefineResolverView = () => {
+const MsgDefineResolver = () => {
 
   const { chainInfo, wallet } = useContext(WalletContext)
 
-  // form input
-  const [url, setUrl] = useState<string>("")
-
-  // error and success
+  const [message, setMessage] = useState<any>(undefined)
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
@@ -27,15 +23,7 @@ const MsgDefineResolverView = () => {
     setError("")
     setSuccess("")
 
-    const msg: MsgDefineResolver = {
-      $type: "regen.data.v1.MsgDefineResolver",
-      manager: wallet.bech32Address,
-      resolverUrl: url,
-    }
-
-    const encMsg = MsgDefineResolver.encode(msg).finish()
-
-    await signAndBroadcast(chainInfo, wallet.bech32Address, msg, encMsg)
+    await signAndBroadcast2(chainInfo, wallet["bech32Address"], [message])
       .then(res => {
         setSuccess(res)
       }).catch(err => {
@@ -47,12 +35,10 @@ const MsgDefineResolverView = () => {
     <>
       <div>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <InputURL
-            id="resolver-url"
-            label="resolver url"
-            placeholder="https://server.chora.io"
-            url={url}
-            setUrl={setUrl}
+          <MsgInputs
+            setMessage={setMessage}
+            useWallet={true}
+            wallet={wallet}
           />
           <button type="submit">
             {"submit"}
@@ -68,4 +54,4 @@ const MsgDefineResolverView = () => {
   )
 }
 
-export default MsgDefineResolverView
+export default MsgDefineResolver

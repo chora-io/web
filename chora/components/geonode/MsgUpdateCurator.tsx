@@ -16,15 +16,15 @@ const MsgUpdateCurator = ({ network, setMessage, useWallet, wallet }: any) => {
   useEffect(() => {
 
     const msg = {
-        $type: "chora.voucher.v1.MsgUpdateCurator",
-        id: Long.fromString(id || "0"),
-        curator: wallet ? wallet.bech32Address : curator,
-        newCurator: newCurator,
+      $type: "chora.voucher.v1.MsgUpdateCurator",
+      id: Long.fromString(id || "0"),
+      curator: wallet ? wallet.bech32Address : curator,
+      newCurator: newCurator,
     } as Msg
 
     const msgAny = {
-        typeUrl: "/chora.voucher.v1.MsgUpdateCurator",
-        value: Msg.encode(msg).finish(),
+      typeUrl: "/chora.voucher.v1.MsgUpdateCurator",
+      value: Msg.encode(msg).finish(),
     }
 
     setMessage(msgAny)

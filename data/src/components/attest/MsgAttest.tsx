@@ -1,36 +1,23 @@
 import * as React from "react"
 import { useContext, useState } from "react"
-import { Buffer } from "buffer"
 
 import { WalletContext } from "chora"
-import { MsgAttest } from "chora/api/regen/data/v1/tx"
-import { signAndBroadcast } from "chora/utils/tx"
+import { signAndBroadcast2 } from "chora/utils/tx"
 
+import MsgInputs from "chora/components/data/MsgAttest"
+import MsgInputsJSON from "chora/components/data/MsgAttestJSON"
 import ResultTx from "chora/components/ResultTx"
 
-import InputHash from "../InputHash"
-import InputHashJSON from "../InputHashJSON"
-import SelectDigestAlgorithm from "../SelectDigestAlgorithm"
-import SelectGraphCanon from "../SelectGraphCanon"
-import SelectGraphMerkle from "../SelectGraphMerkle"
 import SelectInput from "../SelectInput"
 
 import * as styles from "./MsgAttest.module.css"
 
-const MsgAttestView = () => {
+const MsgAttest = () => {
 
   const { chainInfo, wallet } = useContext(WalletContext)
 
-  // input option
   const [input, setInput] = useState("form")
-
-  // form input
-  const [hash, setHash] = useState<string>("")
-
-  // json input
-  const [json, setJson] = useState<string>("")
-
-  // error and success
+  const [message, setMessage] = useState<any>(undefined)
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
@@ -40,38 +27,7 @@ const MsgAttestView = () => {
     setError("")
     setSuccess("")
 
-    let msg: MsgAttest
-    if (input == "form") {
-      msg = {
-        $type: "regen.data.v1.MsgAttest",
-        attestor: wallet.bech32Address,
-        contentHashes: [
-          {
-            $type: "regen.data.v1.ContentHash.Graph",
-            hash: Buffer.from(hash, "base64"),
-            digestAlgorithm: 1, // DIGEST_ALGORITHM_BLAKE2B_256
-            canonicalizationAlgorithm: 1, // GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015
-            merkleTree: 0, // GRAPH_MERKLE_TREE_NONE_UNSPECIFIED
-          },
-        ],
-      }
-    } else {
-      let contentHash = ""
-      try {
-        contentHash = JSON.parse(json)
-      } catch (err) {
-        setError(err.message)
-        return // exit on error
-      }
-      msg = MsgAttest.fromJSON({
-        attestor: wallet.bech32Address,
-        contentHashes: [contentHash.graph]
-      })
-    }
-
-    const encMsg = MsgAttest.encode(msg).finish()
-
-    await signAndBroadcast(chainInfo, wallet.bech32Address, msg, encMsg)
+    await signAndBroadcast2(chainInfo, wallet["bech32Address"], [message])
       .then(res => {
         setSuccess(res)
       }).catch(err => {
@@ -79,33 +35,36 @@ const MsgAttestView = () => {
       })
   }
 
+  const handleSetInput = (input) => {
+    setInput(input)
+    setError("")
+    setSuccess("")
+  }
+
   return (
     <>
       <SelectInput
         input={input}
-        setInput={setInput}
-        setError={setError}
-        setSuccess={setSuccess}
+        setInput={handleSetInput}
       />
       <div>
         {input == "form" ? (
           <form className={styles.form} onSubmit={handleSubmit}>
-            <InputHash
-              hash={hash}
-              setHash={setHash}
+            <MsgInputs
+              setMessage={setMessage}
+              useWallet={true}
+              wallet={wallet}
             />
-            <SelectDigestAlgorithm />
-            <SelectGraphCanon />
-            <SelectGraphMerkle />
             <button type="submit">
               {"submit"}
             </button>
           </form>
         ) : (
           <form className={styles.form} onSubmit={handleSubmit}>
-            <InputHashJSON
-              json={json}
-              setJson={setJson}
+            <MsgInputsJSON
+              setMessage={setMessage}
+              useWallet={true}
+              wallet={wallet}
             />
             <button type="submit">
               {"submit"}
@@ -122,4 +81,4 @@ const MsgAttestView = () => {
   )
 }
 
-export default MsgAttestView
+export default MsgAttest

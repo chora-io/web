@@ -31,6 +31,12 @@ import GroupMsgUpdateGroupPolicyMetadata from "./group/MsgUpdateGroupPolicyMetad
 import GroupMsgVote from "./group/MsgVote"
 import GroupMsgWithdrawProposal from "./group/MsgWithdrawProposal"
 
+// regen.data.v1
+import DataMsgAnchor from "./data/MsgAnchor"
+import DataMsgAttest from "./data/MsgAttest"
+import DataMsgDefineResolver from "./data/MsgDefineResolver"
+import DataMsgRegisterResolver from "./data/MsgRegisterResolver"
+
 import * as styles from "./SelectMessage.module.css"
 
 const defaultId = "message"
@@ -60,6 +66,10 @@ const defaultOptions = [
   "cosmos.group.v1.MsgUpdateGroupPolicyMetadata",
   "cosmos.group.v1.MsgVote",
   "cosmos.group.v1.MsgWithdrawProposal",
+  "regen.data.v1.MsgAnchor",
+  "regen.data.v1.MsgAttest",
+  "regen.data.v1.MsgDefineResolver",
+  "regen.data.v1.MsgRegisterResolver",
 ]
 
 const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
@@ -324,6 +334,50 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
             {selected}
           </h3>
           <GroupMsgWithdrawProposal
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {selected === "regen.data.v1.MsgAnchor" && (
+        <div className={styles.message}>
+          <h3>
+            {selected}
+          </h3>
+          <DataMsgAnchor
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {selected === "regen.data.v1.MsgAttest" && (
+        <div className={styles.message}>
+          <h3>
+            {selected}
+          </h3>
+          <DataMsgAttest
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {selected === "regen.data.v1.MsgDefineResolver" && (
+        <div className={styles.message}>
+          <h3>
+            {selected}
+          </h3>
+          <DataMsgDefineResolver
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {selected === "regen.data.v1.MsgRegisterResolver" && (
+        <div className={styles.message}>
+          <h3>
+            {selected}
+          </h3>
+          <DataMsgRegisterResolver
             network={network}
             setMessage={setMessage}
           />
