@@ -5,14 +5,14 @@
   font-weight: 300 !important;
 }
 
-/* listOptions */
+/* options */
 
-.listOptions {
+.options {
   border-bottom: 1px solid #333;
   padding-bottom: 2em;
 }
 
-.listOptions button {
+.options button {
   background: none;
   color: var(--color-primary);
   font-size: 1em;

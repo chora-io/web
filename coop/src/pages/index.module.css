@@ -1,7 +1,7 @@
 .page {
-    composes: page from "../styles/page.css";
+  composes: page from "../styles/page.css";
 }
 
 .section {
-    composes: section from "../styles/section.css";
+  composes: section from "../styles/section.css";
 }

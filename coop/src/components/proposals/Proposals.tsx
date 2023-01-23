@@ -16,11 +16,12 @@ const Proposals = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  const [proposals, setProposals] = useState<any>(null)
   const [error, setError] = useState<string>("")
+  const [proposals, setProposals] = useState<any>(null)
 
   const [sort, setSort] = useState<string>("ascending")
-  const [filter, setFilter] = useState<string>("none")
+  const [filter, setFilter] = useState<string>("nothing")
+  const [filtered, setFiltered] = useState<any>(null)
 
   useEffect(() => {
     setProposals(null)
@@ -33,9 +34,6 @@ const Proposals = () => {
 
     // fetch policies if network is chora-testnet-1
     if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
-
-
-      // call async function
       fetchPoliciesAndProposals().catch(err => {
         setError(err.message)
       })
@@ -43,7 +41,6 @@ const Proposals = () => {
   }, [chainInfo])
 
   useEffect(() => {
-
     const ps = proposals ? [...proposals] : []
 
     if (proposals && sort === "ascending") {
@@ -58,7 +55,6 @@ const Proposals = () => {
   }, [sort])
 
   useEffect(() => {
-
     if (!proposals) {
       return
     }
@@ -67,27 +63,25 @@ const Proposals = () => {
 
     if (filter === "submitted") {
       ps = ps.filter(v => v.status === "PROPOSAL_STATUS_SUBMITTED")
-      setProposals([...ps])
+      setFiltered([...ps])
     }
 
     if (filter === "accepted") {
       ps = ps.filter(v => v.status === "PROPOSAL_STATUS_ACCEPTED")
-      setProposals([...ps])
+      setFiltered([...ps])
     }
 
     if (filter === "rejected") {
       ps = ps.filter(v => v.status === "PROPOSAL_STATUS_REJECTED")
-      setProposals([...ps])
+      setFiltered([...ps])
     }
 
-    if (filter === "none") {
-      fetchPoliciesAndProposals().catch(err => {
-        setError(err.message)
-      })
+    if (filter === "nothing") {
+      setFiltered(null)
     }
   }, [filter])
 
-  // fetch policies and proposals
+  // fetch policies and proposals asynchronously
   const fetchPoliciesAndProposals = async () => {
 
     let addresses: string[] = []
@@ -127,15 +121,15 @@ const Proposals = () => {
 
       // sort ascending by default
       ps.sort((a, b) => b.id - a.id)
+      setSort("ascending")
 
       setProposals(ps)
-      setSort("ascending")
     })
   }
 
   return (
     <div className={styles.container}>
-      <div className={styles.listOptions}>
+      <div className={styles.options}>
         {sort === "descending" && (
           <button onClick={() => setSort("ascending")}>
             {"sort by newest"}
@@ -146,23 +140,23 @@ const Proposals = () => {
             {"sort by oldest"}
           </button>
         )}
-        {filter === "none" && (
+        {filter === "nothing" && (
           <button onClick={() => setFilter("submitted")}>
             {"view submitted"}
           </button>
         )}
-        {filter === "none" && (
+        {filter === "nothing" && (
           <button onClick={() => setFilter("accepted")}>
             {"view accepted"}
           </button>
         )}
-        {filter === "none" && (
+        {filter === "nothing" && (
           <button onClick={() => setFilter("rejected")}>
             {"view rejected"}
           </button>
         )}
-        {filter !== "none" && (
-          <button onClick={() => setFilter("none")}>
+        {filter !== "nothing" && (
+          <button onClick={() => setFilter("nothing")}>
             {"clear filter"}
           </button>
         )}
@@ -172,15 +166,26 @@ const Proposals = () => {
           {"loading..."}
         </div>
       )}
-      {proposals && proposals.map(proposal => (
+      {!filtered && proposals && proposals.map(proposal => (
         <ProposalPreview
           key={proposal["id"]}
           proposal={proposal}
         />
       ))}
-      {proposals && proposals.length === 0 && !error && (
+      {filtered && filtered.map(proposal => (
+        <ProposalPreview
+          key={proposal["id"]}
+          proposal={proposal}
+        />
+      ))}
+      {!filtered && proposals && proposals.length === 0 && !error && (
         <div className={styles.message}>
           {"no proposals found"}
+        </div>
+      )}
+      {filtered && filtered.length === 0 && !error && (
+        <div className={styles.message}>
+          {`no proposals with status ${filter}`}
         </div>
       )}
       {error && (

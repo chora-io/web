@@ -15,7 +15,6 @@ const Policy = ({ policyAddress }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  // error and success
   const [error, setError] = useState<string>("")
   const [policy, setPolicy] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
@@ -50,8 +49,9 @@ const Policy = ({ policyAddress }) => {
             }
           })
 
-        // return on error (iri never set)
-        if (typeof iri === "undefined") {
+        // return if iri is empty or was never set
+        if (typeof iri === "undefined" || iri === "") {
+          setMetadata({ name: "NA", description: "NA" })
           return
         }
 

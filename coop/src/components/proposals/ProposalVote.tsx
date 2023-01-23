@@ -15,7 +15,6 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  // error and success
   const [error, setError] = useState<string>("")
   const [metadata, setMetadata] = useState<any>(null)
   const [vote, setVote] = useState<any>(null)
@@ -50,8 +49,9 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
             }
           })
 
-        // return on error (iri never set)
-        if (typeof iri === "undefined") {
+        // return if iri is empty or was never set
+        if (typeof iri === "undefined" || iri === "") {
+          setMetadata({ reason: "NA" })
           return
         }
 

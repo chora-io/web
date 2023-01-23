@@ -181,7 +181,7 @@ const SubmitProposal = () => {
       proposers: [wallet.bech32Address],
       groupPolicyAddress: address,
       metadata: iri,
-      messages: [message],
+      messages: message ? [message] : [],
       exec: execution,
     } as MsgSubmitProposal
 

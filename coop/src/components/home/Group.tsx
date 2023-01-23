@@ -52,8 +52,9 @@ const Group = () => {
             }
           })
 
-        // return on error (iri never set)
-        if (typeof iri === "undefined") {
+        // return if iri is empty or was never set
+        if (typeof iri === "undefined" || iri === "") {
+          setMetadata({ name: "NA", description: "NA" })
           return
         }
 

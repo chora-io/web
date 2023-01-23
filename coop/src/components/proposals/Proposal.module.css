@@ -5,6 +5,32 @@
   font-weight: 300 !important;
 }
 
+/* options */
+
+.options {
+  border-bottom: 1px solid #333;
+  padding-bottom: 2em;
+}
+
+.options button {
+  background: none;
+  color: var(--color-primary);
+  font-size: 1em;
+  margin-right: 2em;
+}
+
+.options a,
+.options button {
+  font-weight: normal;
+  margin-right: 1em;
+}
+
+.options button {
+  background: none;
+  color: var(--color-primary);
+  font-size: 1em;
+}
+
 /* item */
 
 .item {

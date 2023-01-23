@@ -15,9 +15,9 @@ const Policies = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  // error and success
   const [error, setError] = useState<string>("")
   const [policies, setPolicies] = useState<any>(null)
+  const [sort, setSort] = useState<string>("ascending")
 
   useEffect(() => {
     setPolicies(null)
@@ -30,33 +30,66 @@ const Policies = () => {
 
     // fetch policies if network is chora-testnet-1
     if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
-
-      // async function workaround
-      const fetchPolicies = async () => {
-
-        // fetch policies from selected network
-        await fetch(chainInfo.rest + "/" + queryPolicies + "/" + groupId)
-          .then(res => res.json())
-          .then(res => {
-            if (res.code) {
-              setError(res.message)
-            } else {
-              setPolicies(res["group_policies"])
-            }
-          })
-      }
-
-      // call async function
       fetchPolicies().catch(err => {
         setError(err.message)
       })
     }
   }, [chainInfo])
 
+  useEffect(() => {
+    const ps = policies ? [...policies] : []
+
+    if (policies && sort === "ascending") {
+      ps.sort((a, b) => {
+        return new Date(b["created_at"]) - new Date(a["created_at"])
+      })
+    }
+
+    if (policies && sort === "descending") {
+      ps.sort((a, b) => {
+        return new Date(a["created_at"]) - new Date(b["created_at"])
+      })
+    }
+
+    setPolicies(ps)
+  }, [sort])
+
+  // fetch policies asynchronously
+  const fetchPolicies = async () => {
+
+    // fetch policies from selected network
+    await fetch(chainInfo.rest + "/" + queryPolicies + "/" + groupId)
+      .then(res => res.json())
+      .then(res => {
+        if (res.code) {
+          setError(res.message)
+        } else {
+          const ps = res["group_policies"]
+          ps.sort((a, b) => {
+            return new Date(b["created_at"]) - new Date(a["created_at"])
+          })
+          setSort("ascending")
+          setPolicies(ps)
+        }
+      })
+  }
+
   return (
     <div className={styles.container}>
+      <div className={styles.options}>
+        {sort === "descending" && (
+          <button onClick={() => setSort("ascending")}>
+            {"sort by newest"}
+          </button>
+        )}
+        {sort === "ascending" && (
+          <button onClick={() => setSort("descending")}>
+            {"sort by oldest"}
+          </button>
+        )}
+      </div>
       {!policies && !error && (
-        <div>
+        <div className={styles.message}>
           {"loading..."}
         </div>
       )}
@@ -67,7 +100,7 @@ const Policies = () => {
         />
       ))}
       {error && (
-        <div>
+        <div className={styles.message}>
           {error}
         </div>
       )}

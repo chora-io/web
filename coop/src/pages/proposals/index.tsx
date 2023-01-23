@@ -2,11 +2,12 @@ import * as React from "react"
 import { Link } from "gatsby"
 
 import Main from "../../layouts/Main"
+import Seo from "../../components/SeoWrapper"
+
 import Proposal from "../../components/proposals/Proposal"
 import Proposals from "../../components/proposals/Proposals"
 import ProposalVote from "../../components/proposals/ProposalVote"
 import ProposalVotes from "../../components/proposals/ProposalVotes"
-import Seo from "../../components/SeoWrapper"
 
 import * as styles from "./index.module.css"
 

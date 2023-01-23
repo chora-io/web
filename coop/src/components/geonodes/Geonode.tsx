@@ -48,8 +48,16 @@ const Geonode = ({ nodeId }) => {
             }
           })
 
-        // return on error (iri never set)
-        if (typeof iri === "undefined") {
+        // return if iri is empty or was never set
+        if (typeof iri === "undefined" || iri === "") {
+          setMetadata({
+            name: "NA",
+            description: "NA",
+            geo: {
+              latitude: "NA",
+              longitude: "NA"
+            }
+          })
           return
         }
 

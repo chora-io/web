@@ -1,5 +1,6 @@
 import * as React from "react"
 import { useContext, useEffect, useState } from "react"
+import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
 import { choraTestnet } from "chora/utils/chains"
@@ -15,7 +16,6 @@ const Proposal = ({ proposalId }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  // error and success
   const [error, setError] = useState<string>("")
   const [proposal, setProposal] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
@@ -50,8 +50,9 @@ const Proposal = ({ proposalId }) => {
             }
           })
 
-        // return on error (iri never set)
-        if (typeof iri === "undefined") {
+        // return if iri is empty or was never set
+        if (typeof iri === "undefined" || iri === "") {
+          setMetadata({ name: "NA", description: "NA" })
           return
         }
 
@@ -82,12 +83,24 @@ const Proposal = ({ proposalId }) => {
     }
   }, [chainInfo])
 
+  const handleExecute = () => {
+
+  }
+
   // whether votes have been finalized
   const votesFinalized = (
     proposal &&
     (
       proposal["status"] === "PROPOSAL_STATUS_ACCEPTED" ||
       proposal["status"] === "PROPOSAL_STATUS_REJECTED"
+    )
+  )
+
+  // whether proposal is executable
+  const proposalExecutable = (
+    proposal &&
+    (
+      proposal["status"] !== "PROPOSAL_STATUS_REJECTED"
     )
   )
 
@@ -100,6 +113,23 @@ const Proposal = ({ proposalId }) => {
       )}
       {proposal && metadata && !error && (
         <div>
+            <div className={styles.options}>
+              {!votesFinalized && (
+                <Link to={`/proposals/vote/?id=${proposalId}`}>
+                  {"vote on proposal"}
+                </Link>
+              )}
+              {proposalExecutable && (
+                <button onClick={handleExecute}>
+                  {"execute proposal"}
+                </button>
+              )}
+              {votesFinalized && !proposalExecutable && (
+                <div>
+                  {"no further action can be taken"}
+                </div>
+              )}
+            </div>
           <div className={styles.item}>
             <h3>
               {"status"}

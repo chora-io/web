@@ -15,9 +15,9 @@ const Members = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  // error and success
   const [error, setError] = useState<string>("")
   const [members, setMembers] = useState<any>(null)
+  const [sort, setSort] = useState<string>("ascending")
 
   useEffect(() => {
     setMembers(null)
@@ -30,31 +30,64 @@ const Members = () => {
 
     // fetch members if network is chora-testnet-1
     if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
-
-      // async function workaround
-      const fetchMembers = async () => {
-
-        // fetch members from selected network
-        await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
-          .then(res => res.json())
-          .then(res => {
-            if (res.code) {
-              setError(res.message)
-            } else {
-              setMembers(res["members"])
-            }
-          })
-      }
-
-      // call async function
       fetchMembers().catch(err => {
         setError(err.message)
       })
     }
   }, [chainInfo])
 
+  useEffect(() => {
+    const ms = members ? [...members] : []
+
+    if (members && sort === "ascending") {
+      ms.sort((a, b) => {
+        return new Date(b["member"]["added_at"]) - new Date(a["member"]["added_at"])
+      })
+    }
+
+    if (members && sort === "descending") {
+      ms.sort((a, b) => {
+        return new Date(a["member"]["added_at"]) - new Date(b["member"]["added_at"])
+      })
+    }
+
+    setMembers(ms)
+  }, [sort])
+
+  // fetch members asynchronously
+  const fetchMembers = async () => {
+
+    // fetch members from selected network
+    await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
+      .then(res => res.json())
+      .then(res => {
+        if (res.code) {
+          setError(res.message)
+        } else {
+          const ms = res["members"]
+          ms.sort((a, b) => {
+            return new Date(b["member"]["added_at"]) - new Date(a["member"]["added_at"])
+          })
+          setSort("ascending")
+          setMembers(ms)
+        }
+      })
+  }
+
   return (
     <div className={styles.container}>
+      <div className={styles.options}>
+        {sort === "descending" && (
+          <button onClick={() => setSort("ascending")}>
+            {"sort by newest"}
+          </button>
+        )}
+        {sort === "ascending" && (
+          <button onClick={() => setSort("descending")}>
+            {"sort by oldest"}
+          </button>
+        )}
+      </div>
       {!members && !error && (
         <div>
           {"loading..."}

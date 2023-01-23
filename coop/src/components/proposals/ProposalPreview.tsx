@@ -8,7 +8,6 @@ const serverUrl = "https://server.chora.io"
 
 const ProposalPreview = ({ proposal }) => {
 
-  // error and success
   const [error, setError] = useState<string>("")
   const [metadata, setMetadata] = useState<any>(null)
 

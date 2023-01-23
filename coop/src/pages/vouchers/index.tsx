@@ -1,11 +1,12 @@
 import * as React from "react"
 
 import Main from "../../layouts/Main"
+import Seo from "../../components/SeoWrapper"
+
 import Balance from "../../components/vouchers/Balance"
 import Balances from "../../components/vouchers/Balances"
 import Voucher from "../../components/vouchers/Voucher"
 import Vouchers from "../../components/vouchers/Vouchers"
-import Seo from "../../components/SeoWrapper"
 
 import * as styles from "./index.module.css"
 

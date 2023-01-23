@@ -14,7 +14,6 @@ const ProposalVotes = ({ proposalId }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  // error and success
   const [error, setError] = useState<string>("")
   const [proposal, setProposal] = useState<any>(null)
   const [votes, setVotes] = useState<any>(null)

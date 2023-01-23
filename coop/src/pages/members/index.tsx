@@ -1,9 +1,10 @@
 import * as React from "react"
 
 import Main from "../../layouts/Main"
+import Seo from "../../components/SeoWrapper"
+
 import Member from "../../components/members/Member"
 import Members from "../../components/members/Members"
-import Seo from "../../components/SeoWrapper"
 
 import * as styles from "./index.module.css"
 

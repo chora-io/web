@@ -1,8 +1,9 @@
 import * as React from "react"
 
 import Main from "../../../layouts/Main"
-import SubmitProposal from "../../../components/proposals/SubmitProposal"
 import Seo from "../../../components/SeoWrapper"
+
+import SubmitProposal from "../../../components/proposals/SubmitProposal"
 
 import * as styles from "./index.module.css"
 

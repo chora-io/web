@@ -1,9 +1,10 @@
 import * as React from "react"
 
 import Main from "../../layouts/Main"
+import Seo from "../../components/SeoWrapper"
+
 import Geonode from "../../components/geonodes/Geonode"
 import Geonodes from "../../components/geonodes/Geonodes"
-import Seo from "../../components/SeoWrapper"
 
 import * as styles from "./index.module.css"
 
