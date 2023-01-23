@@ -15,10 +15,14 @@ const Policies = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
+  // fetch error and results
   const [error, setError] = useState<string>("")
   const [policies, setPolicies] = useState<any>(null)
+
+  // list options
   const [sort, setSort] = useState<string>("ascending")
 
+  // fetch on load and value change
   useEffect(() => {
     setPolicies(null)
     setError("")
@@ -36,19 +40,16 @@ const Policies = () => {
     }
   }, [chainInfo])
 
+  // sort on load and value change
   useEffect(() => {
     const ps = policies ? [...policies] : []
 
     if (policies && sort === "ascending") {
-      ps.sort((a, b) => {
-        return new Date(b["created_at"]) - new Date(a["created_at"])
-      })
+      ps.sort((a, b) => new Date(b["created_at"]) - new Date(a["created_at"]))
     }
 
     if (policies && sort === "descending") {
-      ps.sort((a, b) => {
-        return new Date(a["created_at"]) - new Date(b["created_at"])
-      })
+      ps.sort((a, b) => new Date(a["created_at"]) - new Date(b["created_at"]))
     }
 
     setPolicies(ps)
@@ -65,10 +66,11 @@ const Policies = () => {
           setError(res.message)
         } else {
           const ps = res["group_policies"]
-          ps.sort((a, b) => {
-            return new Date(b["created_at"]) - new Date(a["created_at"])
-          })
+
+         // sort ascending by default and on reload
+          ps.sort((a, b) => new Date(b["created_at"]) - new Date(a["created_at"]))
           setSort("ascending")
+
           setPolicies(ps)
         }
       })

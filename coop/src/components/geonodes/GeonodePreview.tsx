@@ -8,42 +8,43 @@ const serverUrl = "https://server.chora.io"
 
 const GeonodePreview = ({ node }) => {
 
-  // error and success
+  // fetch error and results
   const [error, setError] = useState<string>("")
   const [metadata, setMetadata] = useState<any>(null)
 
+  // fetch on load and value change
   useEffect(() => {
     setMetadata(null)
     setError("")
 
-    // async function workaround
-    const fetchMetadata = async () => {
-
-      // fetch node data from chora server
-      await fetch(serverUrl + "/" + node["metadata"])
-        .then(res => res.json())
-        .then(res => {
-          if (res.error) {
-            setError(res.error)
-            setMetadata(null)
-          } else if (res.context !== "https://schema.chora.io/contexts/geonode.jsonld") {
-            setError("unsupported metadata schema")
-            setMetadata(null)
-          } else {
-            setError("")
-            setMetadata(JSON.parse(res["jsonld"]))
-          }
-        })
-        .catch(err => {
-          setError(err.message)
-        })
-    }
-
-    // call async function
+    // fetch node metadata
     fetchMetadata().catch(err => {
       setError(err.message)
     })
   }, [node["metadata"]])
+
+  // fetch metadata asynchronously
+  const fetchMetadata = async () => {
+
+    // fetch node data from chora server
+    await fetch(serverUrl + "/" + node["metadata"])
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          setError(res.error)
+          setMetadata(null)
+        } else if (res.context !== "https://schema.chora.io/contexts/geonode.jsonld") {
+          setError("unsupported metadata schema")
+          setMetadata(null)
+        } else {
+          setError("")
+          setMetadata(JSON.parse(res["jsonld"]))
+        }
+      })
+      .catch(err => {
+        setError(err.message)
+      })
+  }
 
   return (
     <div className={styles.container}>

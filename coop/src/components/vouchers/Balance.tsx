@@ -13,10 +13,11 @@ const Balance = ({ voucherId, address }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  // error and success
+  // fetch error and results
   const [error, setError] = useState<string>("")
   const [balance, setBalance] = useState<any>(null)
 
+  // fetch on load and value change
   useEffect(() => {
     setBalance(null)
     setError("")
@@ -28,28 +29,26 @@ const Balance = ({ voucherId, address }) => {
 
     // fetch balance if network is chora-testnet-1
     if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
-
-      // async function workaround
-      const fetchBalance = async () => {
-
-        // fetch voucher from selected network
-        await fetch(chainInfo.rest + "/" + queryBalance + "/" + voucherId + "/" + address)
-          .then(res => res.json())
-          .then(res => {
-            if (res.code) {
-              setError(res.message)
-            } else {
-              setBalance(res)
-            }
-          })
-      }
-
-      // call async function
       fetchBalance().catch(err => {
         setError(err.message)
       })
     }
   }, [chainInfo])
+
+  // async balance asynchronously
+  const fetchBalance = async () => {
+
+    // fetch balance from selected network
+    await fetch(chainInfo.rest + "/" + queryBalance + "/" + voucherId + "/" + address)
+      .then(res => res.json())
+      .then(res => {
+        if (res.code) {
+          setError(res.message)
+        } else {
+          setBalance(res)
+        }
+      })
+  }
 
   return (
     <div className={styles.container}>

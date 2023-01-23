@@ -8,41 +8,42 @@ const serverUrl = "https://server.chora.io"
 
 const GroupPolicy = ({ policy }) => {
 
+  // fetch error and results
   const [error, setError] = useState<string>("")
   const [metadata, setMetadata] = useState<any>(null)
 
+  // fetch on load and value change
   useEffect(() => {
     setMetadata(null)
     setError("")
 
-    // async function workaround
-    const fetchMetadata = async () => {
-
-      // fetch policy data from chora server
-      await fetch(serverUrl + "/" + policy["metadata"])
-        .then(res => res.json())
-        .then(res => {
-          if (res.error) {
-            setError(res.error)
-            setMetadata(null)
-          } else if (res.context !== "https://schema.chora.io/contexts/group_policy.jsonld") {
-            setError("unsupported metadata schema")
-            setMetadata(null)
-          } else {
-            setError("")
-            setMetadata(JSON.parse(res["jsonld"]))
-          }
-        })
-        .catch(err => {
-          setError(err.message)
-        })
-    }
-
-    // call async function
     fetchMetadata().catch(err => {
       setError(err.message)
     })
   }, [policy["metadata"]])
+
+  // fetch metadata asynchronously
+  const fetchMetadata = async () => {
+
+    // fetch policy data from chora server
+    await fetch(serverUrl + "/" + policy["metadata"])
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          setError(res.error)
+          setMetadata(null)
+        } else if (res.context !== "https://schema.chora.io/contexts/group_policy.jsonld") {
+          setError("unsupported metadata schema")
+          setMetadata(null)
+        } else {
+          setError("")
+          setMetadata(JSON.parse(res["jsonld"]))
+        }
+      })
+      .catch(err => {
+        setError(err.message)
+      })
+  }
 
   return (
     <div className={styles.container}>

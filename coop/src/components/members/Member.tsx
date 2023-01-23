@@ -16,11 +16,12 @@ const Member = ({ memberAddress }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  // error and success
+  // fetch error and results
   const [error, setError] = useState<string>("")
   const [member, setMember] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
 
+  // fetch on load and value change
   useEffect(() => {
     setMember(null)
     setError("")
@@ -30,60 +31,57 @@ const Member = ({ memberAddress }) => {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch members if network is chora-testnet-1
+    // fetch member and metadata if network is chora-testnet-1
     if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
-
-      // async function workaround
-      const fetchMemberAndMetadata = async () => {
-
-        // member metadata
-        let iri: string
-
-        // fetch members from selected network
-        await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
-          .then(res => res.json())
-          .then(res => {
-            if (res.code) {
-              setError(res.message)
-            } else {
-              const member = res["members"].find(m => m["member"]["address"] === memberAddress)
-              setMember(member["member"])
-              iri = member["member"]["metadata"]
-            }
-          })
-
-        // return if iri is empty or was never set
-        if (typeof iri === "undefined" || iri === "") {
-          setMetadata({ name: "NA" })
-          return
-        }
-
-        // fetch member data from chora server
-        await fetch(serverUrl + "/" + iri)
-          .then(res => res.json())
-          .then(res => {
-            if (res.error) {
-              setError(res.error)
-              setMetadata(null)
-            } else if (res.context !== "https://schema.chora.io/contexts/group_member.jsonld") {
-              setError("unsupported metadata schema")
-              setMetadata(null)
-            } else {
-              setError("")
-              setMetadata(JSON.parse(res["jsonld"]))
-            }
-          })
-          .catch(err => {
-            setError(err.message)
-          })
-      }
-
-      // call async function
       fetchMemberAndMetadata().catch(err => {
         setError(err.message)
       })
     }
   }, [chainInfo])
+
+  // fetch member and metadata asynchronously
+  const fetchMemberAndMetadata = async () => {
+
+    let iri: string
+
+    // fetch members from selected network
+    await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
+      .then(res => res.json())
+      .then(res => {
+        if (res.code) {
+          setError(res.message)
+        } else {
+          const member = res["members"].find(m => m["member"]["address"] === memberAddress)
+          setMember(member["member"])
+          iri = member["member"]["metadata"]
+        }
+      })
+
+    // return if iri is empty or was never set
+    if (typeof iri === "undefined" || iri === "") {
+      setMetadata({ name: "NA" })
+      return
+    }
+
+    // fetch member data from chora server
+    await fetch(serverUrl + "/" + iri)
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          setError(res.error)
+          setMetadata(null)
+        } else if (res.context !== "https://schema.chora.io/contexts/group_member.jsonld") {
+          setError("unsupported metadata schema")
+          setMetadata(null)
+        } else {
+          setError("")
+          setMetadata(JSON.parse(res["jsonld"]))
+        }
+      })
+      .catch(err => {
+        setError(err.message)
+      })
+  }
 
   return (
     <div className={styles.container}>

@@ -16,13 +16,16 @@ const Proposals = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
+  // fetch error and results
   const [error, setError] = useState<string>("")
   const [proposals, setProposals] = useState<any>(null)
 
+  // list options
   const [sort, setSort] = useState<string>("ascending")
   const [filter, setFilter] = useState<string>("nothing")
   const [filtered, setFiltered] = useState<any>(null)
 
+  // fetch on load and value change
   useEffect(() => {
     setProposals(null)
     setError("")
@@ -32,7 +35,7 @@ const Proposals = () => {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch policies if network is chora-testnet-1
+    // fetch policies and proposals if network is chora-testnet-1
     if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
       fetchPoliciesAndProposals().catch(err => {
         setError(err.message)
@@ -40,6 +43,7 @@ const Proposals = () => {
     }
   }, [chainInfo])
 
+  // sort on load and value change
   useEffect(() => {
     const ps = proposals ? [...proposals] : []
 
@@ -52,8 +56,23 @@ const Proposals = () => {
     }
 
     setProposals(ps)
+
+    if (filtered) {
+      const fs = [...filtered]
+
+      if (proposals && sort === "ascending") {
+        fs.sort((a, b) => b.id - a.id)
+      }
+
+      if (proposals && sort === "descending") {
+        fs.sort((a, b) => a.id - b.id)
+      }
+
+      setFiltered(fs)
+    }
   }, [sort])
 
+  // filter on load and value change
   useEffect(() => {
     if (!proposals) {
       return
@@ -84,7 +103,7 @@ const Proposals = () => {
   // fetch policies and proposals asynchronously
   const fetchPoliciesAndProposals = async () => {
 
-    let addresses: string[] = []
+    let addrs: string[] = []
 
     // fetch policies from selected network
     await fetch(chainInfo.rest + "/" + queryPolicies + "/" + groupId)
@@ -94,7 +113,7 @@ const Proposals = () => {
           setError(res.message)
         } else {
           res["group_policies"].map(policy => {
-            addresses.push(policy["address"])
+            addrs.push(policy["address"])
           })
         }
       })
@@ -102,10 +121,10 @@ const Proposals = () => {
     let ps: any[] = []
 
     // create promise for all async fetch calls
-    const promise = addresses.map(async address => {
+    const promise = addrs.map(async addr => {
 
       // fetch proposals from selected network
-      await fetch(chainInfo.rest + "/" + queryProposals + "/" + address)
+      await fetch(chainInfo.rest + "/" + queryProposals + "/" + addr)
         .then(res => res.json())
         .then(res => {
           if (res.code) {
@@ -119,7 +138,7 @@ const Proposals = () => {
     // set state after promise all complete
     await Promise.all(promise).then(() => {
 
-      // sort ascending by default
+      // sort ascending by default and on reload
       ps.sort((a, b) => b.id - a.id)
       setSort("ascending")
 

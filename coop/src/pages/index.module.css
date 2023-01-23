@@ -1,5 +1,6 @@
 .page {
   composes: page from "../styles/page.css";
+  align-items: center;
 }
 
 .section {

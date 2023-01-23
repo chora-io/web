@@ -15,10 +15,14 @@ const Members = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
+  // fetch error and results
   const [error, setError] = useState<string>("")
   const [members, setMembers] = useState<any>(null)
+
+  // list options
   const [sort, setSort] = useState<string>("ascending")
 
+  // fetch on load and value change
   useEffect(() => {
     setMembers(null)
     setError("")
@@ -36,19 +40,16 @@ const Members = () => {
     }
   }, [chainInfo])
 
+  // sort on load and value change
   useEffect(() => {
     const ms = members ? [...members] : []
 
     if (members && sort === "ascending") {
-      ms.sort((a, b) => {
-        return new Date(b["member"]["added_at"]) - new Date(a["member"]["added_at"])
-      })
+      ms.sort((a, b) => new Date(b["member"]["added_at"]) - new Date(a["member"]["added_at"]))
     }
 
     if (members && sort === "descending") {
-      ms.sort((a, b) => {
-        return new Date(a["member"]["added_at"]) - new Date(b["member"]["added_at"])
-      })
+      ms.sort((a, b) => new Date(a["member"]["added_at"]) - new Date(b["member"]["added_at"]))
     }
 
     setMembers(ms)
@@ -65,10 +66,11 @@ const Members = () => {
           setError(res.message)
         } else {
           const ms = res["members"]
-          ms.sort((a, b) => {
-            return new Date(b["member"]["added_at"]) - new Date(a["member"]["added_at"])
-          })
+
+         // sort ascending by default and on reload
+          ms.sort((a, b) => new Date(b["member"]["added_at"]) - new Date(a["member"]["added_at"]))
           setSort("ascending")
+
           setMembers(ms)
         }
       })
@@ -89,7 +91,7 @@ const Members = () => {
         )}
       </div>
       {!members && !error && (
-        <div>
+        <div className={styles.message}>
           {"loading..."}
         </div>
       )}
@@ -100,7 +102,7 @@ const Members = () => {
         />
       ))}
       {error && (
-        <div>
+        <div className={styles.message}>
           {error}
         </div>
       )}

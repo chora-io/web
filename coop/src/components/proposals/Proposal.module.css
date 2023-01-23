@@ -31,6 +31,13 @@
   font-size: 1em;
 }
 
+/* optionResponse */
+
+.optionResponse {
+  border-bottom: 1px solid #333;
+  padding: 2em 0;
+}
+
 /* item */
 
 .item {

@@ -26,23 +26,24 @@ const VoteOnProposal = ({ proposalId }) => {
   const [reason, setReason] = useState<string>("")
   const [execution, setExecution] = useState<number>(Exec["EXEC_UNSPECIFIED"])
 
-  // error and success
+  // form error and success
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
+  // submit vote asynchronously
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
     setError("")
     setSuccess("")
 
-    // set doc
+    // set JSON-LD document
     const doc = {
       "@context": "https://schema.chora.io/contexts/group_vote.jsonld",
       reason: reason,
     }
 
-    // check and normalize JSON-LD
+    // check and normalize JSON-LD document
     const normalized = await jsonld.normalize(doc, {
       algorithm: "URDNA2015",
       format: "application/n-quads",
@@ -51,11 +52,13 @@ const VoteOnProposal = ({ proposalId }) => {
       return
     })
 
+    // return error if empty
     if (normalized == "") {
       setError("JSON-LD empty after normalized")
       return
     }
 
+    // set post request body
     const body = {
       canon: "URDNA2015",
       context: "https://schema.chora.io/contexts/group_vote.jsonld",
@@ -66,6 +69,7 @@ const VoteOnProposal = ({ proposalId }) => {
 
     let iri: string
 
+    // post data to chora server
     await fetch(serverUrl, {
       method: "POST",
       body: JSON.stringify(body),
@@ -82,6 +86,12 @@ const VoteOnProposal = ({ proposalId }) => {
         setError(err.message)
       })
 
+    // return error if iri never set
+    if (typeof iri === "undefined") {
+      return
+    }
+
+    // set submit proposal message
     const msg = {
       $type: "cosmos.group.v1.MsgVote",
       voter: wallet.bech32Address,
@@ -91,11 +101,13 @@ const VoteOnProposal = ({ proposalId }) => {
       exec: execution,
     } as MsgVote
 
+    // convert message to any message
     const msgAny = {
       typeUrl: "/cosmos.group.v1.MsgVote",
       value: MsgVote.encode(msg).finish(),
     }
 
+    // sign and broadcast message to selected network
     await signAndBroadcast(chainInfo, wallet["bech32Address"], [msgAny])
       .then(res => {
         setSuccess(res)

@@ -14,10 +14,12 @@ const ProposalVotes = ({ proposalId }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
+  // fetch error and results
   const [error, setError] = useState<string>("")
   const [proposal, setProposal] = useState<any>(null)
   const [votes, setVotes] = useState<any>(null)
 
+  // fetch on load and value change
   useEffect(() => {
     setVotes(null)
     setError("")
@@ -27,41 +29,39 @@ const ProposalVotes = ({ proposalId }) => {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch votes if network is chora-testnet-1
+    // fetch proposal and votes if network is chora-testnet-1
     if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
-
-      // async function workaround
-      const fetchProposalAndVotes = async () => {
-
-        // fetch proposal from selected network
-        await fetch(chainInfo.rest + "/" + queryProposal + "/" + proposalId)
-          .then(res => res.json())
-          .then(res => {
-            if (res.code) {
-              setError(res.message)
-            } else {
-              setProposal(res["proposal"])
-            }
-          })
-
-        // fetch votes from selected network
-        await fetch(chainInfo.rest + "/" + queryVotes + "/" + proposalId)
-          .then(res => res.json())
-          .then(res => {
-            if (res.code) {
-              setError(res.message)
-            } else {
-              setVotes(res["votes"])
-            }
-          })
-      }
-
-      // call async function
       fetchProposalAndVotes().catch(err => {
         setError(err.message)
       })
     }
   }, [chainInfo])
+
+  // fetch proposal and votes asynchronously
+  const fetchProposalAndVotes = async () => {
+
+    // fetch proposal from selected network
+    await fetch(chainInfo.rest + "/" + queryProposal + "/" + proposalId)
+      .then(res => res.json())
+      .then(res => {
+        if (res.code) {
+          setError(res.message)
+        } else {
+          setProposal(res["proposal"])
+        }
+      })
+
+    // fetch votes from selected network
+    await fetch(chainInfo.rest + "/" + queryVotes + "/" + proposalId)
+      .then(res => res.json())
+      .then(res => {
+        if (res.code) {
+          setError(res.message)
+        } else {
+          setVotes(res["votes"])
+        }
+      })
+  }
 
   // whether votes have been finalized
   const votesFinalized = (

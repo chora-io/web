@@ -13,11 +13,12 @@ const Geonode = ({ nodeId }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  // error and success
+  // fetch error and results
   const [error, setError] = useState<string>("")
   const [node, setNode] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
 
+  // fetch on load and value change
   useEffect(() => {
     setNode(null)
     setError("")
@@ -27,66 +28,63 @@ const Geonode = ({ nodeId }) => {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch node if network is chora-testnet-1
+    // fetch node and metadata if network is chora-testnet-1
     if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
-
-      // async function workaround
-      const fetchNodeAndMetadata = async () => {
-
-        // node metadata
-        let iri: string
-
-        // fetch node from selected network
-        await fetch(chainInfo.rest + "/" + queryNode + "/" + nodeId)
-          .then(res => res.json())
-          .then(res => {
-            if (res.code) {
-              setError(res.message)
-            } else {
-              setNode(res)
-              iri = res["metadata"]
-            }
-          })
-
-        // return if iri is empty or was never set
-        if (typeof iri === "undefined" || iri === "") {
-          setMetadata({
-            name: "NA",
-            description: "NA",
-            geo: {
-              latitude: "NA",
-              longitude: "NA"
-            }
-          })
-          return
-        }
-
-        // fetch node data from chora server
-        await fetch(serverUrl + "/" + iri)
-          .then(res => res.json())
-          .then(res => {
-            if (res.error) {
-              setError(res.error)
-              setMetadata(null)
-            } else if (res.context !== "https://schema.chora.io/contexts/geonode.jsonld") {
-              setError("unsupported metadata schema")
-              setMetadata(null)
-            } else {
-              setError("")
-              setMetadata(JSON.parse(res["jsonld"]))
-            }
-          })
-          .catch(err => {
-            setError(err.message)
-          })
-      }
-
-      // call async function
       fetchNodeAndMetadata().catch(err => {
         setError(err.message)
       })
     }
   }, [chainInfo])
+
+  // fetch node and metadata asynchronously
+  const fetchNodeAndMetadata = async () => {
+
+    let iri: string
+
+    // fetch node from selected network
+    await fetch(chainInfo.rest + "/" + queryNode + "/" + nodeId)
+      .then(res => res.json())
+      .then(res => {
+        if (res.code) {
+          setError(res.message)
+        } else {
+          setNode(res)
+          iri = res["metadata"]
+        }
+      })
+
+    // return if iri is empty or was never set
+    if (typeof iri === "undefined" || iri === "") {
+      setMetadata({
+        name: "NA",
+        description: "NA",
+        geo: {
+          latitude: "NA",
+          longitude: "NA"
+        }
+      })
+      return
+    }
+
+    // fetch node data from chora server
+    await fetch(serverUrl + "/" + iri)
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          setError(res.error)
+          setMetadata(null)
+        } else if (res.context !== "https://schema.chora.io/contexts/geonode.jsonld") {
+          setError("unsupported metadata schema")
+          setMetadata(null)
+        } else {
+          setError("")
+          setMetadata(JSON.parse(res["jsonld"]))
+        }
+      })
+      .catch(err => {
+        setError(err.message)
+      })
+  }
 
   return (
     <div className={styles.container}>

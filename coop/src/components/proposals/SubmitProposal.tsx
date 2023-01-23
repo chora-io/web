@@ -24,7 +24,7 @@ const SubmitProposal = () => {
 
   const { chainInfo, wallet } = useContext(WalletContext)
 
-  // policies
+  // fetch options
   const [policies, setPolicies] = useState<any>(null)
 
   // form input
@@ -34,10 +34,11 @@ const SubmitProposal = () => {
   const [message, setMessage] = useState<any>(null)
   const [execution, setExecution] = useState<number>(Exec["EXEC_UNSPECIFIED"])
 
-  // error and success
+  // fetch and form error and success
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
+  // fetch on load and value change
   useEffect(() => {
     setPolicies(null)
     setError("")
@@ -47,91 +48,86 @@ const SubmitProposal = () => {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch policies if network is chora-testnet-1
+    // fetch policies and metadata if network is chora-testnet-1
     if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
-
-      // async function workaround
-      const fetchPoliciesAndMetadata = async () => {
-
-      let ps = []
-
-        // fetch policies from selected network
-        await fetch(chainInfo.rest + "/" + queryPolicies + "/" + groupId)
-          .then(res => res.json())
-          .then(res => {
-            if (res.code) {
-              setError(res.message)
-            } else {
-              res["group_policies"].map(p => {
-                ps.push(p)
-              })
-            }
-          })
-
-        // create promise for all async fetch calls
-        const promise = ps.map(async (p, i) => {
-
-          // fetch policy data from chora server
-          await fetch(serverUrl + "/" + p["metadata"])
-            .then(res => res.json())
-            .then(res => {
-              if (res.error) {
-                setError(res.error)
-              } else if (res.context !== "https://schema.chora.io/contexts/group_policy.jsonld") {
-                setError("unsupported metadata schema")
-              } else {
-                ps[i] = {
-                  ...ps[i],
-                  ...JSON.parse(res["jsonld"]),
-                }
-              }
-            })
-            .catch(err => {
-              setError(err.message)
-            })
-        })
-
-        // set state after promise all complete
-        await Promise.all(promise).then(() => {
-
-          // sort policies by name
-          ps = ps.sort((a, b) => {
-            const nameA = a.name.toUpperCase()
-            const nameB = b.name.toUpperCase()
-            if (nameA < nameB) {
-              return -1
-            }
-            if (nameA > nameB) {
-              return 1
-            }
-            return 0
-          })
-
-          setPolicies(ps)
-        })
-      }
-
-      // call async function
       fetchPoliciesAndMetadata().catch(err => {
         setError(err.message)
       })
     }
   }, [chainInfo])
 
+  // fetch policies and metadata asynchronously
+  const fetchPoliciesAndMetadata = async () => {
+
+    let ps: any[] = []
+
+    // fetch policies from selected network
+    await fetch(chainInfo.rest + "/" + queryPolicies + "/" + groupId)
+      .then(res => res.json())
+      .then(res => {
+        if (res.code) {
+          setError(res.message)
+        } else {
+          res["group_policies"].map(p => {
+            ps.push(p)
+          })
+        }
+      })
+
+    // create promise for all async fetch calls
+    const promise = ps.map(async (p, i) => {
+
+      // fetch policy data from chora server
+      await fetch(serverUrl + "/" + p["metadata"])
+        .then(res => res.json())
+        .then(res => {
+          if (res.error) {
+            setError(res.error)
+          } else if (res.context !== "https://schema.chora.io/contexts/group_policy.jsonld") {
+            setError("unsupported metadata schema")
+          } else {
+            ps[i] = {
+              ...ps[i],
+              ...JSON.parse(res["jsonld"]),
+            }
+          }
+        })
+        .catch(err => {
+          setError(err.message)
+        })
+    })
+
+    // set state after promise all complete
+    await Promise.all(promise).then(() => {
+
+      // sort policies by name
+      ps = ps.sort((a, b) => {
+        const nameA = a.name.toUpperCase()
+        const nameB = b.name.toUpperCase()
+        if (nameA < nameB) return -1
+        if (nameA > nameB) return 1
+        return 0
+      })
+
+      setPolicies(ps)
+    })
+  }
+
+  // submit proposal asynchronously
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
     setError("")
     setSuccess("")
 
-    // set doc
+    // set JSON-LD document
     const doc = {
       "@context": "https://schema.chora.io/contexts/group_proposal.jsonld",
       name: name,
       description: description,
     }
 
-    // check and normalize JSON-LD
+    // check and normalize JSON-LD document
     const normalized = await jsonld.normalize(doc, {
       algorithm: "URDNA2015",
       format: "application/n-quads",
@@ -140,11 +136,13 @@ const SubmitProposal = () => {
       return
     })
 
+    // return error if empty
     if (normalized == "") {
       setError("JSON-LD empty after normalized")
       return
     }
 
+    // set post request body
     const body = {
       canon: "URDNA2015",
       context: "https://schema.chora.io/contexts/group_proposal.jsonld",
@@ -155,6 +153,7 @@ const SubmitProposal = () => {
 
     let iri: string
 
+    // post data to chora server
     await fetch(serverUrl, {
       method: "POST",
       body: JSON.stringify(body),
@@ -171,11 +170,12 @@ const SubmitProposal = () => {
         setError(err.message)
       })
 
-    // return on error (iri never set)
+    // return error if iri never set
     if (typeof iri === "undefined") {
       return
     }
 
+    // set submit proposal message
     const msg = {
       $type: "cosmos.group.v1.MsgSubmitProposal",
       proposers: [wallet.bech32Address],
@@ -185,11 +185,13 @@ const SubmitProposal = () => {
       exec: execution,
     } as MsgSubmitProposal
 
+    // convert message to any message
     const msgAny = {
       typeUrl: "/cosmos.group.v1.MsgSubmitProposal",
       value: MsgSubmitProposal.encode(msg).finish(),
     }
 
+    // sign and broadcast message to selected network
     await signAndBroadcast(chainInfo, wallet["bech32Address"], [msgAny])
       .then(res => {
         setSuccess(res)

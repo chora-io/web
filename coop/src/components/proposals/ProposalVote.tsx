@@ -15,10 +15,12 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
+  // fetch error and results
   const [error, setError] = useState<string>("")
-  const [metadata, setMetadata] = useState<any>(null)
   const [vote, setVote] = useState<any>(null)
+  const [metadata, setMetadata] = useState<any>(null)
 
+  // fetch on load and value change
   useEffect(() => {
     setVote(null)
     setError("")
@@ -28,59 +30,56 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch vote if network is chora-testnet-1
+    // fetch vote and metadata if network is chora-testnet-1
     if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
-
-      // async function workaround
-      const fetchVoteAndMetadata = async () => {
-
-        // vote metadata
-        let iri: string
-
-        // fetch vote from selected network
-        await fetch(chainInfo.rest + "/" + queryVote + "/" + proposalId + "/" + voterAddress)
-          .then(res => res.json())
-          .then(res => {
-            if (res.code) {
-              setError(res.message)
-            } else {
-              setVote(res["vote"])
-              iri = res["vote"]["metadata"]
-            }
-          })
-
-        // return if iri is empty or was never set
-        if (typeof iri === "undefined" || iri === "") {
-          setMetadata({ reason: "NA" })
-          return
-        }
-
-        // fetch proposal data from chora server
-        await fetch(serverUrl + "/" + iri)
-          .then(res => res.json())
-          .then(res => {
-            if (res.error) {
-              setError(res.error)
-              setMetadata(null)
-            } else if (res.context !== "https://schema.chora.io/contexts/group_vote.jsonld") {
-              setError("unsupported metadata schema")
-              setMetadata(null)
-            } else {
-              setError("")
-              setMetadata(JSON.parse(res["jsonld"]))
-            }
-          })
-          .catch(err => {
-            setError(err.message)
-          })
-      }
-
-      // call async function
       fetchVoteAndMetadata().catch(err => {
         setError(err.message)
       })
     }
   }, [chainInfo])
+
+  // fetch vote and metadata asynchronously
+  const fetchVoteAndMetadata = async () => {
+
+    let iri: string
+
+    // fetch vote from selected network
+    await fetch(chainInfo.rest + "/" + queryVote + "/" + proposalId + "/" + voterAddress)
+      .then(res => res.json())
+      .then(res => {
+        if (res.code) {
+          setError(res.message)
+        } else {
+          setVote(res["vote"])
+          iri = res["vote"]["metadata"]
+        }
+      })
+
+    // return if iri is empty or was never set
+    if (typeof iri === "undefined" || iri === "") {
+      setMetadata({ reason: "NA" })
+      return
+    }
+
+    // fetch vote data from chora server
+    await fetch(serverUrl + "/" + iri)
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          setError(res.error)
+          setMetadata(null)
+        } else if (res.context !== "https://schema.chora.io/contexts/group_vote.jsonld") {
+          setError("unsupported metadata schema")
+          setMetadata(null)
+        } else {
+          setError("")
+          setMetadata(JSON.parse(res["jsonld"]))
+        }
+      })
+      .catch(err => {
+        setError(err.message)
+      })
+  }
 
   return (
     <div className={styles.container}>

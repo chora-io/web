@@ -1,11 +1,11 @@
 import * as React from "react"
-import { Link } from "gatsby"
 
 import Main from "../../layouts/Main"
 import Seo from "../../components/SeoWrapper"
 
 import Proposal from "../../components/proposals/Proposal"
 import Proposals from "../../components/proposals/Proposals"
+import ProposalsNav from "../../components/proposals/ProposalsNav"
 import ProposalVote from "../../components/proposals/ProposalVote"
 import ProposalVotes from "../../components/proposals/ProposalVotes"
 
@@ -25,10 +25,8 @@ const ProposalsPage = ({ location }) => {
             <h1>
               {"group proposals"}
             </h1>
-            <div className={styles.link}>
-              <Link to="/proposals/submit">
-                {"submit proposal"}
-              </Link>
+            <div className={styles.section}>
+              <ProposalsNav />
             </div>
             <div className={styles.section}>
               <Proposals />

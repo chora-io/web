@@ -7,12 +7,12 @@ import SubmitProposal from "../../../components/proposals/SubmitProposal"
 
 import * as styles from "./index.module.css"
 
-const SubmitPage = () => (
+const ProposalsNewPage = () => (
   <Main>
     <div className={styles.page}>
       <div>
         <h1>
-          {"submit proposal"}
+          {"new proposal"}
         </h1>
         <div className={styles.section}>
           <SubmitProposal />
@@ -24,4 +24,4 @@ const SubmitPage = () => (
 
 export const Head = () => <Seo title="" />
 
-export default SubmitPage
+export default ProposalsNewPage

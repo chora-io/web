@@ -1,11 +1,15 @@
 import * as React from "react"
 import { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
+import * as Long from "long"
 
 import { WalletContext } from "chora"
+import { MsgExec } from "chora/api/cosmos/group/v1/tx"
 import { choraTestnet } from "chora/utils/chains"
-
 import { formatTimestamp } from "chora/utils/timestamp"
+import { signAndBroadcast } from "chora/utils/tx"
+
+import ResultTx from "chora/components/ResultTx"
 
 import * as styles from "./Proposal.module.css"
 
@@ -14,12 +18,18 @@ const serverUrl = "https://server.chora.io"
 
 const Proposal = ({ proposalId }) => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, wallet } = useContext(WalletContext)
 
+  // fetch error and results
   const [error, setError] = useState<string>("")
   const [proposal, setProposal] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
 
+  // execution error and results
+  const [execError, setExecError] = useState<string>("")
+  const [execSuccess, setExecSuccess] = useState<string>("")
+
+  // fetch on load and value change
   useEffect(() => {
     setProposal(null)
     setError("")
@@ -29,62 +39,77 @@ const Proposal = ({ proposalId }) => {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch policies if network is chora-testnet-1
+    // fetch proposal and metadata if network is chora-testnet-1
     if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
-
-      // async function workaround
-      const fetchProposalAndMetadata = async () => {
-
-        // proposal metadata
-        let iri: string
-
-        // fetch policies from selected network
-        await fetch(chainInfo.rest + "/" + queryProposal + "/" + proposalId)
-          .then(res => res.json())
-          .then(res => {
-            if (res.code) {
-              setError(res.message)
-            } else {
-              setProposal(res["proposal"])
-              iri = res["proposal"]["metadata"]
-            }
-          })
-
-        // return if iri is empty or was never set
-        if (typeof iri === "undefined" || iri === "") {
-          setMetadata({ name: "NA", description: "NA" })
-          return
-        }
-
-        // fetch proposal data from chora server
-        await fetch(serverUrl + "/" + iri)
-          .then(res => res.json())
-          .then(res => {
-            if (res.error) {
-              setError(res.error)
-              setMetadata(null)
-            } else if (res.context !== "https://schema.chora.io/contexts/group_proposal.jsonld") {
-              setError("unsupported metadata schema")
-              setMetadata(null)
-            } else {
-              setError("")
-              setMetadata(JSON.parse(res["jsonld"]))
-            }
-          })
-          .catch(err => {
-            setError(err.message)
-          })
-      }
-
-      // call async function
       fetchProposalAndMetadata().catch(err => {
         setError(err.message)
       })
     }
   }, [chainInfo])
 
-  const handleExecute = () => {
+  // fetch proposal and metadata asynchronously
+  const fetchProposalAndMetadata = async () => {
 
+    let iri: string
+
+    // fetch proposal from selected network
+    await fetch(chainInfo.rest + "/" + queryProposal + "/" + proposalId)
+      .then(res => res.json())
+      .then(res => {
+        if (res.code) {
+          setError(res.message)
+        } else {
+          setProposal(res["proposal"])
+          iri = res["proposal"]["metadata"]
+        }
+      })
+
+    // return if iri is empty or was never set
+    if (typeof iri === "undefined" || iri === "") {
+      setMetadata({ name: "NA", description: "NA" })
+      return
+    }
+
+    // fetch proposal data from chora server
+    await fetch(serverUrl + "/" + iri)
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          setError(res.error)
+          setMetadata(null)
+        } else if (res.context !== "https://schema.chora.io/contexts/group_proposal.jsonld") {
+          setError("unsupported metadata schema")
+          setMetadata(null)
+        } else {
+          setError("")
+          setMetadata(JSON.parse(res["jsonld"]))
+        }
+      })
+      .catch(err => {
+        setError(err.message)
+      })
+  }
+
+  // execute proposal asynchronously
+  const handleExecute = async () => {
+
+    const msg = {
+      $type: "cosmos.group.v1.MsgExec",
+      executor: wallet["bech32Address"],
+      proposalId: Long.fromString(proposalId),
+    } as MsgExec
+
+    const msgAny = {
+      typeUrl: "/cosmos.group.v1.MsgExec",
+      value: MsgExec.encode(msg).finish(),
+    }
+
+    await signAndBroadcast(chainInfo, wallet["bech32Address"], [msgAny])
+      .then(res => {
+        setExecSuccess(res)
+      }).catch(err => {
+        setExecError(err.message)
+      })
   }
 
   // whether votes have been finalized
@@ -113,23 +138,32 @@ const Proposal = ({ proposalId }) => {
       )}
       {proposal && metadata && !error && (
         <div>
-            <div className={styles.options}>
-              {!votesFinalized && (
-                <Link to={`/proposals/vote/?id=${proposalId}`}>
-                  {"vote on proposal"}
-                </Link>
-              )}
-              {proposalExecutable && (
-                <button onClick={handleExecute}>
-                  {"execute proposal"}
-                </button>
-              )}
-              {votesFinalized && !proposalExecutable && (
-                <div>
-                  {"no further action can be taken"}
-                </div>
-              )}
+          <div className={styles.options}>
+            {!votesFinalized && (
+              <Link to={`/proposals/vote/?id=${proposalId}`}>
+                {"vote on proposal"}
+              </Link>
+            )}
+            {proposalExecutable && (
+              <button onClick={handleExecute}>
+                {"execute proposal"}
+              </button>
+            )}
+            {votesFinalized && !proposalExecutable && (
+              <div>
+                {"no further action can be taken"}
+              </div>
+            )}
+          </div>
+          {(execSuccess || execError) && (
+            <div className={styles.optionResponse}>
+              <ResultTx
+                error={execError}
+                rest={chainInfo.rest}
+                success={execSuccess}
+              />
             </div>
+          )}
           <div className={styles.item}>
             <h3>
               {"status"}

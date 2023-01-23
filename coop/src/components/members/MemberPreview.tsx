@@ -8,42 +8,42 @@ const serverUrl = "https://server.chora.io"
 
 const MemberPreview = ({ member }) => {
 
-  // error and success
+  // fetch error and results
   const [error, setError] = useState<string>("")
   const [metadata, setMetadata] = useState<any>(null)
 
+  // fetch on load and value change
   useEffect(() => {
     setMetadata(null)
     setError("")
 
-    // async function workaround
-    const fetchMetadata = async () => {
-
-      // fetch member data from chora server
-      await fetch(serverUrl + "/" + member["metadata"])
-        .then(res => res.json())
-        .then(res => {
-          if (res.error) {
-            setError(res.error)
-            setMetadata(null)
-          } else if (res.context !== "https://schema.chora.io/contexts/group_member.jsonld") {
-            setError("unsupported metadata schema")
-            setMetadata(null)
-          } else {
-            setError("")
-            setMetadata(JSON.parse(res["jsonld"]))
-          }
-        })
-        .catch(err => {
-          setError(err.message)
-        })
-    }
-
-    // call async function
     fetchMetadata().catch(err => {
       setError(err.message)
     })
   }, [member["metadata"]])
+
+  // fetch member metadata asynchronously
+  const fetchMetadata = async () => {
+
+    // fetch member data from chora server
+    await fetch(serverUrl + "/" + member["metadata"])
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          setError(res.error)
+          setMetadata(null)
+        } else if (res.context !== "https://schema.chora.io/contexts/group_member.jsonld") {
+          setError("unsupported metadata schema")
+          setMetadata(null)
+        } else {
+          setError("")
+          setMetadata(JSON.parse(res["jsonld"]))
+        }
+      })
+      .catch(err => {
+        setError(err.message)
+      })
+  }
 
   return (
     <div className={styles.container}>
