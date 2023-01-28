@@ -9,6 +9,7 @@ import InputNumber from "../InputNumber"
 
 const MsgUpdateIssuer = ({ network, setMessage, useWallet, wallet }: any) => {
 
+  // message inputs
   const [id, setId] = useState<string>("")
   const [issuer, setIssuer] = useState<string>("")
   const [newIssuer, setNewIssuer] = useState<string>("")

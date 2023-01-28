@@ -7,6 +7,7 @@ import InputAddress from "../InputAddress"
 
 const MsgUpdateGroupPolicyAdmin = ({ network, setMessage, useWallet, wallet }: any) => {
 
+  // message inputs
   const [admin, setAdmin] = useState<string>("")
   const [address, setAddress] = useState<string>("")
   const [newAdmin, setNewAdmin] = useState<string>("")

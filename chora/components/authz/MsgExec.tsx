@@ -8,7 +8,7 @@ import SelectMessage from "../SelectMessage"
 
 const MsgExec = ({ network, setMessage, useWallet, wallet }: any) => {
 
-  // exec inputs
+  // message inputs
   const [grantee, setGrantee] = useState<string>("")
   const [execMsg, setExecMsg] = useState<any>(undefined)
 

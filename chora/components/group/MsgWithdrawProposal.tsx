@@ -9,6 +9,7 @@ import InputNumber from "../InputNumber"
 
 const MsgWithdrawProposal = ({ network, setMessage, useWallet, wallet }: any) => {
 
+  // message inputs
   const [address, setAddress] = useState<string>("")
   const [proposalId, setProposalId] = useState<string>("")
 

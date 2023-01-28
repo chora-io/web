@@ -8,6 +8,7 @@ import InputIRI from "../InputIRI"
 
 const MsgUpdateGroupPolicyMetadata = ({ network, setMessage, useWallet, wallet }: any) => {
 
+  // message inputs
   const [admin, setAdmin] = useState<string>("")
   const [address, setAddress] = useState<string>("")
   const [metadata, setMetadata] = useState<string>("")

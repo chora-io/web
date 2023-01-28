@@ -20,6 +20,10 @@ import AuthzMsgRevoke from "./authz/MsgRevoke"
 // cosmos.bank.v1beta1
 import BankMsgSend from "./bank/MsgSend"
 
+// cosmos.feegrant.v1beta1
+import FeegrantMsgGrantAllowance from "./feegrant/MsgGrantAllowance"
+import FeegrantMsgRevokeAllowance from "./feegrant/MsgRevokeAllowance"
+
 // cosmos.group.v1
 import GroupMsgCreateGroup from "./group/MsgCreateGroup"
 import GroupMsgCreateGroupPolicy from "./group/MsgCreateGroupPolicy"
@@ -60,6 +64,8 @@ const defaultOptions = [
   "cosmos.authz.v1beta1.MsgGrant",
   "cosmos.authz.v1beta1.MsgRevoke",
   "cosmos.bank.v1beta1.MsgSend",
+  "cosmos.feegrant.v1beta1.MsgGrantAllowance",
+  "cosmos.feegrant.v1beta1.MsgRevokeAllowance",
   "cosmos.group.v1.MsgCreateGroup",
   "cosmos.group.v1.MsgCreateGroupPolicy",
   "cosmos.group.v1.MsgCreateGroupWithPolicy",
@@ -228,6 +234,28 @@ const SelectMessage = ({ id, label, options, typeOnly, network, setMessage }: an
             {selected}
           </h3>
           <BankMsgSend
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {!typeOnly && selected === "cosmos.feegrant.v1beta1.MsgGrantAllowance" && (
+        <div className={styles.message}>
+          <h3>
+            {selected}
+          </h3>
+          <FeegrantMsgGrantAllowance
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {!typeOnly && selected === "cosmos.feegrant.v1beta1.MsgRevokeAllowance" && (
+        <div className={styles.message}>
+          <h3>
+            {selected}
+          </h3>
+          <FeegrantMsgRevokeAllowance
             network={network}
             setMessage={setMessage}
           />

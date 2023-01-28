@@ -8,6 +8,7 @@ import InputContentHashJSON from "../InputContentHashJSON"
 
 const MsgAttestJSON = ({ network, setMessage, useWallet, wallet }: any) => {
 
+  // message inputs
   const [attestor, setSender] = useState<string>("")
   const [contentHashJson, setContentHashJson] = useState<string>("")
 

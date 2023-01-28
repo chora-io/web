@@ -9,6 +9,7 @@ import InputNumber from "../InputNumber"
 
 const MsgUpdateGroupAdmin = ({ network, setMessage, useWallet, wallet }: any) => {
 
+  // message inputs
   const [admin, setAdmin] = useState<string>("")
   const [groupId, setGroupId] = useState<string>("")
   const [newAdmin, setNewAdmin] = useState<string>("")

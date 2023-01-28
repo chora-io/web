@@ -9,6 +9,7 @@ import InputNumber from "../InputNumber"
 
 const MsgExec = ({ network, setMessage, useWallet, wallet }: any) => {
 
+  // message inputs
   const [executor, setExecutor] = useState<string>("")
   const [proposalId, setProposalId] = useState<string>("")
 

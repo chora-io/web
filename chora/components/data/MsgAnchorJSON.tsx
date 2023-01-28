@@ -8,6 +8,7 @@ import InputContentHashJSON from "../InputContentHashJSON"
 
 const MsgAnchorJSON = ({ network, setMessage, useWallet, wallet }: any) => {
 
+  // message inputs
   const [sender, setSender] = useState<string>("")
   const [contentHashJson, setContentHashJson] = useState<string>("")
 

@@ -11,6 +11,7 @@ import InputTimestamp from "../InputTimestamp"
 
 const MsgIssue = ({ network, setMessage, useWallet, wallet }: any) => {
 
+  // message inputs
   const [id, setId] = useState<string>("")
   const [issuer, setIssuer] = useState<string>("")
   const [recipient, setRecipient] = useState<string>("")

@@ -8,7 +8,7 @@ import InputPolicy from "../InputPolicy"
 
 const MsgUpdateGroupPolicyDecisionPolicy = ({ network, setMessage, useWallet, wallet }: any) => {
 
-  // group inputs
+  // message inputs
   const [admin, setAdmin] = useState<string>("")
   const [address, setAddress] = useState<string>("")
   const [policy, setPolicy] = useState<any>(undefined)

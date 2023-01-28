@@ -12,6 +12,7 @@ import SelectVote from "../SelectVote"
 
 const MsgVote = ({ network, setMessage, useWallet, wallet }: any) => {
 
+  // message inputs
   const [voter, setVoter] = useState<string>("")
   const [proposalId, setProposalId] = useState<string>("")
   const [option, setOption] = useState<string>("")

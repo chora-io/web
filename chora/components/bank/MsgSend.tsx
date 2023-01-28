@@ -9,6 +9,7 @@ import InputNumber from "../InputNumber"
 
 const MsgSend = ({ network, setMessage, useWallet, wallet }: any) => {
 
+  // message inputs
   const [fromAddress, setFromAddress] = useState<string>("")
   const [toAddress, setToAddress] = useState<string>("")
   const [denom, setDenom] = useState<string>("")

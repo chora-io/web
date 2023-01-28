@@ -8,6 +8,7 @@ import InputIRI from "../InputIRI"
 
 const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
 
+  // message inputs
   const [curator, setCurator] = useState<string>("")
   const [metadata, setMetadata] = useState<string>("")
 

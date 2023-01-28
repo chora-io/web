@@ -8,6 +8,7 @@ import InputURL from "../InputURL"
 
 const MsgDefineResolver = ({ network, setMessage, useWallet, wallet }: any) => {
 
+  // message inputs
   const [manager, setManager] = useState<string>("")
   const [resolverUrl, setResolverUrl] = useState<string>("")
 

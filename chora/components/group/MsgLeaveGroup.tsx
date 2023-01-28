@@ -9,6 +9,7 @@ import InputNumber from "../InputNumber"
 
 const MsgLeaveGroup = ({ network, setMessage, useWallet, wallet }: any) => {
 
+  // message inputs
   const [address, setAdmin] = useState<string>("")
   const [groupId, setGroupId] = useState<string>("")
 

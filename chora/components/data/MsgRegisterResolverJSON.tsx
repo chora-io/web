@@ -10,6 +10,7 @@ import InputNumber from "../InputNumber"
 
 const MsgRegisterResolverJSON = ({ network, setMessage, useWallet, wallet }: any) => {
 
+  // message inputs
   const [manager, setManager] = useState<string>("")
   const [resolverId, setResolverId] = useState<string>("")
   const [contentHashJson, setContentHashJson] = useState<any>(undefined)

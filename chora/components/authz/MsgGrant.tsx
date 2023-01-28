@@ -8,7 +8,7 @@ import InputGrant from "../InputGrant"
 
 const MsgGrant = ({ network, setMessage, useWallet, wallet }: any) => {
 
-  // grant inputs
+  // message inputs
   const [granter, setGranter] = useState<string>("")
   const [grantee, setGrantee] = useState<string>("")
   const [grant, setGrant] = useState<any>(undefined)

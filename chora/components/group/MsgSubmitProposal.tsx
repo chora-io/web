@@ -10,7 +10,7 @@ import SelectMessage from "../SelectMessage"
 
 const MsgSubmitProposal = ({ network, setMessage, useWallet, wallet }: any) => {
 
-  // group inputs
+  // message inputs
   const [proposer, setProposer] = useState<string>("")
   const [address, setAddress] = useState<string>("")
   const [metadata, setMetadata] = useState<string>("")

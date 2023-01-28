@@ -9,6 +9,7 @@ import InputMembers from "../InputMembers"
 
 const MsgCreateGroup = ({ network, setMessage, useWallet, wallet }: any) => {
 
+  // message inputs
   const [admin, setAdmin] = useState<string>("")
   const [metadata, setMetadata] = useState<string>("")
   const [members, setMembers] = useState<any[]>([])

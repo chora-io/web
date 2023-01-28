@@ -9,6 +9,7 @@ import InputNumber from "../InputNumber"
 
 const MsgUpdateCurator = ({ network, setMessage, useWallet, wallet }: any) => {
 
+  // message inputs
   const [id, setId] = useState<string>("")
   const [curator, setCurator] = useState<string>("")
   const [newCurator, setNewCurator] = useState<string>("")

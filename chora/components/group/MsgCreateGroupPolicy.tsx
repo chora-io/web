@@ -11,7 +11,7 @@ import InputPolicy from "../InputPolicy"
 
 const MsgCreateGroupPolicy = ({ network, setMessage, useWallet, wallet }: any) => {
 
-  // group inputs
+  // message inputs
   const [admin, setAdmin] = useState<string>("")
   const [groupId, setGroupId] = useState<string>("")
   const [metadata, setMetadata] = useState<string>("")

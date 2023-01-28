@@ -8,6 +8,7 @@ import InputContentHash from "../InputContentHash"
 
 const MsgAnchor = ({ network, setMessage, useWallet, wallet }: any) => {
 
+  // message inputs
   const [sender, setSender] = useState<string>("")
   const [contentHash, setContentHash] = useState<any>(undefined)
 
