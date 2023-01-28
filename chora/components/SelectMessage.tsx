@@ -13,7 +13,9 @@ import VoucherMsgUpdateIssuer from "./voucher/MsgUpdateIssuer"
 import VoucherMsgUpdateMetadata from "./voucher/MsgUpdateMetadata"
 
 // cosmos.authz.v1beta1
+import AuthzMsgExec from "./authz/MsgExec"
 import AuthzMsgGrant from "./authz/MsgGrant"
+import AuthzMsgRevoke from "./authz/MsgRevoke"
 
 // cosmos.bank.v1beta1
 import BankMsgSend from "./bank/MsgSend"
@@ -54,7 +56,9 @@ const defaultOptions = [
   "chora.voucher.v1.MsgIssue",
   "chora.voucher.v1.MsgUpdateIssuer",
   "chora.voucher.v1.MsgUpdateMetadata",
+  "cosmos.authz.v1beta1.MsgExec",
   "cosmos.authz.v1beta1.MsgGrant",
+  "cosmos.authz.v1beta1.MsgRevoke",
   "cosmos.bank.v1beta1.MsgSend",
   "cosmos.group.v1.MsgCreateGroup",
   "cosmos.group.v1.MsgCreateGroupPolicy",
@@ -185,12 +189,34 @@ const SelectMessage = ({ id, label, options, typeOnly, network, setMessage }: an
           />
         </div>
       )}
+      {!typeOnly && selected === "cosmos.authz.v1beta1.MsgExec" && (
+        <div className={styles.message}>
+          <h3>
+            {selected}
+          </h3>
+          <AuthzMsgExec
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
       {!typeOnly && selected === "cosmos.authz.v1beta1.MsgGrant" && (
         <div className={styles.message}>
           <h3>
             {selected}
           </h3>
           <AuthzMsgGrant
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {!typeOnly && selected === "cosmos.authz.v1beta1.MsgRevoke" && (
+        <div className={styles.message}>
+          <h3>
+            {selected}
+          </h3>
+          <AuthzMsgRevoke
             network={network}
             setMessage={setMessage}
           />
