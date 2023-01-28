@@ -19,6 +19,11 @@
   margin-right: 2em;
 }
 
+.optionActive {
+  text-decoration: underline;
+  text-underline-offset: 0.5em;
+}
+
 /* message */
 
 .message {

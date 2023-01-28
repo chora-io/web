@@ -67,7 +67,7 @@ const Policies = () => {
         } else {
           const ps = res["group_policies"]
 
-         // sort ascending by default and on reload
+         // sort ascending by default
           ps.sort((a, b) => new Date(b["created_at"]) - new Date(a["created_at"]))
           setSort("ascending")
 

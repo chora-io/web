@@ -22,7 +22,7 @@ const Proposals = () => {
 
   // list options
   const [sort, setSort] = useState<string>("ascending")
-  const [filter, setFilter] = useState<string>("nothing")
+  const [filter, setFilter] = useState<string>("submitted")
   const [filtered, setFiltered] = useState<any>(null)
 
   // fetch on load and value change
@@ -138,17 +138,40 @@ const Proposals = () => {
     // set state after promise all complete
     await Promise.all(promise).then(() => {
 
-      // sort ascending by default and on reload
+      // sort ascending by default
       ps.sort((a, b) => b.id - a.id)
       setSort("ascending")
 
+      // filter submitted by default
+      const fps = ps.filter(v => v.status === "PROPOSAL_STATUS_SUBMITTED")
+      setFilter("submitted")
+
       setProposals(ps)
+      setFiltered(fps)
     })
   }
 
   return (
     <div className={styles.container}>
       <div className={styles.options}>
+        <button
+          className={filter === "submitted" ? styles.optionActive : null}
+          onClick={() => setFilter("submitted")}
+        >
+          {"submitted"}
+        </button>
+        <button
+          className={filter === "accepted" ? styles.optionActive : null}
+          onClick={() => setFilter("accepted")}
+        >
+          {"accepted"}
+        </button>
+        <button
+          className={filter === "rejected" ? styles.optionActive : null}
+          onClick={() => setFilter("rejected")}
+        >
+          {"rejected"}
+        </button>
         {sort === "descending" && (
           <button onClick={() => setSort("ascending")}>
             {"sort by newest"}
@@ -157,26 +180,6 @@ const Proposals = () => {
         {sort === "ascending" && (
           <button onClick={() => setSort("descending")}>
             {"sort by oldest"}
-          </button>
-        )}
-        {filter === "nothing" && (
-          <button onClick={() => setFilter("submitted")}>
-            {"view submitted"}
-          </button>
-        )}
-        {filter === "nothing" && (
-          <button onClick={() => setFilter("accepted")}>
-            {"view accepted"}
-          </button>
-        )}
-        {filter === "nothing" && (
-          <button onClick={() => setFilter("rejected")}>
-            {"view rejected"}
-          </button>
-        )}
-        {filter !== "nothing" && (
-          <button onClick={() => setFilter("nothing")}>
-            {"clear filter"}
           </button>
         )}
       </div>

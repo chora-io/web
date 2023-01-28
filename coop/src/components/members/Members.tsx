@@ -67,7 +67,7 @@ const Members = () => {
         } else {
           const ms = res["members"]
 
-         // sort ascending by default and on reload
+         // sort ascending by default
           ms.sort((a, b) => new Date(b["member"]["added_at"]) - new Date(a["member"]["added_at"]))
           setSort("ascending")
 
