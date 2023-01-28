@@ -24,7 +24,6 @@ const MsgCreateGroupWithPolicy = ({network, setMessage, useWallet, wallet }: any
   useEffect(() => {
 
     const msg = {
-      $type: "cosmos.group.v1.MsgCreateGroupWithPolicy",
       admin: wallet ? wallet.bech32Address : admin,
       members: members,
       groupMetadata: metadata,

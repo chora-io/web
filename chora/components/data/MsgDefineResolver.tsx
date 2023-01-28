@@ -14,7 +14,6 @@ const MsgDefineResolver = ({ network, setMessage, useWallet, wallet }: any) => {
   useEffect(() => {
 
     const msg = {
-      $type: "regen.data.v1.MsgDefineResolver",
       manager: wallet ? wallet.bech32Address : manager,
       resolverUrl: resolverUrl,
     } as Msg

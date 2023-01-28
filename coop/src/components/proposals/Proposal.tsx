@@ -94,7 +94,6 @@ const Proposal = ({ proposalId }) => {
   const handleExecute = async () => {
 
     const msg = {
-      $type: "cosmos.group.v1.MsgExec",
       executor: wallet["bech32Address"],
       proposalId: Long.fromString(proposalId),
     } as MsgExec

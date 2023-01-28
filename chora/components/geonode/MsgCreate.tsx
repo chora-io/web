@@ -14,7 +14,6 @@ const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
   useEffect(() => {
 
     const msg = {
-      $type: "chora.geonode.v1.MsgCreate",
       curator: wallet ? wallet.bech32Address : curator,
       metadata: metadata,
     } as Msg

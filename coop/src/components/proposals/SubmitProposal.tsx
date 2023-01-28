@@ -4,7 +4,6 @@ import * as jsonld from "jsonld"
 
 import { WalletContext } from "chora"
 import { MsgSubmitProposal } from "chora/api/cosmos/group/v1/tx"
-import { Exec } from "chora/api/cosmos/group/v1/types"
 import { choraTestnet } from "chora/utils/chains"
 import { signAndBroadcast } from "chora/utils/tx"
 
@@ -25,14 +24,14 @@ const SubmitProposal = () => {
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // fetch options
-  const [policies, setPolicies] = useState<any>(null)
+  const [policies, setPolicies] = useState<any[]>([])
 
   // form input
   const [address, setAddress] = useState<string>("")
   const [name, setName] = useState<string>("")
   const [description, setDescription] = useState<string>("")
-  const [message, setMessage] = useState<any>(null)
-  const [execution, setExecution] = useState<number>(Exec["EXEC_UNSPECIFIED"])
+  const [message, setMessage] = useState<any>(undefined)
+  const [execution, setExecution] = useState<string>("")
 
   // fetch and form error and success
   const [error, setError] = useState<string>("")
@@ -177,8 +176,7 @@ const SubmitProposal = () => {
 
     // set submit proposal message
     const msg = {
-      $type: "cosmos.group.v1.MsgSubmitProposal",
-      proposers: [wallet.bech32Address],
+      proposers: [wallet["bech32Address"]],
       groupPolicyAddress: address,
       metadata: iri,
       messages: message ? [message] : [],

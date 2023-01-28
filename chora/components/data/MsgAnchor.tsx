@@ -14,7 +14,6 @@ const MsgAnchor = ({ network, setMessage, useWallet, wallet }: any) => {
   useEffect(() => {
 
     const msg = {
-      $type: "regen.data.v1.MsgAnchor",
       sender: wallet ? wallet.bech32Address : sender,
       contentHash: contentHash,
     } as Msg

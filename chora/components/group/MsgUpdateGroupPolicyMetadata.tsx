@@ -15,7 +15,6 @@ const MsgUpdateGroupPolicyMetadata = ({ network, setMessage, useWallet, wallet }
   useEffect(() => {
 
     const msg = {
-      $type: "cosmos.group.v1.MsgUpdateGroupPolicyMetadata",
       admin: wallet ? wallet.bech32Address : admin,
       groupPolicyAddress: address,
       metadata: metadata,

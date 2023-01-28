@@ -16,7 +16,6 @@ const MsgUpdateCurator = ({ network, setMessage, useWallet, wallet }: any) => {
   useEffect(() => {
 
     const msg = {
-      $type: "chora.voucher.v1.MsgUpdateCurator",
       id: Long.fromString(id || "0"),
       curator: wallet ? wallet.bech32Address : curator,
       newCurator: newCurator,

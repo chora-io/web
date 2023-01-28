@@ -20,7 +20,6 @@ const MsgSubmitProposal = ({ network, setMessage, useWallet, wallet }: any) => {
   useEffect(() => {
 
     const msg = {
-      $type: "cosmos.group.v1.MsgSubmitProposal",
       proposers: wallet ? [wallet.bech32Address] : [proposer],
       groupPolicyAddress: address,
       metadata: metadata,

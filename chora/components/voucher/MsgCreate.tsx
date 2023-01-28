@@ -14,7 +14,6 @@ const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
   useEffect(() => {
 
     const msg = {
-      $type: "chora.voucher.v1.MsgCreate",
       issuer: wallet ? wallet.bech32Address : issuer,
       metadata: metadata,
     } as Msg

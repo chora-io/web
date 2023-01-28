@@ -21,7 +21,6 @@ const MsgVote = ({ network, setMessage, useWallet, wallet }: any) => {
   useEffect(() => {
 
     const msg = {
-      $type: "cosmos.group.v1.MsgVote",
       voter: wallet ? wallet.bech32Address : voter,
       proposalId: Long.fromString(proposalId || "0"),
       option: option,

@@ -22,7 +22,6 @@ const MsgAttestJSON = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msg = {
-      $type: "regen.data.v1.MsgAttest",
       attestor: wallet ? wallet.bech32Address : attestor,
       contentHashes: contentHash ? [contentHash] : [],
     } as Msg

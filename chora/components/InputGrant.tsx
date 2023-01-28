@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useEffect, useState } from "react"
 
-import { GenericAuthorization, Grant } from "../api/cosmos/authz/v1beta1/authz"
+import { GenericAuthorization } from "../api/cosmos/authz/v1beta1/authz"
 
 import InputTimestamp from "./InputTimestamp"
 import SelectMessage from "./SelectMessage"
@@ -19,18 +19,15 @@ const InputGrant = ({ id, label, network, setGrant }: any) => {
   useEffect(() => {
 
     const a = {
-      typeUrl: "/cosmos.authz.v1beta1.Authorization",
+      typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization",
       value: GenericAuthorization.encode({
         msg: message ? message.typeUrl : "",
       }).finish(),
     }
 
     const g = {
-      typeUrl: "/cosmos.authz.v1beta1.Grant",
-      value: Grant.encode({
-        authorization: a,
-        expiration: new Date(expiration),
-      }).finish(),
+      authorization: a,
+      expiration: new Date(expiration),
     }
 
     setGrant(g)

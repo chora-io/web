@@ -15,7 +15,6 @@ const MsgExec = ({ network, setMessage, useWallet, wallet }: any) => {
   useEffect(() => {
 
     const msg = {
-      $type: "cosmos.group.v1.MsgExec",
       executor: wallet ? wallet.bech32Address : executor,
       proposalId: Long.fromString(proposalId || "0"),
     } as Msg

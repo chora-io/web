@@ -15,7 +15,6 @@ const MsgExec = ({ network, setMessage, useWallet, wallet }: any) => {
   useEffect(() => {
 
     const msg = {
-      $type: "cosmos.authz.v1beta1.MsgExec",
       grantee: wallet ? wallet.bech32Address : grantee,
       msgs: execMsg ? [execMsg] : [],
     } as Msg

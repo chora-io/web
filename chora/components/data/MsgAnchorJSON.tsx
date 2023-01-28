@@ -22,7 +22,6 @@ const MsgAnchorJSON = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msg = {
-      $type: "regen.data.v1.MsgAnchor",
       sender: wallet ? wallet.bech32Address : sender,
       contentHash: contentHash,
     } as Msg

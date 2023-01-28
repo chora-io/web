@@ -5,7 +5,6 @@ import * as jsonld from "jsonld"
 
 import { WalletContext } from "chora"
 import { MsgVote } from "chora/api/cosmos/group/v1/tx"
-import { Exec } from "chora/api/cosmos/group/v1/types"
 import { signAndBroadcast } from "chora/utils/tx"
 
 import InputString from "chora/components/InputString"
@@ -24,7 +23,7 @@ const VoteOnProposal = ({ proposalId }) => {
   // form input
   const [vote, setVote] = useState<string>("")
   const [reason, setReason] = useState<string>("")
-  const [execution, setExecution] = useState<number>(Exec["EXEC_UNSPECIFIED"])
+  const [execution, setExecution] = useState<string>("")
 
   // form error and success
   const [error, setError] = useState<string>("")

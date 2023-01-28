@@ -17,7 +17,6 @@ const MsgUpdateMetadata = ({ network, setMessage, useWallet, wallet }: any) => {
   useEffect(() => {
 
     const msg = {
-      $type: "chora.geonode.v1.MsgUpdateMetadata",
       id: Long.fromString(id || "0"),
       curator: wallet ? wallet.bech32Address : curator,
       newMetadata: newMetadata,

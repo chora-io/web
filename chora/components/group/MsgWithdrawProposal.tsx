@@ -15,7 +15,6 @@ const MsgWithdrawProposal = ({ network, setMessage, useWallet, wallet }: any) =>
   useEffect(() => {
 
     const msg = {
-      $type: "cosmos.group.v1.MsgWithdrawProposal",
       address: wallet ? wallet.bech32Address : address,
       proposalId: Long.fromString(proposalId || "0"),
     } as Msg

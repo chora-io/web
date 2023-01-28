@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { formatTimestamp } from "chora/utils/timestamp"
 
-import * as styles from "./Authz.module.css"
+import * as styles from "./AuthzGrant.module.css"
 
 const AuthzGrant = ({ grant }) => (
   <div>

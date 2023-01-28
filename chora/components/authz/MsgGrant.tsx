@@ -16,7 +16,6 @@ const MsgGrant = ({ network, setMessage, useWallet, wallet }: any) => {
   useEffect(() => {
 
     const msg = {
-      $type: "cosmos.authz.v1beta1.MsgGrant",
       granter: wallet ? wallet.bech32Address : granter,
       grantee: grantee,
       grant: grant,

@@ -17,7 +17,6 @@ const MsgRegisterResolver = ({ network, setMessage, useWallet, wallet }: any) =>
   useEffect(() => {
 
     const msg = {
-      $type: "regen.data.v1.MsgRegisterResolver",
       manager: wallet ? wallet.bech32Address : manager,
       resolverId: Long.fromString(resolverId || "0"),
       contentHashes: contentHash ? [contentHash] : [],
