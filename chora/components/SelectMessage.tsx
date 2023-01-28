@@ -12,6 +12,9 @@ import VoucherMsgIssue from "./voucher/MsgIssue"
 import VoucherMsgUpdateIssuer from "./voucher/MsgUpdateIssuer"
 import VoucherMsgUpdateMetadata from "./voucher/MsgUpdateMetadata"
 
+// cosmos.authz.v1beta1
+import AuthzMsgGrant from "./authz/MsgGrant"
+
 // cosmos.bank.v1beta1
 import BankMsgSend from "./bank/MsgSend"
 
@@ -51,6 +54,7 @@ const defaultOptions = [
   "chora.voucher.v1.MsgIssue",
   "chora.voucher.v1.MsgUpdateIssuer",
   "chora.voucher.v1.MsgUpdateMetadata",
+  "cosmos.authz.v1beta1.MsgGrant",
   "cosmos.bank.v1beta1.MsgSend",
   "cosmos.group.v1.MsgCreateGroup",
   "cosmos.group.v1.MsgCreateGroupPolicy",
@@ -72,11 +76,18 @@ const defaultOptions = [
   "regen.data.v1.MsgRegisterResolver",
 ]
 
-const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
+const SelectMessage = ({ id, label, options, typeOnly, network, setMessage }: any) => {
 
   const opts = options || defaultOptions
 
   const [selected, setSelected] = useState<string>("")
+
+  const handleSetSelected = (event) => {
+    if (typeOnly) {
+      setMessage({ typeUrl: "/" + event.target.value })
+    }
+    setSelected(event.target.value)
+  }
 
   return (
     <>
@@ -85,7 +96,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
         <select
           id={id ? id : defaultId}
           value={selected}
-          onChange={event => setSelected(event.target.value)}
+          onChange={handleSetSelected}
         >
           <option value="">
             {"--- select ---"}
@@ -97,7 +108,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           ))}
         </select>
       </label>
-      {selected === "chora.geonode.v1.MsgCreate" && (
+      {!typeOnly && selected === "chora.geonode.v1.MsgCreate" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -108,7 +119,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "chora.geonode.v1.MsgUpdateCurator" && (
+      {!typeOnly && selected === "chora.geonode.v1.MsgUpdateCurator" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -119,7 +130,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "chora.geonode.v1.MsgUpdateMetadata" && (
+      {!typeOnly && selected === "chora.geonode.v1.MsgUpdateMetadata" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -130,7 +141,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "chora.voucher.v1.MsgCreate" && (
+      {!typeOnly && selected === "chora.voucher.v1.MsgCreate" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -141,7 +152,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "chora.voucher.v1.MsgIssue" && (
+      {!typeOnly && selected === "chora.voucher.v1.MsgIssue" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -152,7 +163,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "chora.voucher.v1.MsgUpdateIssuer" && (
+      {!typeOnly && selected === "chora.voucher.v1.MsgUpdateIssuer" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -163,7 +174,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "chora.voucher.v1.MsgUpdateMetadata" && (
+      {!typeOnly && selected === "chora.voucher.v1.MsgUpdateMetadata" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -174,7 +185,18 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "cosmos.bank.v1beta1.MsgSend" && (
+      {!typeOnly && selected === "cosmos.authz.v1beta1.MsgGrant" && (
+        <div className={styles.message}>
+          <h3>
+            {selected}
+          </h3>
+          <AuthzMsgGrant
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {!typeOnly && selected === "cosmos.bank.v1beta1.MsgSend" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -185,7 +207,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "cosmos.group.v1.MsgCreateGroup" && (
+      {!typeOnly && selected === "cosmos.group.v1.MsgCreateGroup" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -196,7 +218,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "cosmos.group.v1.MsgCreateGroupPolicy" && (
+      {!typeOnly && selected === "cosmos.group.v1.MsgCreateGroupPolicy" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -207,7 +229,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "cosmos.group.v1.MsgCreateGroupWithPolicy" && (
+      {!typeOnly && selected === "cosmos.group.v1.MsgCreateGroupWithPolicy" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -218,7 +240,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "cosmos.group.v1.MsgExec" && (
+      {!typeOnly && selected === "cosmos.group.v1.MsgExec" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -229,7 +251,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "cosmos.group.v1.MsgLeaveGroup" && (
+      {!typeOnly && selected === "cosmos.group.v1.MsgLeaveGroup" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -240,7 +262,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "cosmos.group.v1.MsgSubmitProposal" && (
+      {!typeOnly && selected === "cosmos.group.v1.MsgSubmitProposal" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -251,7 +273,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "cosmos.group.v1.MsgUpdateGroupAdmin" && (
+      {!typeOnly && selected === "cosmos.group.v1.MsgUpdateGroupAdmin" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -262,7 +284,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "cosmos.group.v1.MsgUpdateGroupMembers" && (
+      {!typeOnly && selected === "cosmos.group.v1.MsgUpdateGroupMembers" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -273,7 +295,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "cosmos.group.v1.MsgUpdateGroupMetadata" && (
+      {!typeOnly && selected === "cosmos.group.v1.MsgUpdateGroupMetadata" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -284,7 +306,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "cosmos.group.v1.MsgUpdateGroupPolicyAdmin" && (
+      {!typeOnly && selected === "cosmos.group.v1.MsgUpdateGroupPolicyAdmin" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -295,7 +317,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy" && (
+      {!typeOnly && selected === "cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -306,7 +328,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "cosmos.group.v1.MsgUpdateGroupPolicyMetadata" && (
+      {!typeOnly && selected === "cosmos.group.v1.MsgUpdateGroupPolicyMetadata" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -317,7 +339,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "cosmos.group.v1.MsgVote" && (
+      {!typeOnly && selected === "cosmos.group.v1.MsgVote" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -328,7 +350,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "cosmos.group.v1.MsgWithdrawProposal" && (
+      {!typeOnly && selected === "cosmos.group.v1.MsgWithdrawProposal" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -339,7 +361,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "regen.data.v1.MsgAnchor" && (
+      {!typeOnly && selected === "regen.data.v1.MsgAnchor" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -350,7 +372,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "regen.data.v1.MsgAttest" && (
+      {!typeOnly && selected === "regen.data.v1.MsgAttest" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -361,7 +383,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "regen.data.v1.MsgDefineResolver" && (
+      {!typeOnly && selected === "regen.data.v1.MsgDefineResolver" && (
         <div className={styles.message}>
           <h3>
             {selected}
@@ -372,7 +394,7 @@ const SelectMessage = ({ id, label, options, network, setMessage }: any) => {
           />
         </div>
       )}
-      {selected === "regen.data.v1.MsgRegisterResolver" && (
+      {!typeOnly && selected === "regen.data.v1.MsgRegisterResolver" && (
         <div className={styles.message}>
           <h3>
             {selected}
