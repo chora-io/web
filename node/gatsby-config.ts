@@ -10,16 +10,6 @@ module.exports = {
     siteUrl: `https://chora.io/node`,
   },
   plugins: [
-    `gatsby-plugin-image`,
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/../chora/assets/images`,
-      },
-    },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -28,7 +18,14 @@ module.exports = {
         start_url: `/`,
         background_color: `#000`,
         display: `standalone`,
-        icon: `${__dirname}/../chora/assets/images/favicon.ico`,
+        icon: `${__dirname}/node_modules/chora/assets/images/favicon.ico`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/node_modules/chora/assets/images`,
       },
     },
   ],

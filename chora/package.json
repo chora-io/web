@@ -23,15 +23,15 @@
     "clean": "rm -rf api dist"
   },
   "devDependencies": {
-    "@keplr-wallet/proto-types": "^0.11.17",
-    "@keplr-wallet/types": "^0.11.17",
-    "@rollup/plugin-commonjs": "^24.0.0",
+    "@keplr-wallet/proto-types": "^0.11.37",
+    "@keplr-wallet/types": "^0.11.37",
+    "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^11.0.0",
     "react": "^18.2.0",
-    "rollup": "^3.9.1",
+    "rollup": "^3.11.0",
     "rollup-plugin-postcss": "^4.0.2",
     "ts-node": "^10.9.1",
-    "ts-proto": "^1.133.0"
+    "ts-proto": "^1.138.0"
   }
 }
