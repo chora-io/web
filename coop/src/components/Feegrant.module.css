@@ -1,0 +1,31 @@
+/* container */
+
+.container {
+  color: #FFF !important;
+  font-weight: 300 !important;
+}
+
+/* options */
+
+.options {
+  border-bottom: 1px solid #333;
+  padding-bottom: 2em;
+}
+
+.options button {
+  background: none;
+  color: var(--color-primary);
+  font-size: 1em;
+  margin-right: 2em;
+}
+
+.optionActive {
+  text-decoration: underline;
+  text-underline-offset: 0.5em;
+}
+
+/* content */
+
+.content {
+  padding-top: 2em;
+}

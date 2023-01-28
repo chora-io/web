@@ -4,6 +4,7 @@ import Main from "../../layouts/Main"
 import Seo from "../../components/SeoWrapper"
 
 import Authz from "../../components/Authz"
+import Feegrant from "../../components/Feegrant"
 import Policies from "../../components/policies/Policies"
 import Policy from "../../components/policies/Policy"
 
@@ -30,6 +31,12 @@ const PoliciesPage = ({ location }) => {
             </h1>
             <div className={styles.section}>
               <Authz address={policyAddress} />
+            </div>
+            <h1>
+              {"fee allowances"}
+            </h1>
+            <div className={styles.section}>
+              <Feegrant address={policyAddress} />
             </div>
           </div>
         ) : (

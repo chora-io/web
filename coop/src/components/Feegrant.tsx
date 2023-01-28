@@ -1,0 +1,127 @@
+import * as React from "react"
+import { useContext, useEffect, useState } from "react"
+
+import { WalletContext } from "chora"
+import { choraTestnet } from "chora/utils/chains"
+
+import FeegrantAllowance from "./FeegrantAllowance"
+
+import * as styles from "./Feegrant.module.css"
+
+const queryAllowancesByGrantee = "cosmos/feegrant/v1beta1/allowances"
+const queryAllowancesByGranter = "cosmos/feegrant/v1beta1/issued"
+
+const Feegrant = ({ address }) => {
+
+  console.log("address", address)
+
+  const { chainInfo } = useContext(WalletContext)
+
+  // options
+  const [filter, setFilter] = useState<string>("grantee")
+
+  // fetch error and results
+  const [error, setError] = useState<string>("")
+  const [allowancesGrantee, setAllowancesGrantee] = useState<any>(null)
+  const [allowancesGranter, setAllowancesGranter] = useState<any>(null)
+
+  // fetch on load and value change
+  useEffect(() => {
+    setAllowancesGrantee(null)
+    setAllowancesGranter(null)
+    setError("")
+
+    // error if network is not chora-testnet-1
+    if (chainInfo && chainInfo.chainId !== choraTestnet.chainId) {
+      setError("switch to chora-testnet-1")
+    }
+
+    // fetch allowances if network is chora-testnet-1
+    if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
+      fetchAllowances().catch(err => {
+        setError(err.message)
+      })
+    }
+  }, [chainInfo])
+
+  // fetch allowances asynchronously
+  const fetchAllowances = async () => {
+
+    // fetch allowances by grantee from selected network
+    await fetch(chainInfo.rest + "/" + queryAllowancesByGrantee + "/" + address)
+      .then(res => res.json())
+      .then(res => {
+        if (res.code) {
+          setError(res.message)
+        } else {
+          setAllowancesGrantee(res["allowances"])
+        }
+      })
+
+    // fetch allowances by granter from selected network
+    await fetch(chainInfo.rest + "/" + queryAllowancesByGranter + "/" + address)
+      .then(res => res.json())
+      .then(res => {
+        if (res.code) {
+          setError(res.message)
+        } else {
+          setAllowancesGranter(res["allowances"])
+        }
+      })
+  }
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.options}>
+        <button
+          className={filter === "grantee" ? styles.optionActive : null}
+          onClick={() => setFilter("grantee")}
+        >
+          {"grantee"}
+        </button>
+        <button
+          className={filter === "granter" ? styles.optionActive : null}
+          onClick={() => setFilter("granter")}
+        >
+          {"granter"}
+        </button>
+      </div>
+      {!allowancesGrantee && !allowancesGranter && !error && (
+        <div className={styles.content}>
+          {"loading..."}
+        </div>
+      )}
+      {filter === "grantee" && (
+        <div className={styles.content}>
+          {allowancesGrantee && allowancesGrantee.map((allowance, i) => (
+            <FeegrantAllowance key={i} allowance={allowance} />
+          ))}
+          {allowancesGrantee && allowancesGrantee.length === 0 && (
+            <div>
+              {"no fee allowances granted to this account"}
+            </div>
+          )}
+        </div>
+      )}
+      {filter === "granter" && (
+        <div className={styles.content}>
+          {allowancesGranter && allowancesGranter.map((allowance, i) => (
+            <FeegrantAllowance key={i} allowance={allowance} />
+          ))}
+          {allowancesGranter && allowancesGranter.length === 0 && (
+            <div>
+              {"no fee allowances granted by this account"}
+            </div>
+          )}
+        </div>
+      )}
+      {error && (
+        <div className={styles.content}>
+          {error}
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default Feegrant

@@ -4,6 +4,7 @@ import Main from "../../layouts/Main"
 import Seo from "../../components/SeoWrapper"
 
 import Authz from "../../components/Authz"
+import Feegrant from "../../components/Feegrant"
 import Member from "../../components/members/Member"
 import Members from "../../components/members/Members"
 
@@ -30,6 +31,12 @@ const MembersPage = ({ location }) => {
             </h1>
             <div className={styles.section}>
               <Authz address={memberAddress} />
+            </div>
+            <h1>
+              {"fee allowances"}
+            </h1>
+            <div className={styles.section}>
+              <Feegrant address={memberAddress} />
             </div>
           </div>
         ) : (

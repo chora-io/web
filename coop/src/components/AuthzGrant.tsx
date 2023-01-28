@@ -5,7 +5,7 @@ import { formatTimestamp } from "chora/utils/timestamp"
 import * as styles from "./AuthzGrant.module.css"
 
 const AuthzGrant = ({ grant }) => (
-  <div>
+  <div className={styles.container}>
     <div className={styles.item}>
       <h3>
         {"granter"}
