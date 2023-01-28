@@ -3,6 +3,7 @@ import * as React from "react"
 import Main from "../../layouts/Main"
 import Seo from "../../components/SeoWrapper"
 
+import Authz from "../../components/Authz"
 import Policies from "../../components/policies/Policies"
 import Policy from "../../components/policies/Policy"
 
@@ -23,6 +24,12 @@ const PoliciesPage = ({ location }) => {
             </h1>
             <div className={styles.section}>
               <Policy policyAddress={policyAddress} />
+            </div>
+            <h1>
+              {"authorizations"}
+            </h1>
+            <div className={styles.section}>
+              <Authz address={policyAddress} />
             </div>
           </div>
         ) : (

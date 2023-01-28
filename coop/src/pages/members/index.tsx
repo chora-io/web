@@ -3,6 +3,7 @@ import * as React from "react"
 import Main from "../../layouts/Main"
 import Seo from "../../components/SeoWrapper"
 
+import Authz from "../../components/Authz"
 import Member from "../../components/members/Member"
 import Members from "../../components/members/Members"
 
@@ -23,6 +24,12 @@ const MembersPage = ({ location }) => {
             </h1>
             <div className={styles.section}>
               <Member memberAddress={memberAddress} />
+            </div>
+            <h1>
+              {"authorizations"}
+            </h1>
+            <div className={styles.section}>
+              <Authz address={memberAddress} />
             </div>
           </div>
         ) : (

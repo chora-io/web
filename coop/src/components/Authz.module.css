@@ -5,24 +5,27 @@
   font-weight: 300 !important;
 }
 
-/* item */
+/* options */
 
-.item {
-  margin: 2em 0;
+.options {
+  border-bottom: 1px solid #333;
+  padding-bottom: 2em;
 }
 
-.item:first-child {
-  margin-top: 0;
-}
-
-.item:last-child {
-  margin-bottom: 0;
-}
-
-.item h3 {
+.options button {
+  background: none;
   color: var(--color-primary);
+  font-size: 1em;
+  margin-right: 2em;
 }
 
-.item p {
-  margin: 0.5em 0;
+.optionActive {
+  text-decoration: underline;
+  text-underline-offset: 0.5em;
+}
+
+/* content */
+
+.content {
+  padding-top: 2em;
 }

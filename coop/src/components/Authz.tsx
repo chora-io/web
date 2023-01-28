@@ -4,25 +4,29 @@ import { useContext, useEffect, useState } from "react"
 import { WalletContext } from "chora"
 import { choraTestnet } from "chora/utils/chains"
 
-import { formatTimestamp } from "chora/utils/timestamp"
+import AuthzGrant from "./AuthzGrant"
 
-import * as styles from "./PolicyAuthz.module.css"
+import * as styles from "./Authz.module.css"
 
-const queryPolicy = "cosmos/group/v1/group_policy_info"
-const serverUrl = "https://server.chora.io"
+const queryGrantsByGrantee = "cosmos/authz/v1beta1/grants/grantee"
+const queryGrantsByGranter = "cosmos/authz/v1beta1/grants/granter"
 
-const PolicyAuthz = ({ policyAddress }) => {
+const Authz = ({ address }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
+  // options
+  const [filter, setFilter] = useState<string>("grantee")
+
   // fetch error and results
   const [error, setError] = useState<string>("")
-  const [policy, setPolicy] = useState<any>(null)
-  const [metadata, setMetadata] = useState<any>(null)
+  const [grantsGrantee, setGrantsGrantee] = useState<any>(null)
+  const [grantsGranter, setGrantsGranter] = useState<any>(null)
 
   // fetch on load and value change
   useEffect(() => {
-    setPolicy(null)
+    setGrantsGrantee(null)
+    setGrantsGranter(null)
     setError("")
 
     // error if network is not chora-testnet-1
@@ -30,154 +34,87 @@ const PolicyAuthz = ({ policyAddress }) => {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch policy and metadata if network is chora-testnet-1
+    // fetch grants if network is chora-testnet-1
     if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
-      fetchPolicyAndMetadata().catch(err => {
+      fetchGrants().catch(err => {
         setError(err.message)
       })
     }
   }, [chainInfo])
 
-  // fetch policy and metadata asynchronously
-  const fetchPolicyAndMetadata = async () => {
+  // fetch grants asynchronously
+  const fetchGrants = async () => {
 
-    let iri: string
-
-    // fetch policies from selected network
-    await fetch(chainInfo.rest + "/" + queryPolicy + "/" + policyAddress)
+    // fetch grants by grantee from selected network
+    await fetch(chainInfo.rest + "/" + queryGrantsByGrantee + "/" + address)
       .then(res => res.json())
       .then(res => {
         if (res.code) {
           setError(res.message)
         } else {
-          setPolicy(res["info"])
-          iri = res["info"]["metadata"]
+          setGrantsGrantee(res["grants"])
         }
       })
 
-    // return if iri is empty or was never set
-    if (typeof iri === "undefined" || iri === "") {
-      setMetadata({ name: "NA", description: "NA" })
-      return
-    }
-
-    // fetch policy data from chora server
-    await fetch(serverUrl + "/" + iri)
+    // fetch grants by granter from selected network
+    await fetch(chainInfo.rest + "/" + queryGrantsByGranter + "/" + address)
       .then(res => res.json())
       .then(res => {
-        if (res.error) {
-          setError(res.error)
-          setMetadata(null)
-        } else if (res.context !== "https://schema.chora.io/contexts/group_policy.jsonld") {
-          setError("unsupported metadata schema")
-          setMetadata(null)
+        if (res.code) {
+          setError(res.message)
         } else {
-          setError("")
-          setMetadata(JSON.parse(res["jsonld"]))
+          setGrantsGranter(res["grants"])
         }
-      })
-      .catch(err => {
-        setError(err.message)
       })
   }
 
   return (
     <div className={styles.container}>
-      {!policy && !metadata && !error && (
-        <div>
+      <div className={styles.options}>
+        <button
+          className={filter === "grantee" ? styles.optionActive : null}
+          onClick={() => setFilter("grantee")}
+        >
+          {"grantee"}
+        </button>
+        <button
+          className={filter === "granter" ? styles.optionActive : null}
+          onClick={() => setFilter("granter")}
+        >
+          {"granter"}
+        </button>
+      </div>
+      {!grantsGrantee && !grantsGranter && !error && (
+        <div className={styles.content}>
           {"loading..."}
         </div>
       )}
-      {policy && metadata && !error && (
-        <div>
-          <div className={styles.item}>
-            <h3>
-              {"name"}
-            </h3>
-            <p>
-              {metadata["name"]}
-            </p>
-          </div>
-          <div className={styles.item}>
-            <h3>
-              {"description"}
-            </h3>
-            <p>
-              {metadata["description"]}
-            </p>
-          </div>
-          <div className={styles.item}>
-            <h3>
-              {"admin"}
-            </h3>
-            <p>
-              {policy["admin"]}
-            </p>
-          </div>
-          <div className={styles.item}>
-            <h3>
-              {"address"}
-            </h3>
-            <p>
-              {policy["address"]}
-            </p>
-          </div>
-          {policy["decision_policy"]["@type"] === "/cosmos.group.v1.ThresholdDecisionPolicy" && (
-            <div className={styles.item}>
-              <h3>
-                {"threshold"}
-              </h3>
-              <p>
-                {policy["decision_policy"]["threshold"]}
-              </p>
+      {filter === "grantee" && (
+        <div className={styles.content}>
+          {grantsGrantee && grantsGrantee.map((grant, i) => (
+            <AuthzGrant key={i} grant={grant} />
+          ))}
+          {grantsGrantee && grantsGrantee.length === 0 && (
+            <div>
+              {"no authorizations granted to this account"}
             </div>
           )}
-          {policy["decision_policy"]["@type"] === "/cosmos.group.v1.PercentageDecisionPolicy" && (
-            <div className={styles.item}>
-              <h3>
-                {"percentage"}
-              </h3>
-              <p>
-                {policy["decision_policy"]["percentage"]}
-              </p>
+        </div>
+      )}
+      {filter === "granter" && (
+        <div className={styles.content}>
+          {grantsGranter && grantsGranter.map((grant, i) => (
+            <AuthzGrant key={i} grant={grant} />
+          ))}
+          {grantsGranter && grantsGranter.length === 0 && (
+            <div>
+              {"no authorizations granted by this account"}
             </div>
           )}
-          <div className={styles.item}>
-            <h3>
-              {"voting period"}
-            </h3>
-            <p>
-              {policy["decision_policy"]["windows"]["voting_period"]}
-            </p>
-          </div>
-          <div className={styles.item}>
-            <h3>
-              {"min execution period"}
-            </h3>
-            <p>
-              {policy["decision_policy"]["windows"]["min_execution_period"]}
-            </p>
-          </div>
-          <div className={styles.item}>
-            <h3>
-              {"created at"}
-            </h3>
-            <p>
-              {formatTimestamp(policy["created_at"])}
-            </p>
-          </div>
-          <div className={styles.item}>
-            <h3>
-              {"version"}
-            </h3>
-            <p>
-              {policy["version"]}
-            </p>
-          </div>
         </div>
       )}
       {error && (
-        <div>
+        <div className={styles.content}>
           {error}
         </div>
       )}
@@ -185,4 +122,4 @@ const PolicyAuthz = ({ policyAddress }) => {
   )
 }
 
-export default PolicyAuthz
+export default Authz
