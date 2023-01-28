@@ -24,20 +24,22 @@ const FeegrantAllowance = ({ allowance }) => (
     </div>
     {allowance["allowance"]["@type"] === "/cosmos.feegrant.v1beta1.BasicAllowance" && (
       <>
-        <div className={styles.item}>
-          <h3>
-            {"spend limit"}
-          </h3>
-          <p>
-            {allowance["allowance"]["spend_limit"]["amount"] + allowance["allowance"]["spend_limit"]["denom"]}
-          </p>
-        </div>
+        {allowance["allowance"]["spend_limit"].map((spendLimit, i) => (
+          <div className={styles.item} key={i}>
+            <h3>
+              {"spend limit"}
+            </h3>
+            <p>
+              {spendLimit["amount"] + spendLimit["denom"]}
+            </p>
+          </div>
+        ))}
         <div className={styles.item}>
           <h3>
             {"expiration"}
           </h3>
           <p>
-            {formatTimestamp(allowance["expiration"])}
+            {formatTimestamp(allowance["allowance"]["expiration"])}
           </p>
         </div>
       </>

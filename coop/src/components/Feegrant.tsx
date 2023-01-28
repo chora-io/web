@@ -13,8 +13,6 @@ const queryAllowancesByGranter = "cosmos/feegrant/v1beta1/issued"
 
 const Feegrant = ({ address }) => {
 
-  console.log("address", address)
-
   const { chainInfo } = useContext(WalletContext)
 
   // options
