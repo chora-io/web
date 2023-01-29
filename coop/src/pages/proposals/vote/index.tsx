@@ -19,11 +19,9 @@ const VotePage = ({ location }) => {
           <h1>
             {"vote on proposal"}
           </h1>
-          <div className={styles.section}>
-            <VoteOnProposal
-              proposalId={proposalId}
-            />
-          </div>
+          <VoteOnProposal
+            proposalId={proposalId}
+          />
         </div>
       </div>
     </Main>

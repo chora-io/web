@@ -25,12 +25,8 @@ const ProposalsPage = ({ location }) => {
             <h1>
               {"group proposals"}
             </h1>
-            <div className={styles.section}>
-              <ProposalsNav />
-            </div>
-            <div className={styles.section}>
-              <Proposals />
-            </div>
+            <ProposalsNav />
+            <Proposals />
           </div>
         )}
         {proposalId && !voterAddress && (
@@ -38,19 +34,15 @@ const ProposalsPage = ({ location }) => {
             <h1>
               {"group proposal"}
             </h1>
-            <div className={styles.section}>
-              <Proposal
-                proposalId={proposalId}
-              />
-            </div>
+            <Proposal
+              proposalId={proposalId}
+            />
             <h1>
               {"group proposal votes"}
             </h1>
-            <div className={styles.section}>
-              <ProposalVotes
-                proposalId={proposalId}
-              />
-            </div>
+            <ProposalVotes
+              proposalId={proposalId}
+            />
           </div>
         )}
         {proposalId && voterAddress && (
@@ -58,12 +50,10 @@ const ProposalsPage = ({ location }) => {
             <h1>
               {"group proposal vote"}
             </h1>
-            <div className={styles.section}>
-              <ProposalVote
-                proposalId={proposalId}
-                voterAddress={voterAddress}
-              />
-            </div>
+            <ProposalVote
+              proposalId={proposalId}
+              voterAddress={voterAddress}
+            />
           </div>
         )}
       </div>

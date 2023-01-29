@@ -199,52 +199,54 @@ const SubmitProposal = () => {
   }
 
   return (
-    <>
-      <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <SelectAccount
-            id="proposal-policy"
-            label="proposal policy"
-            options={policies}
-            address={address}
-            setAddress={setAddress}
+    <div className={styles.box}>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <SelectAccount
+          id="proposal-policy"
+          label="proposal policy"
+          options={policies}
+          address={address}
+          setAddress={setAddress}
+        />
+        <InputString
+          id="proposal-name"
+          label="proposal name"
+          placeholder="New Proposal"
+          string={name}
+          setString={setName}
+        />
+        <InputString
+          id="proposal-description"
+          label="proposal description"
+          placeholder="A proposal for group members to vote on."
+          string={description}
+          setString={setDescription}
+        />
+        <SelectMessage
+          id="proposal-message"
+          label="proposal message"
+          setMessage={setMessage}
+        />
+        <SelectExecution
+          id="proposal-execution"
+          label="proposal execution"
+          execution={execution}
+          setExecution={setExecution}
+        />
+        <button type="submit">
+          {"submit"}
+        </button>
+      </form>
+      {(success || error) && (
+        <div className={styles.boxResultBelow}>
+          <ResultTx
+            error={error}
+            rest={chainInfo?.rest}
+            success={success}
           />
-          <InputString
-            id="proposal-name"
-            label="proposal name"
-            placeholder="New Proposal"
-            string={name}
-            setString={setName}
-          />
-          <InputString
-            id="proposal-description"
-            label="proposal description"
-            placeholder="A proposal for group members to vote on."
-            string={description}
-            setString={setDescription}
-          />
-          <SelectMessage
-            id="proposal-message"
-            label="proposal message"
-            setMessage={setMessage}
-          />
-          <SelectExecution
-            id="proposal-execution"
-            label="proposal execution"
-            execution={execution}
-            setExecution={setExecution}
-          />
-          <button type="submit">
-            {"submit"}
-          </button>
-        </form>
-      </div>
-      <ResultTx
-        error={error}
-        rest={chainInfo?.rest}
-        success={success}
-      />
-    </>
+        </div>
+      )}
+    </div>
   )
 }
 

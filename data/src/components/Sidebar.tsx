@@ -3,37 +3,46 @@ import { Link } from "gatsby"
 
 import * as styles from "./Sidebar.module.css"
 
-const Sidebar = () => {
-
-  const activeStyle = { fontWeight: "600" }
-
-  return (
-    <div className={styles.sidebar}>
-      <ul>
-        <li>
-          <Link to="/" activeStyle={activeStyle}>{"home"}</Link>
-        </li>
-        <li>
-          <Link to="/hash" activeStyle={activeStyle}>{"hash"}</Link>
-        </li>
-        <li>
-          <Link to="/store" activeStyle={activeStyle}>{"store"}</Link>
-        </li>
-        <li>
-          <Link to="/convert" activeStyle={activeStyle}>{"convert"}</Link>
-        </li>
-        <li>
-          <Link to="/anchor" activeStyle={activeStyle}>{"anchor"}</Link>
-        </li>
-        <li>
-          <Link to="/attest" activeStyle={activeStyle}>{"attest"}</Link>
-        </li>
-        <li>
-          <Link to="/register" activeStyle={activeStyle}>{"register"}</Link>
-        </li>
-      </ul>
-    </div>
-  )
-}
+const Sidebar = () => (
+  <div className={styles.sidebar}>
+    <ul>
+      <li>
+        <Link to="/" activeClassName={styles.active}>
+          {"home"}
+        </Link>
+      </li>
+      <li>
+        <Link to="/hash" activeClassName={styles.active}>
+          {"hash"}
+        </Link>
+      </li>
+      <li>
+        <Link to="/store" activeClassName={styles.active}>
+          {"store"}
+        </Link>
+      </li>
+      <li>
+        <Link to="/convert" activeClassName={styles.active}>
+          {"convert"}
+        </Link>
+      </li>
+      <li>
+        <Link to="/anchor" activeClassName={styles.active}>
+          {"anchor"}
+        </Link>
+      </li>
+      <li>
+        <Link to="/attest" activeClassName={styles.active}>
+          {"attest"}
+        </Link>
+      </li>
+      <li>
+        <Link to="/register" activeClassName={styles.active}>
+          {"register"}
+        </Link>
+      </li>
+    </ul>
+  </div>
+)
 
 export default Sidebar

@@ -82,7 +82,7 @@ const Group = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.box}>
       <div>
         {!group && !metadata && !error && (
           <div>
@@ -91,7 +91,7 @@ const Group = () => {
         )}
         {group && metadata && (
           <div>
-            <div className={styles.item}>
+            <div className={styles.boxText}>
               <h3>
                 {"name"}
               </h3>
@@ -99,7 +99,7 @@ const Group = () => {
                 {metadata["name"]}
               </p>
             </div>
-            <div className={styles.item}>
+            <div className={styles.boxText}>
               <h3>
                 {"description"}
               </h3>
@@ -107,7 +107,7 @@ const Group = () => {
                 {metadata["description"]}
               </p>
             </div>
-            <div className={styles.item}>
+            <div className={styles.boxText}>
               <h3>
                 {"admin"}
               </h3>
@@ -115,7 +115,7 @@ const Group = () => {
                 {group["admin"]}
               </p>
             </div>
-            <div className={styles.item}>
+            <div className={styles.boxText}>
               <h3>
                 {"created at"}
               </h3>
@@ -123,7 +123,7 @@ const Group = () => {
                 {formatTimestamp(group["created_at"])}
               </p>
             </div>
-            <div className={styles.item}>
+            <div className={styles.boxText}>
               <h3>
                 {"version"}
               </h3>

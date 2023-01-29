@@ -5,8 +5,8 @@ import { formatTimestamp } from "chora/utils/timestamp"
 import * as styles from "./AuthzGrant.module.css"
 
 const AuthzGrant = ({ grant }) => (
-  <div className={styles.container}>
-    <div className={styles.item}>
+  <div className={styles.boxItem}>
+    <div className={styles.boxText}>
       <h3>
         {"granter"}
       </h3>
@@ -14,7 +14,7 @@ const AuthzGrant = ({ grant }) => (
         {grant["granter"]}
       </p>
     </div>
-    <div className={styles.item}>
+    <div className={styles.boxText}>
       <h3>
         {"grantee"}
       </h3>
@@ -23,7 +23,7 @@ const AuthzGrant = ({ grant }) => (
       </p>
     </div>
     {grant["authorization"]["@type"] === "/cosmos.authz.v1beta1.GenericAuthorization" && (
-      <div className={styles.item}>
+      <div className={styles.boxText}>
         <h3>
           {"message"}
         </h3>
@@ -32,7 +32,7 @@ const AuthzGrant = ({ grant }) => (
         </p>
       </div>
     )}
-    <div className={styles.item}>
+    <div className={styles.boxText}>
       <h3>
         {"expiration"}
       </h3>

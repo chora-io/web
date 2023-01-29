@@ -152,22 +152,22 @@ const Proposals = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.options}>
+    <div className={styles.box}>
+      <div className={styles.boxOptions}>
         <button
-          className={filter === "submitted" ? styles.optionActive : null}
+          className={filter === "submitted" ? styles.boxOptionActive : null}
           onClick={() => setFilter("submitted")}
         >
           {"submitted"}
         </button>
         <button
-          className={filter === "accepted" ? styles.optionActive : null}
+          className={filter === "accepted" ? styles.boxOptionActive : null}
           onClick={() => setFilter("accepted")}
         >
           {"accepted"}
         </button>
         <button
-          className={filter === "rejected" ? styles.optionActive : null}
+          className={filter === "rejected" ? styles.boxOptionActive : null}
           onClick={() => setFilter("rejected")}
         >
           {"rejected"}
@@ -184,7 +184,7 @@ const Proposals = () => {
         )}
       </div>
       {!proposals && !error && (
-        <div className={styles.message}>
+        <div>
           {"loading..."}
         </div>
       )}
@@ -200,18 +200,18 @@ const Proposals = () => {
           proposal={proposal}
         />
       ))}
-      {!filtered && proposals && proposals.length === 0 && !error && (
-        <div className={styles.message}>
+      {!filtered && proposals && proposals.length === 0 && (
+        <div>
           {"no proposals found"}
         </div>
       )}
-      {filtered && filtered.length === 0 && !error && (
-        <div className={styles.message}>
+      {filtered && filtered.length === 0 && (
+        <div>
           {`no proposals with status ${filter}`}
         </div>
       )}
       {error && (
-        <div className={styles.message}>
+        <div>
           {error}
         </div>
       )}

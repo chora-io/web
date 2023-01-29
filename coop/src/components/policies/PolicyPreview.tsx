@@ -46,15 +46,10 @@ const GroupPolicy = ({ policy }) => {
   }
 
   return (
-    <div className={styles.container}>
-      {!policy && !metadata && !error && (
+    <div className={styles.boxItem}>
+      {policy && metadata && (
         <div>
-          {"loading..."}
-        </div>
-      )}
-      {policy && metadata && !error && (
-        <>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"name"}
             </h3>
@@ -62,7 +57,7 @@ const GroupPolicy = ({ policy }) => {
               {metadata["name"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"address"}
             </h3>
@@ -73,7 +68,7 @@ const GroupPolicy = ({ policy }) => {
           <Link to={`/policies/?address=${policy["address"]}`}>
             {"view policy"}
           </Link>
-        </>
+        </div>
       )}
       {error && (
         <div>

@@ -4,7 +4,7 @@ import { Link } from "gatsby"
 import * as styles from "./ProposalsNav.module.css"
 
 const ProposalsNav = () => (
-  <div className={styles.container}>
+  <div className={styles.box}>
     <Link to="/proposals/new">
       {"new proposal"}
     </Link>

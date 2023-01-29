@@ -13,9 +13,7 @@ const HomePage = () => (
         <h1>
           {"group information"}
         </h1>
-        <div className={styles.section}>
-          <Group />
-        </div>
+        <Group />
       </div>
     </div>
   </Main>

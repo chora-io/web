@@ -87,15 +87,15 @@ const Geonode = ({ nodeId }) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.box}>
       {!node && !metadata && !error && (
         <div>
           {"loading..."}
         </div>
       )}
-      {node && metadata && !error && (
+      {node && metadata && (
         <div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"name"}
             </h3>
@@ -103,7 +103,7 @@ const Geonode = ({ nodeId }) => {
               {metadata["name"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"description"}
             </h3>
@@ -111,7 +111,7 @@ const Geonode = ({ nodeId }) => {
               {metadata["description"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"curator"}
             </h3>
@@ -119,7 +119,7 @@ const Geonode = ({ nodeId }) => {
               {node["curator"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"latitude"}
             </h3>
@@ -127,7 +127,7 @@ const Geonode = ({ nodeId }) => {
               {metadata["geo"]["latitude"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"longitude"}
             </h3>

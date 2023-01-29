@@ -51,15 +51,15 @@ const Balance = ({ voucherId, address }) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.box}>
       {!balance && !error && (
         <div>
           {"loading..."}
         </div>
       )}
-      {balance && !error && (
-        <>
-          <div className={styles.item}>
+      {balance && (
+        <div className={styles.boxItem}>
+          <div className={styles.boxText}>
             <h3>
               {"address"}
             </h3>
@@ -67,7 +67,7 @@ const Balance = ({ voucherId, address }) => {
               {balance["address"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"total amount"}
             </h3>
@@ -76,8 +76,8 @@ const Balance = ({ voucherId, address }) => {
             </p>
           </div>
           {balance["amounts"].map(balance => (
-            <div className={styles.balance} key={balance["expiration"]}>
-              <div className={styles.item}>
+            <div className={styles.boxItemSub} key={balance["expiration"]}>
+              <div className={styles.boxText}>
                 <h3>
                   {"amount"}
                 </h3>
@@ -85,7 +85,7 @@ const Balance = ({ voucherId, address }) => {
                   {balance["amount"]}
                 </p>
               </div>
-              <div className={styles.item}>
+              <div className={styles.boxText}>
                 <h3>
                   {"expiration"}
                 </h3>
@@ -95,7 +95,7 @@ const Balance = ({ voucherId, address }) => {
               </div>
             </div>
           ))}
-        </>
+        </div>
       )}
       {error && (
         <div>

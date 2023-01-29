@@ -46,6 +46,7 @@ p {
 
 a, a:active {
   color: var(--color-primary);
+  font-weight: 400;
   text-decoration: none;
   transition: var(--transition);
 }
@@ -58,6 +59,8 @@ button {
   background: var(--color-primary);
   border: none;
   border-radius: 1em;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1em;
   transition: var(--transition);
 }
 

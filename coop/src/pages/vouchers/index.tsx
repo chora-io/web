@@ -24,9 +24,7 @@ const VouchersPage = ({ location }) => {
             <h1>
               {"vouchers"}
             </h1>
-            <div className={styles.section}>
-              <Vouchers />
-            </div>
+            <Vouchers />
           </div>
         )}
         {voucherId && !address && (
@@ -34,19 +32,15 @@ const VouchersPage = ({ location }) => {
             <h1>
               {"voucher"}
             </h1>
-            <div className={styles.section}>
-              <Voucher
-                voucherId={voucherId}
-              />
-            </div>
+            <Voucher
+              voucherId={voucherId}
+            />
             <h1>
               {"balances"}
             </h1>
-            <div className={styles.section}>
-              <Balances
-                voucherId={voucherId}
-              />
-            </div>
+            <Balances
+              voucherId={voucherId}
+            />
           </div>
         )}
         {voucherId && address && (
@@ -54,12 +48,10 @@ const VouchersPage = ({ location }) => {
             <h1>
               {"balance"}
             </h1>
-            <div className={styles.section}>
-              <Balance
-                voucherId={voucherId}
-                address={address}
-              />
-            </div>
+            <Balance
+              voucherId={voucherId}
+              address={address}
+            />
           </div>
         )}
       </div>

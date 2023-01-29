@@ -1,34 +1,7 @@
-/* container */
-
-.container {
-  border-bottom: 1px solid #333;
-  padding: 2em 0;
+.box-item {
+  composes: box-item from "../../styles/box.css";
 }
 
-.container:first-child {
-  padding-top: 0;
-}
-
-.container:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-/* item */
-
-.item {
-  margin: 2em 0;
-}
-
-.item:first-child,
-.item:last-child {
-  margin: 0;
-}
-
-.item h3 {
-  color: var(--color-primary);
-}
-
-.item p {
-  margin: 0.5em 0;
+.box-text {
+  composes: box-text from "../../styles/box.css";
 }

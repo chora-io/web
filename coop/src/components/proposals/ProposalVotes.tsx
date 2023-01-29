@@ -73,15 +73,15 @@ const ProposalVotes = ({ proposalId }) => {
   )
 
   return (
-    <div className={styles.container}>
+    <div className={styles.box}>
       {!votes && !error && (
         <div>
           {"loading..."}
         </div>
       )}
-      {votes && !error && votes.map(vote => (
-        <div className={styles.votes} key={vote["voter"]}>
-          <div className={styles.item}>
+      {votes && votes.map(vote => (
+        <div className={styles.boxItem} key={vote["voter"]}>
+          <div className={styles.boxText}>
             <h3>
               {"voter"}
             </h3>
@@ -89,7 +89,7 @@ const ProposalVotes = ({ proposalId }) => {
               {vote["voter"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"option"}
             </h3>
@@ -102,7 +102,7 @@ const ProposalVotes = ({ proposalId }) => {
           </Link>
         </div>
       ))}
-      {votes && votes.length === 0 && !error && (
+      {votes && votes.length === 0 && (
         <div>
           {votesFinalized ? "votes have been finalized and removed from state" : "no votes found"}
         </div>

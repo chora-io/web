@@ -84,15 +84,15 @@ const Member = ({ memberAddress }) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.box}>
       {!member && !metadata && !error && (
         <div>
           {"loading..."}
         </div>
       )}
-      {member && metadata && !error && (
+      {member && metadata && (
         <div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"name"}
             </h3>
@@ -100,7 +100,7 @@ const Member = ({ memberAddress }) => {
               {metadata["name"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"address"}
             </h3>
@@ -108,7 +108,7 @@ const Member = ({ memberAddress }) => {
               {member["address"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"added at"}
             </h3>
@@ -116,7 +116,7 @@ const Member = ({ memberAddress }) => {
               {formatTimestamp(member["added_at"])}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"weight"}
             </h3>

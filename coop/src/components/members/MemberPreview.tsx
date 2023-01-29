@@ -46,42 +46,35 @@ const MemberPreview = ({ member }) => {
   }
 
   return (
-    <div className={styles.container}>
-      <div>
-        {!member && !metadata && !error && (
-          <div>
-            {"loading..."}
+    <div className={styles.boxItem}>
+      {member && metadata && (
+        <div>
+          <div className={styles.boxText}>
+            <h3>
+              {"name"}
+            </h3>
+            <p>
+              {metadata["name"]}
+            </p>
           </div>
-        )}
-        {member && metadata && !error && (
-          <div>
-            <div className={styles.item}>
-              <h3>
-                {"name"}
-              </h3>
-              <p>
-                {metadata["name"]}
-              </p>
-            </div>
-            <div className={styles.item}>
-              <h3>
-                {"address"}
-              </h3>
-              <p>
-                {member["address"]}
-              </p>
-            </div>
-            <Link to={`/members/?address=${member["address"]}`}>
-              {"view member"}
-            </Link>
+          <div className={styles.boxText}>
+            <h3>
+              {"address"}
+            </h3>
+            <p>
+              {member["address"]}
+            </p>
           </div>
-        )}
-        {error && (
-          <div>
-            {error}
-          </div>
-        )}
-      </div>
+          <Link to={`/members/?address=${member["address"]}`}>
+            {"view member"}
+          </Link>
+        </div>
+      )}
+      {error && (
+        <div>
+          {error}
+        </div>
+      )}
     </div>
   )
 }

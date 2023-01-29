@@ -82,15 +82,15 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.box}>
       {!vote && !metadata && !error && (
         <div>
           {"loading..."}
         </div>
       )}
-      {vote && metadata && !error && (
-        <div className={styles.vote}>
-          <div className={styles.item}>
+      {vote && metadata && (
+        <div>
+          <div className={styles.boxText}>
             <h3>
               {"voter"}
             </h3>
@@ -98,7 +98,7 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
               {vote["voter"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"option"}
             </h3>
@@ -106,7 +106,7 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
               {vote["option"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"reason"}
             </h3>
@@ -114,7 +114,7 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
               {metadata["reason"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"submit time"}
             </h3>

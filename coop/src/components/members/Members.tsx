@@ -77,8 +77,8 @@ const Members = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.options}>
+    <div className={styles.box}>
+      <div className={styles.boxOptions}>
         {sort === "descending" && (
           <button onClick={() => setSort("ascending")}>
             {"sort by newest"}
@@ -91,7 +91,7 @@ const Members = () => {
         )}
       </div>
       {!members && !error && (
-        <div className={styles.message}>
+        <div>
           {"loading..."}
         </div>
       )}
@@ -102,7 +102,7 @@ const Members = () => {
         />
       ))}
       {error && (
-        <div className={styles.message}>
+        <div>
           {error}
         </div>
       )}

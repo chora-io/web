@@ -19,3 +19,9 @@
   font-weight: 400;
   padding: 1em;
 }
+
+/* active */
+
+.active {
+  font-weight: 600;
+}

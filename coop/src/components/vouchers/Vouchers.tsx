@@ -83,7 +83,7 @@ const Vouchers = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.box}>
       {!vouchers && !error && (
         <div>
           {"loading..."}
@@ -95,7 +95,7 @@ const Vouchers = () => {
           voucher={voucher}
         />
       ))}
-      {vouchers && vouchers.length === 0 && !error && (
+      {vouchers && vouchers.length === 0 && (
         <div>
           {"no vouchers found"}
         </div>

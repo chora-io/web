@@ -14,9 +14,7 @@ const ProposalsNewPage = () => (
         <h1>
           {"new proposal"}
         </h1>
-        <div className={styles.section}>
-          <SubmitProposal />
-        </div>
+        <SubmitProposal />
       </div>
     </div>
   </Main>

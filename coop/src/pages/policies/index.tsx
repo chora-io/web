@@ -23,30 +23,28 @@ const PoliciesPage = ({ location }) => {
             <h1>
               {"group policy"}
             </h1>
-            <div className={styles.section}>
-              <Policy policyAddress={policyAddress} />
-            </div>
+            <Policy
+              policyAddress={policyAddress}
+            />
             <h1>
               {"authorizations"}
             </h1>
-            <div className={styles.section}>
-              <Authz address={policyAddress} />
-            </div>
+            <Authz
+              address={policyAddress}
+            />
             <h1>
               {"fee allowances"}
             </h1>
-            <div className={styles.section}>
-              <Feegrant address={policyAddress} />
-            </div>
+            <Feegrant
+              address={policyAddress}
+            />
           </div>
         ) : (
           <div>
             <h1>
               {"group policies"}
             </h1>
-            <div className={styles.section}>
-              <Policies />
-            </div>
+            <Policies />
           </div>
         )}
       </div>

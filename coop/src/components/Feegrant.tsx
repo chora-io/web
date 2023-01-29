@@ -69,30 +69,33 @@ const Feegrant = ({ address }) => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.options}>
+    <div className={styles.box}>
+      <div className={styles.boxOptions}>
         <button
-          className={filter === "grantee" ? styles.optionActive : null}
+          className={filter === "grantee" ? styles.boxOptionActive : null}
           onClick={() => setFilter("grantee")}
         >
           {"grantee"}
         </button>
         <button
-          className={filter === "granter" ? styles.optionActive : null}
+          className={filter === "granter" ? styles.boxOptionActive : null}
           onClick={() => setFilter("granter")}
         >
           {"granter"}
         </button>
       </div>
       {!allowancesGrantee && !allowancesGranter && !error && (
-        <div className={styles.content}>
+        <div>
           {"loading..."}
         </div>
       )}
       {filter === "grantee" && (
-        <div className={styles.content}>
+        <div>
           {allowancesGrantee && allowancesGrantee.map((allowance, i) => (
-            <FeegrantAllowance key={i} allowance={allowance} />
+            <FeegrantAllowance
+              key={i}
+              allowance={allowance}
+            />
           ))}
           {allowancesGrantee && allowancesGrantee.length === 0 && (
             <div>
@@ -102,9 +105,12 @@ const Feegrant = ({ address }) => {
         </div>
       )}
       {filter === "granter" && (
-        <div className={styles.content}>
+        <div>
           {allowancesGranter && allowancesGranter.map((allowance, i) => (
-            <FeegrantAllowance key={i} allowance={allowance} />
+            <FeegrantAllowance
+              key={i}
+              allowance={allowance}
+            />
           ))}
           {allowancesGranter && allowancesGranter.length === 0 && (
             <div>
@@ -114,7 +120,7 @@ const Feegrant = ({ address }) => {
         </div>
       )}
       {error && (
-        <div className={styles.content}>
+        <div>
           {error}
         </div>
       )}

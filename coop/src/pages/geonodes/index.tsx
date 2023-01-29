@@ -21,20 +21,16 @@ const GeonodesPage = ({ location }) => {
             <h1>
               {"geonode"}
             </h1>
-            <div className={styles.section}>
-              <Geonode
-                nodeId={nodeId}
-              />
-            </div>
+            <Geonode
+              nodeId={nodeId}
+            />
           </div>
         ) : (
           <div>
             <h1>
               {"geonodes"}
             </h1>
-            <div className={styles.section}>
-              <Geonodes />
-            </div>
+            <Geonodes />
           </div>
         )}
       </div>

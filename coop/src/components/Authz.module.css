@@ -1,31 +1,11 @@
-/* container */
-
-.container {
-  color: #FFF !important;
-  font-weight: 300 !important;
+.box {
+  composes: box from "../styles/box.css";
 }
 
-/* options */
-
-.options {
-  border-bottom: 1px solid #333;
-  padding-bottom: 2em;
+.box-options {
+  composes: box-options from "../styles/box.css";
 }
 
-.options button {
-  background: none;
-  color: var(--color-primary);
-  font-size: 1em;
-  margin-right: 2em;
-}
-
-.optionActive {
-  text-decoration: underline;
-  text-underline-offset: 0.5em;
-}
-
-/* content */
-
-.content {
-  padding-top: 2em;
+.box-option-active {
+  composes: box-option-active from "../styles/box.css";
 }

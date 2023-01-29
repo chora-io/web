@@ -80,15 +80,15 @@ const Voucher = ({ voucherId }) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.box}>
       {!voucher && !metadata && !error && (
         <div>
           {"loading..."}
         </div>
       )}
-      {voucher && metadata && !error && (
+      {voucher && metadata && (
         <div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"name"}
             </h3>
@@ -96,7 +96,7 @@ const Voucher = ({ voucherId }) => {
               {metadata["name"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"description"}
             </h3>
@@ -104,7 +104,7 @@ const Voucher = ({ voucherId }) => {
               {metadata["description"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"issuer"}
             </h3>

@@ -5,8 +5,8 @@ import { formatTimestamp } from "chora/utils/timestamp"
 import * as styles from "./FeegrantAllowance.module.css"
 
 const FeegrantAllowance = ({ allowance }) => (
-  <div className={styles.container}>
-    <div className={styles.item}>
+  <div className={styles.boxItem}>
+    <div className={styles.boxText}>
       <h3>
         {"granter"}
       </h3>
@@ -14,7 +14,7 @@ const FeegrantAllowance = ({ allowance }) => (
         {allowance["granter"]}
       </p>
     </div>
-    <div className={styles.item}>
+    <div className={styles.boxText}>
       <h3>
         {"grantee"}
       </h3>
@@ -25,7 +25,7 @@ const FeegrantAllowance = ({ allowance }) => (
     {allowance["allowance"]["@type"] === "/cosmos.feegrant.v1beta1.BasicAllowance" && (
       <>
         {allowance["allowance"]["spend_limit"].map((spendLimit, i) => (
-          <div className={styles.item} key={i}>
+          <div className={styles.boxText} key={i}>
             <h3>
               {"spend limit"}
             </h3>
@@ -34,7 +34,7 @@ const FeegrantAllowance = ({ allowance }) => (
             </p>
           </div>
         ))}
-        <div className={styles.item}>
+        <div className={styles.boxText}>
           <h3>
             {"expiration"}
           </h3>

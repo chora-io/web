@@ -116,39 +116,41 @@ const VoteOnProposal = ({ proposalId }) => {
   }
 
   return (
-    <>
-      <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <SelectVote
-            id="vote-option"
-            label="vote option"
-            vote={vote}
-            setVote={setVote}
+    <div className={styles.box}>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <SelectVote
+          id="vote-option"
+          label="vote option"
+          vote={vote}
+          setVote={setVote}
+        />
+        <InputString
+          id="vote-reason"
+          label="vote reason"
+          placeholder="This proposal needs to be amended and resubmitted."
+          string={reason}
+          setString={setReason}
+        />
+        <SelectExecution
+          id="proposal-execution"
+          label="proposal execution"
+          execution={execution}
+          setExecution={setExecution}
+        />
+        <button type="submit">
+          {"submit"}
+        </button>
+      </form>
+      {(success || error) && (
+        <div className={styles.boxResultBelow}>
+          <ResultTx
+            error={error}
+            rest={chainInfo?.rest}
+            success={success}
           />
-          <InputString
-            id="vote-reason"
-            label="vote reason"
-            placeholder="This proposal needs to be amended and resubmitted."
-            string={reason}
-            setString={setReason}
-          />
-          <SelectExecution
-            id="proposal-execution"
-            label="proposal execution"
-            execution={execution}
-            setExecution={setExecution}
-          />
-          <button type="submit">
-            {"submit"}
-          </button>
-        </form>
-      </div>
-      <ResultTx
-        error={error}
-        rest={chainInfo?.rest}
-        success={success}
-      />
-    </>
+        </div>
+      )}
+    </div>
   )
 }
 

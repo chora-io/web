@@ -47,42 +47,35 @@ const GeonodePreview = ({ node }) => {
   }
 
   return (
-    <div className={styles.container}>
-      <div>
-        {!node && !metadata && !error && (
-          <div>
-            {"loading..."}
+    <div className={styles.boxItem}>
+      {node && metadata && (
+        <div>
+          <div className={styles.boxText}>
+            <h3>
+              {"name"}
+            </h3>
+            <p>
+              {metadata["name"]}
+            </p>
           </div>
-        )}
-        {node && metadata && !error && (
-          <div>
-            <div className={styles.item}>
-              <h3>
-                {"name"}
-              </h3>
-              <p>
-                {metadata["name"]}
-              </p>
-            </div>
-            <div className={styles.item}>
-              <h3>
-                {"curator"}
-              </h3>
-              <p>
-                {node["curator"]}
-              </p>
-            </div>
-            <Link to={`/geonodes/?id=${node["id"]}`}>
-              {"view node"}
-            </Link>
+          <div className={styles.boxText}>
+            <h3>
+              {"curator"}
+            </h3>
+            <p>
+              {node["curator"]}
+            </p>
           </div>
-        )}
-        {error && (
-          <div>
-            {error}
-          </div>
-        )}
-      </div>
+          <Link to={`/geonodes/?id=${node["id"]}`}>
+            {"view node"}
+          </Link>
+        </div>
+      )}
+      {error && (
+        <div>
+          {error}
+        </div>
+      )}
     </div>
   )
 }

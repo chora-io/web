@@ -1,43 +1,11 @@
+.box {
+  composes: box from "../../styles/box.css";
+}
+
+.box-result-below {
+  composes: box-result-below from "../../styles/box.css";
+}
+
 .form {
-    composes: form from "../../styles/form.css";
-}
-
-/* vote */
-
-.vote {
-  border-bottom: 1px solid #333;
-  color: #FFF !important;
-  font-weight: 300 !important;
-  padding: 2em 0;
-}
-
-.vote:first-child {
-  padding-top: 0;
-}
-
-.vote:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-/* item */
-
-.item {
-  margin: 2em 0;
-}
-
-.item:first-child {
-  margin-top: 0;
-}
-
-.item:last-child {
-  margin-bottom: 0;
-}
-
-.item h3 {
-  color: var(--color-primary);
-}
-
-.item p {
-  margin: 0.5em 0;
+  composes: form from "../../styles/form.css";
 }

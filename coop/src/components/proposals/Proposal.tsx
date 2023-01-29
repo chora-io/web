@@ -129,15 +129,15 @@ const Proposal = ({ proposalId }) => {
   )
 
   return (
-    <div className={styles.container}>
+    <div className={styles.box}>
       {!proposal && !metadata && !error && (
         <div>
           {"loading..."}
         </div>
       )}
-      {proposal && metadata && !error && (
+      {proposal && metadata && (
         <div>
-          <div className={styles.options}>
+          <div className={styles.boxOptions}>
             {!votesFinalized && (
               <Link to={`/proposals/vote/?id=${proposalId}`}>
                 {"vote on proposal"}
@@ -155,7 +155,7 @@ const Proposal = ({ proposalId }) => {
             )}
           </div>
           {(execSuccess || execError) && (
-            <div className={styles.optionResponse}>
+            <div className={styles.boxResultAbove}>
               <ResultTx
                 error={execError}
                 rest={chainInfo.rest}
@@ -163,7 +163,7 @@ const Proposal = ({ proposalId }) => {
               />
             </div>
           )}
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"status"}
             </h3>
@@ -171,7 +171,7 @@ const Proposal = ({ proposalId }) => {
               {proposal["status"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"name"}
             </h3>
@@ -179,7 +179,7 @@ const Proposal = ({ proposalId }) => {
               {metadata["name"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"description"}
             </h3>
@@ -188,7 +188,7 @@ const Proposal = ({ proposalId }) => {
             </p>
           </div>
           {proposal["proposers"].length === 1 && (
-            <div className={styles.item}>
+            <div className={styles.boxText}>
                <h3>
                 {"proposer"}
               </h3>
@@ -198,7 +198,7 @@ const Proposal = ({ proposalId }) => {
             </div>
           )}
           {proposal["proposers"].length > 1 && (
-            <div className={styles.item}>
+            <div className={styles.boxText}>
                <h3>
                 {"proposers"}
               </h3>
@@ -209,7 +209,7 @@ const Proposal = ({ proposalId }) => {
               ))}
             </div>
           )}
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"group policy address"}
             </h3>
@@ -217,7 +217,7 @@ const Proposal = ({ proposalId }) => {
               {proposal["group_policy_address"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"submit time"}
             </h3>
@@ -225,7 +225,7 @@ const Proposal = ({ proposalId }) => {
               {formatTimestamp(proposal["submit_time"])}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"voting period end"}
             </h3>
@@ -233,7 +233,7 @@ const Proposal = ({ proposalId }) => {
               {formatTimestamp(proposal["voting_period_end"])}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"messages"}
             </h3>
@@ -251,8 +251,8 @@ const Proposal = ({ proposalId }) => {
             )}
           </div>
           {votesFinalized && (
-            <>
-              <div className={styles.item}>
+            <div>
+              <div className={styles.boxText}>
                 <h3>
                   {"final tally yes"}
                 </h3>
@@ -260,7 +260,7 @@ const Proposal = ({ proposalId }) => {
                   {proposal["final_tally_result"]["yes_count"]}
                 </p>
               </div>
-              <div className={styles.item}>
+              <div className={styles.boxText}>
                 <h3>
                   {"final tally abstain"}
                 </h3>
@@ -268,7 +268,7 @@ const Proposal = ({ proposalId }) => {
                   {proposal["final_tally_result"]["abstain_count"]}
                 </p>
               </div>
-              <div className={styles.item}>
+              <div className={styles.boxText}>
                 <h3>
                   {"final tally no"}
                 </h3>
@@ -276,7 +276,7 @@ const Proposal = ({ proposalId }) => {
                   {proposal["final_tally_result"]["no_count"]}
                 </p>
               </div>
-              <div className={styles.item}>
+              <div className={styles.boxText}>
                 <h3>
                   {"final tally no with veto"}
                 </h3>
@@ -284,7 +284,7 @@ const Proposal = ({ proposalId }) => {
                   {proposal["final_tally_result"]["no_with_veto_count"]}
                 </p>
               </div>
-              <div className={styles.item}>
+              <div className={styles.boxText}>
                 <h3>
                   {"executor result"}
                 </h3>
@@ -292,9 +292,9 @@ const Proposal = ({ proposalId }) => {
                   {proposal["executor_result"]}
                 </p>
               </div>
-            </>
+            </div>
           )}
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"group version"}
             </h3>
@@ -302,7 +302,7 @@ const Proposal = ({ proposalId }) => {
               {proposal["group_version"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"group policy version"}
             </h3>

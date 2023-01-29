@@ -1,28 +1,7 @@
-/* container */
-
-.container {
-  color: #FFF !important;
-  font-weight: 300 !important;
+.box {
+  composes: box from "../../styles/box.css";
 }
 
-/* item */
-
-.item {
-  margin: 2em 0;
-}
-
-.item:first-child {
-  margin-top: 0;
-}
-
-.item:last-child {
-  margin-bottom: 0;
-}
-
-.item h3 {
-  color: var(--color-primary);
-}
-
-.item p {
-  margin: 0.5em 0;
+.box-text {
+  composes: box-text from "../../styles/box.css";
 }

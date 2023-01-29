@@ -1,26 +1,7 @@
-/* container */
-
-.container {
-  color: #FFF !important;
-  font-weight: 300 !important;
+.box {
+  composes: box from "../../styles/box.css";
 }
 
-/* options */
-
-.options {
-  border-bottom: 1px solid #333;
-  padding-bottom: 2em;
-}
-
-.options button {
-  background: none;
-  color: var(--color-primary);
-  font-size: 1em;
-  margin-right: 2em;
-}
-
-/* message */
-
-.message {
-  padding-top: 2em;
+.box-options {
+  composes: box-options from "../../styles/box.css";
 }

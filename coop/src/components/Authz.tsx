@@ -69,30 +69,33 @@ const Authz = ({ address }) => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.options}>
+    <div className={styles.box}>
+      <div className={styles.boxOptions}>
         <button
-          className={filter === "grantee" ? styles.optionActive : null}
+          className={filter === "grantee" ? styles.boxOptionActive : null}
           onClick={() => setFilter("grantee")}
         >
           {"grantee"}
         </button>
         <button
-          className={filter === "granter" ? styles.optionActive : null}
+          className={filter === "granter" ? styles.boxOptionActive : null}
           onClick={() => setFilter("granter")}
         >
           {"granter"}
         </button>
       </div>
       {!grantsGrantee && !grantsGranter && !error && (
-        <div className={styles.content}>
+        <div>
           {"loading..."}
         </div>
       )}
       {filter === "grantee" && (
-        <div className={styles.content}>
+        <div>
           {grantsGrantee && grantsGrantee.map((grant, i) => (
-            <AuthzGrant key={i} grant={grant} />
+            <AuthzGrant
+              key={i}
+              grant={grant}
+            />
           ))}
           {grantsGrantee && grantsGrantee.length === 0 && (
             <div>
@@ -102,9 +105,12 @@ const Authz = ({ address }) => {
         </div>
       )}
       {filter === "granter" && (
-        <div className={styles.content}>
+        <div>
           {grantsGranter && grantsGranter.map((grant, i) => (
-            <AuthzGrant key={i} grant={grant} />
+            <AuthzGrant
+              key={i}
+              grant={grant}
+            />
           ))}
           {grantsGranter && grantsGranter.length === 0 && (
             <div>
@@ -114,7 +120,7 @@ const Authz = ({ address }) => {
         </div>
       )}
       {error && (
-        <div className={styles.content}>
+        <div>
           {error}
         </div>
       )}

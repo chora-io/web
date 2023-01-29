@@ -46,15 +46,15 @@ const ProposalPreview = ({ proposal }) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.boxItem}>
       {!proposal && !metadata && !error && (
         <div>
           {"loading..."}
         </div>
       )}
-      {proposal && metadata && !error && (
-        <>
-          <div className={styles.item}>
+      {proposal && metadata && (
+        <div>
+          <div className={styles.boxText}>
             <h3>
               {"status"}
             </h3>
@@ -62,7 +62,7 @@ const ProposalPreview = ({ proposal }) => {
               {proposal["status"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"name"}
             </h3>
@@ -73,7 +73,7 @@ const ProposalPreview = ({ proposal }) => {
           <Link to={`/proposals/?id=${proposal["id"]}`}>
             {"view proposal"}
           </Link>
-        </>
+        </div>
       )}
       {error && (
         <div>

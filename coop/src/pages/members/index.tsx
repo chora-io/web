@@ -23,30 +23,28 @@ const MembersPage = ({ location }) => {
             <h1>
               {"group member"}
             </h1>
-            <div className={styles.section}>
-              <Member memberAddress={memberAddress} />
-            </div>
+            <Member
+              memberAddress={memberAddress}
+            />
             <h1>
               {"authorizations"}
             </h1>
-            <div className={styles.section}>
-              <Authz address={memberAddress} />
-            </div>
+            <Authz
+              address={memberAddress}
+            />
             <h1>
               {"fee allowances"}
             </h1>
-            <div className={styles.section}>
-              <Feegrant address={memberAddress} />
-            </div>
+            <Feegrant
+              address={memberAddress}
+            />
           </div>
         ) : (
           <div>
             <h1>
               {"group members"}
             </h1>
-            <div className={styles.section}>
-              <Members />
-            </div>
+            <Members />
           </div>
         )}
       </div>

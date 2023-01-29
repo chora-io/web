@@ -46,42 +46,40 @@ const VoucherPreview = ({ voucher }) => {
   }
 
   return (
-    <div className={styles.container}>
-      <div>
-        {!voucher && !metadata && !error && (
-          <div>
-            {"loading..."}
+    <div className={styles.boxItem}>
+      {!voucher && !metadata && !error && (
+        <div>
+          {"loading..."}
+        </div>
+      )}
+      {voucher && metadata && (
+        <div>
+          <div className={styles.boxText}>
+            <h3>
+              {"name"}
+            </h3>
+            <p>
+              {metadata["name"]}
+            </p>
           </div>
-        )}
-        {voucher && metadata && !error && (
-          <div>
-            <div className={styles.item}>
-              <h3>
-                {"name"}
-              </h3>
-              <p>
-                {metadata["name"]}
-              </p>
-            </div>
-            <div className={styles.item}>
-              <h3>
-                {"issuer"}
-              </h3>
-              <p>
-                {voucher["issuer"]}
-              </p>
-            </div>
-            <Link to={`/vouchers/?id=${voucher["id"]}`}>
-              {"view voucher"}
-            </Link>
+          <div className={styles.boxText}>
+            <h3>
+              {"issuer"}
+            </h3>
+            <p>
+              {voucher["issuer"]}
+            </p>
           </div>
-        )}
-        {error && (
-          <div>
-            {error}
-          </div>
-        )}
-      </div>
+          <Link to={`/vouchers/?id=${voucher["id"]}`}>
+            {"view voucher"}
+          </Link>
+        </div>
+      )}
+      {error && (
+        <div>
+          {error}
+        </div>
+      )}
     </div>
   )
 }

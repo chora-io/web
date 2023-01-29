@@ -82,15 +82,15 @@ const Policy = ({ policyAddress }) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.box}>
       {!policy && !metadata && !error && (
         <div>
           {"loading..."}
         </div>
       )}
-      {policy && metadata && !error && (
+      {policy && metadata && (
         <div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"name"}
             </h3>
@@ -98,7 +98,7 @@ const Policy = ({ policyAddress }) => {
               {metadata["name"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"description"}
             </h3>
@@ -106,7 +106,7 @@ const Policy = ({ policyAddress }) => {
               {metadata["description"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"admin"}
             </h3>
@@ -114,7 +114,7 @@ const Policy = ({ policyAddress }) => {
               {policy["admin"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"address"}
             </h3>
@@ -123,7 +123,7 @@ const Policy = ({ policyAddress }) => {
             </p>
           </div>
           {policy["decision_policy"]["@type"] === "/cosmos.group.v1.ThresholdDecisionPolicy" && (
-            <div className={styles.item}>
+            <div className={styles.boxText}>
               <h3>
                 {"threshold"}
               </h3>
@@ -133,7 +133,7 @@ const Policy = ({ policyAddress }) => {
             </div>
           )}
           {policy["decision_policy"]["@type"] === "/cosmos.group.v1.PercentageDecisionPolicy" && (
-            <div className={styles.item}>
+            <div className={styles.boxText}>
               <h3>
                 {"percentage"}
               </h3>
@@ -142,7 +142,7 @@ const Policy = ({ policyAddress }) => {
               </p>
             </div>
           )}
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"voting period"}
             </h3>
@@ -150,7 +150,7 @@ const Policy = ({ policyAddress }) => {
               {policy["decision_policy"]["windows"]["voting_period"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"min execution period"}
             </h3>
@@ -158,7 +158,7 @@ const Policy = ({ policyAddress }) => {
               {policy["decision_policy"]["windows"]["min_execution_period"]}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"created at"}
             </h3>
@@ -166,7 +166,7 @@ const Policy = ({ policyAddress }) => {
               {formatTimestamp(policy["created_at"])}
             </p>
           </div>
-          <div className={styles.item}>
+          <div className={styles.boxText}>
             <h3>
               {"version"}
             </h3>

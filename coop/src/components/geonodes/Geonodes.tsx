@@ -81,7 +81,7 @@ const Geonodes = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.box}>
       {!nodes && !error && (
         <div>
           {"loading..."}
@@ -93,7 +93,7 @@ const Geonodes = () => {
           node={node}
         />
       ))}
-      {nodes && nodes.length === 0 && !error && (
+      {nodes && nodes.length === 0 && (
         <div>
           {"no nodes found"}
         </div>

@@ -1,6 +1,3 @@
-/* container */
-
-.container {
-  color: #FFF !important;
-  font-weight: 400 !important;
+.box {
+  composes: box from "../../styles/box.css";
 }
