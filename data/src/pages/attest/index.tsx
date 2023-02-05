@@ -14,30 +14,10 @@ const AttestPage = () => (
   <Main>
     <div className={styles.page}>
       <div>
-        <div className={styles.section}>
-          <div>
-            {"attest to data"}
-          </div>
-          <MsgAttest />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search data attestations by attestor"}
-          </div>
-          <QueryAttestationsByAttestor />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search data attestations by iri"}
-          </div>
-          <QueryAttestationsByIRI />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search data attestations by content hash"}
-          </div>
-          <QueryAttestationsByHash />
-        </div>
+        <MsgAttest />
+        <QueryAttestationsByAttestor />
+        <QueryAttestationsByIRI />
+        <QueryAttestationsByHash />
       </div>
     </div>
   </Main>

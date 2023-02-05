@@ -42,24 +42,30 @@ const GetData = () => {
   }
 
   return (
-    <>
-      <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <InputIRI
-            network={network}
-            iri={iri}
-            setIri={setIri}
-          />
-          <button type="submit">
-            {"get data"}
-          </button>
-        </form>
+    <div className={styles.box}>
+      <div className={styles.boxHeader}>
+        <h2>
+          {"get data"}
+        </h2>
+        <p>
+          {"get a json-ld document by iri from the chora server"}
+        </p>
       </div>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <InputIRI
+          network={network}
+          iri={iri}
+          setIri={setIri}
+        />
+        <button type="submit">
+          {"get data"}
+        </button>
+      </form>
       <Result
         error={error}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

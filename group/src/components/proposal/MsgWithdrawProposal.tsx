@@ -32,26 +32,32 @@ const MsgWithdrawProposal = () => {
   }
 
   return (
-    <>
-      <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <MsgInputs
-            network={network}
-            setMessage={setMessage}
-            useWallet={true}
-            wallet={wallet}
-          />
-          <button type="submit">
-            {"submit"}
-          </button>
-        </form>
+    <div className={styles.box}>
+      <div className={styles.boxHeader}>
+        <h2>
+          {"MsgWithdrawProposal"}
+        </h2>
+        <p>
+          {"withdraw a group proposal"}
+        </p>
       </div>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <MsgInputs
+          network={network}
+          setMessage={setMessage}
+          useWallet={true}
+          wallet={wallet}
+        />
+        <button type="submit">
+          {"submit"}
+        </button>
+      </form>
       <ResultTx
         error={error}
         rest={chainInfo?.rest}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

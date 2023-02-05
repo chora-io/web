@@ -32,26 +32,32 @@ const MsgCreateGroupWithPolicy = () => {
   }
 
   return (
-    <>
-      <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <MsgInputs
-            network={network}
-            setMessage={setMessage}
-            useWallet={true}
-            wallet={wallet}
-          />
-          <button type="submit">
-            {"submit"}
-          </button>
-        </form>
+    <div className={styles.box}>
+      <div className={styles.boxHeader}>
+        <h2>
+          {"MsgCreateGroupWithPolicy"}
+        </h2>
+        <p>
+          {"create a group with a group policy"}
+        </p>
       </div>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <MsgInputs
+          network={network}
+          setMessage={setMessage}
+          useWallet={true}
+          wallet={wallet}
+        />
+        <button type="submit">
+          {"submit"}
+        </button>
+      </form>
       <ResultTx
         error={error}
         rest={chainInfo?.rest}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

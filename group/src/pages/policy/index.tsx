@@ -15,36 +15,11 @@ const PolicyPage = () => (
   <Main>
     <div className={styles.page}>
       <div>
-        <div className={styles.section}>
-          <div>
-            {"create policy"}
-          </div>
-          <MsgCreateGroupPolicy />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"update policy admin"}
-          </div>
-          <MsgUpdateGroupPolicyAdmin />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"update policy metadata"}
-          </div>
-          <MsgUpdateGroupPolicyMetadata />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"update decision policy"}
-          </div>
-          <MsgUpdateGroupPolicyDecisionPolicy />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search policy"}
-          </div>
-          <QueryGroupPolicy />
-        </div>
+        <MsgCreateGroupPolicy />
+        <MsgUpdateGroupPolicyAdmin />
+        <MsgUpdateGroupPolicyMetadata />
+        <MsgUpdateGroupPolicyDecisionPolicy />
+        <QueryGroupPolicy />
       </div>
     </div>
   </Main>

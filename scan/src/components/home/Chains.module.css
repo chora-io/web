@@ -24,7 +24,7 @@
 }
 
 .table thead {
-  color: var(--color-primary);
+  color: var(--color-theme);
   font-style: italic;
 }
 

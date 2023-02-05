@@ -12,18 +12,8 @@ const StorePage = () => (
   <Main>
     <div className={styles.page}>
       <div>
-        <div className={styles.section}>
-          <div>
-            {"post data to server"}
-          </div>
-          <PostData />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"get data from server"}
-          </div>
-          <GetData />
-        </div>
+        <PostData />
+        <GetData />
       </div>
     </div>
   </Main>

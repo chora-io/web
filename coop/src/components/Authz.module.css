@@ -1,11 +1,11 @@
 .box {
-  composes: box from "../styles/box.css";
+  composes: box from "chora/styles/box.css";
 }
 
 .box-options {
-  composes: box-options from "../styles/box.css";
+  composes: box-options from "chora/styles/box.css";
 }
 
 .box-option-active {
-  composes: box-option-active from "../styles/box.css";
+  composes: box-option-active from "chora/styles/box.css";
 }

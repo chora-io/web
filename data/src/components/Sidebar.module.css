@@ -1,27 +1,7 @@
-/* sidebar */
-
 .sidebar {
-  background: rgba(10, 10, 10, 0.8);
-  box-shadow: 0 0 4px rgba(100, 100, 100, 0.5);
-  height: 100vh;
-  position: fixed;
-  width: var(--sidebar-width);
+  composes: sidebar from "chora/styles/sidebar.css";
 }
-
-.sidebar ul {
-  list-style: none;
-  margin-top: var(--header-height);
-  padding: 2em;
-}
-
-.sidebar li {
-  font-size: 1.6em;
-  font-weight: 400;
-  padding: 1em;
-}
-
-/* active */
 
 .active {
-  font-weight: 600;
+  composes: sidebar-link-active from "chora/styles/sidebar.css";
 }

@@ -42,26 +42,32 @@ const QueryNodesByCurator = () => {
   }
 
   return (
-    <>
-      <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <InputAddress
-            id="query-nodes-by-curator-curator"
-            label="curator"
-            network={network}
-            address={curator}
-            setAddress={setCurator}
-          />
-          <button type="submit">
-            {"search"}
-          </button>
-        </form>
+    <div className={styles.box}>
+      <div className={styles.boxHeader}>
+        <h2>
+          {"QueryNodesByCurator"}
+        </h2>
+        <p>
+          {"query nodes by a curator address"}
+        </p>
       </div>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <InputAddress
+          id="query-nodes-by-curator-curator"
+          label="curator"
+          network={network}
+          address={curator}
+          setAddress={setCurator}
+        />
+        <button type="submit">
+          {"search"}
+        </button>
+      </form>
       <Result
         error={error}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

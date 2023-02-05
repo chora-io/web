@@ -14,30 +14,10 @@ const CreatePage = () => (
   <Main>
     <div className={styles.page}>
       <div>
-        <div className={styles.section}>
-          <div>
-            {"create group"}
-          </div>
-          <MsgCreateGroup />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"create group with policy"}
-          </div>
-          <MsgCreateGroupWithPolicy />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search group by id"}
-          </div>
-          <QueryGroup />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search group members by id"}
-          </div>
-          <QueryGroupMembers />
-        </div>
+        <MsgCreateGroup />
+        <MsgCreateGroupWithPolicy />
+        <QueryGroup />
+        <QueryGroupMembers />
       </div>
     </div>
   </Main>

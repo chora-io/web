@@ -38,19 +38,25 @@ const QueryNodes = () => {
   }
 
   return (
-    <>
-      <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <button type="submit">
-            {"search"}
-          </button>
-        </form>
+    <div className={styles.box}>
+      <div className={styles.boxHeader}>
+        <h2>
+          {"QueryNodes"}
+        </h2>
+        <p>
+          {"query all nodes"}
+        </p>
       </div>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <button type="submit">
+          {"search"}
+        </button>
+      </form>
       <Result
         error={error}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

@@ -1,0 +1,27 @@
+/* sidebar */
+
+.sidebar {
+  background: var(--background-secondary-transparent);
+  box-shadow: var(--box-shadow);
+  height: calc(100vh - var(--header-height));
+  margin-top: var(--header-height);
+  position: fixed;
+  width: var(--sidebar-width);
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 2em;
+}
+
+.sidebar li {
+  font-size: 1.5em;
+  font-weight: 400;
+  padding: 0.8em;
+}
+
+/* sidebar-link-active */
+
+.sidebar-link-active {
+  font-weight: 600;
+}

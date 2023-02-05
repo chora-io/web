@@ -42,27 +42,33 @@ const QueryPolicy = () => {
   }
 
   return (
-    <>
-      <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <InputAddress
-            id="query-group-policy-address"
-            label="policy address"
-            network={network}
-            long={true}
-            address={address}
-            setAddress={setAddress}
-          />
-          <button type="submit">
-            {"search"}
-          </button>
-        </form>
+    <div className={styles.box}>
+      <div className={styles.boxHeader}>
+        <h2>
+          {"QueryGroupPolicy"}
+        </h2>
+        <p>
+          {"query a group policy by the policy address"}
+        </p>
       </div>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <InputAddress
+          id="query-group-policy-address"
+          label="policy address"
+          network={network}
+          long={true}
+          address={address}
+          setAddress={setAddress}
+        />
+        <button type="submit">
+          {"search"}
+        </button>
+      </form>
       <Result
         error={error}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

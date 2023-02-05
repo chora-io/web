@@ -34,5 +34,5 @@ const outputOptions = [
 const bundle = await rollup(inputOptions)
 
 outputOptions.forEach(async (options ) => {
-    await bundle.write(options as OutputOptions)
+  await bundle.write(options as OutputOptions)
 })

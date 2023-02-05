@@ -39,24 +39,30 @@ const ConvertIRIToHash = () => {
   }
 
   return (
-    <>
-      <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <InputIRI
-            network={network}
-            iri={iri}
-            setIri={setIri}
-          />
-          <button type="submit">
-            {"convert"}
-          </button>
-        </form>
+    <div className={styles.box}>
+      <div className={styles.boxHeader}>
+        <h2>
+          {"ConvertIRIToHash"}
+        </h2>
+        <p>
+          {"convert an iri to a content hash"}
+        </p>
       </div>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <InputIRI
+          network={network}
+          iri={iri}
+          setIri={setIri}
+        />
+        <button type="submit">
+          {"convert"}
+        </button>
+      </form>
       <Result
         error={error}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

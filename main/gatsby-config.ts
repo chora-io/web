@@ -17,14 +17,14 @@ module.exports = {
         start_url: `/`,
         background_color: `#000`,
         display: `standalone`,
-        icon: `${__dirname}/node_modules/chora/assets/images/favicon.ico`,
+        icon: `node_modules/chora/assets/images/favicon.ico`,
       },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/node_modules/chora/assets/images`,
+        path: `node_modules/chora/assets/images`,
       },
     },
   ],

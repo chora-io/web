@@ -1,14 +1,11 @@
 import * as React from "react"
 import { useEffect, useState } from "react"
 
-import { Coin } from "../api/cosmos/base/v1beta1/coin"
 import { BasicAllowance } from "../api/cosmos/feegrant/v1beta1/feegrant"
 
 import InputDenom from "./InputDenom"
 import InputNumber from "./InputNumber"
 import InputTimestamp from "./InputTimestamp"
-
-import * as styles from "./InputAllowance.module.css"
 
 const defaultId = "allowance"
 const defaultLabel = "allowance"
@@ -39,7 +36,7 @@ const InputAllowance = ({ id, label, network, setAllowance }: any) => {
   }, [denom, amount, expiration])
 
   return (
-    <span className={styles.allowance}>
+    <>
       <InputDenom
         id={(id || defaultId) + "-spend-limit-denom"}
         label={(label || defaultLabel) + " spend limit denom"}
@@ -59,7 +56,7 @@ const InputAllowance = ({ id, label, network, setAllowance }: any) => {
         timestamp={expiration}
         setTimestamp={setExpiration}
       />
-    </span>
+    </>
   )
 }
 

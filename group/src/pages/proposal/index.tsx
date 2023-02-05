@@ -15,36 +15,11 @@ const ProposalPage = () => (
   <Main>
     <div className={styles.page}>
       <div>
-        <div className={styles.section}>
-          <div>
-            {"submit proposal"}
-          </div>
-          <MsgSubmitProposal />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"withdraw proposal"}
-          </div>
-          <MsgWithdrawProposal />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"vote on proposal"}
-          </div>
-          <MsgVote />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"execute proposal"}
-          </div>
-          <MsgExec />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search proposal"}
-          </div>
-          <QueryProposal />
-        </div>
+        <MsgSubmitProposal />
+        <MsgWithdrawProposal />
+        <MsgVote />
+        <MsgExec />
+        <QueryProposal />
       </div>
     </div>
   </Main>

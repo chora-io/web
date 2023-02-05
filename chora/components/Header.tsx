@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Link } from "gatsby"
 
 import ConnectWallet from "./ConnectWallet"
 
@@ -18,19 +19,15 @@ const Header = ({ context }: any) => {
 
   return (
     <div className={styles.header}>
-      <div className={styles.menu}>
-        <ul>
-          <li>
-            <a href={local ? "http://" + window.location.hostname + ":8000" : "/"}>
-              <div className={styles.title}>
-                <img src={icon} />
-                <div>
-                  {"chora"}
-                </div>
-              </div>
-            </a>
-          </li>
-        </ul>
+      <div>
+        <div className={styles.title}>
+          <Link href={local ? "http://" + window.location.hostname + ":8000" : "/"}>
+            <img src={icon} />
+            <div>
+              {"chora"}
+            </div>
+          </Link>
+        </div>
         {context && <ConnectWallet {...context} />}
       </div>
     </div>

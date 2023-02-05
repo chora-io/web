@@ -11,12 +11,7 @@ const HashPage = () => (
   <Main>
     <div className={styles.page}>
       <div>
-        <div className={styles.section}>
-          <div>
-            {"generate hash"}
-          </div>
-          <GenerateHash />
-        </div>
+        <GenerateHash />
       </div>
     </div>
   </Main>

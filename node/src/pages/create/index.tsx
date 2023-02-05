@@ -14,30 +14,10 @@ const CreatePage = () => (
   <Main>
     <div className={styles.page}>
       <div>
-        <div className={styles.section}>
-          <div>
-            {"create node"}
-          </div>
-          <MsgCreate />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search node by id"}
-          </div>
-          <QueryNode />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search all nodes"}
-          </div>
-          <QueryNodes />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search nodes by curator"}
-          </div>
-          <QueryNodesByCurator />
-        </div>
+        <MsgCreate />
+        <QueryNode />
+        <QueryNodes />
+        <QueryNodesByCurator />
       </div>
     </div>
   </Main>

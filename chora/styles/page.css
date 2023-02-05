@@ -4,10 +4,16 @@
   align-items: flex-start;
   display: flex;
   justify-content: center;
+  margin-bottom: 4em;
   margin-left: var(--sidebar-width);
   min-height: 100vh;
 }
 
-.page > div:first-child {
+.page h1 {
+  margin-bottom: 1.5em;
+}
+
+.page > div {
   margin-top: var(--header-height);
+  padding-top: 4em;
 }

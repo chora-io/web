@@ -1,52 +1,7 @@
-/* header */
-
 .header {
-  background: rgba(10, 10, 10, 0.8);
-  box-shadow: 0 0 4px rgba(100, 100, 100, 0.5);
-  height: var(--header-height);
-  position: fixed;
-  width: 100%;
-  z-index: 1;
+  composes: header from "../styles/header.css";
 }
 
-/* menu */
-
-.menu {
-  display: flex;
-  height: inherit;
-  justify-content: space-between;
-}
-
-.menu ul {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  list-style: none inside none;
-  margin-right: 4em;
-}
-
-.menu li {
-  margin: 1em;
-}
-
-.menu a {
-  font-weight: 400;
-}
-
-.menu .title {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  margin-left: 2em;
-}
-
-.menu .title img {
-  height: 40px;
-}
-
-.menu .title div {
-  color: var(--color-text);
-  font-size: 22px;
-  margin-bottom: 2px;
-  margin-left: 12px;
+.title {
+  composes: header-title from "../styles/header.css";
 }

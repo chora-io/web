@@ -1,0 +1,11 @@
+.header {
+  composes: header from "chora/styles/header.css";
+}
+
+.title {
+  composes: header-title from "chora/styles/header.css";
+}
+
+.menu {
+  composes: header-menu from "chora/styles/header.css";
+}

@@ -40,15 +40,14 @@ const InputMembers = ({ id, network, members, setMembers }: any) => {
   return (
     <>
       {members.map((member, index) => (
-        <span className={styles.member} key={index}>
-          <InputMember
-            id={(id || defaultId) + "-member-" + (index+1)}
-            label={"member " + (index+1)}
-            network={network}
-            member={member}
-            setMember={handleSetMember}
-          />
-        </span>
+        <InputMember
+          key={index}
+          id={(id || defaultId) + "-member-" + (index+1)}
+          label={"member " + (index+1)}
+          network={network}
+          member={member}
+          setMember={handleSetMember}
+        />
       ))}
       <span className={styles.options}>
         <button onClick={handleAddMember}>

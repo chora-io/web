@@ -39,25 +39,31 @@ const QueryResolver = () => {
   }
 
   return (
-    <>
-      <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <InputNumber
-            id="resolver-id"
-            label="resolver id"
-            number={id}
-            setNumber={setId}
-          />
-          <button type="submit">
-            {"search"}
-          </button>
-        </form>
+    <div className={styles.box}>
+      <div className={styles.boxHeader}>
+        <h2>
+          {"QueryResolver"}
+        </h2>
+        <p>
+          {"query a data resolver by the id of the resolver"}
+        </p>
       </div>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <InputNumber
+          id="resolver-id"
+          label="resolver id"
+          number={id}
+          setNumber={setId}
+        />
+        <button type="submit">
+          {"search"}
+        </button>
+      </form>
       <Result
         error={error}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

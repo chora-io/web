@@ -1,15 +1,15 @@
 .box {
-  composes: box from "../../styles/box.css";
+  composes: box from "chora/styles/box.css";
 }
 
 .box-options {
-  composes: box-options from "../../styles/box.css";
+  composes: box-options from "chora/styles/box.css";
 }
 
 .box-result-above {
-  composes: box-result-above from "../../styles/box.css";
+  composes: box-result-above from "chora/styles/box.css";
 }
 
 .box-text {
-  composes: box-text from "../../styles/box.css";
+  composes: box-text from "chora/styles/box.css";
 }

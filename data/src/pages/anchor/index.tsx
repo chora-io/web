@@ -13,24 +13,9 @@ const AnchorPage = () => (
   <Main>
     <div className={styles.page}>
       <div>
-        <div className={styles.section}>
-          <div>
-            {"anchor data"}
-          </div>
-          <MsgAnchor />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search data anchor by iri"}
-          </div>
-          <QueryAnchorByIRI />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search data anchor by content hash"}
-          </div>
-          <QueryAnchorByHash />
-        </div>
+        <MsgAnchor />
+        <QueryAnchorByIRI />
+        <QueryAnchorByHash />
       </div>
     </div>
   </Main>

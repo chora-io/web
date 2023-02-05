@@ -16,42 +16,12 @@ const UpdatePage = () => (
   <Main>
     <div className={styles.page}>
       <div>
-        <div className={styles.section}>
-          <div>
-            {"update group admin"}
-          </div>
-          <MsgUpdateGroupAdmin />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"update group members"}
-          </div>
-          <MsgUpdateGroupMembers />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"update group metadata"}
-          </div>
-          <MsgUpdateGroupMetadata />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"leave group"}
-          </div>
-          <MsgLeaveGroup />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search group by id"}
-          </div>
-          <QueryGroup />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search group members by id"}
-          </div>
-          <QueryGroupMembers />
-        </div>
+        <MsgUpdateGroupAdmin />
+        <MsgUpdateGroupMembers />
+        <MsgUpdateGroupMetadata />
+        <MsgLeaveGroup />
+        <QueryGroup />
+        <QueryGroupMembers />
       </div>
     </div>
   </Main>

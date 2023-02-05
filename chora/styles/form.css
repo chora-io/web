@@ -8,13 +8,8 @@
 .form input,
 .form textarea,
 .form select {
-  background: #111;
-  box-shadow: 0 0 4px rgba(100, 100, 100, 0.5);
-  border: none;
-  color: #FFF;
   display: block;
   margin: 1em 0;
-  outline: none;
   padding: 1em;
 }
 
@@ -33,7 +28,6 @@
 
 .form button {
   display: block;
-  font-size: 1em;
   padding: 0.5em 1em;
   margin: 3em 0 2em 0;
 }

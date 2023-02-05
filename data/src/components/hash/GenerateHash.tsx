@@ -145,77 +145,83 @@ const GenerateHash = () => {
   }
 
   return (
-    <>
+    <div className={styles.box}>
+      <div className={styles.boxHeader}>
+        <h2>
+          {"generate hash"}
+        </h2>
+        <p>
+          {"generate a content hash from a json-ld document"}
+        </p>
+      </div>
       <SelectInput
         input={input}
         setInput={handleSetInput}
       />
-      <div>
-        {input == "form" ? (
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <SelectContext
-              context={context}
-              contexts={contexts}
-              setContext={handleSetContext}
-            />
-            <InputsFromJSON
-              example={example}
-              json={json}
-              setJson={setJson}
-            />
-            <SelectDigestAlgorithm
-              digest={""} // disabled until multiple options exist
-              setDigest={() => {}} // disabled until multiple options exist
-            />
-            <SelectGraphCanon
-              canon={""} // disabled until multiple options exist
-              setCanon={() => {}} // disabled until multiple options exist
-            />
-            <SelectGraphMerkle
-              merkle={""} // disabled until multiple options exist
-              setMerkle={() => {}} // disabled until multiple options exist
-            />
-            <button type="submit">
-              {"generate hash"}
-            </button>
-          </form>
-        ) : (
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <SelectContext
-              context={context}
-              contexts={contexts}
-              setContext={handleSetContext}
-            />
-            <InputJSON
-              json={json}
-              placeholder={example}
-              setJson={handleSetJson}
-              useTemplate={handleGenJson}
-              showUseTemplate={context.length > 0}
-            />
-            <SelectDigestAlgorithm
-              digest={""} // disabled until multiple options exist
-              setDigest={() => {}} // disabled until multiple options exist
-            />
-            <SelectGraphCanon
-              canon={""} // disabled until multiple options exist
-              setCanon={() => {}} // disabled until multiple options exist
-            />
-            <SelectGraphMerkle
-              merkle={""} // disabled until multiple options exist
-              setMerkle={() => {}} // disabled until multiple options exist
-            />
-            <button type="submit">
-              {"generate hash"}
-            </button>
-          </form>
-        )}
-      </div>
+      {input == "form" ? (
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <SelectContext
+            context={context}
+            contexts={contexts}
+            setContext={handleSetContext}
+          />
+          <InputsFromJSON
+            example={example}
+            json={json}
+            setJson={setJson}
+          />
+          <SelectDigestAlgorithm
+            digest={""} // disabled until multiple options exist
+            setDigest={() => {}} // disabled until multiple options exist
+          />
+          <SelectGraphCanon
+            canon={""} // disabled until multiple options exist
+            setCanon={() => {}} // disabled until multiple options exist
+          />
+          <SelectGraphMerkle
+            merkle={""} // disabled until multiple options exist
+            setMerkle={() => {}} // disabled until multiple options exist
+          />
+          <button type="submit">
+            {"generate"}
+          </button>
+        </form>
+      ) : (
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <SelectContext
+            context={context}
+            contexts={contexts}
+            setContext={handleSetContext}
+          />
+          <InputJSON
+            json={json}
+            placeholder={example}
+            setJson={handleSetJson}
+            useTemplate={handleGenJson}
+            showUseTemplate={context.length > 0}
+          />
+          <SelectDigestAlgorithm
+            digest={""} // disabled until multiple options exist
+            setDigest={() => {}} // disabled until multiple options exist
+          />
+          <SelectGraphCanon
+            canon={""} // disabled until multiple options exist
+            setCanon={() => {}} // disabled until multiple options exist
+          />
+          <SelectGraphMerkle
+            merkle={""} // disabled until multiple options exist
+            setMerkle={() => {}} // disabled until multiple options exist
+          />
+          <button type="submit">
+            {"generate"}
+          </button>
+        </form>
+      )}
       <Result
         error={error}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

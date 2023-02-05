@@ -1,0 +1,104 @@
+@font-face {
+  src: local('Ubuntu'),
+    url('../assets/font/Ubuntu-Bold.ttf'),
+    url('../assets/font/Ubuntu-BoldItalic.ttf'),
+    url('../assets/font/Ubuntu-Italic.ttf'),
+    url('../assets/font/Ubuntu-Light.ttf'),
+    url('../assets/font/Ubuntu-LightItalic.ttf'),
+    url('../assets/font/Ubuntu-Medium.ttf'),
+    url('../assets/font/Ubuntu-MediumItalic.ttf'),
+    url('../assets/font/Ubuntu-Regular.ttf');
+}
+
+:root {
+  --background-primary: rgb(0, 0, 0);
+  --background-primary-transparent: rgba(0, 0, 0, 0.9);
+  --background-secondary: rgb(10, 10, 10);
+  --background-secondary-transparent: rgba(10, 10, 10, 0.9);
+  --box-shadow: 0 0 4px rgb(40, 40, 40);
+  --color: rgb(255, 255, 255);
+  --color-error: rgb(255, 0, 0);
+  --color-placeholder: rgba(255, 255, 255, 0.5);
+  --color-theme: rgb(0, 205, 175);
+  --font-family: 'Ubuntu', sans-serif;
+  --header-height: 80px;
+  --sidebar-width: 240px;
+  --transition: 0.25s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  cursor: default;
+}
+
+body {
+  background: var(--background-primary);
+  color: var(--color);
+  font-family: var(--font-family);
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 400;
+}
+
+p {
+  line-height: 1.75;
+}
+
+a, a:active {
+  color: var(--color-theme);
+  font-weight: 400;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  opacity: 0.75;
+}
+
+button {
+  background: var(--color-theme);
+  border: none;
+  border-radius: 1em;
+  font-family: var(--font-family);
+  font-size: 1em;
+  outline: none;
+  transition: var(--transition);
+}
+
+button:hover {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+input,
+textarea,
+select {
+  background: var(--background-secondary);
+  border: none;
+  box-shadow: var(--box-shadow);
+  color: var(--color);
+  font-family: var(--font-family);
+  font-weight: 300;
+  outline: none;
+}
+
+textarea {
+  line-height: 1.5;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-placeholder);
+}
+
+pre {
+  white-space: pre-wrap;
+  word-break: break-all;
+}

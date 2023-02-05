@@ -42,25 +42,31 @@ const QueryGroup = () => {
   }
 
   return (
-    <>
-      <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <InputNumber
-            id="query-group-id"
-            label="group id"
-            number={id}
-            setNumber={setId}
-          />
-          <button type="submit">
-            {"search"}
-          </button>
-        </form>
+    <div className={styles.box}>
+      <div className={styles.boxHeader}>
+        <h2>
+          {"QueryGroup"}
+        </h2>
+        <p>
+          {"query a group by the id of the group"}
+        </p>
       </div>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <InputNumber
+          id="query-group-id"
+          label="group id"
+          number={id}
+          setNumber={setId}
+        />
+        <button type="submit">
+          {"search"}
+        </button>
+      </form>
       <Result
         error={error}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

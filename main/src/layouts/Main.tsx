@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { WalletContextProvider } from "chora"
 
-import HeaderMain from "../components/HeaderMain"
+import Header from "../components/Header"
 import HeaderWallet from "../components/HeaderWallet"
 
 import "./Main.module.css"
@@ -18,7 +18,7 @@ const Main = ({ children, withWallet }: any) => (
       </WalletContextProvider>
     ) : (
       <main>
-        <HeaderMain />
+        <Header />
         {children}
       </main>
     )}

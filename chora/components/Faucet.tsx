@@ -63,9 +63,9 @@ const Faucet = ({ chainInfo, wallet }: any) => {
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        <div>
+        <h1>
           {chainInfo ? chainInfo.chainName + " Faucet" : "Testnet Faucet"}
-        </div>
+        </h1>
       </div>
       <div>
         <button onClick={handleSubmit} className={styles.button}>

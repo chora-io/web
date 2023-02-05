@@ -3,15 +3,15 @@ import * as React from "react"
 import * as styles from "./SelectInput.module.css"
 
 const SelectInput = ({ input, setInput }: any) => (
-  <div className={styles.input}>
+  <div className={styles.boxOptions}>
     <button
-      className={input == "form" ? styles.active : null}
+      className={input == "form" ? styles.boxOptionActive : null}
       onClick={() => setInput("form")}
     >
       {"form"}
     </button>
     <button
-      className={input == "json" ? styles.active : null}
+      className={input == "json" ? styles.boxOptionActive : null}
       onClick={() => setInput("json")}
     >
       {"json"}

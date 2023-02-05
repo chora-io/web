@@ -7,8 +7,6 @@ import { PercentageDecisionPolicy, ThresholdDecisionPolicy } from "../api/cosmos
 import InputNumber from "./InputNumber"
 import SelectPolicyType from "./SelectPolicyType"
 
-import * as styles from "./InputPolicy.module.css"
-
 const defaultId = "policy"
 const defaultLabel = "policy"
 
@@ -66,7 +64,7 @@ const InputPolicy = ({ id, label, setPolicy }: any) => {
   }, [threshold, percentage, votingPeriod, minExecutionPeriod])
 
   return (
-    <span className={styles.policy}>
+    <>
       <SelectPolicyType
         id={(id || defaultId) + "-type"}
         type={type}
@@ -103,7 +101,7 @@ const InputPolicy = ({ id, label, setPolicy }: any) => {
         number={minExecutionPeriod}
         setNumber={setMinExecutionPeriod}
       />
-    </span>
+    </>
   )
 }
 

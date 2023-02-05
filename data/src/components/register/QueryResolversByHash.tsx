@@ -68,39 +68,45 @@ const QueryResolversByHash = () => {
   }
 
   return (
-    <>
+    <div className={styles.box}>
+      <div className={styles.boxHeader}>
+        <h2>
+          {"QueryResolversByHash"}
+        </h2>
+        <p>
+          {"query data resolvers by the content hash of a data entry"}
+        </p>
+      </div>
       <SelectInput
         input={input}
         setInput={handleSetInput}
       />
-      <div>
-        {input == "form" ? (
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <InputContentHash
-              contentHash={contentHash}
-              setContentHash={setContentHash}
-            />
-            <button type="submit">
-              {"search"}
-            </button>
-          </form>
-        ) : (
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <InputContentHashJSON
-              json={contentHashJson}
-              setJson={setContentHashJson}
-            />
-            <button type="submit">
-              {"search"}
-            </button>
-          </form>
-        )}
-      </div>
+      {input == "form" ? (
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <InputContentHash
+            contentHash={contentHash}
+            setContentHash={setContentHash}
+          />
+          <button type="submit">
+            {"search"}
+          </button>
+        </form>
+      ) : (
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <InputContentHashJSON
+            json={contentHashJson}
+            setJson={setContentHashJson}
+          />
+          <button type="submit">
+            {"search"}
+          </button>
+        </form>
+      )}
       <Result
         error={error}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

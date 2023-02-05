@@ -42,25 +42,31 @@ const QueryPolicy = () => {
   }
 
   return (
-    <>
-      <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <InputNumber
-            id="query-group-proposal-id"
-            label="proposal id"
-            number={id}
-            setNumber={setId}
-          />
-          <button type="submit">
-            {"search"}
-          </button>
-        </form>
+    <div className={styles.box}>
+      <div className={styles.boxHeader}>
+        <h2>
+          {"QueryProposal"}
+        </h2>
+        <p>
+          {"query a group proposal by the id of the proposal"}
+        </p>
       </div>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <InputNumber
+          id="query-group-proposal-id"
+          label="proposal id"
+          number={id}
+          setNumber={setId}
+        />
+        <button type="submit">
+          {"search"}
+        </button>
+      </form>
       <Result
         error={error}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

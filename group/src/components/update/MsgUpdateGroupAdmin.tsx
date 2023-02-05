@@ -32,26 +32,32 @@ const MsgUpdateGroupAdmin = () => {
   }
 
   return (
-    <>
-      <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <MsgInputs
-            network={network}
-            setMessage={setMessage}
-            useWallet={true}
-            wallet={wallet}
-          />
-          <button type="submit">
-            {"submit"}
-          </button>
-        </form>
+    <div className={styles.box}>
+      <div className={styles.boxHeader}>
+        <h2>
+          {"MsgUpdateGroupAdmin"}
+        </h2>
+        <p>
+          {"update the admin of a group"}
+        </p>
       </div>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <MsgInputs
+          network={network}
+          setMessage={setMessage}
+          useWallet={true}
+          wallet={wallet}
+        />
+        <button type="submit">
+          {"submit"}
+        </button>
+      </form>
       <ResultTx
         error={error}
         rest={chainInfo?.rest}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

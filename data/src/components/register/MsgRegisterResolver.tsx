@@ -42,42 +42,48 @@ const MsgRegisterResolverView = () => {
   }
 
   return (
-    <>
+    <div className={styles.box}>
+      <div className={styles.boxHeader}>
+        <h2>
+          {"MsgRegisterResolver"}
+        </h2>
+        <p>
+          {"register data to a data resolver"}
+        </p>
+      </div>
       <SelectInput
         input={input}
         setInput={handleSetInput}
       />
-      <div>
-        {input == "form" ? (
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <MsgInputs
-              setMessage={setMessage}
-              useWallet={true}
-              wallet={wallet}
-            />
-            <button type="submit">
-              {"submit"}
-            </button>
-          </form>
-        ) : (
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <MsgInputsJSON
-              setMessage={setMessage}
-              useWallet={true}
-              wallet={wallet}
-            />
-            <button type="submit">
-              {"submit"}
-            </button>
-          </form>
-        )}
-      </div>
+      {input == "form" ? (
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <MsgInputs
+            setMessage={setMessage}
+            useWallet={true}
+            wallet={wallet}
+          />
+          <button type="submit">
+            {"submit"}
+          </button>
+        </form>
+      ) : (
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <MsgInputsJSON
+            setMessage={setMessage}
+            useWallet={true}
+            wallet={wallet}
+          />
+          <button type="submit">
+            {"submit"}
+          </button>
+        </form>
+      )}
       <ResultTx
         error={error}
         rest={chainInfo?.rest}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

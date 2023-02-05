@@ -39,24 +39,30 @@ const QueryAttestationsByIRI = () => {
   }
 
   return (
-    <>
-      <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <InputIRI
-            network={network}
-            iri={iri}
-            setIri={setIri}
-          />
-          <button type="submit">
-            {"search"}
-          </button>
-        </form>
+    <div className={styles.box}>
+      <div className={styles.boxHeader}>
+        <h2>
+          {"QueryAttestationsByIRI"}
+        </h2>
+        <p>
+          {"query data attestations by the iri of a data entry"}
+        </p>
       </div>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <InputIRI
+          network={network}
+          iri={iri}
+          setIri={setIri}
+        />
+        <button type="submit">
+          {"search"}
+        </button>
+      </form>
       <Result
         error={error}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

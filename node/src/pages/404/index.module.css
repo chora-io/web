@@ -1,7 +1,7 @@
 /* page */
 
 .page {
-  background: var(--color-bg);
+  background: var(--background-primary-transparent);
 }
 
 /* content */
@@ -12,16 +12,24 @@
   font-size: 1.2rem;
   justify-content: center;
   min-height: 100vh;
-  width: 100vw;
 }
 
 .content div {
+  margin-bottom: 2%;
   padding: 0 2rem;
   text-align: center;
 }
 
+.content h1 {
+  color: var(--color-theme);
+  font-size: 2.5em;
+}
+
+.content h2 {
+  font-style: italic;
+}
+
 .content h1,
 .content h2 {
-  margin: 0 0 1rem 0;
-  padding: 0.75rem 0;
+  margin: 0.5em 0;
 }

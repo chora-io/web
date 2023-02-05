@@ -1,13 +1,7 @@
-/* input */
-
-.input button {
-  background: none;
-  color: var(--color-primary);
-  font-size: 1em;
-  margin: 0 1em;
+.box-options {
+  composes: box-options from "chora/styles/box.css";
 }
 
-.input button.active {
-  text-decoration: underline;
-  text-underline-offset: 0.5em;
+.box-option-active {
+  composes: box-option-active from "chora/styles/box.css";
 }

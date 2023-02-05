@@ -68,39 +68,45 @@ const ConvertHashToIRI = () => {
   }
 
   return (
-    <>
+    <div className={styles.box}>
+      <div className={styles.boxHeader}>
+        <h2>
+          {"ConvertHashToIRI"}
+        </h2>
+        <p>
+          {"convert a content hash to an iri"}
+        </p>
+      </div>
       <SelectInput
         input={input}
         setInput={handleSetInput}
       />
-      <div>
-        {input == "form" ? (
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <InputContentHash
-              contentHash={contentHash}
-              setContentHash={setContentHash}
-            />
-            <button type="submit">
-              {"convert"}
-            </button>
-          </form>
-        ) : (
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <InputContentHashJSON
-              json={contentHashJson}
-              setJson={setContentHashJson}
-            />
-            <button type="submit">
-              {"convert"}
-            </button>
-          </form>
-        )}
-      </div>
+      {input == "form" ? (
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <InputContentHash
+            contentHash={contentHash}
+            setContentHash={setContentHash}
+          />
+          <button type="submit">
+            {"convert"}
+          </button>
+        </form>
+      ) : (
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <InputContentHashJSON
+            json={contentHashJson}
+            setJson={setContentHashJson}
+          />
+          <button type="submit">
+            {"convert"}
+          </button>
+        </form>
+      )}
       <Result
         error={error}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

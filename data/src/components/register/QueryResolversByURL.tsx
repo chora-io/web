@@ -42,26 +42,32 @@ const QueryResolversByURL = () => {
   }
 
   return (
-    <>
-      <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <InputURL
-            id="resolver-url"
-            label="resolver url"
-            placeholder="https://server.chora.io"
-            url={url}
-            setUrl={setUrl}
-          />
-          <button type="submit">
-            {"search"}
-          </button>
-        </form>
+    <div className={styles.box}>
+      <div className={styles.boxHeader}>
+        <h2>
+          {"QueryResolversByURL"}
+        </h2>
+        <p>
+          {"query data resolvers by the url of the resolvers"}
+        </p>
       </div>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <InputURL
+          id="resolver-url"
+          label="resolver url"
+          placeholder="https://server.chora.io"
+          url={url}
+          setUrl={setUrl}
+        />
+        <button type="submit">
+          {"search"}
+        </button>
+      </form>
       <Result
         error={error}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

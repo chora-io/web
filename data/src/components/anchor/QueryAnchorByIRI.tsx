@@ -39,24 +39,30 @@ const QueryAnchorByIRI = () => {
   }
 
   return (
-    <>
-      <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <InputIRI
-            network={network}
-            iri={iri}
-            setIri={setIri}
-          />
-          <button type="submit">
-            {"search"}
-          </button>
-        </form>
+    <div className={styles.box}>
+      <div className={styles.boxHeader}>
+        <h2>
+          {"QueryAnchorByIRI"}
+        </h2>
+        <p>
+          {"query a data anchor by the iri of a data entry"}
+        </p>
       </div>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <InputIRI
+          network={network}
+          iri={iri}
+          setIri={setIri}
+        />
+        <button type="submit">
+          {"search"}
+        </button>
+      </form>
       <Result
         error={error}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

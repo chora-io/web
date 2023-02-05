@@ -42,25 +42,31 @@ const QueryNode = () => {
   }
 
   return (
-    <>
-      <div>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <InputNumber
-            id="query-node-id"
-            label="node id"
-            number={id}
-            setNumber={setId}
-          />
-          <button type="submit">
-            {"search"}
-          </button>
-        </form>
+    <div className={styles.box}>
+      <div className={styles.boxHeader}>
+        <h2>
+          {"QueryNode"}
+        </h2>
+        <p>
+          {"query a node by the id of the node"}
+        </p>
       </div>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <InputNumber
+          id="query-node-id"
+          label="node id"
+          number={id}
+          setNumber={setId}
+        />
+        <button type="submit">
+          {"search"}
+        </button>
+      </form>
       <Result
         error={error}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

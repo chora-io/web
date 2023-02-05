@@ -1,7 +1,7 @@
 .box-item {
-  composes: box-item from "../../styles/box.css";
+  composes: box-item from "chora/styles/box.css";
 }
 
 .box-text {
-  composes: box-text from "../../styles/box.css";
+  composes: box-text from "chora/styles/box.css";
 }

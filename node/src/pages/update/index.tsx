@@ -15,36 +15,11 @@ const UpdatePage = () => (
   <Main>
     <div className={styles.page}>
       <div>
-        <div className={styles.section}>
-          <div>
-            {"update node curator"}
-          </div>
-          <MsgUpdateCurator />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"update node metadata"}
-          </div>
-          <MsgUpdateMetadata />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search node by id"}
-          </div>
-          <QueryNode />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search all nodes"}
-          </div>
-          <QueryNodes />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search nodes by curator"}
-          </div>
-          <QueryNodesByCurator />
-        </div>
+        <MsgUpdateCurator />
+        <MsgUpdateMetadata />
+        <QueryNode />
+        <QueryNodes />
+        <QueryNodesByCurator />
       </div>
     </div>
   </Main>

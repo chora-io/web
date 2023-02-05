@@ -6,8 +6,6 @@ import { GenericAuthorization } from "../api/cosmos/authz/v1beta1/authz"
 import InputTimestamp from "./InputTimestamp"
 import SelectMessage from "./SelectMessage"
 
-import * as styles from "./InputGrant.module.css"
-
 const defaultId = "grant"
 const defaultLabel = "grant"
 
@@ -35,7 +33,7 @@ const InputGrant = ({ id, label, network, setGrant }: any) => {
   }, [message, expiration])
 
   return (
-    <span className={styles.grant}>
+    <>
       <SelectMessage
         id={(id || defaultId) + "-message"}
         label={(label || defaultLabel) + " message"}
@@ -50,7 +48,7 @@ const InputGrant = ({ id, label, network, setGrant }: any) => {
         timestamp={expiration}
         setTimestamp={setExpiration}
       />
-    </span>
+    </>
   )
 }
 

@@ -17,7 +17,7 @@
     "lint": "echo 'lint not configured'",
     "format": "echo 'format not configured'",
     "test": "echo 'test not configured'",
-    "build": "sh ./scripts/protocgen.sh && ts-node ./build.ts",
+    "build": "sh ./scripts/build.sh",
     "start": "echo 'start not configured'",
     "serve": "echo 'serve not configured'",
     "clean": "rm -rf api dist"

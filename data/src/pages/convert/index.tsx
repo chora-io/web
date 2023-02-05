@@ -12,18 +12,8 @@ const ConvertPage = () => (
   <Main>
     <div className={styles.page}>
       <div>
-        <div className={styles.section}>
-          <div>
-            {"convert content hash to IRI"}
-          </div>
-          <ConvertHashToIRI />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"convert IRI to content hash"}
-          </div>
-          <ConvertIRIToHash />
-        </div>
+        <ConvertHashToIRI />
+        <ConvertIRIToHash />
       </div>
     </div>
   </Main>

@@ -16,42 +16,12 @@ const RegisterPage = () => (
   <Main>
     <div className={styles.page}>
       <div>
-        <div className={styles.section}>
-          <div>
-            {"define resolver"}
-          </div>
-          <MsgDefineResolver />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"register data to resolver"}
-          </div>
-          <MsgRegisterResolver />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search resolvers by id"}
-          </div>
-          <QueryResolver />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search resolvers by url"}
-          </div>
-          <QueryResolversByURL />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search resolvers by data iri"}
-          </div>
-          <QueryResolversByIRI />
-        </div>
-        <div className={styles.section}>
-          <div>
-            {"search resolvers by data content hash"}
-          </div>
-          <QueryResolversByHash />
-        </div>
+        <MsgDefineResolver />
+        <MsgRegisterResolver />
+        <QueryResolver />
+        <QueryResolversByURL />
+        <QueryResolversByIRI />
+        <QueryResolversByHash />
       </div>
     </div>
   </Main>

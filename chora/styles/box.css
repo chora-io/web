@@ -1,17 +1,35 @@
 /* box */
 
 .box {
-  background: rgba(20, 20, 20, 0.5);
-  box-shadow: 0 0 4px rgba(100, 100, 100, 0.5);
-  margin: 2em 0;
+  background: var(--background-secondary-transparent);
+  box-shadow: var(--box-shadow);
+  margin: 2em 0 4em;
   padding: 2em;
   width: 70vw;
+}
+
+/* box-header */
+
+.box-header {
+  border-bottom: 1px solid rgb(25, 25, 25);
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+}
+
+.box-header h2 {
+  color: var(--color-theme);
+  font-size: 1.25em;
+  margin-bottom: 0.5em;
+}
+
+.box-header p {
+  font-style: italic;
 }
 
 /* box-options */
 
 .box-options {
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid rgb(25, 25, 25);
   margin-bottom: 2em;
   padding-bottom: 2em;
 }
@@ -19,7 +37,7 @@
 .box-options a,
 .box-options button {
   background: none;
-  color: var(--color-primary);
+  color: var(--color-theme);
   margin-right: 2em;
 }
 
@@ -33,21 +51,21 @@
 /* box-result-above */
 
 .box-result-above {
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid rgb(25, 25, 25);
   padding-bottom: 2em;
 }
 
 /* box-result-below */
 
 .box-result-below {
-  border-top: 1px solid #222;
+  border-top: 1px solid rgb(25, 25, 25);
   padding-top: 2em;
 }
 
 /* box-item */
 
 .box-item {
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid rgb(25, 25, 25);
   margin-top: 2em;
   padding-bottom: 2em;
 }
@@ -64,7 +82,7 @@
 /* box-item-sub */
 
 .box-item-sub {
-  border-top: 1px solid #222;
+  border-top: 1px solid rgb(25, 25, 25);
   padding-top: 2em;
   margin-bottom: 2em;
 }
@@ -88,6 +106,6 @@
 }
 
 .box-text h3 {
-  color: var(--color-primary);
+  color: var(--color-theme);
   margin: 0.5em 0;
 }
