@@ -55,7 +55,7 @@ const Header = () => {
             </li>
           </ul>
         ) : (
-          <ul>
+          <ul className={styles.menu}>
             <li>
               <Link to="/coop">
                 {"coop"}
