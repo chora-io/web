@@ -9,7 +9,6 @@ import {
   regenLocal,
   regenMainnet,
   regenRedwood,
-  regenHambach,
 } from "../utils/chains"
 
 const cachedAddressKey = "chora-web-address"
@@ -75,9 +74,6 @@ const WalletContextProvider = (props: any) => {
         case regenRedwood.chainId:
           setChainInfo(regenRedwood)
           break
-        case regenHambach.chainId:
-          setChainInfo(regenHambach)
-          break
       }
 
       // check if network is still enabled
@@ -119,9 +115,6 @@ const WalletContextProvider = (props: any) => {
           break
         case regenRedwood.chainId:
           chain = regenRedwood
-          break
-        case regenHambach.chainId:
-          chain = regenHambach
           break
         default:
           chain = choraTestnet

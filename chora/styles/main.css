@@ -18,7 +18,7 @@
   --box-shadow: 0 0 4px rgb(40, 40, 40);
   --color: rgb(255, 255, 255);
   --color-error: rgb(255, 0, 0);
-  --color-placeholder: rgba(255, 255, 255, 0.4);
+  --color-placeholder: rgba(255, 255, 255, 0.5);
   --color-theme: rgb(0, 205, 175);
   --font-family: 'Ubuntu', sans-serif;
   --header-height: 80px;

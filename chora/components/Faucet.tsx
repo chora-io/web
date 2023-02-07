@@ -4,7 +4,6 @@ import { useState } from "react"
 import {
   choraTestnet,
   regenRedwood,
-  regenHambach,
 } from "../utils/chains"
 
 import * as styles from "./Faucet.module.css"
@@ -37,9 +36,6 @@ const Faucet = ({ chainInfo, wallet }: any) => {
         break
       case regenRedwood.chainId:
         faucetUrl = "https://redwood.chora.io/faucet/"
-        break
-      case regenHambach.chainId:
-        faucetUrl = "https://hambach.chora.io/faucet/"
         break
     }
 

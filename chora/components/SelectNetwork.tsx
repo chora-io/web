@@ -5,7 +5,6 @@ import {
   choraTestnet,
   regenLocal,
   regenRedwood,
-  regenHambach,
 } from "../utils/chains"
 
 const defaultId = "network"
@@ -34,9 +33,6 @@ const SelectNetwork = ({ id, label, selected, network, setNetwork }: any) => {
         </option>
         <option value={regenRedwood.chainId}>
           {regenRedwood.chainId}
-        </option>
-        <option value={regenHambach.chainId}>
-          {regenHambach.chainId}
         </option>
         {local && (
           <option value={choraLocal.chainId}>

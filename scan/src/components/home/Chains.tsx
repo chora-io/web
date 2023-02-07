@@ -8,7 +8,6 @@ import {
   choraTestnet,
   regenMainnet,
   regenRedwood,
-  regenHambach,
 } from "chora/utils/chains"
 
 const Chains = () => {
@@ -52,10 +51,6 @@ const Chains = () => {
             <Chain
               chainInfo={regenRedwood}
               dashboardUrl="/redwood"
-            />
-            <Chain
-              chainInfo={regenHambach}
-              dashboardUrl="/hambach"
             />
             <Chain
               chainInfo={choraTestnet}
