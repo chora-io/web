@@ -101,6 +101,11 @@ const Members = () => {
           member={member["member"]}
         />
       ))}
+      {members && members.length === 0 && !error && (
+        <div>
+          {"no members found"}
+        </div>
+      )}
       {error && (
         <div>
           {error}

@@ -102,7 +102,7 @@ const ProposalVotes = ({ proposalId }) => {
           </Link>
         </div>
       ))}
-      {votes && votes.length === 0 && (
+      {votes && votes.length === 0 && !error && (
         <div>
           {votesFinalized ? "votes have been finalized and removed from state" : "no votes found"}
         </div>

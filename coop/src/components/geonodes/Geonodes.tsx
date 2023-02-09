@@ -93,7 +93,7 @@ const Geonodes = () => {
           node={node}
         />
       ))}
-      {nodes && nodes.length === 0 && (
+      {nodes && nodes.length === 0 && !error && (
         <div>
           {"no nodes found"}
         </div>

@@ -95,7 +95,7 @@ const Vouchers = () => {
           voucher={voucher}
         />
       ))}
-      {vouchers && vouchers.length === 0 && (
+      {vouchers && vouchers.length === 0 && !error && (
         <div>
           {"no vouchers found"}
         </div>

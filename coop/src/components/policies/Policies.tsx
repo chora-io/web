@@ -101,6 +101,11 @@ const Policies = () => {
           policy={policy}
         />
       ))}
+      {policies && policies.length === 0 && !error && (
+        <div>
+          {"no policies found"}
+        </div>
+      )}
       {error && (
         <div>
           {error}

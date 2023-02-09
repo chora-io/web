@@ -21,7 +21,7 @@ const Header = ({ context }: any) => {
     <div className={styles.header}>
       <div>
         <div className={styles.title}>
-          <Link href={local ? "http://" + window.location.hostname + ":8000" : "/"}>
+          <Link to={local ? "http://" + window.location.hostname + ":8000" : "/"}>
             <img src={icon} />
             <div>
               {"chora"}

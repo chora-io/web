@@ -12,11 +12,11 @@ const Faucet = ({ chainInfo, wallet }: any) => {
 
   // error and success
   const [error, setError] = useState<string>("")
-  const [success, setSuccess] = useState<string>("")
+  const [success, setSuccess] = useState<boolean>(false)
 
   const handleSubmit = () => {
     setError("")
-    setSuccess("")
+    setSuccess(false)
 
     if (chainInfo === undefined) {
         setError("chain must be enabled")
@@ -48,7 +48,7 @@ const Faucet = ({ chainInfo, wallet }: any) => {
         if (data.error) {
           setError(data.error)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(true)
         }
       })
       .catch(err => {
@@ -78,7 +78,7 @@ const Faucet = ({ chainInfo, wallet }: any) => {
       {success && (
         <div>
           <pre>
-            {success}
+            {"tokens successfully sent"}
           </pre>
         </div>
       )}

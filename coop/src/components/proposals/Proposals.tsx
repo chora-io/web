@@ -200,12 +200,12 @@ const Proposals = () => {
           proposal={proposal}
         />
       ))}
-      {!filtered && proposals && proposals.length === 0 && (
+      {!filtered && proposals && proposals.length === 0 && !error && (
         <div>
           {"no proposals found"}
         </div>
       )}
-      {filtered && filtered.length === 0 && (
+      {filtered && filtered.length === 0 && !error && (
         <div>
           {`no proposals with status ${filter}`}
         </div>

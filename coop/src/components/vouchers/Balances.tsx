@@ -80,9 +80,9 @@ const Balances = ({ voucherId }) => {
           </Link>
         </div>
       ))}
-      {balances && balances.length === 0 && (
+      {balances && balances.length === 0 && !error && (
         <div>
-          {"no active vouchers found"}
+          {"no balances found"}
         </div>
       )}
       {error && (
