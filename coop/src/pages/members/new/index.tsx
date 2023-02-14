@@ -3,18 +3,18 @@ import * as React from "react"
 import Main from "../../../layouts/Main"
 import Seo from "../../../components/SeoWrapper"
 
-import SubmitProposal from "../../../components/proposals/SubmitProposal"
+import SubmitApplication from "../../../components/members/SubmitApplication"
 
 import * as styles from "./index.module.css"
 
-const ProposalsNewPage = () => (
+const MembersNewPage = () => (
   <Main>
     <div className={styles.page}>
       <div>
         <h1>
-          {"submit proposal"}
+          {"submit application"}
         </h1>
-        <SubmitProposal />
+        <SubmitApplication />
       </div>
     </div>
   </Main>
@@ -22,4 +22,4 @@ const ProposalsNewPage = () => (
 
 export const Head = () => <Seo title="" />
 
-export default ProposalsNewPage
+export default MembersNewPage

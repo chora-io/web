@@ -27,7 +27,7 @@ const Chain = ({ chainInfo, dashboardUrl }: any) => {
         const timestamp = formatTimestamp(data.block.header.time)
         const split = timestamp.split(" ")
         setDate(split[0])
-        setTime(split[1] + " " + split[2])
+        setTime(split[1])
       })
       .catch(err => {
         setError(err.message)

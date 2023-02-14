@@ -6,7 +6,7 @@ import * as styles from "./ProposalsNav.module.css"
 const ProposalsNav = () => (
   <div className={styles.box}>
     <Link to="/proposals/new">
-      {"new proposal"}
+      {"submit proposal"}
     </Link>
   </div>
 )

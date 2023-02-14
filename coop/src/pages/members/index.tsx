@@ -7,6 +7,7 @@ import Authz from "../../components/Authz"
 import Feegrant from "../../components/Feegrant"
 import Member from "../../components/members/Member"
 import Members from "../../components/members/Members"
+import MembersNav from "../../components/members/MembersNav"
 
 import * as styles from "./index.module.css"
 
@@ -18,7 +19,15 @@ const MembersPage = ({ location }) => {
   return (
     <Main>
       <div className={styles.page}>
-        {memberAddress ? (
+        {!memberAddress ? (
+          <div>
+            <h1>
+              {"group members"}
+            </h1>
+            <MembersNav />
+            <Members />
+          </div>
+        ) : (
           <div>
             <h1>
               {"group member"}
@@ -38,13 +47,6 @@ const MembersPage = ({ location }) => {
             <Feegrant
               address={memberAddress}
             />
-          </div>
-        ) : (
-          <div>
-            <h1>
-              {"group members"}
-            </h1>
-            <Members />
           </div>
         )}
       </div>
