@@ -1,6 +1,7 @@
 @font-face {
   font-family: 'Ubuntu';
   src:
+    local('Ubuntu'),
     url('../assets/font/Ubuntu-Bold.ttf'),
     url('../assets/font/Ubuntu-BoldItalic.ttf'),
     url('../assets/font/Ubuntu-Italic.ttf'),
