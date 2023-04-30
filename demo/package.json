@@ -1,7 +1,7 @@
 {
-  "name": "coop",
+  "name": "demo",
   "private": true,
-  "description": "chora cooperative",
+  "description": "demo application",
   "version": "0.0.0",
   "homepage": "https://chora.io",
   "bugs": {
@@ -15,12 +15,13 @@
     "lint": "echo 'lint not configured'",
     "format": "echo 'format not configured'",
     "test": "echo 'test not configured'",
-    "dev": "node_modules/.bin/gatsby develop -p 8001",
+    "dev": "node_modules/.bin/gatsby develop -p 8002",
     "build": "node_modules/.bin/gatsby build --prefix-paths",
-    "serve": "node_modules/.bin/gatsby serve -p 8001",
+    "serve": "node_modules/.bin/gatsby serve -p 8002",
     "clean": "node_modules/.bin/gatsby clean"
   },
   "dependencies": {
+    "blakejs": "^1.2.1",
     "chora": "./chora",
     "gatsby": "^5.5.0",
     "gatsby-plugin-manifest": "^5.5.0",

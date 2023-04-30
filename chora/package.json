@@ -17,8 +17,8 @@
     "lint": "echo 'lint not configured'",
     "format": "echo 'format not configured'",
     "test": "echo 'test not configured'",
+    "dev": "echo 'dev not configured'",
     "build": "sh ./scripts/build.sh",
-    "start": "echo 'start not configured'",
     "serve": "echo 'serve not configured'",
     "clean": "rm -rf api dist"
   },

@@ -15,8 +15,8 @@
     "lint": "echo 'lint not configured'",
     "format": "echo 'format not configured'",
     "test": "echo 'test not configured'",
+    "dev": "node_modules/.bin/gatsby develop -p 8005",
     "build": "node_modules/.bin/gatsby build --prefix-paths",
-    "start": "node_modules/.bin/gatsby develop -p 8005",
     "serve": "node_modules/.bin/gatsby serve -p 8005",
     "clean": "node_modules/.bin/gatsby clean"
   },

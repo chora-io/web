@@ -1,6 +1,6 @@
 # web
 
-website and application interfaces
+chora web projects
 
 ## Prerequisites
 
