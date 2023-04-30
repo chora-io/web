@@ -35,21 +35,11 @@ const Header = () => {
             </li>
             <li>
               <Link to={"http://" + window.location.hostname + ":8002"}>
-                {"data"}
+                {"demo"}
               </Link>
             </li>
             <li>
               <Link to={"http://" + window.location.hostname + ":8003"}>
-                {"group"}
-              </Link>
-            </li>
-            <li>
-              <Link to={"http://" + window.location.hostname + ":8004"}>
-                {"node"}
-              </Link>
-            </li>
-            <li>
-              <Link to={"http://" + window.location.hostname + ":8005"}>
                 {"scan"}
               </Link>
             </li>
@@ -62,18 +52,8 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link to="/data">
-                {"data"}
-              </Link>
-            </li>
-            <li>
-              <Link to="/group">
-                {"group"}
-              </Link>
-            </li>
-            <li>
-              <Link to="/node">
-                {"node"}
+              <Link to="/demo">
+                {"demo"}
               </Link>
             </li>
             <li>

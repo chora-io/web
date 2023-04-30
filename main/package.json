@@ -15,8 +15,8 @@
     "lint": "echo 'lint not configured'",
     "format": "echo 'format not configured'",
     "test": "echo 'test not configured'",
+    "dev": "node_modules/.bin/gatsby develop",
     "build": "node_modules/.bin/gatsby build",
-    "start": "node_modules/.bin/gatsby develop",
     "serve": "node_modules/.bin/gatsby serve",
     "clean": "node_modules/.bin/gatsby clean"
   },
