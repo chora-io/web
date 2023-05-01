@@ -10,8 +10,8 @@ import QueryGroupMembers from "../../../components/group/create/QueryGroupMember
 
 import * as styles from "./index.module.css"
 
-const CreatePage = () => (
-  <Main>
+const CreatePage = ({ location }) => (
+  <Main location={location}>
     <div className={styles.page}>
       <div>
         <MsgCreateGroup />

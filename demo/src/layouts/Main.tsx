@@ -7,11 +7,11 @@ import Sidebar from "../components/Sidebar"
 
 import "./Main.module.css"
 
-const Main = ({ children }: any) => (
+const Main = ({ children, location }: any) => (
   <WalletContextProvider>
     <main>
       <Header />
-      <Sidebar />
+      <Sidebar location={location} />
       {children}
     </main>
   </WalletContextProvider>

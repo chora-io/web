@@ -5,8 +5,8 @@ import Seo from "../../components/SeoWrapper"
 
 import * as styles from "./index.module.css"
 
-const HomePage = () => (
-  <Main>
+const HomePage = ({ location }) => (
+  <Main location={location}>
     <div className={styles.page}>
       <div>
         <h1>

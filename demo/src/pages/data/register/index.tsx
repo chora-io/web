@@ -12,8 +12,8 @@ import QueryResolversByURL from "../../../components/data/register/QueryResolver
 
 import * as styles from "./index.module.css"
 
-const RegisterPage = () => (
-  <Main>
+const RegisterPage = ({ location }) => (
+  <Main location={location}>
     <div className={styles.page}>
       <div>
         <MsgDefineResolver />

@@ -10,8 +10,8 @@ import QueryNodesByCurator from "../../../components/geonode/create/QueryNodesBy
 
 import * as styles from "./index.module.css"
 
-const CreatePage = () => (
-  <Main>
+const CreatePage = ({ location }) => (
+  <Main location={location}>
     <div className={styles.page}>
       <div>
         <MsgCreate />

@@ -7,8 +7,8 @@ import GenerateHash from "../../../components/data/hash/GenerateHash"
 
 import * as styles from "./index.module.css"
 
-const HashPage = () => (
-  <Main>
+const HashPage = ({ location }) => (
+  <Main location={location}>
     <div className={styles.page}>
       <div>
         <GenerateHash />

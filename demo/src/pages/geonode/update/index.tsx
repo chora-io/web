@@ -11,8 +11,8 @@ import QueryNodesByCurator from "../../../components/geonode/create/QueryNodesBy
 
 import * as styles from "./index.module.css"
 
-const UpdatePage = () => (
-  <Main>
+const UpdatePage = ({ location }) => (
+  <Main location={location}>
     <div className={styles.page}>
       <div>
         <MsgUpdateCurator />

@@ -4,7 +4,7 @@ import { Link, navigate } from "gatsby"
 
 import * as styles from "./Sidebar.module.css"
 
-const Sidebar = () => {
+const Sidebar = ({ location }) => {
   const [active, setActive] = useState<string>(location.pathname.split("/")[1])
 
   const handleSetActive = (key: string) => {

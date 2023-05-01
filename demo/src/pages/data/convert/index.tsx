@@ -8,8 +8,8 @@ import ConvertIRIToHash from "../../../components/data/convert/ConvertIRIToHash"
 
 import * as styles from "./index.module.css"
 
-const ConvertPage = () => (
-  <Main>
+const ConvertPage = ({ location }) => (
+  <Main location={location}>
     <div className={styles.page}>
       <div>
         <ConvertHashToIRI />

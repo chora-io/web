@@ -11,8 +11,8 @@ import QueryGroupPolicy from "../../../components/group/policy/QueryGroupPolicy"
 
 import * as styles from "./index.module.css"
 
-const PolicyPage = () => (
-  <Main>
+const PolicyPage = ({ location }) => (
+  <Main location={location}>
     <div className={styles.page}>
       <div>
         <MsgCreateGroupPolicy />

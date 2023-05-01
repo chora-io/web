@@ -8,8 +8,8 @@ import PostData from "../../../components/data/store/PostData"
 
 import * as styles from "./index.module.css"
 
-const StorePage = () => (
-  <Main>
+const StorePage = ({ location }) => (
+  <Main location={location}>
     <div className={styles.page}>
       <div>
         <PostData />

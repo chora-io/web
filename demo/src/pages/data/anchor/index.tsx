@@ -9,8 +9,8 @@ import QueryAnchorByIRI from "../../../components/data/anchor/QueryAnchorByIRI"
 
 import * as styles from "./index.module.css"
 
-const AnchorPage = () => (
-  <Main>
+const AnchorPage = ({ location }) => (
+  <Main location={location}>
     <div className={styles.page}>
       <div>
         <MsgAnchor />

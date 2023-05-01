@@ -10,8 +10,8 @@ import QueryAttestationsByIRI from "../../../components/data/attest/QueryAttesta
 
 import * as styles from "./index.module.css"
 
-const AttestPage = () => (
-  <Main>
+const AttestPage = ({ location }) => (
+  <Main location={location}>
     <div className={styles.page}>
       <div>
         <MsgAttest />

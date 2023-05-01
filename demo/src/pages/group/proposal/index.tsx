@@ -11,8 +11,8 @@ import QueryProposal from "../../../components/group/proposal/QueryProposal"
 
 import * as styles from "./index.module.css"
 
-const ProposalPage = () => (
-  <Main>
+const ProposalPage = ({ location }) => (
+  <Main location={location}>
     <div className={styles.page}>
       <div>
         <MsgSubmitProposal />
