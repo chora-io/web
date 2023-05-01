@@ -17,7 +17,7 @@ rm -rf demo/node_modules
 rm -rf scan/node_modules
 
 # bootstrap
-yarn bootstrap
+yarn && yarn bootstrap
 
 # build apps
 yarn build-main

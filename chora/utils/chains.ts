@@ -46,8 +46,8 @@ export const choraLocal = {
 export const choraTestnet = {
     chainId: "chora-testnet-1",
     chainName: "Chora Testnet",
-    rpc: "http://testnet.chora.io:26657",
-    rest: "http://testnet.chora.io:1317",
+    rpc: "https://testnet.chora.io/rpc",
+    rest: "https://testnet.chora.io/rest",
     bip44: {
         coinType: 118,
     },
@@ -136,8 +136,8 @@ export const regenLocal = {
 export const regenMainnet = {
     chainId: "regen-1",
     chainName: "Regen",
-    rpc: "http://regen.chora.io:26657",
-    rest: "http://regen.chora.io:1317",
+    rpc: "https://regen.chora.io/rpc",
+    rest: "https://regen.chora.io/rest",
     bip44: {
         coinType: 118,
     },
@@ -181,8 +181,8 @@ export const regenMainnet = {
 export const regenRedwood = {
     chainId: "regen-redwood-1",
     chainName: "Regen Redwood",
-    rpc: "http://redwood.chora.io:26657",
-    rest: "http://redwood.chora.io:1317",
+    rpc: "https://redwood.chora.io/rpc",
+    rest: "https://redwood.chora.io/rest",
     bip44: {
         coinType: 118,
     },
