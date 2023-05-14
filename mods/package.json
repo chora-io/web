@@ -1,7 +1,7 @@
 {
-  "name": "scan",
+  "name": "mods",
   "private": true,
-  "description": "chora blockchain networks",
+  "description": "chora blockchain modules",
   "version": "0.0.0",
   "homepage": "https://chora.io",
   "bugs": {
@@ -15,9 +15,9 @@
     "lint": "echo 'lint not configured'",
     "format": "echo 'format not configured'",
     "test": "echo 'test not configured'",
-    "dev": "node_modules/.bin/gatsby develop -p 8004",
+    "dev": "node_modules/.bin/gatsby develop -p 8003",
     "build": "node_modules/.bin/gatsby build --prefix-paths",
-    "serve": "node_modules/.bin/gatsby serve -p 8004",
+    "serve": "node_modules/.bin/gatsby serve -p 8003",
     "clean": "node_modules/.bin/gatsby clean"
   },
   "dependencies": {

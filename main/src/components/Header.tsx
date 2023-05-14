@@ -35,11 +35,16 @@ const Header = () => {
             </li>
             <li>
               <Link to={"http://" + window.location.hostname + ":8002"}>
-                {"demo"}
+                {"data"}
               </Link>
             </li>
             <li>
               <Link to={"http://" + window.location.hostname + ":8003"}>
+                {"mods"}
+              </Link>
+            </li>
+            <li>
+              <Link to={"http://" + window.location.hostname + ":8004"}>
                 {"scan"}
               </Link>
             </li>
@@ -52,8 +57,13 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link to="/demo">
-                {"demo"}
+              <Link to="/data">
+                {"data"}
+              </Link>
+            </li>
+            <li>
+              <Link to="/mods">
+                {"mods"}
               </Link>
             </li>
             <li>

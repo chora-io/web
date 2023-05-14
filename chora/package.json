@@ -1,7 +1,7 @@
 {
   "name": "chora",
   "private": true,
-  "description": "chora web sdk",
+  "description": "chora webkit",
   "version": "0.0.0",
   "type": "module",
   "main": "index.ts",

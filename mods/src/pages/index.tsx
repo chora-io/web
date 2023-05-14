@@ -10,7 +10,7 @@ const HomePage = ({ location }) => (
     <div className={styles.page}>
       <div>
         <h1>
-          {"demo application"}
+          {"chora blockchain modules"}
         </h1>
       </div>
     </div>

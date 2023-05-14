@@ -1,10 +1,10 @@
 import * as React from "react"
 
-import Main from "../../../layouts/Main"
-import Seo from "../../../components/SeoWrapper"
+import Main from "../../layouts/Main"
+import Seo from "../../components/SeoWrapper"
 
-import GetData from "../../../components/data/store/GetData"
-import PostData from "../../../components/data/store/PostData"
+import GetData from "../../components/store/GetData"
+import PostData from "../../components/store/PostData"
 
 import * as styles from "./index.module.css"
 

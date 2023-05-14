@@ -1,0 +1,14 @@
+/* long */
+
+.long {
+  height: 20em !important;
+}
+
+/* button */
+
+.button {
+  background: none;
+  color: var(--color-theme);
+  margin: 2em 0 !important;
+  padding: 0 !important;
+}

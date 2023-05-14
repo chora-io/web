@@ -13,7 +13,8 @@ yarn build-chora
 rm -rf node_modules
 rm -rf main/node_modules
 rm -rf coop/node_modules
-rm -rf demo/node_modules
+rm -rf data/node_modules
+rm -rf mods/node_modules
 rm -rf scan/node_modules
 
 # bootstrap
@@ -22,7 +23,8 @@ yarn && yarn bootstrap
 # build apps
 yarn build-main
 yarn build-coop
-yarn build-demo
+yarn build-data
+yarn build-mods
 yarn build-scan
 
 # clean up public
@@ -31,7 +33,8 @@ rm -rf public
 # copy public directories
 cp -r main/public public
 cp -r coop/public public/coop
-cp -r demo/public public/demo
+cp -r data/public public/data
+cp -r mods/public public/mods
 cp -r scan/public public/scan
 
 # add CNAME file

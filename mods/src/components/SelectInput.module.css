@@ -1,0 +1,7 @@
+.box-options {
+  composes: box-options from "chora/styles/box.css";
+}
+
+.box-option-active {
+  composes: box-option-active from "chora/styles/box.css";
+}

@@ -9,10 +9,10 @@ import SelectDigestAlgorithm from "chora/components/SelectDigestAlgorithm"
 import SelectGraphCanon from "chora/components/SelectGraphCanon"
 import SelectGraphMerkle from "chora/components/SelectGraphMerkle"
 
-import InputJSON from "../../InputJSON"
-import InputsFromJSON from "../../InputsFromJSON"
-import SelectContext from "../../SelectContext"
-import SelectInput from "../../SelectInput"
+import InputJSON from "../InputJSON"
+import InputsFromJSON from "../InputsFromJSON"
+import SelectContext from "../SelectContext"
+import SelectInput from "../SelectInput"
 
 import * as styles from "./GenerateHash.module.css"
 

@@ -5,7 +5,19 @@ import { Link, navigate } from "gatsby"
 import * as styles from "./Sidebar.module.css"
 
 const Sidebar = ({ location }) => {
-  const [active, setActive] = useState<string>(location.pathname.split("/")[1])
+  let defaultActive: string
+  if (typeof window !== "undefined" && (
+      window.location.hostname == "0.0.0.0" ||
+      window.location.hostname == "127.0.0.1" ||
+      window.location.hostname == "localhost"
+    )
+  ) {
+    defaultActive = location.pathname.split("/")[1]
+  } else {
+    defaultActive = location.pathname.split("/")[2]
+  }
+
+  const [active, setActive] = useState<string>(defaultActive)
 
   const handleSetActive = (key: string) => {
     if (key === "") {
@@ -23,27 +35,17 @@ const Sidebar = ({ location }) => {
     <div className={styles.sidebar}>
       <ul>
         <li>
-          <button className={styles.button} onClick={() => handleSetActive("")}>
+          <button className={defaultActive === "" ? styles.active : styles.button} onClick={() => handleSetActive("")}>
             {"home"}
           </button>
         </li>
         <li>
-          <button className={styles.button} onClick={() => handleSetActive("data")}>
+          <button className={defaultActive === "data" ? styles.active : styles.button} onClick={() => handleSetActive("data")}>
             {"data"}
           </button>
         </li>
         {active === "data" && (
           <ul>
-            <li>
-              <Link to="/data/hash" activeClassName={styles.active}>
-                {"hash"}
-              </Link>
-            </li>
-            <li>
-              <Link to="/data/store" activeClassName={styles.active}>
-                {"store"}
-              </Link>
-            </li>
             <li>
               <Link to="/data/convert" activeClassName={styles.active}>
                 {"convert"}
@@ -67,7 +69,7 @@ const Sidebar = ({ location }) => {
           </ul>
         )}
         <li>
-          <button className={styles.button} onClick={() => handleSetActive("geonode")}>
+          <button className={defaultActive === "geonode" ? styles.active : styles.button} onClick={() => handleSetActive("geonode")}>
             {"geonode"}
           </button>
         </li>
@@ -86,7 +88,7 @@ const Sidebar = ({ location }) => {
           </ul>
         )}
         <li>
-          <button className={styles.button} onClick={() => handleSetActive("group")}>
+          <button className={defaultActive === "group" ? styles.active : styles.button} onClick={() => handleSetActive("group")}>
             {"group"}
           </button>
         </li>

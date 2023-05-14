@@ -1,9 +1,9 @@
 import * as React from "react"
 
-import Main from "../../../layouts/Main"
-import Seo from "../../../components/SeoWrapper"
+import Main from "../../layouts/Main"
+import Seo from "../../components/SeoWrapper"
 
-import GenerateHash from "../../../components/data/hash/GenerateHash"
+import GenerateHash from "../../components/hash/GenerateHash"
 
 import * as styles from "./index.module.css"
 
