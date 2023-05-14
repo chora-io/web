@@ -7,20 +7,17 @@ import Dashboard from "../../components/dash/Dashboard"
 
 import * as styles from "./index.module.css"
 
-import { regenMainnet } from "chora/utils/chains"
-
-const RegenPage = () => (
+const LocalPage = () => (
   <Main>
     <div className={styles.page}>
       <Dashboard
-        chainId={regenMainnet.chainId}
-        chainName={regenMainnet.chainName}
-        rest={regenMainnet.rest}
+        chainName="Local Testnet"
+        rest="http://127.0.0.1:1317"
       />
     </div>
   </Main>
 )
 
-export const Head = () => <Seo title="scan | regen mainnet" />
+export const Head = () => <Seo title="scan | local testnet" />
 
-export default RegenPage
+export default LocalPage

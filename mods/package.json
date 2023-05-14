@@ -1,7 +1,7 @@
 {
   "name": "mods",
   "private": true,
-  "description": "chora blockchain modules",
+  "description": "blockchain modules",
   "version": "0.0.0",
   "homepage": "https://chora.io",
   "bugs": {

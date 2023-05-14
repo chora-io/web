@@ -4,8 +4,8 @@
 module.exports = {
   pathPrefix: `/scan`,
   siteMetadata: {
-    title: `scan | network scanner`,
-    description: `chora network scanner`,
+    title: `scan | blockchain networks`,
+    description: `blockchain networks`,
     author: `@choraio`,
     siteUrl: `https://chora.io/scan`,
   },

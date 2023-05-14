@@ -5,7 +5,7 @@ import Validators from "./Validators"
 
 import * as styles from "./Dashboard.module.css"
 
-const Dashboard = ({ chainId, chainName, rest }: any) => {
+const Dashboard = ({ chainName, rest }: any) => {
 
   // ...
 
@@ -17,12 +17,11 @@ const Dashboard = ({ chainId, chainName, rest }: any) => {
         </div>
         <div>
           <Link to={"/"}>
-            {"back"}
+            {"home"}
           </Link>
         </div>
       </div>
       <Validators
-        chainId={chainId}
         chainName={chainName}
         rest={rest}
       />

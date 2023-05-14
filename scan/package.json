@@ -1,7 +1,7 @@
 {
   "name": "scan",
   "private": true,
-  "description": "chora blockchain networks",
+  "description": "blockchain networks",
   "version": "0.0.0",
   "homepage": "https://chora.io",
   "bugs": {

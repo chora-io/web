@@ -2,12 +2,12 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
-  pathPrefix: `/demo`,
+  pathPrefix: `/mods`,
   siteMetadata: {
-    title: `demo application`,
-    description: `demo application`,
+    title: `mods | blockchain modules`,
+    description: `blockchain modules`,
     author: `@choraio`,
-    siteUrl: `https://chora.io/demo`,
+    siteUrl: `https://chora.io/mods`,
   },
   plugins: [
     {

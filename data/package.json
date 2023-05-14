@@ -1,7 +1,7 @@
 {
-  "name": "demo",
+  "name": "data",
   "private": true,
-  "description": "demo application",
+  "description": "data demo application",
   "version": "0.0.0",
   "homepage": "https://chora.io",
   "bugs": {

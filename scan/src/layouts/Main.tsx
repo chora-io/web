@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import Header from "../components/HeaderWrapper"
+import Header from "../components/Header"
 
 import "./Main.module.css"
 
