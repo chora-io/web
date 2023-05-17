@@ -4,10 +4,10 @@ import Header from "../components/Header"
 
 import "./Main.module.css"
 
-const Main = ({ children }: any) => {
+const Main = ({ children, location }: any) => {
   return (
     <main>
-      <Header />
+      <Header location={location} />
       {children}
     </main>
   )

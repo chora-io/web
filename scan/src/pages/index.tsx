@@ -7,8 +7,8 @@ import Chains from "../components/home/Chains"
 
 import * as styles from "./index.module.css"
 
-const HomePage = () => (
-  <Main>
+const HomePage = ({ location }: any) => (
+  <Main location={location}>
     <div className={styles.page}>
       <Chains />
     </div>

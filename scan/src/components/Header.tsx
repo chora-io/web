@@ -7,7 +7,7 @@ import icon from "chora/assets/images/chora_dark_icon.png"
 
 import * as styles from "./Header.module.css"
 
-const Header = () => {
+const Header = ({ location }) => {
   let local: boolean
   let page: string
 
@@ -25,17 +25,17 @@ const Header = () => {
 
   let network: string
   switch (page) {
-      case "regen":
-        network = "regen-1"
-        break
-      case "redwood":
-        network = "regen-redwood-1"
-        break
       case "testnet":
         network = "chora-testnet-1"
         break
       case "local":
         network = "local-testnet"
+        break
+      case "regen":
+        network = "regen-1"
+        break
+      case "redwood":
+        network = "regen-redwood-1"
         break
       default:
         network = ""
@@ -45,17 +45,17 @@ const Header = () => {
   let nextPage: string
   const handleSetNetwork = async nextNetwork => {
     switch (nextNetwork) {
+      case "chora-local":
+        nextPage = "local"
+        break
+      case "chora-testnet-1":
+        nextPage = "testnet"
+        break
       case "regen-1":
         nextPage = "regen"
         break
       case "regen-redwood-1":
         nextPage = "redwood"
-        break
-      case "chora-testnet-1":
-        nextPage = "testnet"
-        break
-      case "local-testnet":
-        nextPage = "local"
         break
       default:
         nextPage = ""

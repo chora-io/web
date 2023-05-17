@@ -47,6 +47,16 @@ const Chains = () => {
             </tr>
           </thead>
           <tbody>
+            {local && (
+              <Chain
+                chainInfo={choraLocal}
+                dashboardUrl="/local"
+              />
+            )}
+            <Chain
+              chainInfo={choraTestnet}
+              dashboardUrl="/testnet"
+            />
             <Chain
               chainInfo={regenMainnet}
               dashboardUrl="/regen"
@@ -55,19 +65,6 @@ const Chains = () => {
               chainInfo={regenRedwood}
               dashboardUrl="/redwood"
             />
-            <Chain
-              chainInfo={choraTestnet}
-              dashboardUrl="/testnet"
-            />
-            {local && (
-              <Chain
-                chainInfo={{
-                  chainId: "local-testnet",
-                  rest: "http://localhost:1317",
-                }}
-                dashboardUrl="/local"
-              />
-            )}
           </tbody>
         </table>
       </div>

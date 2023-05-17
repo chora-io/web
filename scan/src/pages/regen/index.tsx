@@ -9,11 +9,10 @@ import * as styles from "./index.module.css"
 
 import { regenMainnet } from "chora/utils/chains"
 
-const RegenPage = () => (
-  <Main>
+const RegenPage = ({ location }: any) => (
+  <Main location={location}>
     <div className={styles.page}>
       <Dashboard
-        chainId={regenMainnet.chainId}
         chainName={regenMainnet.chainName}
         rest={regenMainnet.rest}
       />

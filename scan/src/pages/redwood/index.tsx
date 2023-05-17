@@ -9,11 +9,10 @@ import * as styles from "./index.module.css"
 
 import { regenRedwood } from "chora/utils/chains"
 
-const RedwoodPage = () => (
-  <Main>
+const RedwoodPage = ({ location }: any) => (
+  <Main location={location}>
     <div className={styles.page}>
       <Dashboard
-        chainId={regenRedwood.chainId}
         chainName={regenRedwood.chainName}
         rest={regenRedwood.rest}
       />

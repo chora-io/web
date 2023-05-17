@@ -5,14 +5,16 @@ import Seo from "../../components/SeoWrapper"
 
 import Dashboard from "../../components/dash/Dashboard"
 
+import { choraLocal } from "chora/utils/chains"
+
 import * as styles from "./index.module.css"
 
-const LocalPage = () => (
-  <Main>
+const LocalPage = ({ location }: any) => (
+  <Main location={location}>
     <div className={styles.page}>
       <Dashboard
-        chainName="Local Testnet"
-        rest="http://127.0.0.1:1317"
+        chainName={choraLocal.chainName}
+        rest={choraLocal.rest}
       />
     </div>
   </Main>

@@ -9,11 +9,10 @@ import * as styles from "./index.module.css"
 
 import { choraTestnet } from "chora/utils/chains"
 
-const TestnetPage = () => (
-  <Main>
+const TestnetPage = ({ location }: any) => (
+  <Main location={location}>
     <div className={styles.page}>
       <Dashboard
-        chainId={choraTestnet.chainId}
         chainName={choraTestnet.chainName}
         rest={choraTestnet.rest}
       />

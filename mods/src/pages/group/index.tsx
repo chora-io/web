@@ -5,12 +5,12 @@ import Seo from "../../components/SeoWrapper"
 
 import * as styles from "./index.module.css"
 
-const HomePage = ({ location }) => (
+const GroupPage = ({ location }) => (
   <Main location={location}>
     <div className={styles.page}>
       <div>
         <h1>
-          {"group demo application"}
+          {"group module"}
         </h1>
       </div>
     </div>
@@ -19,4 +19,4 @@ const HomePage = ({ location }) => (
 
 export const Head = () => <Seo title="" />
 
-export default HomePage
+export default GroupPage
