@@ -47,23 +47,13 @@ const Sidebar = ({ location }) => {
         {active === "data" && (
           <ul>
             <li>
-              <Link to="/data/convert" activeClassName={styles.active}>
-                {"convert"}
+              <Link to="/data/msg" activeClassName={styles.active}>
+                {"msg service"}
               </Link>
             </li>
             <li>
-              <Link to="/data/anchor" activeClassName={styles.active}>
-                {"anchor"}
-              </Link>
-            </li>
-            <li>
-              <Link to="/data/attest" activeClassName={styles.active}>
-                {"attest"}
-              </Link>
-            </li>
-            <li>
-              <Link to="/data/register" activeClassName={styles.active}>
-                {"register"}
+              <Link to="/data/query" activeClassName={styles.active}>
+                {"query service"}
               </Link>
             </li>
           </ul>
@@ -76,13 +66,13 @@ const Sidebar = ({ location }) => {
         {active === "geonode" && (
           <ul>
             <li>
-              <Link to="/geonode/create" activeClassName={styles.active}>
-                {"create"}
+              <Link to="/geonode/msg" activeClassName={styles.active}>
+                {"msg service"}
               </Link>
             </li>
             <li>
-              <Link to="/geonode/update" activeClassName={styles.active}>
-                {"update"}
+              <Link to="/geonode/query" activeClassName={styles.active}>
+                {"query service"}
               </Link>
             </li>
           </ul>
@@ -95,23 +85,13 @@ const Sidebar = ({ location }) => {
         {active === "group" && (
           <ul>
             <li>
-              <Link to="/group/create" activeClassName={styles.active}>
-                {"create"}
+              <Link to="/group/msg" activeClassName={styles.active}>
+                {"msg service"}
               </Link>
             </li>
             <li>
-              <Link to="/group/update" activeClassName={styles.active}>
-                {"update"}
-              </Link>
-            </li>
-            <li>
-              <Link to="/group/policy" activeClassName={styles.active}>
-                {"policy"}
-              </Link>
-            </li>
-            <li>
-              <Link to="/group/proposal" activeClassName={styles.active}>
-                {"proposal"}
+              <Link to="/group/query" activeClassName={styles.active}>
+                {"query service"}
               </Link>
             </li>
           </ul>

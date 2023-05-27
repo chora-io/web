@@ -3,18 +3,16 @@ import * as React from "react"
 import Main from "../../../layouts/Main"
 import Seo from "../../../components/SeoWrapper"
 
-import MsgCreate from "../../../components/geonode/create/MsgCreate"
-import QueryNode from "../../../components/geonode/create/QueryNode"
-import QueryNodes from "../../../components/geonode/create/QueryNodes"
-import QueryNodesByCurator from "../../../components/geonode/create/QueryNodesByCurator"
+import QueryNode from "../../../components/geonode/query/QueryNode"
+import QueryNodes from "../../../components/geonode/query/QueryNodes"
+import QueryNodesByCurator from "../../../components/geonode/query/QueryNodesByCurator"
 
 import * as styles from "./index.module.css"
 
-const CreatePage = ({ location }) => (
+const GeonodeQueryPage = ({ location }) => (
   <Main location={location}>
     <div className={styles.page}>
       <div>
-        <MsgCreate />
         <QueryNode />
         <QueryNodes />
         <QueryNodesByCurator />
@@ -25,4 +23,4 @@ const CreatePage = ({ location }) => (
 
 export const Head = () => <Seo title="" />
 
-export default CreatePage
+export default GeonodeQueryPage

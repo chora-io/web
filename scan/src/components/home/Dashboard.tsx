@@ -13,7 +13,7 @@ const Dashboard = () => {
     <div>
       <div className={styles.header}>
         <h1>
-          {"Network Scanner"}
+          {"network scanner"}
         </h1>
       </div>
       <div className={styles.modules}>

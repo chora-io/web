@@ -37,9 +37,11 @@ const SelectNetwork = ({ network, setNetwork }: any) => {
         <option value={regenMainnet.chainId}>
           {regenMainnet.chainId}
         </option>
-        <option value={regenLocal.chainId}>
-          {regenLocal.chainId}
-        </option>
+        {local && (
+          <option value={regenLocal.chainId}>
+            {regenLocal.chainId}
+          </option>
+        )}
         <option value={regenRedwood.chainId}>
           {regenRedwood.chainId}
         </option>
