@@ -5,7 +5,7 @@ import Seo from "../../components/SeoWrapper"
 
 import Dashboard from "../../components/dash/Dashboard"
 
-import { choraLocal } from "chora/utils/chains"
+import { regenLocal } from "chora/utils/chains"
 
 import * as styles from "./index.module.css"
 
@@ -13,13 +13,14 @@ const LocalPage = ({ location }: any) => (
   <Main location={location}>
     <div className={styles.page}>
       <Dashboard
-        chainName={choraLocal.chainName}
-        rest={choraLocal.rest}
+        chainId={regenLocal.chainId}
+        chainName={regenLocal.chainName}
+        rest={regenLocal.rest}
       />
     </div>
   </Main>
 )
 
-export const Head = () => <Seo title="scan | local testnet" />
+export const Head = () => <Seo title={`scan | ${regenLocal.chainName}`} />
 
 export default LocalPage

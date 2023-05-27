@@ -3,6 +3,7 @@ import * as React from "react"
 import {
     choraLocal,
     choraTestnet,
+    regenLocal,
     regenMainnet,
     regenRedwood,
 } from "chora/utils/chains"
@@ -35,6 +36,9 @@ const SelectNetwork = ({ network, setNetwork }: any) => {
         </option>
         <option value={regenMainnet.chainId}>
           {regenMainnet.chainId}
+        </option>
+        <option value={regenLocal.chainId}>
+          {regenLocal.chainId}
         </option>
         <option value={regenRedwood.chainId}>
           {regenRedwood.chainId}

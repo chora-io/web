@@ -1,0 +1,3 @@
+.page {
+  composes: page from "../../styles/page.css";
+}

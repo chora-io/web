@@ -1,18 +1,14 @@
-/* container */
+/* box */
 
-.container {
+.box {
+  composes: box from "chora/styles/box.css";
   display: flex;
   justify-content: center;
   margin-top: var(--header-height);
-  width: 100vw;
 }
 
-.container h1 {
-  text-align: center;
-}
-
-.container p {
-  padding-top: 2em;
+.box h2 {
+  margin-top: 20px;
   text-align: center;
 }
 

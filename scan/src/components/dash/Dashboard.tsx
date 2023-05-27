@@ -5,26 +5,27 @@ import Validators from "./Validators"
 
 import * as styles from "./Dashboard.module.css"
 
-const Dashboard = ({ chainName, rest }: any) => {
+const Dashboard = ({ chainId, chainName, rest }: any) => {
 
   // ...
 
   return (
     <div>
-      <div className={styles.title}>
+      <div className={styles.header}>
         <div>
-          {chainName + " Dashboard"}
+          <h1>
+            {chainName}
+          </h1>
         </div>
         <div>
-          <Link to={"/"}>
-            {"home"}
-          </Link>
+          <h3>
+            {`(${chainId})`}
+          </h3>
         </div>
       </div>
-      <Validators
-        chainName={chainName}
-        rest={rest}
-      />
+      <div className={styles.modules}>
+        <Validators rest={rest} />
+      </div>
     </div>
   )
 }

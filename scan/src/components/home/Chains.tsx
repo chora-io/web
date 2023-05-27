@@ -7,6 +7,7 @@ import * as styles from "./Chains.module.css"
 import {
   choraLocal,
   choraTestnet,
+  regenLocal,
   regenMainnet,
   regenRedwood,
 } from "chora/utils/chains"
@@ -21,11 +22,11 @@ const Chains = () => {
   ) { local = true }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.box}>
       <div>
-        <h1>
+        <h2>
           {"blockchain networks"}
-        </h1>
+        </h2>
         <table className={styles.table}>
           <thead>
             <tr>
@@ -50,20 +51,26 @@ const Chains = () => {
             {local && (
               <Chain
                 chainInfo={choraLocal}
-                dashboardUrl="/local"
+                dashboardUrl={`/${choraLocal.chainId}`}
               />
             )}
             <Chain
               chainInfo={choraTestnet}
-              dashboardUrl="/testnet"
+              dashboardUrl={`/${choraTestnet.chainId}`}
             />
             <Chain
               chainInfo={regenMainnet}
-              dashboardUrl="/regen"
+              dashboardUrl={`/${regenMainnet.chainId}`}
             />
+            {local && (
+              <Chain
+                chainInfo={regenLocal}
+                dashboardUrl={`/${regenLocal.chainId}`}
+              />
+            )}
             <Chain
               chainInfo={regenRedwood}
-              dashboardUrl="/redwood"
+              dashboardUrl={`/${regenRedwood.chainId}`}
             />
           </tbody>
         </table>

@@ -1,7 +1,7 @@
 /* box */
 
 .box {
-  background: var(--background-secondary-transparent);
+  background: var(--background-primary-transparent);
   box-shadow: var(--box-shadow);
   margin: 2em 0 4em;
   padding: 2em;

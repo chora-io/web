@@ -7,19 +7,20 @@ import Dashboard from "../../components/dash/Dashboard"
 
 import * as styles from "./index.module.css"
 
-import { regenMainnet } from "chora/utils/chains"
+import { regenRedwood } from "chora/utils/chains"
 
-const RegenPage = ({ location }: any) => (
+const RedwoodPage = ({ location }: any) => (
   <Main location={location}>
     <div className={styles.page}>
       <Dashboard
-        chainName={regenMainnet.chainName}
-        rest={regenMainnet.rest}
+        chainId={regenRedwood.chainId}
+        chainName={regenRedwood.chainName}
+        rest={regenRedwood.rest}
       />
     </div>
   </Main>
 )
 
-export const Head = () => <Seo title="scan | regen mainnet" />
+export const Head = () => <Seo title={`scan | ${regenRedwood.chainName}`} />
 
-export default RegenPage
+export default RedwoodPage

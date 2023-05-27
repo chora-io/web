@@ -55,10 +55,10 @@
 }
 
 :root {
-  --background-primary: rgb(22, 24, 23);
-  --background-primary-transparent: rgba(22, 24, 23, 0.9);
-  --background-secondary: rgb(16, 18, 17);
-  --background-secondary-transparent: rgba(16, 18, 17, 0.9);
+  --background-primary: rgb(16, 18, 17);
+  --background-primary-transparent: rgba(16, 18, 17, 0.9);
+  --background-secondary: rgb(22, 24, 23);
+  --background-secondary-transparent: rgba(22, 24, 23, 0.9);
   --box-shadow: 0 0 4px rgb(28, 30, 29);
   --color: rgb(245, 245, 245);
   --color-error: rgb(245, 0, 0);
@@ -80,7 +80,7 @@ html {
 }
 
 body {
-  background: var(--background-primary);
+  background: var(--background-secondary);
   color: var(--color);
   font-family: var(--font-family);
   font-weight: 300;
@@ -124,7 +124,7 @@ button:hover {
 input,
 textarea,
 select {
-  background: var(--background-secondary);
+  background: var(--background-primary);
   border: none;
   box-shadow: var(--box-shadow);
   color: var(--color);
