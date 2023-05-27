@@ -1,7 +1,7 @@
 /* container */
 
 .container {
-  background: var(--background-primary-transparent);
+  background: var(--background-secondary-transparent);
   width: 100vw;
 }
 
@@ -44,7 +44,7 @@
 
 .section-text {
   align-items: center;
-  background: var(--background-primary);
+  background: var(--background-secondary);
   display: flex;
   font-size: 1.2rem;
   justify-content: center;

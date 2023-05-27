@@ -9,3 +9,8 @@
 .menu {
   composes: header-menu from "chora/styles/header.css";
 }
+
+.divider {
+  color: var(--color-theme);
+  padding: 0;
+}

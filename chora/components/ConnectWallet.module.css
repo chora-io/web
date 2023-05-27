@@ -35,6 +35,7 @@
 }
 
 .form button {
+  font-size: 0.9em;
   margin: 1em;
   padding: 0.5em;
   width: 110px;

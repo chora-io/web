@@ -48,6 +48,14 @@ const Header = () => {
                 {"scan"}
               </Link>
             </li>
+            <li className={styles.divider}>
+              {'|'}
+            </li>
+            <li>
+              <Link to="https://docs.chora.io" target="_blank">
+                {"docs"}
+              </Link>
+            </li>
           </ul>
         ) : (
           <ul className={styles.menu}>
@@ -69,6 +77,14 @@ const Header = () => {
             <li>
               <Link to="/scan">
                 {"scan"}
+              </Link>
+            </li>
+            <li className={styles.divider}>
+              {'|'}
+            </li>
+            <li>
+              <Link to="https://docs.chora.io" target="_blank">
+                {"docs"}
               </Link>
             </li>
           </ul>
