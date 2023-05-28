@@ -2,12 +2,13 @@ import * as React from "react"
 import { Link, navigate } from "gatsby"
 
 import SelectNetwork from "./SelectNetwork"
+import ToggleThemeButton from "chora/components/ToggleThemeButton"
 
 import icon from "chora/assets/images/chora_dark_icon.png"
 
 import * as styles from "./Header.module.css"
 
-const Header = ({ location }) => {
+const Header = ({ location, darkTheme, toggleTheme }) => {
   let local: boolean
   let network: string
 
@@ -38,11 +39,15 @@ const Header = ({ location }) => {
             </div>
           </Link>
         </div>
-        <div className={styles.network}>
+        <div className={styles.menu}>
           <SelectNetwork
             label=" "
             network={network}
             setNetwork={handleSetNetwork}
+          />
+          <ToggleThemeButton
+            darkTheme={darkTheme}
+            toggleTheme={toggleTheme}
           />
         </div>
       </div>
