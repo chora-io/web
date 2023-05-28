@@ -4,7 +4,8 @@ import { Link, navigate } from "gatsby"
 import SelectNetwork from "./SelectNetwork"
 import ToggleThemeButton from "chora/components/ToggleThemeButton"
 
-import icon from "chora/assets/images/chora_dark_icon.png"
+import choraLogoDark from "chora/assets/images/chora_dark_icon.png"
+import choraLogoLight from "chora/assets/images/chora_light_icon.png"
 
 import * as styles from "./Header.module.css"
 
@@ -33,7 +34,7 @@ const Header = ({ location, darkTheme, toggleTheme }) => {
       <div>
         <div className={styles.title}>
           <Link to={local ? "http://" + window.location.hostname + ":8000" : "https://chora.io"}>
-            <img src={icon} />
+            <img src={darkTheme ? choraLogoDark : choraLogoLight} />
             <div>
               {"chora"}
             </div>

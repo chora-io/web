@@ -90,7 +90,7 @@ const Validators = ({ rest }) => {
             </tbody>
           </table>
         </div>
-        <div className={styles.container}>
+        <div>
           {error !== "" && (
             <div className={styles.error}>
               {error}

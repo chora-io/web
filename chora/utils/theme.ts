@@ -1,4 +1,4 @@
-export const cachedPrefersDark = "chora-prefers-dark"
+export const cachedDarkKey = "chora-web-dark"
 
 export const prefersDark = () => {
   let prefersDark: boolean
@@ -7,8 +7,8 @@ export const prefersDark = () => {
     prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
   }
 
-  if (typeof localStorage !== "undefined") {
-    prefersDark = localStorage.getItem(cachedPrefersDark) === "true"
+  if (typeof localStorage !== "undefined" && localStorage.hasOwnProperty(cachedDarkKey)) {
+    prefersDark = localStorage.getItem(cachedDarkKey) === "true"
   }
 
   return prefersDark

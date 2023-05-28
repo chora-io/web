@@ -3,6 +3,10 @@
 # abort on errors
 set -e
 
+# cleanup
+yarn clean
+rm -rf public
+
 # update chora
 (cd chora && yarn)
 
@@ -26,9 +30,6 @@ yarn build-coop
 yarn build-data
 yarn build-mods
 yarn build-scan
-
-# clean up public
-rm -rf public
 
 # copy public directories
 cp -r main/public public
