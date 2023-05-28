@@ -5,3 +5,7 @@
 .title {
   composes: header-title from "../styles/header.css";
 }
+
+.menu {
+  composes: header-menu from "../styles/header.css";
+}

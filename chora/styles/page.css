@@ -4,16 +4,28 @@
   align-items: flex-start;
   display: flex;
   justify-content: center;
-  margin-bottom: 4em;
-  margin-left: var(--sidebar-width);
   min-height: 100vh;
 }
 
-.page h1 {
+/* page-with-sidebar */
+
+.page-with-sidebar {
+  align-items: flex-start;
+  display: flex;
+  justify-content: center;
+  padding-left: var(--sidebar-width);
+  min-height: 100vh;
+}
+
+/* page and page-with-sidebar */
+
+.page h1,
+.page-with-sidebar h1 {
   margin-bottom: 1.5em;
 }
 
-.page > div {
+.page > div,
+.page-with-sidebar > div {
   margin-top: var(--header-height);
   padding-top: 4em;
 }

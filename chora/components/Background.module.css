@@ -1,15 +1,21 @@
-/* background */
-
-.background {
-  position: fixed;
+.primary,
+.secondary-transparent {
   height: 100vh;
+  position: fixed;
   width: 100vw;
   z-index: -1;
 }
 
-.background {
-  background-image: url('../assets/images/chora_dark.png');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+.primary {
+  background: var(--background-primary);
+}
+
+.secondary-transparent {
+  background: var(--background-secondary-transparent);
+}
+
+.primary img,
+.secondary-transparent img {
+  height: 100vh;
+  width: 100vw;
 }

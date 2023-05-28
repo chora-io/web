@@ -55,19 +55,33 @@
 }
 
 :root {
-  --background-primary: rgb(16, 18, 17);
-  --background-primary-transparent: rgba(16, 18, 17, 0.9);
-  --background-secondary: rgb(22, 24, 23);
-  --background-secondary-transparent: rgba(22, 24, 23, 0.9);
-  --box-shadow: 0 0 4px rgb(28, 30, 29);
-  --color: rgb(245, 245, 245);
-  --color-error: rgb(245, 0, 0);
-  --color-placeholder: rgba(245, 245, 245, 0.5);
+  --color-error: rgb(245, 45, 45);
   --color-theme: rgb(0, 195, 165);
   --font-family: 'Ubuntu', sans-serif;
   --header-height: 80px;
   --sidebar-width: 240px;
   --transition: 0.25s;
+
+  /* light theme */
+  --background-primary: rgb(255, 255, 255);
+  --background-primary-transparent: rgba(255, 255, 255, 0.98);
+  --background-secondary: rgb(250, 250, 250);
+  --background-secondary-transparent: rgba(250, 250, 250, 0.98);
+  --box-shadow: 0 0 4px rgb(245, 245, 245);
+  --box-shadow-color: rgb(245, 245, 245);
+  --color-text: rgb(10, 10, 10);
+  --color-text-placeholder: rgba(10, 10, 10, 0.5);
+}
+
+.dark-theme {
+  --background-primary: rgb(17, 17, 17);
+  --background-primary-transparent: rgba(17, 17, 17, 0.98);
+  --background-secondary: rgb(22, 22, 22);
+  --background-secondary-transparent: rgba(22, 22, 22, 0.98);
+  --box-shadow: 0 0 4px rgb(27, 27, 27);
+  --box-shadow-color: rgb(27, 27, 27);
+  --color-text: rgb(245, 245, 245);
+  --color-text-placeholder: rgba(245, 245, 245, 0.5);
 }
 
 * {
@@ -80,11 +94,13 @@ html {
 }
 
 body {
-  background: var(--background-secondary);
-  color: var(--color);
   font-family: var(--font-family);
   font-weight: 300;
   overflow-x: hidden;
+}
+
+main {
+  color: var(--color-text);
 }
 
 h1, h2, h3, h4, h5 {
@@ -110,6 +126,7 @@ button {
   background: var(--color-theme);
   border: none;
   border-radius: 1em;
+  color: var(--background-primary);
   font-family: var(--font-family);
   font-size: 1em;
   outline: none;
@@ -127,7 +144,7 @@ select {
   background: var(--background-primary);
   border: none;
   box-shadow: var(--box-shadow);
-  color: var(--color);
+  color: var(--color-text);
   font-family: var(--font-family);
   outline: none;
 }
@@ -138,7 +155,7 @@ textarea {
 
 input::placeholder,
 textarea::placeholder {
-  color: var(--color-placeholder);
+  color: var(--color-text-placeholder);
 }
 
 pre {

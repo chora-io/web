@@ -5,13 +5,15 @@ import { WalletContext } from "chora"
 
 import Header from "chora/components/Header"
 
-const HeaderWrapper = () => {
+const HeaderWrapper = ({ darkTheme, toggleTheme }) => {
 
   const context = useContext(WalletContext)
 
   return (
     <Header
       context={context}
+      darkTheme={darkTheme}
+      toggleTheme={toggleTheme}
     />
   )
 }

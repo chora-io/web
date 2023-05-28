@@ -2,12 +2,14 @@ import * as React from "react"
 import { Link } from "gatsby"
 
 import ConnectWallet from "./ConnectWallet"
+import ToggleThemeButton from "./ToggleThemeButton"
 
-import icon from "../assets/images/chora_dark_icon.png"
+import choraLogoDark from "../assets/images/chora_dark_icon.png"
+import choraLogoLight from "../assets/images/chora_light_icon.png"
 
 import * as styles from "./Header.module.css"
 
-const Header = ({ context }: any) => {
+const Header = ({ context, darkTheme, toggleTheme }: any) => {
 
   let local = false
   if (typeof window !== "undefined" && (
@@ -22,13 +24,21 @@ const Header = ({ context }: any) => {
       <div>
         <div className={styles.title}>
           <Link to={local ? "http://" + window.location.hostname + ":8000" : "https://chora.io"}>
-            <img src={icon} />
+            <img src={darkTheme ? choraLogoDark : choraLogoLight} />
             <div>
               {"chora"}
             </div>
           </Link>
         </div>
-        {context && <ConnectWallet {...context} />}
+        <div className={styles.menu}>
+          {context && (
+            <ConnectWallet {...context} />
+          )}
+          <ToggleThemeButton
+            darkTheme={darkTheme}
+            toggleTheme={toggleTheme}
+          />
+        </div>
       </div>
     </div>
   )

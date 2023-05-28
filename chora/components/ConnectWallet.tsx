@@ -66,7 +66,7 @@ const ConnectWallet = ({ getKeplr, network, setNetwork, wallet, loading, error }
       }
       {address !== "" &&
         <span className={styles.address}>
-          {address.substring(0, 9) + "..." + address.substring(41, 44)}
+          {address.substring(0, 13) + "..." + address.substring(38, 44)}
         </span>
       }
       <form className={styles.form} onSubmit={getKeplr}>

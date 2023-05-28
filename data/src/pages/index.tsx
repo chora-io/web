@@ -10,7 +10,7 @@ const HomePage = ({ location }) => (
     <div className={styles.page}>
       <div>
         <h1>
-          {"data management"}
+          {"data tools and services"}
         </h1>
       </div>
     </div>

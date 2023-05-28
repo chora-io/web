@@ -1,15 +1,12 @@
 import * as React from "react"
 
-import Background from "chora/components/Background"
-
 import Main from "../layouts/Main"
 import Seo from "../components/SeoWrapper"
 
 import * as styles from "./index.module.css"
 
 const HomePage = () => (
-  <Main>
-    <Background />
+  <Main withBackground={true}>
     <div className={styles.container} >
       <div className={styles.sectionMain}>
         <div>

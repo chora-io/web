@@ -36,7 +36,7 @@
 }
 
 .header-title div {
-  color: var(--color);
+  color: var(--color-text);
   font-size: 22px;
   margin-left: 12px;
 }
@@ -44,6 +44,12 @@
 /* header-menu */
 
 .header-menu {
+  display: flex;
+  height: var(--header-height);
+  margin-right: 3em;
+}
+
+.header-menu ul {
   align-items: center;
   display: flex;
   justify-content: center;

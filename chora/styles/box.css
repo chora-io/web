@@ -11,7 +11,7 @@
 /* box-header */
 
 .box-header {
-  border-bottom: 1px solid rgb(25, 25, 25);
+  border-bottom: 1px solid var(--box-shadow-color);
   margin-bottom: 2em;
   padding-bottom: 2em;
 }
@@ -29,7 +29,7 @@
 /* box-options */
 
 .box-options {
-  border-bottom: 1px solid rgb(25, 25, 25);
+  border-bottom: 1px solid var(--box-shadow-color);
   margin-bottom: 2em;
   padding-bottom: 2em;
 }
@@ -51,21 +51,21 @@
 /* box-result-above */
 
 .box-result-above {
-  border-bottom: 1px solid rgb(25, 25, 25);
+  border-bottom: 1px solid var(--box-shadow-color);
   padding-bottom: 2em;
 }
 
 /* box-result-below */
 
 .box-result-below {
-  border-top: 1px solid rgb(25, 25, 25);
+  border-top: 1px solid var(--box-shadow-color);
   padding-top: 2em;
 }
 
 /* box-item */
 
 .box-item {
-  border-bottom: 1px solid rgb(25, 25, 25);
+  border-bottom: 1px solid var(--box-shadow-color);
   margin-top: 2em;
   padding-bottom: 2em;
 }
@@ -82,7 +82,7 @@
 /* box-item-sub */
 
 .box-item-sub {
-  border-top: 1px solid rgb(25, 25, 25);
+  border-top: 1px solid var(--box-shadow-color);
   padding-top: 2em;
   margin-bottom: 2em;
 }
