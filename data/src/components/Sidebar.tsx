@@ -12,13 +12,18 @@ const Sidebar = () => (
         </Link>
       </li>
       <li>
-        <Link to="/hash" activeClassName={styles.active}>
-          {"hash"}
+        <Link to="/search" activeClassName={styles.active}>
+          {"search"}
         </Link>
       </li>
       <li>
-        <Link to="/store" activeClassName={styles.active}>
-          {"store"}
+        <Link to="/schema" activeClassName={styles.active}>
+          {"schema"}
+        </Link>
+      </li>
+      <li>
+        <Link to="/server" activeClassName={styles.active}>
+          {"server"}
         </Link>
       </li>
     </ul>

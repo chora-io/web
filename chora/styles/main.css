@@ -58,6 +58,7 @@
   --color-error: rgb(245, 45, 45);
   --color-theme: rgb(0, 195, 165);
   --font-family: 'Ubuntu', sans-serif;
+  --footer-height: 160px;
   --header-height: 80px;
   --sidebar-width: 240px;
   --transition: 0.25s;

@@ -3,17 +3,15 @@ import * as React from "react"
 import Main from "../../layouts/Main"
 import Seo from "../../components/SeoWrapper"
 
-import GetData from "../../components/store/GetData"
-import PostData from "../../components/store/PostData"
+import Search from "../../components/search/Search"
 
 import * as styles from "./index.module.css"
 
-const StorePage = ({ location }) => (
+const ExplorePage = ({ location }) => (
   <Main location={location}>
     <div className={styles.page}>
       <div>
-        <PostData />
-        <GetData />
+        <Search />
       </div>
     </div>
   </Main>
@@ -21,4 +19,4 @@ const StorePage = ({ location }) => (
 
 export const Head = () => <Seo title="" />
 
-export default StorePage
+export default ExplorePage

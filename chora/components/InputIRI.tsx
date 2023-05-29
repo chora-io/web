@@ -7,6 +7,8 @@ const choraPlaceholder = "chora:13toVfvC2YxrrfSXWB5h2BGHiXZURsKxWUz72uDRDSPMCrYP
 const regenPlaceholder = "regen:13toVfvC2YxrrfSXWB5h2BGHiXZURsKxWUz72uDRDSPMCrYPguGUXSC.rdf"
 
 const InputIRI = ({ id, label, placeholder, network, iri, setIri }: any) => {
+  let noLabel = false
+  if (label === "") noLabel = true
 
   let defaultPlaceholder: string
   if (network === undefined || network.includes("chora")) {
@@ -17,7 +19,7 @@ const InputIRI = ({ id, label, placeholder, network, iri, setIri }: any) => {
 
   return (
     <label htmlFor={id ? id : defaultId}>
-      {label ? label : defaultLabel}
+      {!noLabel && (label ? label : defaultLabel)}
       <input
         id={id ? id : defaultId}
         value={iri}

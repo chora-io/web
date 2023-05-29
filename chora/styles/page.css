@@ -4,6 +4,7 @@
   align-items: flex-start;
   display: flex;
   justify-content: center;
+  margin-bottom: var(--footer-height);
   min-height: 100vh;
 }
 
@@ -13,6 +14,7 @@
   align-items: flex-start;
   display: flex;
   justify-content: center;
+  margin-bottom: var(--footer-height);
   padding-left: var(--sidebar-width);
   min-height: 100vh;
 }

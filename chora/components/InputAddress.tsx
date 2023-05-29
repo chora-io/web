@@ -10,9 +10,7 @@ const regenAddressLong = "regen1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vz
 
 const InputAddress = ({ id, label, placeholder, long, network, address, setAddress }: any) => {
   let noLabel = false
-  if (label === "") {
-    noLabel = true
-  }
+  if (label === "") noLabel = true
 
   let defaultPlaceholder: string
   if (network === undefined || network.includes("chora")) {

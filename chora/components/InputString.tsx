@@ -6,9 +6,7 @@ const defaultPlaceholder = ""
 
 const InputString = ({ id, label, placeholder, string, setString }: any) => {
   let noLabel = false
-  if (label === "") {
-    noLabel = true
-  }
+  if (label === "") noLabel = true
 
   return (
     <label htmlFor={id ? id : defaultId}>
