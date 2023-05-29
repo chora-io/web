@@ -1,19 +1,14 @@
 import * as React from "react"
-import { useEffect, useState } from "react"
 
 import Background from "chora/components/Background"
-import { cachedDarkKey, prefersDark } from "chora/utils/theme"
+import { useDarkTheme } from "chora/hooks/useDarkTheme"
 
 import Header from "../components/Header"
 
 import * as styles from "./Main.module.css"
 
 const Main = ({ children, location, withBackground }: any) => {
-  const [darkTheme, setDarkTheme] = useState<boolean>(prefersDark())
-
-  useEffect(() => {
-    localStorage.setItem(cachedDarkKey, darkTheme ? "true" : "false")
-  }, [darkTheme])
+  const [darkTheme, setDarkTheme] = useDarkTheme()
 
   const toggleTheme = () => {
     setDarkTheme(!darkTheme)
@@ -21,6 +16,9 @@ const Main = ({ children, location, withBackground }: any) => {
 
   return (
     <main className={darkTheme ? styles.darkTheme : null}>
+      <div hidden={true}>
+        {darkTheme.toString()}
+      </div>
       {withBackground ? (
         <Background darkTheme={darkTheme} withImage={true} />
       ) : (

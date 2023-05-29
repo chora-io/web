@@ -55,7 +55,7 @@ const InputMembers = ({ id, network, members, setMembers }: any) => {
         </button>
         {members.length > 0 && (
           <button onClick={handleRemoveMember}>
-          {"remove member"}
+            {"remove member"}
           </button>
         )}
       </span>

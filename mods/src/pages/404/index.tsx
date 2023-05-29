@@ -5,8 +5,8 @@ import Seo from "../../components/SeoWrapper"
 
 import * as styles from "./index.module.css"
 
-const NotFoundPage = () => (
-  <Main withBackground={true}>
+const NotFoundPage = ({ location }) => (
+  <Main location={location} withBackground={true}>
     <div className={styles.page}>
       <div className={styles.content}>
         <div>

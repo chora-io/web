@@ -1,9 +1,8 @@
 import * as React from "react"
-import { useEffect, useState } from "react"
 
 import { WalletContextProvider } from "chora"
 import Background from "chora/components/Background"
-import { cachedDarkKey, prefersDark } from "chora/utils/theme"
+import { useDarkTheme } from "chora/hooks/useDarkTheme"
 
 import Header from "../components/Header"
 import HeaderWallet from "../components/HeaderWallet"
@@ -11,11 +10,7 @@ import HeaderWallet from "../components/HeaderWallet"
 import * as styles from "./Main.module.css"
 
 const Main = ({ children, withBackground, withWallet }: any) => {
-  const [darkTheme, setDarkTheme] = useState<boolean>(prefersDark())
-
-  useEffect(() => {
-    localStorage.setItem(cachedDarkKey, darkTheme ? "true" : "false")
-  }, [darkTheme])
+  const [darkTheme, setDarkTheme] = useDarkTheme()
 
   const toggleTheme = () => {
     setDarkTheme(!darkTheme)
@@ -23,6 +18,9 @@ const Main = ({ children, withBackground, withWallet }: any) => {
 
   return (
     <main className={darkTheme ? styles.darkTheme : null}>
+      <div hidden={true}>
+        {darkTheme.toString()}
+      </div>
       {withBackground ? (
         <Background darkTheme={darkTheme} withImage={true} />
       ) : (
