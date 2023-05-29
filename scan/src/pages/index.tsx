@@ -3,14 +3,21 @@ import * as React from "react"
 import Main from "../layouts/Main"
 import Seo from "../components/SeoWrapper"
 
-import Dashboard from "../components/home/Dashboard"
+import Chains from "../components/home/Chains"
 
 import * as styles from "./index.module.css"
 
 const HomePage = ({ location }: any) => (
   <Main location={location}>
     <div className={styles.page}>
-      <Dashboard />
+      <div className={styles.header}>
+        <h1>
+          {"network scanner"}
+        </h1>
+      </div>
+      <div className={styles.content}>
+        <Chains />
+      </div>
     </div>
   </Main>
 )

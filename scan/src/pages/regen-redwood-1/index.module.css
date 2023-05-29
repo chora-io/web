@@ -1,3 +1,25 @@
 .page {
   composes: page from "../../styles/page.css";
 }
+
+/* header */
+
+.header {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: var(--header-height);
+}
+
+.header h1, h3 {
+  margin: 0.25em;
+}
+
+/* content */
+
+.content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
