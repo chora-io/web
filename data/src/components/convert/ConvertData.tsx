@@ -1,9 +1,10 @@
 import * as React from "react"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Buffer } from "buffer"
 import * as blake from "blakejs"
 import * as jsonld from "jsonld"
 
+import { WalletContext } from "chora"
 import Result from "chora/components/Result"
 import SelectDigestAlgorithm from "chora/components/SelectDigestAlgorithm"
 import SelectGraphCanon from "chora/components/SelectGraphCanon"
@@ -14,11 +15,14 @@ import InputsFromJSON from "../InputsFromJSON"
 import SelectContext from "../SelectContext"
 import SelectInput from "../SelectInput"
 
-import * as styles from "./GenerateHash.module.css"
+import * as styles from "./ConvertData.module.css"
 
 const contextUrl = "https://schema.chora.io/contexts/index.jsonld"
+const convertHashToIri = "/regen/data/v1/convert-hash-to-iri"
 
-const GenerateHash = () => {
+const ConvertData = () => {
+
+  const { chainInfo } = useContext(WalletContext)
 
   // input option
   const [input, setInput] = useState("form")
@@ -130,12 +134,33 @@ const GenerateHash = () => {
     // generate hash bytes using blake2b
     const bz = blake.blake2b(normalized, undefined, 32)
 
-    setSuccess(JSON.stringify({
-      hash: Buffer.from(bz).toString("base64"),
-      digestAlgorithm: "DIGEST_ALGORITHM_BLAKE2B_256",
-      canonicalizationAlgorithm: "GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015",
-      merkleTree: "GRAPH_MERKLE_TREE_NONE_UNSPECIFIED"
-    }, null, "  "))
+    const contentHash = {
+      graph: {
+        hash: Buffer.from(bz).toString("base64"),
+        digestAlgorithm: "DIGEST_ALGORITHM_BLAKE2B_256",
+        canonicalizationAlgorithm: "GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015",
+        merkleTree: "GRAPH_MERKLE_TREE_NONE_UNSPECIFIED"
+      }
+  }
+
+    await fetch(chainInfo.rest + convertHashToIri, {
+      method: "POST",
+      body: JSON.stringify({ contentHash }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.code) {
+          setError(data.message)
+        } else {
+          setSuccess(JSON.stringify({
+            iri: data.iri,
+            contentHash,
+          }, null, "  "))
+        }
+      })
+      .catch(err => {
+        setError(err.message)
+      })
   }
 
   const handleSetInput = (input) => {
@@ -148,10 +173,10 @@ const GenerateHash = () => {
     <div className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"generate hash"}
+          {"convert data"}
         </h2>
         <p>
-          {"generate a content hash from a json-ld document"}
+          {"convert data to iri and content hash"}
         </p>
       </div>
       <SelectInput
@@ -183,7 +208,7 @@ const GenerateHash = () => {
             setMerkle={() => {}} // disabled until multiple options exist
           />
           <button type="submit">
-            {"generate"}
+            {"convert"}
           </button>
         </form>
       ) : (
@@ -213,7 +238,7 @@ const GenerateHash = () => {
             setMerkle={() => {}} // disabled until multiple options exist
           />
           <button type="submit">
-            {"generate"}
+            {"convert"}
           </button>
         </form>
       )}
@@ -225,4 +250,4 @@ const GenerateHash = () => {
   )
 }
 
-export default GenerateHash
+export default ConvertData

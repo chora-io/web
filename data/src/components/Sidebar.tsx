@@ -17,8 +17,8 @@ const Sidebar = () => (
         </Link>
       </li>
       <li>
-        <Link to="/schema" activeClassName={styles.active}>
-          {"schema"}
+        <Link to="/convert" activeClassName={styles.active}>
+          {"convert"}
         </Link>
       </li>
       <li>

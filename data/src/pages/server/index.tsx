@@ -12,8 +12,8 @@ const StorePage = ({ location }) => (
   <Main location={location}>
     <div className={styles.page}>
       <div>
-        <PostData />
         <GetData />
+        <PostData />
       </div>
     </div>
   </Main>

@@ -48,7 +48,7 @@ const GetData = () => {
           {"get data"}
         </h2>
         <p>
-          {"get a json-ld document by iri from the chora server"}
+          {"get data by iri from chora server"}
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>

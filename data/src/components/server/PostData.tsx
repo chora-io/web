@@ -163,7 +163,7 @@ const PostData = () => {
           {"post data"}
         </h2>
         <p>
-          {"post a json-ld document to the chora server"}
+          {"generate iri and post data to chora server"}
         </p>
       </div>
       <SelectInput
