@@ -4,15 +4,15 @@ import { useContext, useState } from "react"
 import { WalletContext } from "chora"
 import { signAndBroadcast } from "chora/utils/tx"
 
-import MsgInputs from "chora/components/data/MsgRegisterResolver"
-import MsgInputsJSON from "chora/components/data/MsgRegisterResolverJSON"
+import MsgInputs from "chora/components/data/MsgAttest"
+import MsgInputsJSON from "chora/components/data/MsgAttestJSON"
 import ResultTx from "chora/components/ResultTx"
 
-import SelectInput from "../../SelectInput"
+import SelectInput from "../SelectInput"
 
-import * as styles from "./MsgRegisterResolver.module.css"
+import * as styles from "./MsgAttest.module.css"
 
-const MsgRegisterResolverView = () => {
+const MsgAttest = () => {
 
   const { chainInfo, wallet } = useContext(WalletContext)
 
@@ -45,10 +45,10 @@ const MsgRegisterResolverView = () => {
     <div className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"MsgRegisterResolver"}
+          {"MsgAttest"}
         </h2>
         <p>
-          {"register data to a data resolver"}
+          {"attest to data"}
         </p>
       </div>
       <SelectInput
@@ -87,4 +87,4 @@ const MsgRegisterResolverView = () => {
   )
 }
 
-export default MsgRegisterResolverView
+export default MsgAttest

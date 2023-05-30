@@ -1,3 +1,0 @@
-.page {
-  composes: page-with-sidebar from "chora/styles/page.css";
-}

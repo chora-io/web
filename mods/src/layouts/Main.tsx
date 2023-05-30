@@ -9,7 +9,7 @@ import Sidebar from "../components/Sidebar"
 
 import * as styles from "./Main.module.css"
 
-const Main = ({ children, location, withBackground }: any) => {
+const Main = ({ children, withBackground }: any) => {
   const [darkTheme, setDarkTheme] = useDarkTheme()
 
   const toggleTheme = () => {
@@ -31,7 +31,7 @@ const Main = ({ children, location, withBackground }: any) => {
           darkTheme={darkTheme}
           toggleTheme={toggleTheme}
         />
-        <Sidebar location={location} />
+        <Sidebar />
         {children}
       </main>
     </WalletContextProvider>

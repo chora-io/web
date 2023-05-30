@@ -4,15 +4,15 @@ import { useContext, useState } from "react"
 import { WalletContext } from "chora"
 import { signAndBroadcast } from "chora/utils/tx"
 
-import MsgInputs from "chora/components/data/MsgAttest"
-import MsgInputsJSON from "chora/components/data/MsgAttestJSON"
+import MsgInputs from "chora/components/data/MsgAnchor"
+import MsgInputsJSON from "chora/components/data/MsgAnchorJSON"
 import ResultTx from "chora/components/ResultTx"
 
-import SelectInput from "../../SelectInput"
+import SelectInput from "../SelectInput"
 
-import * as styles from "./MsgAttest.module.css"
+import * as styles from "./MsgAnchor.module.css"
 
-const MsgAttest = () => {
+const MsgAnchor = () => {
 
   const { chainInfo, wallet } = useContext(WalletContext)
 
@@ -45,17 +45,17 @@ const MsgAttest = () => {
     <div className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"MsgAttest"}
+          {"MsgAnchor"}
         </h2>
         <p>
-          {"attest to data"}
+          {"anchor data"}
         </p>
       </div>
       <SelectInput
         input={input}
         setInput={handleSetInput}
       />
-      {input == "form" ? (
+      {input === "form" ? (
         <form className={styles.form} onSubmit={handleSubmit}>
           <MsgInputs
             setMessage={setMessage}
@@ -87,4 +87,4 @@ const MsgAttest = () => {
   )
 }
 
-export default MsgAttest
+export default MsgAnchor

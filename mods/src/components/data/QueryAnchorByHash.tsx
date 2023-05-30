@@ -7,13 +7,13 @@ import InputContentHash from "chora/components/InputContentHash"
 import InputContentHashJSON from "chora/components/InputContentHashJSON"
 import Result from "chora/components/Result"
 
-import SelectInput from "../../SelectInput"
+import SelectInput from "../SelectInput"
 
-import * as styles from "./QueryAttestationsByHash.module.css"
+import * as styles from "./QueryAnchorByHash.module.css"
 
-const queryAttestationsByHash = "/regen/data/v1/attestations-by-hash"
+const queryAnchorByHash = "/regen/data/v1/anchor-by-hash"
 
-const QueryAttestationsByHash = () => {
+const QueryAnchorByHash = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
@@ -32,7 +32,7 @@ const QueryAttestationsByHash = () => {
     let body: string
 
     if (input == "form") {
-      body = JSON.stringify({ contentHash: contentHash })
+        body = JSON.stringify({ contentHash: contentHash })
     } else {
       let ch = ""
       try {
@@ -44,7 +44,7 @@ const QueryAttestationsByHash = () => {
       body = JSON.stringify({ contentHash: ch })
     }
 
-    fetch(chainInfo.rest + queryAttestationsByHash, {
+    fetch(chainInfo.rest + queryAnchorByHash, {
       method: "POST",
       body: body,
     })
@@ -71,10 +71,10 @@ const QueryAttestationsByHash = () => {
     <div className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"QueryAttestationsByHash"}
+          {"QueryAnchorByHash"}
         </h2>
         <p>
-          {"query data attestations by the content hash of a data entry"}
+          {"query a data anchor by the content hash of a data entry"}
         </p>
       </div>
       <SelectInput
@@ -110,4 +110,4 @@ const QueryAttestationsByHash = () => {
   )
 }
 
-export default QueryAttestationsByHash
+export default QueryAnchorByHash

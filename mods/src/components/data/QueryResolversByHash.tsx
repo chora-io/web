@@ -7,7 +7,7 @@ import InputContentHash from "chora/components/InputContentHash"
 import InputContentHashJSON from "chora/components/InputContentHashJSON"
 import Result from "chora/components/Result"
 
-import SelectInput from "../../SelectInput"
+import SelectInput from "../SelectInput"
 
 import * as styles from "./QueryResolversByHash.module.css"
 

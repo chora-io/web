@@ -4,15 +4,15 @@ import { useContext, useState } from "react"
 import { WalletContext } from "chora"
 import { signAndBroadcast } from "chora/utils/tx"
 
-import MsgInputs from "chora/components/data/MsgAnchor"
-import MsgInputsJSON from "chora/components/data/MsgAnchorJSON"
+import MsgInputs from "chora/components/data/MsgRegisterResolver"
+import MsgInputsJSON from "chora/components/data/MsgRegisterResolverJSON"
 import ResultTx from "chora/components/ResultTx"
 
-import SelectInput from "../../SelectInput"
+import SelectInput from "../SelectInput"
 
-import * as styles from "./MsgAnchor.module.css"
+import * as styles from "./MsgRegisterResolver.module.css"
 
-const MsgAnchor = () => {
+const MsgRegisterResolverView = () => {
 
   const { chainInfo, wallet } = useContext(WalletContext)
 
@@ -45,17 +45,17 @@ const MsgAnchor = () => {
     <div className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"MsgAnchor"}
+          {"MsgRegisterResolver"}
         </h2>
         <p>
-          {"anchor data"}
+          {"register data to a data resolver"}
         </p>
       </div>
       <SelectInput
         input={input}
         setInput={handleSetInput}
       />
-      {input === "form" ? (
+      {input == "form" ? (
         <form className={styles.form} onSubmit={handleSubmit}>
           <MsgInputs
             setMessage={setMessage}
@@ -87,4 +87,4 @@ const MsgAnchor = () => {
   )
 }
 
-export default MsgAnchor
+export default MsgRegisterResolverView
