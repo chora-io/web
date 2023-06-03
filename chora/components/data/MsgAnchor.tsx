@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { MsgAnchor as Msg } from "../../api/regen/data/v1/tx"
 
 import InputAddress from "../InputAddress"
-import InputContentHash from "../InputContentHash"
+import InputContentHash from "./InputContentHash"
 
 const MsgAnchor = ({ network, setMessage, useWallet, wallet }: any) => {
 

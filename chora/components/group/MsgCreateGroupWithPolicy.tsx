@@ -5,8 +5,8 @@ import { MsgCreateGroupWithPolicy as Msg } from "../../api/cosmos/group/v1/tx"
 
 import InputAddress from "../InputAddress"
 import InputIRI from "../InputIRI"
-import InputMembers from "../InputMembers"
-import InputPolicy from "../InputPolicy"
+import InputMembers from "./InputMembers"
+import InputPolicy from "./InputPolicy"
 import SelectBoolean from "../SelectBoolean"
 
 const MsgCreateGroupWithPolicy = ({network, setMessage, useWallet, wallet }: any) => {

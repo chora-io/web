@@ -1,8 +1,8 @@
 import * as React from "react"
 
-import * as styles from "./ToggleThemeButton.module.css"
+import * as styles from "./ThemeButton.module.css"
 
-const ToggleThemeButton = ({ darkTheme, toggleTheme }) => (
+const ThemeButton = ({ darkTheme, toggleTheme }) => (
   <button className={styles.button} onClick={toggleTheme}>
     <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" width="1.5em" viewBox="0 0 100 100">
       <circle cx="50" cy="50" r="40" fill={darkTheme ? "#F5F5F5" : "#0A0A0A"} />
@@ -11,4 +11,4 @@ const ToggleThemeButton = ({ darkTheme, toggleTheme }) => (
   </button>
 )
 
-export default ToggleThemeButton
+export default ThemeButton

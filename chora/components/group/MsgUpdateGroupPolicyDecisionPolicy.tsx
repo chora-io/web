@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { MsgUpdateGroupPolicyDecisionPolicy as Msg } from "../../api/cosmos/group/v1/tx"
 
 import InputAddress from "../InputAddress"
-import InputPolicy from "../InputPolicy"
+import InputPolicy from "./InputPolicy"
 
 const MsgUpdateGroupPolicyDecisionPolicy = ({ network, setMessage, useWallet, wallet }: any) => {
 

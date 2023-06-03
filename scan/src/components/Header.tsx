@@ -2,7 +2,7 @@ import * as React from "react"
 import { Link, navigate } from "gatsby"
 
 import SelectNetwork from "./SelectNetwork"
-import ToggleThemeButton from "chora/components/ToggleThemeButton"
+import ThemeButton from "chora/components/ThemeButton"
 
 import choraLogoDark from "chora/assets/images/chora_dark_icon.png"
 import choraLogoLight from "chora/assets/images/chora_light_icon.png"
@@ -46,7 +46,7 @@ const Header = ({ location, darkTheme, toggleTheme }) => {
             network={network}
             setNetwork={handleSetNetwork}
           />
-          <ToggleThemeButton
+          <ThemeButton
             darkTheme={darkTheme}
             toggleTheme={toggleTheme}
           />

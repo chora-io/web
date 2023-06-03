@@ -1,10 +1,10 @@
 import * as React from "react"
 import { useEffect, useState } from "react"
 
-import { GenericAuthorization } from "../api/cosmos/authz/v1beta1/authz"
+import { GenericAuthorization } from "../../api/cosmos/authz/v1beta1/authz"
 
-import InputTimestamp from "./InputTimestamp"
-import SelectMessage from "./SelectMessage"
+import InputTimestamp from "../InputTimestamp"
+import SelectMessage from "../SelectMessage"
 
 const defaultId = "grant"
 const defaultLabel = "grant"

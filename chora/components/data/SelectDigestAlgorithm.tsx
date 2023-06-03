@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { DigestAlgorithm } from "../api/regen/data/v1/types"
+import { DigestAlgorithm } from "../../api/regen/data/v1/types"
 
 const defaultId = "digest-algorithm"
 const defaultLabel = "digest algorithm"

@@ -7,7 +7,7 @@ import { MsgVote as Msg } from "../../api/cosmos/group/v1/tx"
 import InputAddress from "../InputAddress"
 import InputIRI from "../InputIRI"
 import InputNumber from "../InputNumber"
-import SelectExecution from "../SelectExecution"
+import SelectExecution from "./SelectExecution"
 import SelectVote from "../SelectVote"
 
 const MsgVote = ({ network, setMessage, useWallet, wallet }: any) => {

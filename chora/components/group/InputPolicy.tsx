@@ -2,9 +2,9 @@ import * as React from "react"
 import { useEffect, useState } from "react"
 import * as Long from "long"
 
-import { PercentageDecisionPolicy, ThresholdDecisionPolicy } from "../api/cosmos/group/v1/types"
+import { PercentageDecisionPolicy, ThresholdDecisionPolicy } from "../../api/cosmos/group/v1/types"
 
-import InputNumber from "./InputNumber"
+import InputNumber from "../InputNumber"
 import SelectPolicyType from "./SelectPolicyType"
 
 const defaultId = "policy"

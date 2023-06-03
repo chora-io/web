@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { Exec } from "../api/cosmos/group/v1/types"
+import { Exec } from "../../api/cosmos/group/v1/types"
 
 const SelectExecution = ({ id, label, execution, setExecution }: any) => (
   <label htmlFor={id ? id : "execution"}>

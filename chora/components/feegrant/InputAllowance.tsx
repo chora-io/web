@@ -1,11 +1,11 @@
 import * as React from "react"
 import { useEffect, useState } from "react"
 
-import { BasicAllowance } from "../api/cosmos/feegrant/v1beta1/feegrant"
+import { BasicAllowance } from "../../api/cosmos/feegrant/v1beta1/feegrant"
 
-import InputDenom from "./InputDenom"
-import InputNumber from "./InputNumber"
-import InputTimestamp from "./InputTimestamp"
+import InputDenom from "../InputDenom"
+import InputNumber from "../InputNumber"
+import InputTimestamp from "../InputTimestamp"
 
 const defaultId = "allowance"
 const defaultLabel = "allowance"

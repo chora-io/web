@@ -2,7 +2,7 @@ import * as React from "react"
 import { Link } from "gatsby"
 
 import ConnectWallet from "./ConnectWallet"
-import ToggleThemeButton from "./ToggleThemeButton"
+import ThemeButton from "./ThemeButton"
 
 import choraLogoDark from "../assets/images/chora_dark_icon.png"
 import choraLogoLight from "../assets/images/chora_light_icon.png"
@@ -34,7 +34,7 @@ const Header = ({ context, darkTheme, toggleTheme }: any) => {
           {context && (
             <ConnectWallet {...context} />
           )}
-          <ToggleThemeButton
+          <ThemeButton
             darkTheme={darkTheme}
             toggleTheme={toggleTheme}
           />

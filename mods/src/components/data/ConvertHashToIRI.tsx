@@ -3,8 +3,8 @@ import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
 
-import InputContentHash from "chora/components/InputContentHash"
-import InputContentHashJSON from "chora/components/InputContentHashJSON"
+import InputContentHash from "chora/components/data/InputContentHash"
+import InputContentHashJSON from "chora/components/data/InputContentHashJSON"
 import Result from "chora/components/Result"
 
 import SelectInput from "../SelectInput"

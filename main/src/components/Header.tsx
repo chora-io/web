@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Link } from "gatsby"
 
-import ToggleThemeButton from "chora/components/ToggleThemeButton"
+import ThemeButton from "chora/components/ThemeButton"
 
 import choraLogoDark from "chora/assets/images/chora_dark_icon.png"
 import choraLogoLight from "chora/assets/images/chora_light_icon.png"
@@ -93,7 +93,7 @@ const Header = ({ darkTheme, toggleTheme }) => {
               </li>
             </ul>
           )}
-          <ToggleThemeButton
+          <ThemeButton
             darkTheme={darkTheme}
             toggleTheme={toggleTheme}
           />

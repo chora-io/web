@@ -5,7 +5,7 @@ import * as Long from "long"
 import { MsgUpdateGroupMembers as Msg } from "../../api/cosmos/group/v1/tx"
 
 import InputAddress from "../InputAddress"
-import InputMembers from "../InputMembers"
+import InputMembers from "./InputMembers"
 import InputNumber from "../InputNumber"
 
 const MsgUpdateGroupMembers = ({ network, setMessage, useWallet, wallet }: any) => {

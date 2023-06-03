@@ -7,7 +7,7 @@ import { MsgCreateGroupPolicy as Msg } from "../../api/cosmos/group/v1/tx"
 import InputAddress from "../InputAddress"
 import InputIRI from "../InputIRI"
 import InputNumber from "../InputNumber"
-import InputPolicy from "../InputPolicy"
+import InputPolicy from "./InputPolicy"
 
 const MsgCreateGroupPolicy = ({ network, setMessage, useWallet, wallet }: any) => {
 

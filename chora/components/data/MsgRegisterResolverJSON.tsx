@@ -5,7 +5,7 @@ import * as Long from "long"
 import { MsgRegisterResolver as Msg } from "../../api/regen/data/v1/tx"
 
 import InputAddress from "../InputAddress"
-import InputContentHashJSON from "../InputContentHashJSON"
+import InputContentHashJSON from "./InputContentHashJSON"
 import InputNumber from "../InputNumber"
 
 const MsgRegisterResolverJSON = ({ network, setMessage, useWallet, wallet }: any) => {

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { MsgGrant as Msg } from "../../api/cosmos/authz/v1beta1/tx"
 
 import InputAddress from "../InputAddress"
-import InputGrant from "../InputGrant"
+import InputGrant from "./InputGrant"
 
 const MsgGrant = ({ network, setMessage, useWallet, wallet }: any) => {
 

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { MsgGrantAllowance as Msg } from "../../api/cosmos/feegrant/v1beta1/tx"
 
 import InputAddress from "../InputAddress"
-import InputAllowance from "../InputAllowance"
+import InputAllowance from "./InputAllowance"
 
 const MsgGrantAllowance = ({ network, setMessage, useWallet, wallet }: any) => {
 

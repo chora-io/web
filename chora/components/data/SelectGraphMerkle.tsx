@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { GraphMerkleTree } from "../api/regen/data/v1/types"
+import { GraphMerkleTree } from "../../api/regen/data/v1/types"
 
 const defaultId = "graph-merkle"
 const defaultLabel = "merkle tree type"
