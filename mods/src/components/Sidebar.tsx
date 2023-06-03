@@ -26,6 +26,11 @@ const Sidebar = () => (
           {"group"}
         </Link>
       </li>
+      <li>
+        <Link to="/voucher" activeClassName={styles.active}>
+          {"voucher"}
+        </Link>
+      </li>
     </ul>
   </div>
 )
