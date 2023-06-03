@@ -9,7 +9,7 @@ import {
   regenLocal,
   regenMainnet,
   regenRedwood,
-} from "../utils/chains"
+} from "../chains"
 
 const cachedAddressKey = "chora-web-address"
 const cachedConnectedKey = "chora-web-connected"

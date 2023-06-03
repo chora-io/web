@@ -1,16 +1,16 @@
 import * as React from "react"
 
-import Chain from "./Chain"
-
-import * as styles from "./Chains.module.css"
-
 import {
   choraLocal,
   choraTestnet,
   regenLocal,
   regenMainnet,
   regenRedwood,
-} from "chora/utils/chains"
+} from "chora/chains"
+
+import Chain from "./Chain"
+
+import * as styles from "./Chains.module.css"
 
 const Chains = () => {
   let local: boolean

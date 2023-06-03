@@ -1,5 +1,7 @@
 import * as React from "react"
 
+import { choraLocal } from "chora/chains"
+
 import Main from "../../layouts/Main"
 import Seo from "../../components/SeoWrapper"
 
@@ -8,8 +10,6 @@ import Transactions from "../../components/chain/Transactions"
 import Validators from "../../components/chain/Validators"
 import Account from "../../components/chain/account/Account"
 import Transaction from "../../components/chain/transaction/Transaction"
-
-import { choraLocal } from "chora/utils/chains"
 
 import * as styles from "./index.module.css"
 

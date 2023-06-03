@@ -4,7 +4,7 @@ import * as jsonld from "jsonld"
 
 import { WalletContext } from "chora"
 import { MsgSubmitProposal } from "chora/api/cosmos/group/v1/tx"
-import { choraTestnet } from "chora/utils/chains"
+import { choraTestnet } from "chora/chains"
 import { signAndBroadcast } from "chora/utils/tx"
 
 import InputString from "chora/components/InputString"

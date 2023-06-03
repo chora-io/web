@@ -2,7 +2,7 @@ import * as React from "react"
 import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
-import { choraTestnet } from "chora/utils/chains"
+import { choraTestnet } from "chora/chains"
 
 import GroupPolicyPreview from "./PolicyPreview"
 

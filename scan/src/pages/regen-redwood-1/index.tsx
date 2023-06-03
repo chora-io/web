@@ -1,5 +1,7 @@
 import * as React from "react"
 
+import { regenRedwood } from "chora/chains"
+
 import Main from "../../layouts/Main"
 import Seo from "../../components/SeoWrapper"
 
@@ -10,8 +12,6 @@ import Account from "../../components/chain/account/Account"
 import Transaction from "../../components/chain/transaction/Transaction"
 
 import * as styles from "./index.module.css"
-
-import { regenRedwood } from "chora/utils/chains"
 
 const RegenRedwoodPage = ({ location }: any) => {
 

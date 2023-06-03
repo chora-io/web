@@ -4,7 +4,7 @@ import { useState } from "react"
 import {
   choraTestnet,
   regenRedwood,
-} from "../utils/chains"
+} from "../chains"
 
 import * as styles from "./Faucet.module.css"
 
