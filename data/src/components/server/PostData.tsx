@@ -163,7 +163,7 @@ const PostData = () => {
           {"post data"}
         </h2>
         <p>
-          {"generate iri and post data to chora server"}
+          {"post data to chora server and generate iri"}
         </p>
       </div>
       <SelectInput

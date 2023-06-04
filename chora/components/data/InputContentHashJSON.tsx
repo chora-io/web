@@ -12,16 +12,21 @@ const defaultPlaceholder = `{
   }
 }`
 
-const InputContentHashJSON = ({ id, label, placeholder, json, setJson }: any) => (
-  <label htmlFor={id ? id : defaultId}>
-    {label ? label : defaultLabel}
-    <textarea
-      id={id ? id : defaultId}
-      value={json}
-      placeholder={placeholder ? placeholder : defaultPlaceholder}
-      onChange={event => setJson(event.target.value)}
-    />
-  </label>
-)
+const InputContentHashJSON = ({ id, label, placeholder, json, setJson }: any) => {
+  let noLabel = false
+  if (label === "") noLabel = true
+
+  return (
+    <label htmlFor={id ? id : defaultId}>
+      {!noLabel && (label ? label : defaultLabel)}
+      <textarea
+        id={id ? id : defaultId}
+        value={json}
+        placeholder={placeholder ? placeholder : defaultPlaceholder}
+        onChange={event => setJson(event.target.value)}
+      />
+    </label>
+  )
+}
 
 export default InputContentHashJSON

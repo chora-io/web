@@ -53,7 +53,7 @@ const GetData = () => {
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputIRI
-          network={network}
+          network={'chora'} // always for chora server
           iri={iri}
           setIri={setIri}
         />

@@ -12,7 +12,7 @@ const queryAttestationsByAttestor = "/regen/data/v1/attestations-by-attestor"
 
 const QueryAttestationsByAttestor = () => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   const [attestor, setAttestor] = useState("")
   const [error, setError] = useState("")
@@ -53,6 +53,7 @@ const QueryAttestationsByAttestor = () => {
           label="attestor"
           address={attestor}
           setAddress={setAttestor}
+          network={network}
         />
         <button type="submit">
           {"search"}
