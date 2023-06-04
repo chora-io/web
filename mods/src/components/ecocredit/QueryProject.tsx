@@ -42,7 +42,7 @@ const QueryProject = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-project" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"QueryProject"}

@@ -32,7 +32,7 @@ const MsgCreateGroupPolicy = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="msg-create-group-policy" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"MsgCreateGroupPolicy"}

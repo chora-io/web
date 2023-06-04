@@ -68,7 +68,7 @@ const QueryAnchorByHash = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-anchor-by-hash" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"QueryAnchorByHash"}

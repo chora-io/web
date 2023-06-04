@@ -42,7 +42,7 @@ const QueryVouchersByIssuer = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-vouchers-by-issuer" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"QueryVouchersByIssuer"}

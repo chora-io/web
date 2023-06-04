@@ -39,7 +39,7 @@ const QueryAttestationsByIRI = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-attestations-by-iri" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"QueryAttestationsByIRI"}

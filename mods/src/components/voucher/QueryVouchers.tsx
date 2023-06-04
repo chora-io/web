@@ -38,7 +38,7 @@ const QueryVouchers = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-vouchers" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"QueryVouchers"}

@@ -32,7 +32,7 @@ const MsgSubmitTx = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="msg-submit-tx" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"MsgSubmitTx"}

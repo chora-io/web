@@ -3,19 +3,19 @@ import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
 
-import InputAddress from "chora/components/InputAddress"
+import InputNumber from "chora/components/InputNumber"
 import Result from "chora/components/Result"
 
-import * as styles from "./QueryGroupPolicy.module.css"
+import * as styles from "./QueryGroupInfo.module.css"
 
-const queryGroupPolicy = "/cosmos/group/v1/group_policy_info"
+const queryGroupInfo = "/cosmos/group/v1/group_info"
 
-const QueryPolicy = () => {
+const QueryGroupInfo = () => {
 
-  const { chainInfo, network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
 
   // form input
-  const [address, setAddress] = useState<string>("")
+  const [id, setId] = useState<string>("")
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -27,7 +27,7 @@ const QueryPolicy = () => {
     setError("")
     setSuccess("")
 
-    fetch(chainInfo.rest + queryGroupPolicy + "/" + address)
+    fetch(chainInfo.rest + queryGroupInfo + "/" + id)
       .then(res => res.json())
       .then(data => {
         if (data.code) {
@@ -42,23 +42,21 @@ const QueryPolicy = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-group-info" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"QueryGroupPolicy"}
+          {"QueryGroupInfo"}
         </h2>
         <p>
-          {"query a group policy by the policy address"}
+          {"query a group by the id of the group"}
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <InputAddress
-          id="query-group-policy-address"
-          label="policy address"
-          network={network}
-          long={true}
-          address={address}
-          setAddress={setAddress}
+        <InputNumber
+          id="query-group-id"
+          label="group id"
+          number={id}
+          setNumber={setId}
         />
         <button type="submit">
           {"search"}
@@ -72,4 +70,4 @@ const QueryPolicy = () => {
   )
 }
 
-export default QueryPolicy
+export default QueryGroupInfo

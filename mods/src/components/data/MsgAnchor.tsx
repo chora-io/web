@@ -42,7 +42,7 @@ const MsgAnchor = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="msg-anchor" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"MsgAnchor"}

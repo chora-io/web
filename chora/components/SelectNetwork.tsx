@@ -28,22 +28,22 @@ const SelectNetwork = ({ id, label, selected, network, setNetwork }: any) => {
         value={selected || network}
         onChange={event => setNetwork(event.target.value)}
       >
-        <option value={choraTestnet.chainId}>
-          {choraTestnet.chainId}
-        </option>
-        <option value={regenRedwood.chainId}>
-          {regenRedwood.chainId}
-        </option>
         {local && (
           <option value={choraLocal.chainId}>
             {choraLocal.chainId}
           </option>
         )}
+        <option value={choraTestnet.chainId}>
+          {choraTestnet.chainId}
+        </option>
         {local && (
           <option value={regenLocal.chainId}>
             {regenLocal.chainId}
           </option>
         )}
+        <option value={regenRedwood.chainId}>
+          {regenRedwood.chainId}
+        </option>
       </select>
     </label>
   )

@@ -9,7 +9,7 @@ import * as styles from "./Sidebar.module.css"
 const Sidebar = () => {
   const { network } = useContext(WalletContext)
 
-  if (network === 'chora-local' || network === 'chora-testnet-1') {
+  if (network !== undefined && network.includes("chora")) {
     return (
       <div className={styles.sidebar}>
         <ul>
@@ -48,7 +48,7 @@ const Sidebar = () => {
     )
   }
 
-  if (network === 'regen-1' || network === 'regen-local' || network === 'regen-redwood-1') {
+  if (network !== undefined && network.includes("regen")) {
     return (
       <div className={styles.sidebar}>
         <ul>

@@ -42,7 +42,7 @@ const MsgAttest = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="msg-attest" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"MsgAttest"}

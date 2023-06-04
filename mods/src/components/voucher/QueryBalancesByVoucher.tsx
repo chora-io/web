@@ -42,7 +42,7 @@ const QueryBalancesByVoucher = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-balances-by-voucher" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"QueryBalancesByVoucher"}

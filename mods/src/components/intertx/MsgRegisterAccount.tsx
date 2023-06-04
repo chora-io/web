@@ -32,7 +32,7 @@ const MsgRegisterAccount = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="msg-register-account" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"MsgRegisterAccount"}

@@ -32,7 +32,7 @@ const MsgSubmitProposal = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="msg-submit-proposal" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"MsgSubmitProposal"}

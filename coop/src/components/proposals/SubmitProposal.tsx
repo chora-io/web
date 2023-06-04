@@ -10,7 +10,7 @@ import { signAndBroadcast } from "chora/utils/tx"
 import InputString from "chora/components/InputString"
 import ResultTx from "chora/components/ResultTx"
 import SelectAccount from "chora/components/SelectAccount"
-import SelectExecution from "chora/components/SelectExecution"
+import SelectExecution from "chora/components/group/SelectExecution"
 import SelectMessage from "chora/components/SelectMessage"
 
 import * as styles from "./SubmitProposal.module.css"

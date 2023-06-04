@@ -39,7 +39,7 @@ const QueryResolver = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-resolver" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"QueryResolver"}

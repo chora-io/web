@@ -16,6 +16,23 @@ const InterTxPage = () => (
         <h1>
           {"intertx module"}
         </h1>
+        <ul className={styles.table}>
+          <li>
+            <a href="#msg-register-account">
+              {'MsgRegisterAccount'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-submit-tx">
+              {'MsgSubmitTx'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-interchain-account">
+              {'QueryInterchainAccount'}
+            </a>
+          </li>
+        </ul>
         <MsgRegisterAccount />
         <MsgSubmitTx />
         <QueryInterchainAccount />

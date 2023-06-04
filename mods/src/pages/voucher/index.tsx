@@ -23,6 +23,58 @@ const VoucherPage = () => (
         <h1>
           {"voucher module"}
         </h1>
+        <ul className={styles.table}>
+          <li>
+            <a href="#msg-create">
+              {'MsgCreate'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-issue">
+              {'MsgIssue'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-update-issuer">
+              {'MsgUpdateIssuer'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-update-metadata">
+              {'MsgUpdateMetadata'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-balance">
+              {'QueryBalance'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-balances-by-address">
+              {'QueryBalancesByAddress'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-balances-by-voucher">
+              {'QueryBalancesByVoucher'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-voucher">
+              {'QueryVoucher'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-vouchers">
+              {'QueryVouchers'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-vouchers-by-issuer">
+              {'QueryVouchersByIssuer'}
+            </a>
+          </li>
+        </ul>
         <MsgCreate />
         <MsgIssue />
         <MsgUpdateIssuer />

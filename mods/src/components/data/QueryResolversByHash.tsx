@@ -68,7 +68,7 @@ const QueryResolversByHash = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-resolvers-by-hash" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"QueryResolversByHash"}

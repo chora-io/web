@@ -17,9 +17,9 @@ import MsgUpdateGroupPolicyDecisionPolicy from "../../components/group/MsgUpdate
 import MsgUpdateGroupPolicyMetadata from "../../components/group/MsgUpdateGroupPolicyMetadata"
 import MsgVote from "../../components/group/MsgVote"
 import MsgWithdrawProposal from "../../components/group/MsgWithdrawProposal"
-import QueryGroup from "../../components/group/QueryGroup"
+import QueryGroupInfo from "../../components/group/QueryGroupInfo"
 import QueryGroupMembers from "../../components/group/QueryGroupMembers"
-import QueryGroupPolicy from "../../components/group/QueryGroupPolicy"
+import QueryGroupPolicyInfo from "../../components/group/QueryGroupPolicyInfo"
 import QueryProposal from "../../components/group/QueryProposal"
 
 import * as styles from "./index.module.css"
@@ -31,6 +31,125 @@ const GroupPage = () => (
         <h1>
           {"group module"}
         </h1>
+        <ul className={styles.table}>
+          <li>
+            <a href="#msg-create-group">
+              {'MsgCreateGroup'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-create-group-with-policy">
+              {'MsgCreateGroupWithPolicy'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-create-group-policy">
+              {'MsgCreateGroupPolicy'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-exec">
+              {'MsgExec'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-leave-group">
+              {'MsgLeaveGroup'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-submit-proposal">
+              {'MsgSubmitProposal'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-update-group-admin">
+              {'MsgUpdateGroupAdmin'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-update-group-members">
+              {'MsgUpdateGroupMembers'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-update-group-metadata">
+              {'MsgUpdateGroupMetadata'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-update-group-policy-admin">
+              {'MsgUpdateGroupPolicyAdmin'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-update-group-policy-decision-policy">
+              {'MsgUpdateGroupPolicyDecisionPolicy'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-update-group-policy-metadata">
+              {'MsgUpdateGroupPolicyMetadata'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-vote">
+              {'MsgVote'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-withdraw-proposal">
+              {'MsgWithdrawProposal'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-group-info">
+              {'QueryGroupInfo'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-group-members">
+              {'QueryGroupMembers'}
+            </a>
+          </li>
+          <li>
+            {'QueryGroupPoliciesByAdmin'}
+          </li>
+          <li>
+            {'QueryGroupPoliciesByGroup'}
+          </li>
+          <li>
+            <a href="#query-group-policy-info">
+              {'QueryGroupPolicyInfo'}
+            </a>
+          </li>
+          <li>
+            {'QueryGroupsByAdmin'}
+          </li>
+          <li>
+            {'QueryGroupsByMembers'}
+          </li>
+          <li>
+            <a href="#query-proposal">
+              {'QueryProposal'}
+            </a>
+          </li>
+          <li>
+            {'QueryProposalsByGroupPolicy'}
+          </li>
+          <li>
+            {'QueryTallyResult'}
+          </li>
+          <li>
+            {'QueryVoteByProposalVoter'}
+          </li>
+          <li>
+            {'QueryVotesByProposal'}
+          </li>
+          <li>
+            {'QueryVotesByVoter'}
+          </li>
+        </ul>
         <MsgCreateGroup />
         <MsgCreateGroupWithPolicy />
         <MsgCreateGroupPolicy />
@@ -41,13 +160,13 @@ const GroupPage = () => (
         <MsgUpdateGroupMembers />
         <MsgUpdateGroupMetadata />
         <MsgUpdateGroupPolicyAdmin />
-        <MsgUpdateGroupPolicyMetadata />
         <MsgUpdateGroupPolicyDecisionPolicy />
+        <MsgUpdateGroupPolicyMetadata />
         <MsgVote />
         <MsgWithdrawProposal />
-        <QueryGroup />
+        <QueryGroupInfo />
         <QueryGroupMembers />
-        <QueryGroupPolicy />
+        <QueryGroupPolicyInfo />
         <QueryProposal />
       </div>
     </div>

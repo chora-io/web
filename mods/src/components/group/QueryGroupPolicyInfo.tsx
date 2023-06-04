@@ -3,19 +3,19 @@ import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
 
-import InputNumber from "chora/components/InputNumber"
+import InputAddress from "chora/components/InputAddress"
 import Result from "chora/components/Result"
 
-import * as styles from "./QueryGroup.module.css"
+import * as styles from "./QueryGroupPolicyInfo.module.css"
 
-const queryGroup = "/cosmos/group/v1/group_info"
+const queryGroupPolicyInfo = "/cosmos/group/v1/group_policy_info"
 
-const QueryGroup = () => {
+const QueryGroupPolicyInfo = () => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // form input
-  const [id, setId] = useState<string>("")
+  const [address, setAddress] = useState<string>("")
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -27,7 +27,7 @@ const QueryGroup = () => {
     setError("")
     setSuccess("")
 
-    fetch(chainInfo.rest + queryGroup + "/" + id)
+    fetch(chainInfo.rest + queryGroupPolicyInfo + "/" + address)
       .then(res => res.json())
       .then(data => {
         if (data.code) {
@@ -42,21 +42,23 @@ const QueryGroup = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-group-policy" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"QueryGroup"}
+          {"QueryGroupPolicyInfo"}
         </h2>
         <p>
-          {"query a group by the id of the group"}
+          {"query a group policy by the policy address"}
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <InputNumber
-          id="query-group-id"
-          label="group id"
-          number={id}
-          setNumber={setId}
+        <InputAddress
+          id="query-group-policy-address"
+          label="policy address"
+          network={network}
+          long={true}
+          address={address}
+          setAddress={setAddress}
         />
         <button type="submit">
           {"search"}
@@ -70,4 +72,4 @@ const QueryGroup = () => {
   )
 }
 
-export default QueryGroup
+export default QueryGroupPolicyInfo

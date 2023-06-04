@@ -39,7 +39,7 @@ const QueryAttestationsByAttestor = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-attestations-by-attestor" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"QueryAttestationsByAttestor"}

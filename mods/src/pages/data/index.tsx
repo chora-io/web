@@ -28,21 +28,98 @@ const DataPage = () => (
         <h1>
           {"data module"}
         </h1>
+        <ul className={styles.table}>
+          <li>
+            <a href="#convert-hash-to-iri">
+              {'ConvertHashToIRI'}
+            </a>
+          </li>
+          <li>
+            <a href="#convert-iri-to-hash">
+              {'ConvertIRIToHash'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-anchor">
+              {'MsgAnchor'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-attest">
+              {'MsgAttest'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-define-resolver">
+              {'MsgDefineResolver'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-register-resolver">
+              {'MsgRegisterResolver'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-anchor-by-hash">
+              {'QueryAnchorByHash'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-anchor-by-iri">
+              {'QueryAnchorByIRI'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-attestations-by-attestor">
+              {'QueryAttestationsByAttestor'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-attestations-by-hash">
+              {'QueryAttestationsByHash'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-attestations-by-iri">
+              {'QueryAttestationsByIRI'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-resolver">
+              {'QueryResolver'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-resolvers-by-hash">
+              {'QueryResolversByHash'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-resolvers-by-iri">
+              {'QueryResolversByIRI'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-resolvers-by-url">
+              {'QueryResolversByURL'}
+            </a>
+          </li>
+        </ul>
         <ConvertHashToIRI />
         <ConvertIRIToHash />
         <MsgAnchor />
         <MsgAttest />
         <MsgDefineResolver />
         <MsgRegisterResolver />
-        <QueryAnchorByIRI />
         <QueryAnchorByHash />
+        <QueryAnchorByIRI />
         <QueryAttestationsByAttestor />
-        <QueryAttestationsByIRI />
         <QueryAttestationsByHash />
+        <QueryAttestationsByIRI />
         <QueryResolver />
-        <QueryResolversByURL />
-        <QueryResolversByIRI />
         <QueryResolversByHash />
+        <QueryResolversByIRI />
+        <QueryResolversByURL />
       </div>
     </div>
   </Main>

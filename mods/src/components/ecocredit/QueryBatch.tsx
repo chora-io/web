@@ -42,7 +42,7 @@ const QueryBatch = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-batch" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"QueryBatch"}

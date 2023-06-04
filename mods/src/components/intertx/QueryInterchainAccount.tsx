@@ -44,7 +44,7 @@ const QueryNode = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-interchain-account" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"QueryInterchainAccount"}
@@ -63,6 +63,7 @@ const QueryNode = () => {
         <InputString
           id="query-interchain-account-connection-id"
           label="connection id"
+          placeholder="connection-0"
           number={connectionId}
           setNumber={setConnectionId}
         />

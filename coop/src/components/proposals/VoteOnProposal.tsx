@@ -9,7 +9,7 @@ import { signAndBroadcast } from "chora/utils/tx"
 
 import InputString from "chora/components/InputString"
 import ResultTx from "chora/components/ResultTx"
-import SelectExecution from "chora/components/SelectExecution"
+import SelectExecution from "chora/components/group/SelectExecution"
 import SelectVote from "chora/components/SelectVote"
 
 import * as styles from "./VoteOnProposal.module.css"

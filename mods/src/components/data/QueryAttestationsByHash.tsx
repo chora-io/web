@@ -68,7 +68,7 @@ const QueryAttestationsByHash = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-attestations-by-hash" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"QueryAttestationsByHash"}

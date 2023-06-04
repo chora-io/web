@@ -42,7 +42,7 @@ const QueryBalancesByAddress = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-balances-by-address" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"QueryBalancesByAddress"}

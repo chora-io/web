@@ -32,7 +32,7 @@ const MsgExec = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="msg-exec" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"MsgExec"}

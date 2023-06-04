@@ -68,7 +68,7 @@ const ConvertHashToIRI = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="convert-hash-to-iri" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"ConvertHashToIRI"}

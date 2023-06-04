@@ -42,7 +42,7 @@ const QueryNodesByCurator = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-nodes-by-curator" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"QueryNodesByCurator"}

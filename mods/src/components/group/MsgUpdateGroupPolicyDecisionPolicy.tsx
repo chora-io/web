@@ -32,7 +32,7 @@ const MsgUpdateGroupPolicyDecisionPolicy = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="msg-update-group-policy-decision-policy" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"MsgUpdateGroupPolicyDecisionPolicy"}

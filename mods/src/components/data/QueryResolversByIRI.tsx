@@ -39,7 +39,7 @@ const QueryResolversByIRI = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-resolvers-by-iri" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"QueryResolversByIRI"}

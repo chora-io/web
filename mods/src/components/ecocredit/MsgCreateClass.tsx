@@ -32,7 +32,7 @@ const MsgCreateClass = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="msg-create-class" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"MsgCreateClass"}

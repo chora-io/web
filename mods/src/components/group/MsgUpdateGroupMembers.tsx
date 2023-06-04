@@ -32,7 +32,7 @@ const MsgUpdateGroupMembers = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="msg-update-group-members" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"MsgUpdateGroupMembers"}

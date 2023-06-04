@@ -32,7 +32,7 @@ const MsgUpdateGroupPolicyAdmin = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="msg-update-group-policy-admin" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"MsgUpdateGroupPolicyAdmin"}

@@ -42,7 +42,7 @@ const QueryResolversByURL = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-resolvers-by-url" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"QueryResolversByURL"}

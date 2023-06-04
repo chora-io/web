@@ -32,7 +32,7 @@ const MsgUpdateGroupPolicyMetadata = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="msg-update-group-policy-metadata" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"MsgUpdateGroupPolicyMetadata"}

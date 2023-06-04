@@ -19,6 +19,38 @@ const GeonodePage = () => (
         <h1>
           {"geonode module"}
         </h1>
+        <ul className={styles.table}>
+          <li>
+            <a href="#msg-create">
+              {'MsgCreate'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-update-curator">
+              {'MsgUpdateCurator'}
+            </a>
+          </li>
+          <li>
+            <a href="#msg-update-metadata">
+              {'MsgUpdateMetadata'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-node">
+              {'QueryNode'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-nodes">
+              {'QueryNodes'}
+            </a>
+          </li>
+          <li>
+            <a href="#query-nodes-by-curator">
+              {'QueryNodesByCurator'}
+            </a>
+          </li>
+        </ul>
         <MsgCreate />
         <MsgUpdateCurator />
         <MsgUpdateMetadata />

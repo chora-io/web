@@ -42,7 +42,7 @@ const MsgRegisterResolverView = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="msg-register-resolver" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"MsgRegisterResolver"}

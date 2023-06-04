@@ -39,7 +39,7 @@ const ConvertIRIToHash = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="convert-iri-to-hash" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"ConvertIRIToHash"}

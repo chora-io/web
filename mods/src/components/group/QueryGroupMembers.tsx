@@ -42,7 +42,7 @@ const QueryGroupMembers = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-group-members" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"QueryGroupMembers"}

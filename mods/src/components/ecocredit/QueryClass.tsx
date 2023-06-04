@@ -42,7 +42,7 @@ const QueryClass = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-class" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"QueryClass"}

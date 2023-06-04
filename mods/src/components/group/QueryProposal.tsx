@@ -10,7 +10,7 @@ import * as styles from "./QueryProposal.module.css"
 
 const queryProposal = "/cosmos/group/v1/proposal"
 
-const QueryPolicy = () => {
+const QueryProposal = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
@@ -42,7 +42,7 @@ const QueryPolicy = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="query-proposal" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"QueryProposal"}
@@ -70,4 +70,4 @@ const QueryPolicy = () => {
   )
 }
 
-export default QueryPolicy
+export default QueryProposal

@@ -32,7 +32,7 @@ const MsgUpdateMetadata = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div id="msg-update-metadata" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
           {"MsgUpdateMetadata"}

@@ -1,3 +1,14 @@
 .page {
   composes: page-with-sidebar from "chora/styles/page.css";
 }
+
+.table {
+  composes: box from "chora/styles/box.css";
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.table li {
+  flex: 1 0 calc(50% - 2em);
+  margin: 1em;
+}
