@@ -9,14 +9,11 @@ import InputContentHashJSON from "./InputContentHashJSON"
 import InputNumber from "../InputNumber"
 
 const MsgRegisterResolverJSON = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [manager, setManager] = useState<string>("")
   const [resolverId, setResolverId] = useState<string>("")
   const [contentHashJson, setContentHashJson] = useState<any>(undefined)
 
   useEffect(() => {
-
     let contentHash: any
 
     try {
@@ -37,7 +34,6 @@ const MsgRegisterResolverJSON = ({ network, setMessage, useWallet, wallet }: any
     }
 
     setMessage(msgAny)
-
   }, [manager, resolverId, contentHashJson, wallet])
 
   return (

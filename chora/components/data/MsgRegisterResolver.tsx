@@ -9,14 +9,11 @@ import InputContentHash from "./InputContentHash"
 import InputNumber from "../InputNumber"
 
 const MsgRegisterResolver = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [manager, setManager] = useState<string>("")
   const [resolverId, setResolverId] = useState<string>("")
   const [contentHash, setContentHash] = useState<any>(undefined)
 
   useEffect(() => {
-
     const msg = {
       manager: wallet ? wallet.bech32Address : manager,
       resolverId: Long.fromString(resolverId || "0"),
@@ -29,7 +26,6 @@ const MsgRegisterResolver = ({ network, setMessage, useWallet, wallet }: any) =>
     }
 
     setMessage(msgAny)
-
   }, [manager, resolverId, contentHash, wallet])
 
   return (

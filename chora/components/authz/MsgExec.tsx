@@ -7,13 +7,10 @@ import InputAddress from "../InputAddress"
 import SelectMessage from "../SelectMessage"
 
 const MsgExec = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [grantee, setGrantee] = useState<string>("")
   const [execMsg, setExecMsg] = useState<any>(undefined)
 
   useEffect(() => {
-
     const msg = {
       grantee: wallet ? wallet.bech32Address : grantee,
       msgs: execMsg ? [execMsg] : [],
@@ -25,7 +22,6 @@ const MsgExec = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     setMessage(msgAny)
-
   }, [grantee, execMsg, wallet])
 
   return (

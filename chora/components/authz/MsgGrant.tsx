@@ -7,14 +7,11 @@ import InputAddress from "../InputAddress"
 import InputGrant from "./InputGrant"
 
 const MsgGrant = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [granter, setGranter] = useState<string>("")
   const [grantee, setGrantee] = useState<string>("")
   const [grant, setGrant] = useState<any>(undefined)
 
   useEffect(() => {
-
     const msg = {
       granter: wallet ? wallet.bech32Address : granter,
       grantee: grantee,
@@ -27,7 +24,6 @@ const MsgGrant = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     setMessage(msgAny)
-
   }, [granter, grantee, grant, wallet])
 
   return (

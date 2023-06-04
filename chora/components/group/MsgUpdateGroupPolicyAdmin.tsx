@@ -6,14 +6,11 @@ import { MsgUpdateGroupPolicyAdmin as Msg } from "../../api/cosmos/group/v1/tx"
 import InputAddress from "../InputAddress"
 
 const MsgUpdateGroupPolicyAdmin = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [admin, setAdmin] = useState<string>("")
   const [address, setAddress] = useState<string>("")
   const [newAdmin, setNewAdmin] = useState<string>("")
 
   useEffect(() => {
-
     const msg = {
       admin: wallet ? wallet.bech32Address : admin,
       groupPolicyAddress: address,
@@ -26,7 +23,6 @@ const MsgUpdateGroupPolicyAdmin = ({ network, setMessage, useWallet, wallet }: a
     }
 
     setMessage(msgAny)
-
   }, [admin, address, newAdmin, wallet])
 
   return (

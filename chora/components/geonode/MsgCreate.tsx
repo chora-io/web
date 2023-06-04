@@ -7,13 +7,10 @@ import InputAddress from "../InputAddress"
 import InputIRI from "../InputIRI"
 
 const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [curator, setCurator] = useState<string>("")
   const [metadata, setMetadata] = useState<string>("")
 
   useEffect(() => {
-
     const msg = {
       curator: wallet ? wallet.bech32Address : curator,
       metadata: metadata,
@@ -25,7 +22,6 @@ const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     setMessage(msgAny)
-
   }, [curator, metadata, wallet])
 
   return (

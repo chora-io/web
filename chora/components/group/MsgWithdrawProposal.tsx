@@ -8,13 +8,10 @@ import InputAddress from "../InputAddress"
 import InputNumber from "../InputNumber"
 
 const MsgWithdrawProposal = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [address, setAddress] = useState<string>("")
   const [proposalId, setProposalId] = useState<string>("")
 
   useEffect(() => {
-
     const msg = {
       address: wallet ? wallet.bech32Address : address,
       proposalId: Long.fromString(proposalId || "0"),
@@ -26,7 +23,6 @@ const MsgWithdrawProposal = ({ network, setMessage, useWallet, wallet }: any) =>
     }
 
     setMessage(msgAny)
-
   }, [address, proposalId, wallet])
 
   return (

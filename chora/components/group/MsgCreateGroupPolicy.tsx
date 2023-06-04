@@ -10,15 +10,12 @@ import InputNumber from "../InputNumber"
 import InputPolicy from "./InputPolicy"
 
 const MsgCreateGroupPolicy = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [admin, setAdmin] = useState<string>("")
   const [groupId, setGroupId] = useState<string>("")
   const [metadata, setMetadata] = useState<string>("")
   const [decisionPolicy, setDecisionPolicy] = useState<any>(undefined)
 
   useEffect(() => {
-
     const msg = {
       admin: wallet ? wallet.bech32Address : admin,
       groupId: Long.fromString(groupId || "0"),
@@ -32,7 +29,6 @@ const MsgCreateGroupPolicy = ({ network, setMessage, useWallet, wallet }: any) =
     }
 
     setMessage(msgAny)
-
   }, [admin, groupId, metadata, decisionPolicy, wallet])
 
   return (

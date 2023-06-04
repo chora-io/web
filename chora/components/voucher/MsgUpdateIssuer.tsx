@@ -8,14 +8,11 @@ import InputAddress from "../InputAddress"
 import InputNumber from "../InputNumber"
 
 const MsgUpdateIssuer = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [id, setId] = useState<string>("")
   const [issuer, setIssuer] = useState<string>("")
   const [newIssuer, setNewIssuer] = useState<string>("")
 
   useEffect(() => {
-
     const msg = {
       id: Long.fromString(id || "0"),
       issuer: wallet ? wallet.bech32Address : issuer,
@@ -28,7 +25,6 @@ const MsgUpdateIssuer = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     setMessage(msgAny)
-
   }, [id, issuer, newIssuer, wallet])
 
   return (

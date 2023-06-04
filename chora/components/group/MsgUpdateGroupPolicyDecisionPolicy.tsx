@@ -7,14 +7,11 @@ import InputAddress from "../InputAddress"
 import InputPolicy from "./InputPolicy"
 
 const MsgUpdateGroupPolicyDecisionPolicy = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [admin, setAdmin] = useState<string>("")
   const [address, setAddress] = useState<string>("")
   const [policy, setPolicy] = useState<any>(undefined)
 
   useEffect(() => {
-
     const msg = {
       admin: wallet ? wallet.bech32Address : admin,
       groupPolicyAddress: address,
@@ -27,7 +24,6 @@ const MsgUpdateGroupPolicyDecisionPolicy = ({ network, setMessage, useWallet, wa
     }
 
     setMessage(msgAny)
-
   }, [admin, address, policy, wallet])
 
   return (

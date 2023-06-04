@@ -7,13 +7,10 @@ import InputAddress from "../InputAddress"
 import InputURL from "../InputURL"
 
 const MsgDefineResolver = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [manager, setManager] = useState<string>("")
   const [resolverUrl, setResolverUrl] = useState<string>("")
 
   useEffect(() => {
-
     const msg = {
       manager: wallet ? wallet.bech32Address : manager,
       resolverUrl: resolverUrl,
@@ -25,7 +22,6 @@ const MsgDefineResolver = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     setMessage(msgAny)
-
   }, [manager, resolverUrl, wallet])
 
   return (

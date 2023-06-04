@@ -7,14 +7,11 @@ import InputAddress from "../InputAddress"
 import InputIRI from "../InputIRI"
 
 const MsgUpdateGroupPolicyMetadata = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [admin, setAdmin] = useState<string>("")
   const [address, setAddress] = useState<string>("")
   const [metadata, setMetadata] = useState<string>("")
 
   useEffect(() => {
-
     const msg = {
       admin: wallet ? wallet.bech32Address : admin,
       groupPolicyAddress: address,
@@ -27,7 +24,6 @@ const MsgUpdateGroupPolicyMetadata = ({ network, setMessage, useWallet, wallet }
     }
 
     setMessage(msgAny)
-
   }, [admin, address, metadata, wallet])
 
   return (

@@ -10,19 +10,14 @@ import InputPolicy from "./InputPolicy"
 import SelectBoolean from "../SelectBoolean"
 
 const MsgCreateGroupWithPolicy = ({network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [admin, setAdmin] = useState<string>("")
   const [metadata, setMetadata] = useState<string>("")
   const [members, setMembers] = useState<any[]>([])
-
-  // group policy inputs
   const [policyAsAdmin, setPolicyAsAdmin] = useState<string>("")
   const [policyMetadata, setPolicyMetadata] = useState<string>("")
   const [decisionPolicy, setDecisionPolicy] = useState<any>(undefined)
 
   useEffect(() => {
-
     const msg = {
       admin: wallet ? wallet.bech32Address : admin,
       members: members,
@@ -38,7 +33,6 @@ const MsgCreateGroupWithPolicy = ({network, setMessage, useWallet, wallet }: any
     }
 
     setMessage(msgAny)
-
   }, [admin, members, metadata, policyMetadata, policyAsAdmin, decisionPolicy, wallet])
 
   return (

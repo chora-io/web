@@ -7,13 +7,10 @@ import InputAddress from "../InputAddress"
 import InputContentHashJSON from "./InputContentHashJSON"
 
 const MsgAnchorJSON = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [sender, setSender] = useState<string>("")
   const [contentHashJson, setContentHashJson] = useState<string>("")
 
   useEffect(() => {
-
     let contentHash: any
 
     try {
@@ -33,7 +30,6 @@ const MsgAnchorJSON = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     setMessage(msgAny)
-
   }, [sender, contentHashJson, wallet])
 
   return (

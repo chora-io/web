@@ -7,14 +7,11 @@ import InputAddress from "../InputAddress"
 import SelectMessage from "../SelectMessage"
 
 const MsgRevoke = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [granter, setGranter] = useState<string>("")
   const [grantee, setGrantee] = useState<string>("")
   const [revokeMessage, setRevokeMessage] = useState<any>(undefined)
 
   useEffect(() => {
-
     const msg = {
       granter: wallet ? wallet.bech32Address : granter,
       grantee: grantee,
@@ -27,7 +24,6 @@ const MsgRevoke = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     setMessage(msgAny)
-
   }, [granter, grantee, revokeMessage, wallet])
 
   return (

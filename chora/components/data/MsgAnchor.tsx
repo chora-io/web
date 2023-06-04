@@ -7,13 +7,10 @@ import InputAddress from "../InputAddress"
 import InputContentHash from "./InputContentHash"
 
 const MsgAnchor = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [sender, setSender] = useState<string>("")
   const [contentHash, setContentHash] = useState<any>(undefined)
 
   useEffect(() => {
-
     const msg = {
       sender: wallet ? wallet.bech32Address : sender,
       contentHash: contentHash,
@@ -25,7 +22,6 @@ const MsgAnchor = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     setMessage(msgAny)
-
   }, [sender, contentHash, wallet])
 
   return (

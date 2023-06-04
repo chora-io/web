@@ -6,13 +6,10 @@ import { MsgRevokeAllowance as Msg } from "../../api/cosmos/feegrant/v1beta1/tx"
 import InputAddress from "../InputAddress"
 
 const MsgRevokeAllowance = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [granter, setGranter] = useState<string>("")
   const [grantee, setGrantee] = useState<string>("")
 
   useEffect(() => {
-
     const msg = {
       granter: wallet ? wallet.bech32Address : granter,
       grantee: grantee,
@@ -24,7 +21,6 @@ const MsgRevokeAllowance = ({ network, setMessage, useWallet, wallet }: any) => 
     }
 
     setMessage(msgAny)
-
   }, [granter, grantee, wallet])
 
   return (

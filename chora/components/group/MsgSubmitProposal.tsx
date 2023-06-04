@@ -9,8 +9,6 @@ import SelectExecution from "./SelectExecution"
 import SelectMessage from "../SelectMessage"
 
 const MsgSubmitProposal = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [proposer, setProposer] = useState<string>("")
   const [address, setAddress] = useState<string>("")
   const [metadata, setMetadata] = useState<string>("")
@@ -18,7 +16,6 @@ const MsgSubmitProposal = ({ network, setMessage, useWallet, wallet }: any) => {
   const [execution, setExecution] = useState<string>("")
 
   useEffect(() => {
-
     const msg = {
       proposers: wallet ? [wallet.bech32Address] : [proposer],
       groupPolicyAddress: address,
@@ -33,7 +30,6 @@ const MsgSubmitProposal = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     setMessage(msgAny)
-
   }, [proposer, address, metadata, propMessage, execution, wallet])
 
   return (

@@ -8,15 +8,12 @@ import InputDenom from "../InputDenom"
 import InputNumber from "../InputNumber"
 
 const MsgSend = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [fromAddress, setFromAddress] = useState<string>("")
   const [toAddress, setToAddress] = useState<string>("")
   const [denom, setDenom] = useState<string>("")
   const [amount, setAmount] = useState<string>("")
 
   useEffect(() => {
-
     const msg = {
       fromAddress: wallet ? wallet.bech32Address : fromAddress,
       toAddress: toAddress,
@@ -34,7 +31,6 @@ const MsgSend = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     setMessage(msgAny)
-
   }, [fromAddress, toAddress, amount, wallet])
 
   return (

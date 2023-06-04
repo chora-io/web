@@ -7,13 +7,10 @@ import InputAddress from "../InputAddress"
 import InputContentHash from "./InputContentHash"
 
 const MsgAttest = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [attestor, setAttestor] = useState<string>("")
   const [contentHash, setContentHash] = useState<any>(undefined)
 
   useEffect(() => {
-
     const msg = {
       attestor: wallet ? wallet.bech32Address : attestor,
       contentHashes: contentHash ? [contentHash] : [],
@@ -25,7 +22,6 @@ const MsgAttest = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     setMessage(msgAny)
-
   }, [attestor, contentHash, wallet])
 
   return (

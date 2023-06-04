@@ -10,8 +10,6 @@ import InputNumber from "../InputNumber"
 import InputTimestamp from "../InputTimestamp"
 
 const MsgIssue = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [id, setId] = useState<string>("")
   const [issuer, setIssuer] = useState<string>("")
   const [recipient, setRecipient] = useState<string>("")
@@ -20,7 +18,6 @@ const MsgIssue = ({ network, setMessage, useWallet, wallet }: any) => {
   const [metadata, setMetadata] = useState<string>("")
 
   useEffect(() => {
-
     const msg = {
       id: Long.fromString(id || "0"),
       issuer: wallet ? wallet.bech32Address : issuer,
@@ -36,7 +33,6 @@ const MsgIssue = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     setMessage(msgAny)
-
   }, [id, issuer, recipient, amount, expiration, metadata, wallet])
 
   return (

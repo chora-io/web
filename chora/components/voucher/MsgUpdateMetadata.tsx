@@ -9,14 +9,11 @@ import InputIRI from "../InputIRI"
 import InputNumber from "../InputNumber"
 
 const MsgUpdateMetadata = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [id, setId] = useState<string>("")
   const [issuer, setIssuer] = useState<string>("")
   const [newMetadata, setMetadata] = useState<string>("")
 
   useEffect(() => {
-
     const msg = {
       id: Long.fromString(id || "0"),
       issuer: wallet ? wallet.bech32Address : issuer,
@@ -29,7 +26,6 @@ const MsgUpdateMetadata = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     setMessage(msgAny)
-
   }, [id, issuer, newMetadata, wallet])
 
   return (

@@ -8,13 +8,10 @@ import InputAddress from "../InputAddress"
 import InputNumber from "../InputNumber"
 
 const MsgLeaveGroup = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [address, setAdmin] = useState<string>("")
   const [groupId, setGroupId] = useState<string>("")
 
   useEffect(() => {
-
     const msg = {
       address: wallet ? wallet.bech32Address : address,
       groupId: Long.fromString(groupId || "0"),
@@ -26,7 +23,6 @@ const MsgLeaveGroup = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     setMessage(msgAny)
-
   }, [address, groupId, wallet])
 
   return (

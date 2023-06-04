@@ -8,14 +8,11 @@ import InputIRI from "../InputIRI"
 import InputMembers from "./InputMembers"
 
 const MsgCreateGroup = ({ network, setMessage, useWallet, wallet }: any) => {
-
-  // message inputs
   const [admin, setAdmin] = useState<string>("")
   const [metadata, setMetadata] = useState<string>("")
   const [members, setMembers] = useState<any[]>([])
 
   useEffect(() => {
-
     const msg = {
       admin: wallet ? wallet.bech32Address : admin,
       members: members,
@@ -28,7 +25,6 @@ const MsgCreateGroup = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     setMessage(msgAny)
-
   }, [admin, members, metadata, wallet])
 
   return (
