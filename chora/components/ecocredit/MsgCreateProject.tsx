@@ -53,6 +53,7 @@ const MsgCreateProject = ({ network, setMessage, useWallet, wallet }: any) => {
       <InputIRI
         id="msg-create-project-metadata"
         label="metadata"
+        network={network}
         iri={metadata}
         setIri={setMetadata}
       />

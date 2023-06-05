@@ -3,9 +3,29 @@ import * as React from "react"
 import Main from "../../layouts/Main"
 import Seo from "../../components/SeoWrapper"
 
+import MsgAddAllowedBridgeChain from "../../components/ecocredit/MsgAddAllowedBridgeChain"
+import MsgAddClassCreator from "../../components/ecocredit/MsgAddClassCreator"
+import MsgAddCreditType from "../../components/ecocredit/MsgAddCreditType"
+import MsgBridge from "../../components/ecocredit/MsgBridge"
+import MsgBridgeReceive from "../../components/ecocredit/MsgBridgeReceive"
+import MsgCancel from "../../components/ecocredit/MsgCancel"
 import MsgCreateBatch from "../../components/ecocredit/MsgCreateBatch"
 import MsgCreateClass from "../../components/ecocredit/MsgCreateClass"
 import MsgCreateProject from "../../components/ecocredit/MsgCreateProject"
+import MsgMintBatchCredits from "../../components/ecocredit/MsgMintBatchCredits"
+import MsgRemoveAllowedBridgeChain from "../../components/ecocredit/MsgRemoveAllowedBridgeChain"
+import MsgRemoveClassCreator from "../../components/ecocredit/MsgRemoveClassCreator"
+import MsgRetire from "../../components/ecocredit/MsgRetire"
+import MsgSealBatch from "../../components/ecocredit/MsgSealBatch"
+import MsgSend from "../../components/ecocredit/MsgSend"
+import MsgSetClassCreatorAllowlist from "../../components/ecocredit/MsgSetClassCreatorAllowlist"
+import MsgUpdateBatchMetadata from "../../components/ecocredit/MsgUpdateBatchMetadata"
+import MsgUpdateClassAdmin from "../../components/ecocredit/MsgUpdateClassAdmin"
+import MsgUpdateClassFee from "../../components/ecocredit/MsgUpdateClassFee"
+import MsgUpdateClassIssuers from "../../components/ecocredit/MsgUpdateClassIssuers"
+import MsgUpdateClassMetadata from "../../components/ecocredit/MsgUpdateClassMetadata"
+import MsgUpdateProjectAdmin from "../../components/ecocredit/MsgUpdateProjectAdmin"
+import MsgUpdateProjectMetadata from "../../components/ecocredit/MsgUpdateProjectMetadata"
 import QueryBatch from "../../components/ecocredit/QueryBatch"
 import QueryClass from "../../components/ecocredit/QueryClass"
 import QueryProject from "../../components/ecocredit/QueryProject"
@@ -21,22 +41,34 @@ const EcocreditPage = () => (
         </h1>
         <ul className={styles.table}>
           <li>
-            {'MsgAddAllowedBridgeChain'}
+            <a href="#msg-add-allowed-bridge-chain">
+              {'MsgAddAllowedBridgeChain'}
+            </a>
           </li>
           <li>
-            {'MsgAddClassCreator'}
+            <a href="#msg-add-class-creator">
+              {'MsgAddClassCreator'}
+            </a>
           </li>
           <li>
-            {'MsgAddCreditType'}
+            <a href="#msg-add-credit-type">
+              {'MsgAddCreditType'}
+            </a>
           </li>
           <li>
-            {'MsgBridge'}
+            <a href="#msg-bridge">
+              {'MsgBridge'}
+            </a>
           </li>
           <li>
-            {'MsgBridgeReceive'}
+            <a href="#msg-bridge-receive">
+              {'MsgBridgeReceive'}
+            </a>
           </li>
           <li>
-            {'MsgCancel'}
+            <a href="#msg-cancel">
+              {'MsgCancel'}
+            </a>
           </li>
           <li>
             <a href="#msg-create-batch">
@@ -54,46 +86,74 @@ const EcocreditPage = () => (
             </a>
           </li>
           <li>
-            {'MsgMintBatchCredits'}
+            <a href="#msg-mint-batch-credits">
+              {'MsgMintBatchCredits'}
+            </a>
           </li>
           <li>
-            {'MsgRemoveAllowedBridgeChain'}
+            <a href="#msg-remove-allowed-bridge-chain">
+              {'MsgRemoveAllowedBridgeChain'}
+            </a>
           </li>
           <li>
-            {'MsgRemoveClassCreator'}
+            <a href="#msg-remove-class-creator">
+              {'MsgRemoveClassCreator'}
+            </a>
           </li>
           <li>
-            {'MsgRetire'}
+            <a href="#msg-retire">
+              {'MsgRetire'}
+            </a>
           </li>
           <li>
-            {'MsgSealBatch'}
+            <a href="#msg-seal-batch">
+              {'MsgSealBatch'}
+            </a>
           </li>
           <li>
-            {'MsgSend'}
+            <a href="#msg-send">
+              {'MsgSend'}
+            </a>
           </li>
           <li>
-            {'MsgSetClassCreatorAllowlist'}
+            <a href="#msg-set-class-creator-allowlist">
+              {'MsgSetClassCreatorAllowlist'}
+            </a>
           </li>
           <li>
-            {'MsgUpdateBatchMetadata'}
+            <a href="#msg-update-batch-metadata">
+              {'MsgUpdateBatchMetadata'}
+            </a>
           </li>
           <li>
-            {'MsgUpdateClassAdmin'}
+            <a href="#msg-update-class-admin">
+              {'MsgUpdateClassAdmin'}
+            </a>
           </li>
           <li>
-            {'MsgUpdateClassFee'}
+            <a href="#msg-update-class-fee">
+              {'MsgUpdateClassFee'}
+            </a>
           </li>
           <li>
-            {'MsgUpdateClassIssuers'}
+            <a href="#msg-update-class-issuers">
+              {'MsgUpdateClassIssuers'}
+            </a>
           </li>
           <li>
-            {'MsgUpdateClassMetadata'}
+            <a href="#msg-update-class-metadata">
+              {'MsgUpdateClassMetadata'}
+            </a>
           </li>
           <li>
-            {'MsgUpdateProjectAdmin'}
+            <a href="#msg-update-project-admin">
+              {'MsgUpdateProjectAdmin'}
+            </a>
           </li>
           <li>
-            {'MsgUpdateProjectMetadata'}
+            <a href="#msg-update-project-metadata">
+              {'MsgUpdateProjectMetadata'}
+            </a>
           </li>
           <li>
             {'QueryAllBalances'}
@@ -180,9 +240,29 @@ const EcocreditPage = () => (
             {'QuerySupply'}
           </li>
         </ul>
+        <MsgAddAllowedBridgeChain />
+        <MsgAddClassCreator />
+        <MsgAddCreditType />
+        <MsgBridge />
+        <MsgBridgeReceive />
+        <MsgCancel />
         <MsgCreateBatch />
         <MsgCreateClass />
         <MsgCreateProject />
+        <MsgMintBatchCredits />
+        <MsgRemoveAllowedBridgeChain />
+        <MsgRemoveClassCreator />
+        <MsgRetire />
+        <MsgSealBatch />
+        <MsgSend />
+        <MsgSetClassCreatorAllowlist />
+        <MsgUpdateBatchMetadata />
+        <MsgUpdateClassAdmin />
+        <MsgUpdateClassFee />
+        <MsgUpdateClassIssuers />
+        <MsgUpdateClassMetadata />
+        <MsgUpdateProjectAdmin />
+        <MsgUpdateProjectMetadata />
         <QueryBatch />
         <QueryClass />
         <QueryProject />

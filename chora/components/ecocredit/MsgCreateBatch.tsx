@@ -56,6 +56,7 @@ const MsgCreateBatch = ({ network, setMessage, useWallet, wallet }: any) => {
       <InputIRI
         id="msg-create-batch-metadata"
         label="metadata"
+        network={network}
         iri={metadata}
         setIri={setMetadata}
       />

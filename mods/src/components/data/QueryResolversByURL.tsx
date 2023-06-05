@@ -55,7 +55,6 @@ const QueryResolversByURL = () => {
         <InputURL
           id="resolver-url"
           label="resolver url"
-          placeholder="https://server.chora.io"
           url={url}
           setUrl={setUrl}
         />

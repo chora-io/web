@@ -54,6 +54,7 @@ const MsgCreateClass = ({ network, setMessage, useWallet, wallet }: any) => {
       <InputIRI
         id="msg-create-class-metadata"
         label="metadata"
+        network={network}
         iri={metadata}
         setIri={setMetadata}
       />
