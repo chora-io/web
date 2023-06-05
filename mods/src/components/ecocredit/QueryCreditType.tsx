@@ -3,19 +3,19 @@ import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
 
-import InputAddress from "chora/components/InputAddress"
+import InputString from "chora/components/InputString"
 import Result from "chora/components/Result"
 
-import * as styles from "./QueryGroupPolicyInfo.module.css"
+import * as styles from "./QueryCreditType.module.css"
 
-const queryGroupPolicyInfo = "/cosmos/group/v1/group_policy_info"
+const queryCreditType = "/regen/ecocredit/v1/credit-type"
 
-const QueryGroupPolicyInfo = () => {
+const QueryCreditType = () => {
 
-  const { chainInfo, network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
 
   // form input
-  const [address, setAddress] = useState<string>("")
+  const [abbrev, setAbbrev] = useState<string>("")
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -27,7 +27,7 @@ const QueryGroupPolicyInfo = () => {
     setError("")
     setSuccess("")
 
-    fetch(chainInfo.rest + queryGroupPolicyInfo + "/" + address)
+    fetch(chainInfo.rest + queryCreditType + "/" + abbrev)
       .then(res => res.json())
       .then(data => {
         if (data.code) {
@@ -42,23 +42,22 @@ const QueryGroupPolicyInfo = () => {
   }
 
   return (
-    <div id="query-group-policy" className={styles.box}>
+    <div id="query-credit-type" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"QueryGroupPolicyInfo"}
+          {"QueryCreditType"}
         </h2>
         <p>
-          {"query a group policy by the address of the policy"}
+          {"query credit class issuers by credit class id"}
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <InputAddress
-          id="query-group-policy-address"
-          label="policy address"
-          network={network}
-          long={true}
-          address={address}
-          setAddress={setAddress}
+        <InputString
+          id="query-credit-type-abbreviation"
+          label="abbreviation"
+          placeholder="C"
+          string={abbrev}
+          setString={setAbbrev}
         />
         <button type="submit">
           {"search"}
@@ -72,4 +71,4 @@ const QueryGroupPolicyInfo = () => {
   )
 }
 
-export default QueryGroupPolicyInfo
+export default QueryCreditType

@@ -48,6 +48,7 @@ const MsgUpdateProjectAdmin = ({ network, setMessage, useWallet, wallet }: any) 
       <InputAddress
         id="msg-update-project-admin-new-admin"
         label="new admin"
+        network={network}
         address={newAdmin}
         setAddress={setNewAdmin}
       />

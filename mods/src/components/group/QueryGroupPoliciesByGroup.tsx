@@ -3,19 +3,19 @@ import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
 
-import InputAddress from "chora/components/InputAddress"
+import InputNumber from "chora/components/InputNumber"
 import Result from "chora/components/Result"
 
-import * as styles from "./QueryGroupPolicyInfo.module.css"
+import * as styles from "./QueryGroupPoliciesByGroup.module.css"
 
-const queryGroupPolicyInfo = "/cosmos/group/v1/group_policy_info"
+const queryGroupPoliciesByGroup = "/cosmos/group/v1/group_policies_by_group"
 
-const QueryGroupPolicyInfo = () => {
+const QueryGroupPoliciesByGroup = () => {
 
-  const { chainInfo, network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
 
   // form input
-  const [address, setAddress] = useState<string>("")
+  const [id, setId] = useState<string>("")
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -27,7 +27,7 @@ const QueryGroupPolicyInfo = () => {
     setError("")
     setSuccess("")
 
-    fetch(chainInfo.rest + queryGroupPolicyInfo + "/" + address)
+    fetch(chainInfo.rest + queryGroupPoliciesByGroup + "/" + id)
       .then(res => res.json())
       .then(data => {
         if (data.code) {
@@ -42,23 +42,21 @@ const QueryGroupPolicyInfo = () => {
   }
 
   return (
-    <div id="query-group-policy" className={styles.box}>
+    <div id="query-group-policies-by-group" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"QueryGroupPolicyInfo"}
+          {"QueryGroupPoliciesByGroup"}
         </h2>
         <p>
-          {"query a group policy by the address of the policy"}
+          {"query group policies by the id of the group"}
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <InputAddress
-          id="query-group-policy-address"
-          label="policy address"
-          network={network}
-          long={true}
-          address={address}
-          setAddress={setAddress}
+        <InputNumber
+          id="query-group-policies-by-group-group-id"
+          label="group id"
+          number={id}
+          setNumber={setId}
         />
         <button type="submit">
           {"search"}
@@ -72,4 +70,4 @@ const QueryGroupPolicyInfo = () => {
   )
 }
 
-export default QueryGroupPolicyInfo
+export default QueryGroupPoliciesByGroup

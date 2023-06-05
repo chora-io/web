@@ -1,21 +1,18 @@
+
 import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
 
-import InputAddress from "chora/components/InputAddress"
 import Result from "chora/components/Result"
 
-import * as styles from "./QueryGroupPolicyInfo.module.css"
+import * as styles from "./QueryCreditTypes.module.css"
 
-const queryGroupPolicyInfo = "/cosmos/group/v1/group_policy_info"
+const queryCreditTypes = "/regen/ecocredit/v1/credit-types"
 
-const QueryGroupPolicyInfo = () => {
+const QueryCreditTypes = () => {
 
-  const { chainInfo, network } = useContext(WalletContext)
-
-  // form input
-  const [address, setAddress] = useState<string>("")
+  const { chainInfo } = useContext(WalletContext)
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -27,7 +24,7 @@ const QueryGroupPolicyInfo = () => {
     setError("")
     setSuccess("")
 
-    fetch(chainInfo.rest + queryGroupPolicyInfo + "/" + address)
+    fetch(chainInfo.rest + queryCreditTypes)
       .then(res => res.json())
       .then(data => {
         if (data.code) {
@@ -42,24 +39,16 @@ const QueryGroupPolicyInfo = () => {
   }
 
   return (
-    <div id="query-group-policy" className={styles.box}>
+    <div id="query-credit-types" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"QueryGroupPolicyInfo"}
+          {"QueryCreditTypes"}
         </h2>
         <p>
-          {"query a group policy by the address of the policy"}
+          {"query all credit types"}
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <InputAddress
-          id="query-group-policy-address"
-          label="policy address"
-          network={network}
-          long={true}
-          address={address}
-          setAddress={setAddress}
-        />
         <button type="submit">
           {"search"}
         </button>
@@ -72,4 +61,4 @@ const QueryGroupPolicyInfo = () => {
   )
 }
 
-export default QueryGroupPolicyInfo
+export default QueryCreditTypes

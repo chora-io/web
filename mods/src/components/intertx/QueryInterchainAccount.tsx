@@ -11,9 +11,9 @@ import * as styles from "./QueryInterchainAccount.module.css"
 
 const queryInterchainAccount = "/regen/intertx/v1/interchain-account"
 
-const QueryNode = () => {
+const QueryInterchainAccount = () => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // form input
   const [owner, setOwner] = useState<string>("")
@@ -57,6 +57,7 @@ const QueryNode = () => {
         <InputAddress
           id="query-interchain-account-owner"
           label="owner"
+          network={network}
           address={owner}
           setAddress={setOwner}
         />
@@ -79,4 +80,4 @@ const QueryNode = () => {
   )
 }
 
-export default QueryNode
+export default QueryInterchainAccount

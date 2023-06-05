@@ -38,7 +38,7 @@ const MsgAddClassCreator = () => {
           {"MsgAddClassCreator"}
         </h2>
         <p>
-          {"add a credit class creator to the allowlist"}
+          {"add an address to the credit class creator allowlist"}
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>

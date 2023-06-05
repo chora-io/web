@@ -6,16 +6,16 @@ import { WalletContext } from "chora"
 import InputAddress from "chora/components/InputAddress"
 import Result from "chora/components/Result"
 
-import * as styles from "./QueryGroupPolicyInfo.module.css"
+import * as styles from "./QueryGroupsByMember.module.css"
 
-const queryGroupPolicyInfo = "/cosmos/group/v1/group_policy_info"
+const queryGroupsByAdmin = "/cosmos/group/v1/groups_by_member"
 
-const QueryGroupPolicyInfo = () => {
+const QueryGroupsByMember = () => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
   // form input
-  const [address, setAddress] = useState<string>("")
+  const [member, setMember] = useState<string>("")
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -27,7 +27,7 @@ const QueryGroupPolicyInfo = () => {
     setError("")
     setSuccess("")
 
-    fetch(chainInfo.rest + queryGroupPolicyInfo + "/" + address)
+    fetch(chainInfo.rest + queryGroupsByAdmin + "/" + member)
       .then(res => res.json())
       .then(data => {
         if (data.code) {
@@ -42,23 +42,22 @@ const QueryGroupPolicyInfo = () => {
   }
 
   return (
-    <div id="query-group-policy" className={styles.box}>
+    <div id="query-groups-by-member" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"QueryGroupPolicyInfo"}
+          {"QueryGroupsByMember"}
         </h2>
         <p>
-          {"query a group policy by the address of the policy"}
+          {"query groups by the address of a member"}
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputAddress
-          id="query-group-policy-address"
-          label="policy address"
+          id="query-groups-by-member-member"
+          label="member"
           network={network}
-          long={true}
-          address={address}
-          setAddress={setAddress}
+          address={member}
+          setAddress={setMember}
         />
         <button type="submit">
           {"search"}
@@ -72,4 +71,4 @@ const QueryGroupPolicyInfo = () => {
   )
 }
 
-export default QueryGroupPolicyInfo
+export default QueryGroupsByMember

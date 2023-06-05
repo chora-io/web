@@ -48,6 +48,7 @@ const MsgUpdateClassAdmin = ({ network, setMessage, useWallet, wallet }: any) =>
       <InputAddress
         id="msg-update-class-admin-new-admin"
         label="new admin"
+        network={network}
         address={newAdmin}
         setAddress={setNewAdmin}
       />

@@ -4,18 +4,20 @@ import { useContext, useState } from "react"
 import { WalletContext } from "chora"
 
 import InputAddress from "chora/components/InputAddress"
+import InputString from "chora/components/InputString"
 import Result from "chora/components/Result"
 
-import * as styles from "./QueryGroupPolicyInfo.module.css"
+import * as styles from "./QueryBalance.module.css"
 
-const queryGroupPolicyInfo = "/cosmos/group/v1/group_policy_info"
+const queryBalance = "/regen/ecocredit/v1/balance"
 
-const QueryGroupPolicyInfo = () => {
+const QueryBalance = () => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
   // form input
   const [address, setAddress] = useState<string>("")
+  const [denom, setDenom] = useState<string>("")
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -27,7 +29,7 @@ const QueryGroupPolicyInfo = () => {
     setError("")
     setSuccess("")
 
-    fetch(chainInfo.rest + queryGroupPolicyInfo + "/" + address)
+    fetch(chainInfo.rest + queryBalance + "/" + denom + "/" + address)
       .then(res => res.json())
       .then(data => {
         if (data.code) {
@@ -42,23 +44,29 @@ const QueryGroupPolicyInfo = () => {
   }
 
   return (
-    <div id="query-group-policy" className={styles.box}>
+    <div id="query-balance" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"QueryGroupPolicyInfo"}
+          {"QueryBalance"}
         </h2>
         <p>
-          {"query a group policy by the address of the policy"}
+          {"query balance by credit owner address and batch denom"}
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputAddress
-          id="query-group-policy-address"
-          label="policy address"
+          id="query-balance-address"
+          label="address"
           network={network}
-          long={true}
           address={address}
           setAddress={setAddress}
+        />
+        <InputString
+          id="query-balance-batch-denom"
+          label="batch denom"
+          placeholder="C01-001-20200101-20210101-001"
+          string={denom}
+          setString={setDenom}
         />
         <button type="submit">
           {"search"}
@@ -72,4 +80,4 @@ const QueryGroupPolicyInfo = () => {
   )
 }
 
-export default QueryGroupPolicyInfo
+export default QueryBalance

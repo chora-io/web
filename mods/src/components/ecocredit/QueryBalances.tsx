@@ -6,11 +6,11 @@ import { WalletContext } from "chora"
 import InputAddress from "chora/components/InputAddress"
 import Result from "chora/components/Result"
 
-import * as styles from "./QueryGroupPolicyInfo.module.css"
+import * as styles from "./QueryBalances.module.css"
 
-const queryGroupPolicyInfo = "/cosmos/group/v1/group_policy_info"
+const queryBalances = "/regen/ecocredit/v1/balances"
 
-const QueryGroupPolicyInfo = () => {
+const QueryBalances = () => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
@@ -27,7 +27,7 @@ const QueryGroupPolicyInfo = () => {
     setError("")
     setSuccess("")
 
-    fetch(chainInfo.rest + queryGroupPolicyInfo + "/" + address)
+    fetch(chainInfo.rest + queryBalances + "/" + address)
       .then(res => res.json())
       .then(data => {
         if (data.code) {
@@ -42,21 +42,20 @@ const QueryGroupPolicyInfo = () => {
   }
 
   return (
-    <div id="query-group-policy" className={styles.box}>
+    <div id="query-balances" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"QueryGroupPolicyInfo"}
+          {"QueryBalances"}
         </h2>
         <p>
-          {"query a group policy by the address of the policy"}
+          {"query all balances by credit owner address"}
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputAddress
-          id="query-group-policy-address"
-          label="policy address"
+          id="query-balances-address"
+          label="address"
           network={network}
-          long={true}
           address={address}
           setAddress={setAddress}
         />
@@ -72,4 +71,4 @@ const QueryGroupPolicyInfo = () => {
   )
 }
 
-export default QueryGroupPolicyInfo
+export default QueryBalances

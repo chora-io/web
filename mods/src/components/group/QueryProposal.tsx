@@ -53,7 +53,7 @@ const QueryProposal = () => {
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputNumber
-          id="query-group-proposal-id"
+          id="query-proposal-id"
           label="proposal id"
           number={id}
           setNumber={setId}

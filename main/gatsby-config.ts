@@ -3,8 +3,8 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `chora | decentralized protocol research`,
-    description: `Decentralized protocol research and development.`,
+    title: `chora | distributed ledger technology`,
+    description: `Chora is prototyping software for commons governance and ecological regeneration.`,
     author: `@choraio`,
     siteUrl: `https://chora.io/`,
   },

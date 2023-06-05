@@ -26,9 +26,32 @@ import MsgUpdateClassIssuers from "../../components/ecocredit/MsgUpdateClassIssu
 import MsgUpdateClassMetadata from "../../components/ecocredit/MsgUpdateClassMetadata"
 import MsgUpdateProjectAdmin from "../../components/ecocredit/MsgUpdateProjectAdmin"
 import MsgUpdateProjectMetadata from "../../components/ecocredit/MsgUpdateProjectMetadata"
+import QueryAllBalances from "../../components/ecocredit/QueryAllBalances"
+import QueryAllowedBridgeChains from "../../components/ecocredit/QueryAllowedBridgeChains"
+import QueryAllowedClassCreators from "../../components/ecocredit/QueryAllowedClassCreators"
+import QueryBalance from "../../components/ecocredit/QueryBalance"
+import QueryBalances from "../../components/ecocredit/QueryBalances"
+import QueryBalancesByBatch from "../../components/ecocredit/QueryBalancesByBatch"
 import QueryBatch from "../../components/ecocredit/QueryBatch"
+import QueryBatches from "../../components/ecocredit/QueryBatches"
+import QueryBatchesByClass from "../../components/ecocredit/QueryBatchesByClass"
+import QueryBatchesByIssuer from "../../components/ecocredit/QueryBatchesByIssuer"
+import QueryBatchesByProject from "../../components/ecocredit/QueryBatchesByProject"
 import QueryClass from "../../components/ecocredit/QueryClass"
+import QueryClassCreatorAllowlist from "../../components/ecocredit/QueryClassCreatorAllowlist"
+import QueryClasses from "../../components/ecocredit/QueryClasses"
+import QueryClassesByAdmin from "../../components/ecocredit/QueryClassesByAdmin"
+import QueryClassFee from "../../components/ecocredit/QueryClassFee"
+import QueryClassIssuers from "../../components/ecocredit/QueryClassIssuers"
+import QueryCreditType from "../../components/ecocredit/QueryCreditType"
+import QueryCreditTypes from "../../components/ecocredit/QueryCreditTypes"
+import QueryParams from "../../components/ecocredit/QueryParams"
 import QueryProject from "../../components/ecocredit/QueryProject"
+import QueryProjects from "../../components/ecocredit/QueryProjects"
+import QueryProjectsByAdmin from "../../components/ecocredit/QueryProjectsByAdmin"
+import QueryProjectsByClass from "../../components/ecocredit/QueryProjectsByClass"
+import QueryProjectsByReferenceId from "../../components/ecocredit/QueryProjectsByReferenceId"
+import QuerySupply from "../../components/ecocredit/QuerySupply"
 
 import * as styles from "./index.module.css"
 
@@ -156,22 +179,34 @@ const EcocreditPage = () => (
             </a>
           </li>
           <li>
-            {'QueryAllBalances'}
+            <a href="#query-all-balances">
+              {'QueryAllBalances'}
+            </a>
           </li>
           <li>
-            {'QueryAllowedBridgeChains'}
+            <a href="#query-allowed-bridge-chains">
+              {'QueryAllowedBridgeChains'}
+            </a>
           </li>
           <li>
-            {'QueryAllowedClassCreators'}
+            <a href="#query-allowed-bridge-chains">
+              {'QueryAllowedClassCreators'}
+            </a>
           </li>
           <li>
-            {'QueryBalance'}
+            <a href="#query-balance">
+              {'QueryBalance'}
+            </a>
           </li>
           <li>
-            {'QueryBalances'}
+            <a href="#query-balances">
+              {'QueryBalances'}
+            </a>
           </li>
           <li>
-            {'QueryBalancesByBatch'}
+            <a href="#query-balances-by-batch">
+              {'QueryBalancesByBatch'}
+            </a>
           </li>
           <li>
             <a href="#query-batch">
@@ -179,16 +214,24 @@ const EcocreditPage = () => (
             </a>
           </li>
           <li>
-            {'QueryBatches'}
+            <a href="#query-batches">
+              {'QueryBatches'}
+            </a>
           </li>
           <li>
-            {'QueryBatchesByClass'}
+            <a href="#query-batches-by-class">
+              {'QueryBatchesByClass'}
+            </a>
           </li>
           <li>
-            {'QueryBatchesByIssuer'}
+            <a href="#query-batches-by-issuer">
+              {'QueryBatchesByIssuer'}
+            </a>
           </li>
           <li>
-            {'QueryBatchesByProject'}
+            <a href="#query-batches-by-project">
+              {'QueryBatchesByProject'}
+            </a>
           </li>
           <li>
             <a href="#query-class">
@@ -196,28 +239,44 @@ const EcocreditPage = () => (
             </a>
           </li>
           <li>
-            {'QueryClassCreatorAllowlist'}
+            <a href="#query-class-creator-allowlist">
+              {'QueryClassCreatorAllowlist'}
+            </a>
           </li>
           <li>
-            {'QueryClasses'}
+            <a href="#query-classes">
+              {'QueryClasses'}
+            </a>
           </li>
           <li>
-            {'QueryClassesByAdmin'}
+            <a href="#query-classes-by-admin">
+              {'QueryClassesByAdmin'}
+            </a>
           </li>
           <li>
-            {'QueryClassFee'}
+            <a href="#query-class-fee">
+              {'QueryClassFee'}
+            </a>
           </li>
           <li>
-            {'QueryClassIssuers'}
+            <a href="#query-class-issuers">
+              {'QueryClassIssuers'}
+            </a>
           </li>
           <li>
-            {'QueryCreditType'}
+            <a href="#query-credit-type">
+              {'QueryCreditType'}
+            </a>
           </li>
           <li>
-            {'QueryCreditTypes'}
+            <a href="#query-credit-types">
+              {'QueryCreditTypes'}
+            </a>
           </li>
           <li>
-            {'QueryParams'}
+            <a href="#query-params">
+              {'QueryParams'}
+            </a>
           </li>
           <li>
             <a href="#query-project">
@@ -225,19 +284,29 @@ const EcocreditPage = () => (
             </a>
           </li>
           <li>
-            {'QueryProjects'}
+            <a href="#query-projects">
+              {'QueryProjects'}
+            </a>
           </li>
           <li>
-            {'QueryProjectsByAdmin'}
+            <a href="#query-projects-by-admin">
+              {'QueryProjectsByAdmin'}
+            </a>
           </li>
           <li>
-            {'QueryProjectsByClass'}
+            <a href="#query-projects-by-class">
+              {'QueryProjectsByClass'}
+            </a>
           </li>
           <li>
-            {'QueryProjectsByReferenceId'}
+            <a href="#query-projects-by-reference-id">
+              {'QueryProjectsByReferenceId'}
+            </a>
           </li>
           <li>
-            {'QuerySupply'}
+            <a href="#query-supply">
+              {'QuerySupply'}
+            </a>
           </li>
         </ul>
         <MsgAddAllowedBridgeChain />
@@ -263,9 +332,32 @@ const EcocreditPage = () => (
         <MsgUpdateClassMetadata />
         <MsgUpdateProjectAdmin />
         <MsgUpdateProjectMetadata />
+        <QueryAllBalances />
+        <QueryAllowedBridgeChains />
+        <QueryAllowedClassCreators />
+        <QueryBalance />
+        <QueryBalances />
+        <QueryBalancesByBatch />
         <QueryBatch />
+        <QueryBatches />
+        <QueryBatchesByClass />
+        <QueryBatchesByIssuer />
+        <QueryBatchesByProject />
         <QueryClass />
+        <QueryClassCreatorAllowlist />
+        <QueryClasses />
+        <QueryClassesByAdmin />
+        <QueryClassFee />
+        <QueryClassIssuers />
+        <QueryCreditType />
+        <QueryCreditTypes />
+        <QueryParams />
         <QueryProject />
+        <QueryProjects />
+        <QueryProjectsByAdmin />
+        <QueryProjectsByClass />
+        <QueryProjectsByReferenceId />
+        <QuerySupply />
       </div>
     </div>
   </Main>

@@ -3,19 +3,19 @@ import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
 
-import InputAddress from "chora/components/InputAddress"
+import InputString from "chora/components/InputString"
 import Result from "chora/components/Result"
 
-import * as styles from "./QueryGroupPolicyInfo.module.css"
+import * as styles from "./QueryProjectsByClass.module.css"
 
-const queryGroupPolicyInfo = "/cosmos/group/v1/group_policy_info"
+const queryProjectsByClass = "/regen/ecocredit/v1/projects-by-class"
 
-const QueryGroupPolicyInfo = () => {
+const QueryProjectsByClass = () => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
   // form input
-  const [address, setAddress] = useState<string>("")
+  const [classId, setClassId] = useState<string>("")
 
   // error and success
   const [error, setError] = useState<string>("")
@@ -27,7 +27,7 @@ const QueryGroupPolicyInfo = () => {
     setError("")
     setSuccess("")
 
-    fetch(chainInfo.rest + queryGroupPolicyInfo + "/" + address)
+    fetch(chainInfo.rest + queryProjectsByClass + "/" + classId)
       .then(res => res.json())
       .then(data => {
         if (data.code) {
@@ -42,23 +42,22 @@ const QueryGroupPolicyInfo = () => {
   }
 
   return (
-    <div id="query-group-policy" className={styles.box}>
+    <div id="query-projects-by-class" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"QueryGroupPolicyInfo"}
+          {"QueryProjectsByClass"}
         </h2>
         <p>
-          {"query a group policy by the address of the policy"}
+          {"query all projects by class id"}
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <InputAddress
-          id="query-group-policy-address"
-          label="policy address"
-          network={network}
-          long={true}
-          address={address}
-          setAddress={setAddress}
+        <InputString
+          id="query-projects-by-class-class-id"
+          label="class id"
+          placeholder="C01"
+          string={classId}
+          setString={setClassId}
         />
         <button type="submit">
           {"search"}
@@ -72,4 +71,4 @@ const QueryGroupPolicyInfo = () => {
   )
 }
 
-export default QueryGroupPolicyInfo
+export default QueryProjectsByClass

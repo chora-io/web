@@ -19,8 +19,17 @@ import MsgVote from "../../components/group/MsgVote"
 import MsgWithdrawProposal from "../../components/group/MsgWithdrawProposal"
 import QueryGroupInfo from "../../components/group/QueryGroupInfo"
 import QueryGroupMembers from "../../components/group/QueryGroupMembers"
+import QueryGroupPoliciesByAdmin from "../../components/group/QueryGroupPoliciesByAdmin"
+import QueryGroupPoliciesByGroup from "../../components/group/QueryGroupPoliciesByGroup"
 import QueryGroupPolicyInfo from "../../components/group/QueryGroupPolicyInfo"
+import QueryGroupsByAdmin from "../../components/group/QueryGroupsByAdmin"
+import QueryGroupsByMember from "../../components/group/QueryGroupsByMember"
 import QueryProposal from "../../components/group/QueryProposal"
+import QueryProposalsByGroupPolicy from "../../components/group/QueryProposalsByGroupPolicy"
+import QueryTallyResult from "../../components/group/QueryTallyResult"
+import QueryVoteByProposalVoter from "../../components/group/QueryVoteByProposalVoter"
+import QueryVotesByProposal from "../../components/group/QueryVotesByProposal"
+import QueryVotesByVoter from "../../components/group/QueryVotesByVoter"
 
 import * as styles from "./index.module.css"
 
@@ -113,10 +122,14 @@ const GroupPage = () => (
             </a>
           </li>
           <li>
-            {'QueryGroupPoliciesByAdmin'}
+            <a href="#query-group-policies-by-admin">
+              {'QueryGroupPoliciesByAdmin'}
+            </a>
           </li>
           <li>
-            {'QueryGroupPoliciesByGroup'}
+            <a href="#query-group-policies-by-group">
+              {'QueryGroupPoliciesByGroup'}
+            </a>
           </li>
           <li>
             <a href="#query-group-policy-info">
@@ -124,10 +137,14 @@ const GroupPage = () => (
             </a>
           </li>
           <li>
-            {'QueryGroupsByAdmin'}
+            <a href="#query-groups-by-admin">
+              {'QueryGroupsByAdmin'}
+            </a>
           </li>
           <li>
-            {'QueryGroupsByMembers'}
+            <a href="#query-groups-by-member">
+              {'QueryGroupsByMember'}
+            </a>
           </li>
           <li>
             <a href="#query-proposal">
@@ -135,19 +152,29 @@ const GroupPage = () => (
             </a>
           </li>
           <li>
-            {'QueryProposalsByGroupPolicy'}
+            <a href="#query-proposals-by-group-policy">
+              {'QueryProposalsByGroupPolicy'}
+            </a>
           </li>
           <li>
-            {'QueryTallyResult'}
+            <a href="#query-tally-result">
+              {'QueryTallyResult'}
+            </a>
           </li>
           <li>
-            {'QueryVoteByProposalVoter'}
+            <a href="#query-vote-by-proposal-voter">
+              {'QueryVoteByProposalVoter'}
+            </a>
           </li>
           <li>
-            {'QueryVotesByProposal'}
+            <a href="#query-votes-by-proposal">
+              {'QueryVotesByProposal'}
+            </a>
           </li>
           <li>
-            {'QueryVotesByVoter'}
+            <a href="#query-votes-by-voter">
+              {'QueryVotesByVoter'}
+            </a>
           </li>
         </ul>
         <MsgCreateGroup />
@@ -166,8 +193,17 @@ const GroupPage = () => (
         <MsgWithdrawProposal />
         <QueryGroupInfo />
         <QueryGroupMembers />
+        <QueryGroupPoliciesByAdmin />
+        <QueryGroupPoliciesByGroup />
         <QueryGroupPolicyInfo />
+        <QueryGroupsByAdmin />
+        <QueryGroupsByMember />
         <QueryProposal />
+        <QueryProposalsByGroupPolicy />
+        <QueryTallyResult />
+        <QueryVoteByProposalVoter />
+        <QueryVotesByProposal />
+        <QueryVotesByVoter />
       </div>
     </div>
   </Main>
