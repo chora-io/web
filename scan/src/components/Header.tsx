@@ -1,8 +1,9 @@
 import * as React from "react"
 import { Link, navigate } from "gatsby"
 
+import { ThemeButton } from "chora/components"
+
 import SelectNetwork from "./SelectNetwork"
-import ThemeButton from "chora/components/ThemeButton"
 
 import choraLogoDark from "chora/assets/images/chora_dark_icon.png"
 import choraLogoLight from "chora/assets/images/chora_light_icon.png"

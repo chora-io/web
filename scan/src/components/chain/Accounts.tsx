@@ -2,8 +2,7 @@ import * as React from "react"
 import { useState } from "react"
 import { navigate } from "gatsby"
 
-import InputAddress from "chora/components/InputAddress"
-import Result from "chora/components/Result"
+import { InputAddress, Result } from "chora/components"
 
 import * as styles from "./Accounts.module.css"
 

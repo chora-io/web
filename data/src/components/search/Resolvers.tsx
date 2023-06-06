@@ -2,10 +2,8 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-import InputContentHashJSON from "chora/components/data/InputContentHashJSON"
-import InputIRI from "chora/components/InputIRI"
-import InputURL from "chora/components/InputURL"
-import Result from "chora/components/Result"
+import { InputIRI, InputURL, Result } from "chora/components"
+import { InputContentHashJSON } from "chora/components/data"
 
 import * as styles from "./Resolvers.module.css"
 

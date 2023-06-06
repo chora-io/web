@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { formatTimestamp } from "chora/utils/timestamp"
+import { formatTimestamp } from "chora/utils"
 
 import * as styles from "./AuthzGrant.module.css"
 

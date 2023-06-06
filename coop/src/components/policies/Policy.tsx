@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
 import { choraTestnet } from "chora/chains"
-import { formatTimestamp } from "chora/utils/timestamp"
+import { formatTimestamp } from "chora/utils"
 
 import * as styles from "./Policy.module.css"
 

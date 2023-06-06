@@ -2,9 +2,7 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-
-import InputIRI from "chora/components/InputIRI"
-import Result from "chora/components/Result"
+import { InputIRI, Result } from "chora/components"
 
 import * as styles from "./QueryAttestationsByIRI.module.css"
 
@@ -45,7 +43,7 @@ const QueryAttestationsByIRI = () => {
           {"QueryAttestationsByIRI"}
         </h2>
         <p>
-          {"query data attestations by the iri of a data entry"}
+          {"query data attestations by the iri of the data"}
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>

@@ -3,10 +3,9 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-import { signAndBroadcast } from "chora/utils/tx"
-
-import MsgInputs from "chora/components/ecocredit/MsgUpdateBatchMetadata"
-import ResultTx from "chora/components/ResultTx"
+import { ResultTx } from "chora/components"
+import { MsgUpdateBatchMetadata as MsgInputs } from "chora/components/ecocredit"
+import { signAndBroadcast } from "chora/utils"
 
 import * as styles from "./MsgUpdateBatchMetadata.module.css"
 

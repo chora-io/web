@@ -2,9 +2,7 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-
-import InputURL from "chora/components/InputURL"
-import Result from "chora/components/Result"
+import { InputURL, Result } from "chora/components"
 
 import * as styles from "./QueryResolversByURL.module.css"
 

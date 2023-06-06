@@ -2,10 +2,11 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-
-import InputContentHash from "chora/components/data/InputContentHash"
-import InputContentHashJSON from "chora/components/data/InputContentHashJSON"
-import Result from "chora/components/Result"
+import { Result } from "chora/components"
+import {
+  InputContentHash,
+  InputContentHashJSON,
+} from "chora/components/data"
 
 import SelectInput from "../SelectInput"
 

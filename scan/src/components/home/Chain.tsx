@@ -2,7 +2,7 @@ import * as React from "react"
 import { useEffect, useState } from "react"
 import { Link } from "gatsby"
 
-import { formatTimestamp } from "chora/utils/timestamp"
+import { formatTimestamp } from "chora/utils"
 
 import * as styles from "./Chain.module.css"
 

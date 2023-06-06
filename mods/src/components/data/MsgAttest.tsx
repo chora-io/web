@@ -2,11 +2,12 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-import { signAndBroadcast } from "chora/utils/tx"
-
-import MsgInputs from "chora/components/data/MsgAttest"
-import MsgInputsJSON from "chora/components/data/MsgAttestJSON"
-import ResultTx from "chora/components/ResultTx"
+import { ResultTx } from "chora/components"
+import {
+  MsgAttest as MsgInputs,
+  MsgAttestJSON as MsgInputsJSON,
+} from "chora/components/data"
+import { signAndBroadcast } from "chora/utils"
 
 import SelectInput from "../SelectInput"
 

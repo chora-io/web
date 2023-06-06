@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Link } from "gatsby"
 
-import ThemeButton from "chora/components/ThemeButton"
+import { ThemeButton } from "chora/components"
 
 import choraLogoDark from "chora/assets/images/chora_dark_icon.png"
 import choraLogoLight from "chora/assets/images/chora_light_icon.png"

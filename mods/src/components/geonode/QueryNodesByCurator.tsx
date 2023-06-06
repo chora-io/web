@@ -2,9 +2,7 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-
-import InputAddress from "chora/components/InputAddress"
-import Result from "chora/components/Result"
+import { InputAddress, Result } from "chora/components"
 
 import * as styles from "./QueryNodesByCurator.module.css"
 
@@ -48,7 +46,7 @@ const QueryNodesByCurator = () => {
           {"QueryNodesByCurator"}
         </h2>
         <p>
-          {"query nodes by a curator address"}
+          {"query nodes by the address of the curator"}
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>

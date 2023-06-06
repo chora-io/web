@@ -2,49 +2,63 @@ import * as React from "react"
 import { useState } from "react"
 
 // chora.geonode.v1
-import GeonodeMsgCreate from "./geonode/MsgCreate"
-import GeonodeMsgUpdateCurator from "./geonode/MsgUpdateCurator"
-import GeonodeMsgUpdateMetadata from "./geonode/MsgUpdateMetadata"
+import {
+  MsgCreate as GeonodeMsgCreate,
+  MsgUpdateCurator as GeonodeMsgUpdateCurator,
+  MsgUpdateMetadata as GeonodeMsgUpdateMetadata,
+} from "./geonode"
 
 // chora.voucher.v1
-import VoucherMsgCreate from "./voucher/MsgCreate"
-import VoucherMsgIssue from "./voucher/MsgIssue"
-import VoucherMsgUpdateIssuer from "./voucher/MsgUpdateIssuer"
-import VoucherMsgUpdateMetadata from "./voucher/MsgUpdateMetadata"
+import {
+  MsgCreate as VoucherMsgCreate,
+  MsgIssue as VoucherMsgIssue,
+  MsgUpdateIssuer as VoucherMsgUpdateIssuer,
+  MsgUpdateMetadata as VoucherMsgUpdateMetadata,
+} from "./voucher"
 
 // cosmos.authz.v1beta1
-import AuthzMsgExec from "./authz/MsgExec"
-import AuthzMsgGrant from "./authz/MsgGrant"
-import AuthzMsgRevoke from "./authz/MsgRevoke"
+import {
+  MsgExec as AuthzMsgExec,
+  MsgGrant as AuthzMsgGrant,
+  MsgRevoke as AuthzMsgRevoke,
+} from "./authz"
 
 // cosmos.bank.v1beta1
-import BankMsgSend from "./bank/MsgSend"
+import {
+  MsgSend as BankMsgSend,
+} from "./bank"
 
 // cosmos.feegrant.v1beta1
-import FeegrantMsgGrantAllowance from "./feegrant/MsgGrantAllowance"
-import FeegrantMsgRevokeAllowance from "./feegrant/MsgRevokeAllowance"
+import {
+  MsgGrantAllowance as FeegrantMsgGrantAllowance,
+  MsgRevokeAllowance as FeegrantMsgRevokeAllowance,
+} from "./feegrant"
 
 // cosmos.group.v1
-import GroupMsgCreateGroup from "./group/MsgCreateGroup"
-import GroupMsgCreateGroupPolicy from "./group/MsgCreateGroupPolicy"
-import GroupMsgCreateGroupWithPolicy from "./group/MsgCreateGroupWithPolicy"
-import GroupMsgExec from "./group/MsgExec"
-import GroupMsgLeaveGroup from "./group/MsgLeaveGroup"
-import GroupMsgSubmitProposal from "./group/MsgSubmitProposal"
-import GroupMsgUpdateGroupAdmin from "./group/MsgUpdateGroupAdmin"
-import GroupMsgUpdateGroupMembers from "./group/MsgUpdateGroupMembers"
-import GroupMsgUpdateGroupMetadata from "./group/MsgUpdateGroupMetadata"
-import GroupMsgUpdateGroupPolicyAdmin from "./group/MsgUpdateGroupPolicyAdmin"
-import GroupMsgUpdateGroupPolicyDecisionPolicy from "./group/MsgUpdateGroupPolicyDecisionPolicy"
-import GroupMsgUpdateGroupPolicyMetadata from "./group/MsgUpdateGroupPolicyMetadata"
-import GroupMsgVote from "./group/MsgVote"
-import GroupMsgWithdrawProposal from "./group/MsgWithdrawProposal"
+import {
+  MsgCreateGroup as GroupMsgCreateGroup,
+  MsgCreateGroupPolicy as GroupMsgCreateGroupPolicy,
+  MsgCreateGroupWithPolicy as GroupMsgCreateGroupWithPolicy,
+  MsgExec as GroupMsgExec,
+  MsgLeaveGroup as GroupMsgLeaveGroup,
+  MsgSubmitProposal as GroupMsgSubmitProposal,
+  MsgUpdateGroupAdmin as GroupMsgUpdateGroupAdmin,
+  MsgUpdateGroupMembers as GroupMsgUpdateGroupMembers,
+  MsgUpdateGroupMetadata as GroupMsgUpdateGroupMetadata,
+  MsgUpdateGroupPolicyAdmin as GroupMsgUpdateGroupPolicyAdmin,
+  MsgUpdateGroupPolicyDecisionPolicy as GroupMsgUpdateGroupPolicyDecisionPolicy,
+  MsgUpdateGroupPolicyMetadata as GroupMsgUpdateGroupPolicyMetadata,
+  MsgVote as GroupMsgVote,
+  MsgWithdrawProposal as GroupMsgWithdrawProposal,
+} from "./group"
 
 // regen.data.v1
-import DataMsgAnchor from "./data/MsgAnchor"
-import DataMsgAttest from "./data/MsgAttest"
-import DataMsgDefineResolver from "./data/MsgDefineResolver"
-import DataMsgRegisterResolver from "./data/MsgRegisterResolver"
+import {
+  MsgAnchor as DataMsgAnchor,
+  MsgAttest as DataMsgAttest,
+  MsgDefineResolver as DataMsgDefineResolver,
+  MsgRegisterResolver as DataMsgRegisterResolver,
+} from "./data"
 
 import * as styles from "./SelectMessage.module.css"
 

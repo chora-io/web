@@ -2,7 +2,7 @@ import * as React from "react"
 import { useContext } from "react"
 
 import { WalletContext } from "chora"
-import Faucet from "chora/components/Faucet"
+import { Faucet } from "chora/components"
 
 const FaucetWrapper = () => {
 

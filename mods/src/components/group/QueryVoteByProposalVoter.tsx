@@ -3,10 +3,7 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-
-import InputAddress from "chora/components/InputAddress"
-import InputNumber from "chora/components/InputNumber"
-import Result from "chora/components/Result"
+import { InputAddress, InputNumber, Result } from "chora/components"
 
 import * as styles from "./QueryVoteByProposalVoter.module.css"
 
@@ -51,7 +48,7 @@ const QueryVoteByProposalVoter = () => {
           {"QueryVoteByProposalVoter"}
         </h2>
         <p>
-          {"query vote by a proposal id and the address of a voter"}
+          {"query vote by the proposal id and the address of a voter"}
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>

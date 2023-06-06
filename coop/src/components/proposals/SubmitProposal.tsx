@@ -5,13 +5,14 @@ import * as jsonld from "jsonld"
 import { WalletContext } from "chora"
 import { MsgSubmitProposal } from "chora/api/cosmos/group/v1/tx"
 import { choraTestnet } from "chora/chains"
-import { signAndBroadcast } from "chora/utils/tx"
-
-import InputString from "chora/components/InputString"
-import ResultTx from "chora/components/ResultTx"
-import SelectAccount from "chora/components/SelectAccount"
-import SelectExecution from "chora/components/group/SelectExecution"
-import SelectMessage from "chora/components/SelectMessage"
+import {
+  InputString,
+  ResultTx,
+  SelectAccount,
+  SelectMessage
+} from "chora/components"
+import { SelectExecution } from "chora/components/group"
+import { signAndBroadcast } from "chora/utils"
 
 import * as styles from "./SubmitProposal.module.css"
 

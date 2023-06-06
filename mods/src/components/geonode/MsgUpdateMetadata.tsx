@@ -2,10 +2,9 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-import { signAndBroadcast } from "chora/utils/tx"
-
-import MsgInputs from "chora/components/geonode/MsgUpdateMetadata"
-import ResultTx from "chora/components/ResultTx"
+import { ResultTx } from "chora/components"
+import { MsgUpdateMetadata as MsgInputs } from "chora/components/geonode"
+import { signAndBroadcast } from "chora/utils"
 
 import * as styles from "./MsgUpdateMetadata.module.css"
 

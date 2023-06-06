@@ -2,9 +2,7 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-
-import InputString from "chora/components/InputString"
-import Result from "chora/components/Result"
+import { InputString, Result } from "chora/components"
 
 import * as styles from "./QueryClass.module.css"
 

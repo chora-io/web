@@ -1,8 +1,8 @@
 import * as React from "react"
 
 import { WalletContextProvider } from "chora"
-import Background from "chora/components/Background"
-import { useDarkTheme } from "chora/hooks/useDarkTheme"
+import { Background } from "chora/components"
+import { useDarkTheme } from "chora/hooks"
 
 import Header from "../components/HeaderWrapper"
 import Sidebar from "../components/Sidebar"

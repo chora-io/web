@@ -1,7 +1,7 @@
 import * as React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
-import Seo from "chora/components/Seo"
+import { Seo } from "chora/components"
 
 function SeoWrapper({ title, description, children }: any) {
   const { site } = useStaticQuery(

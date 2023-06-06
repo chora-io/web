@@ -2,10 +2,9 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-import { signAndBroadcast } from "chora/utils/tx"
-
-import MsgInputs from "chora/components/group/MsgUpdateGroupPolicyDecisionPolicy"
-import ResultTx from "chora/components/ResultTx"
+import { ResultTx } from "chora/components"
+import { MsgUpdateGroupPolicyDecisionPolicy as MsgInputs } from "chora/components/group"
+import { signAndBroadcast } from "chora/utils"
 
 import * as styles from "./MsgUpdateGroupPolicyDecisionPolicy.module.css"
 

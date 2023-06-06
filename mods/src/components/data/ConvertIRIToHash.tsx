@@ -2,9 +2,7 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-
-import InputIRI from "chora/components/InputIRI"
-import Result from "chora/components/Result"
+import { InputIRI, Result } from "chora/components"
 
 import * as styles from "./ConvertIRIToHash.module.css"
 

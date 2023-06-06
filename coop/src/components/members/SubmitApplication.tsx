@@ -2,8 +2,7 @@ import * as React from "react"
 import { useState } from "react"
 import * as jsonld from "jsonld"
 
-import InputString from "chora/components/InputString"
-import Result from "chora/components/Result"
+import { InputString, Result } from "chora/components"
 
 import * as styles from "./SubmitApplication.module.css"
 

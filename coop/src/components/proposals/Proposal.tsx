@@ -6,10 +6,8 @@ import * as Long from "long"
 import { WalletContext } from "chora"
 import { MsgExec } from "chora/api/cosmos/group/v1/tx"
 import { choraTestnet } from "chora/chains"
-import { formatTimestamp } from "chora/utils/timestamp"
-import { signAndBroadcast } from "chora/utils/tx"
-
-import ResultTx from "chora/components/ResultTx"
+import { ResultTx } from "chora/components"
+import { formatTimestamp, signAndBroadcast } from "chora/utils"
 
 import * as styles from "./Proposal.module.css"
 

@@ -2,10 +2,7 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-
-import InputAddress from "chora/components/InputAddress"
-import InputString from "chora/components/InputString"
-import Result from "chora/components/Result"
+import { InputAddress, InputString, Result } from "chora/components"
 
 import * as styles from "./QueryInterchainAccount.module.css"
 
@@ -50,7 +47,7 @@ const QueryInterchainAccount = () => {
           {"QueryInterchainAccount"}
         </h2>
         <p>
-          {"query an interchain account by owner and connection id"}
+          {"query an interchain account by address of the owner and the connection id"}
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>

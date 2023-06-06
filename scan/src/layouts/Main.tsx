@@ -1,7 +1,7 @@
 import * as React from "react"
 
-import Background from "chora/components/Background"
-import { useDarkTheme } from "chora/hooks/useDarkTheme"
+import { Background } from "chora/components"
+import { useDarkTheme } from "chora/hooks"
 
 import Header from "../components/Header"
 

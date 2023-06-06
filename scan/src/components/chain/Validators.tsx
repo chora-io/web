@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useEffect, useState } from "react"
 
-import Result from "chora/components/Result"
+import { Result } from "chora/components"
 
 import Validator from "./Validator"
 

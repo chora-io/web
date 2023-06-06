@@ -5,12 +5,9 @@ import * as jsonld from "jsonld"
 
 import { WalletContext } from "chora"
 import { MsgVote } from "chora/api/cosmos/group/v1/tx"
-import { signAndBroadcast } from "chora/utils/tx"
-
-import InputString from "chora/components/InputString"
-import ResultTx from "chora/components/ResultTx"
-import SelectExecution from "chora/components/group/SelectExecution"
-import SelectVote from "chora/components/SelectVote"
+import { InputString, ResultTx } from "chora/components"
+import { SelectExecution, SelectVote } from "chora/components/group"
+import { signAndBroadcast } from "chora/utils"
 
 import * as styles from "./VoteOnProposal.module.css"
 

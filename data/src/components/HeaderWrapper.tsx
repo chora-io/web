@@ -2,8 +2,7 @@ import * as React from "react"
 import { useContext } from "react"
 
 import { WalletContext } from "chora"
-
-import Header from "chora/components/Header"
+import { Header } from "chora/components"
 
 const HeaderWrapper = ({ darkTheme, toggleTheme }) => {
 

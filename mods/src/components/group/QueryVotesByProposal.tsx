@@ -3,9 +3,7 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-
-import InputNumber from "chora/components/InputNumber"
-import Result from "chora/components/Result"
+import { InputNumber, Result } from "chora/components"
 
 import * as styles from "./QueryVotesByProposal.module.css"
 
