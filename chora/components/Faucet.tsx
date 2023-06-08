@@ -57,30 +57,22 @@ const Faucet = ({ chainInfo, wallet }: any) => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.title}>
-        <h1>
-          {chainInfo ? chainInfo.chainName + " Faucet" : "Testnet Faucet"}
-        </h1>
-      </div>
-      <div>
-        <button onClick={handleSubmit} className={styles.button}>
-          {"request funds"}
-        </button>
-      </div>
+    <div>
+      <h1>
+        {chainInfo ? chainInfo.chainName + " Faucet" : "Testnet Faucet"}
+      </h1>
+      <button onClick={handleSubmit} className={styles.button}>
+        {"request funds"}
+      </button>
       {error && (
-        <div>
-          <pre className={styles.error}>
-            {error}
-          </pre>
-        </div>
+        <pre className={styles.error}>
+          {error}
+        </pre>
       )}
       {success && (
-        <div>
-          <pre>
-            {"tokens successfully sent"}
-          </pre>
-        </div>
+        <pre>
+          {"tokens successfully sent"}
+        </pre>
       )}
     </div>
   )

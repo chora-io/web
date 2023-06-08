@@ -31,3 +31,28 @@
   margin-top: var(--header-height);
   padding-top: 4em;
 }
+
+/* page-center */
+
+.page-center {
+  background: var(--background-primary-transparent);
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.page-center div {
+  margin-bottom: 2%;
+}
+
+.page-center h1 {
+  color: var(--color-theme);
+  font-size: 2.5em;
+}
+
+.page-center h1,
+.page-center h2 {
+  margin: 0.5em 0;
+}

@@ -48,7 +48,7 @@ const QueryResolver = () => {
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputNumber
-          id="resolver-id"
+          id="query-resolver-resolver-id"
           label="resolver id"
           number={id}
           setNumber={setId}

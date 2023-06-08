@@ -28,19 +28,18 @@ const HomePage = () => (
         </div>
       </div>
       <div className={styles.sectionText}>
-        <div className={styles.text}>
+        <div>
           <p>
             {"We are prototyping software tools and services for commons governance and ecological regeneration using distributed ledger technologies."}
           </p>
           <p>
             {"We also run a validator on "}
-
             <a href={regenLink} target="_blank">
               {"Regen"}
             </a>
             {" in addition to multiple validators on test networks including Chora Testnet and Regen Redwood."}
           </p>
-          <div className={styles.links}>
+          <div className={styles.sectionTextLinks}>
             <a href={notionLink} target="_blank">
               {"learn more"}
             </a>

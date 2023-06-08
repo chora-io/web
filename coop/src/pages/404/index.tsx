@@ -8,15 +8,13 @@ import * as styles from "./index.module.css"
 const NotFoundPage = () => (
   <Main withBackground={true}>
     <div className={styles.page}>
-      <div className={styles.content}>
-        <div>
-          <h1>
-            {'404'}
-          </h1>
-          <h2>
-            {'a placeless place'}
-          </h2>
-        </div>
+      <div>
+        <h1>
+          {'404'}
+        </h1>
+        <h2>
+          {'a placeless place'}
+        </h2>
       </div>
     </div>
   </Main>

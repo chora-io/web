@@ -82,6 +82,7 @@ const QueryAttestationsByHash = () => {
       {input == "form" ? (
         <form className={styles.form} onSubmit={handleSubmit}>
           <InputContentHash
+            id="query-attestations-by-hash-content-hash"
             contentHash={contentHash}
             setContentHash={setContentHash}
           />
@@ -92,6 +93,7 @@ const QueryAttestationsByHash = () => {
       ) : (
         <form className={styles.form} onSubmit={handleSubmit}>
           <InputContentHashJSON
+            id="query-attestations-by-hash-content-hash"
             json={contentHashJson}
             setJson={setContentHashJson}
           />

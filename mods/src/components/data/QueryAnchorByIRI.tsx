@@ -48,6 +48,7 @@ const QueryAnchorByIRI = () => {
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputIRI
+          id="query-anchor-by-hash-iri"
           network={network}
           iri={iri}
           setIri={setIri}

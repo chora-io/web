@@ -1,33 +1,13 @@
-/* container */
-
-.container div {
-  text-align: center;
-}
-
-/* title */
-
-.title {
-  display: flex;
-  justify-content: center;
-  margin-top: 4em;
-}
-
-.title h1 {
-  color: var(--color-theme);
-  font-size: 1.5em;
-  margin: 1em;
-}
-
 /* button */
 
 .button {
-  display: block;
   padding: 0.5em 1em;
-  margin: 2em auto;
+  margin: 1em 0;
 }
 
 /* error */
 
 .error {
   color: var(--color-error);
+  margin: 2em 0;
 }

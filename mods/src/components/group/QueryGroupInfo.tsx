@@ -51,7 +51,7 @@ const QueryGroupInfo = () => {
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputNumber
-          id="query-group-id"
+          id="query-group-info-id"
           label="group id"
           number={id}
           setNumber={setId}

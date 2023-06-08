@@ -13,8 +13,3 @@
 .box-item-sub {
   composes: box-item-sub from "chora/styles/box.css";
 }
-
-.box {
-  margin: 3em 0;
-  width: 70vw;
-}

@@ -48,6 +48,7 @@ const ConvertIRIToHash = () => {
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputIRI
+          id="convert-iri-to-hash-iri"
           network={network}
           iri={iri}
           setIri={setIri}

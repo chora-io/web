@@ -82,6 +82,7 @@ const QueryResolversByHash = () => {
       {input == "form" ? (
         <form className={styles.form} onSubmit={handleSubmit}>
           <InputContentHash
+            id="query-resolvers-by-hash-content-hash"
             contentHash={contentHash}
             setContentHash={setContentHash}
           />
@@ -92,6 +93,7 @@ const QueryResolversByHash = () => {
       ) : (
         <form className={styles.form} onSubmit={handleSubmit}>
           <InputContentHashJSON
+            id="query-resolvers-by-hash-content-hash"
             json={contentHashJson}
             setJson={setContentHashJson}
           />

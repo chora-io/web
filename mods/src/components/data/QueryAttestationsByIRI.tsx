@@ -48,6 +48,7 @@ const QueryAttestationsByIRI = () => {
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputIRI
+          id="query-attestations-by-iri-iri"
           network={network}
           iri={iri}
           setIri={setIri}

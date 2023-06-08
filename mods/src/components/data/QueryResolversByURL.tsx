@@ -51,7 +51,7 @@ const QueryResolversByURL = () => {
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputURL
-          id="resolver-url"
+          id="query-resolvers-by-url-url"
           label="resolver url"
           url={url}
           setUrl={setUrl}

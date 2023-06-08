@@ -85,6 +85,7 @@ const ConvertHashToIRI = () => {
       {input == "form" ? (
         <form className={styles.form} onSubmit={handleSubmit}>
           <InputContentHash
+            id="convert-hash-to-iri-content-hash"
             contentHash={contentHash}
             setContentHash={setContentHash}
           />
@@ -95,6 +96,7 @@ const ConvertHashToIRI = () => {
       ) : (
         <form className={styles.form} onSubmit={handleSubmit}>
           <InputContentHashJSON
+            id="convert-hash-to-iri-content-hash"
             json={contentHashJson}
             setJson={setContentHashJson}
           />
