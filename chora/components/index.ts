@@ -5,6 +5,7 @@ import Header from "./Header"
 import InputAddress from "./InputAddress"
 import InputDenom from "./InputDenom"
 import InputIRI from "./InputIRI"
+import InputJSON from "./InputJSON"
 import InputNumber from "./InputNumber"
 import InputString from "./InputString"
 import InputTimestamp from "./InputTimestamp"
@@ -25,6 +26,7 @@ export {
   InputAddress,
   InputDenom,
   InputIRI,
+  InputJSON,
   InputNumber,
   InputString,
   InputTimestamp,

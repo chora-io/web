@@ -5,14 +5,13 @@ import * as blake from "blakejs"
 import * as jsonld from "jsonld"
 
 import { WalletContext } from "chora"
-import { Result } from "chora/components"
+import { InputJSON, Result } from "chora/components"
 import {
   SelectDigestAlgorithm,
   SelectGraphCanon,
   SelectGraphMerkle,
 } from "chora/components/data"
 
-import InputJSON from "../InputJSON"
 import InputsFromJSON from "../InputsFromJSON"
 import SelectContext from "../SelectContext"
 import SelectInput from "../SelectInput"

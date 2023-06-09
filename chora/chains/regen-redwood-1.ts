@@ -44,5 +44,5 @@ export const regenRedwood = {
 }
 
 export const regenRedwoodX = {
-    faucet: "https://redwood.chora.io/faucet",
+    faucet: "https://redwood.chora.io/faucet/",
 }

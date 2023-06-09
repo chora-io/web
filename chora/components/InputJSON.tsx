@@ -4,7 +4,7 @@ import * as styles from "./InputJSON.module.css"
 
 const InputJSON = ({ id, label, json, placeholder, setJson, useTemplate, showUseTemplate }: any) => (
   <label htmlFor={id ? id : "json"}>
-    {label ? label : "json-ld object"}
+    {label ? label : "json object"}
     {showUseTemplate && (
       <button className={styles.button} onClick={useTemplate}>
         {json.length > 0 ? "reset template" : "use template"}

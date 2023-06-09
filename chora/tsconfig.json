@@ -15,6 +15,7 @@
     "components",
     "contexts",
     "hooks",
+    "modules",
     "utils",
   ],
   "ts-node": {

@@ -1,5 +1,7 @@
 import * as React from "react"
 
+import { groupModule } from "chora/modules"
+
 import Main from "../../layouts/Main"
 import Seo from "../../components/SeoWrapper"
 
@@ -40,6 +42,23 @@ const GroupPage = () => (
         <h1>
           {"group module"}
         </h1>
+        <div className={styles.box}>
+          <p>
+            {`package name: ${groupModule.packageName}`}
+          </p>
+          <p>
+            {`documentation: `}
+            <a href={groupModule.documentation} target="_blank">
+              {groupModule.documentation}
+            </a>
+          </p>
+          <p>
+            {`schema registry: `}
+            <a href={groupModule.schemaRegistry} target="_blank">
+              {groupModule.schemaRegistry}
+            </a>
+          </p>
+        </div>
         <ul className={styles.table}>
           <li>
             <a href="#msg-create-group">

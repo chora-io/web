@@ -1,5 +1,7 @@
 import * as React from "react"
 
+import { dataModule } from "chora/modules"
+
 import Main from "../../layouts/Main"
 import Seo from "../../components/SeoWrapper"
 
@@ -28,6 +30,23 @@ const DataPage = () => (
         <h1>
           {"data module"}
         </h1>
+        <div className={styles.box}>
+          <p>
+            {`package name: ${dataModule.packageName}`}
+          </p>
+          <p>
+            {`documentation: `}
+            <a href={dataModule.documentation} target="_blank">
+              {dataModule.documentation}
+            </a>
+          </p>
+          <p>
+            {`schema registry: `}
+            <a href={dataModule.schemaRegistry} target="_blank">
+              {dataModule.schemaRegistry}
+            </a>
+          </p>
+        </div>
         <ul className={styles.table}>
           <li>
             <a href="#convert-hash-to-iri">

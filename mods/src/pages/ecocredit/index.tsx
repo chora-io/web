@@ -1,5 +1,7 @@
 import * as React from "react"
 
+import { ecocreditModule } from "chora/modules"
+
 import Main from "../../layouts/Main"
 import Seo from "../../components/SeoWrapper"
 
@@ -62,6 +64,23 @@ const EcocreditPage = () => (
         <h1>
           {"ecocredit module"}
         </h1>
+        <div className={styles.box}>
+          <p>
+            {`package name: ${ecocreditModule.packageName}`}
+          </p>
+          <p>
+            {`documentation: `}
+            <a href={ecocreditModule.documentation} target="_blank">
+              {ecocreditModule.documentation}
+            </a>
+          </p>
+          <p>
+            {`schema registry: `}
+            <a href={ecocreditModule.schemaRegistry} target="_blank">
+              {ecocreditModule.schemaRegistry}
+            </a>
+          </p>
+        </div>
         <ul className={styles.table}>
           <li>
             <a href="#msg-add-allowed-bridge-chain">

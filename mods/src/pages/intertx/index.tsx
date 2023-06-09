@@ -1,5 +1,7 @@
 import * as React from "react"
 
+import { intertxModule } from "chora/modules"
+
 import Main from "../../layouts/Main"
 import Seo from "../../components/SeoWrapper"
 
@@ -16,6 +18,23 @@ const InterTxPage = () => (
         <h1>
           {"intertx module"}
         </h1>
+        <div className={styles.box}>
+          <p>
+            {`package name: ${intertxModule.packageName}`}
+          </p>
+          <p>
+            {`documentation: `}
+            <a href={intertxModule.documentation} target="_blank">
+              {intertxModule.documentation}
+            </a>
+          </p>
+          <p>
+            {`schema registry: `}
+            <a href={intertxModule.schemaRegistry} target="_blank">
+              {intertxModule.schemaRegistry}
+            </a>
+          </p>
+        </div>
         <ul className={styles.table}>
           <li>
             <a href="#msg-register-account">

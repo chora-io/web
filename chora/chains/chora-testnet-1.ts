@@ -44,5 +44,5 @@ export const choraTestnet = {
 }
 
 export const choraTestnetX = {
-    faucet: "https://testnet.chora.io/faucet",
+    faucet: "https://testnet.chora.io/faucet/",
 }

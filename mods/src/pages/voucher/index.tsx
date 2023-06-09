@@ -1,5 +1,7 @@
 import * as React from "react"
 
+import { voucherModule } from "chora/modules"
+
 import Main from "../../layouts/Main"
 import Seo from "../../components/SeoWrapper"
 
@@ -23,6 +25,23 @@ const VoucherPage = () => (
         <h1>
           {"voucher module"}
         </h1>
+        <div className={styles.box}>
+          <p>
+            {`package name: ${voucherModule.packageName}`}
+          </p>
+          <p>
+            {`documentation: `}
+            <a href={voucherModule.documentation} target="_blank">
+              {voucherModule.documentation}
+            </a>
+          </p>
+          <p>
+            {`schema registry: `}
+            <a href={voucherModule.schemaRegistry} target="_blank">
+              {voucherModule.schemaRegistry}
+            </a>
+          </p>
+        </div>
         <ul className={styles.table}>
           <li>
             <a href="#msg-create">

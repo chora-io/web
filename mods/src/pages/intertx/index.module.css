@@ -2,6 +2,10 @@
   composes: page-with-sidebar from "chora/styles/page.css";
 }
 
+.box {
+  composes: box from "chora/styles/box.css";
+}
+
 .table {
   composes: box from "chora/styles/box.css";
   display: flex;

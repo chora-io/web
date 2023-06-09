@@ -1,5 +1,7 @@
 import * as React from "react"
 
+import { geonodeModule } from "chora/modules"
+
 import Main from "../../layouts/Main"
 import Seo from "../../components/SeoWrapper"
 
@@ -19,6 +21,23 @@ const GeonodePage = () => (
         <h1>
           {"geonode module"}
         </h1>
+        <div className={styles.box}>
+          <p>
+            {`package name: ${geonodeModule.packageName}`}
+          </p>
+          <p>
+            {`documentation: `}
+            <a href={geonodeModule.documentation} target="_blank">
+              {geonodeModule.documentation}
+            </a>
+          </p>
+          <p>
+            {`schema registry: `}
+            <a href={geonodeModule.schemaRegistry} target="_blank">
+              {geonodeModule.schemaRegistry}
+            </a>
+          </p>
+        </div>
         <ul className={styles.table}>
           <li>
             <a href="#msg-create">
