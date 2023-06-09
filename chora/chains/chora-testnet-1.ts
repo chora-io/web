@@ -42,3 +42,7 @@ export const choraTestnet = {
         coinGeckoId: "chora",
     },
 }
+
+export const choraTestnetX = {
+    faucet: "https://testnet.chora.io/faucet",
+}

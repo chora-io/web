@@ -42,3 +42,7 @@ export const regenMainnet = {
         coinGeckoId: "regen",
     },
 }
+
+export const regenMainnetX = {
+    faucet: null,
+}

@@ -5,7 +5,7 @@
   box-shadow: var(--box-shadow);
   margin: 3em 0;
   padding: 2em;
-  scroll-margin-top: calc(var(--header-height) + 2em);
+  scroll-margin-top: calc(var(--header-height) + 3em);
   width: 70vw;
 }
 

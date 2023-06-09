@@ -11,12 +11,10 @@
     "global.d.ts",
     "module.d.ts",
     "api",
-    "assets",
     "chains",
     "components",
     "contexts",
     "hooks",
-    "styles",
     "utils",
   ],
   "ts-node": {

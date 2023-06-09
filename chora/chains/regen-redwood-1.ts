@@ -42,3 +42,7 @@ export const regenRedwood = {
         coinGeckoId: "regen",
     },
 }
+
+export const regenRedwoodX = {
+    faucet: "https://redwood.chora.io/faucet",
+}

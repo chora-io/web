@@ -42,3 +42,7 @@ export const regenLocal = {
         coinGeckoId: "stake",
     },
 }
+
+export const regenLocalX = {
+    faucet: "http://127.0.0.1:8000",
+}

@@ -42,3 +42,7 @@ export const choraLocal = {
         coinGeckoId: "stake",
     },
 }
+
+export const choraLocalX = {
+    faucet: "http://127.0.0.1:8000",
+}

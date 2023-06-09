@@ -52,7 +52,7 @@ const Chain = ({ chainInfo, dashboardUrl }: any) => {
       <td>
         {error || height || ""}
       </td>
-      {error !== "" ? (
+      {error ? (
         <td>
           {"NA"}
         </td>

@@ -2,8 +2,14 @@ import * as React from "react"
 import { useState } from "react"
 
 import {
+  choraLocal,
+  choraLocalX,
   choraTestnet,
+  choraTestnetX,
+  regenLocal,
+  regenLocalX,
   regenRedwood,
+  regenRedwoodX,
 } from "../chains"
 
 import * as styles from "./Faucet.module.css"
@@ -28,14 +34,19 @@ const Faucet = ({ chainInfo, wallet }: any) => {
         return
     }
 
-    let faucetUrl = "http://127.0.0.1:8000"
-
+    let faucetUrl: string
     switch (chainInfo.chainId) {
+      case choraLocal.chainId:
+        faucetUrl = choraLocalX.faucet
+        break
       case choraTestnet.chainId:
-        faucetUrl = "https://testnet.chora.io/faucet/"
+        faucetUrl = choraTestnetX.faucet
+        break
+      case regenLocal.chainId:
+        faucetUrl = regenLocalX.faucet
         break
       case regenRedwood.chainId:
-        faucetUrl = "https://redwood.chora.io/faucet/"
+        faucetUrl = regenRedwoodX.faucet
         break
     }
 
