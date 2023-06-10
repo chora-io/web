@@ -32,17 +32,39 @@ const DataPage = () => (
         </h1>
         <div className={styles.box}>
           <p>
+            {`specification: `}
+            <a href={dataModule.specification} target="_blank">
+              {dataModule.specification}
+            </a>
+          </p>
+          <p>
             {`api documentation: `}
             <a href={dataModule.apiDocumentation} target="_blank">
               {dataModule.apiDocumentation}
             </a>
           </p>
+          {dataModule.apiVersion && (
+            <p>
+              {`api version: `}
+              <a href={dataModule.apiVersion} target="_blank">
+                {dataModule.apiVersion}
+              </a>
+            </p>
+          )}
           <p>
-            {`module specification: `}
-            <a href={dataModule.moduleSpecification} target="_blank">
-              {dataModule.moduleSpecification}
+            {`git repository: `}
+            <a href={dataModule.gitRepository} target="_blank">
+              {dataModule.gitRepository}
             </a>
           </p>
+          {dataModule.gitVersion && (
+            <p>
+              {`git version: `}
+              <a href={dataModule.gitVersion} target="_blank">
+                {dataModule.gitVersion}
+              </a>
+            </p>
+          )}
           <ul className={styles.boxTable}>
             <li>
               <a href="#convert-hash-to-iri">

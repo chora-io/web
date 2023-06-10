@@ -20,17 +20,39 @@ const InterTxPage = () => (
         </h1>
         <div className={styles.box}>
           <p>
+            {`specification: `}
+            <a href={intertxModule.specification} target="_blank">
+              {intertxModule.specification}
+            </a>
+          </p>
+          <p>
             {`api documentation: `}
             <a href={intertxModule.apiDocumentation} target="_blank">
               {intertxModule.apiDocumentation}
             </a>
           </p>
+          {intertxModule.apiVersion && (
+            <p>
+              {`api version: `}
+              <a href={intertxModule.apiVersion} target="_blank">
+                {intertxModule.apiVersion}
+              </a>
+            </p>
+          )}
           <p>
-            {`module specification: `}
-            <a href={intertxModule.moduleSpecification} target="_blank">
-              {intertxModule.moduleSpecification}
+            {`git repository: `}
+            <a href={intertxModule.gitRepository} target="_blank">
+              {intertxModule.gitRepository}
             </a>
           </p>
+          {intertxModule.gitVersion && (
+            <p>
+              {`git version: `}
+              <a href={intertxModule.gitVersion} target="_blank">
+                {intertxModule.gitVersion}
+              </a>
+            </p>
+          )}
           <ul className={styles.boxTable}>
             <li>
               <a href="#msg-register-account">

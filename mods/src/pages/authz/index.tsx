@@ -23,17 +23,39 @@ const AuthzPage = () => (
         </h1>
         <div className={styles.box}>
           <p>
+            {`specification: `}
+            <a href={authzModule.specification} target="_blank">
+              {authzModule.specification}
+            </a>
+          </p>
+          <p>
             {`api documentation: `}
             <a href={authzModule.apiDocumentation} target="_blank">
               {authzModule.apiDocumentation}
             </a>
           </p>
+          {authzModule.apiVersion && (
+            <p>
+              {`api version: `}
+              <a href={authzModule.apiVersion} target="_blank">
+                {authzModule.apiVersion}
+              </a>
+            </p>
+          )}
           <p>
-            {`module specification: `}
-            <a href={authzModule.moduleSpecification} target="_blank">
-              {authzModule.moduleSpecification}
+            {`git repository: `}
+            <a href={authzModule.gitRepository} target="_blank">
+              {authzModule.gitRepository}
             </a>
           </p>
+          {authzModule.gitVersion && (
+            <p>
+              {`git version: `}
+              <a href={authzModule.gitVersion} target="_blank">
+                {authzModule.gitVersion}
+              </a>
+            </p>
+          )}
           <ul className={styles.boxTable}>
             <li>
               <a href="#msg-exec">

@@ -66,17 +66,39 @@ const EcocreditPage = () => (
         </h1>
         <div className={styles.box}>
           <p>
+            {`specification: `}
+            <a href={ecocreditModule.specification} target="_blank">
+              {ecocreditModule.specification}
+            </a>
+          </p>
+          <p>
             {`api documentation: `}
             <a href={ecocreditModule.apiDocumentation} target="_blank">
               {ecocreditModule.apiDocumentation}
             </a>
           </p>
+          {ecocreditModule.apiVersion && (
+            <p>
+              {`api version: `}
+              <a href={ecocreditModule.apiVersion} target="_blank">
+                {ecocreditModule.apiVersion}
+              </a>
+            </p>
+          )}
           <p>
-            {`module specification: `}
-            <a href={ecocreditModule.moduleSpecification} target="_blank">
-              {ecocreditModule.moduleSpecification}
+            {`git repository: `}
+            <a href={ecocreditModule.gitRepository} target="_blank">
+              {ecocreditModule.gitRepository}
             </a>
           </p>
+          {ecocreditModule.gitVersion && (
+            <p>
+              {`git version: `}
+              <a href={ecocreditModule.gitVersion} target="_blank">
+                {ecocreditModule.gitVersion}
+              </a>
+            </p>
+          )}
           <ul className={styles.boxTable}>
             <li>
               <a href="#msg-add-allowed-bridge-chain">

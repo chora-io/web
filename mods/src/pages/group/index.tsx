@@ -44,17 +44,39 @@ const GroupPage = () => (
         </h1>
         <div className={styles.box}>
           <p>
+            {`specification: `}
+            <a href={groupModule.specification} target="_blank">
+              {groupModule.specification}
+            </a>
+          </p>
+          <p>
             {`api documentation: `}
             <a href={groupModule.apiDocumentation} target="_blank">
               {groupModule.apiDocumentation}
             </a>
           </p>
+          {groupModule.apiVersion && (
+            <p>
+              {`api version: `}
+              <a href={groupModule.apiVersion} target="_blank">
+                {groupModule.apiVersion}
+              </a>
+            </p>
+          )}
           <p>
-            {`module specification: `}
-            <a href={groupModule.moduleSpecification} target="_blank">
-              {groupModule.moduleSpecification}
+            {`git repository: `}
+            <a href={groupModule.gitRepository} target="_blank">
+              {groupModule.gitRepository}
             </a>
           </p>
+          {groupModule.gitVersion && (
+            <p>
+              {`git version: `}
+              <a href={groupModule.gitVersion} target="_blank">
+                {groupModule.gitVersion}
+              </a>
+            </p>
+          )}
           <ul className={styles.boxTable}>
             <li>
               <a href="#msg-create-group">

@@ -27,17 +27,39 @@ const VoucherPage = () => (
         </h1>
         <div className={styles.box}>
           <p>
+            {`specification: `}
+            <a href={voucherModule.specification} target="_blank">
+              {voucherModule.specification}
+            </a>
+          </p>
+          <p>
             {`api documentation: `}
             <a href={voucherModule.apiDocumentation} target="_blank">
               {voucherModule.apiDocumentation}
             </a>
           </p>
+          {voucherModule.apiVersion && (
+            <p>
+              {`api version: `}
+              <a href={voucherModule.apiVersion} target="_blank">
+                {voucherModule.apiVersion}
+              </a>
+            </p>
+          )}
           <p>
-            {`module specification: `}
-            <a href={voucherModule.moduleSpecification} target="_blank">
-              {voucherModule.moduleSpecification}
+            {`git repository: `}
+            <a href={voucherModule.gitRepository} target="_blank">
+              {voucherModule.gitRepository}
             </a>
           </p>
+          {voucherModule.gitVersion && (
+            <p>
+              {`git version: `}
+              <a href={voucherModule.gitVersion} target="_blank">
+                {voucherModule.gitVersion}
+              </a>
+            </p>
+          )}
           <ul className={styles.boxTable}>
             <li>
               <a href="#msg-create">

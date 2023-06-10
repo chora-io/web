@@ -20,17 +20,39 @@ const FeegrantPage = () => (
         </h1>
         <div className={styles.box}>
           <p>
+            {`specification: `}
+            <a href={feegrantModule.specification} target="_blank">
+              {feegrantModule.specification}
+            </a>
+          </p>
+          <p>
             {`api documentation: `}
             <a href={feegrantModule.apiDocumentation} target="_blank">
               {feegrantModule.apiDocumentation}
             </a>
           </p>
+          {feegrantModule.apiVersion && (
+            <p>
+              {`api version: `}
+              <a href={feegrantModule.apiVersion} target="_blank">
+                {feegrantModule.apiVersion}
+              </a>
+            </p>
+          )}
           <p>
-            {`module specification: `}
-            <a href={feegrantModule.moduleSpecification} target="_blank">
-              {feegrantModule.moduleSpecification}
+            {`git repository: `}
+            <a href={feegrantModule.gitRepository} target="_blank">
+              {feegrantModule.gitRepository}
             </a>
           </p>
+          {feegrantModule.gitVersion && (
+            <p>
+              {`git version: `}
+              <a href={feegrantModule.gitVersion} target="_blank">
+                {feegrantModule.gitVersion}
+              </a>
+            </p>
+          )}
           <ul className={styles.boxTable}>
             <li>
               <a href="#msg-grant-allowance">

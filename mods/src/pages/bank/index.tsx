@@ -19,17 +19,39 @@ const BankPage = () => (
         </h1>
         <div className={styles.box}>
           <p>
+            {`specification: `}
+            <a href={bankModule.specification} target="_blank">
+              {bankModule.specification}
+            </a>
+          </p>
+          <p>
             {`api documentation: `}
             <a href={bankModule.apiDocumentation} target="_blank">
               {bankModule.apiDocumentation}
             </a>
           </p>
+          {bankModule.apiVersion && (
+            <p>
+              {`api version: `}
+              <a href={bankModule.apiVersion} target="_blank">
+                {bankModule.apiVersion}
+              </a>
+            </p>
+          )}
           <p>
-            {`module specification: `}
-            <a href={bankModule.moduleSpecification} target="_blank">
-              {bankModule.moduleSpecification}
+            {`git repository: `}
+            <a href={bankModule.gitRepository} target="_blank">
+              {bankModule.gitRepository}
             </a>
           </p>
+          {bankModule.gitVersion && (
+            <p>
+              {`git version: `}
+              <a href={bankModule.gitVersion} target="_blank">
+                {bankModule.gitVersion}
+              </a>
+            </p>
+          )}
           <ul className={styles.boxTable}>
             <li>
               <a href="#msg-multi-send">

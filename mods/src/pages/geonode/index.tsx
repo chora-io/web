@@ -23,17 +23,39 @@ const GeonodePage = () => (
         </h1>
         <div className={styles.box}>
           <p>
+            {`specification: `}
+            <a href={geonodeModule.specification} target="_blank">
+              {geonodeModule.specification}
+            </a>
+          </p>
+          <p>
             {`api documentation: `}
             <a href={geonodeModule.apiDocumentation} target="_blank">
               {geonodeModule.apiDocumentation}
             </a>
           </p>
+          {geonodeModule.apiVersion && (
+            <p>
+              {`api version: `}
+              <a href={geonodeModule.apiVersion} target="_blank">
+                {geonodeModule.apiVersion}
+              </a>
+            </p>
+          )}
           <p>
-            {`module specification: `}
-            <a href={geonodeModule.moduleSpecification} target="_blank">
-              {geonodeModule.moduleSpecification}
+            {`git repository: `}
+            <a href={geonodeModule.gitRepository} target="_blank">
+              {geonodeModule.gitRepository}
             </a>
           </p>
+          {geonodeModule.gitVersion && (
+            <p>
+              {`git version: `}
+              <a href={geonodeModule.gitVersion} target="_blank">
+                {geonodeModule.gitVersion}
+              </a>
+            </p>
+          )}
           <ul className={styles.boxTable}>
             <li>
               <a href="#msg-create">
