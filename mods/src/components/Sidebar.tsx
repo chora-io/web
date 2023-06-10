@@ -19,8 +19,23 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
+            <Link to="/authz" activeClassName={styles.active}>
+              {"authz"}
+            </Link>
+          </li>
+          <li>
+            <Link to="/bank" activeClassName={styles.active}>
+              {"bank"}
+            </Link>
+          </li>
+          <li>
             <Link to="/data" activeClassName={styles.active}>
               {"data"}
+            </Link>
+          </li>
+          <li>
+            <Link to="/feegrant" activeClassName={styles.active}>
+              {"feegrant"}
             </Link>
           </li>
           <li>
@@ -58,6 +73,16 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
+            <Link to="/authz" activeClassName={styles.active}>
+              {"authz"}
+            </Link>
+          </li>
+          <li>
+            <Link to="/bank" activeClassName={styles.active}>
+              {"bank"}
+            </Link>
+          </li>
+          <li>
             <Link to="/data" activeClassName={styles.active}>
               {"data"}
             </Link>
@@ -65,6 +90,11 @@ const Sidebar = () => {
           <li>
             <Link to="/ecocredit" activeClassName={styles.active}>
               {"ecocredit"}
+            </Link>
+          </li>
+          <li>
+            <Link to="/feegrant" activeClassName={styles.active}>
+              {"feegrant"}
             </Link>
           </li>
           <li>

@@ -20,38 +20,35 @@ const InterTxPage = () => (
         </h1>
         <div className={styles.box}>
           <p>
-            {`package name: ${intertxModule.packageName}`}
-          </p>
-          <p>
-            {`documentation: `}
-            <a href={intertxModule.documentation} target="_blank">
-              {intertxModule.documentation}
+            {`api documentation: `}
+            <a href={intertxModule.apiDocumentation} target="_blank">
+              {intertxModule.apiDocumentation}
             </a>
           </p>
           <p>
-            {`schema registry: `}
-            <a href={intertxModule.schemaRegistry} target="_blank">
-              {intertxModule.schemaRegistry}
+            {`module specification: `}
+            <a href={intertxModule.moduleSpecification} target="_blank">
+              {intertxModule.moduleSpecification}
             </a>
           </p>
+          <ul className={styles.boxTable}>
+            <li>
+              <a href="#msg-register-account">
+                {'MsgRegisterAccount'}
+              </a>
+            </li>
+            <li>
+              <a href="#msg-submit-tx">
+                {'MsgSubmitTx'}
+              </a>
+            </li>
+            <li>
+              <a href="#query-interchain-account">
+                {'QueryInterchainAccount'}
+              </a>
+            </li>
+          </ul>
         </div>
-        <ul className={styles.table}>
-          <li>
-            <a href="#msg-register-account">
-              {'MsgRegisterAccount'}
-            </a>
-          </li>
-          <li>
-            <a href="#msg-submit-tx">
-              {'MsgSubmitTx'}
-            </a>
-          </li>
-          <li>
-            <a href="#query-interchain-account">
-              {'QueryInterchainAccount'}
-            </a>
-          </li>
-        </ul>
         <MsgRegisterAccount />
         <MsgSubmitTx />
         <QueryInterchainAccount />
