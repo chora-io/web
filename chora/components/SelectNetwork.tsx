@@ -1,6 +1,7 @@
 import * as React from "react"
 
 import {
+  bionLocal,
   choraLocal,
   choraTestnet,
   regenLocal,
@@ -28,6 +29,11 @@ const SelectNetwork = ({ id, label, selected, network, setNetwork }: any) => {
         value={selected || network}
         onChange={event => setNetwork(event.target.value)}
       >
+        {local && (
+          <option value={bionLocal.chainId}>
+            {bionLocal.chainId}
+          </option>
+        )}
         {local && (
           <option value={choraLocal.chainId}>
             {choraLocal.chainId}

@@ -2,6 +2,8 @@ import * as React from "react"
 import { useState } from "react"
 
 import {
+  bionLocal,
+  bionLocalX,
   choraLocal,
   choraLocalX,
   choraTestnet,
@@ -36,6 +38,9 @@ const Faucet = ({ chainInfo, wallet }: any) => {
 
     let faucetUrl: string
     switch (chainInfo.chainId) {
+      case bionLocal.chainId:
+        faucetUrl = bionLocalX.faucet
+        break
       case choraLocal.chainId:
         faucetUrl = choraLocalX.faucet
         break

@@ -4,6 +4,7 @@ import { createContext, useEffect, useState } from "react"
 import { ChainInfo, Key } from "@keplr-wallet/types"
 
 import {
+  bionLocal,
   choraLocal,
   choraTestnet,
   regenLocal,
@@ -59,6 +60,9 @@ const WalletContextProvider = (props: any) => {
       setNetwork(cachedNetwork)
 
       switch (cachedNetwork) {
+        case bionLocal.chainId:
+          setChainInfo(bionLocal)
+          break
         case choraLocal.chainId:
           setChainInfo(choraLocal)
           break
@@ -101,6 +105,9 @@ const WalletContextProvider = (props: any) => {
       let chain: ChainInfo
 
       switch (network) {
+        case bionLocal.chainId:
+          chain = bionLocal
+          break
         case choraLocal.chainId:
           chain = choraLocal
           break

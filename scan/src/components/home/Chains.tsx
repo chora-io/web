@@ -1,6 +1,7 @@
 import * as React from "react"
 
 import {
+  bionLocal,
   choraLocal,
   choraTestnet,
   regenLocal,
@@ -48,6 +49,12 @@ const Chains = () => {
             </tr>
           </thead>
           <tbody>
+            {local && (
+              <Chain
+                chainInfo={bionLocal}
+                dashboardUrl={`/${bionLocal.chainId}`}
+              />
+            )}
             {local && (
               <Chain
                 chainInfo={choraLocal}
