@@ -15,7 +15,7 @@ const MsgSend = ({ network, setMessage, useWallet, wallet }: any) => {
     const msg = {
       sender: wallet ? wallet.bech32Address : sender,
       recipient: recipient,
-      credits: [], // credits,
+      credits: [], // TODO
     } as Msg
 
     const msgAny = {

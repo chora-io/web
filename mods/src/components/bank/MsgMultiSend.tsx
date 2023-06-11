@@ -3,12 +3,12 @@ import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
 import { ResultTx } from "chora/components"
-import { MsgGrant as MsgInputs } from "chora/components/authz"
+import { MsgMultiSend as MsgInputs } from "chora/components/bank"
 import { signAndBroadcast } from "chora/utils"
 
-import * as styles from "./MsgGrant.module.css"
+import * as styles from "./MsgMultiSend.module.css"
 
-const MsgGrant = () => {
+const MsgMultiSend = () => {
 
   const { chainInfo, wallet } = useContext(WalletContext)
 
@@ -31,13 +31,13 @@ const MsgGrant = () => {
   }
 
   return (
-    <div id="msg-grant" className={styles.box}>
+    <div id="msg-multi-send" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"MsgGrant"}
+          {"MsgMultiSend"}
         </h2>
         <p>
-          {"grant an authorization"}
+          {"send tokens to multiple recipients"}
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
@@ -59,4 +59,4 @@ const MsgGrant = () => {
   )
 }
 
-export default MsgGrant
+export default MsgMultiSend

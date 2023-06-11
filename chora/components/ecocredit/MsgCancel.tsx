@@ -15,7 +15,7 @@ const MsgCancel = ({ network, setMessage, useWallet, wallet }: any) => {
   useEffect(() => {
     const msg = {
       owner: wallet ? wallet.bech32Address : owner,
-      credits: [], // credits,
+      credits: [], // TODO
       reason: reason,
     } as Msg
 

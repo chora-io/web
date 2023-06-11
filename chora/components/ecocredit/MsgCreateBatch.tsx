@@ -20,7 +20,7 @@ const MsgCreateBatch = ({ network, setMessage, useWallet, wallet }: any) => {
     const msg = {
       issuer: wallet ? wallet.bech32Address : issuer,
       projectId: projectId,
-      issuance: [], // issuance,
+      issuance: [], // TODO
       metadata: metadata,
       startDate: new Date(startDate),
       endDate: new Date(endDate),

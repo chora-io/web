@@ -3,6 +3,7 @@ import * as React from "react"
 import { geonodeModule } from "chora/modules"
 
 import Main from "../../layouts/Main"
+import MoreInfo from "../../components/MoreInfo"
 import Seo from "../../components/SeoWrapper"
 
 import MsgCreate from "../../components/geonode/MsgCreate"
@@ -22,40 +23,9 @@ const GeonodePage = () => (
           {"geonode module"}
         </h1>
         <div className={styles.box}>
-          <p>
-            {`specification: `}
-            <a href={geonodeModule.specification} target="_blank">
-              {geonodeModule.specification}
-            </a>
-          </p>
-          <p>
-            {`api documentation: `}
-            <a href={geonodeModule.apiDocumentation} target="_blank">
-              {geonodeModule.apiDocumentation}
-            </a>
-          </p>
-          {geonodeModule.apiVersion && (
-            <p>
-              {`api version: `}
-              <a href={geonodeModule.apiVersion} target="_blank">
-                {geonodeModule.apiVersion}
-              </a>
-            </p>
-          )}
-          <p>
-            {`git repository: `}
-            <a href={geonodeModule.gitRepository} target="_blank">
-              {geonodeModule.gitRepository}
-            </a>
-          </p>
-          {geonodeModule.gitVersion && (
-            <p>
-              {`git version: `}
-              <a href={geonodeModule.gitVersion} target="_blank">
-                {geonodeModule.gitVersion}
-              </a>
-            </p>
-          )}
+          <MoreInfo
+            module={geonodeModule}
+          />
           <ul className={styles.boxTable}>
             <li>
               <a href="#msg-create">

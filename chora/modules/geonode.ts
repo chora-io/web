@@ -1,7 +1,7 @@
 export const geonodeModule = {
+    moduleName: "geonode",
     apiDocumentation: "https://buf.build/chora/geonode/docs/main:chora.geonode.v1",
-    apiVersion: "",
-    gitRepository: "https://github.com/choraio/mods",
-    gitVersion: "",
-    specification: "https://docs.chora.io/specs/geonode",
+    apiPackage: "chora.geonode.v1",
+    apiVersion: "de6da7909faa3d6fd4ba61a766842f2aa8575353",
+    apiVersionLink: "https://buf.build/chora/geonode/docs/de6da7909faa3d6fd4ba61a766842f2aa8575353:chora.geonode.v1",
 }

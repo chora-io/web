@@ -3,9 +3,13 @@ import * as React from "react"
 import { bankModule } from "chora/modules"
 
 import Main from "../../layouts/Main"
+import MoreInfo from "../../components/MoreInfo"
 import Seo from "../../components/SeoWrapper"
 
+import MsgMultiSend from "../../components/bank/MsgMultiSend"
 import MsgSend from "../../components/bank/MsgSend"
+import MsgSetSendEnabled from "../../components/bank/MsgSetSendEnabled"
+import QueryAllBalances from "../../components/bank/QueryAllBalances"
 import QueryBalance from "../../components/bank/QueryBalance"
 
 import * as styles from "./index.module.css"
@@ -18,40 +22,9 @@ const BankPage = () => (
           {"bank module"}
         </h1>
         <div className={styles.box}>
-          <p>
-            {`specification: `}
-            <a href={bankModule.specification} target="_blank">
-              {bankModule.specification}
-            </a>
-          </p>
-          <p>
-            {`api documentation: `}
-            <a href={bankModule.apiDocumentation} target="_blank">
-              {bankModule.apiDocumentation}
-            </a>
-          </p>
-          {bankModule.apiVersion && (
-            <p>
-              {`api version: `}
-              <a href={bankModule.apiVersion} target="_blank">
-                {bankModule.apiVersion}
-              </a>
-            </p>
-          )}
-          <p>
-            {`git repository: `}
-            <a href={bankModule.gitRepository} target="_blank">
-              {bankModule.gitRepository}
-            </a>
-          </p>
-          {bankModule.gitVersion && (
-            <p>
-              {`git version: `}
-              <a href={bankModule.gitVersion} target="_blank">
-                {bankModule.gitVersion}
-              </a>
-            </p>
-          )}
+          <MoreInfo
+            module={bankModule}
+          />
           <ul className={styles.boxTable}>
             <li>
               <a href="#msg-multi-send">
@@ -74,8 +47,8 @@ const BankPage = () => (
               </a>
             </li>
             <li>
-              <a href="#query-all-balances">
-                {'QueryAllBalances'}
+              <a href="#query-balance">
+                {'QueryBalance'}
               </a>
             </li>
             <li>
@@ -125,7 +98,10 @@ const BankPage = () => (
             </li>
           </ul>
         </div>
+        <MsgMultiSend />
         <MsgSend />
+        <MsgSetSendEnabled />
+        <QueryAllBalances />
         <QueryBalance />
       </div>
     </div>

@@ -45,4 +45,55 @@ export const regenMainnet = {
 
 export const regenMainnetX = {
     faucet: null,
+    modules: [
+        {
+            moduleName: "authz",
+            gitRepository: "https://github.com/cosmos/cosmos-sdk",
+            gitVersion: "v0.46.13",
+            gitVersionLink: "https://github.com/cosmos/cosmos-sdk/tree/v0.46.13",
+            specification: "https://docs.cosmos.network/main/modules/authz",
+        },
+        {
+            moduleName: "bank",
+            gitRepository: "https://github.com/cosmos/cosmos-sdk",
+            gitVersion: "v0.46.13",
+            gitVersionLink: "https://github.com/cosmos/cosmos-sdk/tree/v0.46.13",
+            specification: "https://docs.cosmos.network/main/modules/bank",
+        },
+        {
+            moduleName: "data",
+            gitRepository: "https://github.com/regen-network/regen-ledger",
+            gitVersion: "v5.1.2",
+            gitVersionLink: "https://github.com/regen-network/regen-ledger/tree/v5.1.2",
+            specification: "https://docs.regen.network/modules/data",
+        },
+        {
+            moduleName: "ecocredit",
+            gitRepository: "https://github.com/regen-network/regen-ledger",
+            gitVersion: "v5.1.2",
+            gitVersionLink: "https://github.com/regen-network/regen-ledger/tree/v5.1.2",
+            specification: "https://docs.regen.network/modules/ecocredit",
+        },
+        {
+            moduleName: "feegrant",
+            gitRepository: "https://github.com/cosmos/cosmos-sdk",
+            gitVersion: "v0.46.13",
+            gitVersionLink: "https://github.com/cosmos/cosmos-sdk/tree/v0.46.13",
+            specification: "https://docs.cosmos.network/main/modules/feegrant",
+        },
+        {
+            moduleName: "group",
+            gitRepository: "https://github.com/cosmos/cosmos-sdk",
+            gitVersion: "v0.46.13",
+            gitVersionLink: "https://github.com/cosmos/cosmos-sdk/tree/v0.46.13",
+            specification: "https://docs.cosmos.network/main/modules/group",
+        },
+        {
+            moduleName: "intertx",
+            gitRepository: "https://github.com/regen-network/regen-ledger",
+            gitVersion: "v5.1.2",
+            gitVersionLink: "https://github.com/regen-network/regen-ledger/tree/v5.1.2",
+            specification: "https://docs.regen.network/modules/intertx",
+        },
+    ],
 }

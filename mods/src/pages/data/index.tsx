@@ -3,6 +3,7 @@ import * as React from "react"
 import { dataModule } from "chora/modules"
 
 import Main from "../../layouts/Main"
+import MoreInfo from "../../components/MoreInfo"
 import Seo from "../../components/SeoWrapper"
 
 import ConvertHashToIRI from "../../components/data/ConvertHashToIRI"
@@ -31,40 +32,9 @@ const DataPage = () => (
           {"data module"}
         </h1>
         <div className={styles.box}>
-          <p>
-            {`specification: `}
-            <a href={dataModule.specification} target="_blank">
-              {dataModule.specification}
-            </a>
-          </p>
-          <p>
-            {`api documentation: `}
-            <a href={dataModule.apiDocumentation} target="_blank">
-              {dataModule.apiDocumentation}
-            </a>
-          </p>
-          {dataModule.apiVersion && (
-            <p>
-              {`api version: `}
-              <a href={dataModule.apiVersion} target="_blank">
-                {dataModule.apiVersion}
-              </a>
-            </p>
-          )}
-          <p>
-            {`git repository: `}
-            <a href={dataModule.gitRepository} target="_blank">
-              {dataModule.gitRepository}
-            </a>
-          </p>
-          {dataModule.gitVersion && (
-            <p>
-              {`git version: `}
-              <a href={dataModule.gitVersion} target="_blank">
-                {dataModule.gitVersion}
-              </a>
-            </p>
-          )}
+          <MoreInfo
+            module={dataModule}
+          />
           <ul className={styles.boxTable}>
             <li>
               <a href="#convert-hash-to-iri">

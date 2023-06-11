@@ -16,7 +16,7 @@ const MsgRetire = ({ network, setMessage, useWallet, wallet }: any) => {
   useEffect(() => {
     const msg = {
       owner: wallet ? wallet.bech32Address : owner,
-      credits: [], // credits,
+      credits: [], // TODO
       jurisdiction: jurisdiction,
       reason: reason,
     } as Msg

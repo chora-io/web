@@ -3,6 +3,7 @@ import * as React from "react"
 import { voucherModule } from "chora/modules"
 
 import Main from "../../layouts/Main"
+import MoreInfo from "../../components/MoreInfo"
 import Seo from "../../components/SeoWrapper"
 
 import MsgCreate from "../../components/voucher/MsgCreate"
@@ -26,40 +27,9 @@ const VoucherPage = () => (
           {"voucher module"}
         </h1>
         <div className={styles.box}>
-          <p>
-            {`specification: `}
-            <a href={voucherModule.specification} target="_blank">
-              {voucherModule.specification}
-            </a>
-          </p>
-          <p>
-            {`api documentation: `}
-            <a href={voucherModule.apiDocumentation} target="_blank">
-              {voucherModule.apiDocumentation}
-            </a>
-          </p>
-          {voucherModule.apiVersion && (
-            <p>
-              {`api version: `}
-              <a href={voucherModule.apiVersion} target="_blank">
-                {voucherModule.apiVersion}
-              </a>
-            </p>
-          )}
-          <p>
-            {`git repository: `}
-            <a href={voucherModule.gitRepository} target="_blank">
-              {voucherModule.gitRepository}
-            </a>
-          </p>
-          {voucherModule.gitVersion && (
-            <p>
-              {`git version: `}
-              <a href={voucherModule.gitVersion} target="_blank">
-                {voucherModule.gitVersion}
-              </a>
-            </p>
-          )}
+          <MoreInfo
+            module={voucherModule}
+          />
           <ul className={styles.boxTable}>
             <li>
               <a href="#msg-create">

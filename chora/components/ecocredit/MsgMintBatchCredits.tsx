@@ -19,7 +19,7 @@ const MsgMintBatchCredits = ({ network, setMessage, useWallet, wallet }: any) =>
     const msg = {
       issuer: wallet ? wallet.bech32Address : issuer,
       batchDenom: batchDenom,
-      issuance: [], // issuance,
+      issuance: [], // TODO
       originTx: {
         id: originTxId,
         source: originTxSource,

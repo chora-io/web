@@ -17,7 +17,7 @@ const MsgBridge = ({ network, setMessage, useWallet, wallet }: any) => {
       owner: wallet ? wallet.bech32Address : owner,
       target: target,
       recipient: recipient,
-      credits: [], // credits,
+      credits: [], // TODO
     } as Msg
 
     const msgAny = {

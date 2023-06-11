@@ -3,12 +3,12 @@ import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
 import { ResultTx } from "chora/components"
-import { MsgRevoke as MsgInputs } from "chora/components/authz"
+import { MsgSetSendEnabled as MsgInputs } from "chora/components/bank"
 import { signAndBroadcast } from "chora/utils"
 
-import * as styles from "./MsgRevoke.module.css"
+import * as styles from "./MsgSetSendEnabled.module.css"
 
-const MsgRevoke = () => {
+const MsgSetSendEnabled = () => {
 
   const { chainInfo, wallet } = useContext(WalletContext)
 
@@ -31,13 +31,13 @@ const MsgRevoke = () => {
   }
 
   return (
-    <div id="msg-revoke" className={styles.box}>
+    <div id="msg-set-send-enabled" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"MsgRevoke"}
+          {"MsgSetSendEnabled"}
         </h2>
         <p>
-          {"revoke an authorization"}
+          {"set allowlist for sending tokens"}
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
@@ -59,4 +59,4 @@ const MsgRevoke = () => {
   )
 }
 
-export default MsgRevoke
+export default MsgSetSendEnabled

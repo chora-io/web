@@ -3,6 +3,7 @@ import * as React from "react"
 import { groupModule } from "chora/modules"
 
 import Main from "../../layouts/Main"
+import MoreInfo from "../../components/MoreInfo"
 import Seo from "../../components/SeoWrapper"
 
 import MsgCreateGroup from "../../components/group/MsgCreateGroup"
@@ -43,40 +44,9 @@ const GroupPage = () => (
           {"group module"}
         </h1>
         <div className={styles.box}>
-          <p>
-            {`specification: `}
-            <a href={groupModule.specification} target="_blank">
-              {groupModule.specification}
-            </a>
-          </p>
-          <p>
-            {`api documentation: `}
-            <a href={groupModule.apiDocumentation} target="_blank">
-              {groupModule.apiDocumentation}
-            </a>
-          </p>
-          {groupModule.apiVersion && (
-            <p>
-              {`api version: `}
-              <a href={groupModule.apiVersion} target="_blank">
-                {groupModule.apiVersion}
-              </a>
-            </p>
-          )}
-          <p>
-            {`git repository: `}
-            <a href={groupModule.gitRepository} target="_blank">
-              {groupModule.gitRepository}
-            </a>
-          </p>
-          {groupModule.gitVersion && (
-            <p>
-              {`git version: `}
-              <a href={groupModule.gitVersion} target="_blank">
-                {groupModule.gitVersion}
-              </a>
-            </p>
-          )}
+          <MoreInfo
+            module={groupModule}
+          />
           <ul className={styles.boxTable}>
             <li>
               <a href="#msg-create-group">

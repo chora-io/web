@@ -3,6 +3,7 @@ import * as React from "react"
 import { ecocreditModule } from "chora/modules"
 
 import Main from "../../layouts/Main"
+import MoreInfo from "../../components/MoreInfo"
 import Seo from "../../components/SeoWrapper"
 
 import MsgAddAllowedBridgeChain from "../../components/ecocredit/MsgAddAllowedBridgeChain"
@@ -65,40 +66,9 @@ const EcocreditPage = () => (
           {"ecocredit module"}
         </h1>
         <div className={styles.box}>
-          <p>
-            {`specification: `}
-            <a href={ecocreditModule.specification} target="_blank">
-              {ecocreditModule.specification}
-            </a>
-          </p>
-          <p>
-            {`api documentation: `}
-            <a href={ecocreditModule.apiDocumentation} target="_blank">
-              {ecocreditModule.apiDocumentation}
-            </a>
-          </p>
-          {ecocreditModule.apiVersion && (
-            <p>
-              {`api version: `}
-              <a href={ecocreditModule.apiVersion} target="_blank">
-                {ecocreditModule.apiVersion}
-              </a>
-            </p>
-          )}
-          <p>
-            {`git repository: `}
-            <a href={ecocreditModule.gitRepository} target="_blank">
-              {ecocreditModule.gitRepository}
-            </a>
-          </p>
-          {ecocreditModule.gitVersion && (
-            <p>
-              {`git version: `}
-              <a href={ecocreditModule.gitVersion} target="_blank">
-                {ecocreditModule.gitVersion}
-              </a>
-            </p>
-          )}
+          <MoreInfo
+            module={ecocreditModule}
+          />
           <ul className={styles.boxTable}>
             <li>
               <a href="#msg-add-allowed-bridge-chain">

@@ -3,6 +3,7 @@ import * as React from "react"
 import { feegrantModule } from "chora/modules"
 
 import Main from "../../layouts/Main"
+import MoreInfo from "../../components/MoreInfo"
 import Seo from "../../components/SeoWrapper"
 
 import MsgGrantAllowance from "../../components/feegrant/MsgGrantAllowance"
@@ -19,40 +20,9 @@ const FeegrantPage = () => (
           {"feegrant module"}
         </h1>
         <div className={styles.box}>
-          <p>
-            {`specification: `}
-            <a href={feegrantModule.specification} target="_blank">
-              {feegrantModule.specification}
-            </a>
-          </p>
-          <p>
-            {`api documentation: `}
-            <a href={feegrantModule.apiDocumentation} target="_blank">
-              {feegrantModule.apiDocumentation}
-            </a>
-          </p>
-          {feegrantModule.apiVersion && (
-            <p>
-              {`api version: `}
-              <a href={feegrantModule.apiVersion} target="_blank">
-                {feegrantModule.apiVersion}
-              </a>
-            </p>
-          )}
-          <p>
-            {`git repository: `}
-            <a href={feegrantModule.gitRepository} target="_blank">
-              {feegrantModule.gitRepository}
-            </a>
-          </p>
-          {feegrantModule.gitVersion && (
-            <p>
-              {`git version: `}
-              <a href={feegrantModule.gitVersion} target="_blank">
-                {feegrantModule.gitVersion}
-              </a>
-            </p>
-          )}
+          <MoreInfo
+            module={feegrantModule}
+          />
           <ul className={styles.boxTable}>
             <li>
               <a href="#msg-grant-allowance">

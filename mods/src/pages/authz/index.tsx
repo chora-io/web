@@ -3,6 +3,7 @@ import * as React from "react"
 import { authzModule } from "chora/modules"
 
 import Main from "../../layouts/Main"
+import MoreInfo from "../../components/MoreInfo"
 import Seo from "../../components/SeoWrapper"
 
 import MsgExec from "../../components/authz/MsgExec"
@@ -14,7 +15,9 @@ import QueryGrants from "../../components/authz/QueryGrants"
 
 import * as styles from "./index.module.css"
 
-const AuthzPage = () => (
+const AuthzPage = () => {
+
+  return (
   <Main>
     <div className={styles.page}>
       <div>
@@ -22,40 +25,9 @@ const AuthzPage = () => (
           {"authz module"}
         </h1>
         <div className={styles.box}>
-          <p>
-            {`specification: `}
-            <a href={authzModule.specification} target="_blank">
-              {authzModule.specification}
-            </a>
-          </p>
-          <p>
-            {`api documentation: `}
-            <a href={authzModule.apiDocumentation} target="_blank">
-              {authzModule.apiDocumentation}
-            </a>
-          </p>
-          {authzModule.apiVersion && (
-            <p>
-              {`api version: `}
-              <a href={authzModule.apiVersion} target="_blank">
-                {authzModule.apiVersion}
-              </a>
-            </p>
-          )}
-          <p>
-            {`git repository: `}
-            <a href={authzModule.gitRepository} target="_blank">
-              {authzModule.gitRepository}
-            </a>
-          </p>
-          {authzModule.gitVersion && (
-            <p>
-              {`git version: `}
-              <a href={authzModule.gitVersion} target="_blank">
-                {authzModule.gitVersion}
-              </a>
-            </p>
-          )}
+          <MoreInfo
+            module={authzModule}
+          />
           <ul className={styles.boxTable}>
             <li>
               <a href="#msg-exec">
@@ -99,6 +71,7 @@ const AuthzPage = () => (
     </div>
   </Main>
 )
+}
 
 export const Head = () => <Seo title="" />
 

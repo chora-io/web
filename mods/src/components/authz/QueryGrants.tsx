@@ -24,10 +24,9 @@ const QueryGrants = () => {
     setError("")
     setSuccess("")
 
-    fetch(chainInfo.rest + queryGrants, {
-      method: "POST",
-      body: JSON.stringify({ grantee, granter, msgTypeUrl }),
-    })
+    const params = `?grantee=${grantee}&granter=${granter}&msg_type_url=${msgTypeUrl}`
+
+    fetch(chainInfo.rest + queryGrants + params)
       .then(res => res.json())
       .then(data => {
         if (data.code) {

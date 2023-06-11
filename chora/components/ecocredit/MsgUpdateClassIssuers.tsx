@@ -16,8 +16,8 @@ const MsgUpdateClassIssuers = ({ network, setMessage, useWallet, wallet }: any) 
     const msg = {
       admin: wallet ? wallet.bech32Address : admin,
       classId: classId,
-      addIssuers: [], // addIssuers,
-      removeIssuers: [], // removeIssuers,
+      addIssuers: [], // TODO
+      removeIssuers: [], // TODO
     } as Msg
 
     const msgAny = {

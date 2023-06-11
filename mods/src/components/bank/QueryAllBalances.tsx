@@ -2,17 +2,17 @@ import * as React from "react"
 import { useContext, useState } from "react"
 
 import { WalletContext } from "chora"
-import { InputAddress, Result } from "chora/components"
+import { InputNumber, Result } from "chora/components"
 
-import * as styles from "./QueryGranteeGrants.module.css"
+import * as styles from "./QueryAllBalances.module.css"
 
-const queryGranteeGrants = "/cosmos/authz/v1beta1/grants/grantee"
+const queryBalance = "/cosmos/bank/v1beta1/balance"
 
-const QueryGranteeGrants = () => {
+const QueryAllBalances = () => {
 
-  const { chainInfo, network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
 
-  const [grantee, setGrantee] = useState("")
+  const [id, setId] = useState("")
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
 
@@ -22,7 +22,7 @@ const QueryGranteeGrants = () => {
     setError("")
     setSuccess("")
 
-    fetch(chainInfo.rest + queryGranteeGrants + "/" + grantee)
+    fetch(chainInfo.rest + queryBalance + "/" + id)
       .then(res => res.json())
       .then(data => {
         if (data.code) {
@@ -37,22 +37,21 @@ const QueryGranteeGrants = () => {
   }
 
   return (
-    <div id="query-grantee-grants" className={styles.box}>
+    <div id="query-all-balances" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"QueryGranteeGrants"}
+          {"QueryAllBalances"}
         </h2>
         <p>
-          {"query granted authorizations"}
+          {"query all token balances"}
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <InputAddress
-          id="query-grants-grantee"
-          label="grantee"
-          network={network}
-          address={grantee}
-          setAddress={setGrantee}
+        <InputNumber
+          id="query-balance-id"
+          label="balance id"
+          number={id}
+          setNumber={setId}
         />
         <button type="submit">
           {"search"}
@@ -66,4 +65,4 @@ const QueryGranteeGrants = () => {
   )
 }
 
-export default QueryGranteeGrants
+export default QueryAllBalances

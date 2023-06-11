@@ -45,4 +45,20 @@ export const bionLocal = {
 
 export const bionLocalX = {
     faucet: "http://127.0.0.1:8000",
+    modules: [
+        {
+            moduleName: "group",
+            gitRepository: "https://github.com/cosmos/cosmos-sdk",
+            gitVersion: "v0.46.13",
+            gitVersionLink: "https://github.com/cosmos/cosmos-sdk/tree/v0.46.13",
+            specification: "https://docs.cosmos.network/main/modules/group",
+        },
+        {
+            moduleName: "validator",
+            gitRepository: "https://github.com/choraio/mods",
+            gitVersion: "v0.0.0",
+            gitVersionLink: "https://github.com/choraio/mods/main",
+            specification: "https://docs.chora.io/specs/validator",
+        },
+    ],
 }
