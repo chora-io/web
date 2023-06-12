@@ -78,6 +78,7 @@ export const choraTestnetX = {
             moduleName: "geonode",
             gitRepository: "https://github.com/choraio/mods",
             gitVersion: "v0.0.0",
+            gitVersionLink: "https://github.com/choraio/mods/tree/main",
             specification: "https://docs.chora.io/specs/geonode",
         },
         {
@@ -98,6 +99,7 @@ export const choraTestnetX = {
             moduleName: "voucher",
             gitRepository: "https://github.com/choraio/mods",
             gitVersion: "v0.0.0",
+            gitVersionLink: "https://github.com/choraio/mods/tree/main",
             specification: "https://docs.chora.io/specs/voucher",
         },
     ],

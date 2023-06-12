@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useState } from "react"
 
 import { voucherModule } from "chora/modules"
 
@@ -19,84 +20,97 @@ import QueryVouchersByIssuer from "../../components/voucher/QueryVouchersByIssue
 
 import * as styles from "./index.module.css"
 
-const VoucherPage = () => (
-  <Main>
-    <div className={styles.page}>
-      <div>
-        <h1>
-          {"voucher module"}
-        </h1>
-        <div className={styles.box}>
-          <MoreInfo
-            module={voucherModule}
-          />
-          <ul className={styles.boxTable}>
-            <li>
-              <a href="#msg-create">
-                {'MsgCreate'}
-              </a>
-            </li>
-            <li>
-              <a href="#msg-issue">
-                {'MsgIssue'}
-              </a>
-            </li>
-            <li>
-              <a href="#msg-update-issuer">
-                {'MsgUpdateIssuer'}
-              </a>
-            </li>
-            <li>
-              <a href="#msg-update-metadata">
-                {'MsgUpdateMetadata'}
-              </a>
-            </li>
-            <li>
-              <a href="#query-balance">
-                {'QueryBalance'}
-              </a>
-            </li>
-            <li>
-              <a href="#query-balances-by-address">
-                {'QueryBalancesByAddress'}
-              </a>
-            </li>
-            <li>
-              <a href="#query-balances-by-voucher">
-                {'QueryBalancesByVoucher'}
-              </a>
-            </li>
-            <li>
-              <a href="#query-voucher">
-                {'QueryVoucher'}
-              </a>
-            </li>
-            <li>
-              <a href="#query-vouchers">
-                {'QueryVouchers'}
-              </a>
-            </li>
-            <li>
-              <a href="#query-vouchers-by-issuer">
-                {'QueryVouchersByIssuer'}
-              </a>
-            </li>
-          </ul>
+const VoucherPage = () => {
+  const [showInfo, setShowInfo] = useState<boolean>(false)
+
+  const handleShowInfo = () => {
+    setShowInfo(!showInfo)
+  }
+
+  return (
+    <Main>
+      <div className={styles.page}>
+        <div>
+          <h1>
+            {"voucher module"}
+          </h1>
+          <button className={styles.infoButton} onClick={handleShowInfo}>
+            {showInfo ? "less info" : "more info"}
+          </button>
+          <div className={styles.box}>
+            {showInfo && (
+                <MoreInfo
+                    module={voucherModule}
+                />
+            )}
+            <ul>
+              <li>
+                <a href="#msg-create">
+                  {'MsgCreate'}
+                </a>
+              </li>
+              <li>
+                <a href="#msg-issue">
+                  {'MsgIssue'}
+                </a>
+              </li>
+              <li>
+                <a href="#msg-update-issuer">
+                  {'MsgUpdateIssuer'}
+                </a>
+              </li>
+              <li>
+                <a href="#msg-update-metadata">
+                  {'MsgUpdateMetadata'}
+                </a>
+              </li>
+              <li>
+                <a href="#query-balance">
+                  {'QueryBalance'}
+                </a>
+              </li>
+              <li>
+                <a href="#query-balances-by-address">
+                  {'QueryBalancesByAddress'}
+                </a>
+              </li>
+              <li>
+                <a href="#query-balances-by-voucher">
+                  {'QueryBalancesByVoucher'}
+                </a>
+              </li>
+              <li>
+                <a href="#query-voucher">
+                  {'QueryVoucher'}
+                </a>
+              </li>
+              <li>
+                <a href="#query-vouchers">
+                  {'QueryVouchers'}
+                </a>
+              </li>
+              <li>
+                <a href="#query-vouchers-by-issuer">
+                  {'QueryVouchersByIssuer'}
+                </a>
+              </li>
+            </ul>
+          </div>
+          <MsgCreate/>
+          <MsgIssue/>
+          <MsgUpdateIssuer/>
+          <MsgUpdateMetadata/>
+          <QueryBalance/>
+          <QueryBalancesByAddress/>
+          <QueryBalancesByVoucher/>
+          <QueryVoucher/>
+          <QueryVouchers/>
+          <QueryVouchersByIssuer/>
         </div>
-        <MsgCreate />
-        <MsgIssue />
-        <MsgUpdateIssuer />
-        <MsgUpdateMetadata />
-        <QueryBalance />
-        <QueryBalancesByAddress />
-        <QueryBalancesByVoucher />
-        <QueryVoucher />
-        <QueryVouchers />
-        <QueryVouchersByIssuer />
       </div>
-    </div>
-  </Main>
-)
+    </Main>
+  )
+}
 
 export const Head = () => <Seo title="" />
 

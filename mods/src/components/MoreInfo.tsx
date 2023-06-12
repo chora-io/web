@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
 import {
@@ -21,29 +21,40 @@ import * as styles from "./MoreInfo.module.css"
 
 const MoreInfo = ({ module }: any) => {
   const { network } = useContext(WalletContext)
+  const [moduleInfo, setModuleInfo] = useState<any>(null)
 
-  let chainInfoX: any
-  switch (network) {
-    case bionLocal.chainId:
-      chainInfoX = bionLocalX
-    case choraLocal.chainId:
-      chainInfoX = choraLocalX
-    case choraTestnet.chainId:
-      chainInfoX = choraTestnetX
-    case regenLocal.chainId:
-      chainInfoX = regenLocalX
-    case regenMainnet.chainId:
-      chainInfoX = regenMainnetX
-    case regenRedwood.chainId:
-      chainInfoX = regenRedwoodX
-    default:
-      chainInfoX = choraTestnetX
-  }
+  useEffect(() => {
+    let chainInfoX: any
+    switch (network) {
+      case bionLocal.chainId:
+        chainInfoX = bionLocalX
+        break
+      case choraLocal.chainId:
+        chainInfoX = choraLocalX
+        break
+      case choraTestnet.chainId:
+        chainInfoX = choraTestnetX
+        break
+      case regenLocal.chainId:
+        chainInfoX = regenLocalX
+        break
+      case regenMainnet.chainId:
+        chainInfoX = regenMainnetX
+        break
+      case regenRedwood.chainId:
+        chainInfoX = regenRedwoodX
+        break
+      default:
+        chainInfoX = choraTestnetX
+        break
+    }
+    setModuleInfo(chainInfoX.modules.find(m => m.moduleName === module.moduleName))
+  }, [module, network])
 
   const renderApiInfo = () => (
     <div>
       <h4>
-        {'api info (chora webkit)'}
+        {'api information (chora webkit)'}
       </h4>
       <p>
         {`api package: ${module.apiPackage}`}
@@ -63,39 +74,44 @@ const MoreInfo = ({ module }: any) => {
     </div>
   )
 
-  const renderModuleInfo = () => {
-    const m = chainInfoX.modules.find(m => m.moduleName === module.moduleName)
-    return (
-      <div>
-        <h4>
-          {'module info (selected network)'}
-        </h4>
-        <p>
-          {`git version: `}
-          <a href={m.gitVersionLink} target="_blank">
-            {m.gitVersion}
-          </a>
-        </p>
-        <p>
-          {`git repository: `}
-          <a href={m?.gitRepository} target="_blank">
-            {m?.gitRepository}
-          </a>
-        </p>
-        <p>
-          {`specification: `}
-          <a href={m?.specification} target="_blank">
-            {m?.specification}
-          </a>
-        </p>
-      </div>
-    )
-  }
+  const renderModuleInfo = () => (
+    <div>
+      <h4>
+        {`module information (${network})`}
+      </h4>
+      <p>
+        {`git version: `}
+        <a href={moduleInfo.gitVersionLink} target="_blank">
+          {moduleInfo.gitVersion}
+        </a>
+      </p>
+      <p>
+        {`git repository: `}
+        <a href={moduleInfo.gitRepository} target="_blank">
+          {moduleInfo.gitRepository}
+        </a>
+      </p>
+      <p>
+        {`specification: `}
+        <a href={moduleInfo.specification} target="_blank">
+          {moduleInfo.specification}
+        </a>
+      </p>
+    </div>
+  )
 
   return (
     <div className={styles.info}>
       {renderApiInfo()}
-      {renderModuleInfo()}
+      {moduleInfo ? (
+        <>
+          {renderModuleInfo()}
+        </>
+      ) : (
+        <div className={styles.error}>
+          {'not available on selected network'}
+        </div>
+      )}
     </div>
   )
 

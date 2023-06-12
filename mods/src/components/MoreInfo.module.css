@@ -1,12 +1,16 @@
 .info div {
   margin-bottom: 2em;
+  margin-top: 1em;
 }
 
 .info h4 {
-  font-style: italic;
-  font-weight: 300;
   margin-bottom: 1em;
 }
+
 .info p {
   margin-left: 1em;
+}
+
+.error {
+  color: var(--color-error)
 }
