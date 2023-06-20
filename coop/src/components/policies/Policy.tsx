@@ -8,7 +8,7 @@ import { formatTimestamp } from "chora/utils"
 import * as styles from "./Policy.module.css"
 
 const queryPolicy = "cosmos/group/v1/group_policy_info"
-const serverUrl = "https://server.chora.io"
+const serverUrl = "https://server.chora.io/data"
 
 const Policy = ({ policyAddress }) => {
 

@@ -18,7 +18,7 @@ import * as styles from "./SubmitProposal.module.css"
 
 const groupId = "1" // TODO: configuration file
 const queryPolicies = "cosmos/group/v1/group_policies_by_group"
-const serverUrl = "https://server.chora.io"
+const serverUrl = "https://server.chora.io/data"
 
 const SubmitProposal = () => {
 

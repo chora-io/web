@@ -9,7 +9,7 @@ import * as styles from "./Member.module.css"
 
 const groupId = "1" // TODO: configuration file
 const queryMembers = "cosmos/group/v1/group_members" // TODO(cosmos-sdk): group member query
-const serverUrl = "https://server.chora.io"
+const serverUrl = "https://server.chora.io/data"
 
 const Member = ({ memberAddress }) => {
 

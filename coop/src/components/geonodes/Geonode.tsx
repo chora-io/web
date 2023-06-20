@@ -7,7 +7,7 @@ import { choraTestnet } from "chora/chains"
 import * as styles from "./Geonode.module.css"
 
 const queryNode = "chora/geonode/v1/node"
-const serverUrl = "https://server.chora.io"
+const serverUrl = "https://server.chora.io/data"
 
 const Geonode = ({ nodeId }) => {
 

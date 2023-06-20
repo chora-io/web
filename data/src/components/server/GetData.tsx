@@ -6,7 +6,7 @@ import { InputIRI, Result } from "chora/components"
 
 import * as styles from "./GetData.module.css"
 
-const serverUrl = "https://server.chora.io"
+const serverUrl = "https://server.chora.io/data"
 
 const GetData = () => {
 

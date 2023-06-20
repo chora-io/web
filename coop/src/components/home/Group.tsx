@@ -9,7 +9,7 @@ import * as styles from "./Group.module.css"
 
 const groupId = "1" // TODO: configuration file
 const queryGroup = "cosmos/group/v1/group_info"
-const serverUrl = "https://server.chora.io"
+const serverUrl = "https://server.chora.io/data"
 
 const Group = () => {
 

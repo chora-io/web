@@ -8,7 +8,7 @@ import { formatTimestamp } from "chora/utils"
 import * as styles from "./ProposalVote.module.css"
 
 const queryVote = "cosmos/group/v1/vote_by_proposal_voter"
-const serverUrl = "https://server.chora.io"
+const serverUrl = "https://server.chora.io/data"
 
 const ProposalVote = ({ proposalId, voterAddress }) => {
 

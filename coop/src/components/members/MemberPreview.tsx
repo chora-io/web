@@ -4,7 +4,7 @@ import { Link } from "gatsby"
 
 import * as styles from "./MemberPreview.module.css"
 
-const serverUrl = "https://server.chora.io"
+const serverUrl = "https://server.chora.io/data"
 
 const MemberPreview = ({ member }) => {
 

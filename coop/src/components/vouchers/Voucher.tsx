@@ -7,7 +7,7 @@ import { choraTestnet } from "chora/chains"
 import * as styles from "./Voucher.module.css"
 
 const queryVoucher = "chora/voucher/v1/voucher"
-const serverUrl = "https://server.chora.io"
+const serverUrl = "https://server.chora.io/data"
 
 const Voucher = ({ voucherId }) => {
 

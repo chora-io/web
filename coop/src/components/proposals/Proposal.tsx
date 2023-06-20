@@ -12,7 +12,7 @@ import { formatTimestamp, signAndBroadcast } from "chora/utils"
 import * as styles from "./Proposal.module.css"
 
 const queryProposal = "cosmos/group/v1/proposal"
-const serverUrl = "https://server.chora.io"
+const serverUrl = "https://server.chora.io/data"
 
 const Proposal = ({ proposalId }) => {
 
