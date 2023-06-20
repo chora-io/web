@@ -38,11 +38,7 @@ const VoucherPage = () => {
             {showInfo ? "less info" : "more info"}
           </button>
           <div className={styles.box}>
-            {showInfo && (
-                <MoreInfo
-                    module={voucherModule}
-                />
-            )}
+            {showInfo && <MoreInfo module={voucherModule} />}
             <ul>
               <li>
                 <a href="#msg-create">

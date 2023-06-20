@@ -31,11 +31,7 @@ const InterTxPage = () => {
             {showInfo ? "less info" : "more info"}
           </button>
           <div className={styles.box}>
-            {showInfo && (
-                <MoreInfo
-                    module={intertxModule}
-                />
-            )}
+            {showInfo && <MoreInfo module={intertxModule} />}
             <ul>
               <li>
                 <a href="#msg-register-account">

@@ -34,11 +34,7 @@ const AuthzPage = () => {
             {showInfo ? "less info" : "more info"}
           </button>
           <div className={styles.box}>
-            {showInfo && (
-              <MoreInfo
-                module={authzModule}
-              />
-            )}
+            {showInfo && <MoreInfo module={authzModule} />}
             <ul>
               <li>
                 <a href="#msg-exec">

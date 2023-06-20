@@ -34,11 +34,7 @@ const GeonodePage = () => {
             {showInfo ? "less info" : "more info"}
           </button>
           <div className={styles.box}>
-            {showInfo && (
-                <MoreInfo
-                    module={geonodeModule}
-                />
-            )}
+            {showInfo && <MoreInfo module={geonodeModule} />}
             <ul>
               <li>
                 <a href="#msg-create">

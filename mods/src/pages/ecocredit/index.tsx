@@ -77,11 +77,7 @@ const EcocreditPage = () => {
             {showInfo ? "less info" : "more info"}
           </button>
           <div className={styles.box}>
-            {showInfo && (
-                <MoreInfo
-                    module={ecocreditModule}
-                />
-            )}
+            {showInfo && <MoreInfo module={ecocreditModule} />}
             <ul>
               <li>
                 <a href="#msg-add-allowed-bridge-chain">

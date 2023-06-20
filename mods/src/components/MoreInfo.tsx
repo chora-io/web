@@ -60,15 +60,15 @@ const MoreInfo = ({ module }: any) => {
         {`api package: ${module.apiPackage}`}
       </p>
       <p>
-        {`api version: `}
-        <a href={module.apiVersionLink} target="_blank">
-          {module.apiVersion}
-        </a>
-      </p>
-      <p>
         {`api documentation: `}
         <a href={module.apiDocumentation} target="_blank">
           {module.apiDocumentation}
+        </a>
+      </p>
+      <p>
+        {`api version: `}
+        <a href={module.apiVersionLink} target="_blank">
+          {module.apiVersion}
         </a>
       </p>
     </div>
@@ -80,9 +80,9 @@ const MoreInfo = ({ module }: any) => {
         {`module information (${network})`}
       </h4>
       <p>
-        {`git version: `}
-        <a href={moduleInfo.gitVersionLink} target="_blank">
-          {moduleInfo.gitVersion}
+        {`documentation: `}
+        <a href={moduleInfo.documentation} target="_blank">
+          {moduleInfo.documentation}
         </a>
       </p>
       <p>
@@ -92,9 +92,9 @@ const MoreInfo = ({ module }: any) => {
         </a>
       </p>
       <p>
-        {`specification: `}
-        <a href={moduleInfo.specification} target="_blank">
-          {moduleInfo.specification}
+        {`git version: `}
+        <a href={moduleInfo.gitVersionLink} target="_blank">
+          {moduleInfo.gitVersion}
         </a>
       </p>
     </div>

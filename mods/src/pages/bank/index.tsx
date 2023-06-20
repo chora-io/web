@@ -33,11 +33,7 @@ const BankPage = () => {
             {showInfo ? "less info" : "more info"}
           </button>
           <div className={styles.box}>
-            {showInfo && (
-                <MoreInfo
-                    module={bankModule}
-                />
-            )}
+            {showInfo && <MoreInfo module={bankModule} />}
             <ul>
               <li>
                 <a href="#msg-multi-send">

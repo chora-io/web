@@ -43,11 +43,7 @@ const DataPage = () => {
             {showInfo ? "less info" : "more info"}
           </button>
           <div className={styles.box}>
-            {showInfo && (
-                <MoreInfo
-                    module={dataModule}
-                />
-            )}
+            {showInfo && <MoreInfo module={dataModule} />}
             <ul>
               <li>
                 <a href="#convert-hash-to-iri">

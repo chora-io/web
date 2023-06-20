@@ -31,11 +31,7 @@ const FeegrantPage = () => {
             {showInfo ? "less info" : "more info"}
           </button>
           <div className={styles.box}>
-            {showInfo && (
-                <MoreInfo
-                    module={feegrantModule}
-                />
-            )}
+            {showInfo && <MoreInfo module={feegrantModule} />}
             <ul>
               <li>
                 <a href="#msg-grant-allowance">

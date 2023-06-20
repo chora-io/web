@@ -55,11 +55,7 @@ const GroupPage = () => {
             {showInfo ? "less info" : "more info"}
           </button>
           <div className={styles.box}>
-            {showInfo && (
-                <MoreInfo
-                    module={groupModule}
-                />
-            )}
+            {showInfo && <MoreInfo module={groupModule} />}
             <ul>
               <li>
                 <a href="#msg-create-group">
