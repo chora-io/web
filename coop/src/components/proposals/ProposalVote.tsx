@@ -67,12 +67,15 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
         if (res.error) {
           setError(res.error)
           setMetadata(null)
-        } else if (res.context !== "https://schema.chora.io/contexts/group_vote.jsonld") {
-          setError("unsupported metadata schema")
-          setMetadata(null)
         } else {
-          setError("")
-          setMetadata(JSON.parse(res["jsonld"]))
+          const data = JSON.parse(res["jsonld"])
+          if (data.context !== "https://schema.chora.io/contexts/group_vote.jsonld") {
+            setError("unsupported metadata schema")
+            setMetadata(null)
+          } else {
+            setError("")
+            setMetadata(data)
+          }
         }
       })
       .catch(err => {

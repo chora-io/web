@@ -83,12 +83,16 @@ const SubmitProposal = () => {
         .then(res => {
           if (res.error) {
             setError(res.error)
-          } else if (res.context !== "https://schema.chora.io/contexts/group_policy.jsonld") {
-            setError("unsupported metadata schema")
           } else {
-            ps[i] = {
-              ...ps[i],
-              ...JSON.parse(res["jsonld"]),
+            const data = JSON.parse(res["jsonld"])
+            if (data.context !== "https://schema.chora.io/contexts/group_policy.jsonld") {
+              setError("unsupported metadata schema")
+            } else {
+              setError("")
+              ps[i] = {
+                ...ps[i],
+                ...data,
+              }
             }
           }
         })
