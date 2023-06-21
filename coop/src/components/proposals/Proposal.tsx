@@ -77,7 +77,7 @@ const Proposal = ({ proposalId }) => {
           setMetadata(null)
         } else {
           const data = JSON.parse(res["jsonld"])
-          if (data.context !== "https://schema.chora.io/contexts/group_proposal.jsonld") {
+          if (data["@context"] !== "https://schema.chora.io/contexts/group_proposal.jsonld") {
             setError("unsupported metadata schema")
             setMetadata(null)
           } else {

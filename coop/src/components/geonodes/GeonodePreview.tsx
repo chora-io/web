@@ -35,7 +35,7 @@ const GeonodePreview = ({ node }) => {
           setMetadata(null)
         } else {
           const data = JSON.parse(res["jsonld"])
-          if (data.context !== "https://schema.chora.io/contexts/geonode.jsonld") {
+          if (data["@context"] !== "https://schema.chora.io/contexts/geonode.jsonld") {
             setError("unsupported metadata schema")
             setMetadata(null)
           } else {

@@ -34,7 +34,7 @@ const VoucherPreview = ({ voucher }) => {
           setMetadata(null)
         } else {
           const data = JSON.parse(res["jsonld"])
-          if (data.context !== "https://schema.chora.io/contexts/voucher.jsonld") {
+          if (data["@context"] !== "https://schema.chora.io/contexts/voucher.jsonld") {
             setError("unsupported metadata schema")
             setMetadata(null)
           } else {

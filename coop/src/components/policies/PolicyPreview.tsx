@@ -34,7 +34,7 @@ const GroupPolicy = ({ policy }) => {
           setMetadata(null)
         } else {
           const data = JSON.parse(res["jsonld"])
-          if (data.context !== "https://schema.chora.io/contexts/group_policy.jsonld") {
+          if (data["@context"] !== "https://schema.chora.io/contexts/group_policy.jsonld") {
             setError("unsupported metadata schema")
             setMetadata(null)
           } else {

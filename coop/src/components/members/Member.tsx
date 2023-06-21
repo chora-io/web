@@ -71,7 +71,7 @@ const Member = ({ memberAddress }) => {
           setMetadata(null)
         } else {
           const data = JSON.parse(res["jsonld"])
-          if (data.context !== "https://schema.chora.io/contexts/group_member.jsonld") {
+          if (data["@context"] !== "https://schema.chora.io/contexts/group_member.jsonld") {
             setError("unsupported metadata schema")
             setMetadata(null)
           } else {
