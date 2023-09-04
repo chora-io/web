@@ -16,18 +16,18 @@ export const choraLocal = {
     },
     currencies: [
         {
-            coinDenom: "STAKE",
-            coinMinimalDenom: "stake",
+            coinDenom: "CHORA",
+            coinMinimalDenom: "uchora",
             coinDecimals: 6,
-            coinGeckoId: "stake",
+            coinGeckoId: "chora",
         },
     ],
     feeCurrencies: [
         {
-            coinDenom: "STAKE",
-            coinMinimalDenom: "stake",
+            coinDenom: "CHORA",
+            coinMinimalDenom: "uchora",
             coinDecimals: 6,
-            coinGeckoId: "stake",
+            coinGeckoId: "chora",
             gasPriceStep: {
                 low: 0.01,
                 average: 0.025,
@@ -36,10 +36,10 @@ export const choraLocal = {
         },
     ],
     stakeCurrency: {
-        coinDenom: "STAKE",
-        coinMinimalDenom: "stake",
+        coinDenom: "CHORA",
+        coinMinimalDenom: "uchora",
         coinDecimals: 6,
-        coinGeckoId: "stake",
+        coinGeckoId: "chora",
     },
 }
 

@@ -16,7 +16,9 @@ import SelectInput from "../SelectInput"
 import * as styles from "./PostData.module.css"
 
 const contextUrl = "https://schema.chora.io/contexts/index.jsonld"
-const serverUrl = "https://server.chora.io/data"
+const serverUrl = process.env.CHORA_SERVER_URL
+    ? process.env.CHORA_SERVER_URL + '/data'
+    : "https://server.chora.io/data"
 
 const PostData = () => {
 

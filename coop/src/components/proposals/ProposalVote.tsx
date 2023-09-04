@@ -2,17 +2,23 @@ import * as React from "react"
 import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
-import { choraTestnet } from "chora/chains"
+import { choraLocal, choraTestnet } from "chora/chains"
 import { formatTimestamp } from "chora/utils"
+import { voteOptionToJSON } from "chora/api/cosmos/group/v1/types"
 
 import * as styles from "./ProposalVote.module.css"
 
 const queryVote = "cosmos/group/v1/vote_by_proposal_voter"
-const serverUrl = "https://server.chora.io/data"
+const serverUrl = process.env.CHORA_SERVER_URL
+    ? process.env.CHORA_SERVER_URL + '/data'
+    : "https://server.chora.io/data"
+const serverIdxUrl = process.env.CHORA_SERVER_URL
+    ? process.env.CHORA_SERVER_URL + '/idx'
+    : "https://server.chora.io/idx"
 
 const ProposalVote = ({ proposalId, voterAddress }) => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // fetch error and results
   const [error, setError] = useState<string>("")
@@ -24,13 +30,18 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
     setVote(null)
     setError("")
 
-    // error if network is not chora-testnet-1
-    if (chainInfo && chainInfo.chainId !== choraTestnet.chainId) {
+    const coopChain = chainInfo && (
+        chainInfo.chainId !== choraTestnet.chainId ||
+        chainInfo.chainId !== choraLocal.chainId
+    )
+
+    // error if network is not chora-testnet-1 (or chora-local)
+    if (!coopChain) {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch vote and metadata if network is chora-testnet-1
-    if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
+    // fetch vote and metadata if network is chora-testnet-1 (or chora-local)
+    if (coopChain) {
       fetchVoteAndMetadata().catch(err => {
         setError(err.message)
       })
@@ -42,12 +53,31 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
 
     let iri: string
 
+    // fetch idx votes from chora server
+    await fetch(serverIdxUrl + "/" + network + "/group-vote/" + proposalId + "/" + voterAddress)
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          if (!vote) {
+            setError(res.error)
+          }
+        } else {
+          setVote({
+            ...res["vote"],
+            option: voteOptionToJSON(res["vote"]['option']),
+          })
+          iri = res["vote"]["metadata"]
+        }
+      })
+
     // fetch vote from selected network
     await fetch(chainInfo.rest + "/" + queryVote + "/" + proposalId + "/" + voterAddress)
       .then(res => res.json())
       .then(res => {
         if (res.code) {
-          setError(res.message)
+          if (!vote) {
+            setError(res.message)
+          }
         } else {
           setVote(res["vote"])
           iri = res["vote"]["metadata"]
@@ -56,7 +86,6 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
 
     // return if iri is empty or was never set
     if (typeof iri === "undefined" || iri === "") {
-      setMetadata({ reason: "NA" })
       return
     }
 
@@ -113,7 +142,7 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
               {"reason"}
             </h3>
             <p>
-              {metadata["reason"]}
+              {metadata["reason"] ? metadata["reason"] : "NA"}
             </p>
           </div>
           <div className={styles.boxText}>

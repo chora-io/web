@@ -4,7 +4,9 @@ import { Link } from "gatsby"
 
 import * as styles from "./PolicyPreview.module.css"
 
-const serverUrl = "https://server.chora.io/data"
+const serverUrl = process.env.CHORA_SERVER_URL
+    ? process.env.CHORA_SERVER_URL + '/data'
+    : "https://server.chora.io/data"
 
 const GroupPolicy = ({ policy }) => {
 

@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
-import { choraTestnet } from "chora/chains"
+import { choraLocal, choraTestnet } from "chora/chains"
 
 import * as styles from "./Balances.module.css"
 
@@ -22,13 +22,18 @@ const Balances = ({ voucherId }) => {
     setBalances(null)
     setError("")
 
-    // error if network is not chora-testnet-1
-    if (chainInfo && chainInfo.chainId !== choraTestnet.chainId) {
+    const coopChain = chainInfo && (
+        chainInfo.chainId !== choraTestnet.chainId ||
+        chainInfo.chainId !== choraLocal.chainId
+    )
+
+    // error if network is not chora-testnet-1 (or chora-local)
+    if (!coopChain) {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch balances if network is chora-testnet-1
-    if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
+    // fetch balances if network is chora-testnet-1 (or chora-local)
+    if (coopChain) {
       fetchBalances().catch(err => {
         setError(err.message)
       })

@@ -14,9 +14,6 @@ const Account = ({ rest, account }) => {
     fetch(rest + "/" + queryAccount + "/" + account)
       .then(res => res.json())
       .then(data => {
-
-        console.log("data", data)
-
         setResponse(data)
       })
       .catch(err => {

@@ -2,7 +2,8 @@ import * as React from "react"
 import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
-import { choraTestnet } from "chora/chains"
+import { choraLocal, choraTestnet } from "chora/chains"
+import { proposalStatusToJSON } from "chora/api/cosmos/group/v1/types"
 
 import ProposalPreview from "./ProposalPreview"
 
@@ -11,10 +12,13 @@ import * as styles from "./Proposals.module.css"
 const groupId = "1" // TODO: configuration file
 const queryPolicies = "cosmos/group/v1/group_policies_by_group"
 const queryProposals = "cosmos/group/v1/proposals_by_group_policy"
+const serverUrl = process.env.CHORA_SERVER_URL
+    ? process.env.CHORA_SERVER_URL + '/idx'
+    : "https://server.chora.io/idx"
 
 const Proposals = () => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // fetch error and results
   const [error, setError] = useState<string>("")
@@ -30,13 +34,18 @@ const Proposals = () => {
     setProposals(null)
     setError("")
 
-    // error if network is not chora-testnet-1
-    if (chainInfo && chainInfo.chainId !== choraTestnet.chainId) {
+    const coopChain = chainInfo && (
+        chainInfo.chainId !== choraTestnet.chainId ||
+        chainInfo.chainId !== choraLocal.chainId
+    )
+
+    // error if network is not chora-testnet-1 (or chora-local)
+    if (!coopChain) {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch policies and proposals if network is chora-testnet-1
-    if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
+    // fetch policies and proposals if network is chora-testnet-1 (or chora-local)
+    if (coopChain) {
       fetchPoliciesAndProposals().catch(err => {
         setError(err.message)
       })
@@ -120,6 +129,20 @@ const Proposals = () => {
 
     let ps: any[] = []
 
+    // fetch idx proposals from chora server
+    await fetch(serverUrl + "/" + network + "/group-proposals/" + groupId)
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          setError(res.error)
+        } else {
+          res["proposals"]?.map(p => ps.push({
+            ...p,
+            status: proposalStatusToJSON(p['status']),
+          }))
+        }
+      })
+
     // create promise for all async fetch calls
     const promise = addrs.map(async addr => {
 
@@ -137,6 +160,9 @@ const Proposals = () => {
 
     // set state after promise all complete
     await Promise.all(promise).then(() => {
+
+      // filter out duplicates (if both on chain and indexed)
+      ps = [...new Map(ps.map(p => [p['id'], p])).values()]
 
       // sort ascending by default
       ps.sort((a, b) => b.id - a.id)

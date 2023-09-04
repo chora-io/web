@@ -4,7 +4,7 @@ import * as jsonld from "jsonld"
 
 import { WalletContext } from "chora"
 import { MsgSubmitProposal } from "chora/api/cosmos/group/v1/tx"
-import { choraTestnet } from "chora/chains"
+import { choraLocal, choraTestnet } from "chora/chains"
 import {
   InputString,
   ResultTx,
@@ -18,7 +18,9 @@ import * as styles from "./SubmitProposal.module.css"
 
 const groupId = "1" // TODO: configuration file
 const queryPolicies = "cosmos/group/v1/group_policies_by_group"
-const serverUrl = "https://server.chora.io/data"
+const serverUrl = process.env.CHORA_SERVER_URL
+    ? process.env.CHORA_SERVER_URL + '/data'
+    : "https://server.chora.io/data"
 
 const SubmitProposal = () => {
 
@@ -43,13 +45,18 @@ const SubmitProposal = () => {
     setPolicies(null)
     setError("")
 
-    // error if network is not chora-testnet-1
-    if (chainInfo && chainInfo.chainId !== choraTestnet.chainId) {
+    const coopChain = chainInfo && (
+        chainInfo.chainId !== choraTestnet.chainId ||
+        chainInfo.chainId !== choraLocal.chainId
+    )
+
+    // error if network is not chora-testnet-1 (or chora-local)
+    if (!coopChain) {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch policies and metadata if network is chora-testnet-1
-    if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
+    // fetch policies and metadata if network is chora-testnet-1 (or chora-local)
+    if (coopChain) {
       fetchPoliciesAndMetadata().catch(err => {
         setError(err.message)
       })
@@ -199,7 +206,11 @@ const SubmitProposal = () => {
       .then(res => {
         setSuccess(res)
       }).catch(err => {
-        setError(err.message)
+        if (err.message === "Cannot read properties of null (reading 'key')") {
+          setError("keplr account does not exist on the selected network")
+        } else {
+          setError(err.message)
+        }
       })
   }
 

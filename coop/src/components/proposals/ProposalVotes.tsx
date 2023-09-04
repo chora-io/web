@@ -3,20 +3,23 @@ import { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
-import { choraTestnet } from "chora/chains"
+import { choraLocal, choraTestnet } from "chora/chains"
+import { voteOptionToJSON } from "chora/api/cosmos/group/v1/types"
 
 import * as styles from "./ProposalVotes.module.css"
 
 const queryProposal = "cosmos/group/v1/proposal"
 const queryVotes = "cosmos/group/v1/votes_by_proposal"
+const serverUrl = process.env.CHORA_SERVER_URL
+    ? process.env.CHORA_SERVER_URL + '/idx'
+    : "https://server.chora.io/idx"
 
 const ProposalVotes = ({ proposalId }) => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // fetch error and results
   const [error, setError] = useState<string>("")
-  const [proposal, setProposal] = useState<any>(null)
   const [votes, setVotes] = useState<any>(null)
 
   // fetch on load and value change
@@ -24,13 +27,18 @@ const ProposalVotes = ({ proposalId }) => {
     setVotes(null)
     setError("")
 
-    // error if network is not chora-testnet-1
-    if (chainInfo && chainInfo.chainId !== choraTestnet.chainId) {
+    const coopChain = chainInfo && (
+        chainInfo.chainId !== choraTestnet.chainId ||
+        chainInfo.chainId !== choraLocal.chainId
+    )
+
+    // error if network is not chora-testnet-1 (or chora-local)
+    if (!coopChain) {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch proposal and votes if network is chora-testnet-1
-    if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
+    // fetch proposal and votes if network is chora-testnet-1 (or chora-local)
+    if (coopChain) {
       fetchProposalAndVotes().catch(err => {
         setError(err.message)
       })
@@ -39,15 +47,21 @@ const ProposalVotes = ({ proposalId }) => {
 
   // fetch proposal and votes asynchronously
   const fetchProposalAndVotes = async () => {
+    let vs: any[] = []
 
-    // fetch proposal from selected network
-    await fetch(chainInfo.rest + "/" + queryProposal + "/" + proposalId)
+    // fetch idx votes from chora server
+    await fetch(serverUrl + "/" + network + "/group-votes/" + proposalId)
       .then(res => res.json())
       .then(res => {
-        if (res.code) {
-          setError(res.message)
+        if (res.error) {
+          if (!votes) {
+            setError(res.error)
+          }
         } else {
-          setProposal(res["proposal"])
+          res["votes"]?.map(v => vs.push({
+            ...v,
+            option: voteOptionToJSON(v['option']),
+          }))
         }
       })
 
@@ -58,19 +72,16 @@ const ProposalVotes = ({ proposalId }) => {
         if (res.code) {
           setError(res.message)
         } else {
-          setVotes(res["votes"])
+          res["votes"].map(v => vs.push(v))
         }
       })
-  }
 
-  // whether votes have been finalized
-  const votesFinalized = (
-    proposal &&
-    (
-      proposal["status"] === "PROPOSAL_STATUS_ACCEPTED" ||
-      proposal["status"] === "PROPOSAL_STATUS_REJECTED"
-    )
-  )
+    // filter out duplicates (if both on chain and indexed)
+    vs = [...new Map(vs.map(v => [v['voter'], v])).values()]
+
+    // set votes
+    setVotes(vs)
+  }
 
   return (
     <div className={styles.box}>
@@ -104,7 +115,7 @@ const ProposalVotes = ({ proposalId }) => {
       ))}
       {votes && votes.length === 0 && !error && (
         <div>
-          {votesFinalized ? "votes have been finalized and removed from state" : "no votes found"}
+          {"no votes found"}
         </div>
       )}
       {error && (

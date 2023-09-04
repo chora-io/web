@@ -2,14 +2,16 @@ import * as React from "react"
 import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
-import { choraTestnet } from "chora/chains"
+import { choraLocal, choraTestnet } from "chora/chains"
 import { formatTimestamp } from "chora/utils"
 
 import * as styles from "./Group.module.css"
 
 const groupId = "1" // TODO: configuration file
 const queryGroup = "cosmos/group/v1/group_info"
-const serverUrl = "https://server.chora.io/data"
+const serverUrl = process.env.CHORA_SERVER_URL
+    ? process.env.CHORA_SERVER_URL + '/data'
+    : "https://server.chora.io/data"
 
 const Group = () => {
 
@@ -25,13 +27,18 @@ const Group = () => {
     setGroup(null)
     setError("")
 
-    // error if network is not chora-testnet-1
-    if (chainInfo && chainInfo.chainId !== choraTestnet.chainId) {
+    const coopChain = chainInfo && (
+        chainInfo.chainId !== choraTestnet.chainId ||
+        chainInfo.chainId !== choraLocal.chainId
+    )
+
+    // error if network is not chora-testnet-1 (or chora-local)
+    if (!coopChain) {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch group and metadata if network is chora-testnet-1
-    if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
+    // fetch group and metadata if network is chora-testnet-1 (or chora-local)
+    if (coopChain) {
       fetchGroupAndMetadata().catch(err => {
         setError(err.message)
       })
@@ -57,7 +64,6 @@ const Group = () => {
 
     // return if iri is empty or was never set
     if (typeof iri === "undefined" || iri === "") {
-      setMetadata({ name: "NA", description: "NA" })
       return
     }
 
@@ -99,7 +105,7 @@ const Group = () => {
                 {"name"}
               </h3>
               <p>
-                {metadata["name"]}
+                {metadata["name"] ? metadata["name"] : "NA"}
               </p>
             </div>
             <div className={styles.boxText}>
@@ -107,7 +113,7 @@ const Group = () => {
                 {"description"}
               </h3>
               <p>
-                {metadata["description"]}
+                {metadata["description"] ? metadata["description"] : "NA"}
               </p>
             </div>
             <div className={styles.boxText}>

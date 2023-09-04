@@ -14,9 +14,6 @@ const Transaction = ({ rest, tx }) => {
     fetch(rest + "/" + queryTx + "/" + tx)
       .then(res => res.json())
       .then(data => {
-
-        console.log("data", data)
-
         setResponse(data)
       })
       .catch(err => {

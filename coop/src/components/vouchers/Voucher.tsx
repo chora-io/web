@@ -2,12 +2,14 @@ import * as React from "react"
 import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
-import { choraTestnet } from "chora/chains"
+import { choraLocal, choraTestnet } from "chora/chains"
 
 import * as styles from "./Voucher.module.css"
 
 const queryVoucher = "chora/voucher/v1/voucher"
-const serverUrl = "https://server.chora.io/data"
+const serverUrl = process.env.CHORA_SERVER_URL
+    ? process.env.CHORA_SERVER_URL + '/data'
+    : "https://server.chora.io/data"
 
 const Voucher = ({ voucherId }) => {
 
@@ -23,13 +25,18 @@ const Voucher = ({ voucherId }) => {
     setVoucher(null)
     setError("")
 
-    // error if network is not chora-testnet-1
-    if (chainInfo && chainInfo.chainId !== choraTestnet.chainId) {
+    const coopChain = chainInfo && (
+        chainInfo.chainId !== choraTestnet.chainId ||
+        chainInfo.chainId !== choraLocal.chainId
+    )
+
+    // error if network is not chora-testnet-1 (or chora-local)
+    if (!coopChain) {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch voucher and metadata if network is chora-testnet-1
-    if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
+    // fetch voucher and metadata if network is chora-testnet-1 (or chora-local)
+    if (coopChain) {
       fetchVoucherAndMetadata().catch(err => {
         setError(err.message)
       })
@@ -55,7 +62,6 @@ const Voucher = ({ voucherId }) => {
 
     // return if iri is empty or was never set
     if (typeof iri === "undefined" || iri === "") {
-      setMetadata({ name: "NA", description: "NA" })
       return
     }
 
@@ -96,7 +102,7 @@ const Voucher = ({ voucherId }) => {
               {"name"}
             </h3>
             <p>
-              {metadata["name"]}
+              {metadata["name"] ? metadata["name"] : "NA"}
             </p>
           </div>
           <div className={styles.boxText}>
@@ -104,7 +110,7 @@ const Voucher = ({ voucherId }) => {
               {"description"}
             </h3>
             <p>
-              {metadata["description"]}
+              {metadata["description"] ? metadata["description"] : "NA"}
             </p>
           </div>
           <div className={styles.boxText}>

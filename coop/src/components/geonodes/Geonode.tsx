@@ -2,12 +2,14 @@ import * as React from "react"
 import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
-import { choraTestnet } from "chora/chains"
+import { choraLocal, choraTestnet } from "chora/chains"
 
 import * as styles from "./Geonode.module.css"
 
 const queryNode = "chora/geonode/v1/node"
-const serverUrl = "https://server.chora.io/data"
+const serverUrl = process.env.CHORA_SERVER_URL
+    ? process.env.CHORA_SERVER_URL + '/data'
+    : "https://server.chora.io/data"
 
 const Geonode = ({ nodeId }) => {
 
@@ -23,13 +25,18 @@ const Geonode = ({ nodeId }) => {
     setNode(null)
     setError("")
 
-    // error if network is not chora-testnet-1
-    if (chainInfo && chainInfo.chainId !== choraTestnet.chainId) {
+    const coopChain = chainInfo && (
+        chainInfo.chainId !== choraTestnet.chainId ||
+        chainInfo.chainId !== choraLocal.chainId
+    )
+
+    // error if network is not chora-testnet-1 (or chora-local)
+    if (!coopChain) {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch node and metadata if network is chora-testnet-1
-    if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
+    // fetch node and metadata if network is chora-testnet-1 (or chora-local)
+    if (coopChain) {
       fetchNodeAndMetadata().catch(err => {
         setError(err.message)
       })
@@ -55,14 +62,6 @@ const Geonode = ({ nodeId }) => {
 
     // return if iri is empty or was never set
     if (typeof iri === "undefined" || iri === "") {
-      setMetadata({
-        name: "NA",
-        description: "NA",
-        geo: {
-          latitude: "NA",
-          longitude: "NA"
-        }
-      })
       return
     }
 
@@ -103,7 +102,7 @@ const Geonode = ({ nodeId }) => {
               {"name"}
             </h3>
             <p>
-              {metadata["name"]}
+              {metadata["name"] ? metadata["name"] : "NA"}
             </p>
           </div>
           <div className={styles.boxText}>
@@ -111,7 +110,7 @@ const Geonode = ({ nodeId }) => {
               {"description"}
             </h3>
             <p>
-              {metadata["description"]}
+              {metadata["description"] ? metadata["description"] : "NA"}
             </p>
           </div>
           <div className={styles.boxText}>
@@ -127,7 +126,7 @@ const Geonode = ({ nodeId }) => {
               {"latitude"}
             </h3>
             <p>
-              {metadata["geo"]["latitude"]}
+              {metadata["geo"] && metadata["geo"]["latitude"] ? metadata["geo"]["latitude"] : "NA"}
             </p>
           </div>
           <div className={styles.boxText}>
@@ -135,7 +134,7 @@ const Geonode = ({ nodeId }) => {
               {"longitude"}
             </h3>
             <p>
-              {metadata["geo"]["longitude"]}
+              {metadata["geo"] && metadata["geo"]["longitude"] ? metadata["geo"]["longitude"] : "NA"}
             </p>
           </div>
         </div>

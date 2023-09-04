@@ -11,7 +11,9 @@ import { signAndBroadcast } from "chora/utils"
 
 import * as styles from "./VoteOnProposal.module.css"
 
-const serverUrl = "https://server.chora.io/data"
+const serverUrl = process.env.CHORA_SERVER_URL
+    ? process.env.CHORA_SERVER_URL + '/data'
+    : "https://server.chora.io/data"
 
 const VoteOnProposal = ({ proposalId }) => {
 

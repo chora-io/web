@@ -5,18 +5,24 @@ import * as Long from "long"
 
 import { WalletContext } from "chora"
 import { MsgExec } from "chora/api/cosmos/group/v1/tx"
-import { choraTestnet } from "chora/chains"
+import { choraLocal, choraTestnet } from "chora/chains"
 import { ResultTx } from "chora/components"
 import { formatTimestamp, signAndBroadcast } from "chora/utils"
+import { proposalStatusToJSON, proposalExecutorResultToJSON } from "chora/api/cosmos/group/v1/types"
 
 import * as styles from "./Proposal.module.css"
 
 const queryProposal = "cosmos/group/v1/proposal"
-const serverUrl = "https://server.chora.io/data"
+const serverUrl = process.env.CHORA_SERVER_URL
+    ? process.env.CHORA_SERVER_URL + '/data'
+    : "https://server.chora.io/data"
+const serverIdxUrl = process.env.CHORA_SERVER_URL
+    ? process.env.CHORA_SERVER_URL + '/idx'
+    : "https://server.chora.io/idx"
 
 const Proposal = ({ proposalId }) => {
 
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // fetch error and results
   const [error, setError] = useState<string>("")
@@ -32,13 +38,18 @@ const Proposal = ({ proposalId }) => {
     setProposal(null)
     setError("")
 
-    // error if network is not chora-testnet-1
-    if (chainInfo && chainInfo.chainId !== choraTestnet.chainId) {
+    const coopChain = chainInfo && (
+        chainInfo.chainId !== choraTestnet.chainId ||
+        chainInfo.chainId !== choraLocal.chainId
+    )
+
+    // error if network is not chora-testnet-1 (or chora-local)
+    if (!coopChain) {
       setError("switch to chora-testnet-1")
     }
 
-    // fetch proposal and metadata if network is chora-testnet-1
-    if (chainInfo && chainInfo.chainId === choraTestnet.chainId) {
+    // fetch proposal and metadata if network is chora-testnet-1 (or chora-local)
+    if (coopChain) {
       fetchProposalAndMetadata().catch(err => {
         setError(err.message)
       })
@@ -50,12 +61,32 @@ const Proposal = ({ proposalId }) => {
 
     let iri: string
 
+    // fetch idx proposals from chora server
+    await fetch(serverIdxUrl + "/" + network + "/group-proposal/" + proposalId)
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          if (!proposal) {
+            setError(res.error)
+          }
+        } else {
+          setProposal({
+            ...res["proposal"],
+            status: proposalStatusToJSON(res["proposal"]["status"]),
+            executor_result: proposalExecutorResultToJSON(res["proposal"]["executor_result"]),
+          })
+          iri = res["proposal"]["metadata"]
+        }
+      })
+
     // fetch proposal from selected network
     await fetch(chainInfo.rest + "/" + queryProposal + "/" + proposalId)
       .then(res => res.json())
       .then(res => {
         if (res.code) {
-          setError(res.message)
+          if (!proposal) {
+            setError(res.message)
+          }
         } else {
           setProposal(res["proposal"])
           iri = res["proposal"]["metadata"]
@@ -64,7 +95,6 @@ const Proposal = ({ proposalId }) => {
 
     // return if iri is empty or was never set
     if (typeof iri === "undefined" || iri === "") {
-      setMetadata({ name: "NA", description: "NA" })
       return
     }
 
@@ -177,7 +207,7 @@ const Proposal = ({ proposalId }) => {
               {"name"}
             </h3>
             <p>
-              {metadata["name"]}
+              {metadata["name"] ? metadata["name"] : "NA"}
             </p>
           </div>
           <div className={styles.boxText}>
@@ -185,7 +215,7 @@ const Proposal = ({ proposalId }) => {
               {"description"}
             </h3>
             <p>
-              {metadata["description"]}
+              {metadata["description"] ? metadata["description"] : "NA"}
             </p>
           </div>
           {proposal["proposers"].length === 1 && (
@@ -238,12 +268,12 @@ const Proposal = ({ proposalId }) => {
             <h3>
               {"messages"}
             </h3>
-            {proposal["messages"].length === 0 && (
+            {proposal["messages"]?.length === 0 && (
               <p>
-                {"no messages"}
+                {"NA"}
               </p>
             )}
-            {proposal["messages"].length > 0 && (
+            {proposal["messages"]?.length > 0 && (
               <pre>
                 <p>
                   {JSON.stringify(proposal["messages"], null, " ")}

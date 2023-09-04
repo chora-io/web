@@ -6,8 +6,9 @@ import { InputString, Result } from "chora/components"
 
 import * as styles from "./SubmitApplication.module.css"
 
-// TODO: state machine url..?
-const serverUrl = "https://server.chora.io/data"
+const serverUrl = process.env.CHORA_SERVER_URL
+    ? process.env.CHORA_SERVER_URL + '/data'
+    : "https://server.chora.io/data"
 
 const SubmitApplication = () => {
 
