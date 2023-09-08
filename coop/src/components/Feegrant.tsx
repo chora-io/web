@@ -13,7 +13,7 @@ const queryAllowancesByGranter = "cosmos/feegrant/v1beta1/issued"
 
 const Feegrant = ({ address }) => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // options
   const [filter, setFilter] = useState<string>("grantee")
@@ -23,16 +23,17 @@ const Feegrant = ({ address }) => {
   const [allowancesGrantee, setAllowancesGrantee] = useState<any>(null)
   const [allowancesGranter, setAllowancesGranter] = useState<any>(null)
 
+  // whether network is supported by coop app
+  const coopChain = (
+    network === choraTestnet.chainId ||
+    network === choraLocal.chainId
+  )
+
   // fetch on load and value change
   useEffect(() => {
     setAllowancesGrantee(null)
     setAllowancesGranter(null)
     setError("")
-
-    const coopChain = chainInfo && (
-        chainInfo.chainId !== choraTestnet.chainId ||
-        chainInfo.chainId !== choraLocal.chainId
-    )
 
     // error if network is not chora-testnet-1 (or chora-local)
     if (!coopChain) {
@@ -45,7 +46,7 @@ const Feegrant = ({ address }) => {
         setError(err.message)
       })
     }
-  }, [chainInfo])
+  }, [chainInfo, network])
 
   // fetch allowances asynchronously
   const fetchAllowances = async () => {

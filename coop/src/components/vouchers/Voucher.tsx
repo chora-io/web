@@ -7,28 +7,35 @@ import { choraLocal, choraTestnet } from "chora/chains"
 import * as styles from "./Voucher.module.css"
 
 const queryVoucher = "chora/voucher/v1/voucher"
-const serverUrl = process.env.CHORA_SERVER_URL
-    ? process.env.CHORA_SERVER_URL + '/data'
-    : "https://server.chora.io/data"
 
 const Voucher = ({ voucherId }) => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // fetch error and results
   const [error, setError] = useState<string>("")
   const [voucher, setVoucher] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
 
+  // whether network is supported by coop app
+  const coopChain = (
+      network === choraTestnet.chainId ||
+      network === choraLocal.chainId
+  )
+
+  // whether network is a local network
+  const localChain = network?.includes("-local")
+
+  // chora server (use local server if local network)
+  let serverUrl = "http://localhost:3000"
+  if (!localChain) {
+    serverUrl = "https://server.chora.io"
+  }
+
   // fetch on load and value change
   useEffect(() => {
     setVoucher(null)
     setError("")
-
-    const coopChain = chainInfo && (
-        chainInfo.chainId !== choraTestnet.chainId ||
-        chainInfo.chainId !== choraLocal.chainId
-    )
 
     // error if network is not chora-testnet-1 (or chora-local)
     if (!coopChain) {
@@ -41,7 +48,7 @@ const Voucher = ({ voucherId }) => {
         setError(err.message)
       })
     }
-  }, [chainInfo])
+  }, [chainInfo, network])
 
   // fetch voucher and metadata asynchronously
   const fetchVoucherAndMetadata = async () => {
@@ -66,7 +73,7 @@ const Voucher = ({ voucherId }) => {
     }
 
     // fetch voucher data from chora server
-    await fetch(serverUrl + "/" + iri)
+    await fetch(serverUrl + "/data/" + iri)
       .then(res => res.json())
       .then(res => {
         if (res.error) {

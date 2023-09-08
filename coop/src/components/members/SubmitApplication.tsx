@@ -1,16 +1,15 @@
 import * as React from "react"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import * as jsonld from "jsonld"
 
+import { WalletContext } from "chora"
 import { InputString, Result } from "chora/components"
 
 import * as styles from "./SubmitApplication.module.css"
 
-const serverUrl = process.env.CHORA_SERVER_URL
-    ? process.env.CHORA_SERVER_URL + '/data'
-    : "https://server.chora.io/data"
-
 const SubmitApplication = () => {
+
+  const { network } = useContext(WalletContext)
 
   // form input
   const [name, setName] = useState<string>("")
@@ -19,6 +18,15 @@ const SubmitApplication = () => {
   // form error and success
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
+
+  // whether network is a local network
+  const localChain = network?.includes("-local")
+
+  // chora server (use local server if local network)
+  let serverUrl = "http://localhost:3000"
+  if (!localChain) {
+    serverUrl = "https://server.chora.io"
+  }
 
   // submit application asynchronously
   const handleSubmit = async (event: { preventDefault: () => void }) => {
@@ -61,7 +69,7 @@ const SubmitApplication = () => {
     let iri: string
 
     // post data to chora server
-    await fetch(serverUrl, {
+    await fetch(serverUrl + "/data", {
       method: "POST",
       body: JSON.stringify(body),
     })

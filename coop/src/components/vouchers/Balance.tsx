@@ -11,21 +11,22 @@ const queryBalance = "chora/voucher/v1/balance"
 
 const Balance = ({ voucherId, address }) => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // fetch error and results
   const [error, setError] = useState<string>("")
   const [balance, setBalance] = useState<any>(null)
 
+  // whether network is supported by coop app
+  const coopChain = (
+    network === choraTestnet.chainId ||
+    network === choraLocal.chainId
+  )
+
   // fetch on load and value change
   useEffect(() => {
     setBalance(null)
     setError("")
-
-    const coopChain = chainInfo && (
-        chainInfo.chainId !== choraTestnet.chainId ||
-        chainInfo.chainId !== choraLocal.chainId
-    )
 
     // error if network is not chora-testnet-1 (or chora-local)
     if (!coopChain) {
@@ -38,7 +39,7 @@ const Balance = ({ voucherId, address }) => {
         setError(err.message)
       })
     }
-  }, [chainInfo])
+  }, [chainInfo, network])
 
   // async balance asynchronously
   const fetchBalance = async () => {

@@ -13,7 +13,7 @@ const queryGrantsByGranter = "cosmos/authz/v1beta1/grants/granter"
 
 const Authz = ({ address }) => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // options
   const [filter, setFilter] = useState<string>("grantee")
@@ -23,16 +23,17 @@ const Authz = ({ address }) => {
   const [grantsGrantee, setGrantsGrantee] = useState<any>(null)
   const [grantsGranter, setGrantsGranter] = useState<any>(null)
 
+  // whether network is supported by coop app
+  const coopChain = (
+    network === choraTestnet.chainId ||
+    network === choraLocal.chainId
+  )
+
   // fetch on load and value change
   useEffect(() => {
     setGrantsGrantee(null)
     setGrantsGranter(null)
     setError("")
-
-    const coopChain = chainInfo && (
-        chainInfo.chainId !== choraTestnet.chainId ||
-        chainInfo.chainId !== choraLocal.chainId
-    )
 
     // error if network is not chora-testnet-1 (or chora-local)
     if (!coopChain) {
@@ -45,7 +46,7 @@ const Authz = ({ address }) => {
         setError(err.message)
       })
     }
-  }, [chainInfo])
+  }, [chainInfo, network])
 
   // fetch grants asynchronously
   const fetchGrants = async () => {

@@ -8,28 +8,35 @@ import { formatTimestamp } from "chora/utils"
 import * as styles from "./Policy.module.css"
 
 const queryPolicy = "cosmos/group/v1/group_policy_info"
-const serverUrl = process.env.CHORA_SERVER_URL
-    ? process.env.CHORA_SERVER_URL + '/data'
-    : "https://server.chora.io/data"
 
 const Policy = ({ policyAddress }) => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // fetch error and results
   const [error, setError] = useState<string>("")
   const [policy, setPolicy] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
 
+  // whether network is supported by coop app
+  const coopChain = (
+      network === choraTestnet.chainId ||
+      network === choraLocal.chainId
+  )
+
+  // whether network is a local network
+  const localChain = network?.includes("-local")
+
+  // chora server (use local server if local network)
+  let serverUrl = "http://localhost:3000"
+  if (!localChain) {
+    serverUrl = "https://server.chora.io"
+  }
+
   // fetch on load and value change
   useEffect(() => {
     setPolicy(null)
     setError("")
-
-    const coopChain = chainInfo && (
-        chainInfo.chainId !== choraTestnet.chainId ||
-        chainInfo.chainId !== choraLocal.chainId
-    )
 
     // error if network is not chora-testnet-1 (or chora-local)
     if (!coopChain) {
@@ -42,7 +49,7 @@ const Policy = ({ policyAddress }) => {
         setError(err.message)
       })
     }
-  }, [chainInfo])
+  }, [chainInfo, network])
 
   // fetch policy and metadata asynchronously
   const fetchPolicyAndMetadata = async () => {
@@ -67,7 +74,7 @@ const Policy = ({ policyAddress }) => {
     }
 
     // fetch policy data from chora server
-    await fetch(serverUrl + "/" + iri)
+    await fetch(serverUrl + "/data/" + iri)
       .then(res => res.json())
       .then(res => {
         if (res.error) {

@@ -9,12 +9,6 @@ import { voteOptionToJSON } from "chora/api/cosmos/group/v1/types"
 import * as styles from "./ProposalVote.module.css"
 
 const queryVote = "cosmos/group/v1/vote_by_proposal_voter"
-const serverUrl = process.env.CHORA_SERVER_URL
-    ? process.env.CHORA_SERVER_URL + '/data'
-    : "https://server.chora.io/data"
-const serverIdxUrl = process.env.CHORA_SERVER_URL
-    ? process.env.CHORA_SERVER_URL + '/idx'
-    : "https://server.chora.io/idx"
 
 const ProposalVote = ({ proposalId, voterAddress }) => {
 
@@ -25,15 +19,25 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
   const [vote, setVote] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
 
+  // whether network is supported by coop app
+  const coopChain = (
+      network === choraTestnet.chainId ||
+      network === choraLocal.chainId
+  )
+
+  // whether network is a local network
+  const localChain = network?.includes("-local")
+
+  // chora server (use local server if local network)
+  let serverUrl = "http://localhost:3000"
+  if (!localChain) {
+    serverUrl = "https://server.chora.io"
+  }
+
   // fetch on load and value change
   useEffect(() => {
     setVote(null)
     setError("")
-
-    const coopChain = chainInfo && (
-        chainInfo.chainId !== choraTestnet.chainId ||
-        chainInfo.chainId !== choraLocal.chainId
-    )
 
     // error if network is not chora-testnet-1 (or chora-local)
     if (!coopChain) {
@@ -46,7 +50,7 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
         setError(err.message)
       })
     }
-  }, [chainInfo])
+  }, [chainInfo, network])
 
   // fetch vote and metadata asynchronously
   const fetchVoteAndMetadata = async () => {
@@ -54,7 +58,7 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
     let iri: string
 
     // fetch idx votes from chora server
-    await fetch(serverIdxUrl + "/" + network + "/group-vote/" + proposalId + "/" + voterAddress)
+    await fetch(serverUrl + "/idx/" + network + "/group-vote/" + proposalId + "/" + voterAddress)
       .then(res => res.json())
       .then(res => {
         if (res.error) {
@@ -90,7 +94,7 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
     }
 
     // fetch vote data from chora server
-    await fetch(serverUrl + "/" + iri)
+    await fetch(serverUrl + "/data/" + iri)
       .then(res => res.json())
       .then(res => {
         if (res.error) {

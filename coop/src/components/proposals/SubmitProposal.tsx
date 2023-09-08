@@ -18,13 +18,10 @@ import * as styles from "./SubmitProposal.module.css"
 
 const groupId = "1" // TODO: configuration file
 const queryPolicies = "cosmos/group/v1/group_policies_by_group"
-const serverUrl = process.env.CHORA_SERVER_URL
-    ? process.env.CHORA_SERVER_URL + '/data'
-    : "https://server.chora.io/data"
 
 const SubmitProposal = () => {
 
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // fetch options
   const [policies, setPolicies] = useState<any[]>([])
@@ -40,15 +37,25 @@ const SubmitProposal = () => {
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
+  // whether network is supported by coop app
+  const coopChain = (
+      network === choraTestnet.chainId ||
+      network === choraLocal.chainId
+  )
+
+  // whether network is a local network
+  const localChain = network?.includes("-local")
+
+  // chora server (use local server if local network)
+  let serverUrl = "http://localhost:3000"
+  if (!localChain) {
+    serverUrl = "https://server.chora.io"
+  }
+
   // fetch on load and value change
   useEffect(() => {
     setPolicies(null)
     setError("")
-
-    const coopChain = chainInfo && (
-        chainInfo.chainId !== choraTestnet.chainId ||
-        chainInfo.chainId !== choraLocal.chainId
-    )
 
     // error if network is not chora-testnet-1 (or chora-local)
     if (!coopChain) {
@@ -61,7 +68,7 @@ const SubmitProposal = () => {
         setError(err.message)
       })
     }
-  }, [chainInfo])
+  }, [chainInfo, network])
 
   // fetch policies and metadata asynchronously
   const fetchPoliciesAndMetadata = async () => {
@@ -85,7 +92,7 @@ const SubmitProposal = () => {
     const promise = ps.map(async (p, i) => {
 
       // fetch policy data from chora server
-      await fetch(serverUrl + "/" + p["metadata"])
+      await fetch(serverUrl + "/data/" + p["metadata"])
         .then(res => res.json())
         .then(res => {
           if (res.error) {
@@ -165,7 +172,7 @@ const SubmitProposal = () => {
     let iri: string
 
     // post data to chora server
-    await fetch(serverUrl, {
+    await fetch(serverUrl + "/data", {
       method: "POST",
       body: JSON.stringify(body),
     })

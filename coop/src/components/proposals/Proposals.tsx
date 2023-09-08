@@ -12,9 +12,6 @@ import * as styles from "./Proposals.module.css"
 const groupId = "1" // TODO: configuration file
 const queryPolicies = "cosmos/group/v1/group_policies_by_group"
 const queryProposals = "cosmos/group/v1/proposals_by_group_policy"
-const serverUrl = process.env.CHORA_SERVER_URL
-    ? process.env.CHORA_SERVER_URL + '/idx'
-    : "https://server.chora.io/idx"
 
 const Proposals = () => {
 
@@ -29,15 +26,25 @@ const Proposals = () => {
   const [filter, setFilter] = useState<string>("submitted")
   const [filtered, setFiltered] = useState<any>(null)
 
+  // whether network is supported by coop app
+  const coopChain = (
+      network === choraTestnet.chainId ||
+      network === choraLocal.chainId
+  )
+
+  // whether network is a local network
+  const localChain = network?.includes("-local")
+
+  // chora server (use local server if local network)
+  let serverUrl = "http://localhost:3000"
+  if (!localChain) {
+    serverUrl = "https://server.chora.io"
+  }
+
   // fetch on load and value change
   useEffect(() => {
     setProposals(null)
     setError("")
-
-    const coopChain = chainInfo && (
-        chainInfo.chainId !== choraTestnet.chainId ||
-        chainInfo.chainId !== choraLocal.chainId
-    )
 
     // error if network is not chora-testnet-1 (or chora-local)
     if (!coopChain) {
@@ -50,7 +57,7 @@ const Proposals = () => {
         setError(err.message)
       })
     }
-  }, [chainInfo])
+  }, [chainInfo, network])
 
   // sort on load and value change
   useEffect(() => {
@@ -130,7 +137,7 @@ const Proposals = () => {
     let ps: any[] = []
 
     // fetch idx proposals from chora server
-    await fetch(serverUrl + "/" + network + "/group-proposals/" + groupId)
+    await fetch(serverUrl + "/idx/" + network + "/group-proposals/" + groupId)
       .then(res => res.json())
       .then(res => {
         if (res.error) {

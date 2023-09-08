@@ -8,11 +8,7 @@ import { voteOptionToJSON } from "chora/api/cosmos/group/v1/types"
 
 import * as styles from "./ProposalVotes.module.css"
 
-const queryProposal = "cosmos/group/v1/proposal"
 const queryVotes = "cosmos/group/v1/votes_by_proposal"
-const serverUrl = process.env.CHORA_SERVER_URL
-    ? process.env.CHORA_SERVER_URL + '/idx'
-    : "https://server.chora.io/idx"
 
 const ProposalVotes = ({ proposalId }) => {
 
@@ -22,15 +18,25 @@ const ProposalVotes = ({ proposalId }) => {
   const [error, setError] = useState<string>("")
   const [votes, setVotes] = useState<any>(null)
 
+  // whether network is supported by coop app
+  const coopChain = (
+      network === choraTestnet.chainId ||
+      network === choraLocal.chainId
+  )
+
+  // whether network is a local network
+  const localChain = network?.includes("-local")
+
+  // chora server (use local server if local network)
+  let serverUrl = "http://localhost:3000"
+  if (!localChain) {
+    serverUrl = "https://server.chora.io"
+  }
+
   // fetch on load and value change
   useEffect(() => {
     setVotes(null)
     setError("")
-
-    const coopChain = chainInfo && (
-        chainInfo.chainId !== choraTestnet.chainId ||
-        chainInfo.chainId !== choraLocal.chainId
-    )
 
     // error if network is not chora-testnet-1 (or chora-local)
     if (!coopChain) {
@@ -43,14 +49,14 @@ const ProposalVotes = ({ proposalId }) => {
         setError(err.message)
       })
     }
-  }, [chainInfo])
+  }, [chainInfo, network])
 
   // fetch proposal and votes asynchronously
   const fetchProposalAndVotes = async () => {
     let vs: any[] = []
 
     // fetch idx votes from chora server
-    await fetch(serverUrl + "/" + network + "/group-votes/" + proposalId)
+    await fetch(serverUrl + "/idx/" + network + "/group-votes/" + proposalId)
       .then(res => res.json())
       .then(res => {
         if (res.error) {

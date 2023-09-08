@@ -11,13 +11,9 @@ import { signAndBroadcast } from "chora/utils"
 
 import * as styles from "./VoteOnProposal.module.css"
 
-const serverUrl = process.env.CHORA_SERVER_URL
-    ? process.env.CHORA_SERVER_URL + '/data'
-    : "https://server.chora.io/data"
-
 const VoteOnProposal = ({ proposalId }) => {
 
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // form input
   const [vote, setVote] = useState<string>("")
@@ -27,6 +23,15 @@ const VoteOnProposal = ({ proposalId }) => {
   // form error and success
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
+
+  // whether network is a local network
+  const localChain = network?.includes("-local")
+
+  // chora server (use local server if local network)
+  let serverUrl = "http://localhost:3000"
+  if (!localChain) {
+    serverUrl = "https://server.chora.io"
+  }
 
   // submit vote asynchronously
   const handleSubmit = async (event: { preventDefault: () => void }) => {
@@ -68,7 +73,7 @@ const VoteOnProposal = ({ proposalId }) => {
     let iri: string
 
     // post data to chora server
-    await fetch(serverUrl, {
+    await fetch(serverUrl + "/data", {
       method: "POST",
       body: JSON.stringify(body),
     })

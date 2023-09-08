@@ -14,21 +14,22 @@ const queryPolicies = "cosmos/group/v1/group_policies_by_group"
 
 const Geonodes = () => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // fetch error and results
   const [error, setError] = useState<string>("")
   const [nodes, setNodes] = useState<any>(null)
 
+  // whether network is supported by coop app
+  const coopChain = (
+    network === choraTestnet.chainId ||
+    network === choraLocal.chainId
+  )
+
   // fetch on load and value change
   useEffect(() => {
     setNodes(null)
     setError("")
-
-    const coopChain = chainInfo && (
-        chainInfo.chainId !== choraTestnet.chainId ||
-        chainInfo.chainId !== choraLocal.chainId
-    )
 
     // error if network is not chora-testnet-1 (or chora-local)
     if (!coopChain) {
@@ -41,8 +42,7 @@ const Geonodes = () => {
         setError(err.message)
       })
     }
-  }, [chainInfo])
-
+  }, [chainInfo, network])
 
   // fetch policies and nodes asynchronously
   const fetchPoliciesAndNodes = async () => {

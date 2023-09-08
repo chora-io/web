@@ -7,28 +7,36 @@ import { choraLocal, choraTestnet } from "chora/chains"
 import * as styles from "./Geonode.module.css"
 
 const queryNode = "chora/geonode/v1/node"
-const serverUrl = process.env.CHORA_SERVER_URL
-    ? process.env.CHORA_SERVER_URL + '/data'
-    : "https://server.chora.io/data"
 
 const Geonode = ({ nodeId }) => {
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // fetch error and results
   const [error, setError] = useState<string>("")
   const [node, setNode] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
 
+
+  // whether network is supported by coop app
+  const coopChain = (
+      network === choraTestnet.chainId ||
+      network === choraLocal.chainId
+  )
+
+  // whether network is a local network
+  const localChain = network?.includes("-local")
+
+  // chora server (use local server if local network)
+  let serverUrl = "http://localhost:3000"
+  if (!localChain) {
+    serverUrl = "https://server.chora.io"
+  }
+
   // fetch on load and value change
   useEffect(() => {
     setNode(null)
     setError("")
-
-    const coopChain = chainInfo && (
-        chainInfo.chainId !== choraTestnet.chainId ||
-        chainInfo.chainId !== choraLocal.chainId
-    )
 
     // error if network is not chora-testnet-1 (or chora-local)
     if (!coopChain) {
@@ -41,7 +49,7 @@ const Geonode = ({ nodeId }) => {
         setError(err.message)
       })
     }
-  }, [chainInfo])
+  }, [chainInfo, network])
 
   // fetch node and metadata asynchronously
   const fetchNodeAndMetadata = async () => {
@@ -66,7 +74,7 @@ const Geonode = ({ nodeId }) => {
     }
 
     // fetch node data from chora server
-    await fetch(serverUrl + "/" + iri)
+    await fetch(serverUrl + "/data/" + iri)
       .then(res => res.json())
       .then(res => {
         if (res.error) {

@@ -13,12 +13,6 @@ import { proposalStatusToJSON, proposalExecutorResultToJSON } from "chora/api/co
 import * as styles from "./Proposal.module.css"
 
 const queryProposal = "cosmos/group/v1/proposal"
-const serverUrl = process.env.CHORA_SERVER_URL
-    ? process.env.CHORA_SERVER_URL + '/data'
-    : "https://server.chora.io/data"
-const serverIdxUrl = process.env.CHORA_SERVER_URL
-    ? process.env.CHORA_SERVER_URL + '/idx'
-    : "https://server.chora.io/idx"
 
 const Proposal = ({ proposalId }) => {
 
@@ -33,15 +27,25 @@ const Proposal = ({ proposalId }) => {
   const [execError, setExecError] = useState<string>("")
   const [execSuccess, setExecSuccess] = useState<string>("")
 
+  // whether network is supported by coop app
+  const coopChain = (
+      network === choraTestnet.chainId ||
+      network === choraLocal.chainId
+  )
+
+  // whether network is a local network
+  const localChain = network?.includes("-local")
+
+  // chora server (use local server if local network)
+  let serverUrl = "http://localhost:3000"
+  if (!localChain) {
+    serverUrl = "https://server.chora.io"
+  }
+
   // fetch on load and value change
   useEffect(() => {
     setProposal(null)
     setError("")
-
-    const coopChain = chainInfo && (
-        chainInfo.chainId !== choraTestnet.chainId ||
-        chainInfo.chainId !== choraLocal.chainId
-    )
 
     // error if network is not chora-testnet-1 (or chora-local)
     if (!coopChain) {
@@ -54,7 +58,7 @@ const Proposal = ({ proposalId }) => {
         setError(err.message)
       })
     }
-  }, [chainInfo])
+  }, [chainInfo, network])
 
   // fetch proposal and metadata asynchronously
   const fetchProposalAndMetadata = async () => {
@@ -62,7 +66,7 @@ const Proposal = ({ proposalId }) => {
     let iri: string
 
     // fetch idx proposals from chora server
-    await fetch(serverIdxUrl + "/" + network + "/group-proposal/" + proposalId)
+    await fetch(serverUrl + "/idx/" + network + "/group-proposal/" + proposalId)
       .then(res => res.json())
       .then(res => {
         if (res.error) {
@@ -99,7 +103,7 @@ const Proposal = ({ proposalId }) => {
     }
 
     // fetch proposal data from chora server
-    await fetch(serverUrl + "/" + iri)
+    await fetch(serverUrl + "/data/" + iri)
       .then(res => res.json())
       .then(res => {
         if (res.error) {
@@ -158,6 +162,8 @@ const Proposal = ({ proposalId }) => {
       proposal["status"] !== "PROPOSAL_STATUS_REJECTED"
     )
   )
+
+  console.log("messages", proposal ? proposal["messages"] : undefined)
 
   return (
     <div className={styles.box}>
@@ -268,7 +274,7 @@ const Proposal = ({ proposalId }) => {
             <h3>
               {"messages"}
             </h3>
-            {proposal["messages"]?.length === 0 && (
+            {(!proposal["messages"] || proposal["messages"].length === 0) && (
               <p>
                 {"NA"}
               </p>

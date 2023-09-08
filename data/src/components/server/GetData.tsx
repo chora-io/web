@@ -6,10 +6,6 @@ import { InputIRI, Result } from "chora/components"
 
 import * as styles from "./GetData.module.css"
 
-const serverUrl = process.env.CHORA_SERVER_URL
-    ? process.env.CHORA_SERVER_URL + '/data'
-    : "https://server.chora.io/data"
-
 const GetData = () => {
 
   const { network } = useContext(WalletContext)
@@ -21,13 +17,22 @@ const GetData = () => {
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
+  // whether network is a local network
+  const localChain = network?.includes("-local")
+
+  // chora server (use local server if local network)
+  let serverUrl = "http://localhost:3000"
+  if (!localChain) {
+    serverUrl = "https://server.chora.io"
+  }
+
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
     setError("")
     setSuccess("")
 
-    fetch(serverUrl + "/" + iri)
+    fetch(serverUrl + "/data/" + iri)
       .then(res => res.json())
       .then(data => {
         if (data.code) {

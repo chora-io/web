@@ -1,7 +1,8 @@
 import * as React from "react"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import * as jsonld from "jsonld"
 
+import { WalletContext } from "chora"
 import { InputJSON, Result } from "chora/components"
 import {
   SelectDigestAlgorithm,
@@ -16,11 +17,10 @@ import SelectInput from "../SelectInput"
 import * as styles from "./PostData.module.css"
 
 const contextUrl = "https://schema.chora.io/contexts/index.jsonld"
-const serverUrl = process.env.CHORA_SERVER_URL
-    ? process.env.CHORA_SERVER_URL + '/data'
-    : "https://server.chora.io/data"
 
 const PostData = () => {
+
+  const { network } = useContext(WalletContext)
 
   // input option
   const [input, setInput] = useState("form")
@@ -37,6 +37,15 @@ const PostData = () => {
   // error and success
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
+
+  // whether network is a local network
+  const localChain = network?.includes("-local")
+
+  // chora server (use local server if local network)
+  let serverUrl = "http://localhost:3000"
+  if (!localChain) {
+    serverUrl = "https://server.chora.io"
+  }
 
   // fetch available contexts
   useEffect(() => {
@@ -136,7 +145,7 @@ const PostData = () => {
       merkle: "UNSPECIFIED"
     }
 
-    fetch(serverUrl, {
+    fetch(serverUrl + "/data", {
       method: "POST",
       body: JSON.stringify(body),
     })

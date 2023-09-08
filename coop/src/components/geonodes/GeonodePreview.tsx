@@ -1,18 +1,27 @@
 import * as React from "react"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
+
+import { WalletContext } from "chora"
 
 import * as styles from "./GeonodePreview.module.css"
 
-const serverUrl = process.env.CHORA_SERVER_URL
-    ? process.env.CHORA_SERVER_URL + '/data'
-    : "https://server.chora.io/data"
-
 const GeonodePreview = ({ node }) => {
+
+  const { network } = useContext(WalletContext)
 
   // fetch error and results
   const [error, setError] = useState<string>("")
   const [metadata, setMetadata] = useState<any>(null)
+
+  // whether network is a local network
+  const localChain = network?.includes("-local")
+
+  // chora server (use local server if local network)
+  let serverUrl = "http://localhost:3000"
+  if (!localChain) {
+    serverUrl = "https://server.chora.io"
+  }
 
   // fetch on load and value change
   useEffect(() => {
@@ -23,13 +32,13 @@ const GeonodePreview = ({ node }) => {
     fetchMetadata().catch(err => {
       setError(err.message)
     })
-  }, [node["metadata"]])
+  }, [network, node["metadata"]])
 
   // fetch metadata asynchronously
   const fetchMetadata = async () => {
 
     // fetch node data from chora server
-    await fetch(serverUrl + "/" + node["metadata"])
+    await fetch(serverUrl + "/data/" + node["metadata"])
       .then(res => res.json())
       .then(res => {
         if (res.error) {
