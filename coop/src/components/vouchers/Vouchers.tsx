@@ -8,7 +8,7 @@ import VoucherPreview from "./VoucherPreview"
 
 import * as styles from "./Vouchers.module.css"
 
-const groupId = "1" // TODO: configuration file
+const groupId = "1"
 const queryVouchers = "chora/voucher/v1/vouchers-by-issuer"
 const queryPolicies = "cosmos/group/v1/group_policies_by_group"
 

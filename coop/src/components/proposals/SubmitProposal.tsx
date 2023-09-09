@@ -16,7 +16,7 @@ import { signAndBroadcast } from "chora/utils"
 
 import * as styles from "./SubmitProposal.module.css"
 
-const groupId = "1" // TODO: configuration file
+const groupId = "1"
 const queryPolicies = "cosmos/group/v1/group_policies_by_group"
 
 const SubmitProposal = () => {

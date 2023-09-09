@@ -1,5 +1,6 @@
 import * as React from "react"
 import { useContext, useEffect, useState } from "react"
+import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
 import { choraLocal, choraTestnet } from "chora/chains"
@@ -8,6 +9,8 @@ import { voteOptionToJSON } from "chora/api/cosmos/group/v1/types"
 
 import * as styles from "./ProposalVote.module.css"
 
+const groupId = "1"
+const queryMembers = "cosmos/group/v1/group_members" // TODO(cosmos-sdk): group member query
 const queryVote = "cosmos/group/v1/vote_by_proposal_voter"
 
 const ProposalVote = ({ proposalId, voterAddress }) => {
@@ -18,6 +21,7 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
   const [error, setError] = useState<string>("")
   const [vote, setVote] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
+  const [voter, setVoter] = useState<any>(null)
 
   // whether network is supported by coop app
   const coopChain = (
@@ -55,9 +59,10 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
   // fetch vote and metadata asynchronously
   const fetchVoteAndMetadata = async () => {
 
+    let vote: any
     let iri: string
 
-    // fetch idx votes from chora server
+    // fetch idx vote from chora server
     await fetch(serverUrl + "/idx/" + network + "/group-vote/" + proposalId + "/" + voterAddress)
       .then(res => res.json())
       .then(res => {
@@ -66,11 +71,12 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
             setError(res.error)
           }
         } else {
-          setVote({
+          vote = {
             ...res["vote"],
-            option: voteOptionToJSON(res["vote"]['option']),
-          })
+            option: voteOptionToJSON(res["vote"]["option"]),
+          }
           iri = res["vote"]["metadata"]
+          setVote(vote)
         }
       })
 
@@ -83,8 +89,9 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
             setError(res.message)
           }
         } else {
-          setVote(res["vote"])
+          vote = res["vote"]
           iri = res["vote"]["metadata"]
+          setVote(vote)
         }
       })
 
@@ -114,6 +121,49 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
       .catch(err => {
         setError(err.message)
       })
+
+
+    // TODO(cosmos-sdk): query member by group id and member address
+
+    let member: any
+
+    // fetch members from selected network
+    await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
+      .then(res => res.json())
+      .then(res => {
+        if (res.code) {
+          setError(res.message)
+        } else {
+          const voter = vote["voter"]
+          const found = res["members"].find(member => member["member"]["address"] === voter)
+          if (found) {
+            member = found["member"]
+          }
+        }
+      })
+
+    // fetch member data from chora server
+    await fetch(serverUrl + "/data/" + member["metadata"])
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          setError(res.error)
+        } else {
+          const data = JSON.parse(res["jsonld"])
+          if (data["@context"] !== "https://schema.chora.io/contexts/group_member.jsonld") {
+            setError("unsupported metadata schema")
+          } else {
+            setError("")
+            setVoter({
+              address: member["address"],
+              name: data["name"],
+            })
+          }
+        }
+      })
+      .catch(err => {
+        setError(err.message)
+      })
   }
 
   return (
@@ -125,14 +175,30 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
       )}
       {vote && metadata && (
         <div>
-          <div className={styles.boxText}>
-            <h3>
-              {"voter"}
-            </h3>
-            <p>
-              {vote["voter"]}
-            </p>
-          </div>
+          {!voter && (
+            <div className={styles.boxText}>
+              <h3>
+                {"voter"}
+              </h3>
+              <p>
+                {vote["voter"]}
+              </p>
+            </div>
+          )}
+          {voter && (
+            <div className={styles.boxText}>
+              <h3>
+                {"voter"}
+              </h3>
+              <p key={voter["address"]}>
+                {`${voter["name"]} (`}
+                <Link to={`/members/?address=${voter["address"]}`}>
+                  {voter["address"]}
+                </Link>
+                {")"}
+              </p>
+            </div>
+          )}
           <div className={styles.boxText}>
             <h3>
               {"option"}

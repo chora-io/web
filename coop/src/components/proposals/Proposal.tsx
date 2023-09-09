@@ -12,6 +12,9 @@ import { proposalStatusToJSON, proposalExecutorResultToJSON } from "chora/api/co
 
 import * as styles from "./Proposal.module.css"
 
+const groupId = "1"
+const queryMembers = "cosmos/group/v1/group_members" // TODO(cosmos-sdk): group member query
+const queryPolicy = "/cosmos/group/v1/group_policy_info"
 const queryProposal = "cosmos/group/v1/proposal"
 
 const Proposal = ({ proposalId }) => {
@@ -22,6 +25,8 @@ const Proposal = ({ proposalId }) => {
   const [error, setError] = useState<string>("")
   const [proposal, setProposal] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
+  const [policy, setPolicy] = useState<any>(null)
+  const [proposers, setProposers] = useState<any>(null)
 
   // execution error and results
   const [execError, setExecError] = useState<string>("")
@@ -59,6 +64,17 @@ const Proposal = ({ proposalId }) => {
       })
     }
   }, [chainInfo, network])
+
+  // fetch on load and value change
+  useEffect(() => {
+    setError("")
+    fetchProposalProposers().catch(err => {
+      setError(err.message)
+    })
+    fetchProposalPolicy().catch(err => {
+      setError(err.message)
+    })
+  }, [proposal])
 
   // fetch proposal and metadata asynchronously
   const fetchProposalAndMetadata = async () => {
@@ -125,6 +141,104 @@ const Proposal = ({ proposalId }) => {
       })
   }
 
+  // fetch proposer metadata (i.e. member metadata)
+  const fetchProposalProposers = async () => {
+
+    // TODO(cosmos-sdk): query member by group id and member address
+
+    let members = []
+
+    // fetch members from selected network
+    await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
+        .then(res => res.json())
+        .then(res => {
+          if (res.code) {
+            setError(res.message)
+          } else {
+            for (let i = 0; i < proposal["proposers"].length; i++) {
+              const proposer = proposal["proposers"][i]
+              const found = res["members"].find(member => member["member"]["address"] === proposer)
+              if (found) {
+                members.push(found["member"])
+              }
+            }
+          }
+        })
+
+    let proposers = []
+
+    const promise = members.map(async member => {
+
+      // fetch member data from chora server
+      await fetch(serverUrl + "/data/" + member["metadata"])
+        .then(res => res.json())
+        .then(res => {
+          if (res.error) {
+            setError(res.error)
+          } else {
+            const data = JSON.parse(res["jsonld"])
+            if (data["@context"] !== "https://schema.chora.io/contexts/group_member.jsonld") {
+              setError("unsupported metadata schema")
+            } else {
+              setError("")
+              proposers.push({
+                address: member["address"],
+                name: data["name"]
+              })
+            }
+          }
+        })
+        .catch(err => {
+          setError(err.message)
+        })
+    })
+
+    // set state after promise all complete
+    await Promise.all(promise).then(() => {
+      setProposers(proposers)
+    })
+  }
+
+  // fetch policy metadata
+  const fetchProposalPolicy = async () => {
+
+    let iri: string
+
+    // fetch policy from selected network
+    await fetch(chainInfo.rest + "/" + queryPolicy + "/" + proposal["group_policy_address"])
+        .then(res => res.json())
+        .then(res => {
+          if (res.code) {
+            setError(res.message)
+          } else {
+            iri = res["info"]["metadata"]
+          }
+        })
+
+    // fetch member data from chora server
+    await fetch(serverUrl + "/data/" + iri)
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          setError(res.error)
+        } else {
+          const data = JSON.parse(res["jsonld"])
+          if (data["@context"] !== "https://schema.chora.io/contexts/group_policy.jsonld") {
+            setError("unsupported metadata schema")
+          } else {
+            setError("")
+            setPolicy({
+              address: proposal["group_policy_address"],
+              name: data["name"]
+            })
+          }
+        }
+      })
+      .catch(err => {
+        setError(err.message)
+      })
+  }
+
   // execute proposal asynchronously
   const handleExecute = async () => {
 
@@ -159,11 +273,13 @@ const Proposal = ({ proposalId }) => {
   const proposalExecutable = (
     proposal &&
     (
-      proposal["status"] !== "PROPOSAL_STATUS_REJECTED"
+      proposal["status"] === "PROPOSAL_STATUS_ACCEPTED" &&
+      (
+        proposal["executor_result"] === "PROPOSAL_EXECUTOR_RESULT_NOT_RUN" ||
+        proposal["executor_result"] === "PROPOSAL_EXECUTOR_RESULT_FAILURE"
+      )
     )
   )
-
-  console.log("messages", proposal ? proposal["messages"] : undefined)
 
   return (
     <div className={styles.box}>
@@ -224,36 +340,62 @@ const Proposal = ({ proposalId }) => {
               {metadata["description"] ? metadata["description"] : "NA"}
             </p>
           </div>
-          {proposal["proposers"].length === 1 && (
+          {!proposers && proposal["proposers"] && (
             <div className={styles.boxText}>
-               <h3>
-                {"proposer"}
-              </h3>
-              <p>
-                {proposal["proposers"][0]}
-              </p>
-            </div>
-          )}
-          {proposal["proposers"].length > 1 && (
-            <div className={styles.boxText}>
-               <h3>
-                {"proposers"}
+              <h3>
+                {proposal["proposers"].length > 1 ? "proposers" : "proposer"}
               </h3>
               {proposal["proposers"].map(proposer => (
-                <p>
-                  {proposer}
+                <p key={proposer}>
+                  <Link to={`/members/?address=${proposer}`}>
+                    {proposer}
+                  </Link>
                 </p>
               ))}
             </div>
           )}
-          <div className={styles.boxText}>
-            <h3>
-              {"group policy address"}
-            </h3>
-            <p>
-              {proposal["group_policy_address"]}
-            </p>
-          </div>
+          {proposers && (
+            <div className={styles.boxText}>
+               <h3>
+                {proposers.length > 1 ? "proposers" : "proposer"}
+              </h3>
+              {proposers.map(proposer => (
+                <p key={proposer["address"]}>
+                  {`${proposer["name"]} (`}
+                  <Link to={`/members/?address=${proposer["address"]}`}>
+                    {proposer["address"]}
+                  </Link>
+                  {")"}
+                </p>
+              ))}
+            </div>
+          )}
+          {!policy && (
+            <div className={styles.boxText}>
+              <h3>
+                {"group policy address"}
+              </h3>
+              <p>
+                <Link to={`/policies/?address=${proposal["group_policy_address"]}`}>
+                  {proposal["group_policy_address"]}
+                </Link>
+              </p>
+            </div>
+          )}
+          {policy && (
+            <div className={styles.boxText}>
+              <h3>
+                {"group policy"}
+              </h3>
+              <p>
+                {`${policy["name"]} (`}
+                <Link to={`/policies/?address=${policy["address"]}`}>
+                  {policy["address"]}
+                </Link>
+                {")"}
+              </p>
+            </div>
+          )}
           <div className={styles.boxText}>
             <h3>
               {"submit time"}

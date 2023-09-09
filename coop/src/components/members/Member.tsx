@@ -7,7 +7,7 @@ import { formatTimestamp } from "chora/utils"
 
 import * as styles from "./Member.module.css"
 
-const groupId = "1" // TODO: configuration file
+const groupId = "1"
 const queryMembers = "cosmos/group/v1/group_members" // TODO(cosmos-sdk): group member query
 
 const Member = ({ memberAddress }) => {
@@ -57,6 +57,8 @@ const Member = ({ memberAddress }) => {
 
     let iri: string
 
+    // TODO(cosmos-sdk): query member by group id and member address
+
     // fetch members from selected network
     await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
       .then(res => res.json())
@@ -64,9 +66,11 @@ const Member = ({ memberAddress }) => {
         if (res.code) {
           setError(res.message)
         } else {
-          const member = res["members"].find(m => m["member"]["address"] === memberAddress)
-          setMember(member["member"])
-          iri = member["member"]["metadata"]
+          const found = res["members"].find(m => m["member"]["address"] === memberAddress)
+          if (found) {
+            setMember(found["member"])
+            iri = found["member"]["metadata"]
+          }
         }
       })
 

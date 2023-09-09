@@ -7,7 +7,7 @@ import { formatTimestamp } from "chora/utils"
 
 import * as styles from "./Group.module.css"
 
-const groupId = "1" // TODO: configuration file
+const groupId = "1"
 const queryGroup = "cosmos/group/v1/group_info"
 
 const Group = () => {

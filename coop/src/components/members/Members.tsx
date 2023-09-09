@@ -8,7 +8,7 @@ import MemberPreview from "./MemberPreview"
 
 import * as styles from "./Members.module.css"
 
-const groupId = "1" // TODO: configuration file
+const groupId = "1"
 const queryMembers = "cosmos/group/v1/group_members"
 
 const Members = () => {

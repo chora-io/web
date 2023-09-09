@@ -9,7 +9,7 @@ import ProposalPreview from "./ProposalPreview"
 
 import * as styles from "./Proposals.module.css"
 
-const groupId = "1" // TODO: configuration file
+const groupId = "1"
 const queryPolicies = "cosmos/group/v1/group_policies_by_group"
 const queryProposals = "cosmos/group/v1/proposals_by_group_policy"
 
@@ -145,7 +145,7 @@ const Proposals = () => {
         } else {
           res["proposals"]?.map(p => ps.push({
             ...p,
-            status: proposalStatusToJSON(p['status']),
+            status: proposalStatusToJSON(p["status"]),
           }))
         }
       })
@@ -169,7 +169,7 @@ const Proposals = () => {
     await Promise.all(promise).then(() => {
 
       // filter out duplicates (if both on chain and indexed)
-      ps = [...new Map(ps.map(p => [p['id'], p])).values()]
+      ps = [...new Map(ps.map(p => [p["id"], p])).values()]
 
       // sort ascending by default
       ps.sort((a, b) => b.id - a.id)
