@@ -70,20 +70,30 @@ const ProposalPreview = ({ proposal }) => {
         <div>
           <div className={styles.boxText}>
             <h3>
-              {"status"}
-            </h3>
-            <p>
-              {proposal["status"]}
-            </p>
-          </div>
-          <div className={styles.boxText}>
-            <h3>
               {"name"}
             </h3>
             <p>
               {metadata["name"] ? metadata["name"] : "NA"}
             </p>
           </div>
+          <div className={styles.boxText}>
+            <h3>
+              {"status"}
+            </h3>
+            <p>
+              {proposal["status"]}
+            </p>
+          </div>
+          {(proposal["status"] === "PROPOSAL_STATUS_ACCEPTED") && (
+            <div className={styles.boxText}>
+              <h3>
+                {"executor result"}
+              </h3>
+              <p>
+                {proposal["executor_result"]}
+              </p>
+            </div>
+          )}
           <Link to={`/proposals/?id=${proposal["id"]}`}>
             {"view proposal"}
           </Link>

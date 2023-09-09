@@ -52,7 +52,7 @@ const ProposalVotes = ({ proposalId }) => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network])
+  }, [chainInfo, network, proposalId])
 
   // fetch proposal and votes asynchronously
   const fetchProposalAndVotes = async () => {

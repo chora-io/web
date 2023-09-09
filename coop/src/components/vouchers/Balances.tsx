@@ -39,7 +39,7 @@ const Balances = ({ voucherId }) => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network])
+  }, [chainInfo, network, voucherId])
 
   // fetch balances asynchronously
   const fetchBalances = async () => {

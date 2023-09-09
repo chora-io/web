@@ -16,6 +16,9 @@ const groupId = "1"
 const queryMembers = "cosmos/group/v1/group_members" // TODO(cosmos-sdk): group member query
 const queryPolicy = "/cosmos/group/v1/group_policy_info"
 const queryProposal = "cosmos/group/v1/proposal"
+const queryVotes = "cosmos/group/v1/votes_by_proposal"
+
+// TODO(cosmos-sdk): voter should be able to update vote
 
 const Proposal = ({ proposalId }) => {
 
@@ -27,6 +30,7 @@ const Proposal = ({ proposalId }) => {
   const [metadata, setMetadata] = useState<any>(null)
   const [policy, setPolicy] = useState<any>(null)
   const [proposers, setProposers] = useState<any>(null)
+  const [votes, setVotes] = useState<any>(null)
 
   // execution error and results
   const [execError, setExecError] = useState<string>("")
@@ -63,7 +67,7 @@ const Proposal = ({ proposalId }) => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network])
+  }, [chainInfo, network, proposalId])
 
   // fetch on load and value change
   useEffect(() => {
@@ -72,6 +76,9 @@ const Proposal = ({ proposalId }) => {
       setError(err.message)
     })
     fetchProposalPolicy().catch(err => {
+      setError(err.message)
+    })
+    fetchProposalVotes().catch(err => {
       setError(err.message)
     })
   }, [proposal])
@@ -239,6 +246,21 @@ const Proposal = ({ proposalId }) => {
       })
   }
 
+  // fetch proposal votes
+  const fetchProposalVotes = async () => {
+
+    // fetch votes from selected network
+    await fetch(chainInfo.rest + "/" + queryVotes + "/" + proposal["id"])
+      .then(res => res.json())
+      .then(res => {
+        if (res.code) {
+          setError(res.message)
+        } else {
+          setVotes(res["votes"])
+        }
+      })
+  }
+
   // execute proposal asynchronously
   const handleExecute = async () => {
 
@@ -269,6 +291,9 @@ const Proposal = ({ proposalId }) => {
     )
   )
 
+  // current vote of current account
+  const currentVote = votes?.find(vote => vote["voter"] === wallet["bech32Address"])
+
   // whether proposal is executable
   const proposalExecutable = (
     proposal &&
@@ -291,10 +316,15 @@ const Proposal = ({ proposalId }) => {
       {proposal && metadata && (
         <div>
           <div className={styles.boxOptions}>
-            {!votesFinalized && (
+            {!currentVote && !votesFinalized && (
               <Link to={`/proposals/vote/?id=${proposalId}`}>
                 {"vote on proposal"}
               </Link>
+            )}
+            {currentVote && (
+              <>
+                {`vote submitted (${currentVote["option"]})`}
+              </>
             )}
             {proposalExecutable && (
               <button onClick={handleExecute}>

@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
 import { choraLocal, choraTestnet } from "chora/chains"
-import { proposalStatusToJSON } from "chora/api/cosmos/group/v1/types"
+import {proposalExecutorResultToJSON, proposalStatusToJSON} from "chora/api/cosmos/group/v1/types"
 
 import ProposalPreview from "./ProposalPreview"
 
@@ -146,6 +146,7 @@ const Proposals = () => {
           res["proposals"]?.map(p => ps.push({
             ...p,
             status: proposalStatusToJSON(p["status"]),
+            executor_result: proposalExecutorResultToJSON(p["executor_result"]),
           }))
         }
       })

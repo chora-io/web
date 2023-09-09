@@ -50,7 +50,7 @@ const Member = ({ memberAddress }) => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network])
+  }, [chainInfo, network, memberAddress])
 
   // fetch member and metadata asynchronously
   const fetchMemberAndMetadata = async () => {

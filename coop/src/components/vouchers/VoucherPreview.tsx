@@ -6,13 +6,16 @@ import { WalletContext } from "chora"
 
 import * as styles from "./VoucherPreview.module.css"
 
+const queryPolicy = "cosmos/group/v1/group_policy_info"
+
 const VoucherPreview = ({ voucher }) => {
 
-  const { network } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // fetch error and results
   const [error, setError] = useState<string>("")
   const [metadata, setMetadata] = useState<any>(null)
+  const [issuer, setIssuer] = useState<any>(null)
 
   // whether network is a local network
   const localChain = network?.includes("-local")
@@ -29,6 +32,9 @@ const VoucherPreview = ({ voucher }) => {
     setError("")
 
     fetchMetadata().catch(err => {
+      setError(err.message)
+    })
+    fetchVoucherIssuer().catch(err => {
       setError(err.message)
     })
   }, [voucher["metadata"]])
@@ -59,6 +65,46 @@ const VoucherPreview = ({ voucher }) => {
       })
   }
 
+  // fetch voucher issuer
+  const fetchVoucherIssuer = async () => {
+
+    let iri: string
+
+   // fetch policy from selected network
+    await fetch(chainInfo.rest + "/" + queryPolicy + "/" + voucher["issuer"])
+        .then(res => res.json())
+        .then(res => {
+          if (res.code) {
+            setError(res.message)
+          } else {
+            iri = res["info"]["metadata"]
+          }
+        })
+
+    // fetch member data from chora server
+    await fetch(serverUrl + "/data/" + iri)
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          setError(res.error)
+        } else {
+          const data = JSON.parse(res["jsonld"])
+          if (data["@context"] !== "https://schema.chora.io/contexts/group_policy.jsonld") {
+            setError("unsupported metadata schema")
+          } else {
+            setError("")
+            setIssuer({
+              address: voucher["issuer"],
+              name: data["name"]
+            })
+          }
+        }
+      })
+      .catch(err => {
+        setError(err.message)
+      })
+  }
+
   return (
     <div className={styles.boxItem}>
       {!voucher && !metadata && !error && (
@@ -80,9 +126,19 @@ const VoucherPreview = ({ voucher }) => {
             <h3>
               {"issuer"}
             </h3>
-            <p>
-              {voucher["issuer"]}
-            </p>
+            {issuer ? (
+              <p>
+                {`${issuer["name"]} (`}
+                  <Link to={`/policies/?address=${issuer["address"]}`}>
+                    {issuer["address"]}
+                  </Link>
+                {")"}
+              </p>
+            ) : (
+              <p>
+                {voucher["issuer"]}
+              </p>
+            )}
           </div>
           <Link to={`/vouchers/?id=${voucher["id"]}`}>
             {"view voucher"}

@@ -54,7 +54,7 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network])
+  }, [chainInfo, network, proposalId, voterAddress])
 
   // fetch vote and metadata asynchronously
   const fetchVoteAndMetadata = async () => {

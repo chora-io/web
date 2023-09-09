@@ -1,11 +1,13 @@
 import * as React from "react"
 import { useContext, useEffect, useState } from "react"
+import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
 import { choraLocal, choraTestnet } from "chora/chains"
 
 import * as styles from "./Voucher.module.css"
 
+const queryPolicy = "cosmos/group/v1/group_policy_info"
 const queryVoucher = "chora/voucher/v1/voucher"
 
 const Voucher = ({ voucherId }) => {
@@ -16,6 +18,7 @@ const Voucher = ({ voucherId }) => {
   const [error, setError] = useState<string>("")
   const [voucher, setVoucher] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
+  const [issuer, setIssuer] = useState<any>(null)
 
   // whether network is supported by coop app
   const coopChain = (
@@ -48,7 +51,14 @@ const Voucher = ({ voucherId }) => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network])
+  }, [chainInfo, network, voucherId])
+
+  useEffect(() => {
+    setError("")
+    fetchVoucherIssuer().catch(err => {
+      setError(err.message)
+    })
+  }, [voucher]);
 
   // fetch voucher and metadata asynchronously
   const fetchVoucherAndMetadata = async () => {
@@ -95,6 +105,46 @@ const Voucher = ({ voucherId }) => {
       })
   }
 
+  // fetch voucher issuer
+  const fetchVoucherIssuer = async () => {
+
+    let iri: string
+
+   // fetch policy from selected network
+    await fetch(chainInfo.rest + "/" + queryPolicy + "/" + voucher["issuer"])
+        .then(res => res.json())
+        .then(res => {
+          if (res.code) {
+            setError(res.message)
+          } else {
+            iri = res["info"]["metadata"]
+          }
+        })
+
+    // fetch member data from chora server
+    await fetch(serverUrl + "/data/" + iri)
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          setError(res.error)
+        } else {
+          const data = JSON.parse(res["jsonld"])
+          if (data["@context"] !== "https://schema.chora.io/contexts/group_policy.jsonld") {
+            setError("unsupported metadata schema")
+          } else {
+            setError("")
+            setIssuer({
+              address: voucher["issuer"],
+              name: data["name"]
+            })
+          }
+        }
+      })
+      .catch(err => {
+        setError(err.message)
+      })
+  }
+
   return (
     <div className={styles.box}>
       {!voucher && !metadata && !error && (
@@ -124,9 +174,19 @@ const Voucher = ({ voucherId }) => {
             <h3>
               {"issuer"}
             </h3>
-            <p>
-              {voucher["issuer"]}
-            </p>
+            {issuer ? (
+              <p>
+                {`${issuer["name"]} (`}
+                  <Link to={`/policies/?address=${issuer["address"]}`}>
+                    {issuer["address"]}
+                  </Link>
+                {")"}
+              </p>
+            ) : (
+              <p>
+                {voucher["issuer"]}
+              </p>
+            )}
           </div>
         </div>
       )}

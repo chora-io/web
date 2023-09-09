@@ -1,5 +1,6 @@
 import * as React from "react"
 import { useContext, useEffect, useState } from "react"
+import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
 import { choraLocal, choraTestnet } from "chora/chains"
@@ -9,6 +10,7 @@ import * as styles from "./Group.module.css"
 
 const groupId = "1"
 const queryGroup = "cosmos/group/v1/group_info"
+const queryPolicy = "cosmos/group/v1/group_policy_info"
 
 const Group = () => {
 
@@ -18,6 +20,7 @@ const Group = () => {
   const [error, setError] = useState<string>("")
   const [group, setGroup] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
+  const [admin, setAdmin] = useState<any>(null)
 
   // whether network is supported by coop app
   const coopChain = (
@@ -51,6 +54,13 @@ const Group = () => {
       })
     }
   }, [chainInfo, network])
+
+  useEffect(() => {
+    setError("")
+    fetchGroupAdmin().catch(err => {
+      setError(err.message)
+    })
+  }, [group]);
 
   // fetch group and metadata asynchronously
   const fetchGroupAndMetadata = async () => {
@@ -97,6 +107,46 @@ const Group = () => {
       })
   }
 
+  // fetch group admin
+  const fetchGroupAdmin = async () => {
+
+    let iri: string
+
+   // fetch policy from selected network
+    await fetch(chainInfo.rest + "/" + queryPolicy + "/" + group["admin"])
+        .then(res => res.json())
+        .then(res => {
+          if (res.code) {
+            setError(res.message)
+          } else {
+            iri = res["info"]["metadata"]
+          }
+        })
+
+    // fetch member data from chora server
+    await fetch(serverUrl + "/data/" + iri)
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          setError(res.error)
+        } else {
+          const data = JSON.parse(res["jsonld"])
+          if (data["@context"] !== "https://schema.chora.io/contexts/group_policy.jsonld") {
+            setError("unsupported metadata schema")
+          } else {
+            setError("")
+            setAdmin({
+              address: group["admin"],
+              name: data["name"]
+            })
+          }
+        }
+      })
+      .catch(err => {
+        setError(err.message)
+      })
+  }
+
   return (
     <div className={styles.box}>
       <div>
@@ -127,9 +177,19 @@ const Group = () => {
               <h3>
                 {"admin"}
               </h3>
-              <p>
-                {group["admin"]}
-              </p>
+              {admin ? (
+                <p>
+                  {`${admin["name"]} (`}
+                    <Link to={`/policies/?address=${admin["address"]}`}>
+                      {admin["address"]}
+                    </Link>
+                  {")"}
+                </p>
+              ) : (
+                <p>
+                  {group["admin"]}
+                </p>
+              )}
             </div>
             <div className={styles.boxText}>
               <h3>

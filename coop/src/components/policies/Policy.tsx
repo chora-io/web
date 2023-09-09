@@ -1,5 +1,6 @@
 import * as React from "react"
 import { useContext, useEffect, useState } from "react"
+import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
 import { choraLocal, choraTestnet } from "chora/chains"
@@ -17,6 +18,7 @@ const Policy = ({ policyAddress }) => {
   const [error, setError] = useState<string>("")
   const [policy, setPolicy] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
+  const [admin, setAdmin] = useState<any>(null)
 
   // whether network is supported by coop app
   const coopChain = (
@@ -49,7 +51,14 @@ const Policy = ({ policyAddress }) => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network])
+  }, [chainInfo, network, policyAddress])
+
+  useEffect(() => {
+    setError("")
+    fetchPolicyAdmin().catch(err => {
+      setError(err.message)
+    })
+  }, [policy]);
 
   // fetch policy and metadata asynchronously
   const fetchPolicyAndMetadata = async () => {
@@ -96,6 +105,46 @@ const Policy = ({ policyAddress }) => {
       })
   }
 
+  // fetch policy admin
+  const fetchPolicyAdmin = async () => {
+
+    let iri: string
+
+   // fetch policy from selected network
+    await fetch(chainInfo.rest + "/" + queryPolicy + "/" + policy["admin"])
+        .then(res => res.json())
+        .then(res => {
+          if (res.code) {
+            setError(res.message)
+          } else {
+            iri = res["info"]["metadata"]
+          }
+        })
+
+    // fetch member data from chora server
+    await fetch(serverUrl + "/data/" + iri)
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          setError(res.error)
+        } else {
+          const data = JSON.parse(res["jsonld"])
+          if (data["@context"] !== "https://schema.chora.io/contexts/group_policy.jsonld") {
+            setError("unsupported metadata schema")
+          } else {
+            setError("")
+            setAdmin({
+              address: policy["admin"],
+              name: data["name"]
+            })
+          }
+        }
+      })
+      .catch(err => {
+        setError(err.message)
+      })
+  }
+
   return (
     <div className={styles.box}>
       {!policy && !metadata && !error && (
@@ -125,9 +174,19 @@ const Policy = ({ policyAddress }) => {
             <h3>
               {"admin"}
             </h3>
-            <p>
-              {policy["admin"]}
-            </p>
+            {admin ? (
+              <p>
+                {`${admin["name"]} (`}
+                  <Link to={`/policies/?address=${admin["address"]}`}>
+                    {admin["address"]}
+                  </Link>
+                {")"}
+              </p>
+            ) : (
+              <p>
+                {policy["admin"]}
+              </p>
+            )}
           </div>
           <div className={styles.boxText}>
             <h3>
