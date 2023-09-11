@@ -42,6 +42,8 @@ const Proposal = ({ proposalId }) => {
       network === choraLocal.chainId
   )
 
+  // TODO: add hook for server url
+
   // whether network is a local network
   const localChain = network?.includes("-local")
 

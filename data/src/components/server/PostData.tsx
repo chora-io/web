@@ -38,6 +38,8 @@ const PostData = () => {
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
+  // TODO: add hook for server url
+
   // whether network is a local network
   const localChain = network?.includes("-local")
 

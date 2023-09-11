@@ -19,6 +19,8 @@ const FeegrantAllowance = ({ allowance }) => {
   const [grantee, setGrantee] = useState<any>(null)
   const [granter, setGranter] = useState<any>(null)
 
+  // TODO: add hook for server url
+
   // whether network is a local network
   const localChain = network?.includes("-local")
 
@@ -42,9 +44,12 @@ const FeegrantAllowance = ({ allowance }) => {
   const fetchGrantee = async () => {
 
     let iri: string
+    let isPolicyAddress: boolean
 
     // TODO: handle group policy as group member
     if (allowance["grantee"].length > 44) {
+
+      isPolicyAddress = true
 
       // fetch policy from selected network
       await fetch(chainInfo.rest + "/" + queryPolicy + "/" + allowance["grantee"])
@@ -91,6 +96,7 @@ const FeegrantAllowance = ({ allowance }) => {
           } else {
             setError("")
             setGrantee({
+              isPolicyAddress,
               address: allowance["grantee"],
               name: data["name"]
             })
@@ -106,9 +112,12 @@ const FeegrantAllowance = ({ allowance }) => {
   const fetchGranter = async () => {
 
     let iri: string
+    let isPolicyAddress: boolean
 
     // TODO: handle group policy as group member
     if (allowance["granter"].length > 44) {
+
+      isPolicyAddress = true
 
       // fetch policy from selected network
       await fetch(chainInfo.rest + "/" + queryPolicy + "/" + allowance["granter"])
@@ -155,8 +164,9 @@ const FeegrantAllowance = ({ allowance }) => {
           } else {
             setError("")
             setGranter({
+              isPolicyAddress,
               address: allowance["granter"],
-              name: data["name"]
+              name: data["name"],
             })
           }
         }
@@ -175,7 +185,7 @@ const FeegrantAllowance = ({ allowance }) => {
         {granter ? (
           <p>
             {`${granter["name"]} (`}
-              <Link to={`/policies/?address=${granter["address"]}`}>
+              <Link to={`/${granter.isPolicyAddress ? "policies" : "members"}/?address=${granter["address"]}`}>
                 {granter["address"]}
               </Link>
             {")"}
@@ -193,7 +203,7 @@ const FeegrantAllowance = ({ allowance }) => {
         {grantee ? (
           <p>
             {`${grantee["name"]} (`}
-              <Link to={`/policies/?address=${grantee["address"]}`}>
+              <Link to={`/${grantee.isPolicyAddress ? "policies" : "members"}/?address=${grantee["address"]}`}>
                 {grantee["address"]}
               </Link>
             {")"}

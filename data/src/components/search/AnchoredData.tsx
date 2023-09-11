@@ -5,13 +5,13 @@ import { WalletContext } from "chora"
 import { InputIRI, InputURL, Result } from "chora/components"
 import { InputContentHashJSON } from "chora/components/data"
 
-import * as styles from "./Resolvers.module.css"
+import * as styles from "./AnchoredData.module.css"
 
 const queryResolversByHash = "/regen/data/v1/resolvers-by-hash"
 const queryResolversByIRI = "/regen/data/v1/resolvers-by-iri"
-const queryResolversByURL = "/regen/data/v1/resolvers-by-url"
 
-const Resolvers = () => {
+const AnchoredData = () => {
+
   const { chainInfo } = useContext(WalletContext)
 
   // input and options
@@ -26,25 +26,22 @@ const Resolvers = () => {
     event.preventDefault()
 
     let query: string
-    switch (query) {
+    switch (option) {
         case "hash":
             query = queryResolversByHash
             break
         case "iri":
             query = queryResolversByIRI
             break
-        case "url":
-            query = queryResolversByURL
-            break
     }
 
     fetch(chainInfo.rest + "/" + query + "/" + input)
       .then(res => res.json())
-      .then(data => {
-        if (data.error) {
-          setError(data.error)
+      .then(res => {
+        if (res.code) {
+          setError(res.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(res, null, "  "))
         }
       })
       .catch(err => {
@@ -53,17 +50,17 @@ const Resolvers = () => {
   }
 
   if (chainInfo === undefined) {
-      return <>loading</>
+      return <>{"loading"}</>
   }
 
   return (
     <div className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"data resolvers"}
+          {"anchored data"}
         </h2>
         <p>
-          {`search data resolvers on ${chainInfo.chainId}`}
+          {`look up anchored data on ${chainInfo.chainId}`}
         </p>
       </div>
       <div className={styles.boxOptions}>
@@ -78,12 +75,6 @@ const Resolvers = () => {
           onClick={() => setOption("hash")}
         >
           {"hash"}
-        </button>
-        <button
-          className={option === "url" ? styles.boxOptionActive : null}
-          onClick={() => setOption("url")}
-        >
-          {"url"}
         </button>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
@@ -129,4 +120,4 @@ const Resolvers = () => {
   )
 }
 
-export default Resolvers
+export default AnchoredData

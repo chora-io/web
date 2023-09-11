@@ -46,7 +46,7 @@ const Feegrant = ({ address }) => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network])
+  }, [chainInfo, network, address])
 
   // fetch allowances asynchronously
   const fetchAllowances = async () => {

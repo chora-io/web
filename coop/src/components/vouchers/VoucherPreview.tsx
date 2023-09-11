@@ -17,6 +17,8 @@ const VoucherPreview = ({ voucher }) => {
   const [metadata, setMetadata] = useState<any>(null)
   const [issuer, setIssuer] = useState<any>(null)
 
+  // TODO: add hook for server url
+
   // whether network is a local network
   const localChain = network?.includes("-local")
 

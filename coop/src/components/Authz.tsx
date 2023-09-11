@@ -46,7 +46,7 @@ const Authz = ({ address }) => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network])
+  }, [chainInfo, network, address])
 
   // fetch grants asynchronously
   const fetchGrants = async () => {

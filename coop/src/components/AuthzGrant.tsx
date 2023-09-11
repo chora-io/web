@@ -19,6 +19,8 @@ const AuthzGrant = ({ grant }) => {
   const [grantee, setGrantee] = useState<any>(null)
   const [granter, setGranter] = useState<any>(null)
 
+  // TODO: add hook for server url
+
   // whether network is a local network
   const localChain = network?.includes("-local")
 
@@ -42,34 +44,41 @@ const AuthzGrant = ({ grant }) => {
   const fetchGrantee = async () => {
 
     let iri: string
+    let isPolicyAddress: boolean
 
-   // fetch policy from selected network
-    await fetch(chainInfo.rest + "/" + queryPolicy + "/" + grant["grantee"])
-      .then(res => res.json())
-      .then(res => {
-        if (res.code) {
-          setError(res.message)
-        } else {
-          iri = res["info"]["metadata"]
-        }
-      })
+    // TODO: handle group policy as group member
+    if (grant["grantee"].length > 44) {
 
-    // TODO(cosmos-sdk): query member by group id and member address
+      isPolicyAddress = true
 
-    // fetch members from selected network
-    await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
-      .then(res => res.json())
-      .then(res => {
-        if (res.code) {
-          setError(res.message)
-        } else {
-          const found = res["members"].find(m => m["member"]["address"] === grant["grantee"])
-          if (found) {
-            setGrantee(found["member"])
-            iri = found["member"]["metadata"]
+      // fetch policy from selected network
+      await fetch(chainInfo.rest + "/" + queryPolicy + "/" + grant["grantee"])
+        .then(res => res.json())
+        .then(res => {
+          if (res.code) {
+            setError(res.message)
+          } else {
+            iri = res["info"]["metadata"]
           }
-        }
-      })
+        })
+    } else {
+
+      // TODO(cosmos-sdk): query member by group id and member address
+
+      // fetch members from selected network
+      await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
+        .then(res => res.json())
+        .then(res => {
+          if (res.code) {
+            setError(res.message)
+          } else {
+            const found = res["members"].find(m => m["member"]["address"] === grant["grantee"])
+            if (found) {
+              iri = found["member"]["metadata"]
+            }
+          }
+        })
+    }
 
     // fetch member data from chora server
     await fetch(serverUrl + "/data/" + iri)
@@ -87,6 +96,7 @@ const AuthzGrant = ({ grant }) => {
           } else {
             setError("")
             setGrantee({
+              isPolicyAddress,
               address: grant["grantee"],
               name: data["name"]
             })
@@ -102,34 +112,41 @@ const AuthzGrant = ({ grant }) => {
   const fetchGranter = async () => {
 
     let iri: string
+    let isPolicyAddress: boolean
 
-   // fetch policy from selected network
-    await fetch(chainInfo.rest + "/" + queryPolicy + "/" + grant["granter"])
-      .then(res => res.json())
-      .then(res => {
-        if (res.code) {
-          setError(res.message)
-        } else {
-          iri = res["info"]["metadata"]
-        }
-      })
+    // TODO: handle group policy as group member
+    if (grant["granter"].length > 44) {
 
-    // TODO(cosmos-sdk): query member by group id and member address
+      isPolicyAddress = true
 
-    // fetch members from selected network
-    await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
-      .then(res => res.json())
-      .then(res => {
-        if (res.code) {
-          setError(res.message)
-        } else {
-          const found = res["members"].find(m => m["member"]["address"] === grant["granter"])
-          if (found) {
-            setGranter(found["member"])
-            iri = found["member"]["metadata"]
+      // fetch policy from selected network
+      await fetch(chainInfo.rest + "/" + queryPolicy + "/" + grant["granter"])
+        .then(res => res.json())
+        .then(res => {
+          if (res.code) {
+            setError(res.message)
+          } else {
+            iri = res["info"]["metadata"]
           }
-        }
-      })
+        })
+    } else {
+
+      // TODO(cosmos-sdk): query member by group id and member address
+
+      // fetch members from selected network
+      await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
+        .then(res => res.json())
+        .then(res => {
+          if (res.code) {
+            setError(res.message)
+          } else {
+            const found = res["members"].find(m => m["member"]["address"] === grant["granter"])
+            if (found) {
+              iri = found["member"]["metadata"]
+            }
+          }
+        })
+    }
 
    // fetch member from selected network
     await fetch(chainInfo.rest + "/" + queryPolicy + "/" + grant["granter"])
@@ -158,6 +175,7 @@ const AuthzGrant = ({ grant }) => {
           } else {
             setError("")
             setGranter({
+              isPolicyAddress,
               address: grant["granter"],
               name: data["name"]
             })
@@ -178,7 +196,7 @@ const AuthzGrant = ({ grant }) => {
         {granter ? (
           <p>
             {`${granter["name"]} (`}
-              <Link to={`/policies/?address=${granter["address"]}`}>
+              <Link to={`/${granter.isPolicyAddress ? "policies" : "members"}/?address=${granter["address"]}`}>
                 {granter["address"]}
               </Link>
             {")"}
@@ -196,7 +214,7 @@ const AuthzGrant = ({ grant }) => {
         {grantee ? (
           <p>
             {`${grantee["name"]} (`}
-              <Link to={`/policies/?address=${grantee["address"]}`}>
+              <Link to={`/${grantee.isPolicyAddress ? "policies" : "members"}/?address=${grantee["address"]}`}>
                 {grantee["address"]}
               </Link>
             {")"}
