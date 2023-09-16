@@ -2,50 +2,44 @@ import * as React from "react"
 import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
-import { choraLocal, choraTestnet } from "chora/chains"
+import { useCoopParams } from "../../hooks/coop"
 
+import { Result } from "chora/components"
 import VoucherPreview from "./VoucherPreview"
 
 import * as styles from "./Vouchers.module.css"
 
-const groupId = "1"
 const queryVouchers = "chora/voucher/v1/vouchers-by-issuer"
 const queryPolicies = "cosmos/group/v1/group_policies_by_group"
 
 const Vouchers = () => {
 
-  const { chainInfo, network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
+
+  const [groupId, serverUrl] = useCoopParams(chainInfo)
 
   // fetch error and results
-  const [error, setError] = useState<string>("")
-  const [vouchers, setVouchers] = useState<any>(null)
+  const [error, setError] = useState<string | undefined>(undefined)
+  const [vouchers, setVouchers] = useState<any[] | undefined>(undefined)
 
-  // whether network is supported by coop app
-  const coopChain = (
-    network === choraTestnet.chainId ||
-    network === choraLocal.chainId
-  )
-
-  // fetch on load and value change
+  // reset state on network change
   useEffect(() => {
-    setVouchers(null)
-    setError("")
+    setError(undefined)
+    setVouchers(undefined)
+  }, [chainInfo?.chainId]);
 
-    // error if network is not chora-testnet-1 (or chora-local)
-    if (!coopChain) {
-      setError("switch to chora-testnet-1")
-    }
+  // fetch on load and group change
+  useEffect(() => {
 
-    // fetch policies and vouchers if network is chora-testnet-1 (or chora-local)
-    if (coopChain) {
+    // fetch policies and vouchers from selected network
+    if (groupId) {
       fetchPoliciesAndVouchers().catch(err => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network])
+  }, [groupId])
 
-
-  // async function workaround
+  // fetch policies and vouchers from selected network
   const fetchPoliciesAndVouchers = async () => {
 
     let addrs: string[] = []
@@ -88,9 +82,14 @@ const Vouchers = () => {
 
   return (
     <div className={styles.box}>
-      {!vouchers && !error && (
+      {!error && !vouchers && (
         <div>
           {"loading..."}
+        </div>
+      )}
+      {!error && vouchers && vouchers.length === 0 && (
+        <div>
+          {"no vouchers found"}
         </div>
       )}
       {vouchers && vouchers.map(voucher => (
@@ -99,16 +98,7 @@ const Vouchers = () => {
           voucher={voucher}
         />
       ))}
-      {vouchers && vouchers.length === 0 && !error && (
-        <div>
-          {"no vouchers found"}
-        </div>
-      )}
-      {error && (
-        <div>
-          {error}
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

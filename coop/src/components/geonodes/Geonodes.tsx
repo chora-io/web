@@ -2,49 +2,44 @@ import * as React from "react"
 import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
-import { choraLocal, choraTestnet } from "chora/chains"
+import { useCoopParams } from "../../hooks/coop"
 
+import { Result } from "chora/components"
 import GeonodePreview from "./GeonodePreview"
 
 import * as styles from "./Geonodes.module.css"
 
-const groupId = "1"
 const queryGeonodes = "chora/geonode/v1/nodes-by-curator"
 const queryPolicies = "cosmos/group/v1/group_policies_by_group"
 
 const Geonodes = () => {
 
-  const { chainInfo, network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
+
+  const [groupId, serverUrl] = useCoopParams(chainInfo)
 
   // fetch error and results
-  const [error, setError] = useState<string>("")
-  const [nodes, setNodes] = useState<any>(null)
+  const [error, setError] = useState<string | undefined>(undefined)
+  const [nodes, setNodes] = useState<any[] | undefined>(undefined)
 
-  // whether network is supported by coop app
-  const coopChain = (
-    network === choraTestnet.chainId ||
-    network === choraLocal.chainId
-  )
-
-  // fetch on load and value change
+  // reset state on network change
   useEffect(() => {
-    setNodes(null)
-    setError("")
+    setError(undefined)
+    setNodes(undefined)
+  }, [chainInfo?.chainId]);
 
-    // error if network is not chora-testnet-1 (or chora-local)
-    if (!coopChain) {
-      setError("switch to chora-testnet-1")
-    }
+  // fetch on load and group change
+  useEffect(() => {
 
-    // fetch policies and nodes if network is chora-testnet-1 (or chora-local)
-    if (coopChain) {
+    // fetch policies and nodes from selected network
+    if (groupId) {
       fetchPoliciesAndNodes().catch(err => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network])
+  }, [groupId])
 
-  // fetch policies and nodes asynchronously
+  // fetch policies and nodes from selected network
   const fetchPoliciesAndNodes = async () => {
 
     let addrs: string[] = []
@@ -73,10 +68,10 @@ const Geonodes = () => {
         .then(res => {
           if (res.code) {
             setError(res.message)
-        } else {
-          res["nodes"].map(n => ns.push({ curator: addr, ...n }))
-        }
-      })
+          } else {
+            res["nodes"].map(n => ns.push({ curator: addr, ...n }))
+          }
+        })
     })
 
     // set state after promise all complete
@@ -87,9 +82,14 @@ const Geonodes = () => {
 
   return (
     <div className={styles.box}>
-      {!nodes && !error && (
+      {!error && !nodes && (
         <div>
           {"loading..."}
+        </div>
+      )}
+      {!error && nodes && nodes.length === 0 && (
+        <div>
+          {"no nodes found"}
         </div>
       )}
       {nodes && nodes.map(node => (
@@ -98,16 +98,7 @@ const Geonodes = () => {
           node={node}
         />
       ))}
-      {nodes && nodes.length === 0 && !error && (
-        <div>
-          {"no nodes found"}
-        </div>
-      )}
-      {error && (
-        <div>
-          {error}
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

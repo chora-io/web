@@ -2,7 +2,7 @@ import * as React from "react"
 import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
-import { choraLocal, choraTestnet } from "chora/chains"
+import { useCoopParams } from "../hooks/coop"
 
 import AuthzGrant from "./AuthzGrant"
 
@@ -13,42 +13,38 @@ const queryGrantsByGranter = "cosmos/authz/v1beta1/grants/granter"
 
 const Authz = ({ address }) => {
 
-  const { chainInfo, network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
+
+  const [groupId, serverUrl] = useCoopParams(chainInfo)
+
+  // fetch error and results
+  const [error, setError] = useState<string | undefined>(undefined)
+  const [grantsGrantee, setGrantsGrantee] = useState<any[] | undefined>(undefined)
+  const [grantsGranter, setGrantsGranter] = useState<any[] | undefined>(undefined)
 
   // options
   const [filter, setFilter] = useState<string>("grantee")
 
-  // fetch error and results
-  const [error, setError] = useState<string>("")
-  const [grantsGrantee, setGrantsGrantee] = useState<any>(null)
-  const [grantsGranter, setGrantsGranter] = useState<any>(null)
-
-  // whether network is supported by coop app
-  const coopChain = (
-    network === choraTestnet.chainId ||
-    network === choraLocal.chainId
-  )
-
-  // fetch on load and value change
+  // reset state on address or network change
   useEffect(() => {
-    setGrantsGrantee(null)
-    setGrantsGranter(null)
-    setError("")
+    setError(undefined)
+    setGrantsGrantee(undefined)
+    setGrantsGranter(undefined)
+    setFilter("grantee")
+  }, [address, chainInfo?.chainId]);
 
-    // error if network is not chora-testnet-1 (or chora-local)
-    if (!coopChain) {
-      setError("switch to chora-testnet-1")
-    }
+  // fetch on load and address or group change
+  useEffect(() => {
 
-    // fetch grants if network is chora-testnet-1 (or chora-local)
-    if (coopChain) {
+    // fetch grants from selected network
+    if (groupId) {
       fetchGrants().catch(err => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network, address])
+  }, [address, groupId])
 
-  // fetch grants asynchronously
+  // fetch grants from selected network
   const fetchGrants = async () => {
 
     // fetch grants by grantee from selected network
@@ -90,7 +86,7 @@ const Authz = ({ address }) => {
           {"granter"}
         </button>
       </div>
-      {!grantsGrantee && !grantsGranter && !error && (
+      {!error && !grantsGrantee && !grantsGranter && (
         <div>
           {"loading..."}
         </div>

@@ -2,51 +2,46 @@ import * as React from "react"
 import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
-import { choraLocal, choraTestnet } from "chora/chains"
+import { useCoopParams } from "../../hooks/coop"
 
 import MemberPreview from "./MemberPreview"
 
 import * as styles from "./Members.module.css"
 
-const groupId = "1"
 const queryMembers = "cosmos/group/v1/group_members"
 
 const Members = () => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
+  const [groupId] = useCoopParams(chainInfo)
+
   // fetch error and results
-  const [error, setError] = useState<string>("")
-  const [members, setMembers] = useState<any>(null)
+  const [error, setError] = useState<string | undefined>(undefined)
+  const [members, setMembers] = useState<any>(undefined)
 
   // list options
   const [sort, setSort] = useState<string>("ascending")
 
-  // whether network is supported by coop app
-  const coopChain = (
-    network === choraTestnet.chainId ||
-    network === choraLocal.chainId
-  )
-
-  // fetch on load and value change
+  // reset state on network change
   useEffect(() => {
-    setMembers(null)
-    setError("")
+    setError(undefined)
+    setMembers(undefined)
+    setSort("ascending")
+  }, [chainInfo?.chainId]);
 
-    // error if network is not chora-testnet-1 (or chora-local)
-    if (!coopChain) {
-      setError("switch to chora-testnet-1")
-    }
+  // fetch on load and group change
+  useEffect(() => {
 
-    // fetch members if network is chora-testnet-1 (or chora-local)
-    if (coopChain) {
+    // fetch members from selected network
+    if (groupId) {
       fetchMembers().catch(err => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network])
+  }, [groupId])
 
-  // sort on load and value change
+  // sort on load and sort change
   useEffect(() => {
     const ms = members ? [...members] : []
 
@@ -61,7 +56,7 @@ const Members = () => {
     setMembers(ms)
   }, [sort])
 
-  // fetch members asynchronously
+  // fetch members from selected network
   const fetchMembers = async () => {
 
     // fetch members from selected network
@@ -96,9 +91,14 @@ const Members = () => {
           </button>
         )}
       </div>
-      {!members && !error && (
+      {!error && !members && (
         <div>
           {"loading..."}
+        </div>
+      )}
+      {members && members.length === 0 && (
+        <div>
+          {"no members found"}
         </div>
       )}
       {members && members.map(member => (
@@ -107,11 +107,6 @@ const Members = () => {
           member={member["member"]}
         />
       ))}
-      {members && members.length === 0 && !error && (
-        <div>
-          {"no members found"}
-        </div>
-      )}
       {error && (
         <div>
           {error}

@@ -3,45 +3,56 @@ import { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
-import { choraLocal, choraTestnet } from "chora/chains"
+import { useCoopParams } from "../../hooks/coop"
+
+import { Result } from "chora/components"
 
 import * as styles from "./Balances.module.css"
 
 const queryBalances = "chora/voucher/v1/balances-by-voucher"
+const queryMembers = "cosmos/group/v1/group_members" // TODO(cosmos-sdk): group member query
 
 const Balances = ({ voucherId }) => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
+  const [groupId, serverUrl] = useCoopParams(chainInfo)
+
   // fetch error and results
-  const [error, setError] = useState<string>("")
-  const [balances, setBalances] = useState<any>(null)
+  const [error, setError] = useState<string | undefined>(undefined)
+  const [balances, setBalances] = useState<any[] | undefined>(undefined)
+  const [holders, setHolders] = useState<any[] | undefined>(undefined)
 
-  // whether network is supported by coop app
-  const coopChain = (
-    network === choraTestnet.chainId ||
-    network === choraLocal.chainId
-  )
-
-  // fetch on load and value change
+  // reset state on voucher or network change
   useEffect(() => {
-    setBalances(null)
-    setError("")
+    setError(undefined)
+    setBalances(undefined)
+    setHolders(undefined)
+  }, [voucherId, chainInfo?.chainId]);
 
-    // error if network is not chora-testnet-1 (or chora-local)
-    if (!coopChain) {
-      setError("switch to chora-testnet-1")
-    }
+  // fetch on load and voucher or group change
+  useEffect(() => {
 
-    // fetch balances if network is chora-testnet-1 (or chora-local)
-    if (coopChain) {
+    // fetch balances from selected network
+    if (groupId) {
       fetchBalances().catch(err => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network, voucherId])
+  }, [voucherId, groupId])
 
-  // fetch balances asynchronously
+  // fetch on load and voucher or group change
+  useEffect(() => {
+
+    // fetch holders from selected network and data provider
+    if (groupId && balances?.length) {
+      fetchHolders().catch(err => {
+        setError(err.message)
+      })
+    }
+  }, [groupId, balances?.length])
+
+  // fetch balances from selected network
   const fetchBalances = async () => {
 
     // fetch balances from selected network
@@ -56,14 +67,82 @@ const Balances = ({ voucherId }) => {
       })
   }
 
+  // fetch holders from selected network and data provider
+  const fetchHolders = async () => {
+
+    // TODO(cosmos-sdk): query member by group id and member address
+
+    let members = []
+
+    if (balances?.length) {
+
+      // fetch members from selected network
+      await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
+        .then(res => res.json())
+        .then(res => {
+          if (res.code) {
+            setError(res.message)
+          } else {
+            for (let i = 0; i < balances.length; i++) {
+              const holder = balances[i]["address"]
+              const totalAmount = balances[i]["total_amount"]
+              const found = res["members"].find(member => member["member"]["address"] === holder)
+              if (found) {
+                members.push({ "total_amount": totalAmount, ...found["member"] })
+              }
+            }
+          }
+        })
+    }
+
+    let holders = []
+
+    const promise = members.map(async member => {
+
+      // fetch member metadata from data provider
+      await fetch(serverUrl + "/data/" + member["metadata"])
+        .then(res => res.json())
+        .then(res => {
+          if (res.error) {
+            setError(res.error)
+          } else {
+            const data = JSON.parse(res["jsonld"])
+            if (data["@context"] !== "https://schema.chora.io/contexts/group_member.jsonld") {
+              setError("unsupported metadata schema")
+            } else {
+              setError("")
+              holders.push({
+                address: member["address"],
+                name: data["name"],
+                total_amount: member["total_amount"],
+              })
+            }
+          }
+        })
+        .catch(err => {
+          setError(err.message)
+        })
+    })
+
+    // set state after promise all complete
+    await Promise.all(promise).then(() => {
+      setHolders(holders)
+    })
+  }
+
   return (
     <div className={styles.box}>
-      {!balances && !error && (
+      {!error && !balances && (
         <div>
           {"loading..."}
         </div>
       )}
-      {balances && balances.map(balance => (
+      {!error && balances && balances.length === 0 && (
+        <div>
+          {"no balances found"}
+        </div>
+      )}
+      {!holders && balances && balances.map(balance => (
         <div className={styles.boxItem} key={balance["address"]}>
           <div className={styles.boxText}>
             <h3>
@@ -86,16 +165,34 @@ const Balances = ({ voucherId }) => {
           </Link>
         </div>
       ))}
-      {balances && balances.length === 0 && !error && (
-        <div>
-          {"no balances found"}
+      {holders && holders.map(holder => (
+        <div className={styles.boxItem} key={holder["address"]}>
+          <div className={styles.boxText}>
+            <h3>
+              {"address"}
+            </h3>
+            <p key={holder["address"]}>
+              {`${holder["name"]} (`}
+              <Link to={`/members/?address=${holder["address"]}`}>
+                {holder["address"]}
+              </Link>
+              {")"}
+            </p>
+          </div>
+          <div className={styles.boxText}>
+            <h3>
+              {"total amount"}
+            </h3>
+            <p>
+              {holder["total_amount"]}
+            </p>
+          </div>
+          <Link to={`/vouchers/?id=${voucherId}&address=${holder["address"]}`}>
+            {"view balance"}
+          </Link>
         </div>
-      )}
-      {error && (
-        <div>
-          {error}
-        </div>
-      )}
+      ))}
+      <Result error={error} />
     </div>
   )
 }

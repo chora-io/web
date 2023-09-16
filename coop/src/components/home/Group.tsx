@@ -3,71 +3,72 @@ import { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
-import { choraLocal, choraTestnet } from "chora/chains"
 import { formatTimestamp } from "chora/utils"
+import { useCoopParams } from "../../hooks/coop"
+
+import { Result } from "chora/components"
 
 import * as styles from "./Group.module.css"
 
-const groupId = "1"
 const queryGroup = "cosmos/group/v1/group_info"
+const queryMembers = "cosmos/group/v1/group_members" // TODO(cosmos-sdk): group member query
 const queryPolicy = "cosmos/group/v1/group_policy_info"
 
 const Group = () => {
 
-  const { chainInfo, network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
+
+  const [groupId, serverUrl] = useCoopParams(chainInfo)
 
   // fetch error and results
-  const [error, setError] = useState<string>("")
-  const [group, setGroup] = useState<any>(null)
-  const [metadata, setMetadata] = useState<any>(null)
-  const [admin, setAdmin] = useState<any>(null)
+  const [error, setError] = useState<string | undefined>(undefined)
+  const [group, setGroup] = useState<any>(undefined)
+  const [metadata, setMetadata] = useState<any>(undefined)
+  const [admin, setAdmin] = useState<any>(undefined)
 
-  // whether network is supported by coop app
-  const coopChain = (
-      network === choraTestnet.chainId ||
-      network === choraLocal.chainId
-  )
-
-  // TODO: add hook for server url
-
-  // whether network is a local network
-  const localChain = network?.includes("-local")
-
-  // chora server (use local server if local network)
-  let serverUrl = "http://localhost:3000"
-  if (!localChain) {
-    serverUrl = "https://server.chora.io"
-  }
-
-  // fetch on load and value change
+  // reset state on network change
   useEffect(() => {
-    setGroup(null)
-    setError("")
+    setError(undefined)
+    setGroup(undefined)
+    setMetadata(undefined)
+    setAdmin(undefined)
+  }, [chainInfo?.chainId]);
 
-    // error if network is not chora-testnet-1 (or chora-local)
-    if (!coopChain) {
-      setError("switch to chora-testnet-1")
-    }
+  // fetch on load and network change
+  useEffect(() => {
 
-    // fetch group and metadata if network is chora-testnet-1 (or chora-local)
-    if (coopChain) {
-      fetchGroupAndMetadata().catch(err => {
+    // fetch group from selected network
+    if (groupId) {
+      fetchGroup().catch(err => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network])
+  }, [groupId])
 
+  // fetch on load and network change
   useEffect(() => {
-    setError("")
-    fetchGroupAdmin().catch(err => {
-      setError(err.message)
-    })
-  }, [group]);
 
-  // fetch group and metadata asynchronously
-  const fetchGroupAndMetadata = async () => {
+    // fetch group metadata from data provider
+    if (group?.metadata) {
+      fetchGroupMetadata().catch(err => {
+        setError(err.message)
+      })
+    }
+  }, [group?.metadata])
 
-    let iri: string
+  // fetch on load and network change
+  useEffect(() => {
+
+    // fetch group admin metadata from selected network and data provider
+    if (group?.admin) {
+      fetchGroupAdminMetadata().catch(err => {
+        setError(err.message)
+      })
+    }
+  }, [group?.admin]);
+
+  // fetch group from selected network
+  const fetchGroup = async () => {
 
     // fetch group from selected network
     await fetch(chainInfo.rest + "/" + queryGroup + "/" + groupId)
@@ -77,146 +78,175 @@ const Group = () => {
           setError(res.message)
         } else {
           setGroup(res.info)
-          iri = res.info.metadata
         }
-      })
-
-    // return if iri is empty or was never set
-    if (typeof iri === "undefined" || iri === "") {
-      return
-    }
-
-    // fetch group data from chora server
-    await fetch(serverUrl + "/data/" + iri)
-      .then(res => res.json())
-      .then(res => {
-        if (res.error) {
-          setError(res.error)
-          setMetadata(null)
-        } else {
-          const data = JSON.parse(res["jsonld"])
-          if (data["@context"] !== "https://schema.chora.io/contexts/group.jsonld") {
-            setError("unsupported metadata schema")
-            setMetadata(null)
-          } else {
-            setError("")
-            setMetadata(data)
-          }
-        }
-      })
-      .catch(err => {
-        setError(err.message)
       })
   }
 
-  // fetch group admin
-  const fetchGroupAdmin = async () => {
+  // fetch group metadata from data provider
+  const fetchGroupMetadata = async () => {
 
+    // TODO: handle multiple metadata formats (i.e. IRI, IPFS, JSON, etc.)
+
+    // handle metadata as json, otherwise metadata as chora server iri
+    try {
+
+      // parse group metadata
+      const parsedMetadata = JSON.parse(group.metadata)
+      setMetadata(parsedMetadata)
+
+    } catch(e) {
+
+      // do nothing with error
+
+      // fetch group metadata from data provider
+      await fetch(serverUrl + "/data/" + group.metadata)
+        .then(res => res.json())
+        .then(res => {
+          if (res.error) {
+            setError(res.error)
+          } else {
+            const data = JSON.parse(res["jsonld"])
+            if (data["@context"] !== "https://schema.chora.io/contexts/group.jsonld") {
+              setError(`unsupported schema: ${data["@context"]}`)
+            } else {
+              setMetadata(data)
+            }
+          }
+        })
+        .catch(err => {
+          setError(err.message)
+        })
+    }
+  }
+
+  // fetch group admin metadata from data provider
+  const fetchGroupAdminMetadata = async () => {
     let iri: string
 
-   // fetch policy from selected network
-    await fetch(chainInfo.rest + "/" + queryPolicy + "/" + group["admin"])
+    // handle admin as policy, otherwise member
+    try {
+
+      // fetch policy from selected network
+      await fetch(chainInfo.rest + "/" + queryPolicy + "/" + group["admin"])
         .then(res => res.json())
         .then(res => {
           if (res.code) {
-            setError(res.message)
+            // throw error to trigger catch
+            throw Error(res.message)
           } else {
             iri = res["info"]["metadata"]
           }
         })
 
-    // fetch member data from chora server
-    await fetch(serverUrl + "/data/" + iri)
-      .then(res => res.json())
-      .then(res => {
-        if (res.error) {
-          setError(res.error)
-        } else {
-          const data = JSON.parse(res["jsonld"])
-          if (data["@context"] !== "https://schema.chora.io/contexts/group_policy.jsonld") {
-            setError("unsupported metadata schema")
+    } catch (e) {
+
+      // do nothing with error
+
+      // TODO(cosmos-sdk): query member by group id and member address
+
+      // fetch members from selected network
+      await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
+        .then(res => res.json())
+        .then(res => {
+          if (res.code) {
+            setError(res.message)
           } else {
-            setError("")
-            setAdmin({
-              address: group["admin"],
-              name: data["name"]
-            })
+            const found = res["members"].find(m => m["member"]["address"] === group["admin"])
+            if (found) {
+              iri = found["member"]["metadata"]
+            }
           }
-        }
-      })
-      .catch(err => {
-        setError(err.message)
-      })
+        })
+    }
+
+    if (iri) {
+
+      // fetch policy or member metadata from data provider
+      await fetch(serverUrl + "/data/" + iri)
+        .then(res => res.json())
+        .then(res => {
+          if (res.error) {
+            setError(res.error)
+          } else {
+            const data = JSON.parse(res["jsonld"])
+            if (
+              data["@context"] !== "https://schema.chora.io/contexts/group_policy.jsonld" &&
+              data["@context"] !== "https://schema.chora.io/contexts/group_member.jsonld"
+            ) {
+              setError(`unsupported schema: ${data["@context"]}`)
+            } else {
+              setAdmin({
+                address: group["admin"],
+                name: data["name"]
+              })
+            }
+          }
+        })
+        .catch(err => {
+          setError(err.message)
+        })
+      }
   }
 
   return (
     <div className={styles.box}>
-      <div>
-        {!group && !metadata && !error && (
-          <div>
-            {"loading..."}
-          </div>
-        )}
-        {group && metadata && (
-          <div>
-            <div className={styles.boxText}>
-              <h3>
-                {"name"}
-              </h3>
-              <p>
-                {metadata["name"] ? metadata["name"] : "NA"}
-              </p>
-            </div>
-            <div className={styles.boxText}>
-              <h3>
-                {"description"}
-              </h3>
-              <p>
-                {metadata["description"] ? metadata["description"] : "NA"}
-              </p>
-            </div>
-            <div className={styles.boxText}>
-              <h3>
-                {"admin"}
-              </h3>
-              {admin ? (
-                <p>
-                  {`${admin["name"]} (`}
-                    <Link to={`/policies/?address=${admin["address"]}`}>
-                      {admin["address"]}
-                    </Link>
-                  {")"}
-                </p>
-              ) : (
-                <p>
-                  {group["admin"]}
-                </p>
-              )}
-            </div>
-            <div className={styles.boxText}>
-              <h3>
-                {"created at"}
-              </h3>
-              <p>
-                {formatTimestamp(group["created_at"])}
-              </p>
-            </div>
-            <div className={styles.boxText}>
-              <h3>
-                {"version"}
-              </h3>
-              <p>
-                {group["version"]}
-              </p>
-            </div>
-          </div>
-        )}
-        {error && (
-          <div>
-            {error}
-          </div>
-        )}
+      <div className={styles.boxText}>
+        <h3>
+          {"name"}
+        </h3>
+        <p>
+          {metadata && metadata["name"] ? metadata["name"] : "NA"}
+        </p>
       </div>
+      <div className={styles.boxText}>
+        <h3>
+          {"description"}
+        </h3>
+        <p>
+          {metadata && metadata["description"] ? metadata["description"] : "NA"}
+        </p>
+      </div>
+      <div className={styles.boxText}>
+        <h3>
+          {"admin"}
+        </h3>
+        <p>
+          {admin ? (
+            <>
+              {`${admin["name"]} (`}
+                <Link to={`/policies/?address=${admin["address"]}`}>
+                  {admin["address"]}
+                </Link>
+              {")"}
+            </>
+          ) : (
+            <>
+              {group && group["admin"] ? group["admin"] : "NA"}
+            </>
+          )}
+        </p>
+      </div>
+      <div className={styles.boxText}>
+        <h3>
+          {"created at"}
+        </h3>
+        <p>
+          {group && group["created_at"] ? formatTimestamp(group["created_at"]) : "NA"}
+        </p>
+      </div>
+      <div className={styles.boxText}>
+        <h3>
+          {"version"}
+        </h3>
+        <p>
+          {group && group["version"] ? group["version"] : "NA"}
+        </p>
+      </div>
+      {error && (
+        <div className={styles.boxText}>
+          <Result error={error} />
+        </div>
+      )}
     </div>
   )
 }

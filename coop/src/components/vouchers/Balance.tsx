@@ -1,48 +1,51 @@
 import * as React from "react"
 import { useContext, useEffect, useState } from "react"
+import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
-import { choraLocal, choraTestnet } from "chora/chains"
+import { useCoopParams } from "../../hooks/coop"
 import { formatTimestamp } from "chora/utils"
+
+import { Result } from "chora/components"
 
 import * as styles from "./Balance.module.css"
 
 const queryBalance = "chora/voucher/v1/balance"
+const queryMembers = "cosmos/group/v1/group_members" // TODO(cosmos-sdk): group member query
 
 const Balance = ({ voucherId, address }) => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
+  const [groupId, serverUrl] = useCoopParams(chainInfo)
+
   // fetch error and results
-  const [error, setError] = useState<string>("")
-  const [balance, setBalance] = useState<any>(null)
+  const [error, setError] = useState<string | undefined>(undefined)
+  const [balance, setBalance] = useState<any>(undefined)
+  const [holder, setHolder] = useState<any>(undefined)
 
-  // whether network is supported by coop app
-  const coopChain = (
-    network === choraTestnet.chainId ||
-    network === choraLocal.chainId
-  )
-
-  // fetch on load and value change
+  // reset state on voucher or network change
   useEffect(() => {
-    setBalance(null)
-    setError("")
+    setError(undefined)
+    setBalance(undefined)
+    setHolder(undefined)
+  }, [voucherId, address, chainInfo?.chainId]);
 
-    // error if network is not chora-testnet-1 (or chora-local)
-    if (!coopChain) {
-      setError("switch to chora-testnet-1")
-    }
+  // fetch on load and voucher, address, or group change
+  useEffect(() => {
 
-    // fetch balance if network is chora-testnet-1 (or chora-local)
-    if (coopChain) {
+    // fetch balance from selected network
+    if (groupId) {
       fetchBalance().catch(err => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network, voucherId, address])
+  }, [voucherId, address, groupId])
 
-  // async balance asynchronously
+  // fetch balance from selected network
   const fetchBalance = async () => {
+
+    let balance: any
 
     // fetch balance from selected network
     await fetch(chainInfo.rest + "/" + queryBalance + "/" + voucherId + "/" + address)
@@ -51,8 +54,51 @@ const Balance = ({ voucherId, address }) => {
         if (res.code) {
           setError(res.message)
         } else {
+          balance = res
           setBalance(res)
         }
+      })
+
+    // TODO(cosmos-sdk): query member by group id and member address
+
+    let member: any
+
+    // fetch members from selected network
+    await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
+      .then(res => res.json())
+      .then(res => {
+        if (res.code) {
+          setError(res.message)
+        } else {
+          const holder = balance["address"]
+          const found = res["members"].find(member => member["member"]["address"] === holder)
+          if (found) {
+            member = found["member"]
+          }
+        }
+      })
+
+    // fetch member metadata from data provider
+    await fetch(serverUrl + "/data/" + member["metadata"])
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          setError(res.error)
+        } else {
+          const data = JSON.parse(res["jsonld"])
+          if (data["@context"] !== "https://schema.chora.io/contexts/group_member.jsonld") {
+            setError("unsupported metadata schema")
+          } else {
+            setError("")
+            setHolder({
+              address: member["address"],
+              name: data["name"],
+            })
+          }
+        }
+      })
+      .catch(err => {
+        setError(err.message)
       })
   }
 
@@ -65,14 +111,29 @@ const Balance = ({ voucherId, address }) => {
       )}
       {balance && (
         <div className={styles.boxItem}>
-          <div className={styles.boxText}>
-            <h3>
-              {"address"}
-            </h3>
-            <p>
-              {balance["address"]}
-            </p>
-          </div>
+          {holder ? (
+            <div className={styles.boxText}>
+              <h3>
+                {"address"}
+              </h3>
+              <p key={holder["address"]}>
+                {`${holder["name"]} (`}
+                <Link to={`/members/?address=${holder["address"]}`}>
+                  {holder["address"]}
+                </Link>
+                {")"}
+              </p>
+            </div>
+          ) : (
+            <div className={styles.boxText}>
+              <h3>
+                {"address"}
+              </h3>
+              <p>
+                {balance["address"]}
+              </p>
+            </div>
+          )}
           <div className={styles.boxText}>
             <h3>
               {"total amount"}
@@ -104,8 +165,8 @@ const Balance = ({ voucherId, address }) => {
         </div>
       )}
       {error && (
-        <div>
-          {error}
+        <div className={styles.boxText}>
+          <Result error={error} />
         </div>
       )}
     </div>

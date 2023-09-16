@@ -2,7 +2,7 @@ import * as React from "react"
 import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
-import { choraLocal, choraTestnet } from "chora/chains"
+import { useCoopParams } from "../hooks/coop"
 
 import FeegrantAllowance from "./FeegrantAllowance"
 
@@ -15,40 +15,36 @@ const Feegrant = ({ address }) => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
-  // options
-  const [filter, setFilter] = useState<string>("grantee")
+  const [groupId, serverUrl] = useCoopParams(chainInfo)
 
   // fetch error and results
-  const [error, setError] = useState<string>("")
-  const [allowancesGrantee, setAllowancesGrantee] = useState<any>(null)
-  const [allowancesGranter, setAllowancesGranter] = useState<any>(null)
+  const [error, setError] = useState<string | undefined>(undefined)
+  const [allowancesGrantee, setAllowancesGrantee] = useState<any[] | undefined>(undefined)
+  const [allowancesGranter, setAllowancesGranter] = useState<any[] | undefined>(undefined)
 
-  // whether network is supported by coop app
-  const coopChain = (
-    network === choraTestnet.chainId ||
-    network === choraLocal.chainId
-  )
+  // list options
+  const [filter, setFilter] = useState<string>("grantee")
 
-  // fetch on load and value change
+  // reset state on address or network change
   useEffect(() => {
-    setAllowancesGrantee(null)
-    setAllowancesGranter(null)
-    setError("")
+    setError(undefined)
+    setAllowancesGrantee(undefined)
+    setAllowancesGranter(undefined)
+    setFilter("grantee")
+  }, [address, chainInfo?.chainId]);
 
-    // error if network is not chora-testnet-1 (or chora-local)
-    if (!coopChain) {
-      setError("switch to chora-testnet-1")
-    }
+  // fetch on load and address or group change
+  useEffect(() => {
 
-    // fetch allowances if network is chora-testnet-1 (or chora-local)
-    if (coopChain) {
+    // fetch allowances from selected network
+    if (groupId) {
       fetchAllowances().catch(err => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network, address])
+  }, [address, groupId])
 
-  // fetch allowances asynchronously
+  // fetch allowances from selected network
   const fetchAllowances = async () => {
 
     // fetch allowances by grantee from selected network
@@ -90,7 +86,7 @@ const Feegrant = ({ address }) => {
           {"granter"}
         </button>
       </div>
-      {!allowancesGrantee && !allowancesGranter && !error && (
+      {!error && !allowancesGrantee && !allowancesGranter && (
         <div>
           {"loading..."}
         </div>

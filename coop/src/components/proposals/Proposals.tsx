@@ -2,14 +2,14 @@ import * as React from "react"
 import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
-import { choraLocal, choraTestnet } from "chora/chains"
-import {proposalExecutorResultToJSON, proposalStatusToJSON} from "chora/api/cosmos/group/v1/types"
+import { proposalExecutorResultToJSON, proposalStatusToJSON } from "chora/api/cosmos/group/v1/types"
+import { useCoopParams } from "../../hooks/coop"
 
+import { Result } from "chora/components"
 import ProposalPreview from "./ProposalPreview"
 
 import * as styles from "./Proposals.module.css"
 
-const groupId = "1"
 const queryPolicies = "cosmos/group/v1/group_policies_by_group"
 const queryProposals = "cosmos/group/v1/proposals_by_group_policy"
 
@@ -17,51 +17,37 @@ const Proposals = () => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
+  const [groupId, serverUrl] = useCoopParams(chainInfo)
+
   // fetch error and results
-  const [error, setError] = useState<string>("")
-  const [proposals, setProposals] = useState<any>(null)
+  const [error, setError] = useState<string | undefined>(undefined)
+  const [proposals, setProposals] = useState<any[] | undefined>(undefined)
 
   // list options
   const [sort, setSort] = useState<string>("ascending")
   const [filter, setFilter] = useState<string>("submitted")
-  const [filtered, setFiltered] = useState<any>(null)
+  const [filtered, setFiltered] = useState<any>(undefined)
 
-  // whether network is supported by coop app
-  const coopChain = (
-      network === choraTestnet.chainId ||
-      network === choraLocal.chainId
-  )
-
-  // TODO: add hook for server url
-
-  // whether network is a local network
-  const localChain = network?.includes("-local")
-
-  // chora server (use local server if local network)
-  let serverUrl = "http://localhost:3000"
-  if (!localChain) {
-    serverUrl = "https://server.chora.io"
-  }
+  // reset state on network change
+  useEffect(() => {
+    setError(undefined)
+    setProposals(undefined)
+    setSort("ascending")
+    setFilter("submitted")
+  }, [chainInfo?.chainId]);
 
   // fetch on load and value change
   useEffect(() => {
-    setProposals(null)
-    setError("")
 
-    // error if network is not chora-testnet-1 (or chora-local)
-    if (!coopChain) {
-      setError("switch to chora-testnet-1")
-    }
-
-    // fetch policies and proposals if network is chora-testnet-1 (or chora-local)
-    if (coopChain) {
-      fetchPoliciesAndProposals().catch(err => {
+    // fetch proposals and metadata from selected network and data provider
+    if (groupId) {
+      fetchProposals().catch(err => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network])
+  }, [groupId])
 
-  // sort on load and value change
+  // sort on load and sort change
   useEffect(() => {
     const ps = proposals ? [...proposals] : []
 
@@ -90,7 +76,7 @@ const Proposals = () => {
     }
   }, [sort])
 
-  // filter on load and value change
+  // filter on load and filter change
   useEffect(() => {
     if (!proposals) {
       return
@@ -118,8 +104,8 @@ const Proposals = () => {
     }
   }, [filter])
 
-  // fetch policies and proposals asynchronously
-  const fetchPoliciesAndProposals = async () => {
+  // fetch proposals and metadata from selected network and data provider
+  const fetchProposals = async () => {
 
     let addrs: string[] = []
 
@@ -138,21 +124,6 @@ const Proposals = () => {
 
     let ps: any[] = []
 
-    // fetch idx proposals from chora server
-    await fetch(serverUrl + "/idx/" + network + "/group-proposals/" + groupId)
-      .then(res => res.json())
-      .then(res => {
-        if (res.error) {
-          setError(res.error)
-        } else {
-          res["proposals"]?.map(p => ps.push({
-            ...p,
-            status: proposalStatusToJSON(p["status"]),
-            executor_result: proposalExecutorResultToJSON(p["executor_result"]),
-          }))
-        }
-      })
-
     // create promise for all async fetch calls
     const promise = addrs.map(async addr => {
 
@@ -167,6 +138,21 @@ const Proposals = () => {
           }
         })
     })
+
+    // fetch idx proposals from data provider
+    await fetch(serverUrl + "/idx/" + network + "/group-proposals/" + groupId)
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          setError(res.error)
+        } else {
+          res["proposals"]?.map(p => ps.push({
+            ...p,
+            status: proposalStatusToJSON(p["status"]),
+            executor_result: proposalExecutorResultToJSON(p["executor_result"]),
+          }))
+        }
+      })
 
     // set state after promise all complete
     await Promise.all(promise).then(() => {
@@ -219,38 +205,23 @@ const Proposals = () => {
           </button>
         )}
       </div>
-      {!proposals && !error && (
+      {!error && !filtered && (
         <div>
           {"loading..."}
         </div>
       )}
-      {!filtered && proposals && proposals.map(proposal => (
-        <ProposalPreview
-          key={proposal["id"]}
-          proposal={proposal}
-        />
-      ))}
-      {filtered && filtered.map(proposal => (
-        <ProposalPreview
-          key={proposal["id"]}
-          proposal={proposal}
-        />
-      ))}
-      {!filtered && proposals && proposals.length === 0 && !error && (
-        <div>
-          {"no proposals found"}
-        </div>
-      )}
-      {filtered && filtered.length === 0 && !error && (
+      {!error && filtered && filtered.length === 0 && (
         <div>
           {`no proposals with status ${filter}`}
         </div>
       )}
-      {error && (
-        <div>
-          {error}
-        </div>
-      )}
+      {!error && filtered && filtered.map(proposal => (
+        <ProposalPreview
+          key={proposal["id"]}
+          proposal={proposal}
+        />
+      ))}
+      <Result error={error} />
     </div>
   )
 }

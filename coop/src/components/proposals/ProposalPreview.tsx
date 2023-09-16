@@ -3,42 +3,41 @@ import { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
+import { useCoopParams } from "../../hooks/coop"
 
 import * as styles from "./ProposalPreview.module.css"
 
 const ProposalPreview = ({ proposal }) => {
 
-  const { network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
+
+  const [groupId, serverUrl] = useCoopParams(chainInfo)
 
   // fetch error and results
-  const [error, setError] = useState<string>("")
-  const [metadata, setMetadata] = useState<any>(null)
+  const [error, setError] = useState<string | undefined>(undefined)
+  const [metadata, setMetadata] = useState<any>(undefined)
 
-  // TODO: add hook for server url
-
-  // whether network is a local network
-  const localChain = network?.includes("-local")
-
-  // chora server (use local server if local network)
-  let serverUrl = "http://localhost:3000"
-  if (!localChain) {
-    serverUrl = "https://server.chora.io"
-  }
-
-  // fetch on load and value change
+  // reset state on proposal or network change
   useEffect(() => {
-    setMetadata(null)
-    setError("")
+    setError(undefined)
+    setMetadata(undefined)
+  }, [proposal, chainInfo?.chainId]);
 
-    fetchMetadata().catch(err => {
-      setError(err.message)
-    })
-  }, [proposal["metadata"]])
+  // fetch on load and group or metadata change
+  useEffect(() => {
 
-  // fetch metadata asynchronously
+    // fetch proposal metadata from data provider
+    if (groupId && proposal?.metadata) {
+      fetchMetadata().catch(err => {
+        setError(err.message)
+      })
+    }
+  }, [groupId, proposal?.metadata])
+
+  // fetch proposal metadata from data provider
   const fetchMetadata = async () => {
 
-    // fetch proposal data from chora server
+    // fetch proposal metadata from data provider
     await fetch(serverUrl + "/data/" + proposal["metadata"])
       .then(res => res.json())
       .then(res => {

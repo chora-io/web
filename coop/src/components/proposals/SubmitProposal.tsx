@@ -4,7 +4,6 @@ import * as jsonld from "jsonld"
 
 import { WalletContext } from "chora"
 import { MsgSubmitProposal } from "chora/api/cosmos/group/v1/tx"
-import { choraLocal, choraTestnet } from "chora/chains"
 import {
   InputString,
   ResultTx,
@@ -13,15 +12,17 @@ import {
 } from "chora/components"
 import { SelectExecution } from "chora/components/group"
 import { signAndBroadcast } from "chora/utils"
+import { useCoopParams } from "../../hooks/coop"
 
 import * as styles from "./SubmitProposal.module.css"
 
-const groupId = "1"
 const queryPolicies = "cosmos/group/v1/group_policies_by_group"
 
 const SubmitProposal = () => {
 
   const { chainInfo, network, wallet } = useContext(WalletContext)
+
+  const [groupId, serverUrl] = useCoopParams(chainInfo)
 
   // fetch options
   const [policies, setPolicies] = useState<any[]>([])
@@ -37,42 +38,18 @@ const SubmitProposal = () => {
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
-  // whether network is supported by coop app
-  const coopChain = (
-      network === choraTestnet.chainId ||
-      network === choraLocal.chainId
-  )
-
-  // TODO: add hook for server url
-
-  // whether network is a local network
-  const localChain = network?.includes("-local")
-
-  // chora server (use local server if local network)
-  let serverUrl = "http://localhost:3000"
-  if (!localChain) {
-    serverUrl = "https://server.chora.io"
-  }
-
-  // fetch on load and value change
+  // fetch on load and group change
   useEffect(() => {
-    setPolicies(null)
-    setError("")
 
-    // error if network is not chora-testnet-1 (or chora-local)
-    if (!coopChain) {
-      setError("switch to chora-testnet-1")
-    }
-
-    // fetch policies and metadata if network is chora-testnet-1 (or chora-local)
-    if (coopChain) {
+    // fetch policies and metadata from selected network and data provider
+    if (groupId) {
       fetchPoliciesAndMetadata().catch(err => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network])
+  }, [groupId])
 
-  // fetch policies and metadata asynchronously
+  // fetch policies and metadata from selected network and data provider
   const fetchPoliciesAndMetadata = async () => {
 
     let ps: any[] = []
@@ -93,7 +70,7 @@ const SubmitProposal = () => {
     // create promise for all async fetch calls
     const promise = ps.map(async (p, i) => {
 
-      // fetch policy data from chora server
+      // fetch policy metadata from data provider
       await fetch(serverUrl + "/data/" + p["metadata"])
         .then(res => res.json())
         .then(res => {
@@ -120,20 +97,24 @@ const SubmitProposal = () => {
     // set state after promise all complete
     await Promise.all(promise).then(() => {
 
-      // sort policies by name
-      ps = ps.sort((a, b) => {
-        const nameA = a.name.toUpperCase()
-        const nameB = b.name.toUpperCase()
-        if (nameA < nameB) return -1
-        if (nameA > nameB) return 1
-        return 0
-      })
+      // unable to sort if error
+      if (!error) {
+
+        // sort policies by name
+        ps = ps.sort((a, b) => {
+          const nameA = a.name.toUpperCase()
+          const nameB = b.name.toUpperCase()
+          if (nameA < nameB) return -1
+          if (nameA > nameB) return 1
+          return 0
+        })
+      }
 
       setPolicies(ps)
     })
   }
 
-  // submit proposal asynchronously
+  // submit proposal
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
@@ -173,7 +154,7 @@ const SubmitProposal = () => {
 
     let iri: string
 
-    // post data to chora server
+    // post data to data provider
     await fetch(serverUrl + "/data", {
       method: "POST",
       body: JSON.stringify(body),

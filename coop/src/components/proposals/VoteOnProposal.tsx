@@ -8,12 +8,15 @@ import { MsgVote } from "chora/api/cosmos/group/v1/tx"
 import { InputString, ResultTx } from "chora/components"
 import { SelectExecution, SelectVote } from "chora/components/group"
 import { signAndBroadcast } from "chora/utils"
+import { useCoopParams } from "../../hooks/coop"
 
 import * as styles from "./VoteOnProposal.module.css"
 
 const VoteOnProposal = ({ proposalId }) => {
 
-  const { chainInfo, network, wallet } = useContext(WalletContext)
+  const { chainInfo, wallet } = useContext(WalletContext)
+
+  const [groupId, serverUrl] = useCoopParams(chainInfo)
 
   // form input
   const [vote, setVote] = useState<string>("")
@@ -24,18 +27,7 @@ const VoteOnProposal = ({ proposalId }) => {
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
-  // TODO: add hook for server url
-
-  // whether network is a local network
-  const localChain = network?.includes("-local")
-
-  // chora server (use local server if local network)
-  let serverUrl = "http://localhost:3000"
-  if (!localChain) {
-    serverUrl = "https://server.chora.io"
-  }
-
-  // submit vote asynchronously
+  // submit vote
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
@@ -74,7 +66,7 @@ const VoteOnProposal = ({ proposalId }) => {
 
     let iri: string
 
-    // post data to chora server
+    // post data to data provider
     await fetch(serverUrl + "/data", {
       method: "POST",
       body: JSON.stringify(body),

@@ -2,62 +2,57 @@ import * as React from "react"
 import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
-import { choraLocal, choraTestnet } from "chora/chains"
 import { formatTimestamp } from "chora/utils"
+import { useCoopParams } from "../../hooks/coop"
+
+import { Result } from "chora/components"
 
 import * as styles from "./Member.module.css"
 
-const groupId = "1"
 const queryMembers = "cosmos/group/v1/group_members" // TODO(cosmos-sdk): group member query
 
 const Member = ({ memberAddress }) => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
+  const [groupId, serverUrl] = useCoopParams(chainInfo)
+
   // fetch error and results
-  const [error, setError] = useState<string>("")
-  const [member, setMember] = useState<any>(null)
-  const [metadata, setMetadata] = useState<any>(null)
+  const [error, setError] = useState<string | undefined>(undefined)
+  const [member, setMember] = useState<any>(undefined)
+  const [metadata, setMetadata] = useState<any>(undefined)
 
-  // whether network is supported by coop app
-  const coopChain = (
-      network === choraTestnet.chainId ||
-      network === choraLocal.chainId
-  )
-
-  // TODO: add hook for server url
-
-  // whether network is a local network
-  const localChain = network?.includes("-local")
-
-  // chora server (use local server if local network)
-  let serverUrl = "http://localhost:3000"
-  if (!localChain) {
-    serverUrl = "https://server.chora.io"
-  }
-
-  // fetch on load and value change
+  // reset state on address or network change
   useEffect(() => {
-    setMember(null)
-    setError("")
+    setError(undefined)
+    setMember(undefined)
+    setMetadata(undefined)
+  }, [memberAddress, chainInfo?.chainId]);
 
-    // error if network is not chora-testnet-1 (or chora-local)
-    if (!coopChain) {
-      setError("switch to chora-testnet-1")
-    }
+  // fetch on load and address or group change
+  useEffect(() => {
 
-    // fetch member and metadata if network is chora-testnet-1 (or chora-local)
-    if (coopChain) {
-      fetchMemberAndMetadata().catch(err => {
+    // fetch member from selected network
+    if (groupId) {
+      fetchMember().catch(err => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network, memberAddress])
+  }, [memberAddress, groupId])
 
-  // fetch member and metadata asynchronously
-  const fetchMemberAndMetadata = async () => {
+  // fetch on load and member metadata change
+  useEffect(() => {
 
-    let iri: string
+    // fetch member metadata from data provider
+    if (member?.metadata) {
+      fetchMemberMetadata().catch(err => {
+        setError(err.message)
+      })
+    }
+  }, [member?.metadata])
+
+  // fetch member from selected network
+  const fetchMember = async () => {
 
     // TODO(cosmos-sdk): query member by group id and member address
 
@@ -71,85 +66,90 @@ const Member = ({ memberAddress }) => {
           const found = res["members"].find(m => m["member"]["address"] === memberAddress)
           if (found) {
             setMember(found["member"])
-            iri = found["member"]["metadata"]
           }
         }
       })
+  }
 
-    // return if iri is empty or was never set
-    if (typeof iri === "undefined" || iri === "") {
-      return
-    }
+  // fetch member metadata from data provider
+  const fetchMemberMetadata = async () => {
 
-    // fetch member data from chora server
-    await fetch(serverUrl + "/data/" + iri)
-      .then(res => res.json())
-      .then(res => {
-        if (res.error) {
-          setError(res.error)
-          setMetadata(null)
-        } else {
-          const data = JSON.parse(res["jsonld"])
-          if (data["@context"] !== "https://schema.chora.io/contexts/group_member.jsonld") {
-            setError("unsupported metadata schema")
-            setMetadata(null)
+    // TODO: handle multiple metadata formats (i.e. IRI, IPFS, JSON, etc.)
+
+    // handle metadata as json, otherwise chora server iri
+    try {
+
+      // parse member metadata
+      const parsedMetadata = JSON.parse(member.metadata)
+      setMetadata(parsedMetadata)
+
+    } catch(e) {
+
+      // do nothing with error
+
+      // fetch member metadata from data provider
+      await fetch(serverUrl + "/data/" + member.metadata)
+        .then(res => res.json())
+        .then(res => {
+          if (res.error) {
+            setError(res.error)
           } else {
-            setError("")
-            setMetadata(data)
+            const data = JSON.parse(res["jsonld"])
+            if (
+              data["@context"] !== "https://schema.chora.io/contexts/group_policy.jsonld" &&
+              data["@context"] !== "https://schema.chora.io/contexts/group_member.jsonld"
+            ) {
+              setError(`unsupported schema: ${data["@context"]}`)
+            } else {
+              setMetadata(data)
+            }
           }
-        }
-      })
-      .catch(err => {
-        setError(err.message)
-      })
+        })
+        .catch(err => {
+          setError(err.message)
+        })
+    }
   }
 
   return (
     <div className={styles.box}>
-      {!member && !metadata && !error && (
-        <div>
-          {"loading..."}
+      <div>
+        <div className={styles.boxText}>
+          <h3>
+            {"name"}
+          </h3>
+          <p>
+          {metadata && metadata["name"] ? metadata["name"] : "NA"}
+          </p>
         </div>
-      )}
-      {member && metadata && (
-        <div>
-          <div className={styles.boxText}>
-            <h3>
-              {"name"}
-            </h3>
-            <p>
-              {metadata["name"] ? metadata["name"] : "NA"}
-            </p>
-          </div>
-          <div className={styles.boxText}>
-            <h3>
-              {"address"}
-            </h3>
-            <p>
-              {member["address"]}
-            </p>
-          </div>
-          <div className={styles.boxText}>
-            <h3>
-              {"added at"}
-            </h3>
-            <p>
-              {formatTimestamp(member["added_at"])}
-            </p>
-          </div>
-          <div className={styles.boxText}>
-            <h3>
-              {"weight"}
-            </h3>
-            <p>
-              {member["weight"]}
-            </p>
-          </div>
+        <div className={styles.boxText}>
+          <h3>
+            {"address"}
+          </h3>
+          <p>
+          {member && member["address"] ? member["address"] : "NA"}
+          </p>
         </div>
-      )}
+        <div className={styles.boxText}>
+          <h3>
+            {"added at"}
+          </h3>
+          <p>
+          {member && member["added_at"] ? formatTimestamp(member["added_at"]) : "NA"}
+          </p>
+        </div>
+        <div className={styles.boxText}>
+          <h3>
+            {"weight"}
+          </h3>
+          <p>
+            {member && member["weight"] ? member["weight"] : "NA"}
+          </p>
+        </div>
+      </div>
       {error && (
-        <div>
-          {error}
+        <div className={styles.boxText}>
+          <Result error={error} />
         </div>
       )}
     </div>

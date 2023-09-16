@@ -5,14 +5,15 @@ import * as Long from "long"
 
 import { WalletContext } from "chora"
 import { MsgExec } from "chora/api/cosmos/group/v1/tx"
-import { choraLocal, choraTestnet } from "chora/chains"
 import { ResultTx } from "chora/components"
 import { formatTimestamp, signAndBroadcast } from "chora/utils"
 import { proposalStatusToJSON, proposalExecutorResultToJSON } from "chora/api/cosmos/group/v1/types"
+import { useCoopParams } from "../../hooks/coop"
+
+import { Result } from "chora/components"
 
 import * as styles from "./Proposal.module.css"
 
-const groupId = "1"
 const queryMembers = "cosmos/group/v1/group_members" // TODO(cosmos-sdk): group member query
 const queryPolicy = "/cosmos/group/v1/group_policy_info"
 const queryProposal = "cosmos/group/v1/proposal"
@@ -24,89 +25,83 @@ const Proposal = ({ proposalId }) => {
 
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
+  const [groupId, serverUrl] = useCoopParams(chainInfo)
+
   // fetch error and results
-  const [error, setError] = useState<string>("")
-  const [proposal, setProposal] = useState<any>(null)
-  const [metadata, setMetadata] = useState<any>(null)
-  const [policy, setPolicy] = useState<any>(null)
-  const [proposers, setProposers] = useState<any>(null)
-  const [votes, setVotes] = useState<any>(null)
+  const [error, setError] = useState<string | undefined>(undefined)
+  const [proposal, setProposal] = useState<any>(undefined)
+  const [metadata, setMetadata] = useState<any>(undefined)
+  const [policy, setPolicy] = useState<any>(undefined)
+  const [proposers, setProposers] = useState<any[] | undefined>(undefined)
+  const [votes, setVotes] = useState<any[] | undefined>(undefined)
 
   // execution error and results
-  const [execError, setExecError] = useState<string>("")
-  const [execSuccess, setExecSuccess] = useState<string>("")
+  const [execError, setExecError] = useState<string | undefined>(undefined)
+  const [execSuccess, setExecSuccess] = useState<string | undefined>(undefined)
 
-  // whether network is supported by coop app
-  const coopChain = (
-      network === choraTestnet.chainId ||
-      network === choraLocal.chainId
-  )
-
-  // TODO: add hook for server url
-
-  // whether network is a local network
-  const localChain = network?.includes("-local")
-
-  // chora server (use local server if local network)
-  let serverUrl = "http://localhost:3000"
-  if (!localChain) {
-    serverUrl = "https://server.chora.io"
-  }
-
-  // fetch on load and value change
+  // reset state on address or network change
   useEffect(() => {
-    setProposal(null)
-    setError("")
+    setError(undefined)
+    setProposal(undefined)
+    setMetadata(undefined)
+    setPolicy(undefined)
+    setProposers(undefined)
+    setVotes(undefined)
+    setExecError(undefined)
+    setExecSuccess(undefined)
+  }, [proposalId, chainInfo?.chainId]);
 
-    // error if network is not chora-testnet-1 (or chora-local)
-    if (!coopChain) {
-      setError("switch to chora-testnet-1")
-    }
+  // fetch on load and id or group change
+  useEffect(() => {
 
-    // fetch proposal and metadata if network is chora-testnet-1 (or chora-local)
-    if (coopChain) {
-      fetchProposalAndMetadata().catch(err => {
+    // fetch proposal from selected network
+    if (groupId) {
+      fetchProposal().catch(err => {
+        setError(err.message)
+      })
+      fetchProposalVotes().catch(err => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network, proposalId])
+  }, [proposalId, groupId])
 
-  // fetch on load and value change
+  // fetch on load and proposal metadata change
   useEffect(() => {
-    setError("")
-    fetchProposalProposers().catch(err => {
-      setError(err.message)
-    })
-    fetchProposalPolicy().catch(err => {
-      setError(err.message)
-    })
-    fetchProposalVotes().catch(err => {
-      setError(err.message)
-    })
-  }, [proposal])
 
-  // fetch proposal and metadata asynchronously
-  const fetchProposalAndMetadata = async () => {
-
-    let iri: string
-
-    // fetch idx proposals from chora server
-    await fetch(serverUrl + "/idx/" + network + "/group-proposal/" + proposalId)
-      .then(res => res.json())
-      .then(res => {
-        if (res.error) {
-          if (!proposal) {
-            setError(res.error)
-          }
-        } else {
-          setProposal({
-            ...res["proposal"],
-            status: proposalStatusToJSON(res["proposal"]["status"]),
-            executor_result: proposalExecutorResultToJSON(res["proposal"]["executor_result"]),
-          })
-          iri = res["proposal"]["metadata"]
-        }
+    // fetch proposal metadata from data provider
+    if (proposal?.metadata) {
+      fetchProposalMetadata().catch(err => {
+        setError(err.message)
       })
+    }
+  }, [proposal?.metadata])
+
+  // fetch on load and proposal proposers change
+  useEffect(() => {
+
+    // fetch proposal proposers from selected network and data provider
+    if (proposal?.proposers) {
+      fetchProposalProposers().catch(err => {
+        setError(err.message)
+      })
+    }
+  }, [proposal?.proposers])
+
+  // fetch on load and proposal policy address change
+  useEffect(() => {
+
+    // fetch proposal policy from selected network and data provider
+    if (proposal?.group_policy_address) {
+      fetchProposalPolicy().catch(err => {
+        setError(err.message)
+      })
+    }
+  }, [proposal?.group_policy_address])
+
+  // TODO: fetch votes voters from data provider
+
+  // fetch proposal from selected network and data provider
+  const fetchProposal = async () => {
 
     // fetch proposal from selected network
     await fetch(chainInfo.rest + "/" + queryProposal + "/" + proposalId)
@@ -117,18 +112,52 @@ const Proposal = ({ proposalId }) => {
             setError(res.message)
           }
         } else {
-          setProposal(res["proposal"])
-          iri = res["proposal"]["metadata"]
+          if (!proposal) {
+            setProposal(res["proposal"])
+          }
         }
       })
 
-    // return if iri is empty or was never set
-    if (typeof iri === "undefined" || iri === "") {
-      return
-    }
+    // fetch idx proposals from data provider
+    await fetch(serverUrl + "/idx/" + network + "/group-proposal/" + proposalId)
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          if (!proposal) {
+            setError(res.error)
+          }
+        } else {
+          if (!proposal) {
+            setProposal({
+              ...res["proposal"],
+              status: proposalStatusToJSON(res["proposal"]["status"]),
+              executor_result: proposalExecutorResultToJSON(res["proposal"]["executor_result"]),
+            })
+          }
+        }
+      })
+  }
 
-    // fetch proposal data from chora server
-    await fetch(serverUrl + "/data/" + iri)
+  // fetch proposal votes from selected network
+  const fetchProposalVotes = async () => {
+
+    // fetch votes from selected network
+    await fetch(chainInfo.rest + "/" + queryVotes + "/" + proposalId)
+      .then(res => res.json())
+      .then(res => {
+        if (res.code) {
+          setError(res.message)
+        } else {
+          setVotes(res["votes"])
+        }
+      })
+  }
+
+  // fetch proposal metadata from data provider
+  const fetchProposalMetadata = async () => {
+
+    // fetch proposal metadata from data provider
+    await fetch(serverUrl + "/data/" + proposal.metadata)
       .then(res => res.json())
       .then(res => {
         if (res.error) {
@@ -150,7 +179,7 @@ const Proposal = ({ proposalId }) => {
       })
   }
 
-  // fetch proposer metadata (i.e. member metadata)
+  // fetch proposal proposers metadata from selected network and data provider
   const fetchProposalProposers = async () => {
 
     // TODO(cosmos-sdk): query member by group id and member address
@@ -178,7 +207,7 @@ const Proposal = ({ proposalId }) => {
 
     const promise = members.map(async member => {
 
-      // fetch member data from chora server
+      // fetch member metadata from data provider
       await fetch(serverUrl + "/data/" + member["metadata"])
         .then(res => res.json())
         .then(res => {
@@ -208,7 +237,7 @@ const Proposal = ({ proposalId }) => {
     })
   }
 
-  // fetch policy metadata
+  // fetch proposal policy from selected network and data provider
   const fetchProposalPolicy = async () => {
 
     let iri: string
@@ -224,46 +253,34 @@ const Proposal = ({ proposalId }) => {
           }
         })
 
-    // fetch member data from chora server
-    await fetch(serverUrl + "/data/" + iri)
-      .then(res => res.json())
-      .then(res => {
-        if (res.error) {
-          setError(res.error)
-        } else {
-          const data = JSON.parse(res["jsonld"])
-          if (data["@context"] !== "https://schema.chora.io/contexts/group_policy.jsonld") {
-            setError("unsupported metadata schema")
+    if (iri) {
+
+      // fetch member metadata from data provider
+      await fetch(serverUrl + "/data/" + iri)
+        .then(res => res.json())
+        .then(res => {
+          if (res.error) {
+            setError(res.error)
           } else {
-            setError("")
-            setPolicy({
-              address: proposal["group_policy_address"],
-              name: data["name"]
-            })
+            const data = JSON.parse(res["jsonld"])
+            if (data["@context"] !== "https://schema.chora.io/contexts/group_policy.jsonld") {
+              setError("unsupported metadata schema")
+            } else {
+              setError("")
+              setPolicy({
+                address: proposal["group_policy_address"],
+                name: data["name"]
+              })
+            }
           }
-        }
-      })
-      .catch(err => {
-        setError(err.message)
-      })
+        })
+        .catch(err => {
+          setError(err.message)
+        })
+    }
   }
 
-  // fetch proposal votes
-  const fetchProposalVotes = async () => {
-
-    // fetch votes from selected network
-    await fetch(chainInfo.rest + "/" + queryVotes + "/" + proposal["id"])
-      .then(res => res.json())
-      .then(res => {
-        if (res.code) {
-          setError(res.message)
-        } else {
-          setVotes(res["votes"])
-        }
-      })
-  }
-
-  // execute proposal asynchronously
+  // execute proposal
   const handleExecute = async () => {
 
     const msg = {
@@ -293,7 +310,7 @@ const Proposal = ({ proposalId }) => {
     )
   )
 
-  // current vote of current account
+  // current vote of active user
   const currentVote = votes?.find(vote => vote["voter"] === wallet["bech32Address"])
 
   // whether proposal is executable
@@ -310,224 +327,211 @@ const Proposal = ({ proposalId }) => {
 
   return (
     <div className={styles.box}>
-      {!proposal && !metadata && !error && (
-        <div>
-          {"loading..."}
+      <div className={styles.boxOptions}>
+        {currentVote && (
+          <>
+            {`vote submitted (${currentVote["option"]})`}
+          </>
+        )}
+        {!error && !currentVote && !votesFinalized && (
+          <Link to={`/proposals/vote/?id=${proposalId}`}>
+            {"vote on proposal"}
+          </Link>
+        )}
+        {proposalExecutable && (
+          <button onClick={handleExecute}>
+            {"execute proposal"}
+          </button>
+        )}
+        {votesFinalized && !proposalExecutable && (
+          <div>
+            {"no further action can be taken"}
+          </div>
+        )}
+        {error && <Result error={error} />}
+      </div>
+      {(execSuccess || execError) && (
+        <div className={styles.boxResultAbove}>
+          <ResultTx
+            error={execError}
+            rest={chainInfo.rest}
+            success={execSuccess}
+          />
         </div>
       )}
-      {proposal && metadata && (
-        <div>
-          <div className={styles.boxOptions}>
-            {!currentVote && !votesFinalized && (
-              <Link to={`/proposals/vote/?id=${proposalId}`}>
-                {"vote on proposal"}
+      <div className={styles.boxText}>
+        <h3>
+          {"status"}
+        </h3>
+        <p>
+          {proposal && proposal["status"] ? proposal["status"] : "NA"}
+        </p>
+      </div>
+      <div className={styles.boxText}>
+        <h3>
+          {"name"}
+        </h3>
+        <p>
+          {metadata && metadata["name"] ? metadata["name"] : "NA"}
+        </p>
+      </div>
+      <div className={styles.boxText}>
+        <h3>
+          {"description"}
+        </h3>
+        <p>
+          {metadata && metadata["description"] ? metadata["description"] : "NA"}
+        </p>
+      </div>
+      {proposal && !proposers && (
+        <div className={styles.boxText}>
+          <h3>
+            {proposal["proposers"].length > 1 ? "proposers" : "proposer"}
+          </h3>
+          {proposal["proposers"].map(proposer => (
+            <p key={proposer}>
+              <Link to={`/members/?address=${proposer}`}>
+                {proposer}
               </Link>
-            )}
-            {currentVote && (
-              <>
-                {`vote submitted (${currentVote["option"]})`}
-              </>
-            )}
-            {proposalExecutable && (
-              <button onClick={handleExecute}>
-                {"execute proposal"}
-              </button>
-            )}
-            {votesFinalized && !proposalExecutable && (
-              <div>
-                {"no further action can be taken"}
-              </div>
-            )}
-          </div>
-          {(execSuccess || execError) && (
-            <div className={styles.boxResultAbove}>
-              <ResultTx
-                error={execError}
-                rest={chainInfo.rest}
-                success={execSuccess}
-              />
-            </div>
-          )}
-          <div className={styles.boxText}>
-            <h3>
-              {"status"}
-            </h3>
-            <p>
-              {proposal["status"]}
             </p>
-          </div>
-          <div className={styles.boxText}>
-            <h3>
-              {"name"}
-            </h3>
-            <p>
-              {metadata["name"] ? metadata["name"] : "NA"}
-            </p>
-          </div>
-          <div className={styles.boxText}>
-            <h3>
-              {"description"}
-            </h3>
-            <p>
-              {metadata["description"] ? metadata["description"] : "NA"}
-            </p>
-          </div>
-          {!proposers && proposal["proposers"] && (
-            <div className={styles.boxText}>
-              <h3>
-                {proposal["proposers"].length > 1 ? "proposers" : "proposer"}
-              </h3>
-              {proposal["proposers"].map(proposer => (
-                <p key={proposer}>
-                  <Link to={`/members/?address=${proposer}`}>
-                    {proposer}
-                  </Link>
-                </p>
-              ))}
-            </div>
-          )}
-          {proposers && (
-            <div className={styles.boxText}>
-               <h3>
-                {proposers.length > 1 ? "proposers" : "proposer"}
-              </h3>
-              {proposers.map(proposer => (
-                <p key={proposer["address"]}>
-                  {`${proposer["name"]} (`}
-                  <Link to={`/members/?address=${proposer["address"]}`}>
-                    {proposer["address"]}
-                  </Link>
-                  {")"}
-                </p>
-              ))}
-            </div>
-          )}
-          {!policy && (
-            <div className={styles.boxText}>
-              <h3>
-                {"group policy address"}
-              </h3>
-              <p>
-                <Link to={`/policies/?address=${proposal["group_policy_address"]}`}>
-                  {proposal["group_policy_address"]}
-                </Link>
-              </p>
-            </div>
-          )}
-          {policy && (
-            <div className={styles.boxText}>
-              <h3>
-                {"group policy"}
-              </h3>
-              <p>
-                {`${policy["name"]} (`}
-                <Link to={`/policies/?address=${policy["address"]}`}>
-                  {policy["address"]}
-                </Link>
-                {")"}
-              </p>
-            </div>
-          )}
-          <div className={styles.boxText}>
-            <h3>
-              {"submit time"}
-            </h3>
-            <p>
-              {formatTimestamp(proposal["submit_time"])}
-            </p>
-          </div>
-          <div className={styles.boxText}>
-            <h3>
-              {"voting period end"}
-            </h3>
-            <p>
-              {formatTimestamp(proposal["voting_period_end"])}
-            </p>
-          </div>
-          <div className={styles.boxText}>
-            <h3>
-              {"messages"}
-            </h3>
-            {(!proposal["messages"] || proposal["messages"].length === 0) && (
-              <p>
-                {"NA"}
-              </p>
-            )}
-            {proposal["messages"]?.length > 0 && (
-              <pre>
-                <p>
-                  {JSON.stringify(proposal["messages"], null, " ")}
-                </p>
-              </pre>
-            )}
-          </div>
-          {votesFinalized && (
-            <div>
-              <div className={styles.boxText}>
-                <h3>
-                  {"final tally yes"}
-                </h3>
-                <p>
-                  {proposal["final_tally_result"]["yes_count"]}
-                </p>
-              </div>
-              <div className={styles.boxText}>
-                <h3>
-                  {"final tally abstain"}
-                </h3>
-                <p>
-                  {proposal["final_tally_result"]["abstain_count"]}
-                </p>
-              </div>
-              <div className={styles.boxText}>
-                <h3>
-                  {"final tally no"}
-                </h3>
-                <p>
-                  {proposal["final_tally_result"]["no_count"]}
-                </p>
-              </div>
-              <div className={styles.boxText}>
-                <h3>
-                  {"final tally no with veto"}
-                </h3>
-                <p>
-                  {proposal["final_tally_result"]["no_with_veto_count"]}
-                </p>
-              </div>
-              <div className={styles.boxText}>
-                <h3>
-                  {"executor result"}
-                </h3>
-                <p>
-                  {proposal["executor_result"]}
-                </p>
-              </div>
-            </div>
-          )}
-          <div className={styles.boxText}>
-            <h3>
-              {"group version"}
-            </h3>
-            <p>
-              {proposal["group_version"]}
-            </p>
-          </div>
-          <div className={styles.boxText}>
-            <h3>
-              {"group policy version"}
-            </h3>
-            <p>
-              {proposal["group_policy_version"]}
-            </p>
-          </div>
+          ))}
         </div>
       )}
-      {error && (
+      {proposers && (
+        <div className={styles.boxText}>
+           <h3>
+            {proposers.length > 1 ? "proposers" : "proposer"}
+          </h3>
+          {proposers.map(proposer => (
+            <p key={proposer["address"]}>
+              {`${proposer["name"]} (`}
+              <Link to={`/members/?address=${proposer["address"]}`}>
+                {proposer["address"]}
+              </Link>
+              {")"}
+            </p>
+          ))}
+        </div>
+      )}
+      <div className={styles.boxText}>
+        <h3>
+          {"group policy address"}
+        </h3>
+        {!proposal && (
+          <p>
+            {"NA"}
+          </p>
+        )}
+        {proposal && !policy && (
+          <p>
+            <Link to={`/policies/?address=${proposal["group_policy_address"]}`}>
+              {proposal["group_policy_address"]}
+            </Link>
+          </p>
+        )}
+        {policy && (
+          <p>
+            {`${policy["name"]} (`}
+            <Link to={`/policies/?address=${policy["address"]}`}>
+              {policy["address"]}
+            </Link>
+            {")"}
+          </p>
+        )}
+      </div>
+      <div className={styles.boxText}>
+        <h3>
+          {"submit time"}
+        </h3>
+        <p>
+          {proposal && proposal["submit_time"] ? formatTimestamp(proposal["submit_time"]) : "NA"}
+        </p>
+      </div>
+      <div className={styles.boxText}>
+        <h3>
+          {"voting period end"}
+        </h3>
+        <p>
+          {proposal && proposal["voting_period_end"] ? formatTimestamp(proposal["voting_period_end"]) : "NA"}
+        </p>
+      </div>
+      <div className={styles.boxText}>
+        <h3>
+          {"messages"}
+        </h3>
+        {(!proposal || (proposal && (!proposal["messages"] || proposal["messages"].length === 0))) && (
+          <p>
+            {"NA"}
+          </p>
+        )}
+        {proposal && proposal["messages"]?.length > 0 && (
+          <pre>
+            <p>
+              {JSON.stringify(proposal["messages"], null, " ")}
+            </p>
+          </pre>
+        )}
+      </div>
+      {proposal && votesFinalized && (
         <div>
-          {error}
+          <div className={styles.boxText}>
+            <h3>
+              {"final tally yes"}
+            </h3>
+            <p>
+              {proposal["final_tally_result"]["yes_count"]}
+            </p>
+          </div>
+          <div className={styles.boxText}>
+            <h3>
+              {"final tally abstain"}
+            </h3>
+            <p>
+              {proposal["final_tally_result"]["abstain_count"]}
+            </p>
+          </div>
+          <div className={styles.boxText}>
+            <h3>
+              {"final tally no"}
+            </h3>
+            <p>
+              {proposal["final_tally_result"]["no_count"]}
+            </p>
+          </div>
+          <div className={styles.boxText}>
+            <h3>
+              {"final tally no with veto"}
+            </h3>
+            <p>
+              {proposal["final_tally_result"]["no_with_veto_count"]}
+            </p>
+          </div>
+          <div className={styles.boxText}>
+            <h3>
+              {"executor result"}
+            </h3>
+            <p>
+              {proposal["executor_result"]}
+            </p>
+          </div>
         </div>
       )}
+      <div className={styles.boxText}>
+        <h3>
+          {"group version"}
+        </h3>
+        <p>
+          {proposal && proposal["group_version"] ? proposal["group_version"] : "NA"}
+        </p>
+      </div>
+      <div className={styles.boxText}>
+        <h3>
+          {"group policy version"}
+        </h3>
+        <p>
+          {proposal && proposal["group_policy_version"] ? proposal["group_policy_version"] : "NA"}
+        </p>
+      </div>
     </div>
   )
 }

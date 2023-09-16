@@ -3,13 +3,12 @@ import { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
-import { choraLocal, choraTestnet } from "chora/chains"
 import { formatTimestamp } from "chora/utils"
 import { voteOptionToJSON } from "chora/api/cosmos/group/v1/types"
+import { useCoopParams } from "../../hooks/coop"
 
 import * as styles from "./ProposalVote.module.css"
 
-const groupId = "1"
 const queryMembers = "cosmos/group/v1/group_members" // TODO(cosmos-sdk): group member query
 const queryVote = "cosmos/group/v1/vote_by_proposal_voter"
 
@@ -17,70 +16,41 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
+  const [groupId, serverUrl] = useCoopParams(chainInfo)
+
   // fetch error and results
   const [error, setError] = useState<string>("")
   const [vote, setVote] = useState<any>(null)
   const [metadata, setMetadata] = useState<any>(null)
   const [voter, setVoter] = useState<any>(null)
 
-  // whether network is supported by coop app
-  const coopChain = (
-      network === choraTestnet.chainId ||
-      network === choraLocal.chainId
-  )
-
-  // TODO: add hook for server url
-
-  // whether network is a local network
-  const localChain = network?.includes("-local")
-
-  // chora server (use local server if local network)
-  let serverUrl = "http://localhost:3000"
-  if (!localChain) {
-    serverUrl = "https://server.chora.io"
-  }
-
-  // fetch on load and value change
+  // fetch on load and proposal, address, and group change
   useEffect(() => {
-    setVote(null)
-    setError("")
 
-    // error if network is not chora-testnet-1 (or chora-local)
-    if (!coopChain) {
-      setError("switch to chora-testnet-1")
-    }
-
-    // fetch vote and metadata if network is chora-testnet-1 (or chora-local)
-    if (coopChain) {
-      fetchVoteAndMetadata().catch(err => {
+    // fetch vote from selected network
+    if (groupId) {
+      fetchVote().catch(err => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network, proposalId, voterAddress])
+  }, [proposalId, voterAddress, groupId])
 
-  // fetch vote and metadata asynchronously
-  const fetchVoteAndMetadata = async () => {
+  // fetch on load and vote metadata change
+  useEffect(() => {
+
+    // fetch vote metadata from selected network
+    if (groupId && vote?.metadata) {
+      fetchMetadata().catch(err => {
+        setError(err.message)
+      })
+    }
+  }, [groupId, vote?.metadata])
+
+  // fetch vote from selected network and data provider
+  const fetchVote = async () => {
 
     let vote: any
     let iri: string
-
-    // fetch idx vote from chora server
-    await fetch(serverUrl + "/idx/" + network + "/group-vote/" + proposalId + "/" + voterAddress)
-      .then(res => res.json())
-      .then(res => {
-        if (res.error) {
-          if (!vote) {
-            setError(res.error)
-          }
-        } else {
-          vote = {
-            ...res["vote"],
-            option: voteOptionToJSON(res["vote"]["option"]),
-          }
-          iri = res["vote"]["metadata"]
-          setVote(vote)
-        }
-      })
 
     // fetch vote from selected network
     await fetch(chainInfo.rest + "/" + queryVote + "/" + proposalId + "/" + voterAddress)
@@ -91,39 +61,33 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
             setError(res.message)
           }
         } else {
-          vote = res["vote"]
-          iri = res["vote"]["metadata"]
-          setVote(vote)
-        }
-      })
-
-    // return if iri is empty or was never set
-    if (typeof iri === "undefined" || iri === "") {
-      return
-    }
-
-    // fetch vote data from chora server
-    await fetch(serverUrl + "/data/" + iri)
-      .then(res => res.json())
-      .then(res => {
-        if (res.error) {
-          setError(res.error)
-          setMetadata(null)
-        } else {
-          const data = JSON.parse(res["jsonld"])
-          if (data["@context"] !== "https://schema.chora.io/contexts/group_vote.jsonld") {
-            setError("unsupported metadata schema")
-            setMetadata(null)
-          } else {
-            setError("")
-            setMetadata(data)
+          if (!vote) {
+            vote = res["vote"]
+            iri = res["vote"]["metadata"]
+            setVote(vote)
           }
         }
       })
-      .catch(err => {
-        setError(err.message)
-      })
 
+    // fetch idx vote from data provider
+    await fetch(serverUrl + "/idx/" + network + "/group-vote/" + proposalId + "/" + voterAddress)
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          if (!vote) {
+            setError(res.error)
+          }
+        } else {
+          if (!vote) {
+            vote = {
+              ...res["vote"],
+              option: voteOptionToJSON(res["vote"]["option"]),
+            }
+            iri = res["vote"]["metadata"]
+            setVote(vote)
+          }
+        }
+      })
 
     // TODO(cosmos-sdk): query member by group id and member address
 
@@ -144,7 +108,7 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
         }
       })
 
-    // fetch member data from chora server
+    // fetch member metadata from data provider
     await fetch(serverUrl + "/data/" + member["metadata"])
       .then(res => res.json())
       .then(res => {
@@ -160,6 +124,29 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
               address: member["address"],
               name: data["name"],
             })
+          }
+        }
+      })
+      .catch(err => {
+        setError(err.message)
+      })
+  }
+
+  // fetch vote metadata from data provider
+  const fetchMetadata = async () => {
+
+    // fetch vote metadata from data provider
+    await fetch(serverUrl + "/data/" + vote.metadata)
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          setError(res.error)
+        } else {
+          const data = JSON.parse(res["jsonld"])
+          if (data["@context"] !== "https://schema.chora.io/contexts/group_vote.jsonld") {
+            setError("unsupported metadata schema")
+          } else {
+            setMetadata(data)
           }
         }
       })

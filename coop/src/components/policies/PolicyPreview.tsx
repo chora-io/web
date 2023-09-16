@@ -3,92 +3,98 @@ import { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
+import { useCoopParams } from "../../hooks/coop"
+
+import { Result } from "chora/components"
 
 import * as styles from "./PolicyPreview.module.css"
 
 const GroupPolicy = ({ policy }) => {
 
-  const { network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
+
+  const [groupId, serverUrl] = useCoopParams(chainInfo)
 
   // fetch error and results
-  const [error, setError] = useState<string>("")
-  const [metadata, setMetadata] = useState<any>(null)
+  const [error, setError] = useState<string | undefined>(undefined)
+  const [metadata, setMetadata] = useState<any>(undefined)
 
-  // TODO: add hook for server url
-
-  // whether network is a local network
-  const localChain = network?.includes("-local")
-
-  // chora server (use local server if local network)
-  let serverUrl = "http://localhost:3000"
-  if (!localChain) {
-    serverUrl = "https://server.chora.io"
-  }
-
-  // fetch on load and value change
+  // reset state on policy or network change
   useEffect(() => {
-    setMetadata(null)
-    setError("")
+    setError(undefined)
+    setMetadata(undefined)
+  }, [policy, chainInfo?.chainId]);
 
-    fetchMetadata().catch(err => {
-      setError(err.message)
-    })
-  }, [policy["metadata"]])
+  // fetch on load and group or policy metadata change
+  useEffect(() => {
 
-  // fetch metadata asynchronously
-  const fetchMetadata = async () => {
-
-    // fetch policy data from chora server
-    await fetch(serverUrl + "/data/" + policy["metadata"])
-      .then(res => res.json())
-      .then(res => {
-        if (res.error) {
-          setError(res.error)
-          setMetadata(null)
-        } else {
-          const data = JSON.parse(res["jsonld"])
-          if (data["@context"] !== "https://schema.chora.io/contexts/group_policy.jsonld") {
-            setError("unsupported metadata schema")
-            setMetadata(null)
-          } else {
-            setError("")
-            setMetadata(data)
-          }
-        }
-      })
-      .catch(err => {
+    // fetch policy metadata from data provider
+    if (groupId && policy?.metadata) {
+      fetchMetadata().catch(err => {
         setError(err.message)
       })
+    }
+  }, [groupId, policy?.metadata])
+
+  // fetch policy metadata from data provider
+  const fetchMetadata = async () => {
+
+    // TODO: handle multiple metadata formats (i.e. IRI, IPFS, JSON, etc.)
+
+    // handle metadata as json, otherwise chora server iri
+    try {
+
+      // parse policy metadata
+      const parsedMetadata = JSON.parse(policy.metadata)
+      setMetadata(parsedMetadata)
+
+    } catch(e) {
+
+      // fetch policy metadata from data provider
+      await fetch(serverUrl + "/data/" + policy.metadata)
+        .then(res => res.json())
+        .then(res => {
+          if (res.error) {
+            setError(res.error)
+          } else {
+            const data = JSON.parse(res["jsonld"])
+            if (data["@context"] !== "https://schema.chora.io/contexts/group_policy.jsonld") {
+              setError("unsupported metadata schema")
+            } else {
+              setMetadata(data)
+            }
+          }
+        })
+        .catch(err => {
+          setError(err.message)
+        })
+    }
   }
 
   return (
     <div className={styles.boxItem}>
-      {policy && metadata && (
-        <div>
-          <div className={styles.boxText}>
-            <h3>
-              {"name"}
-            </h3>
-            <p>
-              {metadata["name"]}
-            </p>
-          </div>
-          <div className={styles.boxText}>
-            <h3>
-              {"address"}
-            </h3>
-            <p>
-              {policy["address"]}
-            </p>
-          </div>
-          <Link to={`/policies/?address=${policy["address"]}`}>
-            {"view policy"}
-          </Link>
-        </div>
-      )}
+      <div className={styles.boxText}>
+        <h3>
+          {"name"}
+        </h3>
+        <p>
+          {metadata && metadata["name"] ? metadata["name"] : "NA"}
+        </p>
+      </div>
+      <div className={styles.boxText}>
+        <h3>
+          {"address"}
+        </h3>
+        <p>
+          {policy["address"]}
+        </p>
+      </div>
+      <Link to={`/policies/?address=${policy["address"]}`}>
+        {"view policy"}
+      </Link>
       {error && (
-        <div>
-          {error}
+        <div className={styles.boxText}>
+          <Result error={error} />
         </div>
       )}
     </div>

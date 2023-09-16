@@ -3,7 +3,9 @@ import { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
-import { choraLocal, choraTestnet } from "chora/chains"
+import { useCoopParams } from "../../hooks/coop"
+
+import { Result } from "chora/components"
 
 import * as styles from "./Voucher.module.css"
 
@@ -14,58 +16,57 @@ const Voucher = ({ voucherId }) => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
+  const [groupId, serverUrl] = useCoopParams(chainInfo)
+
   // fetch error and results
-  const [error, setError] = useState<string>("")
-  const [voucher, setVoucher] = useState<any>(null)
-  const [metadata, setMetadata] = useState<any>(null)
-  const [issuer, setIssuer] = useState<any>(null)
+  const [error, setError] = useState<string | undefined>(undefined)
+  const [voucher, setVoucher] = useState<any>(undefined)
+  const [metadata, setMetadata] = useState<any>(undefined)
+  const [issuer, setIssuer] = useState<any>(undefined)
 
-  // whether network is supported by coop app
-  const coopChain = (
-      network === choraTestnet.chainId ||
-      network === choraLocal.chainId
-  )
-
-  // TODO: add hook for server url
-
-  // whether network is a local network
-  const localChain = network?.includes("-local")
-
-  // chora server (use local server if local network)
-  let serverUrl = "http://localhost:3000"
-  if (!localChain) {
-    serverUrl = "https://server.chora.io"
-  }
-
-  // fetch on load and value change
+  // reset state on voucher or network change
   useEffect(() => {
-    setVoucher(null)
-    setError("")
+    setError(undefined)
+    setVoucher(undefined)
+    setMetadata(undefined)
+    setIssuer(undefined)
+  }, [voucherId, chainInfo?.chainId]);
 
-    // error if network is not chora-testnet-1 (or chora-local)
-    if (!coopChain) {
-      setError("switch to chora-testnet-1")
-    }
+  // fetch on load and voucher or group change
+  useEffect(() => {
 
-    // fetch voucher and metadata if network is chora-testnet-1 (or chora-local)
-    if (coopChain) {
-      fetchVoucherAndMetadata().catch(err => {
+    // fetch voucher and metadata from selected network
+    if (groupId) {
+      fetchVoucher().catch(err => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network, voucherId])
+  }, [voucherId, groupId])
 
+  // fetch on load and group or node curator change
   useEffect(() => {
-    setError("")
-    fetchVoucherIssuer().catch(err => {
-      setError(err.message)
-    })
-  }, [voucher]);
 
-  // fetch voucher and metadata asynchronously
-  const fetchVoucherAndMetadata = async () => {
+    // fetch voucher metadata from data provider
+    if (groupId && voucher?.metadata) {
+      fetchVoucherMetadata().catch(err => {
+        setError(err.message)
+      })
+    }
+  }, [groupId, voucher?.metadata]);
 
-    let iri: string
+  // fetch on load and group or node curator change
+  useEffect(() => {
+
+    // fetch voucher issuer from selected network and data provider
+    if (groupId && voucher?.issuer) {
+      fetchVoucherIssuer().catch(err => {
+        setError(err.message)
+      })
+    }
+  }, [groupId, voucher?.issuer]);
+
+  // fetch voucher from selected network
+  const fetchVoucher = async () => {
 
     // fetch voucher from selected network
     await fetch(chainInfo.rest + "/" + queryVoucher + "/" + voucherId)
@@ -75,29 +76,24 @@ const Voucher = ({ voucherId }) => {
           setError(res.message)
         } else {
           setVoucher(res)
-          iri = res["metadata"]
         }
       })
+  }
 
-    // return if iri is empty or was never set
-    if (typeof iri === "undefined" || iri === "") {
-      return
-    }
+  // fetch voucher metadata from data provider
+  const fetchVoucherMetadata = async () => {
 
-    // fetch voucher data from chora server
-    await fetch(serverUrl + "/data/" + iri)
+    // fetch voucher metadata from data provider
+    await fetch(serverUrl + "/data/" + voucher.metadata)
       .then(res => res.json())
       .then(res => {
         if (res.error) {
           setError(res.error)
-          setMetadata(null)
         } else {
           const data = JSON.parse(res["jsonld"])
           if (data["@context"] !== "https://schema.chora.io/contexts/voucher.jsonld") {
             setError("unsupported metadata schema")
-            setMetadata(null)
           } else {
-            setError("")
             setMetadata(data)
           }
         }
@@ -107,7 +103,7 @@ const Voucher = ({ voucherId }) => {
       })
   }
 
-  // fetch voucher issuer
+  // fetch voucher issuer from selected network and data provider
   const fetchVoucherIssuer = async () => {
 
     let iri: string
@@ -123,7 +119,7 @@ const Voucher = ({ voucherId }) => {
           }
         })
 
-    // fetch member data from chora server
+    // fetch member metadata from data provider
     await fetch(serverUrl + "/data/" + iri)
       .then(res => res.json())
       .then(res => {
@@ -149,52 +145,43 @@ const Voucher = ({ voucherId }) => {
 
   return (
     <div className={styles.box}>
-      {!voucher && !metadata && !error && (
-        <div>
-          {"loading..."}
-        </div>
-      )}
-      {voucher && metadata && (
-        <div>
-          <div className={styles.boxText}>
-            <h3>
-              {"name"}
-            </h3>
-            <p>
-              {metadata["name"] ? metadata["name"] : "NA"}
-            </p>
-          </div>
-          <div className={styles.boxText}>
-            <h3>
-              {"description"}
-            </h3>
-            <p>
-              {metadata["description"] ? metadata["description"] : "NA"}
-            </p>
-          </div>
-          <div className={styles.boxText}>
-            <h3>
-              {"issuer"}
-            </h3>
-            {issuer ? (
-              <p>
-                {`${issuer["name"]} (`}
-                  <Link to={`/policies/?address=${issuer["address"]}`}>
-                    {issuer["address"]}
-                  </Link>
-                {")"}
-              </p>
-            ) : (
-              <p>
-                {voucher["issuer"]}
-              </p>
-            )}
-          </div>
-        </div>
-      )}
+      <div className={styles.boxText}>
+        <h3>
+          {"name"}
+        </h3>
+        <p>
+          {metadata && metadata["name"] ? metadata["name"] : "NA"}
+        </p>
+      </div>
+      <div className={styles.boxText}>
+        <h3>
+          {"description"}
+        </h3>
+        <p>
+          {metadata && metadata["description"] ? metadata["description"] : "NA"}
+        </p>
+      </div>
+      <div className={styles.boxText}>
+        <h3>
+          {"issuer"}
+        </h3>
+        {issuer ? (
+          <p>
+            {`${issuer["name"]} (`}
+              <Link to={`/policies/?address=${issuer["address"]}`}>
+                {issuer["address"]}
+              </Link>
+            {")"}
+          </p>
+        ) : (
+          <p>
+            {voucher && voucher["issuer"]}
+          </p>
+        )}
+      </div>
       {error && (
-        <div>
-          {error}
+        <div className={styles.boxText}>
+          <Result error={error} />
         </div>
       )}
     </div>

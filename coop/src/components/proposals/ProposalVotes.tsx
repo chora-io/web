@@ -3,12 +3,13 @@ import { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
-import { choraLocal, choraTestnet } from "chora/chains"
 import { voteOptionToJSON } from "chora/api/cosmos/group/v1/types"
+import { useCoopParams } from "../../hooks/coop"
+
+import { Result } from "chora/components"
 
 import * as styles from "./ProposalVotes.module.css"
 
-const groupId = "1"
 const queryMembers = "cosmos/group/v1/group_members" // TODO(cosmos-sdk): group member query
 const queryVotes = "cosmos/group/v1/votes_by_proposal"
 
@@ -16,51 +17,47 @@ const ProposalVotes = ({ proposalId }) => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
+  const [groupId, serverUrl] = useCoopParams(chainInfo)
+
   // fetch error and results
-  const [error, setError] = useState<string>("")
-  const [votes, setVotes] = useState<any>(null)
-  const [voters, setVoters] = useState<any>(null)
+  const [error, setError] = useState<string | undefined>(undefined)
+  const [votes, setVotes] = useState<any[] | undefined>(undefined)
+  const [voters, setVoters] = useState<any[] | undefined>(undefined)
 
-  // whether network is supported by coop app
-  const coopChain = (
-      network === choraTestnet.chainId ||
-      network === choraLocal.chainId
-  )
-
-  // TODO: add hook for server url
-
-  // whether network is a local network
-  const localChain = network?.includes("-local")
-
-  // chora server (use local server if local network)
-  let serverUrl = "http://localhost:3000"
-  if (!localChain) {
-    serverUrl = "https://server.chora.io"
-  }
-
-  // fetch on load and value change
+  // reset state on proposal or network change
   useEffect(() => {
-    setVotes(null)
-    setError("")
+    setError(undefined)
+    setVotes(undefined)
+    setVoters(undefined)
+  }, [proposalId, chainInfo?.chainId]);
 
-    // error if network is not chora-testnet-1 (or chora-local)
-    if (!coopChain) {
-      setError("switch to chora-testnet-1")
-    }
+  // fetch on load and proposal or group change
+  useEffect(() => {
 
-    // fetch proposal and votes if network is chora-testnet-1 (or chora-local)
-    if (coopChain) {
-      fetchProposalAndVotes().catch(err => {
+    // fetch proposal and votes from selected network
+    if (groupId) {
+      fetchVotesAndVoters().catch(err => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network, proposalId])
+  }, [proposalId, groupId])
 
-  // fetch proposal and votes asynchronously
-  const fetchProposalAndVotes = async () => {
+  // fetch votes and voters from selected network and data provider
+  const fetchVotesAndVoters = async () => {
     let vs: any[] = []
 
-    // fetch idx votes from chora server
+    // fetch votes from selected network
+    await fetch(chainInfo.rest + "/" + queryVotes + "/" + proposalId)
+      .then(res => res.json())
+      .then(res => {
+        if (res.code) {
+          setError(res.message)
+        } else {
+          res["votes"].map(v => vs.push(v))
+        }
+      })
+
+    // fetch idx votes from data provider
     await fetch(serverUrl + "/idx/" + network + "/group-votes/" + proposalId)
       .then(res => res.json())
       .then(res => {
@@ -76,17 +73,6 @@ const ProposalVotes = ({ proposalId }) => {
         }
       })
 
-    // fetch votes from selected network
-    await fetch(chainInfo.rest + "/" + queryVotes + "/" + proposalId)
-      .then(res => res.json())
-      .then(res => {
-        if (res.code) {
-          setError(res.message)
-        } else {
-          res["votes"].map(v => vs.push(v))
-        }
-      })
-
     // filter out duplicates (if both on chain and indexed)
     vs = [...new Map(vs.map(v => [v["voter"], v])).values()]
 
@@ -98,27 +84,27 @@ const ProposalVotes = ({ proposalId }) => {
 
     // fetch members from selected network
     await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
-        .then(res => res.json())
-        .then(res => {
-          if (res.code) {
-            setError(res.message)
-          } else {
-            for (let i = 0; i < vs.length; i++) {
-              const voter = vs[i]["voter"]
-              const option = vs[i]["option"]
-              const found = res["members"].find(member => member["member"]["address"] === voter)
-              if (found) {
-                members.push({ option, ...found["member"] })
-              }
+      .then(res => res.json())
+      .then(res => {
+        if (res.code) {
+          setError(res.message)
+        } else {
+          for (let i = 0; i < vs.length; i++) {
+            const voter = vs[i]["voter"]
+            const option = vs[i]["option"]
+            const found = res["members"].find(member => member["member"]["address"] === voter)
+            if (found) {
+              members.push({ option, ...found["member"] })
             }
           }
-        })
+        }
+      })
 
     let voters = []
 
     const promise = members.map(async member => {
 
-      // fetch member data from chora server
+      // fetch member metadata from data provider
       await fetch(serverUrl + "/data/" + member["metadata"])
         .then(res => res.json())
         .then(res => {
@@ -211,11 +197,7 @@ const ProposalVotes = ({ proposalId }) => {
           {"no votes found"}
         </div>
       )}
-      {error && (
-        <div>
-          {error}
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

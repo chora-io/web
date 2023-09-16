@@ -4,12 +4,15 @@ import * as jsonld from "jsonld"
 
 import { WalletContext } from "chora"
 import { InputString, Result } from "chora/components"
+import { useCoopParams } from "../../hooks/coop"
 
 import * as styles from "./SubmitApplication.module.css"
 
 const SubmitApplication = () => {
 
-  const { network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
+
+  const [groupId, serverUrl] = useCoopParams(chainInfo)
 
   // form input
   const [name, setName] = useState<string>("")
@@ -19,18 +22,7 @@ const SubmitApplication = () => {
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
-  // TODO: add hook for server url
-
-  // whether network is a local network
-  const localChain = network?.includes("-local")
-
-  // chora server (use local server if local network)
-  let serverUrl = "http://localhost:3000"
-  if (!localChain) {
-    serverUrl = "https://server.chora.io"
-  }
-
-  // submit application asynchronously
+  // submit application to data provider
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
@@ -70,7 +62,7 @@ const SubmitApplication = () => {
 
     let iri: string
 
-    // post data to chora server
+    // post data to data provider
     await fetch(serverUrl + "/data", {
       method: "POST",
       body: JSON.stringify(body),

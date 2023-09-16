@@ -2,51 +2,46 @@ import * as React from "react"
 import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
-import { choraLocal, choraTestnet } from "chora/chains"
+import { useCoopParams } from "../../hooks/coop"
 
 import GroupPolicyPreview from "./PolicyPreview"
 
 import * as styles from "./Policies.module.css"
 
-const groupId = "1"
 const queryPolicies = "cosmos/group/v1/group_policies_by_group"
 
 const Policies = () => {
 
-  const { chainInfo, network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
+
+  const [groupId] = useCoopParams(chainInfo)
 
   // fetch error and results
-  const [error, setError] = useState<string>("")
-  const [policies, setPolicies] = useState<any>(null)
+  const [error, setError] = useState<string | undefined>(undefined)
+  const [policies, setPolicies] = useState<any[] | undefined>(undefined)
 
   // list options
   const [sort, setSort] = useState<string>("ascending")
 
-  // whether network is supported by coop app
-  const coopChain = (
-    network === choraTestnet.chainId ||
-    network === choraLocal.chainId
-  )
-
-  // fetch on load and value change
+  // reset state on network change
   useEffect(() => {
-    setPolicies(null)
-    setError("")
+    setError(undefined)
+    setPolicies(undefined)
+    setSort("ascending")
+  }, [chainInfo?.chainId]);
 
-    // error if network is not chora-testnet-1 (or chora-local)
-    if (!coopChain) {
-      setError("switch to chora-testnet-1")
-    }
+  // fetch on load and group change
+  useEffect(() => {
 
-    // fetch policies if network is chora-testnet-1 (or chora-local)
-    if (coopChain) {
+    // fetch policies if network supported
+    if (groupId) {
       fetchPolicies().catch(err => {
         setError(err.message)
       })
     }
-  }, [chainInfo, network])
+  }, [groupId])
 
-  // sort on load and value change
+  // sort on load and sort change
   useEffect(() => {
     const ps = policies ? [...policies] : []
 
@@ -61,7 +56,7 @@ const Policies = () => {
     setPolicies(ps)
   }, [sort])
 
-  // fetch policies asynchronously
+  // fetch policies from selected network
   const fetchPolicies = async () => {
 
     // fetch policies from selected network
@@ -96,9 +91,14 @@ const Policies = () => {
           </button>
         )}
       </div>
-      {!policies && !error && (
+      {!error && !policies && (
         <div>
           {"loading..."}
+        </div>
+      )}
+      {policies && policies.length === 0 && (
+        <div>
+          {"no policies found"}
         </div>
       )}
       {policies && policies.map(policy => (
@@ -107,11 +107,6 @@ const Policies = () => {
           policy={policy}
         />
       ))}
-      {policies && policies.length === 0 && !error && (
-        <div>
-          {"no policies found"}
-        </div>
-      )}
       {error && (
         <div>
           {error}

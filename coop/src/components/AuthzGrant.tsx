@@ -4,64 +4,67 @@ import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
 import { formatTimestamp } from "chora/utils"
+import { useCoopParams } from "../hooks/coop"
 
 import * as styles from "./AuthzGrant.module.css"
 
-const groupId = "1"
 const queryMembers = "cosmos/group/v1/group_members"
 const queryPolicy = "cosmos/group/v1/group_policy_info"
 
 const AuthzGrant = ({ grant }) => {
 
-  const { chainInfo, network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
 
-  const [error, setError] = useState<string>("")
-  const [grantee, setGrantee] = useState<any>(null)
-  const [granter, setGranter] = useState<any>(null)
+  const [groupId, serverUrl] = useCoopParams(chainInfo)
 
-  // TODO: add hook for server url
+  const [error, setError] = useState<string | undefined>(undefined)
+  const [grantee, setGrantee] = useState<any>(undefined)
+  const [granter, setGranter] = useState<any>(undefined)
 
-  // whether network is a local network
-  const localChain = network?.includes("-local")
-
-  // chora server (use local server if local network)
-  let serverUrl = "http://localhost:3000"
-  if (!localChain) {
-    serverUrl = "https://server.chora.io"
-  }
-
+  // reset state on grant or network change
   useEffect(() => {
-    setError("")
-    fetchGrantee().catch(err => {
-      setError(err.message)
-    })
-    fetchGranter().catch(err => {
-      setError(err.message)
-    })
-  }, [grant]);
+    setError(undefined)
+    setGrantee(undefined)
+    setGranter(undefined)
+  }, [grant, chainInfo?.chainId]);
 
-  // fetch authorization grantee
+  // fetch on load and group or grant grantee or granter change
+  useEffect(() => {
+    if (groupId) {
+      fetchGrantee().catch(err => {
+        setError(err.message)
+      })
+      fetchGranter().catch(err => {
+        setError(err.message)
+      })
+    }
+  }, [groupId, grant?.grantee, grant?.granter]);
+
+  // fetch grantee from selected network and data provider
   const fetchGrantee = async () => {
 
     let iri: string
     let isPolicyAddress: boolean
 
-    // TODO: handle group policy as group member
-    if (grant["grantee"].length > 44) {
-
-      isPolicyAddress = true
+    // handle grantee as policy, otherwise member
+    try {
 
       // fetch policy from selected network
       await fetch(chainInfo.rest + "/" + queryPolicy + "/" + grant["grantee"])
         .then(res => res.json())
         .then(res => {
           if (res.code) {
-            setError(res.message)
+            // throw error to trigger catch
+            throw Error(res.message)
           } else {
+            isPolicyAddress = true
             iri = res["info"]["metadata"]
           }
         })
-    } else {
+
+    } catch (e) {
+
+      // do nothing with error
 
       // TODO(cosmos-sdk): query member by group id and member address
 
@@ -80,56 +83,62 @@ const AuthzGrant = ({ grant }) => {
         })
     }
 
-    // fetch member data from chora server
-    await fetch(serverUrl + "/data/" + iri)
-      .then(res => res.json())
-      .then(res => {
-        if (res.error) {
-          setError(res.error)
-        } else {
-          const data = JSON.parse(res["jsonld"])
-          if (
-              data["@context"] !== "https://schema.chora.io/contexts/group_policy.jsonld" &&
-              data["@context"] !== "https://schema.chora.io/contexts/group_member.jsonld"
-          ) {
-            setError("unsupported metadata schema")
+    if (iri) {
+
+      // fetch member metadata from data provider
+      await fetch(serverUrl + "/data/" + iri)
+        .then(res => res.json())
+        .then(res => {
+          if (res.error) {
+            setError(res.error)
           } else {
-            setError("")
-            setGrantee({
-              isPolicyAddress,
-              address: grant["grantee"],
-              name: data["name"]
-            })
+            const data = JSON.parse(res["jsonld"])
+            if (
+                data["@context"] !== "https://schema.chora.io/contexts/group_policy.jsonld" &&
+                data["@context"] !== "https://schema.chora.io/contexts/group_member.jsonld"
+            ) {
+              setError("unsupported metadata schema")
+            } else {
+              setError("")
+              setGrantee({
+                isPolicyAddress,
+                address: grant["grantee"],
+                name: data["name"]
+              })
+            }
           }
-        }
-      })
-      .catch(err => {
-        setError(err.message)
-      })
+        })
+        .catch(err => {
+          setError(err.message)
+        })
+    }
   }
 
-  // fetch authorization granter
+  // fetch granter from selected network and data provider
   const fetchGranter = async () => {
 
     let iri: string
     let isPolicyAddress: boolean
 
-    // TODO: handle group policy as group member
-    if (grant["granter"].length > 44) {
-
-      isPolicyAddress = true
+    // handle grantee as policy, otherwise member
+    try {
 
       // fetch policy from selected network
       await fetch(chainInfo.rest + "/" + queryPolicy + "/" + grant["granter"])
         .then(res => res.json())
         .then(res => {
           if (res.code) {
-            setError(res.message)
+            // throw error to trigger catch
+            throw Error(res.message)
           } else {
+            isPolicyAddress = true
             iri = res["info"]["metadata"]
           }
         })
-    } else {
+
+    } catch (e) {
+
+      // do nothing with error
 
       // TODO(cosmos-sdk): query member by group id and member address
 
@@ -148,43 +157,35 @@ const AuthzGrant = ({ grant }) => {
         })
     }
 
-   // fetch member from selected network
-    await fetch(chainInfo.rest + "/" + queryPolicy + "/" + grant["granter"])
-      .then(res => res.json())
-      .then(res => {
-        if (res.code) {
-          setError(res.message)
-        } else {
-          iri = res["info"]["metadata"]
-        }
-      })
+    if (iri) {
 
-    // fetch member data from chora server
-    await fetch(serverUrl + "/data/" + iri)
-      .then(res => res.json())
-      .then(res => {
-        if (res.error) {
-          setError(res.error)
-        } else {
-          const data = JSON.parse(res["jsonld"])
-          if (
-              data["@context"] !== "https://schema.chora.io/contexts/group_policy.jsonld" &&
-              data["@context"] !== "https://schema.chora.io/contexts/group_member.jsonld"
-          ) {
-            setError("unsupported metadata schema")
+      // fetch policy or member metadata from data provider
+      await fetch(serverUrl + "/data/" + iri)
+        .then(res => res.json())
+        .then(res => {
+          if (res.error) {
+            setError(res.error)
           } else {
-            setError("")
-            setGranter({
-              isPolicyAddress,
-              address: grant["granter"],
-              name: data["name"]
-            })
+            const data = JSON.parse(res["jsonld"])
+            if (
+                data["@context"] !== "https://schema.chora.io/contexts/group_policy.jsonld" &&
+                data["@context"] !== "https://schema.chora.io/contexts/group_member.jsonld"
+            ) {
+              setError("unsupported metadata schema")
+            } else {
+              setError("")
+              setGranter({
+                isPolicyAddress,
+                address: grant["granter"],
+                name: data["name"]
+              })
+            }
           }
-        }
-      })
-      .catch(err => {
-        setError(err.message)
-      })
+        })
+        .catch(err => {
+          setError(err.message)
+        })
+    }
   }
 
   return (

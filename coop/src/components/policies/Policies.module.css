@@ -5,3 +5,7 @@
 .box-options {
   composes: box-options from "chora/styles/box.css";
 }
+
+.box-text {
+  composes: box-text from "chora/styles/box.css";
+}
