@@ -49,9 +49,11 @@ const Accounts = ({ chainId, rest }) => {
             {"search"}
           </button>
         </form>
-        <div className={styles.result}>
-          <Result error={error} />
-        </div>
+        {error && (
+          <div className={styles.result}>
+            <Result error={error} />
+          </div>
+        )}
       </div>
   )
 }

@@ -44,7 +44,9 @@ export const choraLocal = {
 }
 
 export const choraLocalX = {
+    coopId: "1",
     faucet: "http://127.0.0.1:8000",
+    server: "http://127.0.0.1:3000",
     modules: [
         {
             moduleName: "authz",

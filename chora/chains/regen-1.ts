@@ -44,7 +44,9 @@ export const regenMainnet = {
 }
 
 export const regenMainnetX = {
-    faucet: null,
+    coopId: "5",
+    faucet: undefined,
+    server: "https://server.chora.io",
     modules: [
         {
             moduleName: "authz",

@@ -44,7 +44,9 @@ export const regenRedwood = {
 }
 
 export const regenRedwoodX = {
+    coopId: "10",
     faucet: "https://redwood.chora.io/faucet/",
+    server: "https://server.chora.io",
     modules: [
         {
             moduleName: "authz",

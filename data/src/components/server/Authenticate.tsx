@@ -24,7 +24,7 @@ const Authenticate = () => {
     }
   }, [chainInfo])
 
-  // get authentication record from chora server
+  // get authentication record from data provider
   const fetchAuthRecord = async ()=> {
 
     // TODO: add hook for server url

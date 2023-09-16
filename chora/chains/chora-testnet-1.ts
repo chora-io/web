@@ -44,7 +44,9 @@ export const choraTestnet = {
 }
 
 export const choraTestnetX = {
+    coopId: "1",
     faucet: "https://testnet.chora.io/faucet/",
+    server: "https://server.chora.io",
     modules: [
         {
             moduleName: "authz",
