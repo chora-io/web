@@ -4,7 +4,7 @@ import * as jsonld from "jsonld"
 
 import { WalletContext } from "chora"
 import { InputString, Result } from "chora/components"
-import { useCoopParams } from "../../hooks/coop"
+import { useNetworkServer } from "chora/hooks"
 
 import * as styles from "./SubmitApplication.module.css"
 
@@ -12,7 +12,7 @@ const SubmitApplication = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  const [groupId, serverUrl] = useCoopParams(chainInfo)
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   // form input
   const [name, setName] = useState<string>("")
@@ -22,7 +22,7 @@ const SubmitApplication = () => {
   const [error, setError] = useState<string>("")
   const [success, setSuccess] = useState<string>("")
 
-  // submit application to data provider
+  // submit application to network server
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
@@ -62,7 +62,7 @@ const SubmitApplication = () => {
 
     let iri: string
 
-    // post data to data provider
+    // post data to network server
     await fetch(serverUrl + "/data", {
       method: "POST",
       body: JSON.stringify(body),

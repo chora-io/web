@@ -3,7 +3,8 @@ import { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
-import { useCoopParams } from "../../hooks/coop"
+import { useNetworkServer } from "chora/hooks"
+import { useNetworkCoop } from "../../hooks"
 
 import { Result } from "chora/components"
 
@@ -16,7 +17,8 @@ const Voucher = ({ voucherId }) => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
-  const [groupId, serverUrl] = useCoopParams(chainInfo)
+  const [groupId] = useNetworkCoop(chainInfo)
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results
   const [error, setError] = useState<string | undefined>(undefined)
@@ -46,7 +48,7 @@ const Voucher = ({ voucherId }) => {
   // fetch on load and group or node curator change
   useEffect(() => {
 
-    // fetch voucher metadata from data provider
+    // fetch voucher metadata from network server
     if (groupId && voucher?.metadata) {
       fetchVoucherMetadata().catch(err => {
         setError(err.message)
@@ -57,7 +59,7 @@ const Voucher = ({ voucherId }) => {
   // fetch on load and group or node curator change
   useEffect(() => {
 
-    // fetch voucher issuer from selected network and data provider
+    // fetch voucher issuer from selected network and network server
     if (groupId && voucher?.issuer) {
       fetchVoucherIssuer().catch(err => {
         setError(err.message)
@@ -80,10 +82,10 @@ const Voucher = ({ voucherId }) => {
       })
   }
 
-  // fetch voucher metadata from data provider
+  // fetch voucher metadata from network server
   const fetchVoucherMetadata = async () => {
 
-    // fetch voucher metadata from data provider
+    // fetch voucher metadata from network server
     await fetch(serverUrl + "/data/" + voucher.metadata)
       .then(res => res.json())
       .then(res => {
@@ -103,7 +105,7 @@ const Voucher = ({ voucherId }) => {
       })
   }
 
-  // fetch voucher issuer from selected network and data provider
+  // fetch voucher issuer from selected network and network server
   const fetchVoucherIssuer = async () => {
 
     let iri: string
@@ -119,7 +121,7 @@ const Voucher = ({ voucherId }) => {
           }
         })
 
-    // fetch member metadata from data provider
+    // fetch member metadata from network server
     await fetch(serverUrl + "/data/" + iri)
       .then(res => res.json())
       .then(res => {

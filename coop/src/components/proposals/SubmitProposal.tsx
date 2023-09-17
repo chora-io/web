@@ -12,7 +12,8 @@ import {
 } from "chora/components"
 import { SelectExecution } from "chora/components/group"
 import { signAndBroadcast } from "chora/utils"
-import { useCoopParams } from "../../hooks/coop"
+import { useNetworkServer } from "chora/hooks"
+import { useNetworkCoop } from "../../hooks"
 
 import * as styles from "./SubmitProposal.module.css"
 
@@ -22,7 +23,8 @@ const SubmitProposal = () => {
 
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
-  const [groupId, serverUrl] = useCoopParams(chainInfo)
+  const [groupId] = useNetworkCoop(chainInfo)
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch options
   const [policies, setPolicies] = useState<any[]>([])
@@ -41,7 +43,7 @@ const SubmitProposal = () => {
   // fetch on load and group change
   useEffect(() => {
 
-    // fetch policies and metadata from selected network and data provider
+    // fetch policies and metadata from selected network and network server
     if (groupId) {
       fetchPoliciesAndMetadata().catch(err => {
         setError(err.message)
@@ -49,7 +51,7 @@ const SubmitProposal = () => {
     }
   }, [groupId])
 
-  // fetch policies and metadata from selected network and data provider
+  // fetch policies and metadata from selected network and network server
   const fetchPoliciesAndMetadata = async () => {
 
     let ps: any[] = []
@@ -70,7 +72,7 @@ const SubmitProposal = () => {
     // create promise for all async fetch calls
     const promise = ps.map(async (p, i) => {
 
-      // fetch policy metadata from data provider
+      // fetch policy metadata from network server
       await fetch(serverUrl + "/data/" + p["metadata"])
         .then(res => res.json())
         .then(res => {
@@ -154,7 +156,7 @@ const SubmitProposal = () => {
 
     let iri: string
 
-    // post data to data provider
+    // post data to network server
     await fetch(serverUrl + "/data", {
       method: "POST",
       body: JSON.stringify(body),

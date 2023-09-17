@@ -1,0 +1,8 @@
+.page {
+  composes: page-with-sidebar from "chora/styles/page.css";
+  align-items: center;
+}
+
+.page div {
+  margin-bottom: 10%;
+}

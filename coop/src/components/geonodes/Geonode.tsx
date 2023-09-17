@@ -3,7 +3,8 @@ import { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
-import { useCoopParams } from "../../hooks/coop"
+import { useNetworkServer } from "chora/hooks"
+import { useNetworkCoop } from "../../hooks"
 
 import { Result } from "chora/components"
 
@@ -16,7 +17,8 @@ const Geonode = ({ nodeId }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  const [groupId, serverUrl] = useCoopParams(chainInfo)
+  const [groupId] = useNetworkCoop(chainInfo)
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results
   const [error, setError] = useState<string | undefined>(undefined)
@@ -46,7 +48,7 @@ const Geonode = ({ nodeId }) => {
   // fetch on load and group or node curator change
   useEffect(() => {
 
-    // fetch node metadata from data provider
+    // fetch node metadata from network server
     if (groupId && node?.metadata) {
       fetchNodeMetadata().catch(err => {
         setError(err.message)
@@ -57,7 +59,7 @@ const Geonode = ({ nodeId }) => {
   // fetch on load and group or node curator change
   useEffect(() => {
 
-    // fetch node curator from selected network and data provider
+    // fetch node curator from selected network and network server
     if (groupId && node?.curator) {
       fetchNodeCurator().catch(err => {
         setError(err.message)
@@ -80,10 +82,10 @@ const Geonode = ({ nodeId }) => {
       })
   }
 
-  // fetch node metadata from data provider
+  // fetch node metadata from network server
   const fetchNodeMetadata = async () => {
 
-    // fetch node metadata from data provider
+    // fetch node metadata from network server
     await fetch(serverUrl + "/data/" + node.metadata)
       .then(res => res.json())
       .then(res => {
@@ -103,7 +105,7 @@ const Geonode = ({ nodeId }) => {
       })
   }
 
-  // fetch node curator from selected network and data provider
+  // fetch node curator from selected network and network server
   const fetchNodeCurator = async () => {
 
     let iri: string
@@ -119,7 +121,7 @@ const Geonode = ({ nodeId }) => {
           }
         })
 
-    // fetch member metadata from data provider
+    // fetch member metadata from network server
     await fetch(serverUrl + "/data/" + iri)
       .then(res => res.json())
       .then(res => {

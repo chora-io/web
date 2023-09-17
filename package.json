@@ -18,7 +18,8 @@
       "data",
       "main",
       "mods",
-      "scan"
+      "scan",
+      "user"
     ]
   },
   "scripts": {
@@ -30,6 +31,7 @@
     "lint-main": "lerna run --scope main lint --stream",
     "lint-mods": "lerna run --scope mods lint --stream",
     "lint-scan": "lerna run --scope scan lint --stream",
+    "lint-user": "lerna run --scope user lint --stream",
     "format": "lerna run format --stream",
     "format-chora": "lerna run --scope chora format --stream",
     "format-coop": "lerna run --scope coop format --stream",
@@ -37,6 +39,7 @@
     "format-main": "lerna run --scope main format --stream",
     "format-mods": "lerna run --scope mods format --stream",
     "format-scan": "lerna run --scope scan format --stream",
+    "format-user": "lerna run --scope user format --stream",
     "test": "lerna run test --stream",
     "test-chora": "lerna run --scope chora test --stream",
     "test-coop": "lerna run --scope coop test --stream",
@@ -44,6 +47,7 @@
     "test-main": "lerna run --scope main test --stream",
     "test-mods": "lerna run --scope mods test --stream",
     "test-scan": "lerna run --scope scan test --stream",
+    "test-user": "lerna run --scope user test --stream",
     "dev": "lerna run dev --stream",
     "dev-chora": "lerna run --scope chora dev --stream",
     "dev-coop": "lerna run --scope coop dev --stream",
@@ -51,6 +55,7 @@
     "dev-main": "lerna run --scope main dev --stream",
     "dev-mods": "lerna run --scope mods dev --stream",
     "dev-scan": "lerna run --scope scan dev --stream",
+    "dev-user": "lerna run --scope user dev --stream",
     "build": "lerna run build --stream",
     "build-chora": "lerna run --scope chora build --stream",
     "build-coop": "lerna run --scope coop build --stream",
@@ -58,6 +63,7 @@
     "build-main": "lerna run --scope main build --stream",
     "build-mods": "lerna run --scope mods build --stream",
     "build-scan": "lerna run --scope scan build --stream",
+    "build-user": "lerna run --scope user build --stream",
     "serve": "lerna run serve --stream",
     "serve-chora": "lerna run --scope chora serve --stream",
     "serve-coop": "lerna run --scope coop serve --stream",
@@ -65,6 +71,7 @@
     "serve-main": "lerna run --scope main serve --stream",
     "serve-mods": "lerna run --scope mods serve --stream",
     "serve-scan": "lerna run --scope scan serve --stream",
+    "serve-user": "lerna run --scope user serve --stream",
     "clean": "lerna run clean --stream",
     "clean-chora": "lerna run --scope chora clean --stream",
     "clean-coop": "lerna run --scope coop clean --stream",
@@ -72,6 +79,7 @@
     "clean-main": "lerna run --scope main clean --stream",
     "clean-mods": "lerna run --scope mods clean --stream",
     "clean-scan": "lerna run --scope scan clean --stream",
+    "clean-user": "lerna run --scope user clean --stream",
     "deploy": "sh ./deploy.sh"
   },
   "devDependencies": {

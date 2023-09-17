@@ -3,7 +3,8 @@ import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
 import { proposalExecutorResultToJSON, proposalStatusToJSON } from "chora/api/cosmos/group/v1/types"
-import { useCoopParams } from "../../hooks/coop"
+import { useNetworkServer } from "chora/hooks"
+import { useNetworkCoop } from "../../hooks"
 
 import { Result } from "chora/components"
 import ProposalPreview from "./ProposalPreview"
@@ -17,7 +18,8 @@ const Proposals = () => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
-  const [groupId, serverUrl] = useCoopParams(chainInfo)
+  const [groupId] = useNetworkCoop(chainInfo)
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results
   const [error, setError] = useState<string | undefined>(undefined)
@@ -39,7 +41,7 @@ const Proposals = () => {
   // fetch on load and value change
   useEffect(() => {
 
-    // fetch proposals and metadata from selected network and data provider
+    // fetch proposals and metadata from selected network and network server
     if (groupId) {
       fetchProposals().catch(err => {
         setError(err.message)
@@ -104,7 +106,7 @@ const Proposals = () => {
     }
   }, [filter])
 
-  // fetch proposals and metadata from selected network and data provider
+  // fetch proposals and metadata from selected network and network server
   const fetchProposals = async () => {
 
     let addrs: string[] = []
@@ -139,7 +141,7 @@ const Proposals = () => {
         })
     })
 
-    // fetch idx proposals from data provider
+    // fetch idx proposals from network server
     await fetch(serverUrl + "/idx/" + network + "/group-proposals/" + groupId)
       .then(res => res.json())
       .then(res => {

@@ -4,7 +4,8 @@ import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
 import { voteOptionToJSON } from "chora/api/cosmos/group/v1/types"
-import { useCoopParams } from "../../hooks/coop"
+import { useNetworkServer } from "chora/hooks"
+import { useNetworkCoop } from "../../hooks"
 
 import { Result } from "chora/components"
 
@@ -17,7 +18,8 @@ const ProposalVotes = ({ proposalId }) => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
-  const [groupId, serverUrl] = useCoopParams(chainInfo)
+  const [groupId] = useNetworkCoop(chainInfo)
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results
   const [error, setError] = useState<string | undefined>(undefined)
@@ -42,7 +44,7 @@ const ProposalVotes = ({ proposalId }) => {
     }
   }, [proposalId, groupId])
 
-  // fetch votes and voters from selected network and data provider
+  // fetch votes and voters from selected network and network server
   const fetchVotesAndVoters = async () => {
     let vs: any[] = []
 
@@ -57,7 +59,7 @@ const ProposalVotes = ({ proposalId }) => {
         }
       })
 
-    // fetch idx votes from data provider
+    // fetch idx votes from network server
     await fetch(serverUrl + "/idx/" + network + "/group-votes/" + proposalId)
       .then(res => res.json())
       .then(res => {
@@ -104,7 +106,7 @@ const ProposalVotes = ({ proposalId }) => {
 
     const promise = members.map(async member => {
 
-      // fetch member metadata from data provider
+      // fetch member metadata from network server
       await fetch(serverUrl + "/data/" + member["metadata"])
         .then(res => res.json())
         .then(res => {

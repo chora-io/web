@@ -5,7 +5,8 @@ import { Link } from "gatsby"
 import { WalletContext } from "chora"
 import { formatTimestamp } from "chora/utils"
 import { voteOptionToJSON } from "chora/api/cosmos/group/v1/types"
-import { useCoopParams } from "../../hooks/coop"
+import { useNetworkServer } from "chora/hooks"
+import { useNetworkCoop } from "../../hooks"
 
 import * as styles from "./ProposalVote.module.css"
 
@@ -16,7 +17,8 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
-  const [groupId, serverUrl] = useCoopParams(chainInfo)
+  const [groupId] = useNetworkCoop(chainInfo)
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results
   const [error, setError] = useState<string>("")
@@ -46,7 +48,7 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
     }
   }, [groupId, vote?.metadata])
 
-  // fetch vote from selected network and data provider
+  // fetch vote from selected network and network server
   const fetchVote = async () => {
 
     let vote: any
@@ -69,7 +71,7 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
         }
       })
 
-    // fetch idx vote from data provider
+    // fetch idx vote from network server
     await fetch(serverUrl + "/idx/" + network + "/group-vote/" + proposalId + "/" + voterAddress)
       .then(res => res.json())
       .then(res => {
@@ -108,7 +110,7 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
         }
       })
 
-    // fetch member metadata from data provider
+    // fetch member metadata from network server
     await fetch(serverUrl + "/data/" + member["metadata"])
       .then(res => res.json())
       .then(res => {
@@ -132,10 +134,10 @@ const ProposalVote = ({ proposalId, voterAddress }) => {
       })
   }
 
-  // fetch vote metadata from data provider
+  // fetch vote metadata from network server
   const fetchMetadata = async () => {
 
-    // fetch vote metadata from data provider
+    // fetch vote metadata from network server
     await fetch(serverUrl + "/data/" + vote.metadata)
       .then(res => res.json())
       .then(res => {

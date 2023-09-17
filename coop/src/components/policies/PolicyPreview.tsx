@@ -3,7 +3,8 @@ import { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
-import { useCoopParams } from "../../hooks/coop"
+import { useNetworkServer } from "chora/hooks"
+import { useNetworkCoop } from "../../hooks"
 
 import { Result } from "chora/components"
 
@@ -13,7 +14,8 @@ const GroupPolicy = ({ policy }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  const [groupId, serverUrl] = useCoopParams(chainInfo)
+  const [groupId] = useNetworkCoop(chainInfo)
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results
   const [error, setError] = useState<string | undefined>(undefined)
@@ -28,7 +30,7 @@ const GroupPolicy = ({ policy }) => {
   // fetch on load and group or policy metadata change
   useEffect(() => {
 
-    // fetch policy metadata from data provider
+    // fetch policy metadata from network server
     if (groupId && policy?.metadata) {
       fetchMetadata().catch(err => {
         setError(err.message)
@@ -36,7 +38,7 @@ const GroupPolicy = ({ policy }) => {
     }
   }, [groupId, policy?.metadata])
 
-  // fetch policy metadata from data provider
+  // fetch policy metadata from network server
   const fetchMetadata = async () => {
 
     // TODO: handle multiple metadata formats (i.e. IRI, IPFS, JSON, etc.)
@@ -50,7 +52,7 @@ const GroupPolicy = ({ policy }) => {
 
     } catch(e) {
 
-      // fetch policy metadata from data provider
+      // fetch policy metadata from network server
       await fetch(serverUrl + "/data/" + policy.metadata)
         .then(res => res.json())
         .then(res => {

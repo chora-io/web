@@ -52,6 +52,11 @@ const Header = ({ darkTheme, toggleTheme }) => {
                   {"scan"}
                 </Link>
               </li>
+              <li>
+                <Link to={"http://" + window.location.hostname + ":8005"}>
+                  {"user"}
+                </Link>
+              </li>
               <li className={styles.divider}>
                 {'|'}
               </li>
@@ -81,6 +86,11 @@ const Header = ({ darkTheme, toggleTheme }) => {
               <li>
                 <Link to="/scan">
                   {"scan"}
+                </Link>
+              </li>
+              <li>
+                <Link to="/user">
+                  {"user"}
                 </Link>
               </li>
               <li className={styles.divider}>

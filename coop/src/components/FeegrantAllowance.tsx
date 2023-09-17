@@ -4,7 +4,8 @@ import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
 import { formatTimestamp } from "chora/utils"
-import { useCoopParams } from "../hooks/coop"
+import { useNetworkServer } from "chora/hooks"
+import { useNetworkCoop } from "../hooks"
 
 import * as styles from "./FeegrantAllowance.module.css"
 
@@ -15,7 +16,8 @@ const FeegrantAllowance = ({ allowance }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  const [groupId, serverUrl] = useCoopParams(chainInfo)
+  const [groupId] = useNetworkCoop(chainInfo)
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   const [error, setError] = useState<string | undefined>(undefined)
   const [grantee, setGrantee] = useState<any>(undefined)
@@ -39,7 +41,7 @@ const FeegrantAllowance = ({ allowance }) => {
     })
   }, [groupId, allowance?.grantee, allowance?.granter]);
 
-  // fetch grantee from selected network and data provider
+  // fetch grantee from selected network and network server
   const fetchGrantee = async () => {
 
     let iri: string
@@ -84,7 +86,7 @@ const FeegrantAllowance = ({ allowance }) => {
 
     if (iri) {
 
-      // fetch member metadata from data provider
+      // fetch member metadata from network server
       await fetch(serverUrl + "/data/" + iri)
         .then(res => res.json())
         .then(res => {
@@ -113,7 +115,7 @@ const FeegrantAllowance = ({ allowance }) => {
     }
   }
 
-  // fetch granter from selected network and data provider
+  // fetch granter from selected network and network server
   const fetchGranter = async () => {
 
     let iri: string
@@ -158,7 +160,7 @@ const FeegrantAllowance = ({ allowance }) => {
 
     if (iri) {
 
-      // fetch policy or member metadata from data provider
+      // fetch policy or member metadata from network server
       await fetch(serverUrl + "/data/" + iri)
         .then(res => res.json())
         .then(res => {

@@ -3,7 +3,8 @@ import { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
-import { useCoopParams } from "../../hooks/coop"
+import { useNetworkServer } from "chora/hooks"
+import { useNetworkCoop } from "../../hooks"
 
 import * as styles from "./ProposalPreview.module.css"
 
@@ -11,7 +12,8 @@ const ProposalPreview = ({ proposal }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  const [groupId, serverUrl] = useCoopParams(chainInfo)
+  const [groupId] = useNetworkCoop(chainInfo)
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results
   const [error, setError] = useState<string | undefined>(undefined)
@@ -26,7 +28,7 @@ const ProposalPreview = ({ proposal }) => {
   // fetch on load and group or metadata change
   useEffect(() => {
 
-    // fetch proposal metadata from data provider
+    // fetch proposal metadata from network server
     if (groupId && proposal?.metadata) {
       fetchMetadata().catch(err => {
         setError(err.message)
@@ -34,10 +36,10 @@ const ProposalPreview = ({ proposal }) => {
     }
   }, [groupId, proposal?.metadata])
 
-  // fetch proposal metadata from data provider
+  // fetch proposal metadata from network server
   const fetchMetadata = async () => {
 
-    // fetch proposal metadata from data provider
+    // fetch proposal metadata from network server
     await fetch(serverUrl + "/data/" + proposal["metadata"])
       .then(res => res.json())
       .then(res => {

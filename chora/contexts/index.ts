@@ -1,3 +1,2 @@
-import { WalletContext } from "./WalletContext"
-
-export { WalletContext }
+export { AuthContext } from "./AuthContext"
+export { WalletContext } from "./WalletContext"

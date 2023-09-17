@@ -3,7 +3,8 @@ import { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
-import { useCoopParams } from "../../hooks/coop"
+import { useNetworkServer } from "chora/hooks"
+import { useNetworkCoop } from "../../hooks"
 
 import { Result } from "chora/components"
 
@@ -15,7 +16,8 @@ const VoucherPreview = ({ voucher }) => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
-  const [groupId, serverUrl] = useCoopParams(chainInfo)
+  const [groupId] = useNetworkCoop(chainInfo)
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results
   const [error, setError] = useState<string | undefined>(undefined)
@@ -32,7 +34,7 @@ const VoucherPreview = ({ voucher }) => {
   // fetch on load and group or voucher metadata change
   useEffect(() => {
 
-    // fetch voucher metadata from data provider
+    // fetch voucher metadata from network server
     if (groupId && voucher?.metadata) {
       fetchMetadata().catch(err => {
         setError(err.message)
@@ -43,7 +45,7 @@ const VoucherPreview = ({ voucher }) => {
   // fetch on load and group or voucher issuer change
   useEffect(() => {
 
-    // fetch voucher issuer from selected network and data provider
+    // fetch voucher issuer from selected network and network server
     if (groupId && voucher?.issuer) {
       fetchVoucherIssuer().catch(err => {
         setError(err.message)
@@ -54,7 +56,7 @@ const VoucherPreview = ({ voucher }) => {
   // fetch metadata
   const fetchMetadata = async () => {
 
-    // fetch voucher metadata from data provider
+    // fetch voucher metadata from network server
     await fetch(serverUrl + "/data/" + voucher["metadata"])
       .then(res => res.json())
       .then(res => {
@@ -93,7 +95,7 @@ const VoucherPreview = ({ voucher }) => {
           }
         })
 
-    // fetch member metadata from data provider
+    // fetch member metadata from network server
     await fetch(serverUrl + "/data/" + iri)
       .then(res => res.json())
       .then(res => {

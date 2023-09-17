@@ -4,7 +4,8 @@ import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
 import { formatTimestamp } from "chora/utils"
-import { useCoopParams } from "../../hooks/coop"
+import { useNetworkServer } from "chora/hooks"
+import { useNetworkCoop } from "../../hooks"
 
 import { Result } from "chora/components"
 
@@ -17,7 +18,8 @@ const Policy = ({ policyAddress }) => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  const [groupId, serverUrl] = useCoopParams(chainInfo)
+  const [groupId] = useNetworkCoop(chainInfo)
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results
   const [error, setError] = useState<string | undefined>(undefined)
@@ -47,7 +49,7 @@ const Policy = ({ policyAddress }) => {
   // fetch on load and policy metadata change
   useEffect(() => {
 
-    // fetch policy metadata from data provider
+    // fetch policy metadata from network server
     if (policy?.metadata) {
       fetchPolicyMetadata().catch(err => {
         setError(err.message)
@@ -58,7 +60,7 @@ const Policy = ({ policyAddress }) => {
   // fetch on load and policy admin change
   useEffect(() => {
 
-    // fetch policy admin metadata from selected network and data provider
+    // fetch policy admin metadata from selected network and network server
     if (policy?.admin) {
       fetchPolicyAdminMetadata().catch(err => {
         setError(err.message)
@@ -81,7 +83,7 @@ const Policy = ({ policyAddress }) => {
       })
   }
 
-  // fetch policy metadata from data provider
+  // fetch policy metadata from network server
   const fetchPolicyMetadata = async () => {
 
     // TODO: handle multiple metadata formats (i.e. IRI, IPFS, JSON, etc.)
@@ -97,7 +99,7 @@ const Policy = ({ policyAddress }) => {
 
       // do nothing with error
 
-      // fetch policy or member metadata from data provider
+      // fetch policy or member metadata from network server
       await fetch(serverUrl + "/data/" + policy.metadata)
         .then(res => res.json())
         .then(res => {
@@ -121,7 +123,7 @@ const Policy = ({ policyAddress }) => {
     }
   }
 
-  // fetch policy admin from selected network and data provider
+  // fetch policy admin from selected network and network server
   const fetchPolicyAdminMetadata = async () => {
     let iri: string
 
@@ -163,7 +165,7 @@ const Policy = ({ policyAddress }) => {
 
     if (iri) {
 
-      // fetch policy or member metadata from data provider
+      // fetch policy or member metadata from network server
       await fetch(serverUrl + "/data/" + iri)
         .then(res => res.json())
         .then(res => {

@@ -4,7 +4,8 @@ import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
 import { formatTimestamp } from "chora/utils"
-import { useCoopParams } from "../../hooks/coop"
+import { useNetworkServer } from "chora/hooks"
+import { useNetworkCoop } from "../../hooks"
 
 import { Result } from "chora/components"
 
@@ -18,7 +19,8 @@ const Group = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  const [groupId, serverUrl] = useCoopParams(chainInfo)
+  const [groupId] = useNetworkCoop(chainInfo)
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results
   const [error, setError] = useState<string | undefined>(undefined)
@@ -48,7 +50,7 @@ const Group = () => {
   // fetch on load and network change
   useEffect(() => {
 
-    // fetch group metadata from data provider
+    // fetch group metadata from network server
     if (group?.metadata) {
       fetchGroupMetadata().catch(err => {
         setError(err.message)
@@ -59,7 +61,7 @@ const Group = () => {
   // fetch on load and network change
   useEffect(() => {
 
-    // fetch group admin metadata from selected network and data provider
+    // fetch group admin metadata from selected network and network server
     if (group?.admin) {
       fetchGroupAdminMetadata().catch(err => {
         setError(err.message)
@@ -82,7 +84,7 @@ const Group = () => {
       })
   }
 
-  // fetch group metadata from data provider
+  // fetch group metadata from network server
   const fetchGroupMetadata = async () => {
 
     // TODO: handle multiple metadata formats (i.e. IRI, IPFS, JSON, etc.)
@@ -98,7 +100,7 @@ const Group = () => {
 
       // do nothing with error
 
-      // fetch group metadata from data provider
+      // fetch group metadata from network server
       await fetch(serverUrl + "/data/" + group.metadata)
         .then(res => res.json())
         .then(res => {
@@ -119,7 +121,7 @@ const Group = () => {
     }
   }
 
-  // fetch group admin metadata from data provider
+  // fetch group admin metadata from network server
   const fetchGroupAdminMetadata = async () => {
     let iri: string
 
@@ -161,7 +163,7 @@ const Group = () => {
 
     if (iri) {
 
-      // fetch policy or member metadata from data provider
+      // fetch policy or member metadata from network server
       await fetch(serverUrl + "/data/" + iri)
         .then(res => res.json())
         .then(res => {

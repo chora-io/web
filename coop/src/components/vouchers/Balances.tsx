@@ -3,7 +3,8 @@ import { useContext, useEffect, useState } from "react"
 import { Link } from "gatsby"
 
 import { WalletContext } from "chora"
-import { useCoopParams } from "../../hooks/coop"
+import { useNetworkServer } from "chora/hooks"
+import { useNetworkCoop } from "../../hooks"
 
 import { Result } from "chora/components"
 
@@ -16,7 +17,8 @@ const Balances = ({ voucherId }) => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
-  const [groupId, serverUrl] = useCoopParams(chainInfo)
+  const [groupId] = useNetworkCoop(chainInfo)
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results
   const [error, setError] = useState<string | undefined>(undefined)
@@ -44,7 +46,7 @@ const Balances = ({ voucherId }) => {
   // fetch on load and voucher or group change
   useEffect(() => {
 
-    // fetch holders from selected network and data provider
+    // fetch holders from selected network and network server
     if (groupId && balances?.length) {
       fetchHolders().catch(err => {
         setError(err.message)
@@ -67,7 +69,7 @@ const Balances = ({ voucherId }) => {
       })
   }
 
-  // fetch holders from selected network and data provider
+  // fetch holders from selected network and network server
   const fetchHolders = async () => {
 
     // TODO(cosmos-sdk): query member by group id and member address
@@ -99,7 +101,7 @@ const Balances = ({ voucherId }) => {
 
     const promise = members.map(async member => {
 
-      // fetch member metadata from data provider
+      // fetch member metadata from network server
       await fetch(serverUrl + "/data/" + member["metadata"])
         .then(res => res.json())
         .then(res => {

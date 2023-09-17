@@ -3,7 +3,8 @@ import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
 import { formatTimestamp } from "chora/utils"
-import { useCoopParams } from "../../hooks/coop"
+import { useNetworkServer } from "chora/hooks"
+import { useNetworkCoop } from "../../hooks"
 
 import { Result } from "chora/components"
 
@@ -15,7 +16,8 @@ const Member = ({ memberAddress }) => {
 
   const { chainInfo, network } = useContext(WalletContext)
 
-  const [groupId, serverUrl] = useCoopParams(chainInfo)
+  const [groupId] = useNetworkCoop(chainInfo)
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results
   const [error, setError] = useState<string | undefined>(undefined)
@@ -43,7 +45,7 @@ const Member = ({ memberAddress }) => {
   // fetch on load and member metadata change
   useEffect(() => {
 
-    // fetch member metadata from data provider
+    // fetch member metadata from network server
     if (member?.metadata) {
       fetchMemberMetadata().catch(err => {
         setError(err.message)
@@ -71,7 +73,7 @@ const Member = ({ memberAddress }) => {
       })
   }
 
-  // fetch member metadata from data provider
+  // fetch member metadata from network server
   const fetchMemberMetadata = async () => {
 
     // TODO: handle multiple metadata formats (i.e. IRI, IPFS, JSON, etc.)
@@ -87,7 +89,7 @@ const Member = ({ memberAddress }) => {
 
       // do nothing with error
 
-      // fetch member metadata from data provider
+      // fetch member metadata from network server
       await fetch(serverUrl + "/data/" + member.metadata)
         .then(res => res.json())
         .then(res => {

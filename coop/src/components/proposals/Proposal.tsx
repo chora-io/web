@@ -8,7 +8,8 @@ import { MsgExec } from "chora/api/cosmos/group/v1/tx"
 import { ResultTx } from "chora/components"
 import { formatTimestamp, signAndBroadcast } from "chora/utils"
 import { proposalStatusToJSON, proposalExecutorResultToJSON } from "chora/api/cosmos/group/v1/types"
-import { useCoopParams } from "../../hooks/coop"
+import { useNetworkServer } from "chora/hooks"
+import { useNetworkCoop } from "../../hooks"
 
 import { Result } from "chora/components"
 
@@ -25,7 +26,8 @@ const Proposal = ({ proposalId }) => {
 
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
-  const [groupId, serverUrl] = useCoopParams(chainInfo)
+  const [groupId] = useNetworkCoop(chainInfo)
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results
   const [error, setError] = useState<string | undefined>(undefined)
@@ -68,7 +70,7 @@ const Proposal = ({ proposalId }) => {
   // fetch on load and proposal metadata change
   useEffect(() => {
 
-    // fetch proposal metadata from data provider
+    // fetch proposal metadata from network server
     if (proposal?.metadata) {
       fetchProposalMetadata().catch(err => {
         setError(err.message)
@@ -79,7 +81,7 @@ const Proposal = ({ proposalId }) => {
   // fetch on load and proposal proposers change
   useEffect(() => {
 
-    // fetch proposal proposers from selected network and data provider
+    // fetch proposal proposers from selected network and network server
     if (proposal?.proposers) {
       fetchProposalProposers().catch(err => {
         setError(err.message)
@@ -90,7 +92,7 @@ const Proposal = ({ proposalId }) => {
   // fetch on load and proposal policy address change
   useEffect(() => {
 
-    // fetch proposal policy from selected network and data provider
+    // fetch proposal policy from selected network and network server
     if (proposal?.group_policy_address) {
       fetchProposalPolicy().catch(err => {
         setError(err.message)
@@ -98,9 +100,9 @@ const Proposal = ({ proposalId }) => {
     }
   }, [proposal?.group_policy_address])
 
-  // TODO: fetch votes voters from data provider
+  // TODO: fetch votes voters from network server
 
-  // fetch proposal from selected network and data provider
+  // fetch proposal from selected network and network server
   const fetchProposal = async () => {
 
     // fetch proposal from selected network
@@ -118,7 +120,7 @@ const Proposal = ({ proposalId }) => {
         }
       })
 
-    // fetch idx proposals from data provider
+    // fetch idx proposals from network server
     await fetch(serverUrl + "/idx/" + network + "/group-proposal/" + proposalId)
       .then(res => res.json())
       .then(res => {
@@ -153,10 +155,10 @@ const Proposal = ({ proposalId }) => {
       })
   }
 
-  // fetch proposal metadata from data provider
+  // fetch proposal metadata from network server
   const fetchProposalMetadata = async () => {
 
-    // fetch proposal metadata from data provider
+    // fetch proposal metadata from network server
     await fetch(serverUrl + "/data/" + proposal.metadata)
       .then(res => res.json())
       .then(res => {
@@ -179,7 +181,7 @@ const Proposal = ({ proposalId }) => {
       })
   }
 
-  // fetch proposal proposers metadata from selected network and data provider
+  // fetch proposal proposers metadata from selected network and network server
   const fetchProposalProposers = async () => {
 
     // TODO(cosmos-sdk): query member by group id and member address
@@ -207,7 +209,7 @@ const Proposal = ({ proposalId }) => {
 
     const promise = members.map(async member => {
 
-      // fetch member metadata from data provider
+      // fetch member metadata from network server
       await fetch(serverUrl + "/data/" + member["metadata"])
         .then(res => res.json())
         .then(res => {
@@ -237,7 +239,7 @@ const Proposal = ({ proposalId }) => {
     })
   }
 
-  // fetch proposal policy from selected network and data provider
+  // fetch proposal policy from selected network and network server
   const fetchProposalPolicy = async () => {
 
     let iri: string
@@ -255,7 +257,7 @@ const Proposal = ({ proposalId }) => {
 
     if (iri) {
 
-      // fetch member metadata from data provider
+      // fetch member metadata from network server
       await fetch(serverUrl + "/data/" + iri)
         .then(res => res.json())
         .then(res => {

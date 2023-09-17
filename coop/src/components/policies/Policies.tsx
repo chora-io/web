@@ -2,7 +2,7 @@ import * as React from "react"
 import { useContext, useEffect, useState } from "react"
 
 import { WalletContext } from "chora"
-import { useCoopParams } from "../../hooks/coop"
+import { useNetworkCoop } from "../../hooks"
 
 import GroupPolicyPreview from "./PolicyPreview"
 
@@ -14,7 +14,7 @@ const Policies = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  const [groupId] = useCoopParams(chainInfo)
+  const [groupId] = useNetworkCoop(chainInfo)
 
   // fetch error and results
   const [error, setError] = useState<string | undefined>(undefined)

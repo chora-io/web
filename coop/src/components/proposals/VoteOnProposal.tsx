@@ -8,7 +8,7 @@ import { MsgVote } from "chora/api/cosmos/group/v1/tx"
 import { InputString, ResultTx } from "chora/components"
 import { SelectExecution, SelectVote } from "chora/components/group"
 import { signAndBroadcast } from "chora/utils"
-import { useCoopParams } from "../../hooks/coop"
+import { useNetworkServer } from "chora/hooks"
 
 import * as styles from "./VoteOnProposal.module.css"
 
@@ -16,7 +16,7 @@ const VoteOnProposal = ({ proposalId }) => {
 
   const { chainInfo, wallet } = useContext(WalletContext)
 
-  const [groupId, serverUrl] = useCoopParams(chainInfo)
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   // form input
   const [vote, setVote] = useState<string>("")
@@ -66,7 +66,7 @@ const VoteOnProposal = ({ proposalId }) => {
 
     let iri: string
 
-    // post data to data provider
+    // post data to network server
     await fetch(serverUrl + "/data", {
       method: "POST",
       body: JSON.stringify(body),
