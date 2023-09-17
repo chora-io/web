@@ -9,7 +9,7 @@ import * as styles from "./Auth.module.css"
 const Auth = () => {
 
   const { authUser, checkAuthToken, removeAuthToken } = useContext(AuthContext)
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
@@ -27,7 +27,7 @@ const Auth = () => {
           {"authenticated"}
         </h2>
         <p>
-          {"whether or not the user is authenticated"}
+          {"authenticated user information"}
         </p>
       </div>
       <div className={styles.boxItem}>
@@ -39,10 +39,50 @@ const Auth = () => {
             {authUser ? "true" : "false"}
           </p>
         </div>
+        <div className={styles.boxText}>
+          <h3>
+            {"id"}
+          </h3>
+          <p>
+            {(authUser && authUser.id) || "NA"}
+          </p>
+        </div>
+        <div className={styles.boxText}>
+          <h3>
+            {"email"}
+          </h3>
+          <p>
+            {(authUser && authUser.email) || "NA"}
+          </p>
+        </div>
+        <div className={styles.boxText}>
+          <h3>
+            {"address"}
+          </h3>
+          <p>
+            {(authUser && authUser.address) || "NA"}
+          </p>
+        </div>
+        <div className={styles.boxText}>
+          <h3>
+            {"username"}
+          </h3>
+          <p>
+            {(authUser && authUser.username) || "NA"}
+          </p>
+        </div>
+        <div className={styles.boxText}>
+          <h3>
+            {"created at"}
+          </h3>
+          <p>
+            {(authUser && authUser["created_at"]) || "NA"}
+          </p>
+        </div>
       </div>
       {authUser && (
         <button className={styles.button} onClick={removeAuthToken}>
-          {"un-authenticate"}
+          {"clear authentication"}
         </button>
       )}
     </div>

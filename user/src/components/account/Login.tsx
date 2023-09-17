@@ -5,9 +5,9 @@ import { AuthContext, WalletContext } from "chora"
 import { InputString, Result } from "chora/components"
 import { useNetworkServer } from "chora/hooks/useNetworkServer"
 
-import * as styles from "./Email.module.css"
+import * as styles from "./Login.module.css"
 
-const Email = () => {
+const Login = () => {
 
   const { authUser, checkAuthToken, getAuthToken, setAuthToken, setAuthUser } = useContext(AuthContext)
   const { chainInfo } = useContext(WalletContext)
@@ -15,8 +15,8 @@ const Email = () => {
   const [serverUrl] = useNetworkServer(chainInfo)
 
   // form input
-  const [email, setEmail] = useState<string>("")
-  const [accessCode, setAccessCode] = useState<string>("")
+  const [username, setUsername] = useState<string>("")
+  const [password, setPassword] = useState<string>("")
 
   // authentication error
   const [error, setError] = useState<string | undefined>(undefined)
@@ -28,7 +28,7 @@ const Email = () => {
     }
   }, [serverUrl]);
 
-  // authenticate user with email and access code
+  // authenticate user with username and password
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
@@ -37,13 +37,13 @@ const Email = () => {
     // get authentication token
     const token = getAuthToken()
 
-    // authenticate user with email and access code
-    await fetch(serverUrl + "/auth/email", {
+    // authenticate user with username and password
+    await fetch(serverUrl + "/auth/login", {
       method: "POST",
       body: JSON.stringify({
         token,
-        email,
-        accessCode,
+        username,
+        password,
       }),
     })
       .then(res => res.json())
@@ -66,34 +66,34 @@ const Email = () => {
     <div className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"email access code authentication"}
+          {"username and password authentication"}
         </h2>
         <p>
-          {"authenticate user with email access code"}
+          {"authenticate user with username and password"}
         </p>
       </div>
-        <div className={styles.boxItem}>
-          <div className={styles.boxText}>
-            <h3>
-              {"connected"}
-            </h3>
-            <p>
-              {authUser && authUser.email ? "true" : "false"}
-            </p>
-          </div>
-        {(!authUser || (authUser && !authUser.email)) ? (
+      <div className={styles.boxItem}>
+        <div className={styles.boxText}>
+          <h3>
+            {"connected"}
+          </h3>
+          <p>
+            {authUser && authUser.username ? "true" : "false"}
+          </p>
+        </div>
+        {(!authUser || (authUser && !authUser.username)) ? (
           <form className={styles.form} onSubmit={handleSubmit}>
             <InputString
-              id="email"
-              label="email"
-              string={email}
-              setString={setEmail}
+              id="username"
+              label="username"
+              string={username}
+              setString={setUsername}
             />
             <InputString
-              id="access-code"
-              label="access code"
-              string="access code"
-              disabled // TODO: access code input
+              id="password"
+              label="password"
+              string="password"
+              disabled // TODO: password input
             />
             <button className={styles.button} type="submit">
               {"authenticate"}
@@ -102,10 +102,10 @@ const Email = () => {
         ) : (
           <div className={styles.boxText}>
             <h3>
-              {"email"}
+              {"username"}
             </h3>
             <p>
-              {authUser && authUser.email}
+              {authUser && authUser.username}
             </p>
           </div>
         )}
@@ -115,4 +115,4 @@ const Email = () => {
   )
 }
 
-export default Email
+export default Login

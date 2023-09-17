@@ -9,7 +9,7 @@ import * as styles from "./Keplr.module.css"
 
 const Keplr = () => {
 
-  const { authUser, checkAuthToken, setAuthToken, setAuthUser } = useContext(AuthContext)
+  const { authUser, checkAuthToken, getAuthToken, setAuthToken, setAuthUser } = useContext(AuthContext)
   const { chainInfo, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
@@ -49,7 +49,11 @@ const Keplr = () => {
     // new authentication request
     await fetch(serverUrl + "/auth/keplr", {
       method: "POST",
-      body: `{"address": "${wallet.bech32Address}", "signature": "${signature}"}`,
+      body: JSON.stringify({
+        token: getAuthToken(),
+        address: wallet.bech32Address,
+        signature,
+      }),
     })
       .then(res => res.json())
       .then(data => {
@@ -59,10 +63,7 @@ const Keplr = () => {
           setError(data.error)
         } else {
           setAuthToken(data.token)
-
-          // TODO: return user information from chora server
-          setAuthUser({ ...authUser, address: wallet.bech32Address})
-
+          setAuthUser(data.user)
         }
       })
       .catch(err => {
@@ -95,7 +96,7 @@ const Keplr = () => {
               {"address"}
             </h3>
             <p>
-              {wallet.bech32Address}
+              {(authUser && authUser.address) || wallet.bech32Address}
             </p>
           </div>
         </div>

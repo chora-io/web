@@ -4,7 +4,7 @@ const defaultId = "string"
 const defaultLabel = "string"
 const defaultPlaceholder = ""
 
-const InputString = ({ id, label, placeholder, string, setString }: any) => {
+const InputString = ({ id, label, placeholder, string, setString, disabled }: any) => {
   let noLabel = false
   if (label === "") noLabel = true
 
@@ -16,6 +16,7 @@ const InputString = ({ id, label, placeholder, string, setString }: any) => {
         value={string}
         placeholder={placeholder || defaultPlaceholder}
         onChange={event => setString(event.target.value)}
+        disabled={disabled}
       />
     </label>
   )

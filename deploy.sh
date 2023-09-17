@@ -17,6 +17,7 @@ rm -rf coop/node_modules
 rm -rf data/node_modules
 rm -rf mods/node_modules
 rm -rf scan/node_modules
+rm -rf user/node_modules
 
 # bootstrap
 yarn && yarn bootstrap
@@ -27,6 +28,7 @@ yarn build-coop
 yarn build-data
 yarn build-mods
 yarn build-scan
+yarn build-user
 
 # copy public directories
 cp -r main/public public
@@ -34,6 +36,7 @@ cp -r coop/public public/coop
 cp -r data/public public/data
 cp -r mods/public public/mods
 cp -r scan/public public/scan
+cp -r user/public public/user
 
 # add CNAME file
 echo 'chora.io' >> public/CNAME
