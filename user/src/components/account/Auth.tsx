@@ -1,30 +1,19 @@
 import * as React from "react"
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 
-import { AuthContext, WalletContext } from "chora"
-import { useNetworkServer } from "chora/hooks/useNetworkServer"
+import { AuthContext } from "chora"
 
 import * as styles from "./Auth.module.css"
 
 const Auth = () => {
 
-  const { authUser, checkAuthToken, removeAuthToken } = useContext(AuthContext)
-  const { chainInfo } = useContext(WalletContext)
-
-  const [serverUrl] = useNetworkServer(chainInfo)
-
-  // check authenticated on load
-  useEffect(() => {
-    if (serverUrl) {
-      checkAuthToken(serverUrl)
-    }
-  }, [serverUrl]);
+  const { account } = useContext(AuthContext)
 
   return (
     <div className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>
-          {"authenticated"}
+          {"account information"}
         </h2>
         <p>
           {"authenticated user information"}
@@ -36,7 +25,7 @@ const Auth = () => {
             {"authenticated"}
           </h3>
           <p>
-            {authUser ? "true" : "false"}
+            {account ? "true" : "false"}
           </p>
         </div>
         <div className={styles.boxText}>
@@ -44,15 +33,7 @@ const Auth = () => {
             {"id"}
           </h3>
           <p>
-            {(authUser && authUser.id) || "NA"}
-          </p>
-        </div>
-        <div className={styles.boxText}>
-          <h3>
-            {"email"}
-          </h3>
-          <p>
-            {(authUser && authUser.email) || "NA"}
+            {(account && account.id) || "NA"}
           </p>
         </div>
         <div className={styles.boxText}>
@@ -60,7 +41,15 @@ const Auth = () => {
             {"address"}
           </h3>
           <p>
-            {(authUser && authUser.address) || "NA"}
+            {(account && account.address) || "NA"}
+          </p>
+        </div>
+        <div className={styles.boxText}>
+          <h3>
+            {"email"}
+          </h3>
+          <p>
+            {(account && account.email) || "NA"}
           </p>
         </div>
         <div className={styles.boxText}>
@@ -68,7 +57,7 @@ const Auth = () => {
             {"username"}
           </h3>
           <p>
-            {(authUser && authUser.username) || "NA"}
+            {(account && account.username) || "NA"}
           </p>
         </div>
         <div className={styles.boxText}>
@@ -76,15 +65,10 @@ const Auth = () => {
             {"created at"}
           </h3>
           <p>
-            {(authUser && authUser["created_at"]) || "NA"}
+            {(account && account["created_at"]) || "NA"}
           </p>
         </div>
       </div>
-      {authUser && (
-        <button className={styles.button} onClick={removeAuthToken}>
-          {"clear authentication"}
-        </button>
-      )}
     </div>
   )
 }

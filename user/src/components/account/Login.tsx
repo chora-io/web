@@ -9,7 +9,7 @@ import * as styles from "./Login.module.css"
 
 const Login = () => {
 
-  const { authUser, checkAuthToken, getAuthToken, setAuthToken, setAuthUser } = useContext(AuthContext)
+  const { account, activeAccount, setAccount } = useContext(AuthContext)
   const { chainInfo } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
@@ -21,27 +21,18 @@ const Login = () => {
   // authentication error
   const [error, setError] = useState<string | undefined>(undefined)
 
-  // check authenticated on load
-  useEffect(() => {
-    if (serverUrl) {
-      checkAuthToken(serverUrl)
-    }
-  }, [serverUrl]);
-
   // authenticate user with username and password
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
-    setError("")
-
-    // get authentication token
-    const token = getAuthToken()
+    // reset authentication error
+    setError(undefined)
 
     // authenticate user with username and password
     await fetch(serverUrl + "/auth/login", {
       method: "POST",
       body: JSON.stringify({
-        token,
+        token: activeAccount ? activeAccount.token : undefined,
         username,
         password,
       }),
@@ -53,8 +44,7 @@ const Login = () => {
         } else if (data.error) {
           setError(data.error)
         } else {
-          setAuthToken(data.token)
-          setAuthUser(data.user)
+          setAccount(data.user, data.token)
         }
       })
       .catch(err => {
@@ -78,10 +68,10 @@ const Login = () => {
             {"connected"}
           </h3>
           <p>
-            {authUser && authUser.username ? "true" : "false"}
+            {account && account.username ? "true" : "false"}
           </p>
         </div>
-        {(!authUser || (authUser && !authUser.username)) ? (
+        {(!account || (account && !account.username)) ? (
           <form className={styles.form} onSubmit={handleSubmit}>
             <InputString
               id="username"
@@ -93,6 +83,7 @@ const Login = () => {
               id="password"
               label="password"
               string="password"
+              setString={setPassword}
               disabled // TODO: password input
             />
             <button className={styles.button} type="submit">
@@ -105,7 +96,7 @@ const Login = () => {
               {"username"}
             </h3>
             <p>
-              {authUser && authUser.username}
+              {account && account.username}
             </p>
           </div>
         )}

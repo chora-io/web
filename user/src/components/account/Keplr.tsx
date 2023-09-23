@@ -9,7 +9,7 @@ import * as styles from "./Keplr.module.css"
 
 const Keplr = () => {
 
-  const { authUser, checkAuthToken, getAuthToken, setAuthToken, setAuthUser } = useContext(AuthContext)
+  const { account, activeAccount, setAccount } = useContext(AuthContext)
   const { chainInfo, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
@@ -17,16 +17,11 @@ const Keplr = () => {
   // authentication error
   const [error, setError] = useState<string | undefined>(undefined)
 
-  // check authenticated on load
-  useEffect(() => {
-    if (serverUrl) {
-      checkAuthToken(serverUrl)
-    }
-  }, [serverUrl]);
+  // authenticate user with keplr wallet
+  const handleSubmit = async () => {
 
-  // authenticate user with keplr arbitrary message signing
-  const handleAuthenticate = async () => {
-    setError("")
+    // reset authentication error
+    setError(undefined)
 
     if (!wallet) {
       setError("keplr wallet not detected")
@@ -50,7 +45,7 @@ const Keplr = () => {
     await fetch(serverUrl + "/auth/keplr", {
       method: "POST",
       body: JSON.stringify({
-        token: getAuthToken(),
+        token: activeAccount ? activeAccount.token : undefined,
         address: wallet.bech32Address,
         signature,
       }),
@@ -62,8 +57,7 @@ const Keplr = () => {
         } else if (data.error) {
           setError(data.error)
         } else {
-          setAuthToken(data.token)
-          setAuthUser(data.user)
+          setAccount(data.user, data.token)
         }
       })
       .catch(err => {
@@ -78,7 +72,7 @@ const Keplr = () => {
           {"keplr authentication"}
         </h2>
         <p>
-          {"authenticate user with arbitrary message signing"}
+          {"authenticate user with keplr wallet"}
         </p>
       </div>
       {wallet ? (
@@ -88,7 +82,7 @@ const Keplr = () => {
               {"connected"}
             </h3>
             <p>
-              {authUser && authUser.address ? "true" : "false"}
+              {account && account.address ? "true" : "false"}
             </p>
           </div>
           <div className={styles.boxText}>
@@ -96,7 +90,7 @@ const Keplr = () => {
               {"address"}
             </h3>
             <p>
-              {(authUser && authUser.address) || wallet.bech32Address}
+              {(account && account.address) || wallet.bech32Address}
             </p>
           </div>
         </div>
@@ -107,8 +101,8 @@ const Keplr = () => {
           </p>
         </div>
       )}
-      {(!authUser || (authUser && !authUser.address)) && (
-        <button className={styles.button} onClick={handleAuthenticate}>
+      {(!account || (account && !account.address)) && (
+        <button className={styles.button} onClick={handleSubmit}>
           {"authenticate"}
         </button>
       )}

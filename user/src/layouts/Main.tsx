@@ -18,8 +18,8 @@ const Main = ({ children, withBackground }: any) => {
   }
 
   return (
-    <AuthContextProvider>
-      <WalletContextProvider>
+    <WalletContextProvider>
+      <AuthContextProvider>
         <main className={darkTheme ? styles.darkTheme : null}>
           <div hidden={true}>
             {darkTheme.toString()}
@@ -36,8 +36,8 @@ const Main = ({ children, withBackground }: any) => {
           <Sidebar />
           {children}
         </main>
-      </WalletContextProvider>
-    </AuthContextProvider>
+      </AuthContextProvider>
+    </WalletContextProvider>
   )
 }
 
