@@ -1,0 +1,90 @@
+/* container */
+
+.container {
+  background: var(--background-primary-transparent);
+  width: 100vw;
+}
+
+/* sectionMain */
+
+.sectionMain {
+  align-items: center;
+  display: flex;
+  font-size: 1.5rem;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.sectionMain div {
+  margin-bottom: 2%;
+}
+
+.sectionMain h1 {
+  padding: 0.75rem 0;
+}
+
+.sectionMain p {
+  padding: 0.5rem 0;
+}
+
+.sectionMain p > i {
+  color: var(--color-theme);
+}
+
+@media (max-width: 850px) {
+
+  .sectionMain {
+    font-size: 1.2rem;
+  }
+}
+
+/* sectionText */
+
+.sectionText {
+  align-items: center;
+  background: var(--background-primary);
+  display: flex;
+  font-size: 1.2rem;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+@media (max-width: 850px) {
+
+  .sectionText {
+    font-size: 1rem;
+  }
+}
+
+.sectionText div {
+  display: block;
+  margin-bottom: 5%;
+  max-width: 650px;
+  padding: 2rem;
+}
+
+.sectionText div p {
+  padding: 1rem 0;
+}
+
+@media (max-width: 850px) {
+
+  .sectionText div {
+    padding: 2rem;
+  }
+}
+
+/* sectionTextLinks */
+
+.sectionTextLinks {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+}
+
+.sectionTextLinks a {
+  padding: 1rem;
+}

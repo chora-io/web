@@ -1,24 +1,4 @@
-.idea
-
-# enviroment
-.env
-.env.*
-
-# mac os
 .DS_Store
-
-# dependencies
+.idea
+.turbo
 node_modules
-
-# package logs
-lerna-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# gatsby files
-.cache
-public
-
-# build artifacts
-api
-dist
