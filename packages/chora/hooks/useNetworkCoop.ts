@@ -7,9 +7,10 @@ import {
   regenLocalX,
   regenRedwoodX,
   regenMainnetX,
-} from "chora/chains"
+} from "../chains"
 
 export const useNetworkCoop = (chainInfo: any) => {
+
   const [groupId, setGroupId] = useState<string | undefined>(undefined)
 
   useEffect(() => {
@@ -35,8 +36,12 @@ export const useNetworkCoop = (chainInfo: any) => {
           break
         default:
           // network not supported
+          setGroupId(undefined)
           break
       }
+    } else {
+      // network not available
+      setGroupId(undefined)
     }
   }, [chainInfo])
 

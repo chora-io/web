@@ -2,9 +2,9 @@
 
 // import { Metadata } from 'next'
 
-import Group from "@components/home/Group"
+import Group from '@components/home/Group'
 
-import styles from "./page.module.css"
+import styles from './page.module.css'
 
 // export const metadata: Metadata = {
 //   title: 'coop',
@@ -13,9 +13,7 @@ import styles from "./page.module.css"
 const HomePage = () => (
   <div className={styles.page}>
     <div>
-      <h1>
-        {"group information"}
-      </h1>
+      <h1>{'group information'}</h1>
       <Group />
     </div>
   </div>

@@ -2,9 +2,9 @@
 
 // import { Metadata } from 'next'
 
-import { ConnectWallet, Faucet } from "chora/components"
+import { ConnectWallet, Faucet } from 'chora/components'
 
-import styles from "./page.module.css"
+import styles from './page.module.css'
 
 // export const metadata: Metadata = {
 //   title: 'faucet',

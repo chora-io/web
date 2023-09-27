@@ -2,9 +2,9 @@
 
 // import { Metadata } from 'next'
 
-import ConvertData from "@components/convert/ConvertData"
+import ConvertData from '@components/convert/ConvertData'
 
-import styles from "./page.module.css"
+import styles from './page.module.css'
 
 // export const metadata: Metadata = {
 //   title: 'convert',

@@ -1,14 +1,13 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { Result } from 'chora/components'
 
-import styles from "./QueryClassFee.module.css"
+import styles from './QueryClassFee.module.css'
 
-const queryClassFee = "/regen/ecocredit/v1/class-fee"
+const queryClassFee = '/regen/ecocredit/v1/class-fee'
 
 const QueryClassFee = () => {
-
   const { chainInfo } = useContext(WalletContext)
 
   // error and success
@@ -22,15 +21,15 @@ const QueryClassFee = () => {
     setSuccess(undefined)
 
     fetch(chainInfo.rest + queryClassFee)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -38,22 +37,13 @@ const QueryClassFee = () => {
   return (
     <div id="query-class-fee" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryClassFee"}
-        </h2>
-        <p>
-          {"query the credit class creation fee"}
-        </p>
+        <h2>{'QueryClassFee'}</h2>
+        <p>{'query the credit class creation fee'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

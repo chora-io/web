@@ -1,17 +1,16 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputNumber, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputNumber, Result } from 'chora/components'
 
-import styles from "./QueryBalance.module.css"
+import styles from './QueryBalance.module.css'
 
-const queryBalance = "/cosmos/bank/v1beta1/balance"
+const queryBalance = '/cosmos/bank/v1beta1/balance'
 
 const QueryBalance = () => {
-
   const { chainInfo } = useContext(WalletContext)
 
-  const [id, setId] = useState("")
+  const [id, setId] = useState('')
   const [error, setError] = useState<string | undefined>(undefined)
   const [success, setSuccess] = useState<string | undefined>(undefined)
 
@@ -21,16 +20,16 @@ const QueryBalance = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    fetch(chainInfo.rest + queryBalance + "/" + id)
-      .then(res => res.json())
-      .then(data => {
+    fetch(chainInfo.rest + queryBalance + '/' + id)
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -38,12 +37,8 @@ const QueryBalance = () => {
   return (
     <div id="query-balance" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryBalance"}
-        </h2>
-        <p>
-          {"query token balance"}
-        </p>
+        <h2>{'QueryBalance'}</h2>
+        <p>{'query token balance'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputNumber
@@ -52,14 +47,9 @@ const QueryBalance = () => {
           number={id}
           setNumber={setId}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

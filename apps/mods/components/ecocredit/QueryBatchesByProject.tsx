@@ -1,18 +1,17 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputString, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputString, Result } from 'chora/components'
 
-import styles from "./QueryBatchesByProject.module.css"
+import styles from './QueryBatchesByProject.module.css'
 
-const queryBatchesByProject = "/regen/ecocredit/v1/batches-by-project"
+const queryBatchesByProject = '/regen/ecocredit/v1/batches-by-project'
 
 const QueryBatchesByProject = () => {
-
   const { chainInfo, network } = useContext(WalletContext)
 
   // form input
-  const [projectId, setProjectId] = useState<string>("")
+  const [projectId, setProjectId] = useState<string>('')
 
   // error and success
   const [error, setError] = useState<string | undefined>(undefined)
@@ -24,16 +23,16 @@ const QueryBatchesByProject = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    fetch(chainInfo.rest + queryBatchesByProject + "/" + projectId)
-      .then(res => res.json())
-      .then(data => {
+    fetch(chainInfo.rest + queryBatchesByProject + '/' + projectId)
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -41,12 +40,8 @@ const QueryBatchesByProject = () => {
   return (
     <div id="query-batches-by-project" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryBatchesByProject"}
-        </h2>
-        <p>
-          {"query all credit batches by project id"}
-        </p>
+        <h2>{'QueryBatchesByProject'}</h2>
+        <p>{'query all credit batches by project id'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputString
@@ -56,14 +51,9 @@ const QueryBatchesByProject = () => {
           string={projectId}
           setString={setProjectId}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

@@ -1,14 +1,13 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { ResultTx } from "chora/components"
-import { MsgExec as MsgInputs } from "chora/components/authz"
-import { signAndBroadcast } from "chora/utils"
+import { WalletContext } from 'chora'
+import { ResultTx } from 'chora/components'
+import { MsgExec as MsgInputs } from 'chora/components/authz'
+import { signAndBroadcast } from 'chora/utils'
 
-import styles from "./MsgExec.module.css"
+import styles from './MsgExec.module.css'
 
 const MsgExec = () => {
-
   const { chainInfo, wallet } = useContext(WalletContext)
 
   const [message, setMessage] = useState<any>(undefined)
@@ -21,10 +20,11 @@ const MsgExec = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    await signAndBroadcast(chainInfo, wallet["bech32Address"], [message])
-      .then(res => {
+    await signAndBroadcast(chainInfo, wallet['bech32Address'], [message])
+      .then((res) => {
         setSuccess(res)
-      }).catch(err => {
+      })
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -32,28 +32,14 @@ const MsgExec = () => {
   return (
     <div id="msg-exec" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"MsgExec"}
-        </h2>
-        <p>
-          {"execute authorized messages"}
-        </p>
+        <h2>{'MsgExec'}</h2>
+        <p>{'execute authorized messages'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <MsgInputs
-          setMessage={setMessage}
-          useWallet={true}
-          wallet={wallet}
-        />
-        <button type="submit">
-          {"submit"}
-        </button>
+        <MsgInputs setMessage={setMessage} useWallet={true} wallet={wallet} />
+        <button type="submit">{'submit'}</button>
       </form>
-      <ResultTx
-        error={error}
-        rest={chainInfo?.rest}
-        success={success}
-      />
+      <ResultTx error={error} rest={chainInfo?.rest} success={success} />
     </div>
   )
 }

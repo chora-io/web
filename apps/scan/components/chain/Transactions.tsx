@@ -1,17 +1,16 @@
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
-import { InputString, Result } from "chora/components"
+import { InputString, Result } from 'chora/components'
 
-import styles from "./Transactions.module.css"
+import styles from './Transactions.module.css'
 
-const queryTx = "cosmos/tx/v1beta1/txs"
+const queryTx = 'cosmos/tx/v1beta1/txs'
 
 const Transactions = ({ chainId, rest }: any) => {
-
   const router = useRouter()
 
-  const [tx, setTx] = useState<string>("")
+  const [tx, setTx] = useState<string>('')
   const [error, setError] = useState<string | undefined>(undefined)
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
@@ -22,22 +21,19 @@ const Transactions = ({ chainId, rest }: any) => {
     // TODO: validate tx
 
     if (tx) {
-
       // TODO: custom tx page
       // router.push(`?tx=${tx}`)
 
-      router.push(rest + "/" + queryTx + "/" + tx)
+      router.push(rest + '/' + queryTx + '/' + tx)
     } else {
-      setError("transaction cannot be empty")
+      setError('transaction cannot be empty')
     }
   }
 
   return (
     <div className={styles.box}>
       <div>
-        <h2>
-          {"transactions"}
-        </h2>
+        <h2>{'transactions'}</h2>
       </div>
       <form className={styles.form}>
         <InputString
@@ -49,7 +45,7 @@ const Transactions = ({ chainId, rest }: any) => {
           setString={setTx}
         />
         <button type="submit" onClick={handleSubmit}>
-          {"search"}
+          {'search'}
         </button>
       </form>
       {error && (

@@ -1,18 +1,17 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputAddress, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputAddress, Result } from 'chora/components'
 
-import styles from "./QueryBalancesByAddress.module.css"
+import styles from './QueryBalancesByAddress.module.css'
 
-const queryBalancesByAddress = "/chora/voucher/v1/balances-by-address"
+const queryBalancesByAddress = '/chora/voucher/v1/balances-by-address'
 
 const QueryBalancesByAddress = () => {
-
   const { chainInfo } = useContext(WalletContext)
 
   // form input
-  const [address, setAddress] = useState<string>("")
+  const [address, setAddress] = useState<string>('')
 
   // error and success
   const [error, setError] = useState<string | undefined>(undefined)
@@ -24,16 +23,16 @@ const QueryBalancesByAddress = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    fetch(chainInfo.rest + queryBalancesByAddress + "/" + address)
-      .then(res => res.json())
-      .then(data => {
+    fetch(chainInfo.rest + queryBalancesByAddress + '/' + address)
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -41,12 +40,8 @@ const QueryBalancesByAddress = () => {
   return (
     <div id="query-balances-by-address" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryBalancesByAddress"}
-        </h2>
-        <p>
-          {"query all balances by the address of the owner"}
-        </p>
+        <h2>{'QueryBalancesByAddress'}</h2>
+        <p>{'query all balances by the address of the owner'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputAddress
@@ -55,14 +50,9 @@ const QueryBalancesByAddress = () => {
           number={address}
           setNumber={setAddress}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

@@ -1,18 +1,17 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputAddress, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputAddress, Result } from 'chora/components'
 
-import styles from "./QueryGroupPolicyInfo.module.css"
+import styles from './QueryGroupPolicyInfo.module.css'
 
-const queryGroupPolicyInfo = "/cosmos/group/v1/group_policy_info"
+const queryGroupPolicyInfo = '/cosmos/group/v1/group_policy_info'
 
 const QueryGroupPolicyInfo = () => {
-
   const { chainInfo, network } = useContext(WalletContext)
 
   // form input
-  const [address, setAddress] = useState<string>("")
+  const [address, setAddress] = useState<string>('')
 
   // error and success
   const [error, setError] = useState<string | undefined>(undefined)
@@ -24,16 +23,16 @@ const QueryGroupPolicyInfo = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    fetch(chainInfo.rest + queryGroupPolicyInfo + "/" + address)
-      .then(res => res.json())
-      .then(data => {
+    fetch(chainInfo.rest + queryGroupPolicyInfo + '/' + address)
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -41,12 +40,8 @@ const QueryGroupPolicyInfo = () => {
   return (
     <div id="query-group-policy" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryGroupPolicyInfo"}
-        </h2>
-        <p>
-          {"query a group policy by the address of the policy"}
-        </p>
+        <h2>{'QueryGroupPolicyInfo'}</h2>
+        <p>{'query a group policy by the address of the policy'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputAddress
@@ -57,14 +52,9 @@ const QueryGroupPolicyInfo = () => {
           address={address}
           setAddress={setAddress}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

@@ -1,9 +1,9 @@
 'use client'
 
-import { ThemeContextProvider, WalletContextProvider } from "chora"
-import { Header } from "chora/components"
+import { ThemeContextProvider, WalletContextProvider } from 'chora'
+import { Header } from 'chora/components'
 
-import Sidebar from "@components/Sidebar"
+import Sidebar from '@components/Sidebar'
 
 import './globals.css'
 

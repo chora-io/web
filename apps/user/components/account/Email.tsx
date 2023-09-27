@@ -1,13 +1,12 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { AuthContext, WalletContext } from "chora"
-import { InputString, Result } from "chora/components"
-import { useNetworkServer } from "chora/hooks"
+import { AuthContext, WalletContext } from 'chora'
+import { InputString, Result } from 'chora/components'
+import { useNetworkServer } from 'chora/hooks'
 
-import styles from "./Email.module.css"
+import styles from './Email.module.css'
 
 const Email = () => {
-
   const { account, activeAccount, setAccount } = useContext(AuthContext)
 
   const { chainInfo } = useContext(WalletContext)
@@ -15,8 +14,8 @@ const Email = () => {
   const [serverUrl] = useNetworkServer(chainInfo)
 
   // form inputs
-  const [email, setEmail] = useState<string>("")
-  const [accessCode, setAccessCode] = useState<string>("")
+  const [email, setEmail] = useState<string>('')
+  const [accessCode, setAccessCode] = useState<string>('')
 
   // authentication error
   const [error, setError] = useState<string | undefined>(undefined)
@@ -29,16 +28,16 @@ const Email = () => {
     setError(undefined)
 
     // authenticate user with email and access code
-    await fetch(serverUrl + "/auth/email", {
-      method: "POST",
+    await fetch(serverUrl + '/auth/email', {
+      method: 'POST',
       body: JSON.stringify({
         token: activeAccount ? activeAccount.token : undefined,
         email,
         accessCode,
       }),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else if (data.error) {
@@ -47,7 +46,7 @@ const Email = () => {
           setAccount(data.user, data.token)
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -55,23 +54,15 @@ const Email = () => {
   return (
     <div className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"email access code authentication"}
-        </h2>
-        <p>
-          {"authenticate user with email access code"}
-        </p>
+        <h2>{'email access code authentication'}</h2>
+        <p>{'authenticate user with email access code'}</p>
       </div>
       <div className={styles.boxItem}>
         <div className={styles.boxText}>
-          <h3>
-            {"connected"}
-          </h3>
-          <p>
-            {account && account.email ? "true" : "false"}
-          </p>
+          <h3>{'connected'}</h3>
+          <p>{account && account.email ? 'true' : 'false'}</p>
         </div>
-        {(!account || (account && !account.email)) ? (
+        {!account || (account && !account.email) ? (
           <form className={styles.form} onSubmit={handleSubmit}>
             <InputString
               id="email"
@@ -87,17 +78,13 @@ const Email = () => {
               disabled // TODO: access code input
             />
             <button className={styles.button} type="submit">
-              {"authenticate"}
+              {'authenticate'}
             </button>
           </form>
         ) : (
           <div className={styles.boxText}>
-            <h3>
-              {"email"}
-            </h3>
-            <p>
-              {account && account.email}
-            </p>
+            <h3>{'email'}</h3>
+            <p>{account && account.email}</p>
           </div>
         )}
       </div>

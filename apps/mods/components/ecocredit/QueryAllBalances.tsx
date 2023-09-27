@@ -1,14 +1,13 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { Result } from 'chora/components'
 
-import styles from "./QueryAllBalances.module.css"
+import styles from './QueryAllBalances.module.css'
 
-const queryAllBalances = "/regen/ecocredit/v1/all-balances"
+const queryAllBalances = '/regen/ecocredit/v1/all-balances'
 
 const QueryAllBalances = () => {
-
   const { chainInfo } = useContext(WalletContext)
 
   // error and success
@@ -22,15 +21,15 @@ const QueryAllBalances = () => {
     setSuccess(undefined)
 
     fetch(chainInfo.rest + queryAllBalances)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -38,22 +37,13 @@ const QueryAllBalances = () => {
   return (
     <div id="query-all-balances" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryAllBalances"}
-        </h2>
-        <p>
-          {"query all credit batch balances"}
-        </p>
+        <h2>{'QueryAllBalances'}</h2>
+        <p>{'query all credit batch balances'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

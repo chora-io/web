@@ -1,15 +1,12 @@
-import Link from "next/link"
-import { useContext, useEffect, useState } from "react"
+import Link from 'next/link'
+import { useContext, useEffect, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { useNetworkServer } from "chora/hooks"
+import { WalletContext } from 'chora'
+import { useNetworkCoop, useNetworkServer } from 'chora/hooks'
 
-import { useNetworkCoop } from "@hooks"
-
-import styles from "./ProposalPreview.module.css"
+import styles from './ProposalPreview.module.css'
 
 const ProposalPreview = ({ proposal }: any) => {
-
   const { chainInfo } = useContext(WalletContext)
 
   const [groupId] = useNetworkCoop(chainInfo)
@@ -23,14 +20,13 @@ const ProposalPreview = ({ proposal }: any) => {
   useEffect(() => {
     setError(undefined)
     setMetadata(undefined)
-  }, [proposal, chainInfo?.chainId]);
+  }, [proposal, chainInfo?.chainId])
 
   // fetch on load and group or metadata change
   useEffect(() => {
-
     // fetch proposal metadata from network server
     if (groupId && proposal?.metadata) {
-      fetchMetadata().catch(err => {
+      fetchMetadata().catch((err) => {
         setError(err.message)
       })
     }
@@ -38,75 +34,57 @@ const ProposalPreview = ({ proposal }: any) => {
 
   // fetch proposal metadata from network server
   const fetchMetadata = async () => {
-
     // fetch proposal metadata from network server
-    await fetch(serverUrl + "/data/" + proposal["metadata"])
-      .then(res => res.json())
-      .then(res => {
+    await fetch(serverUrl + '/data/' + proposal['metadata'])
+      .then((res) => res.json())
+      .then((res) => {
         if (res.error) {
           setError(res.error)
           setMetadata(null)
         } else {
-          const data = JSON.parse(res["jsonld"])
-          if (data["@context"] !== "https://schema.chora.io/contexts/group_proposal.jsonld") {
-            setError("unsupported metadata schema")
+          const data = JSON.parse(res['jsonld'])
+          if (
+            data['@context'] !==
+            'https://schema.chora.io/contexts/group_proposal.jsonld'
+          ) {
+            setError('unsupported metadata schema')
             setMetadata(null)
           } else {
-            setError("")
+            setError('')
             setMetadata(data)
           }
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
 
   return (
     <div className={styles.boxItem}>
-      {!proposal && !metadata && !error && (
-        <div>
-          {"loading..."}
-        </div>
-      )}
+      {!proposal && !metadata && !error && <div>{'loading...'}</div>}
       {proposal && metadata && (
         <div>
           <div className={styles.boxText}>
-            <h3>
-              {"name"}
-            </h3>
-            <p>
-              {metadata["name"] ? metadata["name"] : "NA"}
-            </p>
+            <h3>{'name'}</h3>
+            <p>{metadata['name'] ? metadata['name'] : 'NA'}</p>
           </div>
           <div className={styles.boxText}>
-            <h3>
-              {"status"}
-            </h3>
-            <p>
-              {proposal["status"]}
-            </p>
+            <h3>{'status'}</h3>
+            <p>{proposal['status']}</p>
           </div>
-          {(proposal["status"] === "PROPOSAL_STATUS_ACCEPTED") && (
+          {proposal['status'] === 'PROPOSAL_STATUS_ACCEPTED' && (
             <div className={styles.boxText}>
-              <h3>
-                {"executor result"}
-              </h3>
-              <p>
-                {proposal["executor_result"]}
-              </p>
+              <h3>{'executor result'}</h3>
+              <p>{proposal['executor_result']}</p>
             </div>
           )}
-          <Link href={`/proposals/?id=${proposal["id"]}`}>
-            {"view proposal"}
+          <Link href={`/proposals/?id=${proposal['id']}`}>
+            {'view proposal'}
           </Link>
         </div>
       )}
-      {error && (
-        <div>
-          {error}
-        </div>
-      )}
+      {error && <div>{error}</div>}
     </div>
   )
 }

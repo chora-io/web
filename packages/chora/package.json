@@ -15,26 +15,27 @@
   },
   "scripts": {
     "build": "sh scripts/build.sh",
-    "clean": "rm -rf api dist",
     "lint": "echo 'lint not configured'",
     "format": "echo 'format not configured'",
-    "test": "echo 'test not configured'"
+    "test": "echo 'test not configured'",
+    "clean": "rm -rf .turbo api dist node_modules"
   },
   "devDependencies": {
-    "@keplr-wallet/proto-types": "^0.11.37",
-    "@keplr-wallet/types": "^0.11.37",
-    "@rollup/plugin-commonjs": "^24.0.1",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-typescript": "^11.0.0",
+    "@keplr-wallet/proto-types": "^0.12.28",
+    "@keplr-wallet/types": "^0.12.28",
+    "@rollup/plugin-commonjs": "^25.0.4",
+    "@rollup/plugin-node-resolve": "^15.2.1",
+    "@rollup/plugin-typescript": "^11.1.4",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "eslint": "^8.50.0",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "rollup": "^3.11.0",
+    "rollup": "^3.29.3",
     "rollup-plugin-postcss": "^4.0.2",
     "ts-node": "^10.9.1",
-    "ts-proto": "^1.157.1"
+    "ts-proto": "^1.158.0"
   }
 }

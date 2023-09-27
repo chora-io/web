@@ -2,10 +2,10 @@
 
 // import { Metadata } from 'next'
 
-import AnchoredData from "@components/search/AnchoredData"
-import DataResolvers from "@components/search/DataResolvers"
+import AnchoredData from '@components/search/AnchoredData'
+import DataResolvers from '@components/search/DataResolvers'
 
-import styles from "./page.module.css"
+import styles from './page.module.css'
 
 // export const metadata: Metadata = {
 //   title: 'search',

@@ -1,13 +1,12 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { AuthContext, WalletContext } from "chora"
-import { Result } from "chora/components"
-import { useNetworkServer } from "chora/hooks"
+import { AuthContext, WalletContext } from 'chora'
+import { Result } from 'chora/components'
+import { useNetworkServer } from 'chora/hooks'
 
-import styles from "./Keplr.module.css"
+import styles from './Keplr.module.css'
 
 const Keplr = () => {
-
   const { account, activeAccount, setAccount } = useContext(AuthContext)
   const { chainInfo, wallet } = useContext(WalletContext)
 
@@ -18,12 +17,11 @@ const Keplr = () => {
 
   // authenticate user with keplr wallet
   const handleSubmit = async () => {
-
     // reset authentication error
     setError(undefined)
 
     if (!wallet) {
-      setError("keplr wallet not detected")
+      setError('keplr wallet not detected')
       return
     }
 
@@ -34,23 +32,26 @@ const Keplr = () => {
     let signature: any
 
     // sign data and set signature
-    await window?.keplr?.signArbitrary(chainInfo.chainId, wallet.bech32Address, data).then(res => {
-      signature = res.signature
-    }).catch(err => {
-      setError(err.message)
-    })
+    await window?.keplr
+      ?.signArbitrary(chainInfo.chainId, wallet.bech32Address, data)
+      .then((res) => {
+        signature = res.signature
+      })
+      .catch((err) => {
+        setError(err.message)
+      })
 
     // new authentication request
-    await fetch(serverUrl + "/auth/keplr", {
-      method: "POST",
+    await fetch(serverUrl + '/auth/keplr', {
+      method: 'POST',
       body: JSON.stringify({
         token: activeAccount ? activeAccount.token : undefined,
         address: wallet.bech32Address,
         signature,
       }),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else if (data.error) {
@@ -59,7 +60,7 @@ const Keplr = () => {
           setAccount(data.user, data.token)
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -67,42 +68,28 @@ const Keplr = () => {
   return (
     <div className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"keplr authentication"}
-        </h2>
-        <p>
-          {"authenticate user with keplr wallet"}
-        </p>
+        <h2>{'keplr authentication'}</h2>
+        <p>{'authenticate user with keplr wallet'}</p>
       </div>
       {wallet ? (
         <div className={styles.boxItem}>
           <div className={styles.boxText}>
-            <h3>
-              {"connected"}
-            </h3>
-            <p>
-              {account && account.address ? "true" : "false"}
-            </p>
+            <h3>{'connected'}</h3>
+            <p>{account && account.address ? 'true' : 'false'}</p>
           </div>
           <div className={styles.boxText}>
-            <h3>
-              {"address"}
-            </h3>
-            <p>
-              {(account && account.address) || wallet.bech32Address}
-            </p>
+            <h3>{'address'}</h3>
+            <p>{(account && account.address) || wallet.bech32Address}</p>
           </div>
         </div>
       ) : (
         <div className={styles.boxItem}>
-          <p>
-            {"keplr wallet not detected, unable to authenticate"}
-          </p>
+          <p>{'keplr wallet not detected, unable to authenticate'}</p>
         </div>
       )}
       {(!account || (account && !account.address)) && (
         <button className={styles.button} onClick={handleSubmit}>
-          {"authenticate"}
+          {'authenticate'}
         </button>
       )}
       <Result error={error} />

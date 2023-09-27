@@ -1,22 +1,21 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { ResultTx } from "chora/components"
+import { WalletContext } from 'chora'
+import { ResultTx } from 'chora/components'
 import {
   MsgAnchor as MsgInputs,
   MsgAnchorJSON as MsgInputsJSON,
-} from "chora/components/data"
-import { signAndBroadcast } from "chora/utils"
+} from 'chora/components/data'
+import { signAndBroadcast } from 'chora/utils'
 
-import SelectInput from "../SelectInput"
+import SelectInput from '../SelectInput'
 
-import styles from "./MsgAnchor.module.css"
+import styles from './MsgAnchor.module.css'
 
 const MsgAnchor = () => {
-
   const { chainInfo, wallet } = useContext(WalletContext)
 
-  const [input, setInput] = useState("form")
+  const [input, setInput] = useState('form')
   const [message, setMessage] = useState<any>(undefined)
   const [error, setError] = useState<string | undefined>(undefined)
   const [success, setSuccess] = useState<string | undefined>(undefined)
@@ -27,10 +26,11 @@ const MsgAnchor = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    await signAndBroadcast(chainInfo, wallet["bech32Address"], [message])
-      .then(res => {
+    await signAndBroadcast(chainInfo, wallet['bech32Address'], [message])
+      .then((res) => {
         setSuccess(res)
-      }).catch(err => {
+      })
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -44,27 +44,14 @@ const MsgAnchor = () => {
   return (
     <div id="msg-anchor" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"MsgAnchor"}
-        </h2>
-        <p>
-          {"anchor data"}
-        </p>
+        <h2>{'MsgAnchor'}</h2>
+        <p>{'anchor data'}</p>
       </div>
-      <SelectInput
-        input={input}
-        setInput={handleSetInput}
-      />
-      {input === "form" ? (
+      <SelectInput input={input} setInput={handleSetInput} />
+      {input === 'form' ? (
         <form className={styles.form} onSubmit={handleSubmit}>
-          <MsgInputs
-            setMessage={setMessage}
-            useWallet={true}
-            wallet={wallet}
-          />
-          <button type="submit">
-            {"submit"}
-          </button>
+          <MsgInputs setMessage={setMessage} useWallet={true} wallet={wallet} />
+          <button type="submit">{'submit'}</button>
         </form>
       ) : (
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -73,16 +60,10 @@ const MsgAnchor = () => {
             useWallet={true}
             wallet={wallet}
           />
-          <button type="submit">
-            {"submit"}
-          </button>
+          <button type="submit">{'submit'}</button>
         </form>
       )}
-      <ResultTx
-        error={error}
-        rest={chainInfo?.rest}
-        success={success}
-      />
+      <ResultTx error={error} rest={chainInfo?.rest} success={success} />
     </div>
   )
 }

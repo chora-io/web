@@ -1,19 +1,18 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputAddress, InputString, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputAddress, InputString, Result } from 'chora/components'
 
-import styles from "./QueryInterchainAccount.module.css"
+import styles from './QueryInterchainAccount.module.css'
 
-const queryInterchainAccount = "/regen/intertx/v1/interchain-account"
+const queryInterchainAccount = '/regen/intertx/v1/interchain-account'
 
 const QueryInterchainAccount = () => {
-
   const { chainInfo, network } = useContext(WalletContext)
 
   // form input
-  const [owner, setOwner] = useState<string>("")
-  const [connectionId, setConnectionId] = useState<string>("")
+  const [owner, setOwner] = useState<string>('')
+  const [connectionId, setConnectionId] = useState<string>('')
 
   // error and success
   const [error, setError] = useState<string | undefined>(undefined)
@@ -25,16 +24,23 @@ const QueryInterchainAccount = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    fetch(chainInfo.rest + queryInterchainAccount + "/" + owner + "/" + connectionId)
-      .then(res => res.json())
-      .then(data => {
+    fetch(
+      chainInfo.rest +
+        queryInterchainAccount +
+        '/' +
+        owner +
+        '/' +
+        connectionId,
+    )
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -42,11 +48,11 @@ const QueryInterchainAccount = () => {
   return (
     <div id="query-interchain-account" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryInterchainAccount"}
-        </h2>
+        <h2>{'QueryInterchainAccount'}</h2>
         <p>
-          {"query an interchain account by address of the owner and the connection id"}
+          {
+            'query an interchain account by address of the owner and the connection id'
+          }
         </p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
@@ -64,14 +70,9 @@ const QueryInterchainAccount = () => {
           number={connectionId}
           setNumber={setConnectionId}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

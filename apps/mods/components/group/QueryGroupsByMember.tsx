@@ -1,18 +1,17 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputAddress, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputAddress, Result } from 'chora/components'
 
-import styles from "./QueryGroupsByMember.module.css"
+import styles from './QueryGroupsByMember.module.css'
 
-const queryGroupsByAdmin = "/cosmos/group/v1/groups_by_member"
+const queryGroupsByAdmin = '/cosmos/group/v1/groups_by_member'
 
 const QueryGroupsByMember = () => {
-
   const { chainInfo, network } = useContext(WalletContext)
 
   // form input
-  const [member, setMember] = useState<string>("")
+  const [member, setMember] = useState<string>('')
 
   // error and success
   const [error, setError] = useState<string | undefined>(undefined)
@@ -24,16 +23,16 @@ const QueryGroupsByMember = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    fetch(chainInfo.rest + queryGroupsByAdmin + "/" + member)
-      .then(res => res.json())
-      .then(data => {
+    fetch(chainInfo.rest + queryGroupsByAdmin + '/' + member)
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -41,12 +40,8 @@ const QueryGroupsByMember = () => {
   return (
     <div id="query-groups-by-member" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryGroupsByMember"}
-        </h2>
-        <p>
-          {"query groups by the address of a member"}
-        </p>
+        <h2>{'QueryGroupsByMember'}</h2>
+        <p>{'query groups by the address of a member'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputAddress
@@ -56,14 +51,9 @@ const QueryGroupsByMember = () => {
           address={member}
           setAddress={setMember}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

@@ -1,18 +1,17 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputNumber, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputNumber, Result } from 'chora/components'
 
-import styles from "./QueryVotesByProposal.module.css"
+import styles from './QueryVotesByProposal.module.css'
 
-const queryVotesByProposal = "/cosmos/group/v1/votes_by_proposal"
+const queryVotesByProposal = '/cosmos/group/v1/votes_by_proposal'
 
 const QueryVotesByProposal = () => {
-
   const { chainInfo, network } = useContext(WalletContext)
 
   // form input
-  const [proposalId, setProposalId] = useState<string>("")
+  const [proposalId, setProposalId] = useState<string>('')
 
   // error and success
   const [error, setError] = useState<string | undefined>(undefined)
@@ -24,16 +23,16 @@ const QueryVotesByProposal = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    fetch(chainInfo.rest + queryVotesByProposal + "/" + proposalId)
-      .then(res => res.json())
-      .then(data => {
+    fetch(chainInfo.rest + queryVotesByProposal + '/' + proposalId)
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -41,12 +40,8 @@ const QueryVotesByProposal = () => {
   return (
     <div id="query-votes-by-proposal" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryVotesByProposal"}
-        </h2>
-        <p>
-          {"query votes by the id of a proposal"}
-        </p>
+        <h2>{'QueryVotesByProposal'}</h2>
+        <p>{'query votes by the id of a proposal'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputNumber
@@ -55,14 +50,9 @@ const QueryVotesByProposal = () => {
           number={proposalId}
           setNumber={setProposalId}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

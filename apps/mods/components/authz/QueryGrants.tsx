@@ -1,19 +1,18 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputAddress, SelectMessage, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputAddress, SelectMessage, Result } from 'chora/components'
 
-import styles from "./QueryGrants.module.css"
+import styles from './QueryGrants.module.css'
 
-const queryGrants = "/cosmos/authz/v1beta1/grants"
+const queryGrants = '/cosmos/authz/v1beta1/grants'
 
 const QueryGrants = () => {
-
   const { chainInfo, network } = useContext(WalletContext)
 
-  const [granter, setGranter] = useState("")
-  const [grantee, setGrantee] = useState("")
-  const [msgTypeUrl, setMsgTypeUrl] = useState("")
+  const [granter, setGranter] = useState('')
+  const [grantee, setGrantee] = useState('')
+  const [msgTypeUrl, setMsgTypeUrl] = useState('')
   const [error, setError] = useState<string | undefined>(undefined)
   const [success, setSuccess] = useState<string | undefined>(undefined)
 
@@ -26,15 +25,15 @@ const QueryGrants = () => {
     const params = `?grantee=${grantee}&granter=${granter}&msg_type_url=${msgTypeUrl}`
 
     fetch(chainInfo.rest + queryGrants + params)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -42,12 +41,8 @@ const QueryGrants = () => {
   return (
     <div id="query-grants" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryGrants"}
-        </h2>
-        <p>
-          {"query granted authorizations"}
-        </p>
+        <h2>{'QueryGrants'}</h2>
+        <p>{'query granted authorizations'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputAddress
@@ -71,14 +66,9 @@ const QueryGrants = () => {
           message={msgTypeUrl}
           setMessage={setMsgTypeUrl}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

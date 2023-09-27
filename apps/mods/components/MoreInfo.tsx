@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from 'react'
 
-import { WalletContext } from "chora"
+import { WalletContext } from 'chora'
 import {
   bionLocal,
   bionLocalX,
@@ -14,9 +14,9 @@ import {
   regenMainnetX,
   regenRedwood,
   regenRedwoodX,
-} from "chora/chains"
+} from 'chora/chains'
 
-import styles from "./MoreInfo.module.css"
+import styles from './MoreInfo.module.css'
 
 const MoreInfo = ({ module }: any) => {
   const { network } = useContext(WalletContext)
@@ -47,17 +47,15 @@ const MoreInfo = ({ module }: any) => {
         chainInfoX = choraTestnetX
         break
     }
-    setModuleInfo(chainInfoX.modules.find((m: any) => m.moduleName === module.moduleName))
+    setModuleInfo(
+      chainInfoX.modules.find((m: any) => m.moduleName === module.moduleName),
+    )
   }, [module, network])
 
   const renderApiInfo = () => (
     <div>
-      <h4>
-        {'api information (chora webkit)'}
-      </h4>
-      <p>
-        {`api package: ${module.apiPackage}`}
-      </p>
+      <h4>{'api information (chora webkit)'}</h4>
+      <p>{`api package: ${module.apiPackage}`}</p>
       <p>
         {`api documentation: `}
         <a href={module.apiDocumentation} target="_blank">
@@ -75,9 +73,7 @@ const MoreInfo = ({ module }: any) => {
 
   const renderModuleInfo = () => (
     <div>
-      <h4>
-        {`module information (${network})`}
-      </h4>
+      <h4>{`module information (${network})`}</h4>
       <p>
         {`documentation: `}
         <a href={moduleInfo.documentation} target="_blank">
@@ -103,9 +99,7 @@ const MoreInfo = ({ module }: any) => {
     <div className={styles.info}>
       {renderApiInfo()}
       {moduleInfo ? (
-        <>
-          {renderModuleInfo()}
-        </>
+        <>{renderModuleInfo()}</>
       ) : (
         <div className={styles.error}>
           {'not available on selected network'}
@@ -113,7 +107,6 @@ const MoreInfo = ({ module }: any) => {
       )}
     </div>
   )
-
 }
 
 export default MoreInfo

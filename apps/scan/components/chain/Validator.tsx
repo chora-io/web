@@ -1,24 +1,22 @@
-import styles from "./Validator.module.css"
+import styles from './Validator.module.css'
 
 const Validators = ({ validator, index }: any) => (
-  <tr key={index} className={validator["jailed"] ? styles.jailed : undefined}>
+  <tr key={index} className={validator['jailed'] ? styles.jailed : undefined}>
+    <td>{validator.description['moniker']}</td>
+    <td>{validator['tokens']}</td>
+    <td>{Number(validator['delegator_shares']).toFixed()}</td>
     <td>
-      {validator.description["moniker"]}
+      {Number(validator['commission']['commission_rates']['rate']).toFixed(2)}
     </td>
     <td>
-      {validator["tokens"]}
+      {Number(validator['commission']['commission_rates']['max_rate']).toFixed(
+        2,
+      )}
     </td>
     <td>
-      {Number(validator["delegator_shares"]).toFixed()}
-    </td>
-    <td>
-      {Number(validator["commission"]["commission_rates"]["rate"]).toFixed(2)}
-    </td>
-    <td>
-      {Number(validator["commission"]["commission_rates"]["max_rate"]).toFixed(2)}
-    </td>
-    <td>
-      {Number(validator["commission"]["commission_rates"]["max_change_rate"]).toFixed(2)}
+      {Number(
+        validator['commission']['commission_rates']['max_change_rate'],
+      ).toFixed(2)}
     </td>
   </tr>
 )

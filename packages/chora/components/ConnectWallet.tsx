@@ -18,6 +18,8 @@ const ConnectWallet = () => {
 
   const { getKeplr, network, setNetwork, wallet, loading, error } = useContext(WalletContext)
 
+  // TODO: reconsider loading and whether the following should be within the context
+
   let address: string
   let connected: boolean
   let selected: string

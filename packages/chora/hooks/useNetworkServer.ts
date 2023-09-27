@@ -10,6 +10,7 @@ import {
 } from "chora/chains"
 
 export const useNetworkServer = (chainInfo: any) => {
+
   const [serverUrl, setServerUrl] = useState<string | undefined>(undefined)
 
   useEffect(() => {
@@ -33,10 +34,13 @@ export const useNetworkServer = (chainInfo: any) => {
         case 'regen-1':
           setServerUrl(regenMainnetX.server)
           break
-        default:
           // network not supported
+          setServerUrl(undefined)
           break
       }
+    } else {
+      // network not available
+      setServerUrl(undefined)
     }
   }, [chainInfo])
 

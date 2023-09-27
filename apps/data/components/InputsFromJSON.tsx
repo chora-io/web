@@ -1,23 +1,20 @@
 const InputsFromJSON = ({ example, json, setJson }: any) => {
-
   const inputs: any[] = []
 
-  let parsedJson = JSON.parse(json || "{}")
-  let parsedExample = JSON.parse(example || "{}")
+  let parsedJson = JSON.parse(json || '{}')
+  let parsedExample = JSON.parse(example || '{}')
 
   if (example) {
-
     // parse example to generate inputs
     JSON.parse(example, (k, v) => {
-
       // skip keyless
-      if (k === "") return
+      if (k === '') return
 
       // whether input should be hidden
-      const hidden = (k === "@context")
+      const hidden = k === '@context'
 
       // push non-object value to inputs
-      if (typeof v !== "object") {
+      if (typeof v !== 'object') {
         inputs.push({
           id: k,
           label: k,
@@ -30,37 +27,32 @@ const InputsFromJSON = ({ example, json, setJson }: any) => {
 
     // parse example again to update nested inputs
     JSON.parse(example, (k, v) => {
-
       // skip keyless
-      if (k === "") return
+      if (k === '') return
 
       // check if value is an object
-      if (typeof v === "object") {
-
+      if (typeof v === 'object') {
         // loop through object properties
         for (const p in parsedExample[k]) {
-
           // find index of nested property
-          const i = inputs.findIndex(e => e.id === p)
+          const i = inputs.findIndex((e) => e.id === p)
 
           // update id and label of nested property
-          inputs[i].id = k + "/" + inputs[i].id
-          inputs[i].label = k + " " + inputs[i].label
+          inputs[i].id = k + '/' + inputs[i].id
+          inputs[i].label = k + ' ' + inputs[i].label
         }
       }
     })
   }
 
   const handleSetJson = (id: string, value: any) => {
-
     // parse json string and use example with context if json is not yet set
-    let obj = JSON.parse(json || `{"@context": "${parsedExample["@context"]}"}`)
+    let obj = JSON.parse(json || `{"@context": "${parsedExample['@context']}"}`)
 
     // check nested property
-    if (id.includes("/")) {
-
+    if (id.includes('/')) {
       // get nested ids
-      const ids = id.split("/")
+      const ids = id.split('/')
 
       // set nested property
       if (obj[ids[0]] !== undefined) {
@@ -68,9 +60,7 @@ const InputsFromJSON = ({ example, json, setJson }: any) => {
       } else {
         obj[ids[0]] = { [ids[1]]: value }
       }
-
     } else {
-
       // set value
       obj[id] = value
     }
@@ -84,15 +74,15 @@ const InputsFromJSON = ({ example, json, setJson }: any) => {
 
   return (
     <>
-      {inputs.map(input => (
+      {inputs.map((input) => (
         <label key={input.id} htmlFor={input.id}>
-          {input.hidden ? "" : input.label}
+          {input.hidden ? '' : input.label}
           <input
             id={input.id}
             value={input.value}
             placeholder={input.placeholder}
-            onChange={event => handleSetJson(input.id, event.target.value)}
-            type={input.hidden ? "hidden" : undefined}
+            onChange={(event) => handleSetJson(input.id, event.target.value)}
+            type={input.hidden ? 'hidden' : undefined}
           />
         </label>
       ))}

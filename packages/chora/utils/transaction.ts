@@ -29,7 +29,7 @@ export const signAndBroadcast = async (
 
       // throw error if account is undefined
       if (res["account"] === undefined) {
-        throw Error("error fetching account: account is undefined")
+        throw Error("account is undefined")
       }
 
       // set account information

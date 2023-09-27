@@ -16,6 +16,13 @@
     "packages/*"
   ],
   "scripts": {
+    "dev": "turbo run dev",
+    "dev:coop": "turbo run dev --filter=coop",
+    "dev:data": "turbo run dev --filter=data",
+    "dev:main": "turbo run dev --filter=main",
+    "dev:mods": "turbo run dev --filter=mods",
+    "dev:scan": "turbo run dev --filter=scan",
+    "dev:user": "turbo run dev --filter=user",
     "build": "turbo run build",
     "build:chora": "turbo run build --filter=chora",
     "build:coop": "turbo run build --filter=coop",
@@ -24,13 +31,6 @@
     "build:mods": "turbo run build --filter=mods",
     "build:scan": "turbo run build --filter=scan",
     "build:user": "turbo run build --filter=user",
-    "dev": "turbo run dev",
-    "dev:coop": "turbo run dev --filter=coop",
-    "dev:data": "turbo run dev --filter=data",
-    "dev:main": "turbo run dev --filter=main",
-    "dev:mods": "turbo run dev --filter=mods",
-    "dev:scan": "turbo run dev --filter=scan",
-    "dev:user": "turbo run dev --filter=user",
     "start": "turbo run start",
     "start:coop": "turbo run start --filter=coop",
     "start:data": "turbo run start --filter=data",
@@ -38,14 +38,6 @@
     "start:mods": "turbo run start --filter=mods",
     "start:scan": "turbo run start --filter=scan",
     "start:user": "turbo run start --filter=user",
-    "clean": "turbo run clean && rm -rf node_modules",
-    "clean:chora": "turbo run clean --filter=chora",
-    "clean:coop": "turbo run clean --filter=coop",
-    "clean:data": "turbo run clean --filter=data",
-    "clean:main": "turbo run clean --filter=main",
-    "clean:mods": "turbo run clean --filter=mods",
-    "clean:scan": "turbo run clean --filter=scan",
-    "clean:user": "turbo run clean --filter=user",
     "lint": "turbo run lint",
     "lint:chora": "turbo run lint --filter=chora",
     "lint:coop": "turbo run lint --filter=coop",
@@ -70,12 +62,16 @@
     "test:mods": "turbo run test --filter=mods",
     "test:scan": "turbo run test --filter=scan",
     "test:user": "turbo run test --filter=user",
-    "deploy": "sh ./deploy.sh"
+    "clean": "turbo run clean && rm -rf node_modules",
+    "clean:chora": "turbo run clean --filter=chora",
+    "clean:coop": "turbo run clean --filter=coop",
+    "clean:data": "turbo run clean --filter=data",
+    "clean:main": "turbo run clean --filter=main",
+    "clean:mods": "turbo run clean --filter=mods",
+    "clean:scan": "turbo run clean --filter=scan",
+    "clean:user": "turbo run clean --filter=user"
   },
   "devDependencies": {
-    "eslint": "^8.50.0",
-    "prettier": "^3.0.3",
-    "turbo": "^1.10.14",
-    "typescript": "^5.2.2"
+    "turbo": "^1.10.14"
   }
 }

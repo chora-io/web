@@ -1,17 +1,16 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputIRI, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputIRI, Result } from 'chora/components'
 
-import styles from "./ConvertIRIToHash.module.css"
+import styles from './ConvertIRIToHash.module.css'
 
-const convertIriToHash = "/regen/data/v1/convert-iri-to-hash"
+const convertIriToHash = '/regen/data/v1/convert-iri-to-hash'
 
 const ConvertIRIToHash = () => {
-
   const { chainInfo, network } = useContext(WalletContext)
 
-  const [iri, setIri] = useState("")
+  const [iri, setIri] = useState('')
   const [error, setError] = useState<string | undefined>(undefined)
   const [success, setSuccess] = useState<string | undefined>(undefined)
 
@@ -21,16 +20,16 @@ const ConvertIRIToHash = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    fetch(chainInfo.rest + convertIriToHash + "/" + iri)
-      .then(res => res.json())
-      .then(data => {
+    fetch(chainInfo.rest + convertIriToHash + '/' + iri)
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data["content_hash"], null, "  "))
+          setSuccess(JSON.stringify(data['content_hash'], null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -38,12 +37,8 @@ const ConvertIRIToHash = () => {
   return (
     <div id="convert-iri-to-hash" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"ConvertIRIToHash"}
-        </h2>
-        <p>
-          {"convert an iri to a content hash"}
-        </p>
+        <h2>{'ConvertIRIToHash'}</h2>
+        <p>{'convert an iri to a content hash'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputIRI
@@ -52,14 +47,9 @@ const ConvertIRIToHash = () => {
           iri={iri}
           setIri={setIri}
         />
-        <button type="submit">
-          {"convert"}
-        </button>
+        <button type="submit">{'convert'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

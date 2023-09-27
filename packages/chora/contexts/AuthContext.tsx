@@ -1,8 +1,7 @@
-import * as React from "react"
 import { createContext, useContext, useEffect, useState } from "react"
 
-import { WalletContext } from "chora"
-import { useNetworkServer } from "chora/hooks"
+import { WalletContext } from "./WalletContext"
+import { useNetworkServer } from "../hooks"
 
 const cachedAuthAccount = "chora-auth-account"
 const cachedAuthAccounts = "chora-auth-accounts"
@@ -42,6 +41,9 @@ const AuthContext = createContext<any>({})
 const AuthContextProvider = (props: any) => {
 
   // TODO: reconsider context within context for server url
+  // currently required to check on load within context provider
+  // and ideally network server would be determined by selected network
+  // will likely need to move useEffect outside context provider
 
   const { chainInfo } = useContext(WalletContext)
 
@@ -101,11 +103,11 @@ const AuthContextProvider = (props: any) => {
     // set account
     setAccount(a)
 
-    // set cached account
-    setCachedAccount({ id: a.id, token: t })
-
     // set active account
     setActiveAccount({ id: a.id, token: t })
+
+    // set cached account
+    setCachedAccount({ id: a.id, token: t })
 
     // set active account within accounts
     setAccountWithinAccounts({ id: a.id, token: t })
@@ -114,14 +116,14 @@ const AuthContextProvider = (props: any) => {
   // remove account from state and storage
   const removeAccount = () => {
 
-    // remove cached account
-    removeCachedAccount()
-
     // reset account state
     setAccount(undefined)
 
     // reset active account state
     setActiveAccount(undefined)
+
+    // remove cached account
+    removeCachedAccount()
   }
 
   // remove account from accounts in state and storage
@@ -138,30 +140,30 @@ const AuthContextProvider = (props: any) => {
       cas.splice(i, 1)
     }
 
-    // set cached accounts
-    setCachedAccounts(cas)
-
     // set active accounts
     setActiveAccounts(cas)
+
+    // set cached accounts
+    setCachedAccounts(cas)
   }
 
   // remove accounts from state and storage
   const removeAccounts = () => {
+
+    // reset account state
+    setAccount(undefined)
+
+    // reset active account state
+    setActiveAccount(undefined)
+
+    // reset active accounts state
+    setActiveAccounts(undefined)
 
     // remove cached account
     removeCachedAccount()
 
     // remove cached accounts
     removeCachedAccounts()
-
-    // reset account state
-    setAccount(undefined)
-
-    // reset cached account state
-    setActiveAccount(undefined)
-
-    // reset cached accounts state
-    setActiveAccounts(undefined)
   }
 
   // set account within accounts in state and storage
@@ -188,11 +190,11 @@ const AuthContextProvider = (props: any) => {
       cas = [aa]
     }
 
-    // set cached accounts
-    setCachedAccounts(cas)
-
     // set active accounts
     setActiveAccounts(cas)
+
+    // set cached accounts
+    setCachedAccounts(cas)
   }
 
   // switch account in state and storage
@@ -201,11 +203,11 @@ const AuthContextProvider = (props: any) => {
     // reset account
     setAccount(undefined)
 
-    // set cached account
-    setCachedAccount(activeAccount)
-
     // set active account
     setActiveAccount(activeAccount)
+
+    // set cached account
+    setCachedAccount(activeAccount)
 
     // set account within accounts
     setAccountWithinAccounts(activeAccount)

@@ -1,18 +1,17 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputNumber, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputNumber, Result } from 'chora/components'
 
-import styles from "./QueryNode.module.css"
+import styles from './QueryNode.module.css'
 
-const queryNode = "/chora/geonode/v1/node"
+const queryNode = '/chora/geonode/v1/node'
 
 const QueryNode = () => {
-
   const { chainInfo } = useContext(WalletContext)
 
   // form input
-  const [id, setId] = useState<string>("")
+  const [id, setId] = useState<string>('')
 
   // error and success
   const [error, setError] = useState<string | undefined>(undefined)
@@ -24,16 +23,16 @@ const QueryNode = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    fetch(chainInfo.rest + queryNode + "/" + id)
-      .then(res => res.json())
-      .then(data => {
+    fetch(chainInfo.rest + queryNode + '/' + id)
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -41,12 +40,8 @@ const QueryNode = () => {
   return (
     <div id="query-node" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryNode"}
-        </h2>
-        <p>
-          {"query a node by the id of the node"}
-        </p>
+        <h2>{'QueryNode'}</h2>
+        <p>{'query a node by the id of the node'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputNumber
@@ -55,14 +50,9 @@ const QueryNode = () => {
           number={id}
           setNumber={setId}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

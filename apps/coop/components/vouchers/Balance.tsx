@@ -1,20 +1,17 @@
-import Link from "next/link"
-import { useContext, useEffect, useState } from "react"
+import Link from 'next/link'
+import { useContext, useEffect, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { Result } from "chora/components"
-import { useNetworkServer } from "chora/hooks"
-import { formatTimestamp } from "chora/utils"
+import { WalletContext } from 'chora'
+import { Result } from 'chora/components'
+import { useNetworkCoop, useNetworkServer } from 'chora/hooks'
+import { formatTimestamp } from 'chora/utils'
 
-import { useNetworkCoop } from "@hooks"
+import styles from './Balance.module.css'
 
-import styles from "./Balance.module.css"
-
-const queryBalance = "chora/voucher/v1/balance"
-const queryMembers = "cosmos/group/v1/group_members" // TODO(cosmos-sdk): group member query
+const queryBalance = 'chora/voucher/v1/balance'
+const queryMembers = 'cosmos/group/v1/group_members' // TODO(cosmos-sdk): group member query
 
 const Balance = ({ voucherId, address }: any) => {
-
   const { chainInfo, network } = useContext(WalletContext)
 
   const [groupId] = useNetworkCoop(chainInfo)
@@ -30,14 +27,13 @@ const Balance = ({ voucherId, address }: any) => {
     setError(undefined)
     setBalance(undefined)
     setHolder(undefined)
-  }, [voucherId, address, chainInfo?.chainId]);
+  }, [voucherId, address, chainInfo?.chainId])
 
   // fetch on load and voucher, address, or group change
   useEffect(() => {
-
     // fetch balance from selected network
     if (groupId) {
-      fetchBalance().catch(err => {
+      fetchBalance().catch((err) => {
         setError(err.message)
       })
     }
@@ -45,13 +41,14 @@ const Balance = ({ voucherId, address }: any) => {
 
   // fetch balance from selected network
   const fetchBalance = async () => {
-
     let balance: any
 
     // fetch balance from selected network
-    await fetch(chainInfo.rest + "/" + queryBalance + "/" + voucherId + "/" + address)
-      .then(res => res.json())
-      .then(res => {
+    await fetch(
+      chainInfo.rest + '/' + queryBalance + '/' + voucherId + '/' + address,
+    )
+      .then((res) => res.json())
+      .then((res) => {
         if (res.code) {
           setError(res.message)
         } else {
@@ -65,101 +62,84 @@ const Balance = ({ voucherId, address }: any) => {
     let member: any
 
     // fetch members from selected network
-    await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
-      .then(res => res.json())
-      .then(res => {
+    await fetch(chainInfo.rest + '/' + queryMembers + '/' + groupId)
+      .then((res) => res.json())
+      .then((res) => {
         if (res.code) {
           setError(res.message)
         } else {
-          const holder = balance["address"]
-          const found = res["members"].find((member: any) => member["member"]["address"] === holder)
+          const holder = balance['address']
+          const found = res['members'].find(
+            (member: any) => member['member']['address'] === holder,
+          )
           if (found) {
-            member = found["member"]
+            member = found['member']
           }
         }
       })
 
     // fetch member metadata from network server
-    await fetch(serverUrl + "/data/" + member["metadata"])
-      .then(res => res.json())
-      .then(res => {
+    await fetch(serverUrl + '/data/' + member['metadata'])
+      .then((res) => res.json())
+      .then((res) => {
         if (res.error) {
           setError(res.error)
         } else {
-          const data = JSON.parse(res["jsonld"])
-          if (data["@context"] !== "https://schema.chora.io/contexts/group_member.jsonld") {
-            setError("unsupported metadata schema")
+          const data = JSON.parse(res['jsonld'])
+          if (
+            data['@context'] !==
+            'https://schema.chora.io/contexts/group_member.jsonld'
+          ) {
+            setError('unsupported metadata schema')
           } else {
-            setError("")
+            setError('')
             setHolder({
-              address: member["address"],
-              name: data["name"],
+              address: member['address'],
+              name: data['name'],
             })
           }
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
 
   return (
     <div className={styles.box}>
-      {!balance && !error && (
-        <div>
-          {"loading..."}
-        </div>
-      )}
+      {!balance && !error && <div>{'loading...'}</div>}
       {balance && (
         <div className={styles.boxItem}>
           {holder ? (
             <div className={styles.boxText}>
-              <h3>
-                {"address"}
-              </h3>
-              <p key={holder["address"]}>
-                {`${holder["name"]} (`}
-                <Link href={`/members/?address=${holder["address"]}`}>
-                  {holder["address"]}
+              <h3>{'address'}</h3>
+              <p key={holder['address']}>
+                {`${holder['name']} (`}
+                <Link href={`/members/?address=${holder['address']}`}>
+                  {holder['address']}
                 </Link>
-                {")"}
+                {')'}
               </p>
             </div>
           ) : (
             <div className={styles.boxText}>
-              <h3>
-                {"address"}
-              </h3>
-              <p>
-                {balance["address"]}
-              </p>
+              <h3>{'address'}</h3>
+              <p>{balance['address']}</p>
             </div>
           )}
           <div className={styles.boxText}>
-            <h3>
-              {"total amount"}
-            </h3>
-            <p>
-              {balance["total_amount"]}
-            </p>
+            <h3>{'total amount'}</h3>
+            <p>{balance['total_amount']}</p>
           </div>
-          {balance["amounts"].map((balance: any) => (
-            <div className={styles.boxItemSub} key={balance["expiration"]}>
+          {balance['amounts'].map((balance: any) => (
+            <div className={styles.boxItemSub} key={balance['expiration']}>
               <div className={styles.boxText}>
-                <h3>
-                  {"amount"}
-                </h3>
-                <p>
-                  {balance["amount"]}
-                </p>
+                <h3>{'amount'}</h3>
+                <p>{balance['amount']}</p>
               </div>
               <div className={styles.boxText}>
-                <h3>
-                  {"expiration"}
-                </h3>
-                <p>
-                  {formatTimestamp(balance["expiration"])}
-                </p>
+                <h3>{'expiration'}</h3>
+                <p>{formatTimestamp(balance['expiration'])}</p>
               </div>
             </div>
           ))}

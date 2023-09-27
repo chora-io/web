@@ -15,10 +15,10 @@
     "build": "next build",
     "dev": "next dev -p 8004",
     "start": "next start -p 8004",
-    "clean": "rm -rf .next && rm -rf .turbo",
     "lint": "next lint",
-    "format": "echo 'format not configured'",
-    "test": "echo 'test not configured'"
+    "format": "prettier --write .",
+    "test": "echo 'test not configured'",
+    "clean": "rm -rf .next .turbo node_modules"
   },
   "dependencies": {
     "chora": "workspace:*",
@@ -30,8 +30,11 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "autoprefixer": "^10.4.12",
+    "eslint": "^8.50.0",
     "eslint-config-next": "^13.5.2",
     "postcss": "^8.4.18",
-    "tailwindcss": "^3.2.1"
+    "prettier": "^3.0.3",
+    "tailwindcss": "^3.2.1",
+    "typescript": "^5.2.2"
   }
 }

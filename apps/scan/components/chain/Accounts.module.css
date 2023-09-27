@@ -1,7 +1,7 @@
 /* box */
 
 .box {
-  composes: box from "chora/styles/box.css";
+  composes: box from 'chora/styles/box.css';
 }
 
 .box h2 {
@@ -12,7 +12,7 @@
 /* form */
 
 .form {
-  composes: form from "chora/styles/form.css";
+  composes: form from 'chora/styles/form.css';
   align-items: center;
   display: flex;
   justify-content: center;

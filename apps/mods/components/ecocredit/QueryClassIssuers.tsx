@@ -1,18 +1,17 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputString, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputString, Result } from 'chora/components'
 
-import styles from "./QueryClassIssuers.module.css"
+import styles from './QueryClassIssuers.module.css'
 
-const queryClassIssuers = "/regen/ecocredit/v1/class-issuers"
+const queryClassIssuers = '/regen/ecocredit/v1/class-issuers'
 
 const QueryClassIssuers = () => {
-
   const { chainInfo } = useContext(WalletContext)
 
   // form input
-  const [id, setId] = useState<string>("")
+  const [id, setId] = useState<string>('')
 
   // error and success
   const [error, setError] = useState<string | undefined>(undefined)
@@ -24,16 +23,16 @@ const QueryClassIssuers = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    fetch(chainInfo.rest + queryClassIssuers + "/" + id)
-      .then(res => res.json())
-      .then(data => {
+    fetch(chainInfo.rest + queryClassIssuers + '/' + id)
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -41,12 +40,8 @@ const QueryClassIssuers = () => {
   return (
     <div id="query-class-issuers" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryClassIssuers"}
-        </h2>
-        <p>
-          {"query credit class issuers by credit class id"}
-        </p>
+        <h2>{'QueryClassIssuers'}</h2>
+        <p>{'query credit class issuers by credit class id'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputString
@@ -56,14 +51,9 @@ const QueryClassIssuers = () => {
           string={id}
           setString={setId}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

@@ -1,18 +1,17 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputString, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputString, Result } from 'chora/components'
 
-import styles from "./QueryClass.module.css"
+import styles from './QueryClass.module.css'
 
-const queryClass = "/regen/ecocredit/v1/class"
+const queryClass = '/regen/ecocredit/v1/class'
 
 const QueryClass = () => {
-
   const { chainInfo } = useContext(WalletContext)
 
   // form input
-  const [id, setId] = useState<string>("")
+  const [id, setId] = useState<string>('')
 
   // error and success
   const [error, setError] = useState<string | undefined>(undefined)
@@ -24,16 +23,16 @@ const QueryClass = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    fetch(chainInfo.rest + queryClass + "/" + id)
-      .then(res => res.json())
-      .then(data => {
+    fetch(chainInfo.rest + queryClass + '/' + id)
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -41,12 +40,8 @@ const QueryClass = () => {
   return (
     <div id="query-class" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryClass"}
-        </h2>
-        <p>
-          {"query a credit class by id"}
-        </p>
+        <h2>{'QueryClass'}</h2>
+        <p>{'query a credit class by id'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputString
@@ -56,14 +51,9 @@ const QueryClass = () => {
           string={id}
           setString={setId}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

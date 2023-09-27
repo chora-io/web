@@ -2,9 +2,9 @@
 
 // import { Metadata } from 'next'
 
-import Chains from "@components/home/Chains"
+import Chains from '@components/home/Chains'
 
-import styles from "./page.module.css"
+import styles from './page.module.css'
 
 // export const metadata: Metadata = {
 //   title: "scan",
@@ -13,9 +13,7 @@ import styles from "./page.module.css"
 const HomePage = () => (
   <div className={styles.page}>
     <div className={styles.header}>
-      <h1>
-        {"network scanner"}
-      </h1>
+      <h1>{'network scanner'}</h1>
     </div>
     <div className={styles.content}>
       <Chains />

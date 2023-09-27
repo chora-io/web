@@ -1,25 +1,24 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputIRI, InputURL, Result } from "chora/components"
-import { InputContentHashJSON } from "chora/components/data"
+import { WalletContext } from 'chora'
+import { InputIRI, InputURL, Result } from 'chora/components'
+import { InputContentHashJSON } from 'chora/components/data'
 
-import styles from "./AnchoredData.module.css"
+import styles from './AnchoredData.module.css'
 
-const queryResolversByHash = "/regen/data/v1/resolvers-by-hash"
-const queryResolversByIRI = "/regen/data/v1/resolvers-by-iri"
+const queryResolversByHash = '/regen/data/v1/resolvers-by-hash'
+const queryResolversByIRI = '/regen/data/v1/resolvers-by-iri'
 
 const AnchoredData = () => {
-
   const { chainInfo, network } = useContext(WalletContext)
 
   // input and options
-  const [input, setInput] = useState<string>("")
-  const [option, setOption] = useState<string>("iri")
+  const [input, setInput] = useState<string>('')
+  const [option, setOption] = useState<string>('iri')
 
   // error and success
-  const [error, setError] = useState<string>("")
-  const [success, setSuccess] = useState<string>("")
+  const [error, setError] = useState<string>('')
+  const [success, setSuccess] = useState<string>('')
 
   const handleSubmit = (event: any) => {
     event.preventDefault()
@@ -27,24 +26,24 @@ const AnchoredData = () => {
     let query: string | undefined
 
     switch (option) {
-      case "hash":
+      case 'hash':
         query = queryResolversByHash
         break
-      case "iri":
+      case 'iri':
         query = queryResolversByIRI
         break
     }
 
-    fetch(chainInfo.rest + "/" + query + "/" + input)
-      .then(res => res.json())
-      .then(res => {
+    fetch(chainInfo.rest + '/' + query + '/' + input)
+      .then((res) => res.json())
+      .then((res) => {
         if (res.code) {
           setError(res.message)
         } else {
-          setSuccess(JSON.stringify(res, null, "  "))
+          setSuccess(JSON.stringify(res, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -52,29 +51,25 @@ const AnchoredData = () => {
   return (
     <div className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"anchored data"}
-        </h2>
-        <p>
-          {`look up anchored data on ${network}`}
-        </p>
+        <h2>{'anchored data'}</h2>
+        <p>{`look up anchored data on ${network}`}</p>
       </div>
       <div className={styles.boxOptions}>
         <button
-          className={option === "iri" ? styles.boxOptionActive : undefined}
-          onClick={() => setOption("iri")}
+          className={option === 'iri' ? styles.boxOptionActive : undefined}
+          onClick={() => setOption('iri')}
         >
-          {"iri"}
+          {'iri'}
         </button>
         <button
-          className={option === "hash" ? styles.boxOptionActive : undefined}
-          onClick={() => setOption("hash")}
+          className={option === 'hash' ? styles.boxOptionActive : undefined}
+          onClick={() => setOption('hash')}
         >
-          {"hash"}
+          {'hash'}
         </button>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
-        {option === "iri" && (
+        {option === 'iri' && (
           <InputIRI
             id="resolvers-by-iri"
             label=""
@@ -84,7 +79,7 @@ const AnchoredData = () => {
             setIri={setInput}
           />
         )}
-        {option === "hash" && (
+        {option === 'hash' && (
           <InputContentHashJSON
             id="resolvers-by-hash"
             label=""
@@ -94,7 +89,7 @@ const AnchoredData = () => {
             setContentHash={setInput}
           />
         )}
-        {option === "url" && (
+        {option === 'url' && (
           <InputURL
             id="resolvers-by-url"
             label=""
@@ -104,14 +99,9 @@ const AnchoredData = () => {
             setContentHash={setInput}
           />
         )}
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

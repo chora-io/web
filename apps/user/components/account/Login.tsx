@@ -1,21 +1,20 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { AuthContext, WalletContext } from "chora"
-import { InputString, Result } from "chora/components"
-import { useNetworkServer } from "chora/hooks"
+import { AuthContext, WalletContext } from 'chora'
+import { InputString, Result } from 'chora/components'
+import { useNetworkServer } from 'chora/hooks'
 
-import styles from "./Login.module.css"
+import styles from './Login.module.css'
 
 const Login = () => {
-
   const { account, activeAccount, setAccount } = useContext(AuthContext)
   const { chainInfo } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
   // form input
-  const [username, setUsername] = useState<string>("")
-  const [password, setPassword] = useState<string>("")
+  const [username, setUsername] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
 
   // authentication error
   const [error, setError] = useState<string | undefined>(undefined)
@@ -28,16 +27,16 @@ const Login = () => {
     setError(undefined)
 
     // authenticate user with username and password
-    await fetch(serverUrl + "/auth/login", {
-      method: "POST",
+    await fetch(serverUrl + '/auth/login', {
+      method: 'POST',
       body: JSON.stringify({
         token: activeAccount ? activeAccount.token : undefined,
         username,
         password,
       }),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else if (data.error) {
@@ -46,7 +45,7 @@ const Login = () => {
           setAccount(data.user, data.token)
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -54,23 +53,15 @@ const Login = () => {
   return (
     <div className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"username and password authentication"}
-        </h2>
-        <p>
-          {"authenticate user with username and password"}
-        </p>
+        <h2>{'username and password authentication'}</h2>
+        <p>{'authenticate user with username and password'}</p>
       </div>
       <div className={styles.boxItem}>
         <div className={styles.boxText}>
-          <h3>
-            {"connected"}
-          </h3>
-          <p>
-            {account && account.username ? "true" : "false"}
-          </p>
+          <h3>{'connected'}</h3>
+          <p>{account && account.username ? 'true' : 'false'}</p>
         </div>
-        {(!account || (account && !account.username)) ? (
+        {!account || (account && !account.username) ? (
           <form className={styles.form} onSubmit={handleSubmit}>
             <InputString
               id="username"
@@ -86,17 +77,13 @@ const Login = () => {
               disabled // TODO: password input
             />
             <button className={styles.button} type="submit">
-              {"authenticate"}
+              {'authenticate'}
             </button>
           </form>
         ) : (
           <div className={styles.boxText}>
-            <h3>
-              {"username"}
-            </h3>
-            <p>
-              {account && account.username}
-            </p>
+            <h3>{'username'}</h3>
+            <p>{account && account.username}</p>
           </div>
         )}
       </div>

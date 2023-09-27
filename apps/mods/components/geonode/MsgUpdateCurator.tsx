@@ -1,14 +1,13 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { ResultTx } from "chora/components"
-import { MsgUpdateCurator as MsgInputs } from "chora/components/geonode"
-import { signAndBroadcast } from "chora/utils"
+import { WalletContext } from 'chora'
+import { ResultTx } from 'chora/components'
+import { MsgUpdateCurator as MsgInputs } from 'chora/components/geonode'
+import { signAndBroadcast } from 'chora/utils'
 
-import styles from "./MsgUpdateCurator.module.css"
+import styles from './MsgUpdateCurator.module.css'
 
 const MsgUpdateCurator = () => {
-
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [message, setMessage] = useState<any>(undefined)
@@ -21,10 +20,11 @@ const MsgUpdateCurator = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    await signAndBroadcast(chainInfo, wallet["bech32Address"], [message])
-      .then(res => {
+    await signAndBroadcast(chainInfo, wallet['bech32Address'], [message])
+      .then((res) => {
         setSuccess(res)
-      }).catch(err => {
+      })
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -32,12 +32,8 @@ const MsgUpdateCurator = () => {
   return (
     <div id="msg-update-curator" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"MsgUpdateCurator"}
-        </h2>
-        <p>
-          {"update the curator of a node"}
-        </p>
+        <h2>{'MsgUpdateCurator'}</h2>
+        <p>{'update the curator of a node'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <MsgInputs
@@ -46,15 +42,9 @@ const MsgUpdateCurator = () => {
           useWallet={true}
           wallet={wallet}
         />
-        <button type="submit">
-          {"submit"}
-        </button>
+        <button type="submit">{'submit'}</button>
       </form>
-      <ResultTx
-        error={error}
-        rest={chainInfo?.rest}
-        success={success}
-      />
+      <ResultTx error={error} rest={chainInfo?.rest} success={success} />
     </div>
   )
 }

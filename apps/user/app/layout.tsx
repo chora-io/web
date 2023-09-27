@@ -1,11 +1,15 @@
 'use client'
 
-import { AuthContextProvider, ThemeContextProvider, WalletContextProvider } from "chora"
-import Header from "chora/components/Header"
+import {
+  AuthContextProvider,
+  ThemeContextProvider,
+  WalletContextProvider,
+} from 'chora'
+import Header from 'chora/components/Header'
 
-import Sidebar from "@components/Sidebar"
+import Sidebar from '@components/Sidebar'
 
-import "./globals.css"
+import './globals.css'
 
 const Layout = ({ children }: any) => (
   <html lang="en">

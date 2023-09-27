@@ -1,18 +1,17 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputNumber, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputNumber, Result } from 'chora/components'
 
-import styles from "./QueryGroupPoliciesByGroup.module.css"
+import styles from './QueryGroupPoliciesByGroup.module.css'
 
-const queryGroupPoliciesByGroup = "/cosmos/group/v1/group_policies_by_group"
+const queryGroupPoliciesByGroup = '/cosmos/group/v1/group_policies_by_group'
 
 const QueryGroupPoliciesByGroup = () => {
-
   const { chainInfo } = useContext(WalletContext)
 
   // form input
-  const [id, setId] = useState<string>("")
+  const [id, setId] = useState<string>('')
 
   // error and success
   const [error, setError] = useState<string | undefined>(undefined)
@@ -24,16 +23,16 @@ const QueryGroupPoliciesByGroup = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    fetch(chainInfo.rest + queryGroupPoliciesByGroup + "/" + id)
-      .then(res => res.json())
-      .then(data => {
+    fetch(chainInfo.rest + queryGroupPoliciesByGroup + '/' + id)
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -41,12 +40,8 @@ const QueryGroupPoliciesByGroup = () => {
   return (
     <div id="query-group-policies-by-group" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryGroupPoliciesByGroup"}
-        </h2>
-        <p>
-          {"query group policies by the id of the group"}
-        </p>
+        <h2>{'QueryGroupPoliciesByGroup'}</h2>
+        <p>{'query group policies by the id of the group'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputNumber
@@ -55,14 +50,9 @@ const QueryGroupPoliciesByGroup = () => {
           number={id}
           setNumber={setId}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

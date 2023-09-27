@@ -1,18 +1,17 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputString, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputString, Result } from 'chora/components'
 
-import styles from "./QueryProjectsByClass.module.css"
+import styles from './QueryProjectsByClass.module.css'
 
-const queryProjectsByClass = "/regen/ecocredit/v1/projects-by-class"
+const queryProjectsByClass = '/regen/ecocredit/v1/projects-by-class'
 
 const QueryProjectsByClass = () => {
-
   const { chainInfo, network } = useContext(WalletContext)
 
   // form input
-  const [classId, setClassId] = useState<string>("")
+  const [classId, setClassId] = useState<string>('')
 
   // error and success
   const [error, setError] = useState<string | undefined>(undefined)
@@ -24,16 +23,16 @@ const QueryProjectsByClass = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    fetch(chainInfo.rest + queryProjectsByClass + "/" + classId)
-      .then(res => res.json())
-      .then(data => {
+    fetch(chainInfo.rest + queryProjectsByClass + '/' + classId)
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -41,12 +40,8 @@ const QueryProjectsByClass = () => {
   return (
     <div id="query-projects-by-class" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryProjectsByClass"}
-        </h2>
-        <p>
-          {"query all projects by class id"}
-        </p>
+        <h2>{'QueryProjectsByClass'}</h2>
+        <p>{'query all projects by class id'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputString
@@ -56,14 +51,9 @@ const QueryProjectsByClass = () => {
           string={classId}
           setString={setClassId}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

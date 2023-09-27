@@ -1,18 +1,17 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputString, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputString, Result } from 'chora/components'
 
-import styles from "./QueryBalancesByBatch.module.css"
+import styles from './QueryBalancesByBatch.module.css'
 
-const queryBalancesByBatch = "/regen/ecocredit/v1/balances-by-batch"
+const queryBalancesByBatch = '/regen/ecocredit/v1/balances-by-batch'
 
 const QueryBalancesByBatch = () => {
-
   const { chainInfo, network } = useContext(WalletContext)
 
   // form input
-  const [denom, setDenom] = useState<string>("")
+  const [denom, setDenom] = useState<string>('')
 
   // error and success
   const [error, setError] = useState<string | undefined>(undefined)
@@ -24,16 +23,16 @@ const QueryBalancesByBatch = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    fetch(chainInfo.rest + queryBalancesByBatch + "/" + denom)
-      .then(res => res.json())
-      .then(data => {
+    fetch(chainInfo.rest + queryBalancesByBatch + '/' + denom)
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -41,12 +40,8 @@ const QueryBalancesByBatch = () => {
   return (
     <div id="query-balances-by-batch" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryBalancesByBatch"}
-        </h2>
-        <p>
-          {"query all balances by credit batch denom"}
-        </p>
+        <h2>{'QueryBalancesByBatch'}</h2>
+        <p>{'query all balances by credit batch denom'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputString
@@ -56,14 +51,9 @@ const QueryBalancesByBatch = () => {
           string={denom}
           setString={setDenom}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

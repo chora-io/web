@@ -1,17 +1,16 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputURL, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputURL, Result } from 'chora/components'
 
-import styles from "./QueryResolversByURL.module.css"
+import styles from './QueryResolversByURL.module.css'
 
-const queryResolversByUrl = "/regen/data/v1/resolvers-by-url"
+const queryResolversByUrl = '/regen/data/v1/resolvers-by-url'
 
 const QueryResolversByURL = () => {
-
   const { chainInfo } = useContext(WalletContext)
 
-  const [url, setUrl] = useState("")
+  const [url, setUrl] = useState('')
   const [error, setError] = useState<string | undefined>(undefined)
   const [success, setSuccess] = useState<string | undefined>(undefined)
 
@@ -22,18 +21,18 @@ const QueryResolversByURL = () => {
     setSuccess(undefined)
 
     fetch(chainInfo.rest + queryResolversByUrl, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify({ url: url }),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -41,12 +40,8 @@ const QueryResolversByURL = () => {
   return (
     <div id="query-resolvers-by-url" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryResolversByURL"}
-        </h2>
-        <p>
-          {"query data resolvers by the url of the resolvers"}
-        </p>
+        <h2>{'QueryResolversByURL'}</h2>
+        <p>{'query data resolvers by the url of the resolvers'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputURL
@@ -55,14 +50,9 @@ const QueryResolversByURL = () => {
           url={url}
           setUrl={setUrl}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

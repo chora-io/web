@@ -1,10 +1,10 @@
 'use client'
 
-import { ThemeContextProvider, WalletContextProvider } from "chora"
+import { ThemeContextProvider, WalletContextProvider } from 'chora'
 
-import Header from "@components/Header"
+import Header from '@components/Header'
 
-import "./globals.css"
+import './globals.css'
 
 const Layout = ({ children }: any) => (
   <html lang="en">

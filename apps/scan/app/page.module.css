@@ -1,5 +1,5 @@
 .page {
-  composes: page from "../styles/page.css";
+  composes: page from '../styles/page.css';
 }
 
 /* header */

@@ -1,19 +1,16 @@
-import Link from "next/link"
-import { useContext, useEffect, useState } from "react"
+import Link from 'next/link'
+import { useContext, useEffect, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { useNetworkServer } from "chora/hooks"
-import { formatTimestamp } from "chora/utils"
+import { WalletContext } from 'chora'
+import { useNetworkCoop, useNetworkServer } from 'chora/hooks'
+import { formatTimestamp } from 'chora/utils'
 
-import { useNetworkCoop } from "@hooks"
+import styles from './FeegrantAllowance.module.css'
 
-import styles from "./FeegrantAllowance.module.css"
-
-const queryMembers = "cosmos/group/v1/group_members"
-const queryPolicy = "cosmos/group/v1/group_policy_info"
+const queryMembers = 'cosmos/group/v1/group_members'
+const queryPolicy = 'cosmos/group/v1/group_policy_info'
 
 const FeegrantAllowance = ({ allowance }: any) => {
-
   const { chainInfo } = useContext(WalletContext)
 
   const [groupId] = useNetworkCoop(chainInfo)
@@ -28,88 +25,89 @@ const FeegrantAllowance = ({ allowance }: any) => {
     setError(undefined)
     setGrantee(undefined)
     setGranter(undefined)
-  }, [allowance, chainInfo?.chainId]);
+  }, [allowance, chainInfo?.chainId])
 
   // fetch on load and group or allowance grantee or granter change
   useEffect(() => {
-    setError("")
-    fetchGrantee().catch(err => {
+    setError('')
+    fetchGrantee().catch((err) => {
       setError(err.message)
     })
-    fetchGranter().catch(err => {
+    fetchGranter().catch((err) => {
       setError(err.message)
     })
-  }, [groupId, allowance?.grantee, allowance?.granter]);
+  }, [groupId, allowance?.grantee, allowance?.granter])
 
   // fetch grantee from selected network and network server
   const fetchGrantee = async () => {
-
     let iri: string | undefined
     let isPolicyAddress: boolean
 
     // handle grantee as policy, otherwise member
     try {
-
       // fetch policy from selected network
-      await fetch(chainInfo.rest + "/" + queryPolicy + "/" + allowance["grantee"])
-        .then(res => res.json())
-        .then(res => {
+      await fetch(
+        chainInfo.rest + '/' + queryPolicy + '/' + allowance['grantee'],
+      )
+        .then((res) => res.json())
+        .then((res) => {
           if (res.code) {
             // throw error to trigger catch
             throw Error(res.message)
           } else {
             isPolicyAddress = true
-            iri = res["info"]["metadata"]
+            iri = res['info']['metadata']
           }
         })
-
     } catch (e) {
-
       // do nothing with error
 
       // TODO(cosmos-sdk): query member by group id and member address
 
       // fetch members from selected network
-      await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
-        .then(res => res.json())
-        .then(res => {
+      await fetch(chainInfo.rest + '/' + queryMembers + '/' + groupId)
+        .then((res) => res.json())
+        .then((res) => {
           if (res.code) {
             setError(res.message)
           } else {
-            const found = res["members"].find((m: any) => m["member"]["address"] === allowance["grantee"])
+            const found = res['members'].find(
+              (m: any) => m['member']['address'] === allowance['grantee'],
+            )
             if (found) {
-              iri = found["member"]["metadata"]
+              iri = found['member']['metadata']
             }
           }
         })
     }
 
     if (iri) {
-
       // fetch member metadata from network server
-      await fetch(serverUrl + "/data/" + iri)
-        .then(res => res.json())
-        .then(res => {
+      await fetch(serverUrl + '/data/' + iri)
+        .then((res) => res.json())
+        .then((res) => {
           if (res.error) {
             setError(res.error)
           } else {
-            const data = JSON.parse(res["jsonld"])
+            const data = JSON.parse(res['jsonld'])
             if (
-                data["@context"] !== "https://schema.chora.io/contexts/group_policy.jsonld" &&
-                data["@context"] !== "https://schema.chora.io/contexts/group_member.jsonld"
+              data['@context'] !==
+                'https://schema.chora.io/contexts/group_policy.jsonld' &&
+              data['@context'] !==
+                'https://schema.chora.io/contexts/group_member.jsonld'
             ) {
-              setError("unsupported metadata schema")
+              setError('unsupported metadata schema')
             } else {
-              setError("")
+              setError('')
               setGrantee({
                 isPolicyAddress,
-                address: allowance["grantee"],
-                name: data["name"]
+                address: allowance['grantee'],
+                name: data['name'],
               })
             }
           }
         })
-        .catch(err => {
+        .catch((err) => {
           setError(err.message)
         })
     }
@@ -117,73 +115,74 @@ const FeegrantAllowance = ({ allowance }: any) => {
 
   // fetch granter from selected network and network server
   const fetchGranter = async () => {
-
     let iri: string | undefined
     let isPolicyAddress: boolean
 
     // handle grantee as policy, otherwise member
     try {
-
       // fetch policy from selected network
-      await fetch(chainInfo.rest + "/" + queryPolicy + "/" + allowance["granter"])
-        .then(res => res.json())
-        .then(res => {
+      await fetch(
+        chainInfo.rest + '/' + queryPolicy + '/' + allowance['granter'],
+      )
+        .then((res) => res.json())
+        .then((res) => {
           if (res.code) {
             // throw error to trigger catch
             throw Error(res.message)
           } else {
             isPolicyAddress = true
-            iri = res["info"]["metadata"]
+            iri = res['info']['metadata']
           }
         })
-
     } catch (e) {
-
       // do nothing with error
 
       // TODO(cosmos-sdk): query member by group id and member address
 
       // fetch members from selected network
-      await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
-        .then(res => res.json())
-        .then(res => {
+      await fetch(chainInfo.rest + '/' + queryMembers + '/' + groupId)
+        .then((res) => res.json())
+        .then((res) => {
           if (res.code) {
             setError(res.message)
           } else {
-            const found = res["members"].find((m: any) => m["member"]["address"] === allowance["granter"])
+            const found = res['members'].find(
+              (m: any) => m['member']['address'] === allowance['granter'],
+            )
             if (found) {
-              iri = found["member"]["metadata"]
+              iri = found['member']['metadata']
             }
           }
         })
     }
 
     if (iri) {
-
       // fetch policy or member metadata from network server
-      await fetch(serverUrl + "/data/" + iri)
-        .then(res => res.json())
-        .then(res => {
+      await fetch(serverUrl + '/data/' + iri)
+        .then((res) => res.json())
+        .then((res) => {
           if (res.error) {
             setError(res.error)
           } else {
-            const data = JSON.parse(res["jsonld"])
+            const data = JSON.parse(res['jsonld'])
             if (
-                data["@context"] !== "https://schema.chora.io/contexts/group_policy.jsonld" &&
-                data["@context"] !== "https://schema.chora.io/contexts/group_member.jsonld"
+              data['@context'] !==
+                'https://schema.chora.io/contexts/group_policy.jsonld' &&
+              data['@context'] !==
+                'https://schema.chora.io/contexts/group_member.jsonld'
             ) {
-              setError("unsupported metadata schema")
+              setError('unsupported metadata schema')
             } else {
-              setError("")
+              setError('')
               setGranter({
                 isPolicyAddress,
-                address: allowance["granter"],
-                name: data["name"]
+                address: allowance['granter'],
+                name: data['name'],
               })
             }
           }
         })
-        .catch(err => {
+        .catch((err) => {
           setError(err.message)
         })
     }
@@ -192,60 +191,55 @@ const FeegrantAllowance = ({ allowance }: any) => {
   return (
     <div className={styles.boxItem}>
       <div className={styles.boxText}>
-        <h3>
-          {"granter"}
-        </h3>
+        <h3>{'granter'}</h3>
         {granter ? (
           <p>
-            {`${granter["name"]} (`}
-              <Link href={`/${granter.isPolicyAddress ? "policies" : "members"}/?address=${granter["address"]}`}>
-                {granter["address"]}
-              </Link>
-            {")"}
+            {`${granter['name']} (`}
+            <Link
+              href={`/${
+                granter.isPolicyAddress ? 'policies' : 'members'
+              }/?address=${granter['address']}`}
+            >
+              {granter['address']}
+            </Link>
+            {')'}
           </p>
         ) : (
-          <p>
-            {allowance["granter"]}
-          </p>
+          <p>{allowance['granter']}</p>
         )}
       </div>
       <div className={styles.boxText}>
-        <h3>
-          {"grantee"}
-        </h3>
+        <h3>{'grantee'}</h3>
         {grantee ? (
           <p>
-            {`${grantee["name"]} (`}
-              <Link href={`/${grantee.isPolicyAddress ? "policies" : "members"}/?address=${grantee["address"]}`}>
-                {grantee["address"]}
-              </Link>
-            {")"}
+            {`${grantee['name']} (`}
+            <Link
+              href={`/${
+                grantee.isPolicyAddress ? 'policies' : 'members'
+              }/?address=${grantee['address']}`}
+            >
+              {grantee['address']}
+            </Link>
+            {')'}
           </p>
         ) : (
-          <p>
-            {allowance["grantee"]}
-          </p>
+          <p>{allowance['grantee']}</p>
         )}
       </div>
-      {allowance["allowance"]["@type"] === "/cosmos.feegrant.v1beta1.BasicAllowance" && (
+      {allowance['allowance']['@type'] ===
+        '/cosmos.feegrant.v1beta1.BasicAllowance' && (
         <>
-          {allowance["allowance"]["spend_limit"].map((spendLimit: any, i: number) => (
-            <div className={styles.boxText} key={i}>
-              <h3>
-                {"spend limit"}
-              </h3>
-              <p>
-                {spendLimit["amount"] + spendLimit["denom"]}
-              </p>
-            </div>
-          ))}
+          {allowance['allowance']['spend_limit'].map(
+            (spendLimit: any, i: number) => (
+              <div className={styles.boxText} key={i}>
+                <h3>{'spend limit'}</h3>
+                <p>{spendLimit['amount'] + spendLimit['denom']}</p>
+              </div>
+            ),
+          )}
           <div className={styles.boxText}>
-            <h3>
-              {"expiration"}
-            </h3>
-            <p>
-              {formatTimestamp(allowance["allowance"]["expiration"])}
-            </p>
+            <h3>{'expiration'}</h3>
+            <p>{formatTimestamp(allowance['allowance']['expiration'])}</p>
           </div>
         </>
       )}

@@ -1,18 +1,18 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputString, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputString, Result } from 'chora/components'
 
-import styles from "./QueryProjectsByReferenceId.module.css"
+import styles from './QueryProjectsByReferenceId.module.css'
 
-const queryProjectsByReferenceId = "/regen/ecocredit/v1/projects-by-reference-id"
+const queryProjectsByReferenceId =
+  '/regen/ecocredit/v1/projects-by-reference-id'
 
 const QueryProjectsByReferenceId = () => {
-
   const { chainInfo, network } = useContext(WalletContext)
 
   // form input
-  const [referenceId, setClassId] = useState<string>("")
+  const [referenceId, setClassId] = useState<string>('')
 
   // error and success
   const [error, setError] = useState<string | undefined>(undefined)
@@ -24,16 +24,16 @@ const QueryProjectsByReferenceId = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    fetch(chainInfo.rest + queryProjectsByReferenceId + "/" + referenceId)
-      .then(res => res.json())
-      .then(data => {
+    fetch(chainInfo.rest + queryProjectsByReferenceId + '/' + referenceId)
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -41,12 +41,8 @@ const QueryProjectsByReferenceId = () => {
   return (
     <div id="query-projects-by-reference-id" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryProjectsByReferenceId"}
-        </h2>
-        <p>
-          {"query all projects by reference id"}
-        </p>
+        <h2>{'QueryProjectsByReferenceId'}</h2>
+        <p>{'query all projects by reference id'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputString
@@ -56,14 +52,9 @@ const QueryProjectsByReferenceId = () => {
           string={referenceId}
           setString={setClassId}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

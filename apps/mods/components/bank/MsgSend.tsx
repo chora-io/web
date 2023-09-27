@@ -1,14 +1,13 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { ResultTx } from "chora/components"
-import { MsgSend as MsgInputs } from "chora/components/bank"
-import { signAndBroadcast } from "chora/utils"
+import { WalletContext } from 'chora'
+import { ResultTx } from 'chora/components'
+import { MsgSend as MsgInputs } from 'chora/components/bank'
+import { signAndBroadcast } from 'chora/utils'
 
-import styles from "./MsgSend.module.css"
+import styles from './MsgSend.module.css'
 
 const MsgSend = () => {
-
   const { chainInfo, wallet } = useContext(WalletContext)
 
   const [message, setMessage] = useState<any>(undefined)
@@ -21,10 +20,11 @@ const MsgSend = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    await signAndBroadcast(chainInfo, wallet["bech32Address"], [message])
-      .then(res => {
+    await signAndBroadcast(chainInfo, wallet['bech32Address'], [message])
+      .then((res) => {
         setSuccess(res)
-      }).catch(err => {
+      })
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -32,28 +32,14 @@ const MsgSend = () => {
   return (
     <div id="msg-send" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"MsgSend"}
-        </h2>
-        <p>
-          {"send tokens"}
-        </p>
+        <h2>{'MsgSend'}</h2>
+        <p>{'send tokens'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <MsgInputs
-          setMessage={setMessage}
-          useWallet={true}
-          wallet={wallet}
-        />
-        <button type="submit">
-          {"submit"}
-        </button>
+        <MsgInputs setMessage={setMessage} useWallet={true} wallet={wallet} />
+        <button type="submit">{'submit'}</button>
       </form>
-      <ResultTx
-        error={error}
-        rest={chainInfo?.rest}
-        success={success}
-      />
+      <ResultTx error={error} rest={chainInfo?.rest} success={success} />
     </div>
   )
 }

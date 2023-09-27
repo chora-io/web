@@ -19,8 +19,18 @@
       "cache": false,
       "dependsOn": ["^build"]
     },
+    "format": {
+      "cache": false
+    },
     "lint": {
       "cache": false
+    },
+    "start": {
+      "cache": false
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "outputs": []
     }
   }
 }

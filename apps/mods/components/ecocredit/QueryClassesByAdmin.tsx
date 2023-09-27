@@ -1,18 +1,17 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputAddress, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputAddress, Result } from 'chora/components'
 
-import styles from "./QueryClassesByAdmin.module.css"
+import styles from './QueryClassesByAdmin.module.css'
 
-const queryClassesByAdmin = "/regen/ecocredit/v1/classes-by-admin"
+const queryClassesByAdmin = '/regen/ecocredit/v1/classes-by-admin'
 
 const QueryClassesByAdmin = () => {
-
   const { chainInfo, network } = useContext(WalletContext)
 
   // form input
-  const [admin, setAdmin] = useState<string>("")
+  const [admin, setAdmin] = useState<string>('')
 
   // error and success
   const [error, setError] = useState<string | undefined>(undefined)
@@ -24,16 +23,16 @@ const QueryClassesByAdmin = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    fetch(chainInfo.rest + queryClassesByAdmin + "/" + admin)
-      .then(res => res.json())
-      .then(data => {
+    fetch(chainInfo.rest + queryClassesByAdmin + '/' + admin)
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -41,12 +40,8 @@ const QueryClassesByAdmin = () => {
   return (
     <div id="query-classes-by-admin" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryClassesByAdmin"}
-        </h2>
-        <p>
-          {"query all credit classes by the address of the admin"}
-        </p>
+        <h2>{'QueryClassesByAdmin'}</h2>
+        <p>{'query all credit classes by the address of the admin'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputAddress
@@ -56,14 +51,9 @@ const QueryClassesByAdmin = () => {
           address={admin}
           setAddress={setAdmin}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

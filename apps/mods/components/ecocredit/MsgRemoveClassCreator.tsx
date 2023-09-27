@@ -1,14 +1,13 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { ResultTx } from "chora/components"
-import { MsgRemoveClassCreator as MsgInputs } from "chora/components/ecocredit"
-import { signAndBroadcast } from "chora/utils"
+import { WalletContext } from 'chora'
+import { ResultTx } from 'chora/components'
+import { MsgRemoveClassCreator as MsgInputs } from 'chora/components/ecocredit'
+import { signAndBroadcast } from 'chora/utils'
 
-import styles from "./MsgRemoveClassCreator.module.css"
+import styles from './MsgRemoveClassCreator.module.css'
 
 const MsgRemoveClassCreator = () => {
-
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [message, setMessage] = useState<any>(undefined)
@@ -21,10 +20,11 @@ const MsgRemoveClassCreator = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    await signAndBroadcast(chainInfo, wallet["bech32Address"], [message])
-      .then(res => {
+    await signAndBroadcast(chainInfo, wallet['bech32Address'], [message])
+      .then((res) => {
         setSuccess(res)
-      }).catch(err => {
+      })
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -32,12 +32,8 @@ const MsgRemoveClassCreator = () => {
   return (
     <div id="msg-remove-class-creator" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"MsgRemoveClassCreator"}
-        </h2>
-        <p>
-          {"remove a credit class creator from the allowlist"}
-        </p>
+        <h2>{'MsgRemoveClassCreator'}</h2>
+        <p>{'remove a credit class creator from the allowlist'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <MsgInputs
@@ -46,15 +42,9 @@ const MsgRemoveClassCreator = () => {
           useWallet={true}
           wallet={wallet}
         />
-        <button type="submit">
-          {"submit"}
-        </button>
+        <button type="submit">{'submit'}</button>
       </form>
-      <ResultTx
-        error={error}
-        rest={chainInfo?.rest}
-        success={success}
-      />
+      <ResultTx error={error} rest={chainInfo?.rest} success={success} />
     </div>
   )
 }

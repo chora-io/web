@@ -1,9 +1,6 @@
-import * as React from "react"
 import { createContext, useEffect, useState } from "react"
 
 export const cachedDarkKey = "chora-web-dark"
-
-const ThemeContext = createContext<any>({})
 
 const initDarkTheme = () => {
   let initDarkTheme = false
@@ -16,6 +13,8 @@ const initDarkTheme = () => {
 
   return initDarkTheme
 }
+
+const ThemeContext = createContext<any>({})
 
 const ThemeContextProvider = (props: any) => {
 

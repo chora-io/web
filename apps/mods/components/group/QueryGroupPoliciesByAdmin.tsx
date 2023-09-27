@@ -1,18 +1,17 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputAddress, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputAddress, Result } from 'chora/components'
 
-import styles from "./QueryGroupPoliciesByAdmin.module.css"
+import styles from './QueryGroupPoliciesByAdmin.module.css'
 
-const queryGroupPoliciesByAdmin = "/cosmos/group/v1/group_policies_by_admin"
+const queryGroupPoliciesByAdmin = '/cosmos/group/v1/group_policies_by_admin'
 
 const QueryGroupPoliciesByAdmin = () => {
-
   const { chainInfo, network } = useContext(WalletContext)
 
   // form input
-  const [admin, setAdmin] = useState<string>("")
+  const [admin, setAdmin] = useState<string>('')
 
   // error and success
   const [error, setError] = useState<string | undefined>(undefined)
@@ -24,16 +23,16 @@ const QueryGroupPoliciesByAdmin = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    fetch(chainInfo.rest + queryGroupPoliciesByAdmin + "/" + admin)
-      .then(res => res.json())
-      .then(data => {
+    fetch(chainInfo.rest + queryGroupPoliciesByAdmin + '/' + admin)
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -41,12 +40,8 @@ const QueryGroupPoliciesByAdmin = () => {
   return (
     <div id="query-group-policies-by-admin" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryGroupPoliciesByAdmin"}
-        </h2>
-        <p>
-          {"query group policies by the address of the admin"}
-        </p>
+        <h2>{'QueryGroupPoliciesByAdmin'}</h2>
+        <p>{'query group policies by the address of the admin'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputAddress
@@ -56,14 +51,9 @@ const QueryGroupPoliciesByAdmin = () => {
           address={admin}
           setAddress={setAdmin}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

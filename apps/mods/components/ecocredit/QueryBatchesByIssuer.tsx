@@ -1,18 +1,17 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputAddress, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputAddress, Result } from 'chora/components'
 
-import styles from "./QueryBatchesByIssuer.module.css"
+import styles from './QueryBatchesByIssuer.module.css'
 
-const queryBatchesByIssuer = "/regen/ecocredit/v1/batches-by-issuer"
+const queryBatchesByIssuer = '/regen/ecocredit/v1/batches-by-issuer'
 
 const QueryBatchesByIssuer = () => {
-
   const { chainInfo, network } = useContext(WalletContext)
 
   // form input
-  const [issuer, setIssuer] = useState<string>("")
+  const [issuer, setIssuer] = useState<string>('')
 
   // error and success
   const [error, setError] = useState<string | undefined>(undefined)
@@ -24,16 +23,16 @@ const QueryBatchesByIssuer = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    fetch(chainInfo.rest + queryBatchesByIssuer + "/" + issuer)
-      .then(res => res.json())
-      .then(data => {
+    fetch(chainInfo.rest + queryBatchesByIssuer + '/' + issuer)
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -41,12 +40,8 @@ const QueryBatchesByIssuer = () => {
   return (
     <div id="query-batches-by-issuer" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryBatchesByIssuer"}
-        </h2>
-        <p>
-          {"query all credit batches by issuer address"}
-        </p>
+        <h2>{'QueryBatchesByIssuer'}</h2>
+        <p>{'query all credit batches by issuer address'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputAddress
@@ -56,14 +51,9 @@ const QueryBatchesByIssuer = () => {
           address={issuer}
           setAddress={setIssuer}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

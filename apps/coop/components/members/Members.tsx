@@ -1,16 +1,15 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from 'react'
 
-import { WalletContext } from "chora"
+import { WalletContext } from 'chora'
+import { useNetworkCoop } from 'chora/hooks'
 
-import { useNetworkCoop } from "@hooks"
-import MemberPreview from "./MemberPreview"
+import MemberPreview from './MemberPreview'
 
-import styles from "./Members.module.css"
+import styles from './Members.module.css'
 
-const queryMembers = "cosmos/group/v1/group_members"
+const queryMembers = 'cosmos/group/v1/group_members'
 
 const Members = () => {
-
   const { chainInfo, network } = useContext(WalletContext)
 
   const [groupId] = useNetworkCoop(chainInfo)
@@ -20,21 +19,20 @@ const Members = () => {
   const [members, setMembers] = useState<any>(undefined)
 
   // list options
-  const [sort, setSort] = useState<string>("ascending")
+  const [sort, setSort] = useState<string>('ascending')
 
   // reset state on network change
   useEffect(() => {
     setError(undefined)
     setMembers(undefined)
-    setSort("ascending")
-  }, [chainInfo?.chainId]);
+    setSort('ascending')
+  }, [chainInfo?.chainId])
 
   // fetch on load and group or network change
   useEffect(() => {
-
     // fetch members from selected network
     if (groupId) {
-      fetchMembers().catch(err => {
+      fetchMembers().catch((err) => {
         setError(err.message)
       })
     }
@@ -44,12 +42,20 @@ const Members = () => {
   useEffect(() => {
     const ms = members ? [...members] : []
 
-    if (members && sort === "ascending") {
-      ms.sort((a: any, b: any) => new Date(b["member"]["added_at"]).getUTCDate() - new Date(a["member"]["added_at"]).getUTCDate())
+    if (members && sort === 'ascending') {
+      ms.sort(
+        (a: any, b: any) =>
+          new Date(b['member']['added_at']).getUTCDate() -
+          new Date(a['member']['added_at']).getUTCDate(),
+      )
     }
 
-    if (members && sort === "descending") {
-      ms.sort((a: any, b: any) => new Date(a["member"]["added_at"]).getUTCDate() - new Date(b["member"]["added_at"]).getUTCDate())
+    if (members && sort === 'descending') {
+      ms.sort(
+        (a: any, b: any) =>
+          new Date(a['member']['added_at']).getUTCDate() -
+          new Date(b['member']['added_at']).getUTCDate(),
+      )
     }
 
     setMembers(ms)
@@ -57,19 +63,22 @@ const Members = () => {
 
   // fetch members from selected network
   const fetchMembers = async () => {
-
     // fetch members from selected network
-    await fetch(chainInfo.rest + "/" + queryMembers + "/" + groupId)
-      .then(res => res.json())
-      .then(res => {
+    await fetch(chainInfo.rest + '/' + queryMembers + '/' + groupId)
+      .then((res) => res.json())
+      .then((res) => {
         if (res.code) {
           setError(res.message)
         } else {
-          const ms = res["members"]
+          const ms = res['members']
 
-         // sort ascending by default
-          ms.sort((a: any, b: any) => new Date(b["member"]["added_at"]).getUTCDate() - new Date(a["member"]["added_at"]).getUTCDate())
-          setSort("ascending")
+          // sort ascending by default
+          ms.sort(
+            (a: any, b: any) =>
+              new Date(b['member']['added_at']).getUTCDate() -
+              new Date(a['member']['added_at']).getUTCDate(),
+          )
+          setSort('ascending')
 
           setMembers(ms)
         }
@@ -79,38 +88,27 @@ const Members = () => {
   return (
     <div className={styles.box}>
       <div className={styles.boxOptions}>
-        {sort === "descending" && (
-          <button onClick={() => setSort("ascending")}>
-            {"sort by newest"}
+        {sort === 'descending' && (
+          <button onClick={() => setSort('ascending')}>
+            {'sort by newest'}
           </button>
         )}
-        {sort === "ascending" && (
-          <button onClick={() => setSort("descending")}>
-            {"sort by oldest"}
+        {sort === 'ascending' && (
+          <button onClick={() => setSort('descending')}>
+            {'sort by oldest'}
           </button>
         )}
       </div>
-      {!error && !members && (
-        <div>
-          {"loading..."}
-        </div>
-      )}
-      {members && members.length === 0 && (
-        <div>
-          {"no members found"}
-        </div>
-      )}
-      {members && members.map((member: any) => (
-        <MemberPreview
-          key={member["member"]["address"]}
-          member={member["member"]}
-        />
-      ))}
-      {error && (
-        <div>
-          {error}
-        </div>
-      )}
+      {!error && !members && <div>{'loading...'}</div>}
+      {members && members.length === 0 && <div>{'no members found'}</div>}
+      {members &&
+        members.map((member: any) => (
+          <MemberPreview
+            key={member['member']['address']}
+            member={member['member']}
+          />
+        ))}
+      {error && <div>{error}</div>}
     </div>
   )
 }

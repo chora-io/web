@@ -1,18 +1,17 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { InputAddress, Result } from "chora/components"
+import { WalletContext } from 'chora'
+import { InputAddress, Result } from 'chora/components'
 
-import styles from "./QueryProjectsByAdmin.module.css"
+import styles from './QueryProjectsByAdmin.module.css'
 
-const queryProjectsByAdmin = "/regen/ecocredit/v1/projects-by-admin"
+const queryProjectsByAdmin = '/regen/ecocredit/v1/projects-by-admin'
 
 const QueryProjectsByAdmin = () => {
-
   const { chainInfo, network } = useContext(WalletContext)
 
   // form input
-  const [admin, setAdmin] = useState<string>("")
+  const [admin, setAdmin] = useState<string>('')
 
   // error and success
   const [error, setError] = useState<string | undefined>(undefined)
@@ -24,16 +23,16 @@ const QueryProjectsByAdmin = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    fetch(chainInfo.rest + queryProjectsByAdmin + "/" + admin)
-      .then(res => res.json())
-      .then(data => {
+    fetch(chainInfo.rest + queryProjectsByAdmin + '/' + admin)
+      .then((res) => res.json())
+      .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, "  "))
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -41,12 +40,8 @@ const QueryProjectsByAdmin = () => {
   return (
     <div id="query-projects-by-admin" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"QueryProjectsByAdmin"}
-        </h2>
-        <p>
-          {"query all projects by the address of the admin"}
-        </p>
+        <h2>{'QueryProjectsByAdmin'}</h2>
+        <p>{'query all projects by the address of the admin'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputAddress
@@ -56,14 +51,9 @@ const QueryProjectsByAdmin = () => {
           address={admin}
           setAddress={setAdmin}
         />
-        <button type="submit">
-          {"search"}
-        </button>
+        <button type="submit">{'search'}</button>
       </form>
-      <Result
-        error={error}
-        success={success}
-      />
+      <Result error={error} success={success} />
     </div>
   )
 }

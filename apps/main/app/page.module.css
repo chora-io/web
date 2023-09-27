@@ -33,7 +33,6 @@
 }
 
 @media (max-width: 850px) {
-
   .sectionMain {
     font-size: 1.2rem;
   }
@@ -51,7 +50,6 @@
 }
 
 @media (max-width: 850px) {
-
   .sectionText {
     font-size: 1rem;
   }
@@ -69,7 +67,6 @@
 }
 
 @media (max-width: 850px) {
-
   .sectionText div {
     padding: 2rem;
   }

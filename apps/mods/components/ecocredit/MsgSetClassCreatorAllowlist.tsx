@@ -1,14 +1,13 @@
-import { useContext, useState } from "react"
+import { useContext, useState } from 'react'
 
-import { WalletContext } from "chora"
-import { ResultTx } from "chora/components"
-import { MsgSetClassCreatorAllowlist as MsgInputs } from "chora/components/ecocredit"
-import { signAndBroadcast } from "chora/utils"
+import { WalletContext } from 'chora'
+import { ResultTx } from 'chora/components'
+import { MsgSetClassCreatorAllowlist as MsgInputs } from 'chora/components/ecocredit'
+import { signAndBroadcast } from 'chora/utils'
 
-import styles from "./MsgSetClassCreatorAllowlist.module.css"
+import styles from './MsgSetClassCreatorAllowlist.module.css'
 
 const MsgSetClassCreatorAllowlist = () => {
-
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [message, setMessage] = useState<any>(undefined)
@@ -21,10 +20,11 @@ const MsgSetClassCreatorAllowlist = () => {
     setError(undefined)
     setSuccess(undefined)
 
-    await signAndBroadcast(chainInfo, wallet["bech32Address"], [message])
-      .then(res => {
+    await signAndBroadcast(chainInfo, wallet['bech32Address'], [message])
+      .then((res) => {
         setSuccess(res)
-      }).catch(err => {
+      })
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -32,12 +32,8 @@ const MsgSetClassCreatorAllowlist = () => {
   return (
     <div id="msg-set-class-creator-allowlist" className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>
-          {"MsgSetClassCreatorAllowlist"}
-        </h2>
-        <p>
-          {"set whether the class creator allowlist is enabled"}
-        </p>
+        <h2>{'MsgSetClassCreatorAllowlist'}</h2>
+        <p>{'set whether the class creator allowlist is enabled'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <MsgInputs
@@ -46,15 +42,9 @@ const MsgSetClassCreatorAllowlist = () => {
           useWallet={true}
           wallet={wallet}
         />
-        <button type="submit">
-          {"submit"}
-        </button>
+        <button type="submit">{'submit'}</button>
       </form>
-      <ResultTx
-        error={error}
-        rest={chainInfo?.rest}
-        success={success}
-      />
+      <ResultTx error={error} rest={chainInfo?.rest} success={success} />
     </div>
   )
 }
