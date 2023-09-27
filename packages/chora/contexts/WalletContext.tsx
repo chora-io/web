@@ -1,6 +1,6 @@
-import { createContext, useEffect, useState } from "react"
+import { createContext, useEffect, useState } from 'react'
 
-import { ChainInfo, Key } from "@keplr-wallet/types"
+import { ChainInfo, Key } from '@keplr-wallet/types'
 
 import {
   bionLocal,
@@ -9,18 +9,17 @@ import {
   regenLocal,
   regenMainnet,
   regenRedwood,
-} from "../chains"
+} from '../chains'
 
-const cachedAddressKey = "chora-web-address"
-const cachedConnectedKey = "chora-web-connected"
-const cachedNetworkKey = "chora-web-network"
+const cachedAddressKey = 'chora-web-address'
+const cachedConnectedKey = 'chora-web-connected'
+const cachedNetworkKey = 'chora-web-network'
 
 const defaultNetwork = choraTestnet.chainId
 
 const WalletContext = createContext<any>({})
 
 const WalletContextProvider = (props: any) => {
-
   // selected network
   const [network, setNetwork] = useState<string | undefined>(undefined)
 
@@ -34,28 +33,28 @@ const WalletContextProvider = (props: any) => {
   const [loading, setLoading] = useState<boolean>(true)
 
   // error returned from handler and keplr
-  const [error, setError] = useState<string>("")
+  const [error, setError] = useState<string>('')
 
   // keplr event listener
   useEffect(() => {
-    window.addEventListener("keplr_keystorechange", handleKeystoreChange)
+    window.addEventListener('keplr_keystorechange', handleKeystoreChange)
     return () => {
-      window.removeEventListener("keplr_keystorechange", handleKeystoreChange)
+      window.removeEventListener('keplr_keystorechange', handleKeystoreChange)
     }
   })
 
   // load network from cache and set chain information and wallet
   useEffect(() => {
-    const cachedNetwork = localStorage.getItem(cachedNetworkKey) || ""
+    const cachedNetwork = localStorage.getItem(cachedNetworkKey) || ''
 
-    if (cachedNetwork === "" && network === undefined) {
+    if (cachedNetwork === '' && network === undefined) {
       setNetwork(defaultNetwork)
 
       // cache default network to initialize local storage
       localStorage.setItem(cachedNetworkKey, defaultNetwork)
     }
 
-    if (cachedNetwork !== "" && cachedNetwork !== chainInfo?.chainId) {
+    if (cachedNetwork !== '' && cachedNetwork !== chainInfo?.chainId) {
       setNetwork(cachedNetwork)
 
       switch (cachedNetwork) {
@@ -80,18 +79,23 @@ const WalletContextProvider = (props: any) => {
       }
 
       // check if network is still enabled
-      window.keplr?.enable(cachedNetwork).then(() => {
-
-        // get wallet from connected network
-        window.keplr?.getKey(cachedNetwork).then(wallet => {
-          setLoading(false)
-          setWallet(wallet)
-        }).catch(() => {
+      window.keplr
+        ?.enable(cachedNetwork)
+        .then(() => {
+          // get wallet from connected network
+          window.keplr
+            ?.getKey(cachedNetwork)
+            .then((wallet) => {
+              setLoading(false)
+              setWallet(wallet)
+            })
+            .catch(() => {
+              setLoading(false)
+            })
+        })
+        .catch(() => {
           setLoading(false)
         })
-      }).catch(() => {
-        setLoading(false)
-      })
     }
   }, [network])
 
@@ -100,7 +104,6 @@ const WalletContextProvider = (props: any) => {
     event.preventDefault()
 
     if (window.keplr && network !== undefined) {
-
       let chain: ChainInfo
 
       switch (network) {
@@ -133,17 +136,16 @@ const WalletContextProvider = (props: any) => {
       let rejected = false
 
       // enable chain based on network and host
-      await window.keplr.enable(network).catch(async err => {
-
+      await window.keplr.enable(network).catch(async (err) => {
         // skip setting error if request rejected
-        if (err.message !== "Request rejected") {
+        if (err.message !== 'Request rejected') {
           setError(err.message)
         } else {
           rejected = true
         }
 
         // add chain if matching chain id not found in keplr
-        await window.keplr?.experimentalSuggestChain(chain).catch(err => {
+        await window.keplr?.experimentalSuggestChain(chain).catch((err) => {
           setError(err.message)
           return // exit on error
         })
@@ -151,49 +153,55 @@ const WalletContextProvider = (props: any) => {
 
       // if enable request not rejected
       if (!rejected) {
-
         // get wallet from selected network
-        await window.keplr.getKey(network).then(wallet => {
-          setWallet(wallet)
-          setError("")
-        }).catch(err => {
-          setError(err.message)
-        })
+        await window.keplr
+          .getKey(network)
+          .then((wallet) => {
+            setWallet(wallet)
+            setError('')
+          })
+          .catch((err) => {
+            setError(err.message)
+          })
       }
     } else {
-      setError("keplr not found")
+      setError('keplr not found')
     }
   }
 
   // event handler for keplr keystore change
   const handleKeystoreChange = async () => {
     if (window.keplr && network !== undefined) {
-
       // get wallet from selected network
-      await window.keplr.getKey(network).then((wallet: Key) => {
-        setWallet(wallet)
-      }).catch(err => {
-        setError(err.message)
-      })
+      await window.keplr
+        .getKey(network)
+        .then((wallet: Key) => {
+          setWallet(wallet)
+        })
+        .catch((err) => {
+          setError(err.message)
+        })
     }
   }
 
   const handleSetNetwork = (value: string) => {
-    setError("")
+    setError('')
     setNetwork(value)
     setWallet(undefined)
   }
 
   return (
-    <WalletContext.Provider value={{
-      getKeplr,
-      network,
-      setNetwork: handleSetNetwork,
-      chainInfo,
-      wallet,
-      loading,
-      error,
-    }}>
+    <WalletContext.Provider
+      value={{
+        getKeplr,
+        network,
+        setNetwork: handleSetNetwork,
+        chainInfo,
+        wallet,
+        loading,
+        error,
+      }}
+    >
       {props.children}
     </WalletContext.Provider>
   )

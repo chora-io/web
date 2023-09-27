@@ -1,12 +1,19 @@
-import * as React from "react"
+import * as React from 'react'
 
-const defaultId = "string"
-const defaultLabel = "string"
-const defaultPlaceholder = ""
+const defaultId = 'string'
+const defaultLabel = 'string'
+const defaultPlaceholder = ''
 
-const InputString = ({ id, label, placeholder, string, setString, disabled }: any) => {
+const InputString = ({
+  id,
+  label,
+  placeholder,
+  string,
+  setString,
+  disabled,
+}: any) => {
   let noLabel = false
-  if (label === "") noLabel = true
+  if (label === '') noLabel = true
 
   return (
     <label htmlFor={id ? id : defaultId}>
@@ -15,7 +22,7 @@ const InputString = ({ id, label, placeholder, string, setString, disabled }: an
         id={id ? id : defaultId}
         value={string}
         placeholder={placeholder || defaultPlaceholder}
-        onChange={event => setString(event.target.value)}
+        onChange={(event) => setString(event.target.value)}
         disabled={disabled}
       />
     </label>

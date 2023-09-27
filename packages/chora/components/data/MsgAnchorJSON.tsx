@@ -1,14 +1,14 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgAnchor as Msg } from "../../api/regen/data/v1/tx"
+import { MsgAnchor as Msg } from '../../api/regen/data/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputContentHashJSON from "./InputContentHashJSON"
+import InputAddress from '../InputAddress'
+import InputContentHashJSON from './InputContentHashJSON'
 
 const MsgAnchorJSON = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [sender, setSender] = useState<string>("")
-  const [contentHashJson, setContentHashJson] = useState<string>("")
+  const [sender, setSender] = useState<string>('')
+  const [contentHashJson, setContentHashJson] = useState<string>('')
 
   useEffect(() => {
     let contentHash: any
@@ -25,7 +25,7 @@ const MsgAnchorJSON = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.data.v1.MsgAnchor",
+      typeUrl: '/regen.data.v1.MsgAnchor',
       value: Msg.encode(msg).finish(),
     }
 

@@ -1,14 +1,13 @@
-import * as React from "react"
-import { useEffect } from "react"
+import * as React from 'react'
+import { useEffect } from 'react'
 
-import InputMember from "./InputMember"
+import InputMember from './InputMember'
 
-import styles from "./InputMembers.module.css"
+import styles from './InputMembers.module.css'
 
-const defaultId = "members"
+const defaultId = 'members'
 
 const InputMembers = ({ id, network, members, setMembers }: any) => {
-
   useEffect(() => {
     let ms = [...members]
     ms = ms.map((m, i) => ({ index: i, ...m }))
@@ -24,7 +23,7 @@ const InputMembers = ({ id, network, members, setMembers }: any) => {
   const handleAddMember = (event: any) => {
     event?.preventDefault()
     const ms = [...members]
-    ms.push({address: "", weight: "", metadata: ""})
+    ms.push({ address: '', weight: '', metadata: '' })
     setMembers(ms)
   }
 
@@ -42,21 +41,17 @@ const InputMembers = ({ id, network, members, setMembers }: any) => {
       {members.map((member: any, index: number) => (
         <InputMember
           key={index}
-          id={(id || defaultId) + "-member-" + (index+1)}
-          label={"member " + (index+1)}
+          id={(id || defaultId) + '-member-' + (index + 1)}
+          label={'member ' + (index + 1)}
           network={network}
           member={member}
           setMember={handleSetMember}
         />
       ))}
       <span className={styles.options}>
-        <button onClick={handleAddMember}>
-          {"add member"}
-        </button>
+        <button onClick={handleAddMember}>{'add member'}</button>
         {members.length > 0 && (
-          <button onClick={handleRemoveMember}>
-            {"remove member"}
-          </button>
+          <button onClick={handleRemoveMember}>{'remove member'}</button>
         )}
       </span>
     </>

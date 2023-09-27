@@ -1,27 +1,32 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
-import * as Long from "long"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
+import * as Long from 'long'
 
-import { MsgUpdateGroupMembers as Msg } from "../../api/cosmos/group/v1/tx"
+import { MsgUpdateGroupMembers as Msg } from '../../api/cosmos/group/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputMembers from "./InputMembers"
-import InputNumber from "../InputNumber"
+import InputAddress from '../InputAddress'
+import InputMembers from './InputMembers'
+import InputNumber from '../InputNumber'
 
-const MsgUpdateGroupMembers = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [admin, setAdmin] = useState<string>("")
-  const [groupId, setGroupId] = useState<string>("")
+const MsgUpdateGroupMembers = ({
+  network,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
+  const [admin, setAdmin] = useState<string>('')
+  const [groupId, setGroupId] = useState<string>('')
   const [members, setMembers] = useState<any[]>([])
 
   useEffect(() => {
     const msg = {
       admin: wallet ? wallet.bech32Address : admin,
-      groupId: Long.fromString(groupId || "0"),
+      groupId: Long.fromString(groupId || '0'),
       memberUpdates: members,
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/cosmos.group.v1.MsgUpdateGroupMembers",
+      typeUrl: '/cosmos.group.v1.MsgUpdateGroupMembers',
       value: Msg.encode(msg).finish(),
     }
 
@@ -36,7 +41,7 @@ const MsgUpdateGroupMembers = ({ network, setMessage, useWallet, wallet }: any) 
         number={groupId}
         setNumber={setGroupId}
       />
-      {!useWallet &&
+      {!useWallet && (
         <InputAddress
           id="msg-update-group-members-admin"
           label="admin"
@@ -45,7 +50,7 @@ const MsgUpdateGroupMembers = ({ network, setMessage, useWallet, wallet }: any) 
           address={admin}
           setAddress={setAdmin}
         />
-      }
+      )}
       <InputMembers
         id="msg-update-group-members-members"
         network={network}

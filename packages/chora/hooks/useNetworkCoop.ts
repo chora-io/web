@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
 
 import {
   bionLocalX,
@@ -7,10 +7,9 @@ import {
   regenLocalX,
   regenRedwoodX,
   regenMainnetX,
-} from "../chains"
+} from '../chains'
 
 export const useNetworkCoop = (chainInfo: any) => {
-
   const [groupId, setGroupId] = useState<string | undefined>(undefined)
 
   useEffect(() => {

@@ -1,16 +1,21 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgUpdateBatchMetadata as Msg } from "../../api/regen/ecocredit/v1/tx"
+import { MsgUpdateBatchMetadata as Msg } from '../../api/regen/ecocredit/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputIRI from "../InputIRI"
-import InputString from "../InputString"
+import InputAddress from '../InputAddress'
+import InputIRI from '../InputIRI'
+import InputString from '../InputString'
 
-const MsgUpdateBatchMetadata = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [issuer, setIssuer] = useState<string>("")
-  const [batchDenom, setBatchDenom] = useState<string>("")
-  const [newMetadata, setNewMetadata] = useState<string>("")
+const MsgUpdateBatchMetadata = ({
+  network,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
+  const [issuer, setIssuer] = useState<string>('')
+  const [batchDenom, setBatchDenom] = useState<string>('')
+  const [newMetadata, setNewMetadata] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -20,7 +25,7 @@ const MsgUpdateBatchMetadata = ({ network, setMessage, useWallet, wallet }: any)
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.ecocredit.v1.MsgUpdateBatchMetadata",
+      typeUrl: '/regen.ecocredit.v1.MsgUpdateBatchMetadata',
       value: Msg.encode(msg).finish(),
     }
 

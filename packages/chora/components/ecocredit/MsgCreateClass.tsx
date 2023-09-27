@@ -1,19 +1,19 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgCreateClass as Msg } from "../../api/regen/ecocredit/v1/tx"
+import { MsgCreateClass as Msg } from '../../api/regen/ecocredit/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputIRI from "../InputIRI"
-import InputString from "../InputString"
+import InputAddress from '../InputAddress'
+import InputIRI from '../InputIRI'
+import InputString from '../InputString'
 
 const MsgCreateClass = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [admin, setAdmin] = useState<string>("")
-  const [issuers, setIssuers] = useState<string>("")
-  const [metadata, setMetadata] = useState<string>("")
-  const [creditTypeAbbrev, setCreditTypeAbbrev] = useState<string>("")
-  const [feeDenom, setFeeDenom] = useState<string>("")
-  const [feeAmount, setFeeAmount] = useState<string>("")
+  const [admin, setAdmin] = useState<string>('')
+  const [issuers, setIssuers] = useState<string>('')
+  const [metadata, setMetadata] = useState<string>('')
+  const [creditTypeAbbrev, setCreditTypeAbbrev] = useState<string>('')
+  const [feeDenom, setFeeDenom] = useState<string>('')
+  const [feeAmount, setFeeAmount] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -25,7 +25,7 @@ const MsgCreateClass = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.ecocredit.v1.MsgCreateClass",
+      typeUrl: '/regen.ecocredit.v1.MsgCreateClass',
       value: Msg.encode(msg).finish(),
     }
 

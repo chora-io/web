@@ -1,16 +1,21 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgUpdateProjectMetadata as Msg } from "../../api/regen/ecocredit/v1/tx"
+import { MsgUpdateProjectMetadata as Msg } from '../../api/regen/ecocredit/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputIRI from "../InputIRI"
-import InputString from "../InputString"
+import InputAddress from '../InputAddress'
+import InputIRI from '../InputIRI'
+import InputString from '../InputString'
 
-const MsgUpdateProjectMetadata = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [admin, setAdmin] = useState<string>("")
-  const [projectId, setProjectId] = useState<string>("")
-  const [newMetadata, setNewMetadata] = useState<string>("")
+const MsgUpdateProjectMetadata = ({
+  network,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
+  const [admin, setAdmin] = useState<string>('')
+  const [projectId, setProjectId] = useState<string>('')
+  const [newMetadata, setNewMetadata] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -20,7 +25,7 @@ const MsgUpdateProjectMetadata = ({ network, setMessage, useWallet, wallet }: an
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectMetadata",
+      typeUrl: '/regen.ecocredit.v1.MsgUpdateProjectMetadata',
       value: Msg.encode(msg).finish(),
     }
 

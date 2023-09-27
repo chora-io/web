@@ -1,18 +1,18 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgCreateProject as Msg } from "../../api/regen/ecocredit/v1/tx"
+import { MsgCreateProject as Msg } from '../../api/regen/ecocredit/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputIRI from "../InputIRI"
-import InputString from "../InputString"
+import InputAddress from '../InputAddress'
+import InputIRI from '../InputIRI'
+import InputString from '../InputString'
 
 const MsgCreateProject = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [admin, setAdmin] = useState<string>("")
-  const [classId, setClassId] = useState<string>("")
-  const [metadata, setMetadata] = useState<string>("")
-  const [jurisdiction, setJurisdiction] = useState<string>("")
-  const [referenceId, setReferenceId] = useState<string>("")
+  const [admin, setAdmin] = useState<string>('')
+  const [classId, setClassId] = useState<string>('')
+  const [metadata, setMetadata] = useState<string>('')
+  const [jurisdiction, setJurisdiction] = useState<string>('')
+  const [referenceId, setReferenceId] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -24,7 +24,7 @@ const MsgCreateProject = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.ecocredit.v1.MsgCreateProject",
+      typeUrl: '/regen.ecocredit.v1.MsgCreateProject',
       value: Msg.encode(msg).finish(),
     }
 

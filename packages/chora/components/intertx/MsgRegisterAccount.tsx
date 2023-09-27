@@ -1,15 +1,20 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgRegisterAccount as Msg } from "../../api/regen/intertx/v1/tx"
+import { MsgRegisterAccount as Msg } from '../../api/regen/intertx/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputString from "../InputString"
+import InputAddress from '../InputAddress'
+import InputString from '../InputString'
 
-const MsgRegisterAccount = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [owner, setOwner] = useState<string>("")
-  const [connectionId, setConnectionId] = useState<string>("")
-  const [version, setVersion] = useState<string>("")
+const MsgRegisterAccount = ({
+  network,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
+  const [owner, setOwner] = useState<string>('')
+  const [connectionId, setConnectionId] = useState<string>('')
+  const [version, setVersion] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -19,7 +24,7 @@ const MsgRegisterAccount = ({ network, setMessage, useWallet, wallet }: any) => 
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.intertx.v1.MsgRegisterAccount",
+      typeUrl: '/regen.intertx.v1.MsgRegisterAccount',
       value: Msg.encode(msg).finish(),
     }
 

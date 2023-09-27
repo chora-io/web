@@ -1,14 +1,14 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgGrant as Msg } from "../../api/cosmos/authz/v1beta1/tx"
+import { MsgGrant as Msg } from '../../api/cosmos/authz/v1beta1/tx'
 
-import InputAddress from "../InputAddress"
-import InputGrant from "./InputGrant"
+import InputAddress from '../InputAddress'
+import InputGrant from './InputGrant'
 
 const MsgGrant = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [granter, setGranter] = useState<string>("")
-  const [grantee, setGrantee] = useState<string>("")
+  const [granter, setGranter] = useState<string>('')
+  const [grantee, setGrantee] = useState<string>('')
   const [grant, setGrant] = useState<any>(undefined)
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const MsgGrant = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/cosmos.authz.v1beta1.MsgGrant",
+      typeUrl: '/cosmos.authz.v1beta1.MsgGrant',
       value: Msg.encode(msg).finish(),
     }
 
@@ -28,7 +28,7 @@ const MsgGrant = ({ network, setMessage, useWallet, wallet }: any) => {
 
   return (
     <>
-      {!useWallet &&
+      {!useWallet && (
         <InputAddress
           id="msg-grant-granter"
           label="granter"
@@ -37,7 +37,7 @@ const MsgGrant = ({ network, setMessage, useWallet, wallet }: any) => {
           address={granter}
           setAddress={setGranter}
         />
-      }
+      )}
       <InputAddress
         id="msg-grant-grantee"
         label="grantee"

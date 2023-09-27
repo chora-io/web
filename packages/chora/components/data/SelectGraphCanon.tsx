@@ -1,9 +1,9 @@
-import * as React from "react"
+import * as React from 'react'
 
-import { GraphCanonicalizationAlgorithm } from "../../api/regen/data/v1/types"
+import { GraphCanonicalizationAlgorithm } from '../../api/regen/data/v1/types'
 
-const defaultId = "graph-canon"
-const defaultLabel = "canonicalization algorithm"
+const defaultId = 'graph-canon'
+const defaultLabel = 'canonicalization algorithm'
 
 const SelectGraphCanon = ({ id, label, canon, setCanon }: any) => (
   <label htmlFor={id ? id : defaultId}>
@@ -11,11 +11,17 @@ const SelectGraphCanon = ({ id, label, canon, setCanon }: any) => (
     <select
       id={id ? id : defaultId}
       value={canon}
-      onChange={event => setCanon(event.target.value)}
+      onChange={(event) => setCanon(event.target.value)}
       disabled // disabled until multiple options exist
     >
-      <option value={GraphCanonicalizationAlgorithm["GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015"]}>
-        {"URDNA2015"}
+      <option
+        value={
+          GraphCanonicalizationAlgorithm[
+            'GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015'
+          ]
+        }
+      >
+        {'URDNA2015'}
       </option>
     </select>
   </label>

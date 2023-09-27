@@ -1,13 +1,18 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgRemoveClassCreator as Msg } from "../../api/regen/ecocredit/v1/tx"
+import { MsgRemoveClassCreator as Msg } from '../../api/regen/ecocredit/v1/tx'
 
-import InputAddress from "../InputAddress"
+import InputAddress from '../InputAddress'
 
-const MsgRemoveClassCreator = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [authority, setAuthority] = useState<string>("")
-  const [creator, setCreator] = useState<string>("")
+const MsgRemoveClassCreator = ({
+  network,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
+  const [authority, setAuthority] = useState<string>('')
+  const [creator, setCreator] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -16,7 +21,7 @@ const MsgRemoveClassCreator = ({ network, setMessage, useWallet, wallet }: any) 
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.ecocredit.v1.MsgRemoveClassCreator",
+      typeUrl: '/regen.ecocredit.v1.MsgRemoveClassCreator',
       value: Msg.encode(msg).finish(),
     }
 

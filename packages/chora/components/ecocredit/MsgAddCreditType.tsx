@@ -1,17 +1,17 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgAddCreditType as Msg } from "../../api/regen/ecocredit/v1/tx"
+import { MsgAddCreditType as Msg } from '../../api/regen/ecocredit/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputNumber from "../InputNumber"
-import InputString from "../InputString"
+import InputAddress from '../InputAddress'
+import InputNumber from '../InputNumber'
+import InputString from '../InputString'
 
 const MsgAddCreditType = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [authority, setAuthority] = useState<string>("")
-  const [creditTypeAbbrev, setCreditTypeAbbrev] = useState<string>("")
-  const [creditTypeName, setCreditTypeName] = useState<string>("")
-  const [creditTypeUnit, setCreditTypeUnit] = useState<string>("")
+  const [authority, setAuthority] = useState<string>('')
+  const [creditTypeAbbrev, setCreditTypeAbbrev] = useState<string>('')
+  const [creditTypeName, setCreditTypeName] = useState<string>('')
+  const [creditTypeUnit, setCreditTypeUnit] = useState<string>('')
   const [creditTypePrecision, setCreditTypePrecision] = useState<number>(6)
 
   useEffect(() => {
@@ -26,12 +26,19 @@ const MsgAddCreditType = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.ecocredit.v1.MsgAddCreditType",
+      typeUrl: '/regen.ecocredit.v1.MsgAddCreditType',
       value: Msg.encode(msg).finish(),
     }
 
     setMessage(msgAny)
-  }, [authority, creditTypeAbbrev, creditTypeName, creditTypeUnit, creditTypePrecision, wallet])
+  }, [
+    authority,
+    creditTypeAbbrev,
+    creditTypeName,
+    creditTypeUnit,
+    creditTypePrecision,
+    wallet,
+  ])
 
   return (
     <>

@@ -1,27 +1,27 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgSetSendEnabled as Msg } from "../../api/cosmos/bank/v1beta1/tx"
+import { MsgSetSendEnabled as Msg } from '../../api/cosmos/bank/v1beta1/tx'
 
-import InputAddress from "../InputAddress"
-import InputString from "../InputString"
+import InputAddress from '../InputAddress'
+import InputString from '../InputString'
 
 const MsgSetSendEnabled = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [authority, setAuthority] = useState<string>("")
-  const [sendEnabled, setSendEnabled] = useState<string>("")
-  const [useDefaultFor, setUseDefaultFor] = useState<string>("")
+  const [authority, setAuthority] = useState<string>('')
+  const [sendEnabled, setSendEnabled] = useState<string>('')
+  const [useDefaultFor, setUseDefaultFor] = useState<string>('')
 
   useEffect(() => {
     const msg = {
-      $type: "cosmos.bank.v1beta1.MsgSetSendEnabled",
+      $type: 'cosmos.bank.v1beta1.MsgSetSendEnabled',
       authority: wallet ? wallet.bech32Address : authority,
       sendEnabled: [], // TODO
       useDefaultFor: [], // TODO
     } as unknown as Msg
 
     const msgAny = {
-        typeUrl: "/cosmos.bank.v1beta1.MsgSetSendEnabled",
-        value: Msg.encode(msg).finish(),
+      typeUrl: '/cosmos.bank.v1beta1.MsgSetSendEnabled',
+      value: Msg.encode(msg).finish(),
     }
 
     setMessage(msgAny)

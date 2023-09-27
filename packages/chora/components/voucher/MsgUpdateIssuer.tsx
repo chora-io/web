@@ -1,26 +1,26 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
-import * as Long from "long"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
+import * as Long from 'long'
 
-import { MsgUpdateIssuer as Msg } from "../../api/chora/voucher/v1/msg"
+import { MsgUpdateIssuer as Msg } from '../../api/chora/voucher/v1/msg'
 
-import InputAddress from "../InputAddress"
-import InputNumber from "../InputNumber"
+import InputAddress from '../InputAddress'
+import InputNumber from '../InputNumber'
 
 const MsgUpdateIssuer = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [id, setId] = useState<string>("")
-  const [issuer, setIssuer] = useState<string>("")
-  const [newIssuer, setNewIssuer] = useState<string>("")
+  const [id, setId] = useState<string>('')
+  const [issuer, setIssuer] = useState<string>('')
+  const [newIssuer, setNewIssuer] = useState<string>('')
 
   useEffect(() => {
     const msg = {
-      id: Long.fromString(id || "0"),
+      id: Long.fromString(id || '0'),
       issuer: wallet ? wallet.bech32Address : issuer,
       newIssuer: newIssuer,
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/chora.voucher.v1.MsgUpdateIssuer",
+      typeUrl: '/chora.voucher.v1.MsgUpdateIssuer',
       value: Msg.encode(msg).finish(),
     }
 

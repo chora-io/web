@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react'
 
 function Seo({ site, title, description, children }: any) {
   const defaultTitle = site.siteMetadata?.title

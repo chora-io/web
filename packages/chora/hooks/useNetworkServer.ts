@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
 
 import {
   bionLocalX,
@@ -7,10 +7,9 @@ import {
   regenLocalX,
   regenRedwoodX,
   regenMainnetX,
-} from "chora/chains"
+} from 'chora/chains'
 
 export const useNetworkServer = (chainInfo: any) => {
-
   const [serverUrl, setServerUrl] = useState<string | undefined>(undefined)
 
   useEffect(() => {

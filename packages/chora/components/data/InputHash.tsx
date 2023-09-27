@@ -1,9 +1,9 @@
-import * as React from "react"
+import * as React from 'react'
 
-const defaultId = "hash"
-const defaultLabel = "hash"
+const defaultId = 'hash'
+const defaultLabel = 'hash'
 
-const defaultPlaceholder = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+const defaultPlaceholder = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA='
 
 const InputHash = ({ id, label, placeholder, hash, setHash }: any) => (
   <label htmlFor={id ? id : defaultId}>
@@ -12,7 +12,7 @@ const InputHash = ({ id, label, placeholder, hash, setHash }: any) => (
       id={id ? id : defaultId}
       value={hash}
       placeholder={placeholder ? placeholder : defaultPlaceholder}
-      onChange={event => setHash(event.target.value)}
+      onChange={(event) => setHash(event.target.value)}
     />
   </label>
 )

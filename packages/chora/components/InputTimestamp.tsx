@@ -1,7 +1,7 @@
-import * as React from "react"
+import * as React from 'react'
 
-const defaultId = "timestamp"
-const defaultLabel = "timestamp"
+const defaultId = 'timestamp'
+const defaultLabel = 'timestamp'
 
 const InputTimestamp = ({ id, label, timestamp, setTimestamp }: any) => (
   <label htmlFor={id ? id : defaultId}>
@@ -10,7 +10,7 @@ const InputTimestamp = ({ id, label, timestamp, setTimestamp }: any) => (
       type="datetime-local"
       id={id ? id : defaultId}
       value={timestamp}
-      onChange={event => setTimestamp(event.target.value)}
+      onChange={(event) => setTimestamp(event.target.value)}
     />
   </label>
 )

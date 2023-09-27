@@ -1,9 +1,5 @@
-import MsgMultiSend from "./MsgMultiSend"
-import MsgSend from "./MsgSend"
-import MsgSetSendEnabled from "./MsgSetSendEnabled"
+import MsgMultiSend from './MsgMultiSend'
+import MsgSend from './MsgSend'
+import MsgSetSendEnabled from './MsgSetSendEnabled'
 
-export {
-  MsgMultiSend,
-  MsgSend,
-  MsgSetSendEnabled,
-}
+export { MsgMultiSend, MsgSend, MsgSetSendEnabled }

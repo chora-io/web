@@ -1,14 +1,14 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgCreate as Msg } from "../../api/chora/geonode/v1/msg"
+import { MsgCreate as Msg } from '../../api/chora/geonode/v1/msg'
 
-import InputAddress from "../InputAddress"
-import InputIRI from "../InputIRI"
+import InputAddress from '../InputAddress'
+import InputIRI from '../InputIRI'
 
 const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [curator, setCurator] = useState<string>("")
-  const [metadata, setMetadata] = useState<string>("")
+  const [curator, setCurator] = useState<string>('')
+  const [metadata, setMetadata] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -17,7 +17,7 @@ const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/chora.geonode.v1.MsgCreate",
+      typeUrl: '/chora.geonode.v1.MsgCreate',
       value: Msg.encode(msg).finish(),
     }
 

@@ -1,14 +1,19 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgUpdateGroupPolicyAdmin as Msg } from "../../api/cosmos/group/v1/tx"
+import { MsgUpdateGroupPolicyAdmin as Msg } from '../../api/cosmos/group/v1/tx'
 
-import InputAddress from "../InputAddress"
+import InputAddress from '../InputAddress'
 
-const MsgUpdateGroupPolicyAdmin = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [admin, setAdmin] = useState<string>("")
-  const [address, setAddress] = useState<string>("")
-  const [newAdmin, setNewAdmin] = useState<string>("")
+const MsgUpdateGroupPolicyAdmin = ({
+  network,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
+  const [admin, setAdmin] = useState<string>('')
+  const [address, setAddress] = useState<string>('')
+  const [newAdmin, setNewAdmin] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -18,7 +23,7 @@ const MsgUpdateGroupPolicyAdmin = ({ network, setMessage, useWallet, wallet }: a
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/cosmos.group.v1.MsgUpdateGroupPolicyAdmin",
+      typeUrl: '/cosmos.group.v1.MsgUpdateGroupPolicyAdmin',
       value: Msg.encode(msg).finish(),
     }
 
@@ -35,7 +40,7 @@ const MsgUpdateGroupPolicyAdmin = ({ network, setMessage, useWallet, wallet }: a
         address={address}
         setAddress={setAddress}
       />
-      {!useWallet &&
+      {!useWallet && (
         <InputAddress
           id="msg-update-group-policy-admin-admin"
           label="policy admin"
@@ -44,7 +49,7 @@ const MsgUpdateGroupPolicyAdmin = ({ network, setMessage, useWallet, wallet }: a
           address={admin}
           setAddress={setAdmin}
         />
-      }
+      )}
       <InputAddress
         id="msg-update-group-policy-admin-new-admin"
         label="new policy admin"

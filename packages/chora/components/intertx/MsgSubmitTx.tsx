@@ -1,15 +1,15 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgSubmitTx as Msg } from "../../api/regen/intertx/v1/tx"
+import { MsgSubmitTx as Msg } from '../../api/regen/intertx/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputString from "../InputString"
-import SelectMessage from "../SelectMessage"
+import InputAddress from '../InputAddress'
+import InputString from '../InputString'
+import SelectMessage from '../SelectMessage'
 
 const MsgSubmitTx = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [owner, setOwner] = useState<string>("")
-  const [connectionId, setConnectionId] = useState<string>("")
+  const [owner, setOwner] = useState<string>('')
+  const [connectionId, setConnectionId] = useState<string>('')
   const [txMsg, setTxMsg] = useState<any>(undefined)
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const MsgSubmitTx = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.intertx.v1.MsgSubmitTx",
+      typeUrl: '/regen.intertx.v1.MsgSubmitTx',
       value: Msg.encode(msg).finish(),
     }
 

@@ -1,16 +1,16 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgCancel as Msg } from "../../api/regen/ecocredit/v1/tx"
+import { MsgCancel as Msg } from '../../api/regen/ecocredit/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputIRI from "../InputIRI"
-import InputString from "../InputString"
+import InputAddress from '../InputAddress'
+import InputIRI from '../InputIRI'
+import InputString from '../InputString'
 
 const MsgCancel = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [owner, setOwner] = useState<string>("")
-  const [credits, setCredits] = useState<string>("")
-  const [reason, setReason] = useState<string>("")
+  const [owner, setOwner] = useState<string>('')
+  const [credits, setCredits] = useState<string>('')
+  const [reason, setReason] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -20,7 +20,7 @@ const MsgCancel = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.ecocredit.v1.MsgCancel",
+      typeUrl: '/regen.ecocredit.v1.MsgCancel',
       value: Msg.encode(msg).finish(),
     }
 

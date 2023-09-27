@@ -1,14 +1,19 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgAddAllowedBridgeChain as Msg } from "../../api/regen/ecocredit/v1/tx"
+import { MsgAddAllowedBridgeChain as Msg } from '../../api/regen/ecocredit/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputString from "../InputString"
+import InputAddress from '../InputAddress'
+import InputString from '../InputString'
 
-const MsgAddAllowedBridgeChain = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [authority, setAuthority] = useState<string>("")
-  const [chainName, setChainName] = useState<string>("")
+const MsgAddAllowedBridgeChain = ({
+  network,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
+  const [authority, setAuthority] = useState<string>('')
+  const [chainName, setChainName] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -17,7 +22,7 @@ const MsgAddAllowedBridgeChain = ({ network, setMessage, useWallet, wallet }: an
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.ecocredit.v1.MsgAddAllowedBridgeChain",
+      typeUrl: '/regen.ecocredit.v1.MsgAddAllowedBridgeChain',
       value: Msg.encode(msg).finish(),
     }
 

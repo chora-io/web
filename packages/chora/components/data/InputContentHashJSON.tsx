@@ -1,7 +1,7 @@
-import * as React from "react"
+import * as React from 'react'
 
-const defaultId = "content-hash"
-const defaultLabel = "content hash"
+const defaultId = 'content-hash'
+const defaultLabel = 'content hash'
 
 const defaultPlaceholder = `{
   "graph": {
@@ -12,9 +12,15 @@ const defaultPlaceholder = `{
   }
 }`
 
-const InputContentHashJSON = ({ id, label, placeholder, json, setJson }: any) => {
+const InputContentHashJSON = ({
+  id,
+  label,
+  placeholder,
+  json,
+  setJson,
+}: any) => {
   let noLabel = false
-  if (label === "") noLabel = true
+  if (label === '') noLabel = true
 
   return (
     <label htmlFor={id ? id : defaultId}>
@@ -23,7 +29,7 @@ const InputContentHashJSON = ({ id, label, placeholder, json, setJson }: any) =>
         id={id ? id : defaultId}
         value={json}
         placeholder={placeholder ? placeholder : defaultPlaceholder}
-        onChange={event => setJson(event.target.value)}
+        onChange={(event) => setJson(event.target.value)}
       />
     </label>
   )

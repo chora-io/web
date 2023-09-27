@@ -1,26 +1,22 @@
-import * as React from "react"
+import * as React from 'react'
 
-import styles from "./ResultTx.module.css"
+import styles from './ResultTx.module.css'
 
-const queryTx = "cosmos/tx/v1beta1/txs"
+const queryTx = 'cosmos/tx/v1beta1/txs'
 
 const ResultTx = ({ error, rest, success }: any) => {
-  const txUrl = rest + "/" + queryTx + "/" + success
+  const txUrl = rest + '/' + queryTx + '/' + success
   return (
     <>
       {error && (
         <div>
-          <pre className={styles.error}>
-            {error}
-          </pre>
+          <pre className={styles.error}>{error}</pre>
         </div>
       )}
       {success && (
         <div>
           <pre>
-            <a href={txUrl}>
-              {txUrl}
-            </a>
+            <a href={txUrl}>{txUrl}</a>
           </pre>
         </div>
       )}

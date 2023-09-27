@@ -1,5 +1,5 @@
-import * as React from "react"
-import { useContext, useState } from "react"
+import * as React from 'react'
+import { useContext, useState } from 'react'
 
 import {
   bionLocal,
@@ -12,31 +12,30 @@ import {
   regenLocalX,
   regenRedwood,
   regenRedwoodX,
-} from "../chains"
-import { WalletContext } from "../contexts"
+} from '../chains'
+import { WalletContext } from '../contexts'
 
-import styles from "./Faucet.module.css"
+import styles from './Faucet.module.css'
 
 const Faucet = () => {
-
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // error and success
-  const [error, setError] = useState<string>("")
+  const [error, setError] = useState<string>('')
   const [success, setSuccess] = useState<boolean>(false)
 
   const handleSubmit = () => {
-    setError("")
+    setError('')
     setSuccess(false)
 
     if (chainInfo === undefined) {
-        setError("chain must be enabled")
-        return
+      setError('chain must be enabled')
+      return
     }
 
     if (wallet === undefined) {
-        setError("wallet must be connected")
-        return
+      setError('wallet must be connected')
+      return
     }
 
     let faucetUrl: string
@@ -58,23 +57,23 @@ const Faucet = () => {
         faucetUrl = regenRedwoodX.faucet
         break
       default:
-        faucetUrl = "http://127.0.0.1:8000"
+        faucetUrl = 'http://127.0.0.1:8000'
         break
     }
 
     fetch(faucetUrl, {
-      method: "POST",
+      method: 'POST',
       body: `{"address": "${wallet.bech32Address}"}`,
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.error) {
           setError(data.error)
         } else {
           setSuccess(true)
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message)
       })
   }
@@ -82,18 +81,10 @@ const Faucet = () => {
   return (
     <div>
       <button onClick={handleSubmit} className={styles.button}>
-        {"request funds"}
+        {'request funds'}
       </button>
-      {error && (
-        <pre className={styles.error}>
-          {error}
-        </pre>
-      )}
-      {success && (
-        <pre>
-          {"tokens successfully sent"}
-        </pre>
-      )}
+      {error && <pre className={styles.error}>{error}</pre>}
+      {success && <pre>{'tokens successfully sent'}</pre>}
     </div>
   )
 }

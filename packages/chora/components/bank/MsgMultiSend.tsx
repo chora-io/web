@@ -1,17 +1,17 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgMultiSend as Msg } from "@keplr-wallet/proto-types/cosmos/bank/v1beta1/tx"
+import { MsgMultiSend as Msg } from '@keplr-wallet/proto-types/cosmos/bank/v1beta1/tx'
 
-import InputAddress from "../InputAddress"
-import InputDenom from "../InputDenom"
-import InputNumber from "../InputNumber"
+import InputAddress from '../InputAddress'
+import InputDenom from '../InputDenom'
+import InputNumber from '../InputNumber'
 
 const MsgMultiSend = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [fromAddress, setFromAddress] = useState<string>("")
-  const [toAddress, setToAddress] = useState<string>("")
-  const [denom, setDenom] = useState<string>("")
-  const [amount, setAmount] = useState<string>("")
+  const [fromAddress, setFromAddress] = useState<string>('')
+  const [toAddress, setToAddress] = useState<string>('')
+  const [denom, setDenom] = useState<string>('')
+  const [amount, setAmount] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -40,8 +40,8 @@ const MsgMultiSend = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-        typeUrl: "/cosmos.bank.v1beta1.MsgMultiSend",
-        value: Msg.encode(msg).finish(),
+      typeUrl: '/cosmos.bank.v1beta1.MsgMultiSend',
+      value: Msg.encode(msg).finish(),
     }
 
     setMessage(msgAny)

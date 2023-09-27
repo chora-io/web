@@ -1,15 +1,15 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgSend as Msg } from "../../api/regen/ecocredit/v1/tx"
+import { MsgSend as Msg } from '../../api/regen/ecocredit/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputString from "../InputString"
+import InputAddress from '../InputAddress'
+import InputString from '../InputString'
 
 const MsgSend = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [sender, setSender] = useState<string>("")
-  const [recipient, setRecipient] = useState<string>("")
-  const [credits, setCredits] = useState<string>("")
+  const [sender, setSender] = useState<string>('')
+  const [recipient, setRecipient] = useState<string>('')
+  const [credits, setCredits] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -19,7 +19,7 @@ const MsgSend = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.ecocredit.v1.MsgSend",
+      typeUrl: '/regen.ecocredit.v1.MsgSend',
       value: Msg.encode(msg).finish(),
     }
 

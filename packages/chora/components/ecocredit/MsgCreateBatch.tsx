@@ -1,20 +1,20 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgCreateBatch as Msg } from "../../api/regen/ecocredit/v1/tx"
+import { MsgCreateBatch as Msg } from '../../api/regen/ecocredit/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputIRI from "../InputIRI"
-import InputString from "../InputString"
-import InputTimestamp from "../InputTimestamp"
+import InputAddress from '../InputAddress'
+import InputIRI from '../InputIRI'
+import InputString from '../InputString'
+import InputTimestamp from '../InputTimestamp'
 
 const MsgCreateBatch = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [issuer, setIssuer] = useState<string>("")
-  const [projectId, setProjectId] = useState<string>("")
-  const [issuance, setIssuance] = useState<string>("")
-  const [metadata, setMetadata] = useState<string>("")
-  const [startDate, setStartDate] = useState<string>("")
-  const [endDate, setEndDate] = useState<string>("")
+  const [issuer, setIssuer] = useState<string>('')
+  const [projectId, setProjectId] = useState<string>('')
+  const [issuance, setIssuance] = useState<string>('')
+  const [metadata, setMetadata] = useState<string>('')
+  const [startDate, setStartDate] = useState<string>('')
+  const [endDate, setEndDate] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -27,7 +27,7 @@ const MsgCreateBatch = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.ecocredit.v1.MsgCreateBatch",
+      typeUrl: '/regen.ecocredit.v1.MsgCreateBatch',
       value: Msg.encode(msg).finish(),
     }
 

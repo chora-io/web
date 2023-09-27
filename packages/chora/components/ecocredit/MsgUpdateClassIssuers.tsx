@@ -1,16 +1,21 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgUpdateClassIssuers as Msg } from "../../api/regen/ecocredit/v1/tx"
+import { MsgUpdateClassIssuers as Msg } from '../../api/regen/ecocredit/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputString from "../InputString"
+import InputAddress from '../InputAddress'
+import InputString from '../InputString'
 
-const MsgUpdateClassIssuers = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [admin, setAdmin] = useState<string>("")
-  const [classId, setClassId] = useState<string>("")
-  const [addIssuers, setAddIssuers] = useState<string>("")
-  const [removeIssuers, setRemoveIssuers] = useState<string>("")
+const MsgUpdateClassIssuers = ({
+  network,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
+  const [admin, setAdmin] = useState<string>('')
+  const [classId, setClassId] = useState<string>('')
+  const [addIssuers, setAddIssuers] = useState<string>('')
+  const [removeIssuers, setRemoveIssuers] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -21,7 +26,7 @@ const MsgUpdateClassIssuers = ({ network, setMessage, useWallet, wallet }: any) 
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.ecocredit.v1.MsgUpdateClassIssuers",
+      typeUrl: '/regen.ecocredit.v1.MsgUpdateClassIssuers',
       value: Msg.encode(msg).finish(),
     }
 

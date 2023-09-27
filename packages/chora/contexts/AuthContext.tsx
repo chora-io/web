@@ -1,22 +1,27 @@
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useState } from 'react'
 
-import { WalletContext } from "./WalletContext"
-import { useNetworkServer } from "../hooks"
+import { WalletContext } from './WalletContext'
+import { useNetworkServer } from '../hooks'
 
-const cachedAuthAccount = "chora-auth-account"
-const cachedAuthAccounts = "chora-auth-accounts"
+const cachedAuthAccount = 'chora-auth-account'
+const cachedAuthAccounts = 'chora-auth-accounts'
 
 // TODO: use http-only cookies for improved security
 
 const getCachedAccount = () => {
-  if (typeof localStorage !== "undefined") {
-    return JSON.parse(localStorage.getItem(cachedAuthAccount) || 'null') || undefined
+  if (typeof localStorage !== 'undefined') {
+    return (
+      JSON.parse(localStorage.getItem(cachedAuthAccount) || 'null') || undefined
+    )
   }
 }
 
 const getCachedAccounts = () => {
-  if (typeof localStorage !== "undefined") {
-    return JSON.parse(localStorage.getItem(cachedAuthAccounts) || 'null') || undefined
+  if (typeof localStorage !== 'undefined') {
+    return (
+      JSON.parse(localStorage.getItem(cachedAuthAccounts) || 'null') ||
+      undefined
+    )
   }
 }
 
@@ -39,7 +44,6 @@ const setCachedAccounts = (accounts: any[]) => {
 const AuthContext = createContext<any>({})
 
 const AuthContextProvider = (props: any) => {
-
   // TODO: reconsider context within context for server url
   // currently required to check on load within context provider
   // and ideally network server would be determined by selected network
@@ -51,32 +55,35 @@ const AuthContextProvider = (props: any) => {
 
   const [account, setAccount] = useState<any>(undefined)
   const [activeAccount, setActiveAccount] = useState<any>(getCachedAccount())
-  const [activeAccounts, setActiveAccounts] = useState<any[] | undefined>(getCachedAccounts())
+  const [activeAccounts, setActiveAccounts] = useState<any[] | undefined>(
+    getCachedAccounts(),
+  )
   const [error, setError] = useState<string | undefined>(undefined)
 
   // check active account is authenticated
   useEffect(() => {
-    checkToken().catch(err => {
+    checkToken().catch((err) => {
       setError(err.message)
     })
-  }, [(!error && account === undefined && activeAccount !== undefined), serverUrl]);
+  }, [
+    !error && account === undefined && activeAccount !== undefined,
+    serverUrl,
+  ])
 
   // check active account token with network server
-  const checkToken = async ()=> {
-
+  const checkToken = async () => {
     // reset error
     setError(undefined)
 
     // check server url and active account
     if (serverUrl && activeAccount) {
-
       // verify token and return account from network server
-      await fetch(serverUrl + "/auth", {
-        method: "POST",
+      await fetch(serverUrl + '/auth', {
+        method: 'POST',
         body: JSON.stringify({ token: activeAccount.token }),
       })
-        .then(res => res.json())
-        .then(data => {
+        .then((res) => res.json())
+        .then((data) => {
           if (data.code) {
             setError(data.message)
           } else if (data.error) {
@@ -91,7 +98,7 @@ const AuthContextProvider = (props: any) => {
             })
           }
         })
-        .catch(err => {
+        .catch((err) => {
           setError(err.message)
         })
     }
@@ -99,7 +106,6 @@ const AuthContextProvider = (props: any) => {
 
   // set active account in state and storage
   const handleSetAccount = (a: any, t: string) => {
-
     // set account
     setAccount(a)
 
@@ -115,7 +121,6 @@ const AuthContextProvider = (props: any) => {
 
   // remove account from state and storage
   const removeAccount = () => {
-
     // reset account state
     setAccount(undefined)
 
@@ -128,9 +133,8 @@ const AuthContextProvider = (props: any) => {
 
   // remove account from accounts in state and storage
   const removeAccountFromAccounts = (id: string) => {
-
     // get cached accounts
-    let cas = getCachedAccounts()
+    const cas = getCachedAccounts()
 
     // find account in cached accounts
     const i = cas.findIndex((ca: any) => ca.id === id)
@@ -149,7 +153,6 @@ const AuthContextProvider = (props: any) => {
 
   // remove accounts from state and storage
   const removeAccounts = () => {
-
     // reset account state
     setAccount(undefined)
 
@@ -168,12 +171,10 @@ const AuthContextProvider = (props: any) => {
 
   // set account within accounts in state and storage
   const setAccountWithinAccounts = (aa: any) => {
-
     // get cached accounts
     let cas = getCachedAccounts()
 
     if (cas) {
-
       // find account in cached accounts
       const i = cas.findIndex((ca: any) => ca.id === aa.id)
 
@@ -183,9 +184,7 @@ const AuthContextProvider = (props: any) => {
       } else {
         cas.push(aa)
       }
-
     } else {
-
       // create cached accounts with account
       cas = [aa]
     }
@@ -199,7 +198,6 @@ const AuthContextProvider = (props: any) => {
 
   // switch account in state and storage
   const switchAccount = (activeAccount: any) => {
-
     // reset account
     setAccount(undefined)
 
@@ -214,24 +212,23 @@ const AuthContextProvider = (props: any) => {
   }
 
   return (
-    <AuthContext.Provider value={{
-      account,
-      activeAccount,
-      activeAccounts,
-      checkToken,
-      error,
-      removeAccount,
-      removeAccountFromAccounts,
-      removeAccounts,
-      setAccount: handleSetAccount,
-      switchAccount,
-    }}>
+    <AuthContext.Provider
+      value={{
+        account,
+        activeAccount,
+        activeAccounts,
+        checkToken,
+        error,
+        removeAccount,
+        removeAccountFromAccounts,
+        removeAccounts,
+        setAccount: handleSetAccount,
+        switchAccount,
+      }}
+    >
       {props.children}
     </AuthContext.Provider>
   )
 }
 
-export {
-  AuthContext,
-  AuthContextProvider,
-}
+export { AuthContext, AuthContextProvider }

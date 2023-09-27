@@ -1,13 +1,13 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgExec as Msg } from "../../api/cosmos/authz/v1beta1/tx"
+import { MsgExec as Msg } from '../../api/cosmos/authz/v1beta1/tx'
 
-import InputAddress from "../InputAddress"
-import SelectMessage from "../SelectMessage"
+import InputAddress from '../InputAddress'
+import SelectMessage from '../SelectMessage'
 
 const MsgExec = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [grantee, setGrantee] = useState<string>("")
+  const [grantee, setGrantee] = useState<string>('')
   const [execMsg, setExecMsg] = useState<any>(undefined)
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const MsgExec = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/cosmos.authz.v1beta1.MsgExec",
+      typeUrl: '/cosmos.authz.v1beta1.MsgExec',
       value: Msg.encode(msg).finish(),
     }
 
@@ -26,7 +26,7 @@ const MsgExec = ({ network, setMessage, useWallet, wallet }: any) => {
 
   return (
     <>
-      {!useWallet &&
+      {!useWallet && (
         <InputAddress
           id="msg-exec-grantee"
           label="grantee"
@@ -35,7 +35,7 @@ const MsgExec = ({ network, setMessage, useWallet, wallet }: any) => {
           address={grantee}
           setAddress={setGrantee}
         />
-      }
+      )}
       <SelectMessage
         id="msg-exec-message"
         label="message"

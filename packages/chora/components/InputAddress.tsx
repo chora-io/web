@@ -1,19 +1,29 @@
-import * as React from "react"
+import * as React from 'react'
 
-const defaultId = "address"
-const defaultLabel = "address"
+const defaultId = 'address'
+const defaultLabel = 'address'
 
-const choraAddress = "chora1jx34255cgvxpthkg572ma6rhq6crwl6xh7g0md"
-const regenAddress = "regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx"
-const choraAddressLong = "chora1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsdnjkmu"
-const regenAddressLong = "regen1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsdnjkmu"
+const choraAddress = 'chora1jx34255cgvxpthkg572ma6rhq6crwl6xh7g0md'
+const regenAddress = 'regen1jx34255cgvxpthkg572ma6rhq6crwl6x2s4ajx'
+const choraAddressLong =
+  'chora1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsdnjkmu'
+const regenAddressLong =
+  'regen1afk9zr2hn2jsac63h4hm60vl9z3e5u69gndzf7c99cqge3vzwjzsdnjkmu'
 
-const InputAddress = ({ id, label, placeholder, long, network, address, setAddress }: any) => {
+const InputAddress = ({
+  id,
+  label,
+  placeholder,
+  long,
+  network,
+  address,
+  setAddress,
+}: any) => {
   let noLabel = false
-  if (label === "") noLabel = true
+  if (label === '') noLabel = true
 
   let defaultPlaceholder: string
-  if (network === undefined || network.includes("chora")) {
+  if (network === undefined || network.includes('chora')) {
     if (long) {
       defaultPlaceholder = choraAddressLong
     } else {
@@ -34,7 +44,7 @@ const InputAddress = ({ id, label, placeholder, long, network, address, setAddre
         id={id ? id : defaultId}
         value={address}
         placeholder={placeholder || defaultPlaceholder}
-        onChange={event => setAddress(event.target.value)}
+        onChange={(event) => setAddress(event.target.value)}
       />
     </label>
   )

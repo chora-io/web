@@ -1,28 +1,28 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgBridgeReceive as Msg } from "../../api/regen/ecocredit/v1/tx"
+import { MsgBridgeReceive as Msg } from '../../api/regen/ecocredit/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputIRI from "../InputIRI"
-import InputString from "../InputString"
-import InputTimestamp from "../InputTimestamp"
+import InputAddress from '../InputAddress'
+import InputIRI from '../InputIRI'
+import InputString from '../InputString'
+import InputTimestamp from '../InputTimestamp'
 
 const MsgBridgeReceive = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [issuer, setIssuer] = useState<string>("")
-  const [classId, setClassId] = useState<string>("")
-  const [projectReferenceId, setProjectReferenceId] = useState<string>("")
-  const [projectJurisdiction, setProjectJurisdiction] = useState<string>("")
-  const [projectMetadata, setProjectMetadata] = useState<string>("")
-  const [batchRecipient, setBatchRecipient] = useState<string>("")
-  const [batchAmount, setBatchAmount] = useState<string>("")
-  const [batchStartDate, setBatchStartDate] = useState<string>("")
-  const [batchEndDate, setBatchEndDate] = useState<string>("")
-  const [batchMetadata, setBatchMetadata] = useState<string>("")
-  const [originTxId, setOriginTxId] = useState<string>("")
-  const [originTxSource, setOriginTxSource] = useState<string>("")
-  const [originTxContract, setOriginTxContract] = useState<string>("")
-  const [originTxNote, setOriginTxNote] = useState<string>("")
+  const [issuer, setIssuer] = useState<string>('')
+  const [classId, setClassId] = useState<string>('')
+  const [projectReferenceId, setProjectReferenceId] = useState<string>('')
+  const [projectJurisdiction, setProjectJurisdiction] = useState<string>('')
+  const [projectMetadata, setProjectMetadata] = useState<string>('')
+  const [batchRecipient, setBatchRecipient] = useState<string>('')
+  const [batchAmount, setBatchAmount] = useState<string>('')
+  const [batchStartDate, setBatchStartDate] = useState<string>('')
+  const [batchEndDate, setBatchEndDate] = useState<string>('')
+  const [batchMetadata, setBatchMetadata] = useState<string>('')
+  const [originTxId, setOriginTxId] = useState<string>('')
+  const [originTxSource, setOriginTxSource] = useState<string>('')
+  const [originTxContract, setOriginTxContract] = useState<string>('')
+  const [originTxNote, setOriginTxNote] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -49,7 +49,7 @@ const MsgBridgeReceive = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.ecocredit.v1.MsgBridgeReceive",
+      typeUrl: '/regen.ecocredit.v1.MsgBridgeReceive',
       value: Msg.encode(msg).finish(),
     }
 

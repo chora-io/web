@@ -1,25 +1,25 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgRevoke as Msg } from "../../api/cosmos/authz/v1beta1/tx"
+import { MsgRevoke as Msg } from '../../api/cosmos/authz/v1beta1/tx'
 
-import InputAddress from "../InputAddress"
-import SelectMessage from "../SelectMessage"
+import InputAddress from '../InputAddress'
+import SelectMessage from '../SelectMessage'
 
 const MsgRevoke = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [granter, setGranter] = useState<string>("")
-  const [grantee, setGrantee] = useState<string>("")
+  const [granter, setGranter] = useState<string>('')
+  const [grantee, setGrantee] = useState<string>('')
   const [revokeMessage, setRevokeMessage] = useState<any>(undefined)
 
   useEffect(() => {
     const msg = {
       granter: wallet ? wallet.bech32Address : granter,
       grantee: grantee,
-      msgTypeUrl: revokeMessage ? revokeMessage.typeUrl : "",
+      msgTypeUrl: revokeMessage ? revokeMessage.typeUrl : '',
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/cosmos.authz.v1beta1.MsgRevoke",
+      typeUrl: '/cosmos.authz.v1beta1.MsgRevoke',
       value: Msg.encode(msg).finish(),
     }
 
@@ -28,7 +28,7 @@ const MsgRevoke = ({ network, setMessage, useWallet, wallet }: any) => {
 
   return (
     <>
-      {!useWallet &&
+      {!useWallet && (
         <InputAddress
           id="msg-revoke-granter"
           label="granter"
@@ -37,7 +37,7 @@ const MsgRevoke = ({ network, setMessage, useWallet, wallet }: any) => {
           address={granter}
           setAddress={setGranter}
         />
-      }
+      )}
       <InputAddress
         id="msg-revoke-grantee"
         label="grantee"

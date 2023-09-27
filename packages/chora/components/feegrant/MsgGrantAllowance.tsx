@@ -1,14 +1,14 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgGrantAllowance as Msg } from "../../api/cosmos/feegrant/v1beta1/tx"
+import { MsgGrantAllowance as Msg } from '../../api/cosmos/feegrant/v1beta1/tx'
 
-import InputAddress from "../InputAddress"
-import InputAllowance from "./InputAllowance"
+import InputAddress from '../InputAddress'
+import InputAllowance from './InputAllowance'
 
 const MsgGrantAllowance = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [granter, setGranter] = useState<string>("")
-  const [grantee, setGrantee] = useState<string>("")
+  const [granter, setGranter] = useState<string>('')
+  const [grantee, setGrantee] = useState<string>('')
   const [allowance, setAllowance] = useState<any>(undefined)
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const MsgGrantAllowance = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowance",
+      typeUrl: '/cosmos.feegrant.v1beta1.MsgGrantAllowance',
       value: Msg.encode(msg).finish(),
     }
 
@@ -28,7 +28,7 @@ const MsgGrantAllowance = ({ network, setMessage, useWallet, wallet }: any) => {
 
   return (
     <>
-      {!useWallet &&
+      {!useWallet && (
         <InputAddress
           id="msg-grant-allowance-granter"
           label="granter"
@@ -37,7 +37,7 @@ const MsgGrantAllowance = ({ network, setMessage, useWallet, wallet }: any) => {
           address={granter}
           setAddress={setGranter}
         />
-      }
+      )}
       <InputAddress
         id="msg-grant-allowance-grantee"
         label="grantee"

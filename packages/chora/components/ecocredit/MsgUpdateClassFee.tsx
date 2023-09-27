@@ -1,16 +1,16 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgUpdateClassFee as Msg } from "../../api/regen/ecocredit/v1/tx"
+import { MsgUpdateClassFee as Msg } from '../../api/regen/ecocredit/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputNumber from "../InputNumber"
-import InputString from "../InputString"
+import InputAddress from '../InputAddress'
+import InputNumber from '../InputNumber'
+import InputString from '../InputString'
 
 const MsgUpdateClassFee = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [authority, setAuthority] = useState<string>("")
-  const [feeDenom, setFeeDenom] = useState<string>("")
-  const [feeAmount, setFeeAmount] = useState<string>("")
+  const [authority, setAuthority] = useState<string>('')
+  const [feeDenom, setFeeDenom] = useState<string>('')
+  const [feeAmount, setFeeAmount] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -22,7 +22,7 @@ const MsgUpdateClassFee = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.ecocredit.v1.MsgUpdateClassFee",
+      typeUrl: '/regen.ecocredit.v1.MsgUpdateClassFee',
       value: Msg.encode(msg).finish(),
     }
 

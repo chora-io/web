@@ -1,14 +1,14 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgSealBatch as Msg } from "../../api/regen/ecocredit/v1/tx"
+import { MsgSealBatch as Msg } from '../../api/regen/ecocredit/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputString from "../InputString"
+import InputAddress from '../InputAddress'
+import InputString from '../InputString'
 
 const MsgSealBatch = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [issuer, setIssuer] = useState<string>("")
-  const [batchDenom, setBatchDenom] = useState<string>("")
+  const [issuer, setIssuer] = useState<string>('')
+  const [batchDenom, setBatchDenom] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -17,7 +17,7 @@ const MsgSealBatch = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.ecocredit.v1.MsgSealBatch",
+      typeUrl: '/regen.ecocredit.v1.MsgSealBatch',
       value: Msg.encode(msg).finish(),
     }
 

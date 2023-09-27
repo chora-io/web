@@ -1,19 +1,24 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgMintBatchCredits as Msg } from "../../api/regen/ecocredit/v1/tx"
+import { MsgMintBatchCredits as Msg } from '../../api/regen/ecocredit/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputString from "../InputString"
+import InputAddress from '../InputAddress'
+import InputString from '../InputString'
 
-const MsgMintBatchCredits = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [issuer, setIssuer] = useState<string>("")
-  const [batchDenom, setBatchDenom] = useState<string>("")
-  const [issuance, setIssuance] = useState<string>("")
-  const [originTxId, setOriginTxId] = useState<string>("")
-  const [originTxSource, setOriginTxSource] = useState<string>("")
-  const [originTxContract, setOriginTxContract] = useState<string>("")
-  const [originTxNote, setOriginTxNote] = useState<string>("")
+const MsgMintBatchCredits = ({
+  network,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
+  const [issuer, setIssuer] = useState<string>('')
+  const [batchDenom, setBatchDenom] = useState<string>('')
+  const [issuance, setIssuance] = useState<string>('')
+  const [originTxId, setOriginTxId] = useState<string>('')
+  const [originTxSource, setOriginTxSource] = useState<string>('')
+  const [originTxContract, setOriginTxContract] = useState<string>('')
+  const [originTxNote, setOriginTxNote] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -29,7 +34,7 @@ const MsgMintBatchCredits = ({ network, setMessage, useWallet, wallet }: any) =>
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.ecocredit.v1.MsgMintBatchCredits",
+      typeUrl: '/regen.ecocredit.v1.MsgMintBatchCredits',
       value: Msg.encode(msg).finish(),
     }
 

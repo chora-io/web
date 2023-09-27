@@ -1,14 +1,14 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgDefineResolver as Msg } from "../../api/regen/data/v1/tx"
+import { MsgDefineResolver as Msg } from '../../api/regen/data/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputURL from "../InputURL"
+import InputAddress from '../InputAddress'
+import InputURL from '../InputURL'
 
 const MsgDefineResolver = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [manager, setManager] = useState<string>("")
-  const [resolverUrl, setResolverUrl] = useState<string>("")
+  const [manager, setManager] = useState<string>('')
+  const [resolverUrl, setResolverUrl] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -17,7 +17,7 @@ const MsgDefineResolver = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.data.v1.MsgDefineResolver",
+      typeUrl: '/regen.data.v1.MsgDefineResolver',
       value: Msg.encode(msg).finish(),
     }
 

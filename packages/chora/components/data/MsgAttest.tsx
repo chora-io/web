@@ -1,13 +1,13 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgAttest as Msg } from "../../api/regen/data/v1/tx"
+import { MsgAttest as Msg } from '../../api/regen/data/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputContentHash from "./InputContentHash"
+import InputAddress from '../InputAddress'
+import InputContentHash from './InputContentHash'
 
 const MsgAttest = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [attestor, setAttestor] = useState<string>("")
+  const [attestor, setAttestor] = useState<string>('')
   const [contentHash, setContentHash] = useState<any>(undefined)
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const MsgAttest = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.data.v1.MsgAttest",
+      typeUrl: '/regen.data.v1.MsgAttest',
       value: Msg.encode(msg).finish(),
     }
 

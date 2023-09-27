@@ -1,7 +1,7 @@
-import * as React from "react"
+import * as React from 'react'
 
-const defaultId = "data-type"
-const defaultLabel = "data type"
+const defaultId = 'data-type'
+const defaultLabel = 'data type'
 
 const SelectDataType = ({ id, label, type, setType }: any) => (
   <label htmlFor={id ? id : defaultId}>
@@ -9,14 +9,10 @@ const SelectDataType = ({ id, label, type, setType }: any) => (
     <select
       id={id ? id : defaultId}
       value={type}
-      onChange={event => setType(event.target.value)}
+      onChange={(event) => setType(event.target.value)}
     >
-      <option value="graph">
-        {"graph"}
-      </option>
-      <option value="raw">
-        {"raw"}
-      </option>
+      <option value="graph">{'graph'}</option>
+      <option value="raw">{'raw'}</option>
     </select>
   </label>
 )

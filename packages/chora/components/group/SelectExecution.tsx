@@ -1,21 +1,17 @@
-import * as React from "react"
+import * as React from 'react'
 
-import { Exec } from "../../api/cosmos/group/v1/types"
+import { Exec } from '../../api/cosmos/group/v1/types'
 
 const SelectExecution = ({ id, label, execution, setExecution }: any) => (
-  <label htmlFor={id ? id : "execution"}>
-    {label ? label : "execution"}
+  <label htmlFor={id ? id : 'execution'}>
+    {label ? label : 'execution'}
     <select
-      id={id ? id : "execution"}
+      id={id ? id : 'execution'}
       value={execution}
-      onChange={event => setExecution(event.target.value)}
+      onChange={(event) => setExecution(event.target.value)}
     >
-      <option value={Exec["EXEC_UNSPECIFIED"]}>
-        {"separate"}
-      </option>
-      <option value={Exec["EXEC_TRY"]}>
-        {"immediate"}
-      </option>
+      <option value={Exec['EXEC_UNSPECIFIED']}>{'separate'}</option>
+      <option value={Exec['EXEC_TRY']}>{'immediate'}</option>
     </select>
   </label>
 )

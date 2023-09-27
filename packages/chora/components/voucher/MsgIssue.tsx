@@ -1,25 +1,25 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
-import * as Long from "long"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
+import * as Long from 'long'
 
-import { MsgIssue as Msg } from "../../api/chora/voucher/v1/msg"
+import { MsgIssue as Msg } from '../../api/chora/voucher/v1/msg'
 
-import InputAddress from "../InputAddress"
-import InputIRI from "../InputIRI"
-import InputNumber from "../InputNumber"
-import InputTimestamp from "../InputTimestamp"
+import InputAddress from '../InputAddress'
+import InputIRI from '../InputIRI'
+import InputNumber from '../InputNumber'
+import InputTimestamp from '../InputTimestamp'
 
 const MsgIssue = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [id, setId] = useState<string>("")
-  const [issuer, setIssuer] = useState<string>("")
-  const [recipient, setRecipient] = useState<string>("")
-  const [amount, setAmount] = useState<string>("")
-  const [expiration, setExpiration] = useState<string>("")
-  const [metadata, setMetadata] = useState<string>("")
+  const [id, setId] = useState<string>('')
+  const [issuer, setIssuer] = useState<string>('')
+  const [recipient, setRecipient] = useState<string>('')
+  const [amount, setAmount] = useState<string>('')
+  const [expiration, setExpiration] = useState<string>('')
+  const [metadata, setMetadata] = useState<string>('')
 
   useEffect(() => {
     const msg = {
-      id: Long.fromString(id || "0"),
+      id: Long.fromString(id || '0'),
       issuer: wallet ? wallet.bech32Address : issuer,
       recipient: recipient,
       amount: amount,
@@ -28,8 +28,8 @@ const MsgIssue = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-        typeUrl: "/chora.voucher.v1.MsgIssue",
-        value: Msg.encode(msg).finish(),
+      typeUrl: '/chora.voucher.v1.MsgIssue',
+      value: Msg.encode(msg).finish(),
     }
 
     setMessage(msgAny)

@@ -1,16 +1,16 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgBridge as Msg } from "../../api/regen/ecocredit/v1/tx"
+import { MsgBridge as Msg } from '../../api/regen/ecocredit/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputString from "../InputString"
+import InputAddress from '../InputAddress'
+import InputString from '../InputString'
 
 const MsgBridge = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [owner, setOwner] = useState<string>("")
-  const [target, setTarget] = useState<string>("")
-  const [recipient, setRecipient] = useState<string>("")
-  const [credits, setCredits] = useState<string>("")
+  const [owner, setOwner] = useState<string>('')
+  const [target, setTarget] = useState<string>('')
+  const [recipient, setRecipient] = useState<string>('')
+  const [credits, setCredits] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -21,7 +21,7 @@ const MsgBridge = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.ecocredit.v1.MsgBridge",
+      typeUrl: '/regen.ecocredit.v1.MsgBridge',
       value: Msg.encode(msg).finish(),
     }
 

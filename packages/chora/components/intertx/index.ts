@@ -1,7 +1,4 @@
-import MsgRegisterAccount from "./MsgRegisterAccount"
-import MsgSubmitTx from "./MsgSubmitTx"
+import MsgRegisterAccount from './MsgRegisterAccount'
+import MsgSubmitTx from './MsgSubmitTx'
 
-export {
-  MsgRegisterAccount,
-  MsgSubmitTx,
-}
+export { MsgRegisterAccount, MsgSubmitTx }

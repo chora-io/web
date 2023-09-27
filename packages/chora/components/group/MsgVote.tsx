@@ -1,35 +1,38 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
-import * as Long from "long"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
+import * as Long from 'long'
 
-import { MsgVote as Msg } from "../../api/cosmos/group/v1/tx"
-import { execFromJSON, voteOptionFromJSON } from "chora/api/cosmos/group/v1/types"
+import { MsgVote as Msg } from '../../api/cosmos/group/v1/tx'
+import {
+  execFromJSON,
+  voteOptionFromJSON,
+} from 'chora/api/cosmos/group/v1/types'
 
-import InputAddress from "../InputAddress"
-import InputIRI from "../InputIRI"
-import InputNumber from "../InputNumber"
-import SelectExecution from "./SelectExecution"
-import SelectVote from "./SelectVote"
+import InputAddress from '../InputAddress'
+import InputIRI from '../InputIRI'
+import InputNumber from '../InputNumber'
+import SelectExecution from './SelectExecution'
+import SelectVote from './SelectVote'
 
 const MsgVote = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [voter, setVoter] = useState<string>("")
-  const [proposalId, setProposalId] = useState<string>("")
-  const [option, setOption] = useState<string>("")
-  const [metadata, setMetadata] = useState<string>("")
-  const [execution, setExecution] = useState<string>("")
+  const [voter, setVoter] = useState<string>('')
+  const [proposalId, setProposalId] = useState<string>('')
+  const [option, setOption] = useState<string>('')
+  const [metadata, setMetadata] = useState<string>('')
+  const [execution, setExecution] = useState<string>('')
 
   useEffect(() => {
     const msg = {
-      $type: "cosmos.group.v1.MsgVote",
+      $type: 'cosmos.group.v1.MsgVote',
       voter: wallet ? wallet.bech32Address : voter,
-      proposalId: Long.fromString(proposalId || "0"),
+      proposalId: Long.fromString(proposalId || '0'),
       option: voteOptionFromJSON(option),
       metadata: metadata,
       exec: execFromJSON(execution),
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/cosmos.group.v1.MsgVote",
+      typeUrl: '/cosmos.group.v1.MsgVote',
       value: Msg.encode(msg).finish(),
     }
 
@@ -44,7 +47,7 @@ const MsgVote = ({ network, setMessage, useWallet, wallet }: any) => {
         number={proposalId}
         setNumber={setProposalId}
       />
-      {!useWallet &&
+      {!useWallet && (
         <InputAddress
           id="msg-vote-voter"
           label="voter"
@@ -53,7 +56,7 @@ const MsgVote = ({ network, setMessage, useWallet, wallet }: any) => {
           address={voter}
           setAddress={setVoter}
         />
-      }
+      )}
       <SelectVote
         id="msg-vote-option"
         label="vote option"

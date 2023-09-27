@@ -1,17 +1,17 @@
-import * as React from "react"
-import { useEffect, useState } from "react"
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
-import { MsgRetire as Msg } from "../../api/regen/ecocredit/v1/tx"
+import { MsgRetire as Msg } from '../../api/regen/ecocredit/v1/tx'
 
-import InputAddress from "../InputAddress"
-import InputIRI from "../InputIRI"
-import InputString from "../InputString"
+import InputAddress from '../InputAddress'
+import InputIRI from '../InputIRI'
+import InputString from '../InputString'
 
 const MsgRetire = ({ network, setMessage, useWallet, wallet }: any) => {
-  const [owner, setOwner] = useState<string>("")
-  const [credits, setCredits] = useState<string>("")
-  const [jurisdiction, setJurisdiction] = useState<string>("")
-  const [reason, setReason] = useState<string>("")
+  const [owner, setOwner] = useState<string>('')
+  const [credits, setCredits] = useState<string>('')
+  const [jurisdiction, setJurisdiction] = useState<string>('')
+  const [reason, setReason] = useState<string>('')
 
   useEffect(() => {
     const msg = {
@@ -22,7 +22,7 @@ const MsgRetire = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: "/regen.ecocredit.v1.MsgRetire",
+      typeUrl: '/regen.ecocredit.v1.MsgRetire',
       value: Msg.encode(msg).finish(),
     }
 
