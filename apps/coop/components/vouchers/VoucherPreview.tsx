@@ -128,7 +128,7 @@ const VoucherPreview = ({ voucher }: any) => {
         {issuer ? (
           <p>
             {`${issuer['name']} (`}
-            <Link href={`/policies/?address=${issuer['address']}`}>
+            <Link href={`/policies/${issuer['address']}`}>
               {issuer['address']}
             </Link>
             {')'}
@@ -137,7 +137,7 @@ const VoucherPreview = ({ voucher }: any) => {
           <p>{voucher['issuer']}</p>
         )}
       </div>
-      <Link href={`/vouchers/?id=${voucher['id']}`}>{'view voucher'}</Link>
+      <Link href={`/vouchers/${voucher['id']}`}>{'view voucher'}</Link>
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

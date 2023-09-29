@@ -128,7 +128,7 @@ const GeonodePreview = ({ node }: any) => {
         {curator ? (
           <p>
             {`${curator['name']} (`}
-            <Link href={`/policies/?address=${curator['address']}`}>
+            <Link href={`/policies/${curator['address']}`}>
               {curator['address']}
             </Link>
             {')'}
@@ -137,7 +137,7 @@ const GeonodePreview = ({ node }: any) => {
           <p>{node['curator']}</p>
         )}
       </div>
-      <Link href={`/geonodes/?id=${node['id']}`}>{'view node'}</Link>
+      <Link href={`/geonodes/${node['id']}`}>{'view node'}</Link>
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

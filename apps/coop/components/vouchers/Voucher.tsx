@@ -158,7 +158,7 @@ const Voucher = ({ voucherId }: any) => {
         {issuer ? (
           <p>
             {`${issuer['name']} (`}
-            <Link href={`/policies/?address=${issuer['address']}`}>
+            <Link href={`/policies/${issuer['address']}`}>
               {issuer['address']}
             </Link>
             {')'}

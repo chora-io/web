@@ -77,9 +77,7 @@ const MemberPreview = ({ member }: any) => {
         <h3>{'address'}</h3>
         <p>{member['address']}</p>
       </div>
-      <Link href={`/members/?address=${member['address']}`}>
-        {'view member'}
-      </Link>
+      <Link href={`/members/${member['address']}`}>{'view member'}</Link>
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

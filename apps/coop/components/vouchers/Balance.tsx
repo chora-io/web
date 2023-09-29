@@ -115,7 +115,7 @@ const Balance = ({ voucherId, address }: any) => {
               <h3>{'address'}</h3>
               <p key={holder['address']}>
                 {`${holder['name']} (`}
-                <Link href={`/members/?address=${holder['address']}`}>
+                <Link href={`/members/${holder['address']}`}>
                   {holder['address']}
                 </Link>
                 {')'}

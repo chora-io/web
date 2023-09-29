@@ -77,9 +77,7 @@ const GroupPolicy = ({ policy }: any) => {
         <h3>{'address'}</h3>
         <p>{policy['address']}</p>
       </div>
-      <Link href={`/policies/?address=${policy['address']}`}>
-        {'view policy'}
-      </Link>
+      <Link href={`/policies/${policy['address']}`}>{'view policy'}</Link>
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

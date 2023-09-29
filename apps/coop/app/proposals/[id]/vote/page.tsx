@@ -1,26 +1,26 @@
 'use client'
 
 // import { Metadata } from 'next'
-import { useSearchParams } from 'next/navigation'
+import { useParams } from 'next/navigation'
 
 import VoteOnProposal from '@components/proposals/VoteOnProposal'
 
 import styles from './page.module.css'
 
 // export const metadata: Metadata = {
-//   title: 'vote',
+//   title: 'proposal vote',
 // }
 
 const VotePage = () => {
-  const searchParams = useSearchParams()
+  const { id } = useParams()
 
-  const proposalId = searchParams.get('id')
+  // TODO: valid id, otherwise error
 
   return (
     <div className={styles.page}>
       <div>
         <h1>{'vote on proposal'}</h1>
-        <VoteOnProposal proposalId={proposalId} />
+        <VoteOnProposal proposalId={id} />
       </div>
     </div>
   )

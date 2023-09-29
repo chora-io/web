@@ -184,7 +184,7 @@ const ProposalVote = ({ proposalId, voterAddress }: any) => {
               <h3>{'voter'}</h3>
               <p key={voter['address']}>
                 {`${voter['name']} (`}
-                <Link href={`/members/?address=${voter['address']}`}>
+                <Link href={`/members/${voter['address']}`}>
                   {voter['address']}
                 </Link>
                 {')'}

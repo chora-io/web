@@ -153,7 +153,7 @@ const ProposalVotes = ({ proposalId }: any) => {
               <h3>{'option'}</h3>
               <p>{vote['option']}</p>
             </div>
-            <Link href={`/proposals/?id=${proposalId}&voter=${vote['voter']}`}>
+            <Link href={`/proposals/${proposalId}/${vote['voter']}`}>
               {'view vote'}
             </Link>
           </div>
@@ -165,7 +165,7 @@ const ProposalVotes = ({ proposalId }: any) => {
               <h3>{'voter'}</h3>
               <p key={voter['address']}>
                 {`${voter['name']} (`}
-                <Link href={`/members/?address=${voter['address']}`}>
+                <Link href={`/members/${voter['address']}`}>
                   {voter['address']}
                 </Link>
                 {')'}
@@ -175,9 +175,7 @@ const ProposalVotes = ({ proposalId }: any) => {
               <h3>{'option'}</h3>
               <p>{voter['option']}</p>
             </div>
-            <Link
-              href={`/proposals/?id=${proposalId}&voter=${voter['address']}`}
-            >
+            <Link href={`/proposals/${proposalId}/${voter['address']}`}>
               {'view vote'}
             </Link>
           </div>

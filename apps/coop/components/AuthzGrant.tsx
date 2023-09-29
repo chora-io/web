@@ -193,9 +193,9 @@ const AuthzGrant = ({ grant }: any) => {
           <p>
             {`${granter['name']} (`}
             <Link
-              href={`/${
-                granter.isPolicyAddress ? 'policies' : 'members'
-              }/?address=${granter['address']}`}
+              href={`/${granter.isPolicyAddress ? 'policies' : 'members'}/${
+                granter['address']
+              }`}
             >
               {granter['address']}
             </Link>
@@ -211,9 +211,9 @@ const AuthzGrant = ({ grant }: any) => {
           <p>
             {`${grantee['name']} (`}
             <Link
-              href={`/${
-                grantee.isPolicyAddress ? 'policies' : 'members'
-              }/?address=${grantee['address']}`}
+              href={`/${grantee.isPolicyAddress ? 'policies' : 'members'}/${
+                grantee['address']
+              }`}
             >
               {grantee['address']}
             </Link>

@@ -200,7 +200,7 @@ const Policy = ({ policyAddress }: any) => {
           {admin ? (
             <>
               {`${admin['name']} (`}
-              <Link href={`/policies/?address=${admin['address']}`}>
+              <Link href={`/policies/${admin['address']}`}>
                 {admin['address']}
               </Link>
               {')'}

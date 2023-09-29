@@ -79,9 +79,7 @@ const ProposalPreview = ({ proposal }: any) => {
               <p>{proposal['executor_result']}</p>
             </div>
           )}
-          <Link href={`/proposals/?id=${proposal['id']}`}>
-            {'view proposal'}
-          </Link>
+          <Link href={`/proposals/${proposal['id']}`}>{'view proposal'}</Link>
         </div>
       )}
       {error && <div>{error}</div>}

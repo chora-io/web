@@ -7,7 +7,7 @@ import SubmitProposal from '@components/proposals/SubmitProposal'
 import styles from './page.module.css'
 
 // export const metadata: Metadata = {
-//   title: 'new',
+//   title: 'proposals new',
 // }
 
 const ProposalsNewPage = () => (

@@ -332,7 +332,7 @@ const Proposal = ({ proposalId }: any) => {
       <div className={styles.boxOptions}>
         {currentVote && <>{`vote submitted (${currentVote['option']})`}</>}
         {!error && !currentVote && !votesFinalized && (
-          <Link href={`/proposals/vote/?id=${proposalId}`}>
+          <Link href={`/proposals/vote/${proposalId}`}>
             {'vote on proposal'}
           </Link>
         )}
@@ -372,7 +372,7 @@ const Proposal = ({ proposalId }: any) => {
           <h3>{proposal['proposers'].length > 1 ? 'proposers' : 'proposer'}</h3>
           {proposal['proposers'].map((proposer: any) => (
             <p key={proposer}>
-              <Link href={`/members/?address=${proposer}`}>{proposer}</Link>
+              <Link href={`/members/${proposer}`}>{proposer}</Link>
             </p>
           ))}
         </div>
@@ -383,7 +383,7 @@ const Proposal = ({ proposalId }: any) => {
           {proposers.map((proposer: any) => (
             <p key={proposer['address']}>
               {`${proposer['name']} (`}
-              <Link href={`/members/?address=${proposer['address']}`}>
+              <Link href={`/members/${proposer['address']}`}>
                 {proposer['address']}
               </Link>
               {')'}
@@ -396,9 +396,7 @@ const Proposal = ({ proposalId }: any) => {
         {!proposal && <p>{'NA'}</p>}
         {proposal && !policy && (
           <p>
-            <Link
-              href={`/policies/?address=${proposal['group_policy_address']}`}
-            >
+            <Link href={`/policies/${proposal['group_policy_address']}`}>
               {proposal['group_policy_address']}
             </Link>
           </p>
@@ -406,7 +404,7 @@ const Proposal = ({ proposalId }: any) => {
         {policy && (
           <p>
             {`${policy['name']} (`}
-            <Link href={`/policies/?address=${policy['address']}`}>
+            <Link href={`/policies/${policy['address']}`}>
               {policy['address']}
             </Link>
             {')'}

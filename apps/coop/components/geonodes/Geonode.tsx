@@ -157,7 +157,7 @@ const Geonode = ({ nodeId }: any) => {
         {curator ? (
           <p>
             {`${curator['name']} (`}
-            <Link href={`/policies/?address=${curator['address']}`}>
+            <Link href={`/policies/${curator['address']}`}>
               {curator['address']}
             </Link>
             {')'}

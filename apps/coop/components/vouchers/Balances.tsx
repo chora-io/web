@@ -145,9 +145,7 @@ const Balances = ({ voucherId }: any) => {
               <h3>{'total amount'}</h3>
               <p>{balance['total_amount']}</p>
             </div>
-            <Link
-              href={`/vouchers/?id=${voucherId}&address=${balance['address']}`}
-            >
+            <Link href={`/vouchers/${voucherId}/${balance['address']}`}>
               {'view balance'}
             </Link>
           </div>
@@ -159,7 +157,7 @@ const Balances = ({ voucherId }: any) => {
               <h3>{'address'}</h3>
               <p key={holder['address']}>
                 {`${holder['name']} (`}
-                <Link href={`/members/?address=${holder['address']}`}>
+                <Link href={`/members/${holder['address']}`}>
                   {holder['address']}
                 </Link>
                 {')'}
@@ -169,9 +167,7 @@ const Balances = ({ voucherId }: any) => {
               <h3>{'total amount'}</h3>
               <p>{holder['total_amount']}</p>
             </div>
-            <Link
-              href={`/vouchers/?id=${voucherId}&address=${holder['address']}`}
-            >
+            <Link href={`/vouchers/${voucherId}/${holder['address']}`}>
               {'view balance'}
             </Link>
           </div>
