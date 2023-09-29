@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import { MsgSetSendEnabled as Msg } from '../../api/cosmos/bank/v1beta1/tx'
+import { MsgSetSendEnabled as Msg } from 'cosmos/api/cosmos/bank/v1beta1/tx'
 
 import InputAddress from '../InputAddress'
 import InputString from '../InputString'

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import { MsgSealBatch as Msg } from '../../api/regen/ecocredit/v1/tx'
+import { MsgSealBatch as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 
 import InputAddress from '../InputAddress'
 import InputString from '../InputString'

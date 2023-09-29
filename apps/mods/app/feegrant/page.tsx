@@ -3,7 +3,7 @@
 // import { Metadata } from 'next'
 import { useState } from 'react'
 
-import { feegrantModule } from 'chora/modules'
+import { feegrantModule } from '../../../../packages/cosmos/modules'
 
 import MoreInfo from '@components/MoreInfo'
 import MsgGrantAllowance from '@components/feegrant/MsgGrantAllowance'

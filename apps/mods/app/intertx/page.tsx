@@ -3,7 +3,7 @@
 // import { Metadata } from 'next'
 import { useState } from 'react'
 
-import { intertxModule } from 'chora/modules'
+import { intertxModule } from '../../../../packages/cosmos/modules'
 
 import MoreInfo from '@components/MoreInfo'
 import MsgRegisterAccount from '@components/intertx/MsgRegisterAccount'

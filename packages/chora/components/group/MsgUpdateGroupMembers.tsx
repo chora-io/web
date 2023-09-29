@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useEffect, useState } from 'react'
 import * as Long from 'long'
 
-import { MsgUpdateGroupMembers as Msg } from '../../api/cosmos/group/v1/tx'
+import { MsgUpdateGroupMembers as Msg } from 'cosmos/api/cosmos/group/v1/tx'
 
 import InputAddress from '../InputAddress'
 import InputMembers from './InputMembers'

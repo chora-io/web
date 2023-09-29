@@ -7,7 +7,7 @@ import {
   regenLocalX,
   regenRedwoodX,
   regenMainnetX,
-} from '../chains'
+} from 'cosmos/chains'
 
 export const useNetworkCoop = (chainInfo: any) => {
   const [groupId, setGroupId] = useState<string | undefined>(undefined)

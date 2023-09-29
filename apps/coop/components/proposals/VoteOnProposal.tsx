@@ -3,7 +3,7 @@ import * as Long from 'long'
 import { useContext, useState } from 'react'
 
 import { WalletContext } from 'chora'
-import { MsgVote } from 'chora/api/cosmos/group/v1/tx'
+import { MsgVote } from 'cosmos/api/cosmos/group/v1/tx'
 import { useNetworkServer } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'
 

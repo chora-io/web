@@ -12,7 +12,7 @@ import {
   regenLocalX,
   regenRedwood,
   regenRedwoodX,
-} from '../chains'
+} from 'cosmos/chains'
 import { WalletContext } from '../contexts'
 
 import styles from './Faucet.module.css'

@@ -1,7 +1,6 @@
-import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import { MsgExec as Msg } from '../../api/cosmos/authz/v1beta1/tx'
+import { MsgExec as Msg } from 'cosmos/api/cosmos/authz/v1beta1/tx'
 
 import InputAddress from '../InputAddress'
 import SelectMessage from '../SelectMessage'

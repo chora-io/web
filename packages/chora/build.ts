@@ -1,23 +1,24 @@
 import { rollup, OutputOptions } from "rollup"
-import { nodeResolve } from "@rollup/plugin-node-resolve"
 import commonjs from "@rollup/plugin-commonjs"
-import typescript from "@rollup/plugin-typescript"
+import resolve from "@rollup/plugin-node-resolve"
 import postcss from "rollup-plugin-postcss"
+import typescript from "@rollup/plugin-typescript"
 
 const inputOptions = {
   input: process.cwd(),
   plugins: [
-    nodeResolve(),
     commonjs({
-      include: '../../node_modules/**',
+      include: ['../../node_modules/**'],
     }),
-    typescript(),
     postcss({
       sourceMap: true,
       extract: true,
       minimize: true
     }),
+    resolve(),
+    typescript(),
   ],
+  external: ['cosmos/chains'],
 }
 
 const outputOptions = [

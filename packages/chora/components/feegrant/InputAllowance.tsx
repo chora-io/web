@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import { Coin } from '../../api/cosmos/base/v1beta1/coin'
-import { BasicAllowance } from '../../api/cosmos/feegrant/v1beta1/feegrant'
+import { Coin } from 'cosmos/api/cosmos/base/v1beta1/coin'
+import { BasicAllowance } from 'cosmos/api/cosmos/feegrant/v1beta1/feegrant'
 
 import InputDenom from '../InputDenom'
 import InputNumber from '../InputNumber'

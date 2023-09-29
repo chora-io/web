@@ -10,6 +10,10 @@
       ]
     },
     "chora#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "cosmos#build": {
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "clean": {

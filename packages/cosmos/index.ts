@@ -1,0 +1,6 @@
+export { bionLocal, bionLocalX } from './chains/bion-local'
+export { choraLocal, choraLocalX } from './chains/chora-local'
+export { choraTestnet, choraTestnetX } from './chains/chora-testnet-1'
+export { regenMainnet, regenMainnetX } from './chains/regen-1'
+export { regenLocal, regenLocalX } from './chains/regen-local'
+export { regenRedwood, regenRedwoodX } from './chains/regen-redwood-1'

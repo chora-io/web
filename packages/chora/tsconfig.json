@@ -19,12 +19,9 @@
     "index.ts",
     "global.d.ts",
     "module.d.ts",
-    "api",
-    "chains",
     "components",
     "contexts",
     "hooks",
-    "modules",
     "utils"
   ],
   "exclude": ["node_modules"],

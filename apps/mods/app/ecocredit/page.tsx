@@ -3,7 +3,7 @@
 // import { Metadata } from 'next'
 import { useState } from 'react'
 
-import { ecocreditModule } from 'chora/modules'
+import { ecocreditModule } from '../../../../packages/cosmos/modules'
 
 import MoreInfo from '@components/MoreInfo'
 import MsgAddAllowedBridgeChain from '@components/ecocredit/MsgAddAllowedBridgeChain'

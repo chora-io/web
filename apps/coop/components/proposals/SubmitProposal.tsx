@@ -2,7 +2,7 @@ import * as jsonld from 'jsonld'
 import { useContext, useEffect, useState } from 'react'
 
 import { WalletContext } from 'chora'
-import { MsgSubmitProposal } from 'chora/api/cosmos/group/v1/tx'
+import { MsgSubmitProposal } from 'cosmos/api/cosmos/group/v1/tx'
 import {
   InputString,
   ResultTx,

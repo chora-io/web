@@ -3,7 +3,7 @@
 // import { Metadata } from 'next'
 import { useState } from 'react'
 
-import { groupModule } from 'chora/modules'
+import { groupModule } from '../../../../packages/cosmos/modules'
 
 import MoreInfo from '@components/MoreInfo'
 import MsgCreateGroup from '@components/group/MsgCreateGroup'

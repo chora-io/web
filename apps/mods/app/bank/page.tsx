@@ -3,7 +3,7 @@
 // import { Metadata } from 'next'
 import { useState } from 'react'
 
-import { bankModule } from 'chora/modules'
+import { bankModule } from '../../../../packages/cosmos/modules'
 
 import MoreInfo from '@components/MoreInfo'
 import MsgMultiSend from '@components/bank/MsgMultiSend'

@@ -4,7 +4,7 @@ import { WalletContext } from 'chora'
 import {
   proposalExecutorResultToJSON,
   proposalStatusToJSON,
-} from 'chora/api/cosmos/group/v1/types'
+} from 'cosmos/api/cosmos/group/v1/types'
 import { Result } from 'chora/components'
 import { useNetworkCoop, useNetworkServer } from 'chora/hooks'
 

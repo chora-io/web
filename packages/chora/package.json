@@ -15,12 +15,13 @@
   },
   "scripts": {
     "build": "sh scripts/build.sh",
-    "lint": "eslint chains/**/** components/**/** contexts/**/** hooks/**/** modules/** utils/**/**",
-    "format": "prettier --write chains components contexts hooks modules utils",
+    "lint": "eslint components/**/** contexts/**/** hooks/**/** utils/**/**",
+    "format": "prettier --write components contexts hooks utils",
     "test": "echo 'test not configured'",
-    "clean": "rm -rf .turbo api dist node_modules"
+    "clean": "rm -rf .turbo dist node_modules"
   },
   "dependencies": {
+    "cosmos": "workspace:*",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"

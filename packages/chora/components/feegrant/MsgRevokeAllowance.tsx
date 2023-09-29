@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import { MsgRevokeAllowance as Msg } from '../../api/cosmos/feegrant/v1beta1/tx'
+import { MsgRevokeAllowance as Msg } from 'cosmos/api/cosmos/feegrant/v1beta1/tx'
 
 import InputAddress from '../InputAddress'
 

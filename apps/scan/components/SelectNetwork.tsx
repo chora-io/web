@@ -5,7 +5,7 @@ import {
   regenLocal,
   regenMainnet,
   regenRedwood,
-} from 'chora/chains'
+} from '../../../packages/cosmos/chains'
 
 const SelectNetwork = ({ network, setNetwork }: any) => {
   let local = false

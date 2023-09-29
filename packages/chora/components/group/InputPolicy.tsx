@@ -6,7 +6,7 @@ import {
   DecisionPolicyWindows,
   PercentageDecisionPolicy,
   ThresholdDecisionPolicy,
-} from '../../api/cosmos/group/v1/types'
+} from 'cosmos/api/cosmos/group/v1/types'
 
 import InputNumber from '../InputNumber'
 import SelectPolicyType from './SelectPolicyType'

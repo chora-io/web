@@ -3,7 +3,7 @@
 // import { Metadata } from 'next'
 import { useState } from 'react'
 
-import { voucherModule } from 'chora/modules'
+import { voucherModule } from '../../../../packages/cosmos/modules'
 
 import MoreInfo from '@components/MoreInfo'
 import MsgCreate from '@components/voucher/MsgCreate'

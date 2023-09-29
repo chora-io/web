@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useEffect, useState } from 'react'
 import * as Long from 'long'
 
-import { MsgRegisterResolver as Msg } from '../../api/regen/data/v1/tx'
+import { MsgRegisterResolver as Msg } from 'cosmos/api/regen/data/v1/tx'
 
 import InputAddress from '../InputAddress'
 import InputContentHashJSON from './InputContentHashJSON'

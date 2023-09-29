@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { VoteOption } from '../../api/cosmos/group/v1/types'
+import { VoteOption } from 'cosmos/api/cosmos/group/v1/types'
 
 const defaultId = 'vote'
 const defaultLabel = 'vote'

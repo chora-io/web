@@ -3,11 +3,11 @@ import Link from 'next/link'
 import { useContext, useEffect, useState } from 'react'
 
 import { WalletContext } from 'chora'
-import { MsgExec } from 'chora/api/cosmos/group/v1/tx'
+import { MsgExec } from 'cosmos/api/cosmos/group/v1/tx'
 import {
   proposalStatusToJSON,
   proposalExecutorResultToJSON,
-} from 'chora/api/cosmos/group/v1/types'
+} from 'cosmos/api/cosmos/group/v1/types'
 import { Result, ResultTx } from 'chora/components'
 import { useNetworkCoop, useNetworkServer } from 'chora/hooks'
 import { formatTimestamp, signAndBroadcast } from 'chora/utils'

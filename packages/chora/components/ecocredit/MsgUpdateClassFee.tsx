@@ -1,10 +1,9 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import { MsgUpdateClassFee as Msg } from '../../api/regen/ecocredit/v1/tx'
+import { MsgUpdateClassFee as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 
 import InputAddress from '../InputAddress'
-import InputNumber from '../InputNumber'
 import InputString from '../InputString'
 
 const MsgUpdateClassFee = ({ network, setMessage, useWallet, wallet }: any) => {

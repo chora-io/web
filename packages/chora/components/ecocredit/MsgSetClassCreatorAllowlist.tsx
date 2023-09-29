@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import { MsgSetClassCreatorAllowlist as Msg } from '../../api/regen/ecocredit/v1/tx'
+import { MsgSetClassCreatorAllowlist as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 
 import InputAddress from '../InputAddress'
 import SelectBoolean from '../SelectBoolean'

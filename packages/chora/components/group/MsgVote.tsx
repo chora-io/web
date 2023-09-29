@@ -2,11 +2,11 @@ import * as React from 'react'
 import { useEffect, useState } from 'react'
 import * as Long from 'long'
 
-import { MsgVote as Msg } from '../../api/cosmos/group/v1/tx'
+import { MsgVote as Msg } from 'cosmos/api/cosmos/group/v1/tx'
 import {
   execFromJSON,
   voteOptionFromJSON,
-} from 'chora/api/cosmos/group/v1/types'
+} from 'cosmos/api/cosmos/group/v1/types'
 
 import InputAddress from '../InputAddress'
 import InputIRI from '../InputIRI'

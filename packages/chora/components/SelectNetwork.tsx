@@ -6,7 +6,7 @@ import {
   choraTestnet,
   regenLocal,
   regenRedwood,
-} from '../chains'
+} from 'cosmos/chains'
 
 const defaultId = 'network'
 const defaultLabel = 'network'

@@ -3,7 +3,7 @@
 // import { Metadata } from 'next'
 import { useSearchParams } from 'next/navigation'
 
-import { bionLocal } from 'chora/chains'
+import { bionLocal } from '../../../../packages/cosmos/chains'
 
 import Accounts from '@components/chain/Accounts'
 import Transactions from '@components/chain/Transactions'

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useEffect, useState } from 'react'
 import * as Long from 'long'
 
-import { MsgUpdateMetadata as Msg } from '../../api/chora/geonode/v1/msg'
+import { MsgUpdateMetadata as Msg } from 'cosmos/api/chora/geonode/v1/msg'
 
 import InputAddress from '../InputAddress'
 import InputIRI from '../InputIRI'

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useContext, useEffect, useState } from 'react'
 
 import { WalletContext } from 'chora'
-import { voteOptionToJSON } from 'chora/api/cosmos/group/v1/types'
+import { voteOptionToJSON } from 'cosmos/api/cosmos/group/v1/types'
 import { Result } from 'chora/components'
 import { useNetworkCoop, useNetworkServer } from 'chora/hooks'
 

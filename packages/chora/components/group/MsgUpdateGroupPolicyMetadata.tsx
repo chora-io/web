@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import { MsgUpdateGroupPolicyMetadata as Msg } from '../../api/cosmos/group/v1/tx'
+import { MsgUpdateGroupPolicyMetadata as Msg } from 'cosmos/api/cosmos/group/v1/tx'
 
 import InputAddress from '../InputAddress'
 import InputIRI from '../InputIRI'

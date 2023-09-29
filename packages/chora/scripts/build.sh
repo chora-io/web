@@ -9,9 +9,6 @@ if ! grep -q "\"name\": \"chora\"" ./package.json ; then
   return 1
 fi
 
-# generate api from proto files
-sh ./scripts/protocgen.sh
-
 # compile javascript files
 ts-node ./build.ts
 

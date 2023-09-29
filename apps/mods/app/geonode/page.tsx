@@ -3,7 +3,7 @@
 // import { Metadata } from 'next'
 import { useState } from 'react'
 
-import { geonodeModule } from 'chora/modules'
+import { geonodeModule } from '../../../../packages/cosmos/modules'
 
 import MoreInfo from '@components/MoreInfo'
 import MsgCreate from '@components/geonode/MsgCreate'

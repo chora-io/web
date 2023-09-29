@@ -7,7 +7,7 @@ import {
   regenLocalX,
   regenRedwoodX,
   regenMainnetX,
-} from 'chora/chains'
+} from 'cosmos/chains'
 
 export const useNetworkServer = (chainInfo: any) => {
   const [serverUrl, setServerUrl] = useState<string | undefined>(undefined)

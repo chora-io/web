@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import { MsgCancel as Msg } from '../../api/regen/ecocredit/v1/tx'
+import { MsgCancel as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 
 import InputAddress from '../InputAddress'
 import InputIRI from '../InputIRI'

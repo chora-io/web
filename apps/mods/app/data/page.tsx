@@ -3,7 +3,7 @@
 // import { Metadata } from 'next'
 import { useState } from 'react'
 
-import { dataModule } from 'chora/modules'
+import { dataModule } from '../../../../packages/cosmos/modules'
 
 import MoreInfo from '@components/MoreInfo'
 import ConvertHashToIRI from '@components/data/ConvertHashToIRI'

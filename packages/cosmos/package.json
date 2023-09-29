@@ -1,0 +1,30 @@
+{
+  "name": "cosmos",
+  "private": true,
+  "description": "chora cosmos api",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "index.ts",
+  "homepage": "https://chora.io",
+  "bugs": {
+    "url": "https://github.com/choraio/web/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/choraio/web"
+  },
+  "scripts": {
+    "build": "sh ./scripts/protocgen.sh",
+    "lint": "eslint chains/**/** modules/**",
+    "format": "prettier --write chains modules",
+    "test": "echo 'test not configured'",
+    "clean": "rm -rf .turbo api node_modules"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "eslint": "^8.50.0",
+    "prettier": "^3.0.3",
+    "ts-proto": "^1.158.0"
+  }
+}

@@ -14,7 +14,7 @@ import {
   regenMainnetX,
   regenRedwood,
   regenRedwoodX,
-} from 'chora/chains'
+} from '../../../packages/cosmos/chains'
 
 import styles from './MoreInfo.module.css'
 
