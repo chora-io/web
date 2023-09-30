@@ -1,14 +1,12 @@
+import { WalletContext } from 'chora'
+import { InputString, ResultTx } from 'chora/components'
+import { SelectExecution, SelectVote } from 'chora/components/group'
+import { useNetworkServer } from 'chora/hooks'
+import { signAndBroadcast } from 'chora/utils'
+import { MsgVote } from 'cosmos/api/cosmos/group/v1/tx'
 import * as jsonld from 'jsonld'
 import * as Long from 'long'
 import { useContext, useState } from 'react'
-
-import { WalletContext } from 'chora'
-import { MsgVote } from 'cosmos/api/cosmos/group/v1/tx'
-import { useNetworkServer } from 'chora/hooks'
-import { signAndBroadcast } from 'chora/utils'
-
-import { InputString, ResultTx } from 'chora/components'
-import { SelectExecution, SelectVote } from 'chora/components/group'
 
 import styles from './VoteOnProposal.module.css'
 
@@ -23,15 +21,15 @@ const VoteOnProposal = ({ proposalId }: any) => {
   const [execution, setExecution] = useState<string>('')
 
   // form error and success
-  const [error, setError] = useState<string | undefined>(undefined)
-  const [success, setSuccess] = useState<string | undefined>(undefined)
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<string | null>(null)
 
   // submit vote
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
-    setError('')
-    setSuccess('')
+    setError(null)
+    setSuccess(null)
 
     // set JSON-LD document
     const doc = {
@@ -65,7 +63,7 @@ const VoteOnProposal = ({ proposalId }: any) => {
       merkle: 'UNSPECIFIED',
     }
 
-    let iri: string | undefined
+    let iri: string | null
 
     // post data to network server
     await fetch(serverUrl + '/data', {
@@ -85,7 +83,7 @@ const VoteOnProposal = ({ proposalId }: any) => {
       })
 
     // return error if iri never set
-    if (typeof iri === 'undefined') {
+    if (typeof iri === 'null') {
       return
     }
 

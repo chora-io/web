@@ -1,44 +1,28 @@
+import { WalletContext } from 'chora'
 import { useContext, useEffect, useState } from 'react'
 
-import { WalletContext } from 'chora'
-import { useNetworkCoop } from 'chora/hooks'
-
-import GroupPolicyPreview from './PolicyPreview'
+import GroupPolicyPreview from '@components/policies/PolicyPreview'
+import { useGroupPolicies } from '@hooks/useGroupPolicies'
 
 import styles from './Policies.module.css'
-
-const queryPolicies = 'cosmos/group/v1/group_policies_by_group'
 
 const Policies = () => {
   const { chainInfo } = useContext(WalletContext)
 
-  const [groupId] = useNetworkCoop(chainInfo)
-
-  // fetch error and results
-  const [error, setError] = useState<string | undefined>(undefined)
-  const [policies, setPolicies] = useState<any[] | undefined>(undefined)
+  // fetch group policies from selected network
+  const [policies, error] = useGroupPolicies(chainInfo)
 
   // list options
   const [sort, setSort] = useState<string>('ascending')
+  const [sortedPolicies, setSortedPolicies] = useState<any[] | null>(null)
 
-  // reset state on network change
+  // reset state on network or policies change
   useEffect(() => {
-    setError(undefined)
-    setPolicies(undefined)
+    setSortedPolicies(null)
     setSort('ascending')
-  }, [chainInfo?.chainId])
+  }, [chainInfo?.chainId, policies])
 
-  // fetch on load and group or network change
-  useEffect(() => {
-    // fetch policies if network supported
-    if (groupId) {
-      fetchPolicies().catch((err) => {
-        setError(err.message)
-      })
-    }
-  }, [groupId, chainInfo?.chainId])
-
-  // sort on load and sort change
+  // sort on load and sort or policies change
   useEffect(() => {
     const ps = policies ? [...policies] : []
 
@@ -58,32 +42,8 @@ const Policies = () => {
       )
     }
 
-    setPolicies(ps)
-  }, [sort])
-
-  // fetch policies from selected network
-  const fetchPolicies = async () => {
-    // fetch policies from selected network
-    await fetch(chainInfo.rest + '/' + queryPolicies + '/' + groupId)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.code) {
-          setError(res.message)
-        } else {
-          const ps = res['group_policies']
-
-          // sort ascending by default
-          ps.sort(
-            (a: any, b: any) =>
-              new Date(b['created_at']).getUTCDate() -
-              new Date(a['created_at']).getUTCDate(),
-          )
-          setSort('ascending')
-
-          setPolicies(ps)
-        }
-      })
-  }
+    setSortedPolicies(ps)
+  }, [sort, policies])
 
   return (
     <div className={styles.box}>
@@ -99,10 +59,12 @@ const Policies = () => {
           </button>
         )}
       </div>
-      {!error && !policies && <div>{'loading...'}</div>}
-      {policies && policies.length === 0 && <div>{'no policies found'}</div>}
-      {policies &&
-        policies.map((policy: any) => (
+      {!error && !sortedPolicies && <div>{'loading...'}</div>}
+      {sortedPolicies && sortedPolicies.length === 0 && (
+        <div>{'no policies found'}</div>
+      )}
+      {sortedPolicies &&
+        sortedPolicies.map((policy: any) => (
           <GroupPolicyPreview key={policy['address']} policy={policy} />
         ))}
       {error && <div>{error}</div>}

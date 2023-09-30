@@ -1,44 +1,27 @@
+import { WalletContext } from 'chora'
 import { useContext, useEffect, useState } from 'react'
 
-import { WalletContext } from 'chora'
-import { useNetworkCoop } from 'chora/hooks'
-
-import MemberPreview from './MemberPreview'
+import MemberPreview from '@components/members/MemberPreview'
+import { useGroupMembers } from '@hooks/useGroupMembers'
 
 import styles from './Members.module.css'
 
-const queryMembers = 'cosmos/group/v1/group_members'
-
 const Members = () => {
-  const { chainInfo, network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
 
-  const [groupId] = useNetworkCoop(chainInfo)
-
-  // fetch error and results
-  const [error, setError] = useState<string | undefined>(undefined)
-  const [members, setMembers] = useState<any>(undefined)
+  // fetch group members from selected network
+  const [members, error] = useGroupMembers(chainInfo)
 
   // list options
   const [sort, setSort] = useState<string>('ascending')
+  const [sortedMembers, setSortedMembers] = useState<any[] | null>(null)
 
-  // reset state on network change
+  // reset state on network or members change
   useEffect(() => {
-    setError(undefined)
-    setMembers(undefined)
     setSort('ascending')
-  }, [chainInfo?.chainId])
+  }, [chainInfo?.chainId, members])
 
-  // fetch on load and group or network change
-  useEffect(() => {
-    // fetch members from selected network
-    if (groupId) {
-      fetchMembers().catch((err) => {
-        setError(err.message)
-      })
-    }
-  }, [groupId, chainInfo?.chainId])
-
-  // sort on load and sort change
+  // sort on load and sort or members change
   useEffect(() => {
     const ms = members ? [...members] : []
 
@@ -58,32 +41,8 @@ const Members = () => {
       )
     }
 
-    setMembers(ms)
-  }, [sort])
-
-  // fetch members from selected network
-  const fetchMembers = async () => {
-    // fetch members from selected network
-    await fetch(chainInfo.rest + '/' + queryMembers + '/' + groupId)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.code) {
-          setError(res.message)
-        } else {
-          const ms = res['members']
-
-          // sort ascending by default
-          ms.sort(
-            (a: any, b: any) =>
-              new Date(b['member']['added_at']).getUTCDate() -
-              new Date(a['member']['added_at']).getUTCDate(),
-          )
-          setSort('ascending')
-
-          setMembers(ms)
-        }
-      })
-  }
+    setSortedMembers(ms)
+  }, [sort, members])
 
   return (
     <div className={styles.box}>
@@ -99,10 +58,12 @@ const Members = () => {
           </button>
         )}
       </div>
-      {!error && !members && <div>{'loading...'}</div>}
-      {members && members.length === 0 && <div>{'no members found'}</div>}
-      {members &&
-        members.map((member: any) => (
+      {!error && !sortedMembers && <div>{'loading...'}</div>}
+      {sortedMembers && sortedMembers.length === 0 && (
+        <div>{'no sortedMembers found'}</div>
+      )}
+      {sortedMembers &&
+        sortedMembers.map((member: any) => (
           <MemberPreview
             key={member['member']['address']}
             member={member['member']}

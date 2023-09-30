@@ -1,79 +1,17 @@
-import { useContext, useEffect, useState } from 'react'
-
 import { WalletContext } from 'chora'
 import { Result } from 'chora/components'
-import { useNetworkCoop } from 'chora/hooks'
+import { useContext } from 'react'
 
-import VoucherPreview from './VoucherPreview'
+import VoucherPreview from '@components/vouchers/VoucherPreview'
+import { useVouchers } from '@hooks/useVouchers'
 
 import styles from './Vouchers.module.css'
-
-const queryVouchers = 'chora/voucher/v1/vouchers-by-issuer'
-const queryPolicies = 'cosmos/group/v1/group_policies_by_group'
 
 const Vouchers = () => {
   const { chainInfo } = useContext(WalletContext)
 
-  const [groupId] = useNetworkCoop(chainInfo)
-
-  // fetch error and results
-  const [error, setError] = useState<string | undefined>(undefined)
-  const [vouchers, setVouchers] = useState<any[] | undefined>(undefined)
-
-  // reset state on network change
-  useEffect(() => {
-    setError(undefined)
-    setVouchers(undefined)
-  }, [chainInfo?.chainId])
-
-  // fetch on load and group or network change
-  useEffect(() => {
-    // fetch policies and vouchers from selected network
-    if (groupId) {
-      fetchPoliciesAndVouchers().catch((err) => {
-        setError(err.message)
-      })
-    }
-  }, [groupId, chainInfo?.chainId])
-
-  // fetch policies and vouchers from selected network
-  const fetchPoliciesAndVouchers = async () => {
-    let addrs: string[] = []
-
-    // fetch policies from selected network
-    await fetch(chainInfo.rest + '/' + queryPolicies + '/' + groupId)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.code) {
-          setError(res.message)
-        } else {
-          res['group_policies'].map((policy: any) => {
-            addrs.push(policy['address'])
-          })
-        }
-      })
-
-    const vs: any[] = []
-
-    // create promise for all async fetch calls
-    const promise = addrs.map(async (addr) => {
-      // fetch vouchers from selected network
-      await fetch(chainInfo.rest + '/' + queryVouchers + '/' + addr)
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.code) {
-            setError(res.message)
-          } else {
-            res['vouchers'].map((v: any) => vs.push({ issuer: addr, ...v }))
-          }
-        })
-    })
-
-    // set state after promise all complete
-    await Promise.all(promise).then(() => {
-      setVouchers(vs)
-    })
-  }
+  // fetch vouchers (curated by coop) from selected network
+  const [vouchers, error] = useVouchers(chainInfo)
 
   return (
     <div className={styles.box}>

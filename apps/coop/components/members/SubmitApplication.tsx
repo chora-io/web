@@ -1,9 +1,8 @@
-import * as jsonld from 'jsonld'
-import { useContext, useState } from 'react'
-
 import { WalletContext } from 'chora'
 import { InputString, Result } from 'chora/components'
 import { useNetworkServer } from 'chora/hooks'
+import * as jsonld from 'jsonld'
+import { useContext, useState } from 'react'
 
 import styles from './SubmitApplication.module.css'
 
@@ -24,8 +23,8 @@ const SubmitApplication = () => {
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
-    setError('')
-    setSuccess('')
+    setError(null)
+    setSuccess(null)
 
     // set JSON-LD document
     const doc = {

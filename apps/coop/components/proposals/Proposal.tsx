@@ -1,292 +1,42 @@
+import { WalletContext } from 'chora'
+import { Result, ResultTx } from 'chora/components'
+import { formatTimestamp, signAndBroadcast } from 'chora/utils'
+import { MsgExec } from 'cosmos/api/cosmos/group/v1/tx'
 import * as Long from 'long'
 import Link from 'next/link'
 import { useContext, useEffect, useState } from 'react'
 
-import { WalletContext } from 'chora'
-import { MsgExec } from 'cosmos/api/cosmos/group/v1/tx'
-import {
-  proposalStatusToJSON,
-  proposalExecutorResultToJSON,
-} from 'cosmos/api/cosmos/group/v1/types'
-import { Result, ResultTx } from 'chora/components'
-import { useNetworkCoop, useNetworkServer } from 'chora/hooks'
-import { formatTimestamp, signAndBroadcast } from 'chora/utils'
+import Address from '@components/Address'
+import { useGroupProposal } from '@hooks/useGroupProposal'
+import { useGroupProposalVotes } from '@hooks/useGroupProposalVotes'
 
 import styles from './Proposal.module.css'
-
-const queryMembers = 'cosmos/group/v1/group_members' // TODO(cosmos-sdk): group member query
-const queryPolicy = '/cosmos/group/v1/group_policy_info'
-const queryProposal = 'cosmos/group/v1/proposal'
-const queryVotes = 'cosmos/group/v1/votes_by_proposal'
 
 // TODO(cosmos-sdk): voter should be able to update vote
 
 const Proposal = ({ proposalId }: any) => {
-  const { chainInfo, network, wallet } = useContext(WalletContext)
+  const { chainInfo, wallet } = useContext(WalletContext)
 
-  const [groupId] = useNetworkCoop(chainInfo)
-  const [serverUrl] = useNetworkServer(chainInfo)
+  // fetch group proposal and proposal metadata from selected network and network server
+  const [proposal, metadata, proposalError] = useGroupProposal(
+    chainInfo,
+    proposalId,
+  )
 
-  // fetch error and results
-  const [error, setError] = useState<string | undefined>(undefined)
-  const [proposal, setProposal] = useState<any>(undefined)
-  const [metadata, setMetadata] = useState<any>(undefined)
-  const [policy, setPolicy] = useState<any>(undefined)
-  const [proposers, setProposers] = useState<any[] | undefined>(undefined)
-  const [votes, setVotes] = useState<any[] | undefined>(undefined)
+  // fetch group proposal votes from selected network (used to determine available actions)
+  const [votes, votesError] = useGroupProposalVotes(chainInfo, proposalId)
+
+  const error = proposalError || votesError
 
   // execution error and results
-  const [execError, setExecError] = useState<string | undefined>(undefined)
-  const [execSuccess, setExecSuccess] = useState<string | undefined>(undefined)
+  const [execError, setExecError] = useState<string | null>(null)
+  const [execSuccess, setExecSuccess] = useState<string | null>(null)
 
-  // reset state on address or network change
+  // reset state on network or proposal id change
   useEffect(() => {
-    setError(undefined)
-    setProposal(undefined)
-    setMetadata(undefined)
-    setPolicy(undefined)
-    setProposers(undefined)
-    setVotes(undefined)
-    setExecError(undefined)
-    setExecSuccess(undefined)
-  }, [proposalId, chainInfo?.chainId])
-
-  // fetch on load and id or group change
-  useEffect(() => {
-    // fetch proposal from selected network
-    if (groupId) {
-      fetchProposal().catch((err) => {
-        setError(err.message)
-      })
-      fetchProposalVotes().catch((err) => {
-        setError(err.message)
-      })
-    }
-  }, [proposalId, groupId])
-
-  // fetch on load and proposal metadata change
-  useEffect(() => {
-    // fetch proposal metadata from network server
-    if (proposal?.metadata) {
-      fetchProposalMetadata().catch((err) => {
-        setError(err.message)
-      })
-    }
-  }, [proposal?.metadata])
-
-  // fetch on load and proposal proposers change
-  useEffect(() => {
-    // fetch proposal proposers from selected network and network server
-    if (proposal?.proposers) {
-      fetchProposalProposers().catch((err) => {
-        setError(err.message)
-      })
-    }
-  }, [proposal?.proposers])
-
-  // fetch on load and proposal policy address change
-  useEffect(() => {
-    // fetch proposal policy from selected network and network server
-    if (proposal?.group_policy_address) {
-      fetchProposalPolicy().catch((err) => {
-        setError(err.message)
-      })
-    }
-  }, [proposal?.group_policy_address])
-
-  // TODO: fetch votes voters from network server
-
-  // fetch proposal from selected network and network server
-  const fetchProposal = async () => {
-    // fetch proposal from selected network
-    await fetch(chainInfo.rest + '/' + queryProposal + '/' + proposalId)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.code) {
-          if (!proposal) {
-            setError(res.message)
-          }
-        } else {
-          if (!proposal) {
-            setProposal(res['proposal'])
-          }
-        }
-      })
-
-    // fetch idx proposals from network server
-    await fetch(serverUrl + '/idx/' + network + '/group-proposal/' + proposalId)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.error) {
-          if (!proposal) {
-            setError(res.error)
-          }
-        } else {
-          if (!proposal) {
-            setProposal({
-              ...res['proposal'],
-              status: proposalStatusToJSON(res['proposal']['status']),
-              executor_result: proposalExecutorResultToJSON(
-                res['proposal']['executor_result'],
-              ),
-            })
-          }
-        }
-      })
-  }
-
-  // fetch proposal votes from selected network
-  const fetchProposalVotes = async () => {
-    // fetch votes from selected network
-    await fetch(chainInfo.rest + '/' + queryVotes + '/' + proposalId)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.code) {
-          setError(res.message)
-        } else {
-          setVotes(res['votes'])
-        }
-      })
-  }
-
-  // fetch proposal metadata from network server
-  const fetchProposalMetadata = async () => {
-    // fetch proposal metadata from network server
-    await fetch(serverUrl + '/data/' + proposal.metadata)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.error) {
-          setError(res.error)
-          setMetadata(null)
-        } else {
-          const data = JSON.parse(res['jsonld'])
-          if (
-            data['@context'] !==
-            'https://schema.chora.io/contexts/group_proposal.jsonld'
-          ) {
-            setError('unsupported metadata schema')
-            setMetadata(null)
-          } else {
-            setError('')
-            setMetadata(data)
-          }
-        }
-      })
-      .catch((err) => {
-        setError(err.message)
-      })
-  }
-
-  // fetch proposal proposers metadata from selected network and network server
-  const fetchProposalProposers = async () => {
-    // TODO(cosmos-sdk): query member by group id and member address
-
-    let members: any[] = []
-
-    // fetch members from selected network
-    await fetch(chainInfo.rest + '/' + queryMembers + '/' + groupId)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.code) {
-          setError(res.message)
-        } else {
-          for (let i = 0; i < proposal['proposers'].length; i++) {
-            const proposer = proposal['proposers'][i]
-            const found = res['members'].find(
-              (member: any) => member['member']['address'] === proposer,
-            )
-            if (found) {
-              members.push(found['member'])
-            }
-          }
-        }
-      })
-
-    let proposers: any = []
-
-    const promise = members.map(async (member) => {
-      // fetch member metadata from network server
-      await fetch(serverUrl + '/data/' + member['metadata'])
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.error) {
-            setError(res.error)
-          } else {
-            const data = JSON.parse(res['jsonld'])
-            if (
-              data['@context'] !==
-              'https://schema.chora.io/contexts/group_member.jsonld'
-            ) {
-              setError('unsupported metadata schema')
-            } else {
-              setError('')
-              proposers.push({
-                address: member['address'],
-                name: data['name'],
-              })
-            }
-          }
-        })
-        .catch((err) => {
-          setError(err.message)
-        })
-    })
-
-    // set state after promise all complete
-    await Promise.all(promise).then(() => {
-      setProposers(proposers)
-    })
-  }
-
-  // fetch proposal policy from selected network and network server
-  const fetchProposalPolicy = async () => {
-    let iri: string | undefined
-
-    // fetch policy from selected network
-    await fetch(
-      chainInfo.rest +
-        '/' +
-        queryPolicy +
-        '/' +
-        proposal['group_policy_address'],
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.code) {
-          setError(res.message)
-        } else {
-          iri = res['info']['metadata']
-        }
-      })
-
-    if (iri) {
-      // fetch member metadata from network server
-      await fetch(serverUrl + '/data/' + iri)
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.error) {
-            setError(res.error)
-          } else {
-            const data = JSON.parse(res['jsonld'])
-            if (
-              data['@context'] !==
-              'https://schema.chora.io/contexts/group_policy.jsonld'
-            ) {
-              setError('unsupported metadata schema')
-            } else {
-              setError('')
-              setPolicy({
-                address: proposal['group_policy_address'],
-                name: data['name'],
-              })
-            }
-          }
-        })
-        .catch((err) => {
-          setError(err.message)
-        })
-    }
-  }
+    setExecError(null)
+    setExecSuccess(null)
+  }, [chainInfo?.chainId, proposalId])
 
   // execute proposal
   const handleExecute = async () => {
@@ -367,49 +117,25 @@ const Proposal = ({ proposalId }: any) => {
           {metadata && metadata['description'] ? metadata['description'] : 'NA'}
         </p>
       </div>
-      {proposal && !proposers && (
+      {proposal && (
         <div className={styles.boxText}>
           <h3>{proposal['proposers'].length > 1 ? 'proposers' : 'proposer'}</h3>
-          {proposal['proposers'].map((proposer: any) => (
+          {proposal['proposers'].map((proposer: string) => (
             <p key={proposer}>
-              <Link href={`/members/${proposer}`}>{proposer}</Link>
-            </p>
-          ))}
-        </div>
-      )}
-      {proposers && (
-        <div className={styles.boxText}>
-          <h3>{proposers.length > 1 ? 'proposers' : 'proposer'}</h3>
-          {proposers.map((proposer: any) => (
-            <p key={proposer['address']}>
-              {`${proposer['name']} (`}
-              <Link href={`/members/${proposer['address']}`}>
-                {proposer['address']}
-              </Link>
-              {')'}
+              <Address address={proposer} />
             </p>
           ))}
         </div>
       )}
       <div className={styles.boxText}>
         <h3>{'group policy address'}</h3>
-        {!proposal && <p>{'NA'}</p>}
-        {proposal && !policy && (
-          <p>
-            <Link href={`/policies/${proposal['group_policy_address']}`}>
-              {proposal['group_policy_address']}
-            </Link>
-          </p>
-        )}
-        {policy && (
-          <p>
-            {`${policy['name']} (`}
-            <Link href={`/policies/${policy['address']}`}>
-              {policy['address']}
-            </Link>
-            {')'}
-          </p>
-        )}
+        <p>
+          {proposal && proposal['group_policy_address'] ? (
+            <Address address={proposal['group_policy_address']} />
+          ) : (
+            'NA'
+          )}
+        </p>
       </div>
       <div className={styles.boxText}>
         <h3>{'submit time'}</h3>

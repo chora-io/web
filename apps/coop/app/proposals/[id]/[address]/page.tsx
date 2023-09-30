@@ -20,7 +20,7 @@ const ProposalPage = () => {
     <div className={styles.page}>
       <div>
         <h1>{'group proposal vote'}</h1>
-        <ProposalVote proposalId={id} voterAddress={address} />
+        <ProposalVote proposalId={id} address={address} />
       </div>
     </div>
   )

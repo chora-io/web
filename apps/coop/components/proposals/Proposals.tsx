@@ -1,52 +1,31 @@
+import { WalletContext } from 'chora'
+import { Result } from 'chora/components'
 import { useContext, useEffect, useState } from 'react'
 
-import { WalletContext } from 'chora'
-import {
-  proposalExecutorResultToJSON,
-  proposalStatusToJSON,
-} from 'cosmos/api/cosmos/group/v1/types'
-import { Result } from 'chora/components'
-import { useNetworkCoop, useNetworkServer } from 'chora/hooks'
-
-import ProposalPreview from './ProposalPreview'
+import ProposalPreview from '@components/proposals/ProposalPreview'
+import { useGroupProposals } from '@hooks/useGroupProposals'
 
 import styles from './Proposals.module.css'
 
-const queryPolicies = 'cosmos/group/v1/group_policies_by_group'
-const queryProposals = 'cosmos/group/v1/proposals_by_group_policy'
-
 const Proposals = () => {
-  const { chainInfo, network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
 
-  const [groupId] = useNetworkCoop(chainInfo)
-  const [serverUrl] = useNetworkServer(chainInfo)
-
-  // fetch error and results
-  const [error, setError] = useState<string | undefined>(undefined)
-  const [proposals, setProposals] = useState<any[] | undefined>(undefined)
+  // fetch group proposals from selected network
+  const [proposals, error] = useGroupProposals(chainInfo)
 
   // list options
   const [sort, setSort] = useState<string>('ascending')
+  const [sorted, setSorted] = useState<any[] | null>(null)
   const [filter, setFilter] = useState<string>('submitted')
-  const [filtered, setFiltered] = useState<any>(undefined)
+  const [filtered, setFiltered] = useState<any[] | null>(null)
 
   // reset state on network change
   useEffect(() => {
-    setError(undefined)
-    setProposals(undefined)
     setSort('ascending')
+    setSorted(null)
     setFilter('submitted')
+    setFiltered(null)
   }, [chainInfo?.chainId])
-
-  // fetch on load and group or network change
-  useEffect(() => {
-    // fetch proposals and metadata from selected network and network server
-    if (groupId) {
-      fetchProposals().catch((err) => {
-        setError(err.message)
-      })
-    }
-  }, [groupId, chainInfo?.chainId])
 
   // sort on load and sort change
   useEffect(() => {
@@ -60,10 +39,10 @@ const Proposals = () => {
       ps.sort((a, b) => a.id - b.id)
     }
 
-    setProposals(ps)
+    setSorted(ps)
 
-    if (filtered) {
-      const fs = [...filtered]
+    if (proposals) {
+      const fs = [...proposals]
 
       if (proposals && sort === 'ascending') {
         fs.sort((a, b) => b.id - a.id)
@@ -75,15 +54,15 @@ const Proposals = () => {
 
       setFiltered(fs)
     }
-  }, [sort])
+  }, [sort, proposals])
 
   // filter on load and filter change
   useEffect(() => {
-    if (!proposals) {
+    if (!sorted) {
       return
     }
 
-    let ps = proposals
+    let ps = sorted
 
     if (filter === 'submitted') {
       ps = ps.filter((v) => v.status === 'PROPOSAL_STATUS_SUBMITTED')
@@ -101,79 +80,9 @@ const Proposals = () => {
     }
 
     if (filter === 'nothing') {
-      setFiltered(undefined)
+      setFiltered(null)
     }
-  }, [filter])
-
-  // fetch proposals and metadata from selected network and network server
-  const fetchProposals = async () => {
-    let addrs: string[] = []
-
-    // fetch policies from selected network
-    await fetch(chainInfo.rest + '/' + queryPolicies + '/' + groupId)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.code) {
-          setError(res.message)
-        } else {
-          res['group_policies'].map((policy: any) => {
-            addrs.push(policy['address'])
-          })
-        }
-      })
-
-    let ps: any[] = []
-
-    // create promise for all async fetch calls
-    const promise = addrs.map(async (addr) => {
-      // fetch proposals from selected network
-      await fetch(chainInfo.rest + '/' + queryProposals + '/' + addr)
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.code) {
-            setError(res.message)
-          } else {
-            res['proposals'].map((p: any) => ps.push(p))
-          }
-        })
-    })
-
-    // fetch idx proposals from network server
-    await fetch(serverUrl + '/idx/' + network + '/group-proposals/' + groupId)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.error) {
-          setError(res.error)
-        } else {
-          res['proposals']?.map((p: any) =>
-            ps.push({
-              ...p,
-              status: proposalStatusToJSON(p['status']),
-              executor_result: proposalExecutorResultToJSON(
-                p['executor_result'],
-              ),
-            }),
-          )
-        }
-      })
-
-    // set state after promise all complete
-    await Promise.all(promise).then(() => {
-      // filter out duplicates (if both on chain and indexed)
-      // ps = [...new Map(ps.map((p: any) => [p["id"], p])).values()] // TODO: iterable iterator
-
-      // sort ascending by default
-      ps.sort((a, b) => b.id - a.id)
-      setSort('ascending')
-
-      // filter submitted by default
-      const fps = ps.filter((v) => v.status === 'PROPOSAL_STATUS_SUBMITTED')
-      setFilter('submitted')
-
-      setProposals(ps)
-      setFiltered(fps)
-    })
-  }
+  }, [filter, sorted])
 
   return (
     <div className={styles.box}>

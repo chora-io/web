@@ -22,7 +22,7 @@ const MembersPage = () => {
     <div className={styles.page}>
       <div>
         <h1>{'group member'}</h1>
-        <Member memberAddress={address} />
+        <Member address={address} />
         <h1>{'authorizations'}</h1>
         <Authz address={address} />
         <h1>{'fee allowances'}</h1>
