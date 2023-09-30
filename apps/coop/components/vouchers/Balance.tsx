@@ -1,6 +1,9 @@
+'use client'
+
 import { WalletContext } from 'chora'
 import { Result } from 'chora/components'
 import { formatTimestamp } from 'chora/utils'
+import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import Address from '@components/Address'
@@ -8,11 +11,13 @@ import { useVoucherBalance } from '@hooks/useVoucherBalance'
 
 import styles from './Balance.module.css'
 
-const Balance = ({ voucherId, address }: any) => {
+const Balance = () => {
+  const { id, address } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch voucher balance by voucher id and address from selected network
-  const [balance, error] = useVoucherBalance(chainInfo, voucherId, address)
+  const [balance, error] = useVoucherBalance(chainInfo, `${id}`, `${address}`)
 
   return (
     <div className={styles.box}>

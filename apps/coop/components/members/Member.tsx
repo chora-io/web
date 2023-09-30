@@ -1,17 +1,22 @@
+'use client'
+
 import { WalletContext } from 'chora'
 import { Result } from 'chora/components'
 import { formatTimestamp } from 'chora/utils'
+import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import { useGroupMember } from '@hooks/useGroupMember'
 
 import styles from './Member.module.css'
 
-const Member = ({ address }: { address: string }) => {
+const Member = () => {
+  const { address } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch member and member metadata from selected network and network server
-  const [member, metadata, error] = useGroupMember(chainInfo, address)
+  const [member, metadata, error] = useGroupMember(chainInfo, `${address}`)
 
   return (
     <div className={styles.box}>

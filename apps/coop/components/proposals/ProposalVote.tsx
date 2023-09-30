@@ -1,5 +1,8 @@
+'use client'
+
 import { WalletContext } from 'chora'
 import { formatTimestamp } from 'chora/utils'
+import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import Address from '@components/Address'
@@ -7,14 +10,16 @@ import { useGroupProposalVote } from '@hooks/useGroupProposalVote'
 
 import styles from './ProposalVote.module.css'
 
-const ProposalVote = ({ proposalId, address }: any) => {
+const ProposalVote = () => {
+  const { id, address } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch proposal vote and vote metadata from selected network and network server
   const [vote, metadata, error] = useGroupProposalVote(
     chainInfo,
-    proposalId,
-    address,
+    `${id}`,
+    `${address}`,
   )
 
   return (

@@ -1,5 +1,8 @@
+'use client'
+
 import { WalletContext } from 'chora'
 import { Result } from 'chora/components'
+import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import Address from '@components/Address'
@@ -7,11 +10,13 @@ import { useVoucher } from '@hooks/useVoucher'
 
 import styles from './Voucher.module.css'
 
-const Voucher = ({ voucherId }: any) => {
+const Voucher = () => {
+  const { id } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch voucher and voucher metadata from selected network and network server
-  const [voucher, metadata, error] = useVoucher(chainInfo, voucherId)
+  const [voucher, metadata, error] = useVoucher(chainInfo, `${id}`)
 
   return (
     <div className={styles.box}>

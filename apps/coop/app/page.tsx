@@ -1,14 +1,12 @@
-'use client'
-
-// import { Metadata } from 'next'
+import { Metadata } from 'next'
 
 import Group from '@components/home/Group'
 
 import styles from './page.module.css'
 
-// export const metadata: Metadata = {
-//   title: 'coop',
-// }
+export const metadata: Metadata = {
+  title: 'coop | group',
+}
 
 const HomePage = () => (
   <div className={styles.page}>

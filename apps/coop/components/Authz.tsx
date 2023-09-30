@@ -1,4 +1,7 @@
+'use client'
+
 import { WalletContext } from 'chora'
+import { useParams } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
 import AuthzGrant from '@components/AuthzGrant'
@@ -6,13 +9,15 @@ import { useAuthzGrants } from '@hooks/useAuthzGrants'
 
 import styles from './Authz.module.css'
 
-const Authz = ({ address }: { address: string }) => {
+const Authz = () => {
+  const { address } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch authz grants by address from selected network
   const [grantsGrantee, grantsGranter, error] = useAuthzGrants(
     chainInfo,
-    address,
+    `${address}`,
   )
 
   // view options

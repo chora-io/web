@@ -1,9 +1,12 @@
+'use client'
+
 import { WalletContext } from 'chora'
 import { Result, ResultTx } from 'chora/components'
 import { formatTimestamp, signAndBroadcast } from 'chora/utils'
 import { MsgExec } from 'cosmos/api/cosmos/group/v1/tx'
 import * as Long from 'long'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
 import Address from '@components/Address'
@@ -14,17 +17,19 @@ import styles from './Proposal.module.css'
 
 // TODO(cosmos-sdk): voter should be able to update vote
 
-const Proposal = ({ proposalId }: any) => {
+const Proposal = () => {
+  const { id } = useParams()
+
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // fetch group proposal and proposal metadata from selected network and network server
   const [proposal, metadata, proposalError] = useGroupProposal(
     chainInfo,
-    proposalId,
+    `${id}`,
   )
 
   // fetch group proposal votes from selected network (used to determine available actions)
-  const [votes, votesError] = useGroupProposalVotes(chainInfo, proposalId)
+  const [votes, votesError] = useGroupProposalVotes(chainInfo, `${id}`)
 
   const error = proposalError || votesError
 
@@ -36,13 +41,13 @@ const Proposal = ({ proposalId }: any) => {
   useEffect(() => {
     setExecError(null)
     setExecSuccess(null)
-  }, [chainInfo?.chainId, proposalId])
+  }, [chainInfo?.chainId, id])
 
   // execute proposal
   const handleExecute = async () => {
     const msg = {
       executor: wallet['bech32Address'],
-      proposalId: Long.fromString(proposalId),
+      proposalId: Long.fromString(`${id}`),
     } as unknown as MsgExec
 
     const msgAny = {
@@ -82,9 +87,7 @@ const Proposal = ({ proposalId }: any) => {
       <div className={styles.boxOptions}>
         {currentVote && <>{`vote submitted (${currentVote['option']})`}</>}
         {!error && !currentVote && !votesFinalized && (
-          <Link href={`/proposals/vote/${proposalId}`}>
-            {'vote on proposal'}
-          </Link>
+          <Link href={`/proposals/vote/${id}`}>{'vote on proposal'}</Link>
         )}
         {proposalExecutable && (
           <button onClick={handleExecute}>{'execute proposal'}</button>

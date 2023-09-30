@@ -1,3 +1,5 @@
+'use client'
+
 import { WalletContext } from 'chora'
 import { InputString, ResultTx } from 'chora/components'
 import { SelectExecution, SelectVote } from 'chora/components/group'
@@ -6,11 +8,14 @@ import { signAndBroadcast } from 'chora/utils'
 import { MsgVote } from 'cosmos/api/cosmos/group/v1/tx'
 import * as jsonld from 'jsonld'
 import * as Long from 'long'
+import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
 
 import styles from './VoteOnProposal.module.css'
 
-const VoteOnProposal = ({ proposalId }: any) => {
+const VoteOnProposal = () => {
+  const { id } = useParams()
+
   const { chainInfo, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
@@ -91,7 +96,7 @@ const VoteOnProposal = ({ proposalId }: any) => {
     const msg = {
       $type: 'cosmos.group.v1.MsgVote',
       voter: wallet.bech32Address,
-      proposalId: Long.fromString(proposalId),
+      proposalId: Long.fromString(`${id}`),
       option: vote,
       metadata: iri,
       exec: execution,

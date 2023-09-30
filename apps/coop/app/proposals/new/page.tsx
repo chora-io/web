@@ -1,14 +1,12 @@
-'use client'
-
-// import { Metadata } from 'next'
+import { Metadata } from 'next'
 
 import SubmitProposal from '@components/proposals/SubmitProposal'
 
 import styles from './page.module.css'
 
-// export const metadata: Metadata = {
-//   title: 'proposals new',
-// }
+export const metadata: Metadata = {
+  title: 'coop | new proposal',
+}
 
 const ProposalsNewPage = () => (
   <div className={styles.page}>

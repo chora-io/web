@@ -1,3 +1,5 @@
+'use client'
+
 import { WalletContext } from 'chora'
 import { Result } from 'chora/components'
 import { formatTimestamp } from 'chora/utils'

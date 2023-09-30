@@ -1,6 +1,9 @@
+'use client'
+
 import { WalletContext } from 'chora'
 import { Result } from 'chora/components'
 import { formatTimestamp } from 'chora/utils'
+import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import Address from '@components/Address'
@@ -8,11 +11,13 @@ import { useGroupPolicy } from '@hooks/useGroupPolicy'
 
 import styles from './Policy.module.css'
 
-const Policy = ({ policyAddress }: any) => {
+const Policy = () => {
+  const { address } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch policy and policy metadata from selected network and network server
-  const [policy, metadata, error] = useGroupPolicy(chainInfo, policyAddress)
+  const [policy, metadata, error] = useGroupPolicy(chainInfo, `${address}`)
 
   return (
     <div className={styles.box}>

@@ -1,18 +1,15 @@
-'use client'
-
-// import { Metadata } from 'next'
+import { Metadata } from 'next'
 
 import Members from '@components/members/Members'
 import MembersNav from '@components/members/MembersNav'
 
 import styles from './page.module.css'
 
-// export const metadata: Metadata = {
-//   title: 'members',
-// }
+export const metadata: Metadata = {
+  title: 'coop | members',
+}
 
-const MembersPage = () => {
-  return (
+const MembersPage = () => (
     <div className={styles.page}>
       <div>
         <h1>{'group members'}</h1>
@@ -21,6 +18,5 @@ const MembersPage = () => {
       </div>
     </div>
   )
-}
 
 export default MembersPage

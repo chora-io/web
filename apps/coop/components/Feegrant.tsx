@@ -1,4 +1,7 @@
+'use client'
+
 import { WalletContext } from 'chora'
+import { useParams } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
 import FeegrantAllowance from '@components/FeegrantAllowance'
@@ -6,13 +9,15 @@ import { useFeegrantAllowances } from '@hooks/useFeegrantAllowances'
 
 import styles from './Feegrant.module.css'
 
-const Feegrant = ({ address }: { address: string }) => {
+const Feegrant = () => {
+  const { address } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch feegrant allowances by address from selected network
   const [allowancesGrantee, allowancesGranter, error] = useFeegrantAllowances(
     chainInfo,
-    address,
+    `${address}`,
   )
 
   // view options

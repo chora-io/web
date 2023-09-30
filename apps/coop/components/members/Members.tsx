@@ -1,3 +1,5 @@
+'use client'
+
 import { WalletContext } from 'chora'
 import { useContext, useEffect, useState } from 'react'
 

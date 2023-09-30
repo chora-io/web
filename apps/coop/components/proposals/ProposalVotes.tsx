@@ -1,6 +1,9 @@
+'use client'
+
 import { WalletContext } from 'chora'
 import { Result } from 'chora/components'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import Address from '@components/Address'
@@ -8,11 +11,13 @@ import { useGroupProposalVotes } from '@hooks/useGroupProposalVotes'
 
 import styles from './ProposalVotes.module.css'
 
-const ProposalVotes = ({ proposalId }: { proposalId: string }) => {
+const ProposalVotes = () => {
+  const { id } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch proposal votes from selected network
-  const [votes, error] = useGroupProposalVotes(chainInfo, proposalId)
+  const [votes, error] = useGroupProposalVotes(chainInfo, `${id}`)
 
   return (
     <div className={styles.box}>
@@ -34,7 +39,7 @@ const ProposalVotes = ({ proposalId }: { proposalId: string }) => {
               <h3>{'option'}</h3>
               <p>{vote['option']}</p>
             </div>
-            <Link href={`/proposals/${proposalId}/${vote['voter']}`}>
+            <Link href={`/proposals/${id}/${vote['voter']}`}>
               {'view vote'}
             </Link>
           </div>

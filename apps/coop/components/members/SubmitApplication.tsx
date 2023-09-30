@@ -1,3 +1,5 @@
+'use client'
+
 import { WalletContext } from 'chora'
 import { InputString, Result } from 'chora/components'
 import { useNetworkServer } from 'chora/hooks'

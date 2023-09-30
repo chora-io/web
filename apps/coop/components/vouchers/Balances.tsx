@@ -1,6 +1,9 @@
+'use client'
+
 import { WalletContext } from 'chora'
 import { Result } from 'chora/components'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import Address from '@components/Address'
@@ -8,13 +11,13 @@ import { useVoucherBalances } from '@hooks/useVoucherBalances'
 
 import styles from './Balances.module.css'
 
-const Balances = ({ voucherId }: { voucherId: string }) => {
+const Balances = () => {
+  const { id } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch voucher balances from selected network
-  const [balances, error] = useVoucherBalances(chainInfo, voucherId)
-
-  console.log('balances', balances)
+  const [balances, error] = useVoucherBalances(chainInfo, `${id}`)
 
   return (
     <div className={styles.box}>
@@ -39,7 +42,7 @@ const Balances = ({ voucherId }: { voucherId: string }) => {
               <h3>{'total amount'}</h3>
               <p>{balance['total_amount']}</p>
             </div>
-            <Link href={`/vouchers/${voucherId}/${balance['address']}`}>
+            <Link href={`/vouchers/${id}/${balance['address']}`}>
               {'view balance'}
             </Link>
           </div>
