@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "chora": "workspace:*",
+    "cosmos": "workspace:*",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"
@@ -29,6 +30,8 @@
   "devDependencies": {
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
     "autoprefixer": "^10.4.12",
     "eslint": "^8.50.0",
     "eslint-config-next": "^13.5.2",

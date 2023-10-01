@@ -1,5 +1,3 @@
-'use client'
-
 import { ThemeContextProvider, WalletContextProvider } from 'chora'
 import { Header } from 'chora/components'
 

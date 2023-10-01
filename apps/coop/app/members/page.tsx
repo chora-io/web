@@ -10,13 +10,13 @@ export const metadata: Metadata = {
 }
 
 const MembersPage = () => (
-    <div className={styles.page}>
-      <div>
-        <h1>{'group members'}</h1>
-        <MembersNav />
-        <Members />
-      </div>
+  <div className={styles.page}>
+    <div>
+      <h1>{'group members'}</h1>
+      <MembersNav />
+      <Members />
     </div>
-  )
+  </div>
+)
 
 export default MembersPage

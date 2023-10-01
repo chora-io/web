@@ -55,7 +55,6 @@ export const useGroupProposals = (chainInfo: any) => {
                 setError(res.message)
               }
             } else {
-              setError(null)
               res['proposals'].map((p: any) => ps.push(p))
             }
           })
@@ -72,7 +71,6 @@ export const useGroupProposals = (chainInfo: any) => {
               setError(res.error)
             }
           } else {
-            setError(null)
             res['proposals']?.map((p: any) =>
               ps.push({
                 ...p,

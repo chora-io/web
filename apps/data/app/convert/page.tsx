@@ -1,14 +1,12 @@
-'use client'
-
-// import { Metadata } from 'next'
+import { Metadata } from 'next'
 
 import ConvertData from '@components/convert/ConvertData'
 
 import styles from './page.module.css'
 
-// export const metadata: Metadata = {
-//   title: 'convert',
-// }
+export const metadata: Metadata = {
+  title: 'data | convert',
+}
 
 const HashPage = () => (
   <div className={styles.page}>

@@ -53,7 +53,6 @@ export const useGroupPoliciesWithMetadata = (chainInfo: any) => {
               ) {
                 setError('unsupported metadata schema')
               } else {
-                setError(null)
                 ps[i] = {
                   ...ps[i],
                   ...data,

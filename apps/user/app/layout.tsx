@@ -1,11 +1,9 @@
-'use client'
-
 import {
   AuthContextProvider,
   ThemeContextProvider,
   WalletContextProvider,
 } from 'chora'
-import Header from 'chora/components/Header'
+import { Header } from 'chora/components'
 
 import Sidebar from '@components/Sidebar'
 

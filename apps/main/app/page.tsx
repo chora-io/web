@@ -1,16 +1,12 @@
-'use client'
+import { Metadata } from 'next'
 
-// import { Metadata } from 'next'
-import { useContext } from 'react'
-
-import { ThemeContext } from 'chora'
-import { Background } from 'chora/components'
+import Background from '@components/Background'
 
 import styles from './page.module.css'
 
-// export const metadata: Metadata = {
-//   title: 'chora',
-// }
+export const metadata: Metadata = {
+  title: 'chora | home',
+}
 
 const docsLink = 'https://docs.chora.io'
 const notionLink =
@@ -19,11 +15,9 @@ const regenLink =
   'https://www.mintscan.io/regen/validators/regenvaloper1t8p3zdu3h8qzggfmvvvmtdnaj4trcsfh79xp4e'
 
 const HomePage = () => {
-  const { darkTheme } = useContext(ThemeContext)
-
   return (
     <div className={styles.container}>
-      <Background darkTheme={darkTheme} withImage={true} />
+      <Background />
       <div className={styles.sectionMain}>
         <div>
           <h1>{'chora'}</h1>

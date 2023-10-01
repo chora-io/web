@@ -78,7 +78,6 @@ export const useAddressMetadata = (chainInfo: any, address: string) => {
               ) {
                 setError('unsupported metadata schema')
               } else {
-                setError(null)
                 setMetadata({
                   isPolicyAddress,
                   address,

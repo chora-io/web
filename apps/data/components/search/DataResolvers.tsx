@@ -1,57 +1,26 @@
-import { useContext, useEffect, useState } from 'react'
+'use client'
 
 import { WalletContext } from 'chora'
 import { Result } from 'chora/components'
+import { useContext } from 'react'
+
+import { useDataResolvers } from '@hooks/useDataResolvers'
 
 import styles from './DataResolvers.module.css'
 
-const queryResolver = '/regen/data/v1/resolver'
-
 const DataResolvers = () => {
-  const { chainInfo, network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
 
-  // error and resolvers
-  const [error, setError] = useState<string>('')
-  const [resolvers, setResolvers] = useState<any[]>([])
-
-  useEffect(() => {
-    setError('')
-    if (chainInfo) {
-      fetchResolvers().catch((err) => {
-        setError(err.message)
-      })
-    }
-  }, [chainInfo])
-
-  // fetch resolvers by incrementing id until not found
-  const fetchResolvers = async () => {
-    let nextId = 1
-    let resolvers: any[] = []
-    while (nextId !== 0) {
-      await fetch(chainInfo.rest + '/' + queryResolver + '/' + nextId)
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.code) {
-            nextId = 0
-          } else {
-            resolvers.push(res['resolver'])
-            nextId++
-          }
-        })
-        .catch((err) => {
-          setError(err.message)
-        })
-    }
-    setResolvers(resolvers)
-  }
+  // fetch data resolvers from selected network
+  const [resolvers, error] = useDataResolvers(chainInfo)
 
   return (
     <div className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>{'data resolvers'}</h2>
-        <p>{`data resolvers registered on ${network}`}</p>
+        <p>{`data resolvers registered on ${chainInfo?.chainId}`}</p>
       </div>
-      {resolvers.map((resolver) => (
+      {resolvers?.map((resolver) => (
         <div className={styles.boxItem} key={resolver['id']}>
           <div className={styles.boxText}>
             <h3>{'id'}</h3>
@@ -67,8 +36,8 @@ const DataResolvers = () => {
           </div>
         </div>
       ))}
-      {network && resolvers.length === 0 && (
-        <p>{`no data resolvers found on ${network}`}</p>
+      {chainInfo?.chainId && resolvers?.length === 0 && (
+        <p>{`no data resolvers found on ${chainInfo?.chainId}`}</p>
       )}
       <Result error={error} />
     </div>

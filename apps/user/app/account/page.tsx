@@ -1,6 +1,4 @@
-'use client'
-
-// import { Metadata } from 'next'
+import { Metadata } from 'next'
 
 import Auth from '@components/account/Auth'
 import Email from '@components/account/Email'
@@ -10,9 +8,9 @@ import Switch from '@components/account/Switch'
 
 import styles from './page.module.css'
 
-// export const metadata: Metadata = {
-//   title: "account",
-// }
+export const metadata: Metadata = {
+  title: 'user | account',
+}
 
 const AccountPage = () => (
   <div className={styles.page}>

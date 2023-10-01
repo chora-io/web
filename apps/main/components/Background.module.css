@@ -1,5 +1,4 @@
-.primary,
-.secondary-transparent {
+.background {
   align-items: center;
   display: flex;
   height: 100vh;
@@ -9,15 +8,10 @@
   z-index: -1;
 }
 
-.primary {
+.background {
   background: var(--background-primary);
 }
 
-.secondary-transparent {
-  background: var(--background-secondary-transparent);
-}
-
-.primary img,
-.secondary-transparent img {
+.background img {
   scale: 65%;
 }

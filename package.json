@@ -78,8 +78,5 @@
   },
   "devDependencies": {
     "turbo": "^1.10.14"
-  },
-  "dependencies": {
-    "@rollup/plugin-node-resolve": "^15.2.1"
   }
 }

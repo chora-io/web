@@ -1,4 +1,3 @@
-import Background from './Background'
 import ConnectWallet from './ConnectWallet'
 import Faucet from './Faucet'
 import Header from './Header'
@@ -19,7 +18,6 @@ import Seo from './Seo'
 import ThemeButton from './ThemeButton'
 
 export {
-  Background,
   ConnectWallet,
   Faucet,
   Header,

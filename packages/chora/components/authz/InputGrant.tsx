@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { useEffect, useState } from 'react'
 
 import { GenericAuthorization } from 'cosmos/api/cosmos/authz/v1beta1/authz'

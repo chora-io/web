@@ -14,8 +14,8 @@
     "url": "https://github.com/choraio/web"
   },
   "scripts": {
-    "build": "sh scripts/build.sh",
-    "lint": "eslint components/**/** contexts/**/** hooks/**/** utils/**/**",
+    "build": "ts-node ./build.ts",
+    "lint": "eslint --ext js,jsx,ts,tsx components/**/** contexts/**/** hooks/**/** utils/**/**",
     "format": "prettier --write components contexts hooks utils",
     "test": "echo 'test not configured'",
     "clean": "rm -rf .turbo dist node_modules"

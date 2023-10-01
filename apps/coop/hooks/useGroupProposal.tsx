@@ -104,7 +104,6 @@ export const useGroupProposal = (chainInfo: any, proposalId: string) => {
             ) {
               setError('unsupported metadata schema')
             } else {
-              setError(null)
               setMetadata(data)
             }
           }

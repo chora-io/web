@@ -1,6 +1,7 @@
 'use client'
 
 import { WalletContext } from 'chora'
+import { Result } from 'chora/components'
 import { formatTimestamp } from 'chora/utils'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
@@ -45,7 +46,7 @@ const ProposalVote = () => {
           </div>
         </div>
       )}
-      {error && <div>{error}</div>}
+      <Result error={error} />
     </div>
   )
 }

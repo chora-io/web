@@ -61,7 +61,6 @@ export const useVoucher = (chainInfo: any, voucherId: string) => {
             ) {
               setError('unsupported metadata schema')
             } else {
-              setError(null)
               setMetadata(data)
             }
           }

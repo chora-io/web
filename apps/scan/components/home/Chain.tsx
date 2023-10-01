@@ -1,7 +1,6 @@
+import { formatTimestamp } from 'chora/utils'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-
-import { formatTimestamp } from 'chora/utils'
 
 import styles from './Chain.module.css'
 
@@ -33,7 +32,7 @@ const Chain = ({ chainInfo, dashboardUrl }: any) => {
     setTimeout(() => {
       setCount(count + 1)
     }, 6000) // 6 seconds
-  }, [count])
+  }, [chainInfo.rest, count])
 
   return (
     <tr className={error ? styles.error : undefined}>

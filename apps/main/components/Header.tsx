@@ -1,12 +1,12 @@
+'use client'
+
+import { ThemeContext } from 'chora'
+import choraLogoDark from 'chora/assets/images/chora_dark_icon.png'
+import choraLogoLight from 'chora/assets/images/chora_light_icon.png'
+import { ThemeButton } from 'chora/components'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useContext } from 'react'
-
-import { ThemeContext } from 'chora'
-import { ThemeButton } from 'chora/components'
-
-import choraLogoDark from 'chora/assets/images/chora_dark_icon.png'
-import choraLogoLight from 'chora/assets/images/chora_light_icon.png'
 
 import styles from './Header.module.css'
 

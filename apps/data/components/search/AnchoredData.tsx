@@ -1,8 +1,9 @@
-import { useContext, useState } from 'react'
+'use client'
 
 import { WalletContext } from 'chora'
 import { InputIRI, InputURL, Result } from 'chora/components'
 import { InputContentHashJSON } from 'chora/components/data'
+import { useContext, useState } from 'react'
 
 import styles from './AnchoredData.module.css'
 

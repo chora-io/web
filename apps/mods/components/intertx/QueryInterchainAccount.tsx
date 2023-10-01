@@ -1,7 +1,8 @@
-import { useContext, useState } from 'react'
+'use client'
 
 import { WalletContext } from 'chora'
 import { InputAddress, InputString, Result } from 'chora/components'
+import { useContext, useState } from 'react'
 
 import styles from './QueryInterchainAccount.module.css'
 

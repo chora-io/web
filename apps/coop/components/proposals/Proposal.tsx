@@ -85,17 +85,20 @@ const Proposal = () => {
   return (
     <div className={styles.box}>
       <div className={styles.boxOptions}>
-        {currentVote && <>{`vote submitted (${currentVote['option']})`}</>}
-        {!error && !currentVote && !votesFinalized && (
+        {proposal && currentVote && (
+          <>{`vote submitted (${currentVote['option']})`}</>
+        )}
+        {proposal && !currentVote && !votesFinalized && (
           <Link href={`/proposals/vote/${id}`}>{'vote on proposal'}</Link>
         )}
-        {proposalExecutable && (
+        {proposal && proposalExecutable && (
           <button onClick={handleExecute}>{'execute proposal'}</button>
         )}
-        {votesFinalized && !proposalExecutable && (
+        {proposal && votesFinalized && !proposalExecutable && (
           <div>{'no further action can be taken'}</div>
         )}
-        {error && <Result error={error} />}
+        {!proposal && !error && <>{'loading...'}</>}
+        {!proposal && error && <Result error={error} />}
       </div>
       {(execSuccess || execError) && (
         <div className={styles.boxResultAbove}>

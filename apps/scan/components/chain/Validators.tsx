@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+'use client'
 
 import { Result } from 'chora/components'
+import { useEffect, useState } from 'react'
 
 import Validator from './Validator'
 
@@ -32,7 +33,7 @@ const Validators = ({ rest }: any) => {
       .catch((err) => {
         setError(err.message)
       })
-  }, [validators.length])
+  }, [rest, validators.length])
 
   return (
     <div className={styles.box}>

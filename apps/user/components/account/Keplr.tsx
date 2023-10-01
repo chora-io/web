@@ -1,8 +1,9 @@
-import { useContext, useState } from 'react'
+'use client'
 
 import { AuthContext, WalletContext } from 'chora'
 import { Result } from 'chora/components'
 import { useNetworkServer } from 'chora/hooks'
+import { useContext, useState } from 'react'
 
 import styles from './Keplr.module.css'
 

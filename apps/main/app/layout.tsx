@@ -1,5 +1,3 @@
-'use client'
-
 import { ThemeContextProvider } from 'chora'
 
 import Header from '@components/Header'

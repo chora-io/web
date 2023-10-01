@@ -1,6 +1,7 @@
-import { useContext } from 'react'
+'use client'
 
 import { AuthContext } from 'chora'
+import { useContext } from 'react'
 
 import styles from './Auth.module.css'
 

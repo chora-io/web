@@ -1,7 +1,8 @@
-import { useContext, useState } from 'react'
+'use client'
 
 import { WalletContext } from 'chora'
 import { InputIRI, Result } from 'chora/components'
+import { useContext, useState } from 'react'
 
 import styles from './ConvertIRIToHash.module.css'
 

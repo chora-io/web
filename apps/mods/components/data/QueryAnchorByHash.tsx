@@ -1,10 +1,11 @@
-import { useContext, useState } from 'react'
+'use client'
 
 import { WalletContext } from 'chora'
 import { Result } from 'chora/components'
 import { InputContentHash, InputContentHashJSON } from 'chora/components/data'
+import { useContext, useState } from 'react'
 
-import SelectInput from '../SelectInput'
+import SelectInput from '@components/SelectInput'
 
 import styles from './QueryAnchorByHash.module.css'
 

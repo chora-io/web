@@ -1,7 +1,4 @@
-import * as blake from 'blakejs'
-import { Buffer } from 'buffer'
-import * as jsonld from 'jsonld'
-import { useContext, useEffect, useState } from 'react'
+'use client'
 
 import { WalletContext } from 'chora'
 import { InputJSON, Result } from 'chora/components'
@@ -10,10 +7,14 @@ import {
   SelectGraphCanon,
   SelectGraphMerkle,
 } from 'chora/components/data'
+import * as blake from 'blakejs'
+import { Buffer } from 'buffer'
+import * as jsonld from 'jsonld'
+import { useContext, useEffect, useState } from 'react'
 
-import InputsFromJSON from '../InputsFromJSON'
-import SelectContext from '../SelectContext'
-import SelectInput from '../SelectInput'
+import InputsFromJSON from '@components/InputsFromJSON'
+import SelectContext from '@components/SelectContext'
+import SelectInput from '@components/SelectInput'
 
 import styles from './ConvertData.module.css'
 

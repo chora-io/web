@@ -1,12 +1,17 @@
+'use client'
+
+import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import styles from './Account.module.css'
 
 const queryAccount = '/cosmos/auth/v1beta1/account'
 
-const Account = ({ rest, address }: any) => {
-  const [response, setResponse] = useState<any>(undefined)
-  const [error, setError] = useState<string | undefined>(undefined)
+const Account = ({ rest }: any) => {
+  const { address } = useParams()
+
+  const [error, setError] = useState<string | null>(null)
+  const [response, setResponse] = useState<any>(null)
 
   useEffect(() => {
     fetch(rest + '/' + queryAccount + '/' + address)
@@ -17,7 +22,7 @@ const Account = ({ rest, address }: any) => {
       .catch((err) => {
         setError(err.message)
       })
-  }, [response])
+  }, [rest, address, response])
 
   return (
     <div>

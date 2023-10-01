@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build": "sh ./scripts/protocgen.sh",
-    "lint": "eslint chains/**/** modules/**",
+    "lint": "eslint --ext js,jsx,ts,tsx chains/**/** modules/**",
     "format": "prettier --write chains modules",
     "test": "echo 'test not configured'",
     "clean": "rm -rf .turbo api node_modules"

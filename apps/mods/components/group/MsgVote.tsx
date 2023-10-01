@@ -1,9 +1,10 @@
-import { useContext, useState } from 'react'
+'use client'
 
 import { WalletContext } from 'chora'
 import { ResultTx } from 'chora/components'
 import { MsgVote as MsgInputs } from 'chora/components/group'
 import { signAndBroadcast } from 'chora/utils'
+import { useContext, useState } from 'react'
 
 import styles from './MsgVote.module.css'
 

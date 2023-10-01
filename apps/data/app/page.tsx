@@ -1,12 +1,10 @@
-'use client'
-
-// import { Metadata } from 'next'
+import { Metadata } from 'next'
 
 import styles from './page.module.css'
 
-// export const metadata: Metadata = {
-//   title: 'data',
-// }
+export const metadata: Metadata = {
+  title: 'data | home',
+}
 
 const HomePage = () => (
   <div className={styles.page} style={{ alignItems: 'center' }}>

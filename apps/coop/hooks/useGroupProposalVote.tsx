@@ -106,7 +106,6 @@ export const useGroupProposalVote = (
             ) {
               setError('unsupported metadata schema')
             } else {
-              setError(null)
               setMetadata(data)
             }
           }

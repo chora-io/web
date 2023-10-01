@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { useEffect, useState } from 'react'
 
 import { MsgGrant as Msg } from 'cosmos/api/cosmos/authz/v1beta1/tx'

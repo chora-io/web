@@ -32,7 +32,6 @@ export const useGeonodeMetadata = (chainInfo: any, iri: string) => {
             ) {
               setError('unsupported metadata schema')
             } else {
-              setError(null)
               setMetadata(data)
             }
           }

@@ -1,7 +1,8 @@
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+'use client'
 
 import { InputString, Result } from 'chora/components'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 import styles from './Transactions.module.css'
 

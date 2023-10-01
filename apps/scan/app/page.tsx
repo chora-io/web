@@ -1,14 +1,12 @@
-'use client'
-
-// import { Metadata } from 'next'
+import { Metadata } from 'next'
 
 import Chains from '@components/home/Chains'
 
 import styles from './page.module.css'
 
-// export const metadata: Metadata = {
-//   title: "scan",
-// }
+export const metadata: Metadata = {
+  title: 'scan | home',
+}
 
 const HomePage = () => (
   <div className={styles.page}>

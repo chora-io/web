@@ -1,5 +1,3 @@
-'use client'
-
 import { WalletContextProvider } from 'chora'
 
 const FaucetLayout = ({ children }: any) => {

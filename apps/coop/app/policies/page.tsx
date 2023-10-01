@@ -9,12 +9,12 @@ export const metadata: Metadata = {
 }
 
 const PoliciesPage = () => (
-    <div className={styles.page}>
-      <div>
-        <h1>{'group policies'}</h1>
-        <Policies />
-      </div>
+  <div className={styles.page}>
+    <div>
+      <h1>{'group policies'}</h1>
+      <Policies />
     </div>
-  )
+  </div>
+)
 
 export default PoliciesPage

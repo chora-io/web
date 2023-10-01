@@ -1,18 +1,18 @@
-import * as React from 'react'
-
-import Layout from './layout'
+import { Metadata } from 'next'
 
 import styles from './not-found.module.css'
 
+export const metadata: Metadata = {
+  title: '404 | a placeless place',
+}
+
 const NotFoundPage = () => (
-  <Layout withBackground={true}>
-    <div className={styles.page}>
-      <div>
-        <h1>{'404'}</h1>
-        <h2>{'a placeless place'}</h2>
-      </div>
+  <div className={styles.page}>
+    <div>
+      <h1>{'404'}</h1>
+      <h2>{'a placeless place'}</h2>
     </div>
-  </Layout>
+  </div>
 )
 
 export default NotFoundPage

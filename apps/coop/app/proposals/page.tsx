@@ -10,13 +10,13 @@ export const metadata: Metadata = {
 import styles from './page.module.css'
 
 const ProposalsPage = () => (
-    <div className={styles.page}>
-      <div>
-        <h1>{'group proposals'}</h1>
-        <ProposalsNav />
-        <Proposals />
-      </div>
+  <div className={styles.page}>
+    <div>
+      <h1>{'group proposals'}</h1>
+      <ProposalsNav />
+      <Proposals />
     </div>
-  )
+  </div>
+)
 
 export default ProposalsPage

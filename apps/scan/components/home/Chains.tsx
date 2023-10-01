@@ -1,3 +1,5 @@
+'use client'
+
 import {
   bionLocal,
   choraLocal,
@@ -5,7 +7,7 @@ import {
   regenLocal,
   regenMainnet,
   regenRedwood,
-} from '../../../../packages/cosmos/chains'
+} from 'cosmos/chains'
 
 import Chain from './Chain'
 
