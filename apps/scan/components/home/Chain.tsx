@@ -10,7 +10,7 @@ const Chain = ({ chainInfo, dashboardUrl }: any) => {
   const [date, setDate] = useState<string>('')
   const [time, setTime] = useState<string>('')
   const [height, setHeight] = useState<number>(0)
-  const [error, setError] = useState<string | undefined>(undefined)
+  const [error, setError] = useState<string | null>(null)
 
   const [count, setCount] = useState<number>(0)
 

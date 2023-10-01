@@ -23,7 +23,7 @@ const InputAddress = ({
   if (label === '') noLabel = true
 
   let defaultPlaceholder: string
-  if (network === undefined || network.includes('chora')) {
+  if (!network || network.includes('chora')) {
     if (long) {
       defaultPlaceholder = choraAddressLong
     } else {

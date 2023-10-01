@@ -32,13 +32,7 @@ const Voucher = () => {
       </div>
       <div className={styles.boxText}>
         <h3>{'issuer'}</h3>
-        <p>
-          {voucher && voucher['issuer'] ? (
-            <Address address={voucher.issuer} />
-          ) : (
-            'NA'
-          )}
-        </p>
+        <p>{voucher?.issuer ? <Address address={voucher.issuer} /> : 'NA'}</p>
       </div>
       {error && (
         <div className={styles.boxText}>

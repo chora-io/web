@@ -24,7 +24,7 @@ const SubmitProposal = () => {
   const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch group policies and policies metadata from selected network
-  const [policies] = useGroupPoliciesWithMetadata<any[]>([])
+  const [policies] = useGroupPoliciesWithMetadata(chainInfo)
 
   // form input
   const [address, setAddress] = useState<string>('')
@@ -35,7 +35,7 @@ const SubmitProposal = () => {
 
   // fetch and form error and success
   const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState<string | null>(null)
+  const [success, setSuccess] = useState<any>(null)
 
   // submit proposal
   const handleSubmit = async (event: { preventDefault: () => void }) => {
@@ -77,7 +77,7 @@ const SubmitProposal = () => {
       merkle: 'UNSPECIFIED',
     }
 
-    let iri: string | null
+    let iri: string | undefined
 
     // post data to network server
     await fetch(serverUrl + '/data', {
@@ -97,7 +97,7 @@ const SubmitProposal = () => {
       })
 
     // return error if iri never set
-    if (typeof iri === 'null') {
+    if (typeof iri === 'undefined') {
       return
     }
 

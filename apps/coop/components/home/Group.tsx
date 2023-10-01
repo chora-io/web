@@ -30,9 +30,7 @@ const Group = () => {
       </div>
       <div className={styles.boxText}>
         <h3>{'admin'}</h3>
-        <p>
-          {group && group['admin'] ? <Address address={group.admin} /> : 'NA'}
-        </p>
+        <p>{group?.admin ? <Address address={group.admin} /> : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'created at'}</h3>

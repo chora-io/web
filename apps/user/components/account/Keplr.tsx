@@ -14,12 +14,12 @@ const Keplr = () => {
   const [serverUrl] = useNetworkServer(chainInfo)
 
   // authentication error
-  const [error, setError] = useState<string | undefined>(undefined)
+  const [error, setError] = useState<string | null>(null)
 
   // authenticate user with keplr wallet
   const handleSubmit = async () => {
     // reset authentication error
-    setError(undefined)
+    setError(null)
 
     if (!wallet) {
       setError('keplr wallet not detected')

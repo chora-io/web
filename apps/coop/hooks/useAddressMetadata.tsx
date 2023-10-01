@@ -23,7 +23,7 @@ export const useAddressMetadata = (chainInfo: any, address: string) => {
   useEffect(() => {
     // fetch metadata from selected network and network server
     const fetchMetadata = async () => {
-      let iri: string | null
+      let iri: string | undefined
       let isPolicyAddress: boolean
 
       // handle metadata as policy, otherwise member
@@ -48,8 +48,7 @@ export const useAddressMetadata = (chainInfo: any, address: string) => {
           .then((res) => res.json())
           .then((res) => {
             if (res.code) {
-              // set both catch error and fetch error
-              setError(`${e.message}: ${res.message}`)
+              setError(res.message)
             } else {
               const found = res['members'].find(
                 (m: any) => m['member']['address'] === address,
@@ -61,7 +60,7 @@ export const useAddressMetadata = (chainInfo: any, address: string) => {
           })
       }
 
-      if (iri) {
+      if (typeof iri !== 'undefined') {
         // fetch member metadata from network server
         await fetch(serverUrl + '/data/' + iri)
           .then((res) => res.json())

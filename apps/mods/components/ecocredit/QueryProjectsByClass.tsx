@@ -10,20 +10,20 @@ import styles from './QueryProjectsByClass.module.css'
 const queryProjectsByClass = '/regen/ecocredit/v1/projects-by-class'
 
 const QueryProjectsByClass = () => {
-  const { chainInfo, network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
 
   // form input
   const [classId, setClassId] = useState<string>('')
 
   // error and success
-  const [error, setError] = useState<string | undefined>(undefined)
-  const [success, setSuccess] = useState<string | undefined>(undefined)
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<any>(null)
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
-    setError(undefined)
-    setSuccess(undefined)
+    setError(null)
+    setSuccess(null)
 
     fetch(chainInfo.rest + queryProjectsByClass + '/' + classId)
       .then((res) => res.json())

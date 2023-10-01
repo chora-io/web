@@ -37,8 +37,8 @@ const ConvertData = () => {
   const [json, setJson] = useState<string>('')
 
   // error and success
-  const [error, setError] = useState<string | undefined>(undefined)
-  const [success, setSuccess] = useState<string | undefined>(undefined)
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<any>(null)
 
   useEffect(() => {
     // fetch available schemas
@@ -58,12 +58,12 @@ const ConvertData = () => {
     event.preventDefault()
 
     setJson(template)
-    setError('')
+    setError(null)
   }
 
   const handleSetJson = (value: any) => {
     setJson(value)
-    setError('')
+    setError(null)
   }
 
   const handleSetContext = (event: any) => {
@@ -71,7 +71,7 @@ const ConvertData = () => {
 
     setContext(event.target.value)
     setJson('')
-    setError('')
+    setError(null)
 
     if (event.target.value !== '') {
       // fetch schema example
@@ -102,15 +102,15 @@ const ConvertData = () => {
   const handleSubmit = async (event: any) => {
     event.preventDefault()
 
-    setError('')
-    setSuccess('')
+    setError(null)
+    setSuccess(null)
 
     // check and parse JSON
     let doc: any
     try {
       doc = JSON.parse(json)
     } catch (err) {
-      setError('invalid json') // TODO: type error undefined
+      setError('invalid json') // TODO: type error null
       return
     }
 
@@ -170,8 +170,8 @@ const ConvertData = () => {
 
   const handleSetInput = (input: string) => {
     setInput(input)
-    setError('')
-    setSuccess('')
+    setError(null)
+    setSuccess(null)
   }
 
   return (

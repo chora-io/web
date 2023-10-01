@@ -25,13 +25,13 @@ const Balances = () => {
       {!error && balances && balances.length === 0 && (
         <div>{'no balances found'}</div>
       )}
-      {balances &&
+      {Array.isArray(balances) &&
         balances.map((balance) => (
           <div className={styles.boxItem} key={balance['address']}>
             <div className={styles.boxText}>
               <h3>{'address'}</h3>
               <p>
-                {balance && balance['address'] ? (
+                {balance?.address ? (
                   <Address address={balance.address} />
                 ) : (
                   'NA'

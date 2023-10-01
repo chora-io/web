@@ -17,15 +17,15 @@ const MsgAttest = () => {
   const { chainInfo, wallet } = useContext(WalletContext)
 
   const [input, setInput] = useState('form')
-  const [message, setMessage] = useState<any>(undefined)
-  const [error, setError] = useState<string | undefined>(undefined)
-  const [success, setSuccess] = useState<string | undefined>(undefined)
+  const [message, setMessage] = useState<any>(null)
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<any>(null)
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
-    setError(undefined)
-    setSuccess(undefined)
+    setError(null)
+    setSuccess(null)
 
     await signAndBroadcast(chainInfo, wallet['bech32Address'], [message])
       .then((res) => {
@@ -38,8 +38,8 @@ const MsgAttest = () => {
 
   const handleSetInput = (input: string) => {
     setInput(input)
-    setError(undefined)
-    setSuccess(undefined)
+    setError(null)
+    setSuccess(null)
   }
 
   return (

@@ -12,15 +12,15 @@ import styles from './MsgUpdateIssuer.module.css'
 const MsgUpdateIssuer = () => {
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
-  const [message, setMessage] = useState<any>(undefined)
-  const [error, setError] = useState<string | undefined>(undefined)
-  const [success, setSuccess] = useState<string | undefined>(undefined)
+  const [message, setMessage] = useState<any>(null)
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<any>(null)
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
-    setError(undefined)
-    setSuccess(undefined)
+    setError(null)
+    setSuccess(null)
 
     await signAndBroadcast(chainInfo, wallet['bech32Address'], [message])
       .then((res) => {

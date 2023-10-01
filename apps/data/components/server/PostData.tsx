@@ -34,8 +34,8 @@ const PostData = () => {
   const [json, setJson] = useState<string>('')
 
   // error and success
-  const [error, setError] = useState<string>('')
-  const [success, setSuccess] = useState<string>('')
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<any>(null)
 
   // TODO: add hook for server url
 
@@ -66,12 +66,12 @@ const PostData = () => {
     event.preventDefault()
 
     setJson(template)
-    setError('')
+    setError(null)
   }
 
   const handleSetJson = (value: any) => {
     setJson(value)
-    setError('')
+    setError(null)
   }
 
   const handleSetContext = (event: any) => {
@@ -79,7 +79,7 @@ const PostData = () => {
 
     setContext(event.target.value)
     setJson('')
-    setError('')
+    setError(null)
 
     if (event.target.value !== '') {
       // fetch schema example
@@ -110,8 +110,8 @@ const PostData = () => {
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
-    setError('')
-    setSuccess('')
+    setError(null)
+    setSuccess(null)
 
     // check and parse JSON
     let doc: any
@@ -165,8 +165,8 @@ const PostData = () => {
 
   const handleSetInput = (input: string) => {
     setInput(input)
-    setError('')
-    setSuccess('')
+    setError(null)
+    setSuccess(null)
   }
 
   return (

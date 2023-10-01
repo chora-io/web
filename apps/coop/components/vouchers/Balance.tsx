@@ -27,11 +27,7 @@ const Balance = () => {
           <div className={styles.boxText}>
             <h3>{'address'}</h3>
             <p>
-              {balance && balance['address'] ? (
-                <Address address={balance.address} />
-              ) : (
-                'NA'
-              )}
+              {balance?.address ? <Address address={balance.address} /> : 'NA'}
             </p>
           </div>
           <div className={styles.boxText}>

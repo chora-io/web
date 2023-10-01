@@ -11,7 +11,7 @@ const queryValidators = '/cosmos/staking/v1beta1/validators'
 
 const Validators = ({ rest }: any) => {
   const [validators, setValidators] = useState<any[]>([])
-  const [error, setError] = useState<string | undefined>(undefined)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     // fetch latest block header data

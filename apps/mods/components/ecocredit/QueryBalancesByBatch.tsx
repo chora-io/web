@@ -10,20 +10,20 @@ import styles from './QueryBalancesByBatch.module.css'
 const queryBalancesByBatch = '/regen/ecocredit/v1/balances-by-batch'
 
 const QueryBalancesByBatch = () => {
-  const { chainInfo, network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
 
   // form input
   const [denom, setDenom] = useState<string>('')
 
   // error and success
-  const [error, setError] = useState<string | undefined>(undefined)
-  const [success, setSuccess] = useState<string | undefined>(undefined)
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<any>(null)
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
-    setError(undefined)
-    setSuccess(undefined)
+    setError(null)
+    setSuccess(null)
 
     fetch(chainInfo.rest + queryBalancesByBatch + '/' + denom)
       .then((res) => res.json())

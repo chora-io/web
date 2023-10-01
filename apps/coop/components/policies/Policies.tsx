@@ -26,7 +26,7 @@ const Policies = () => {
 
   // sort on load and sort or policies change
   useEffect(() => {
-    const ps = policies ? [...policies] : []
+    const ps = Array.isArray(policies) ? [...policies] : []
 
     if (policies && sort === 'ascending') {
       ps.sort(

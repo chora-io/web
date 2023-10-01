@@ -15,16 +15,16 @@ const ConvertHashToIRI = () => {
   const { chainInfo } = useContext(WalletContext)
 
   const [input, setInput] = useState('form')
-  const [contentHash, setContentHash] = useState<any>(undefined)
+  const [contentHash, setContentHash] = useState<any>(null)
   const [contentHashJson, setContentHashJson] = useState<string>('')
-  const [error, setError] = useState<string | undefined>(undefined)
-  const [success, setSuccess] = useState<string | undefined>(undefined)
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<any>(null)
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
-    setError(undefined)
-    setSuccess(undefined)
+    setError(null)
+    setSuccess(null)
 
     let body: string
 
@@ -60,8 +60,8 @@ const ConvertHashToIRI = () => {
 
   const handleSetInput = (input: string) => {
     setInput(input)
-    setError(undefined)
-    setSuccess(undefined)
+    setError(null)
+    setSuccess(null)
   }
 
   return (

@@ -9,20 +9,20 @@ import styles from './QueryVotesByProposal.module.css'
 const queryVotesByProposal = '/cosmos/group/v1/votes_by_proposal'
 
 const QueryVotesByProposal = () => {
-  const { chainInfo, network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
 
   // form input
   const [proposalId, setProposalId] = useState<string>('')
 
   // error and success
-  const [error, setError] = useState<string | undefined>(undefined)
-  const [success, setSuccess] = useState<string | undefined>(undefined)
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<any>(null)
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
-    setError(undefined)
-    setSuccess(undefined)
+    setError(null)
+    setSuccess(null)
 
     fetch(chainInfo.rest + queryVotesByProposal + '/' + proposalId)
       .then((res) => res.json())

@@ -18,8 +18,8 @@ const SubmitApplication = () => {
   const [description, setDescription] = useState<string>('')
 
   // form error and success
-  const [error, setError] = useState<string>('')
-  const [success, setSuccess] = useState<string>('')
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<any>(null)
 
   // submit application to network server
   const handleSubmit = async (event: { preventDefault: () => void }) => {
@@ -63,8 +63,6 @@ const SubmitApplication = () => {
       merkle: 'UNSPECIFIED',
     }
 
-    let iri: string | undefined
-
     // post data to network server
     await fetch(serverUrl + '/data', {
       method: 'POST',
@@ -75,7 +73,7 @@ const SubmitApplication = () => {
         if (data.code) {
           setError(data.message)
         } else {
-          iri = data['iri']
+          setSuccess(data['iri'])
         }
       })
       .catch((err) => {

@@ -4,19 +4,19 @@ import Address from '@components/Address'
 
 import styles from './FeegrantAllowance.module.css'
 
-const FeegrantAllowance = ({ allowance }: { address: string }) => {
+const FeegrantAllowance = ({ allowance }: any) => {
   return (
     <div className={styles.boxItem}>
       <div className={styles.boxText}>
         <h3>{'granter'}</h3>
         <p>
-          <Address address={allowance?.granter} />
+          <Address address={allowance.granter} />
         </p>
       </div>
       <div className={styles.boxText}>
         <h3>{'grantee'}</h3>
         <p>
-          <Address address={allowance?.grantee} />
+          <Address address={allowance.grantee} />
         </p>
       </div>
       {allowance['allowance']['@type'] ===

@@ -22,18 +22,12 @@ const ProposalVotes = () => {
   return (
     <div className={styles.box}>
       {!votes && !error && <div>{'loading...'}</div>}
-      {votes &&
+      {Array.isArray(votes) &&
         votes.map((vote) => (
           <div className={styles.boxItem} key={vote['voter']}>
             <div className={styles.boxText}>
               <h3>{'voter'}</h3>
-              <p>
-                {vote && vote['voter'] ? (
-                  <Address address={vote['voter']} />
-                ) : (
-                  'NA'
-                )}
-              </p>
+              <p>{vote?.voter ? <Address address={vote.voter} /> : 'NA'}</p>
             </div>
             <div className={styles.boxText}>
               <h3>{'option'}</h3>

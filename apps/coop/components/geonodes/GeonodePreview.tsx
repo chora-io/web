@@ -22,9 +22,7 @@ const GeonodePreview = ({ node }: any) => {
       </div>
       <div className={styles.boxText}>
         <h3>{'curator'}</h3>
-        <p>
-          {node && node['curator'] ? <Address address={node.curator} /> : 'NA'}
-        </p>
+        <p>{node?.curator ? <Address address={node.curator} /> : 'NA'}</p>
       </div>
       <Link href={`/geonodes/${node['id']}`}>{'view node'}</Link>
       {error && (

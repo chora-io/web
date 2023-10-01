@@ -10,7 +10,7 @@ export const useVoucherBalance = (
 ) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
-  const [balance, setBalance] = useState<any[] | null>(null)
+  const [balance, setBalance] = useState<any>(null)
 
   // reset state on network, voucher id, or address change
   useEffect(() => {

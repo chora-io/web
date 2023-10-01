@@ -13,7 +13,7 @@ const InputIRI = ({ id, label, placeholder, network, iri, setIri }: any) => {
   if (label === '') noLabel = true
 
   let defaultPlaceholder: string
-  if (network === undefined || network.includes('chora')) {
+  if (!network || network.includes('chora')) {
     defaultPlaceholder = choraPlaceholder
   } else {
     defaultPlaceholder = regenPlaceholder

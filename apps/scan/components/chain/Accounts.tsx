@@ -12,12 +12,12 @@ const Accounts = ({ chainId, rest }: any) => {
   const router = useRouter()
 
   const [address, setAddress] = useState<string>('')
-  const [error, setError] = useState<string | undefined>(undefined)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
-    setError(undefined)
+    setError(null)
 
     // TODO: validate address
 

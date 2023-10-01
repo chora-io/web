@@ -61,7 +61,7 @@ const AuthContextProvider = (props: any) => {
   const [activeAccounts, setActiveAccounts] = useState<any[] | undefined>(
     getCachedAccounts(),
   )
-  const [error, setError] = useState<string | undefined>(undefined)
+  const [error, setError] = useState<string | null>(null)
 
   // check active account is authenticated
   useEffect(() => {
@@ -76,7 +76,7 @@ const AuthContextProvider = (props: any) => {
   // check active account token with network server
   const checkToken = async () => {
     // reset error
-    setError(undefined)
+    setError(null)
 
     // check server url and active account
     if (serverUrl && activeAccount) {

@@ -20,22 +20,23 @@ const DataResolvers = () => {
         <h2>{'data resolvers'}</h2>
         <p>{`data resolvers registered on ${chainInfo?.chainId}`}</p>
       </div>
-      {resolvers?.map((resolver) => (
-        <div className={styles.boxItem} key={resolver['id']}>
-          <div className={styles.boxText}>
-            <h3>{'id'}</h3>
-            <p>{resolver['id']}</p>
+      {Array.isArray(resolvers) &&
+        resolvers.map((resolver) => (
+          <div className={styles.boxItem} key={resolver['id']}>
+            <div className={styles.boxText}>
+              <h3>{'id'}</h3>
+              <p>{resolver['id']}</p>
+            </div>
+            <div className={styles.boxText}>
+              <h3>{'url'}</h3>
+              <p>{resolver['url']}</p>
+            </div>
+            <div className={styles.boxText}>
+              <h3>{'manager'}</h3>
+              <p>{resolver['manager']}</p>
+            </div>
           </div>
-          <div className={styles.boxText}>
-            <h3>{'url'}</h3>
-            <p>{resolver['url']}</p>
-          </div>
-          <div className={styles.boxText}>
-            <h3>{'manager'}</h3>
-            <p>{resolver['manager']}</p>
-          </div>
-        </div>
-      ))}
+        ))}
       {chainInfo?.chainId && resolvers?.length === 0 && (
         <p>{`no data resolvers found on ${chainInfo?.chainId}`}</p>
       )}

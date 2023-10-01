@@ -19,7 +19,7 @@ const Geonodes = () => {
     <div className={styles.box}>
       {!error && !nodes && <div>{'loading...'}</div>}
       {!error && nodes && nodes.length === 0 && <div>{'no nodes found'}</div>}
-      {nodes &&
+      {Array.isArray(nodes) &&
         nodes.map((node) => <GeonodePreview key={node['id']} node={node} />)}
       <Result error={error} />
     </div>

@@ -10,8 +10,8 @@ const queryTx = 'cosmos/tx/v1beta1/txs'
 const Transaction = ({ rest }: any) => {
   const { hash } = useParams()
 
-  const [error, setError] = useState<string | undefined>(undefined)
-  const [response, setResponse] = useState<any>(undefined)
+  const [error, setError] = useState<string | null>(null)
+  const [response, setResponse] = useState<any>(null)
 
   useEffect(() => {
     fetch(rest + '/' + queryTx + '/' + hash)

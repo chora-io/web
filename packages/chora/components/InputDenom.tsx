@@ -15,7 +15,7 @@ const InputDenom = ({
   setDenom,
 }: any) => {
   let defaultPlaceholder: string
-  if (network === undefined || network.includes('chora')) {
+  if (!network || network.includes('chora')) {
     defaultPlaceholder = choraDenom
   } else {
     defaultPlaceholder = regenDenom

@@ -1,8 +1,8 @@
 const InputsFromJSON = ({ example, json, setJson }: any) => {
   const inputs: any[] = []
 
-  let parsedJson = JSON.parse(json || '{}')
-  let parsedExample = JSON.parse(example || '{}')
+  const parsedJson = JSON.parse(json || '{}')
+  const parsedExample = JSON.parse(example || '{}')
 
   if (example) {
     // parse example to generate inputs
@@ -47,7 +47,9 @@ const InputsFromJSON = ({ example, json, setJson }: any) => {
 
   const handleSetJson = (id: string, value: any) => {
     // parse json string and use example with context if json is not yet set
-    let obj = JSON.parse(json || `{"@context": "${parsedExample['@context']}"}`)
+    const obj = JSON.parse(
+      json || `{"@context": "${parsedExample['@context']}"}`,
+    )
 
     // check nested property
     if (id.includes('/')) {

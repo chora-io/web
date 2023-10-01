@@ -33,13 +33,7 @@ const Policy = () => {
       </div>
       <div className={styles.boxText}>
         <h3>{'admin'}</h3>
-        <p>
-          {policy && policy['admin'] ? (
-            <Address address={policy.admin} />
-          ) : (
-            'NA'
-          )}
-        </p>
+        <p>{policy?.admin ? <Address address={policy.admin} /> : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'address'}</h3>

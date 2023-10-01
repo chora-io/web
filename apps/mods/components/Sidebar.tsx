@@ -13,7 +13,7 @@ const Sidebar = () => {
 
   const currentRoute = usePathname()
 
-  if (network !== undefined && network.includes('chora')) {
+  if (!!network && network.includes('chora')) {
     return (
       <div className={styles.sidebar}>
         <ul>
@@ -102,7 +102,7 @@ const Sidebar = () => {
     )
   }
 
-  if (network !== undefined && network.includes('regen')) {
+  if (!!network && network.includes('regen')) {
     return (
       <div className={styles.sidebar}>
         <ul>

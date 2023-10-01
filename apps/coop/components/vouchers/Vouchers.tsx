@@ -21,7 +21,7 @@ const Vouchers = () => {
       {!error && vouchers && vouchers.length === 0 && (
         <div>{'no vouchers found'}</div>
       )}
-      {vouchers &&
+      {Array.isArray(vouchers) &&
         vouchers.map((voucher) => (
           <VoucherPreview key={voucher['id']} voucher={voucher} />
         ))}

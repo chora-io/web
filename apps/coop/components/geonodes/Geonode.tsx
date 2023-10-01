@@ -32,9 +32,7 @@ const Geonode = () => {
       </div>
       <div className={styles.boxText}>
         <h3>{'curator'}</h3>
-        <p>
-          {node && node['curator'] ? <Address address={node.curator} /> : 'NA'}
-        </p>
+        <p>{node?.curator ? <Address address={node.curator} /> : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'latitude'}</h3>

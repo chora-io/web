@@ -19,14 +19,14 @@ const Email = () => {
   const [accessCode, setAccessCode] = useState<string>('')
 
   // authentication error
-  const [error, setError] = useState<string | undefined>(undefined)
+  const [error, setError] = useState<string | null>(null)
 
   // authenticate user with email and access code
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
     // reset authentication error
-    setError(undefined)
+    setError(null)
 
     // authenticate user with email and access code
     await fetch(serverUrl + '/auth/email', {

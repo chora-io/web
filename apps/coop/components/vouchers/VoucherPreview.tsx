@@ -22,13 +22,7 @@ const VoucherPreview = ({ voucher }: any) => {
       </div>
       <div className={styles.boxText}>
         <h3>{'issuer'}</h3>
-        <p>
-          {voucher && voucher['issuer'] ? (
-            <Address address={voucher.issuer} />
-          ) : (
-            'NA'
-          )}
-        </p>
+        <p>{voucher?.issuer ? <Address address={voucher.issuer} /> : 'NA'}</p>
       </div>
       <Link href={`/vouchers/${voucher['id']}`}>{'view voucher'}</Link>
       {error && (

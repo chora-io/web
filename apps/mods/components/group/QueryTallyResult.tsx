@@ -15,14 +15,14 @@ const QueryTallyResult = () => {
   const [id, setId] = useState<string>('')
 
   // error and success
-  const [error, setError] = useState<string | undefined>(undefined)
-  const [success, setSuccess] = useState<string | undefined>(undefined)
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<any>(null)
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
-    setError(undefined)
-    setSuccess(undefined)
+    setError(null)
+    setSuccess(null)
 
     fetch(chainInfo.rest + queryTallyResult + '/' + id + '/tally')
       .then((res) => res.json())

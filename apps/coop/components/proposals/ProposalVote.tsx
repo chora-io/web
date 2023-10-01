@@ -30,7 +30,7 @@ const ProposalVote = () => {
         <div>
           <div className={styles.boxText}>
             <h3>{'voter'}</h3>
-            {vote && vote['voter'] ? <Address address={vote['voter']} /> : 'NA'}
+            {vote?.voter ? <Address address={vote.voter} /> : 'NA'}
           </div>
           <div className={styles.boxText}>
             <h3>{'option'}</h3>

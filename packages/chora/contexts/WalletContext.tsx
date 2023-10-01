@@ -24,19 +24,19 @@ const WalletContext = createContext<any>({})
 
 const WalletContextProvider = (props: any) => {
   // selected network
-  const [network, setNetwork] = useState<string | undefined>(undefined)
+  const [network, setNetwork] = useState<string | null>(null)
 
   // chain info based on connected network
-  const [chainInfo, setChainInfo] = useState<ChainInfo | undefined>(undefined)
+  const [chainInfo, setChainInfo] = useState<ChainInfo | null>(null)
 
   // wallet loaded from keplr
-  const [wallet, setWallet] = useState<any | undefined>(undefined)
+  const [wallet, setWallet] = useState<any | null>(null)
 
   // loading wallet from keplr (only when loading from cache)
   const [loading, setLoading] = useState<boolean>(true)
 
   // error returned from handler and keplr
-  const [error, setError] = useState<string>('')
+  const [error, setError] = useState<string | null>(null)
 
   // keplr event listener
   useEffect(() => {
@@ -50,7 +50,7 @@ const WalletContextProvider = (props: any) => {
   useEffect(() => {
     const cachedNetwork = localStorage.getItem(cachedNetworkKey) || ''
 
-    if (cachedNetwork === '' && network === undefined) {
+    if (cachedNetwork === '' && network === null) {
       setNetwork(defaultNetwork)
 
       // cache default network to initialize local storage
@@ -106,7 +106,7 @@ const WalletContextProvider = (props: any) => {
   const getKeplr = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
-    if (window.keplr && network !== undefined) {
+    if (window.keplr && network !== null) {
       let chain: ChainInfo
 
       switch (network) {
@@ -161,7 +161,7 @@ const WalletContextProvider = (props: any) => {
           .getKey(network)
           .then((wallet) => {
             setWallet(wallet)
-            setError('')
+            setError(null)
           })
           .catch((err) => {
             setError(err.message)
@@ -174,7 +174,7 @@ const WalletContextProvider = (props: any) => {
 
   // event handler for keplr keystore change
   const handleKeystoreChange = async () => {
-    if (window.keplr && network !== undefined) {
+    if (window.keplr && network !== null) {
       // get wallet from selected network
       await window.keplr
         .getKey(network)
@@ -188,9 +188,9 @@ const WalletContextProvider = (props: any) => {
   }
 
   const handleSetNetwork = (value: string) => {
-    setError('')
+    setError(null)
     setNetwork(value)
-    setWallet(undefined)
+    setWallet(null)
   }
 
   return (

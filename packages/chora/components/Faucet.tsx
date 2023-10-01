@@ -23,11 +23,11 @@ const Faucet = () => {
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // error and success
-  const [error, setError] = useState<string>('')
+  const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<boolean>(false)
 
   const handleSubmit = () => {
-    setError('')
+    setError(null)
     setSuccess(false)
 
     if (chainInfo === undefined) {

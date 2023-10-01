@@ -49,7 +49,7 @@ const Feegrant = () => {
       )}
       {filter === 'grantee' && (
         <div>
-          {allowancesGrantee &&
+          {Array.isArray(allowancesGrantee) &&
             allowancesGrantee.map((allowance, i) => (
               <FeegrantAllowance key={i} allowance={allowance} />
             ))}
@@ -60,7 +60,7 @@ const Feegrant = () => {
       )}
       {filter === 'granter' && (
         <div>
-          {allowancesGranter &&
+          {Array.isArray(allowancesGranter) &&
             allowancesGranter.map((allowance, i) => (
               <FeegrantAllowance key={i} allowance={allowance} />
             ))}

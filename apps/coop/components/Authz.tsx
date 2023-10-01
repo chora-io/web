@@ -47,7 +47,7 @@ const Authz = () => {
       {!error && !grantsGrantee && !grantsGranter && <div>{'loading...'}</div>}
       {filter === 'grantee' && (
         <div>
-          {grantsGrantee &&
+          {Array.isArray(grantsGrantee) &&
             grantsGrantee.map((grant, i) => (
               <AuthzGrant key={i} grant={grant} />
             ))}
@@ -58,7 +58,7 @@ const Authz = () => {
       )}
       {filter === 'granter' && (
         <div>
-          {grantsGranter &&
+          {Array.isArray(grantsGranter) &&
             grantsGranter.map((grant, i) => (
               <AuthzGrant key={i} grant={grant} />
             ))}

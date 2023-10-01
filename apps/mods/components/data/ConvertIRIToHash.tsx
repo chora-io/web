@@ -12,14 +12,14 @@ const ConvertIRIToHash = () => {
   const { chainInfo, network } = useContext(WalletContext)
 
   const [iri, setIri] = useState('')
-  const [error, setError] = useState<string | undefined>(undefined)
-  const [success, setSuccess] = useState<string | undefined>(undefined)
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<any>(null)
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
-    setError(undefined)
-    setSuccess(undefined)
+    setError(null)
+    setSuccess(null)
 
     fetch(chainInfo.rest + convertIriToHash + '/' + iri)
       .then((res) => res.json())

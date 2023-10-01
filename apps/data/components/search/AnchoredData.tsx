@@ -18,8 +18,8 @@ const AnchoredData = () => {
   const [option, setOption] = useState<string>('iri')
 
   // error and success
-  const [error, setError] = useState<string>('')
-  const [success, setSuccess] = useState<string>('')
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<any>(null)
 
   const handleSubmit = (event: any) => {
     event.preventDefault()

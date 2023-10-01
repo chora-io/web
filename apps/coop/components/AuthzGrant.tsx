@@ -4,19 +4,19 @@ import Address from '@components/Address'
 
 import styles from './AuthzGrant.module.css'
 
-const AuthzGrant = ({ grant }: { address: string }) => {
+const AuthzGrant = ({ grant }: any) => {
   return (
     <div className={styles.boxItem}>
       <div className={styles.boxText}>
         <h3>{'granter'}</h3>
         <p>
-          <Address address={grant?.granter} />
+          <Address address={grant.granter} />
         </p>
       </div>
       <div className={styles.boxText}>
         <h3>{'grantee'}</h3>
         <p>
-          <Address address={grant?.grantee} />
+          <Address address={grant.grantee} />
         </p>
       </div>
       {grant['authorization']['@type'] ===

@@ -13,8 +13,8 @@ const GetData = () => {
   const [iri, setIri] = useState<string>('')
 
   // error and success
-  const [error, setError] = useState<string>('')
-  const [success, setSuccess] = useState<string>('')
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<any>(null)
 
   // TODO: add hook for server url
 
@@ -30,8 +30,8 @@ const GetData = () => {
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
-    setError('')
-    setSuccess('')
+    setError(null)
+    setSuccess(null)
 
     fetch(serverUrl + '/data/' + iri)
       .then((res) => res.json())

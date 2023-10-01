@@ -18,14 +18,14 @@ const Login = () => {
   const [password, setPassword] = useState<string>('')
 
   // authentication error
-  const [error, setError] = useState<string | undefined>(undefined)
+  const [error, setError] = useState<string | null>(null)
 
   // authenticate user with username and password
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
     // reset authentication error
-    setError(undefined)
+    setError(null)
 
     // authenticate user with username and password
     await fetch(serverUrl + '/auth/login', {

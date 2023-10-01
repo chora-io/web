@@ -14,14 +14,14 @@ const QueryGrants = () => {
   const [granter, setGranter] = useState('')
   const [grantee, setGrantee] = useState('')
   const [msgTypeUrl, setMsgTypeUrl] = useState('')
-  const [error, setError] = useState<string | undefined>(undefined)
-  const [success, setSuccess] = useState<string | undefined>(undefined)
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<any>(null)
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
-    setError(undefined)
-    setSuccess(undefined)
+    setError(null)
+    setSuccess(null)
 
     const params = `?grantee=${grantee}&granter=${granter}&msg_type_url=${msgTypeUrl}`
 

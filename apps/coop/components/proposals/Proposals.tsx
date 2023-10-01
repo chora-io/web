@@ -31,7 +31,7 @@ const Proposals = () => {
 
   // sort on load and sort change
   useEffect(() => {
-    const ps = proposals ? [...proposals] : []
+    const ps = Array.isArray(proposals) ? [...proposals] : []
 
     if (proposals && sort === 'ascending') {
       ps.sort((a, b) => b.id - a.id)
@@ -43,7 +43,7 @@ const Proposals = () => {
 
     setSorted(ps)
 
-    if (proposals) {
+    if (Array.isArray(proposals)) {
       const fs = [...proposals]
 
       if (proposals && sort === 'ascending') {

@@ -35,7 +35,7 @@ const Proposal = () => {
 
   // execution error and results
   const [execError, setExecError] = useState<string | null>(null)
-  const [execSuccess, setExecSuccess] = useState<string | null>(null)
+  const [execSuccess, setExecSuccess] = useState<any>(null)
 
   // reset state on network or proposal id change
   useEffect(() => {
@@ -72,7 +72,7 @@ const Proposal = () => {
 
   // current vote of active user
   const currentVote = votes?.find(
-    (vote) => vote['voter'] === wallet['bech32Address'],
+    (vote: any) => vote['voter'] === wallet['bech32Address'],
   )
 
   // whether proposal is executable

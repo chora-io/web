@@ -27,7 +27,7 @@ const VoteOnProposal = () => {
 
   // form error and success
   const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState<string | null>(null)
+  const [success, setSuccess] = useState<any>(null)
 
   // submit vote
   const handleSubmit = async (event: { preventDefault: () => void }) => {
@@ -68,7 +68,7 @@ const VoteOnProposal = () => {
       merkle: 'UNSPECIFIED',
     }
 
-    let iri: string | null
+    let iri: string | undefined
 
     // post data to network server
     await fetch(serverUrl + '/data', {
@@ -88,7 +88,7 @@ const VoteOnProposal = () => {
       })
 
     // return error if iri never set
-    if (typeof iri === 'null') {
+    if (typeof iri === 'undefined') {
       return
     }
 
