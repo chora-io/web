@@ -20,13 +20,13 @@ export const POST = async (req: NextRequest) => {
     )
   }
 
-  // extract input from request body
-  const { input } = await req.json()
+  // extract prompt from request body
+  const { prompt } = await req.json()
 
-  // verify input is not empty
-  if (input.trim().length === 0) {
+  // verify prompt is not empty
+  if (prompt.trim().length === 0) {
     return new Response(
-      JSON.stringify({ error: { message: 'Please enter a valid input' } }),
+      JSON.stringify({ error: { message: 'Please enter a valid prompt' } }),
       {
         status: 400,
       },
@@ -36,8 +36,8 @@ export const POST = async (req: NextRequest) => {
   try {
     // create completion request
     const completion = await openai.createCompletion({
-      model: 'text-davinci-003',
-      prompt: generatePrompt(input),
+      model: 'gpt-3.5-turbo-instruct',
+      prompt,
       temperature: 0.6,
     })
 
@@ -65,8 +65,4 @@ export const POST = async (req: NextRequest) => {
       )
     }
   }
-}
-
-const generatePrompt = (input) => {
-  return `Quote a famous person that explicitly uses the word ${input}.`
 }

@@ -12,9 +12,9 @@
     "url": "https://github.com/choraio/web"
   },
   "scripts": {
-    "dev": "next dev -p 8001",
+    "dev": "next dev -p 9000",
     "build": "next build",
-    "start": "next start -p 8001",
+    "start": "next start -p 9000",
     "lint": "next lint",
     "format": "prettier --write .",
     "test": "echo 'test not configured'",

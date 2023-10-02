@@ -3,11 +3,11 @@
 import { InputString, Result } from 'chora/components'
 import { useState } from 'react'
 
-import styles from './Generate.module.css'
+import styles from './Completion.module.css'
 
-const Generate = () => {
+const Completion = () => {
   const [error, setError] = useState<string | null>(null)
-  const [input, setInput] = useState<string>('')
+  const [prompt, setPrompt] = useState<string>('')
   const [result, setResult] = useState<any>(null)
 
   async function handleSubmit(event) {
@@ -17,12 +17,12 @@ const Generate = () => {
     setResult(null)
 
     try {
-      const response = await fetch('/api/generate', {
+      const response = await fetch('/api/completion', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ input }),
+        body: JSON.stringify({ prompt }),
       })
 
       const data = await response.json()
@@ -33,7 +33,7 @@ const Generate = () => {
         )
       }
 
-      setInput('')
+      setPrompt('')
       setResult(data.result)
     } catch (error) {
       setError(error.message)
@@ -43,16 +43,16 @@ const Generate = () => {
   return (
     <div className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>{'generate quote'}</h2>
-        <p>{'generate a quote that uses a word'}</p>
+        <h2>{'text completion'}</h2>
+        <p>{'return a text completion that matches the instructions or context'}</p>
       </div>
       <form onSubmit={handleSubmit} className={styles.form}>
         <InputString
-          id="word"
+          id="prompt"
           label=""
-          placeholder="enter a word..."
-          string={input}
-          setString={setInput}
+          placeholder="enter a prompt..."
+          string={prompt}
+          setString={setPrompt}
         />
         <button type="submit">{'submit'}</button>
       </form>
@@ -63,4 +63,4 @@ const Generate = () => {
   )
 }
 
-export default Generate
+export default Completion

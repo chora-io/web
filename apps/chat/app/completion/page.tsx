@@ -1,19 +1,19 @@
 import { Metadata } from 'next'
 
-import Generate from '@components/Generate'
+import Completion from '@components/Completion'
 
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'chat | generate',
+  title: 'chat | completion',
 }
 
-const HomePage = () => (
+const CompletionPage = () => (
   <div className={styles.page}>
     <div>
-      <Generate />
+      <Completion />
     </div>
   </div>
 )
 
-export default HomePage
+export default CompletionPage

@@ -21,10 +21,10 @@ const Sidebar = () => {
         </li>
         <li>
           <Link
-            href="/generate"
-            className={currentRoute === '/generate' ? styles.active : undefined}
+            href="/completion"
+            className={currentRoute === '/completion' ? styles.active : undefined}
           >
-            {'generate'}
+            {'completion'}
           </Link>
         </li>
       </ul>
