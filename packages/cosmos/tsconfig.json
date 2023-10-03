@@ -8,14 +8,12 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "incremental": true
   },
   "include": [
-    "index.ts",
     "api",
     "chains",
     "modules"

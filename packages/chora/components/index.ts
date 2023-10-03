@@ -14,7 +14,6 @@ import ResultTx from './ResultTx'
 import SelectAccount from './SelectAccount'
 import SelectMessage from './SelectMessage'
 import SelectNetwork from './SelectNetwork'
-import Seo from './Seo'
 import ThemeButton from './ThemeButton'
 
 export {
@@ -34,6 +33,5 @@ export {
   SelectAccount,
   SelectMessage,
   SelectNetwork,
-  Seo,
   ThemeButton,
 }

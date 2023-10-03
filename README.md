@@ -1,6 +1,6 @@
 # web
 
-webkit and application interfaces
+chora webkit and applications
 
 ## Prerequisites
 

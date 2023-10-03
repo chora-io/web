@@ -13,7 +13,7 @@ const Completion = () => {
   async function handleSubmit(event) {
     event.preventDefault()
 
-    setError('')
+    setError(null)
     setResult(null)
 
     try {

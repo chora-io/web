@@ -1,7 +1,7 @@
 {
   "name": "data",
   "private": true,
-  "description": "data tools and services",
+  "description": "data services",
   "version": "0.0.0",
   "homepage": "https://chora.io",
   "bugs": {

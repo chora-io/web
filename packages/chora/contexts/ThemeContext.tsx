@@ -10,7 +10,7 @@ const initDarkTheme = () => {
 
   if (
     typeof localStorage !== 'undefined' &&
-    localStorage.hasOwnProperty(cachedDarkKey)
+    localStorage.getItem(cachedDarkKey)
   ) {
     initDarkTheme = localStorage.getItem(cachedDarkKey) === 'true'
   } else if (typeof window !== 'undefined') {

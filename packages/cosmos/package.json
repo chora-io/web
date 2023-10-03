@@ -1,7 +1,7 @@
 {
   "name": "cosmos",
   "private": true,
-  "description": "chora cosmos api",
+  "description": "cosmos webkit",
   "version": "0.0.0",
   "type": "module",
   "main": "index.ts",

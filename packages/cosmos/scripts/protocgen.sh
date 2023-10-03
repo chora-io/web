@@ -8,7 +8,7 @@ PROTO_DIRS=$(find ./proto -path -prune -o -name '*.proto' -print0 | xargs -0 -n1
 # remove/add api directory
 rm -rf api && mkdir api
 
-# generate typescript with ts-proto
+# generate typescript with buf protoc and ts-proto
 for dir in $PROTO_DIRS; do
   buf alpha protoc \
     -I "proto" \
