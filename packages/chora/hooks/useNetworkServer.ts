@@ -10,7 +10,7 @@ import {
 } from 'cosmos/chains'
 
 export const useNetworkServer = (chainInfo: any) => {
-  const [serverUrl, setServerUrl] = useState<string | undefined>(undefined)
+  const [serverUrl, setServerUrl] = useState<string | null>(null)
 
   useEffect(() => {
     if (chainInfo) {
@@ -34,12 +34,12 @@ export const useNetworkServer = (chainInfo: any) => {
           setServerUrl(regenMainnetX.server)
           break
           // network not supported
-          setServerUrl(undefined)
+          setServerUrl(null)
           break
       }
     } else {
       // network not available
-      setServerUrl(undefined)
+      setServerUrl(null)
     }
   }, [chainInfo])
 

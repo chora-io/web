@@ -44,7 +44,9 @@ const Completion = () => {
     <div className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>{'text completion'}</h2>
-        <p>{'return a text completion that matches the instructions or context'}</p>
+        <p>
+          {'return a text completion that matches the instructions or context'}
+        </p>
       </div>
       <form onSubmit={handleSubmit} className={styles.form}>
         <InputString

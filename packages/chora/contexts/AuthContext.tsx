@@ -13,17 +13,14 @@ const cachedAuthAccounts = 'chora-auth-accounts'
 
 const getCachedAccount = () => {
   if (typeof localStorage !== 'undefined') {
-    return (
-      JSON.parse(localStorage.getItem(cachedAuthAccount) || 'null') || undefined
-    )
+    return JSON.parse(localStorage.getItem(cachedAuthAccount) || 'null') || null
   }
 }
 
 const getCachedAccounts = () => {
   if (typeof localStorage !== 'undefined') {
     return (
-      JSON.parse(localStorage.getItem(cachedAuthAccounts) || 'null') ||
-      undefined
+      JSON.parse(localStorage.getItem(cachedAuthAccounts) || 'null') || null
     )
   }
 }
@@ -47,31 +44,24 @@ const setCachedAccounts = (accounts: any[]) => {
 const AuthContext = createContext<any>({})
 
 const AuthContextProvider = (props: any) => {
-  // TODO: reconsider context within context for server url
-  // currently required to check on load within context provider
-  // and ideally network server would be determined by selected network
-  // will likely need to move useEffect outside context provider
-
   const { chainInfo } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
-  const [account, setAccount] = useState<any>(undefined)
+  const [account, setAccount] = useState<any>(null)
   const [activeAccount, setActiveAccount] = useState<any>(getCachedAccount())
-  const [activeAccounts, setActiveAccounts] = useState<any[] | undefined>(
+  const [activeAccounts, setActiveAccounts] = useState<any[] | null>(
     getCachedAccounts(),
   )
   const [error, setError] = useState<string | null>(null)
 
   // check active account is authenticated
   useEffect(() => {
-    checkToken().catch((err) => {
-      setError(err.message)
-    })
-  }, [
-    !error && account === undefined && activeAccount !== undefined,
-    serverUrl,
-  ])
+    if (serverUrl && (!account || !activeAccount) && !error)
+      checkToken().catch((err) => {
+        setError(err.message)
+      })
+  }, [serverUrl, account, activeAccount, error])
 
   // check active account token with network server
   const checkToken = async () => {
@@ -125,10 +115,10 @@ const AuthContextProvider = (props: any) => {
   // remove account from state and storage
   const removeAccount = () => {
     // reset account state
-    setAccount(undefined)
+    setAccount(null)
 
     // reset active account state
-    setActiveAccount(undefined)
+    setActiveAccount(null)
 
     // remove cached account
     removeCachedAccount()
@@ -157,13 +147,13 @@ const AuthContextProvider = (props: any) => {
   // remove accounts from state and storage
   const removeAccounts = () => {
     // reset account state
-    setAccount(undefined)
+    setAccount(null)
 
     // reset active account state
-    setActiveAccount(undefined)
+    setActiveAccount(null)
 
     // reset active accounts state
-    setActiveAccounts(undefined)
+    setActiveAccounts(null)
 
     // remove cached account
     removeCachedAccount()
@@ -202,7 +192,7 @@ const AuthContextProvider = (props: any) => {
   // switch account in state and storage
   const switchAccount = (activeAccount: any) => {
     // reset account
-    setAccount(undefined)
+    setAccount(null)
 
     // set active account
     setActiveAccount(activeAccount)

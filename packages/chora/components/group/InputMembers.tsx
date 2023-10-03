@@ -2,8 +2,7 @@ import * as React from 'react'
 import { useEffect } from 'react'
 
 import InputMember from './InputMember'
-
-import styles from './InputMembers.module.css'
+import ManageList from '../ManageList'
 
 const defaultId = 'members'
 
@@ -48,12 +47,12 @@ const InputMembers = ({ id, network, members, setMembers }: any) => {
           setMember={handleSetMember}
         />
       ))}
-      <span className={styles.options}>
-        <button onClick={handleAddMember}>{'add member'}</button>
-        {members.length > 0 && (
-          <button onClick={handleRemoveMember}>{'remove member'}</button>
-        )}
-      </span>
+      <ManageList
+        label="member"
+        addItem={handleAddMember}
+        removeItem={handleRemoveMember}
+        notEmpty={members.length > 0}
+      />
     </>
   )
 }

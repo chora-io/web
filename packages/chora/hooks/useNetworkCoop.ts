@@ -10,7 +10,7 @@ import {
 } from 'cosmos/chains'
 
 export const useNetworkCoop = (chainInfo: any) => {
-  const [groupId, setGroupId] = useState<string | undefined>(undefined)
+  const [groupId, setGroupId] = useState<string | null>(null)
 
   useEffect(() => {
     if (chainInfo) {
@@ -35,12 +35,12 @@ export const useNetworkCoop = (chainInfo: any) => {
           break
         default:
           // network not supported
-          setGroupId(undefined)
+          setGroupId(null)
           break
       }
     } else {
       // network not available
-      setGroupId(undefined)
+      setGroupId(null)
     }
   }, [chainInfo])
 

@@ -4,7 +4,6 @@
   "description": "cosmos webkit",
   "version": "0.0.0",
   "type": "module",
-  "main": "index.ts",
   "homepage": "https://chora.io",
   "bugs": {
     "url": "https://github.com/choraio/web/issues"

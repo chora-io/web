@@ -22,7 +22,9 @@ const Sidebar = () => {
         <li>
           <Link
             href="/completion"
-            className={currentRoute === '/completion' ? styles.active : undefined}
+            className={
+              currentRoute === '/completion' ? styles.active : undefined
+            }
           >
             {'completion'}
           </Link>
