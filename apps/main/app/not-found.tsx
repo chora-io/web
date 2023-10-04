@@ -1,5 +1,3 @@
-'use client'
-
 import { Metadata } from 'next'
 
 import styles from './not-found.module.css'

@@ -1,7 +1,7 @@
 {
   "name": "user",
   "private": true,
-  "description": "user accounts",
+  "description": "user account and profile",
   "version": "0.0.0",
   "homepage": "https://chora.io",
   "bugs": {

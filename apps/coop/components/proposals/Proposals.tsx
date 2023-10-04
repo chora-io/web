@@ -120,16 +120,19 @@ const Proposals = () => {
           </button>
         )}
       </div>
-      {!error && !filtered && <div>{'loading...'}</div>}
-      {!error && filtered && filtered.length === 0 && (
+      {!filtered && <div>{'loading...'}</div>}
+      {filtered && filtered.length === 0 && (
         <div>{`no proposals with status ${filter}`}</div>
       )}
-      {!error &&
-        filtered &&
+      {filtered &&
         filtered.map((proposal: any) => (
           <ProposalPreview key={proposal['id']} proposal={proposal} />
         ))}
-      <Result error={error} />
+      {error && (
+        <div className={styles.boxText}>
+          <Result error={error} />
+        </div>
+      )}
     </div>
   )
 }

@@ -10,7 +10,7 @@ const Completion = () => {
   const [prompt, setPrompt] = useState<string>('')
   const [result, setResult] = useState<any>(null)
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: { preventDefault: () => void }) {
     event.preventDefault()
 
     setError(null)
@@ -35,7 +35,7 @@ const Completion = () => {
 
       setPrompt('')
       setResult(data.result)
-    } catch (error) {
+    } catch (error: any) {
       setError(error.message)
     }
   }

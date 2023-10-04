@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 const FaucetPage = () => (
   <div className={styles.page}>
     <div>
+      <h1>{'token faucet'}</h1>
       <ConnectWallet />
       <Faucet />
     </div>

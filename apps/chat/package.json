@@ -1,7 +1,7 @@
 {
   "name": "chat",
   "private": true,
-  "description": "chat demo",
+  "description": "chat example",
   "version": "0.0.0",
   "homepage": "https://chora.io",
   "bugs": {

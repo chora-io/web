@@ -30,12 +30,12 @@ const Faucet = () => {
     setError(null)
     setSuccess(false)
 
-    if (chainInfo === undefined) {
+    if (chainInfo === null) {
       setError('chain must be enabled')
       return
     }
 
-    if (wallet === undefined) {
+    if (wallet === null) {
       setError('wallet must be connected')
       return
     }

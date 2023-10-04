@@ -48,9 +48,9 @@ export const POST = async (req: NextRequest) => {
         status: 200,
       },
     )
-  } catch (error) {
+  } catch (error: any) {
     // handle response error
-    if (error.response) {
+    if (error && error.response) {
       return new Response(JSON.stringify(error.response.data), {
         status: error.response.status,
       })

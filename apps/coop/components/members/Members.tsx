@@ -1,6 +1,7 @@
 'use client'
 
 import { WalletContext } from 'chora'
+import { Result } from 'chora/components'
 import { useContext, useEffect, useState } from 'react'
 
 import MemberPreview from '@components/members/MemberPreview'
@@ -62,7 +63,7 @@ const Members = () => {
       </div>
       {!error && !sortedMembers && <div>{'loading...'}</div>}
       {sortedMembers && sortedMembers.length === 0 && (
-        <div>{'no sortedMembers found'}</div>
+        <div>{'no members found'}</div>
       )}
       {sortedMembers &&
         sortedMembers.map((member: any) => (
@@ -71,7 +72,11 @@ const Members = () => {
             member={member['member']}
           />
         ))}
-      {error && <div>{error}</div>}
+      {error && (
+        <div className={styles.boxText}>
+          <Result error={error} />
+        </div>
+      )}
     </div>
   )
 }

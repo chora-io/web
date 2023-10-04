@@ -4,5 +4,5 @@
 
 .page h1 {
   display: inline-block;
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }

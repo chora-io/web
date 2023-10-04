@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const HomePage = () => (
   <div className={styles.page} style={{ alignItems: 'center' }}>
     <div>
-      <h1>{'user account management'}</h1>
+      <h1>{'user account and profile'}</h1>
     </div>
   </div>
 )

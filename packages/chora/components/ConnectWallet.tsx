@@ -34,7 +34,7 @@ const ConnectWallet = () => {
       selected = localStorage.getItem(cachedNetworkKey) || defaultNetwork
 
       // loading complete and wallet unavailable
-    } else if (wallet === undefined) {
+    } else if (wallet === null) {
       address = ''
       connected = false
       selected = network || defaultNetwork

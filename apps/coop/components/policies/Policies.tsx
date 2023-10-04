@@ -1,6 +1,7 @@
 'use client'
 
 import { WalletContext } from 'chora'
+import { Result } from 'chora/components'
 import { useContext, useEffect, useState } from 'react'
 
 import GroupPolicyPreview from '@components/policies/PolicyPreview'
@@ -69,7 +70,11 @@ const Policies = () => {
         sortedPolicies.map((policy: any) => (
           <GroupPolicyPreview key={policy['address']} policy={policy} />
         ))}
-      {error && <div>{error}</div>}
+      {error && (
+        <div className={styles.boxText}>
+          <Result error={error} />
+        </div>
+      )}
     </div>
   )
 }

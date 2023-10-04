@@ -25,7 +25,7 @@ export const signAndBroadcast = async (
     .then((res) => res.json())
     .then((res) => {
       // throw error if response includes error code
-      if (res.code !== undefined) {
+      if (res.code) {
         throw Error(res.message)
       }
 

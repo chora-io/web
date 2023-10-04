@@ -45,12 +45,6 @@ const Switch = () => {
               <h3>{'id'}</h3>
               <p>{ca.id}</p>
             </div>
-            {error && activeAccount && activeAccount.id === ca.id && (
-              <div className={styles.boxText}>
-                <h3>{'error'}</h3>
-                <p>{error}</p>
-              </div>
-            )}
             {!activeAccount || activeAccount.id !== ca.id ? (
               <button
                 className={styles.button}
@@ -71,14 +65,20 @@ const Switch = () => {
             </button>
           </div>
         ))}
-      <div className={styles.boxItem}>
-        {activeAccounts && activeAccounts.length > 0 && (
+      {activeAccounts && activeAccounts.length > 0 && (
+        <div className={styles.boxItem}>
           <button className={styles.button} onClick={removeAccounts}>
             {'remove all accounts from list'}
           </button>
-        )}
-      </div>
-      <Result error={error} />
+        </div>
+      )}
+      {error && (
+        <div className={styles.boxItem}>
+          <div className={styles.boxText}>
+            <Result error={error} />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
