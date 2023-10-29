@@ -1,5 +1,0 @@
-@import 'chora/styles/main.css';
-
-.dark-theme {
-  composes: dark-theme from 'chora/styles/main.css';
-}

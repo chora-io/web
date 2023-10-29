@@ -5,7 +5,7 @@ import Group from '@components/home/Group'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'coop | home',
+  title: 'chora | chora cooperative',
 }
 
 const HomePage = () => (

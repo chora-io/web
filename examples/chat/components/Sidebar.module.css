@@ -1,0 +1,7 @@
+.sidebar {
+  composes: sidebar from '../../../node_modules/chora/styles/sidebar.css';
+}
+
+.active {
+  composes: sidebar-link-active from '../../../node_modules/chora/styles/sidebar.css';
+}

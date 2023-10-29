@@ -41,7 +41,7 @@ const Header = () => {
               alt="chora"
               src={darkTheme ? choraLogoDark : choraLogoLight}
             />
-            <div>{'chora'}</div>
+            <div>{'chora '}<span style={{ opacity: '0.75' }}>{'protocol'}</span></div>
           </Link>
         </div>
         <div className={styles.menu}>
@@ -67,15 +67,10 @@ const Header = () => {
                   {'scan'}
                 </Link>
               </li>
-              <li>
-                <Link href={'http://' + window.location.hostname + ':8005'}>
-                  {'user'}
-                </Link>
-              </li>
               <li className={styles.divider}>{'|'}</li>
               <li>
                 <Link href="https://docs.chora.io" target="_blank">
-                  {'docs'}
+                  {'docs ↗'}
                 </Link>
               </li>
             </ul>
@@ -93,13 +88,10 @@ const Header = () => {
               <li>
                 <Link href="/scan">{'scan'}</Link>
               </li>
-              <li>
-                <Link href="/user">{'user'}</Link>
-              </li>
               <li className={styles.divider}>{'|'}</li>
               <li>
                 <Link href="https://docs.chora.io" target="_blank">
-                  {'docs'}
+                  {'docs ↗'}
                 </Link>
               </li>
             </ul>

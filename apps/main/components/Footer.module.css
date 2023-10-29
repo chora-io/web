@@ -1,0 +1,11 @@
+.footer {
+  composes: footer from 'chora/styles/footer.css';
+}
+
+.title {
+  composes: footer-title from 'chora/styles/footer.css';
+}
+
+.list {
+  composes: footer-list from 'chora/styles/footer.css';
+}

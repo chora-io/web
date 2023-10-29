@@ -1,7 +1,7 @@
 /* header */
 
 .header {
-  background: var(--background-primary-transparent);
+  background: var(--background-primary);
   box-shadow: var(--box-shadow);
   height: var(--header-height);
   position: fixed;

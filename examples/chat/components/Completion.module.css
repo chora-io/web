@@ -1,0 +1,15 @@
+.box {
+  composes: box from '../../../node_modules/chora/styles/box.css';
+}
+
+.boxHeader {
+  composes: box-header from '../../../node_modules/chora/styles/box.css';
+}
+
+.boxResultBelow {
+  composes: box-result-below from '../../../node_modules/chora/styles/box.css';
+}
+
+.form {
+  composes: form from '../../../node_modules/chora/styles/form.css';
+}

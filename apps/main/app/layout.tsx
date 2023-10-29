@@ -1,5 +1,6 @@
 import { ThemeContextProvider } from 'chora'
 
+import Footer from '@components/Footer'
 import Header from '@components/Header'
 
 import './globals.css'
@@ -11,6 +12,7 @@ const Layout = ({ children }: any) => (
         <ThemeContextProvider>
           <Header />
           {children}
+          <Footer />
         </ThemeContextProvider>
       </main>
     </body>

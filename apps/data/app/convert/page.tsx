@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'data | convert',
 }
 
-const HashPage = () => (
+const ConvertPage = () => (
   <div className={styles.page}>
     <div>
       <ConvertData />
@@ -16,4 +16,4 @@ const HashPage = () => (
   </div>
 )
 
-export default HashPage
+export default ConvertPage

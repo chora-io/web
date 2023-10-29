@@ -1,7 +1,0 @@
-.page {
-  composes: page-with-sidebar from 'chora/styles/page.css';
-}
-
-.page div {
-  margin-bottom: 10% !important;
-}

@@ -5,14 +5,8 @@ import Background from '@components/Background'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'chora | home',
+  title: 'chora protocol | distributed ledger technology',
 }
-
-const docsLink = 'https://docs.chora.io'
-const notionLink =
-  'https://chora.notion.site/What-is-Chora-f188f982c4c34792b067e644810a488d'
-const regenLink =
-  'https://www.mintscan.io/regen/validators/regenvaloper1t8p3zdu3h8qzggfmvvvmtdnaj4trcsfh79xp4e'
 
 const HomePage = () => {
   return (
@@ -20,7 +14,7 @@ const HomePage = () => {
       <Background />
       <div className={styles.sectionMain}>
         <div>
-          <h1>{'chora'}</h1>
+          <h1>{'chora '}<span style={{ opacity: '0.75' }}>{'protocol'}</span></h1>
           <p>
             <i>{'the grass is always greener on the decentralized web'}</i>
           </p>
@@ -31,32 +25,28 @@ const HomePage = () => {
         <div>
           <p>
             {
-              'We are prototyping software tools and services for commons governance and ecological regeneration using distributed ledger technologies.'
+              'Chora Protocol is experimental software that leverages distributed ledger technology for commons governance and ecological regeneration.'
             }
           </p>
           <p>
-            {'We also run a validator on '}
-            <a href={regenLink} target="_blank">
-              {'Regen'}
+            {
+              'Chora Protocol is currently stewarded by '
+            }
+            <a href="https://chora.studio" target="_blank">
+              {'Chora Studio'}
             </a>
             {
-              ' in addition to multiple validators on test networks including Chora Testnet and Regen Redwood.'
+              ', a software research and development company building distributed ledger technologies.'
             }
           </p>
           <div className={styles.sectionTextLinks}>
-            <a href={notionLink} target="_blank">
-              {'learn more'}
+            <a href="https://docs.chora.io" target="_blank">
+              {'view documentation ↗'}
             </a>
-            <a href={docsLink} target="_blank">
-              {'view docs'}
+            <a href="https://github.com/choraio" target="_blank">
+              {'view repositories ↗'}
             </a>
           </div>
-        </div>
-      </div>
-      <div className={styles.sectionMain}>
-        <div>
-          <h1>{'connect'}</h1>
-          <p>{'contact [ at ] chora.io'}</p>
         </div>
       </div>
     </div>

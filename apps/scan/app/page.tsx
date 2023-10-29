@@ -5,7 +5,7 @@ import Chains from '@components/home/Chains'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'scan | home',
+  title: 'chora | network scanner',
 }
 
 const HomePage = () => (

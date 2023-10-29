@@ -1,7 +1,7 @@
 {
-  "name": "scan",
+  "name": "user",
   "private": true,
-  "description": "network scanner",
+  "description": "user example",
   "version": "0.0.0",
   "homepage": "https://chora.io",
   "bugs": {
@@ -12,17 +12,16 @@
     "url": "https://github.com/choraio/web"
   },
   "scripts": {
+    "dev": "next dev",
     "build": "next build",
-    "dev": "next dev -p 8004",
-    "start": "next start -p 8004",
+    "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
     "test": "echo 'test not configured'",
-    "clean": "rm -rf .next .turbo node_modules"
+    "clean": "rm -rf .next node_modules"
   },
   "dependencies": {
-    "chora": "workspace:*",
-    "cosmos": "workspace:*",
+    "chora": "git://github.com/choraio/web.git#main",
     "next": "^14",
     "react": "^18",
     "react-dom": "^18"

@@ -1,4 +1,4 @@
-import { ThemeContextProvider, WalletContextProvider } from 'chora'
+import { ThemeContextProvider, WalletContextProvider } from 'chora/index'
 import { Header } from 'chora/components'
 
 import Sidebar from '@components/Sidebar'
