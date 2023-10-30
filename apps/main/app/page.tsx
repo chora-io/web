@@ -5,7 +5,7 @@ import Background from '@components/Background'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'chora protocol | distributed ledger technology',
+  title: 'chora | distributed ledger technology',
 }
 
 const HomePage = () => {
@@ -14,7 +14,7 @@ const HomePage = () => {
       <Background />
       <div className={styles.sectionMain}>
         <div>
-          <h1>{'chora '}<span style={{ opacity: '0.75' }}>{'protocol'}</span></h1>
+          <h1>{'chora '}</h1>
           <p>
             <i>{'the grass is always greener on the decentralized web'}</i>
           </p>
@@ -25,18 +25,18 @@ const HomePage = () => {
         <div>
           <p>
             {
-              'Chora Protocol is experimental software that leverages distributed ledger technology for commons governance and ecological regeneration.'
+              'Chora is experimental software for commons governance and ecological regeneration built with distributed ledger technology.'
             }
           </p>
           <p>
             {
-              'Chora Protocol is currently stewarded by '
+              'Chora is stewarded by '
             }
             <a href="https://chora.studio" target="_blank">
               {'Chora Studio'}
             </a>
             {
-              ', a software research and development company building distributed ledger technologies.'
+              ', a software research and development company specializing in infrastructure for climate solutions.'
             }
           </p>
           <div className={styles.sectionTextLinks}>

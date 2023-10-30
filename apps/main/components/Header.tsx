@@ -41,7 +41,7 @@ const Header = () => {
               alt="chora"
               src={darkTheme ? choraLogoDark : choraLogoLight}
             />
-            <div>{'chora '}<span style={{ opacity: '0.75' }}>{'protocol'}</span></div>
+            <div>{'chora '}</div>
           </Link>
         </div>
         <div className={styles.menu}>
