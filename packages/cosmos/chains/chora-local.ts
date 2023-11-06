@@ -80,9 +80,9 @@ export const choraLocalX = {
     {
       moduleName: 'geonode',
       documentation: 'https://docs.chora.io/specs/geonode',
-      gitRepository: 'https://github.com/choraio/mods',
+      gitRepository: 'https://github.com/chora-io/mods',
       gitVersion: 'v0.0.0',
-      gitVersionLink: 'https://github.com/choraio/mods/tree/main',
+      gitVersionLink: 'https://github.com/chora-io/mods/tree/main',
     },
     {
       moduleName: 'group',
@@ -102,9 +102,9 @@ export const choraLocalX = {
     {
       moduleName: 'voucher',
       documentation: 'https://docs.chora.io/specs/voucher',
-      gitRepository: 'https://github.com/choraio/mods',
+      gitRepository: 'https://github.com/chora-io/mods',
       gitVersion: 'v0.0.0',
-      gitVersionLink: 'https://github.com/choraio/mods/tree/main',
+      gitVersionLink: 'https://github.com/chora-io/mods/tree/main',
     },
   ],
 }

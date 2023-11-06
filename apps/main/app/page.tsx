@@ -43,7 +43,7 @@ const HomePage = () => {
             <a href="https://docs.chora.io" target="_blank">
               {'view documentation ↗'}
             </a>
-            <a href="https://github.com/choraio" target="_blank">
+            <a href="https://github.com/chora-io" target="_blank">
               {'view repositories ↗'}
             </a>
           </div>

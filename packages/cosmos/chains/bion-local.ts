@@ -58,9 +58,9 @@ export const bionLocalX = {
     {
       moduleName: 'validator',
       documentation: 'https://docs.chora.io/specs/validator',
-      gitRepository: 'https://github.com/choraio/mods',
+      gitRepository: 'https://github.com/chora-io/mods',
       gitVersion: 'v0.0.0',
-      gitVersionLink: 'https://github.com/choraio/mods/main',
+      gitVersionLink: 'https://github.com/chora-io/mods/main',
     },
   ],
 }

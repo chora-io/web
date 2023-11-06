@@ -5,11 +5,11 @@
   "version": "0.0.0",
   "homepage": "https://chora.io",
   "bugs": {
-    "url": "https://github.com/choraio/web/issues"
+    "url": "https://github.com/chora-io/web/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/choraio/web"
+    "url": "https://github.com/chora-io/web"
   },
   "scripts": {
     "dev": "next dev",
@@ -21,7 +21,7 @@
     "clean": "rm -rf .next node_modules"
   },
   "dependencies": {
-    "chora": "git://github.com/choraio/web.git#main",
+    "chora": "git://github.com/chora-io/web.git#main",
     "next": "^14",
     "openai": "^3",
     "react": "^18",

@@ -7,11 +7,11 @@
   "main": "index.ts",
   "homepage": "https://chora.io",
   "bugs": {
-    "url": "https://github.com/choraio/web/issues"
+    "url": "https://github.com/chora-io/web/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/choraio/web"
+    "url": "https://github.com/chora-io/web"
   },
   "scripts": {
     "build": "ts-node ./build.ts",
