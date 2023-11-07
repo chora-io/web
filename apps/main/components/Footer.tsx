@@ -68,24 +68,16 @@ const Footer = () => {
           ) : (
             <ul>
               <li>
-                <Link href="/coop">
-                  {'chora cooperative'}
-                </Link>
+                <Link href="/coop">{'chora cooperative'}</Link>
               </li>
               <li>
-                <Link href="/data">
-                  {'data management'}
-                </Link>
+                <Link href="/data">{'data management'}</Link>
               </li>
               <li>
-                <Link href="/mods">
-                  {'blockchain modules'}
-                </Link>
+                <Link href="/mods">{'blockchain modules'}</Link>
               </li>
               <li>
-                <Link href="/scan">
-                  {'network scanner'}
-                </Link>
+                <Link href="/scan">{'network scanner'}</Link>
               </li>
             </ul>
           )}

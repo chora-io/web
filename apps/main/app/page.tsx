@@ -29,9 +29,7 @@ const HomePage = () => {
             }
           </p>
           <p>
-            {
-              'Chora is stewarded by '
-            }
+            {'Chora is stewarded by '}
             <a href="https://chora.studio" target="_blank">
               {'Chora Studio'}
             </a>
