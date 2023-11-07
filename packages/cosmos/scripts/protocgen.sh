@@ -13,7 +13,7 @@ for dir in $PROTO_DIRS; do
   buf alpha protoc \
     -I "proto" \
     --plugin=${TS_PROTO_BIN} \
-    --ts_proto_opt="esModuleInterop=true,forceLong=long,useOptionals=messages,outputTypeRegistry=true" \
+    --ts_proto_opt="esModuleInterop=true,forceLong=long,outputTypeRegistry=true,useExactTypes=false,useOptionals=messages" \
     --ts_proto_out=api \
     $(find "${dir}" -maxdepth 1 -name '*.proto')
 done

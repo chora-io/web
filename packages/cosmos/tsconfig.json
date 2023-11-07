@@ -5,18 +5,25 @@
     "outDir": "dist",
     "lib": ["dom", "dom.iterable", "esnext"],
     "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "./dist/types",
+    "emitDeclarationOnly": true,
+        "disableSizeLimit": true,
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "incremental": true
+    "resolveJsonModule": true
   },
   "include": [
+    "index.ts",
     "api",
     "chains",
     "modules"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "esm": true
+  }
 }
