@@ -2,7 +2,7 @@ import {
   AuthContextProvider,
   ThemeContextProvider,
   WalletContextProvider,
-} from 'chora'
+} from 'chora/contexts'
 import { Header } from 'chora/components'
 
 import Sidebar from '@components/Sidebar'
