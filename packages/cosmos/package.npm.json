@@ -1,0 +1,16 @@
+{
+  "name": "@chora-io/cosmos",
+  "description": "cosmos webkit",
+  "version": "0.1.0-alpha2",
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "homepage": "https://chora.io",
+  "bugs": {
+    "url": "https://github.com/chora-io/web/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chora-io/web"
+  }
+}

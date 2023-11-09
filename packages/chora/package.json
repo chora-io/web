@@ -13,6 +13,7 @@
   },
   "scripts": {
     "build": "tsup",
+    "postbuild": "cp -r assets dist && cp -r styles dist && cp package.npm.json dist/package.json",
     "lint": "eslint --ext js,jsx,ts,tsx components/**/** contexts/**/** hooks/**/** utils/**/**",
     "format": "prettier --write components contexts hooks utils",
     "test": "echo 'test not configured'",
