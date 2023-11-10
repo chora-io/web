@@ -1,8 +1,7 @@
-import * as React from 'react'
-import { useEffect, useState } from 'react'
-
 import { MsgSubmitProposal as Msg } from 'cosmos/api/cosmos/group/v1/tx'
 import { execFromJSON } from 'cosmos/api/cosmos/group/v1/types'
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
 import InputAddress from '../InputAddress'
 import InputIRI from '../InputIRI'

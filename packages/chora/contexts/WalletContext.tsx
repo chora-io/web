@@ -1,10 +1,6 @@
 'use client'
 
-import * as React from 'react'
-import { createContext, useEffect, useState } from 'react'
-
 import { ChainInfo, Key } from '@keplr-wallet/types'
-
 import {
   bionLocal,
   choraLocal,
@@ -13,6 +9,8 @@ import {
   regenMainnet,
   regenRedwood,
 } from 'cosmos/chains'
+import * as React from 'react'
+import { createContext, useEffect, useState } from 'react'
 
 const cachedAddressKey = 'chora-web-address'
 const cachedConnectedKey = 'chora-web-connected'

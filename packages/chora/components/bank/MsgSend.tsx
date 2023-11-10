@@ -1,7 +1,6 @@
+import { MsgSend as Msg } from '@keplr-wallet/proto-types/cosmos/bank/v1beta1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-
-import { MsgSend as Msg } from '@keplr-wallet/proto-types/cosmos/bank/v1beta1/tx'
 
 import InputAddress from '../InputAddress'
 import InputDenom from '../InputDenom'

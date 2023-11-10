@@ -1,8 +1,8 @@
 'use client'
 
-import { WalletContext } from 'chora'
 import { ResultTx } from 'chora/components'
 import { MsgGrant as MsgInputs } from 'chora/components/authz'
+import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
 import { useContext, useState } from 'react'
 

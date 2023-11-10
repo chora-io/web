@@ -3,7 +3,7 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+      "outputs": [".next/**", "!.next/cache/**"]
     },
     "chora#build": {
       "dependsOn": ["^build"],
@@ -16,8 +16,7 @@
       "cache": false
     },
     "dev": {
-      "cache": false,
-      "dependsOn": ["^build"]
+      "cache": false
     },
     "format": {
       "cache": false
@@ -29,7 +28,6 @@
       "cache": false
     },
     "test": {
-      "dependsOn": ["^build"],
       "outputs": []
     }
   }

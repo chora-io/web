@@ -1,7 +1,7 @@
 'use client'
 
-import { WalletContext } from 'chora'
 import { Result } from 'chora/components'
+import { WalletContext } from 'chora/contexts'
 import { formatTimestamp } from 'chora/utils'
 import { useContext } from 'react'
 

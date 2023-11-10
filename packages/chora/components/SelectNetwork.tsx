@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import {
   bionLocal,
   choraLocal,
@@ -7,6 +5,7 @@ import {
   regenLocal,
   regenRedwood,
 } from 'cosmos/chains'
+import * as React from 'react'
 
 const defaultId = 'network'
 const defaultLabel = 'network'

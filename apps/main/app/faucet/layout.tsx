@@ -1,4 +1,4 @@
-import { WalletContextProvider } from 'chora'
+import { WalletContextProvider } from 'chora/contexts'
 
 const FaucetLayout = ({ children }: any) => {
   return <WalletContextProvider>{children}</WalletContextProvider>

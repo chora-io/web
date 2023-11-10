@@ -1,8 +1,8 @@
 'use client'
 
-import { WalletContext } from 'chora'
 import { Result } from 'chora/components'
 import { InputContentHash, InputContentHashJSON } from 'chora/components/data'
+import { WalletContext } from 'chora/contexts'
 import { useContext, useState } from 'react'
 
 import SelectInput from '../SelectInput'

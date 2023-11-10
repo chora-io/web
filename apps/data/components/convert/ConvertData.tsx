@@ -1,12 +1,12 @@
 'use client'
 
-import { WalletContext } from 'chora'
 import { InputJSON, Result } from 'chora/components'
 import {
   SelectDigestAlgorithm,
   SelectGraphCanon,
   SelectGraphMerkle,
 } from 'chora/components/data'
+import { WalletContext } from 'chora/contexts'
 import * as blake from 'blakejs'
 import { Buffer } from 'buffer'
 import * as jsonld from 'jsonld'

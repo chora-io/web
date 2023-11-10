@@ -1,10 +1,9 @@
 'use client'
 
+import { WalletContext } from 'chora/contexts'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useContext } from 'react'
-
-import { WalletContext } from 'chora'
 
 import styles from './Sidebar.module.css'
 

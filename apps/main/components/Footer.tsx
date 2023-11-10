@@ -1,11 +1,12 @@
 'use client'
 
-import { ThemeContext } from 'chora'
-import choraLogoDark from 'chora/assets/images/chora_dark_small.png'
-import choraLogoLight from 'chora/assets/images/chora_light_small.png'
+import { ThemeContext } from 'chora/contexts'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useContext } from 'react'
+
+import choraLogoDark from 'chora/assets/images/chora_dark_small.png'
+import choraLogoLight from 'chora/assets/images/chora_light_small.png'
 
 import styles from './Footer.module.css'
 

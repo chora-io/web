@@ -1,11 +1,10 @@
 'use client'
 
-import { useContext, useState } from 'react'
-
-import { WalletContext } from 'chora'
 import { ResultTx } from 'chora/components'
 import { MsgAddAllowedBridgeChain as MsgInputs } from 'chora/components/ecocredit'
+import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
+import { useContext, useState } from 'react'
 
 import styles from './MsgAddAllowedBridgeChain.module.css'
 

@@ -1,7 +1,6 @@
+import { MsgUpdateGroupPolicyAdmin as Msg } from 'cosmos/api/cosmos/group/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-
-import { MsgUpdateGroupPolicyAdmin as Msg } from 'cosmos/api/cosmos/group/v1/tx'
 
 import InputAddress from '../InputAddress'
 

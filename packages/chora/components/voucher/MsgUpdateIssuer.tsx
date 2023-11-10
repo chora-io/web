@@ -1,8 +1,7 @@
+import { MsgUpdateIssuer as Msg } from 'cosmos/api/chora/voucher/v1/msg'
+import * as Long from 'long'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-import * as Long from 'long'
-
-import { MsgUpdateIssuer as Msg } from 'cosmos/api/chora/voucher/v1/msg'
 
 import InputAddress from '../InputAddress'
 import InputNumber from '../InputNumber'

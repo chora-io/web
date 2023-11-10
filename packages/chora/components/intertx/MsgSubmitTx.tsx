@@ -1,7 +1,6 @@
+import { MsgSubmitTx as Msg } from 'cosmos/api/regen/intertx/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-
-import { MsgSubmitTx as Msg } from 'cosmos/api/regen/intertx/v1/tx'
 
 import InputAddress from '../InputAddress'
 import InputString from '../InputString'

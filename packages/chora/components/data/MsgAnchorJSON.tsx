@@ -1,7 +1,6 @@
+import { MsgAnchor as Msg } from 'cosmos/api/regen/data/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-
-import { MsgAnchor as Msg } from 'cosmos/api/regen/data/v1/tx'
 
 import InputAddress from '../InputAddress'
 import InputContentHashJSON from './InputContentHashJSON'

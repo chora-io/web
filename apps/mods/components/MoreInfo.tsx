@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 
-import { WalletContext } from 'chora'
+import { WalletContext } from 'chora/contexts'
 import {
   bionLocal,
   bionLocalX,

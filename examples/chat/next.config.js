@@ -1,11 +1,8 @@
 /** @type {import('next').NextConfig} */
 
-const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
-
-const nextConfig = (phase) => {
+const nextConfig = () => {
   return {
-    basePath: phase === PHASE_DEVELOPMENT_SERVER ? '' : '/chat',
-    transpilePackages: ['chora'],
+    basePath: '',
   }
 }
 

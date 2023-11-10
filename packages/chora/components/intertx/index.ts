@@ -1,4 +1,2 @@
-import MsgRegisterAccount from './MsgRegisterAccount'
-import MsgSubmitTx from './MsgSubmitTx'
-
-export { MsgRegisterAccount, MsgSubmitTx }
+export { default as MsgRegisterAccount } from './MsgRegisterAccount'
+export { default as MsgSubmitTx } from './MsgSubmitTx'

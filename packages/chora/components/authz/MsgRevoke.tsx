@@ -1,7 +1,6 @@
+import { MsgRevoke as Msg } from 'cosmos/api/cosmos/authz/v1beta1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-
-import { MsgRevoke as Msg } from 'cosmos/api/cosmos/authz/v1beta1/tx'
 
 import InputAddress from '../InputAddress'
 import SelectMessage from '../SelectMessage'

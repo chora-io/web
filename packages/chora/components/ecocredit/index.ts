@@ -1,49 +1,23 @@
-import MsgAddAllowedBridgeChain from './MsgAddAllowedBridgeChain'
-import MsgAddClassCreator from './MsgAddClassCreator'
-import MsgAddCreditType from './MsgAddCreditType'
-import MsgBridge from './MsgBridge'
-import MsgBridgeReceive from './MsgBridgeReceive'
-import MsgCancel from './MsgCancel'
-import MsgCreateBatch from './MsgCreateBatch'
-import MsgCreateClass from './MsgCreateClass'
-import MsgCreateProject from './MsgCreateProject'
-import MsgMintBatchCredits from './MsgMintBatchCredits'
-import MsgRemoveAllowedBridgeChain from './MsgRemoveAllowedBridgeChain'
-import MsgRemoveClassCreator from './MsgRemoveClassCreator'
-import MsgRetire from './MsgRetire'
-import MsgSealBatch from './MsgSealBatch'
-import MsgSend from './MsgSend'
-import MsgSetClassCreatorAllowlist from './MsgSetClassCreatorAllowlist'
-import MsgUpdateBatchMetadata from './MsgUpdateBatchMetadata'
-import MsgUpdateClassAdmin from './MsgUpdateClassAdmin'
-import MsgUpdateClassFee from './MsgUpdateClassFee'
-import MsgUpdateClassIssuers from './MsgUpdateClassIssuers'
-import MsgUpdateClassMetadata from './MsgUpdateClassMetadata'
-import MsgUpdateProjectAdmin from './MsgUpdateProjectAdmin'
-import MsgUpdateProjectMetadata from './MsgUpdateProjectMetadata'
-
-export {
-  MsgAddAllowedBridgeChain,
-  MsgAddClassCreator,
-  MsgAddCreditType,
-  MsgBridge,
-  MsgBridgeReceive,
-  MsgCancel,
-  MsgCreateBatch,
-  MsgCreateClass,
-  MsgCreateProject,
-  MsgMintBatchCredits,
-  MsgRemoveAllowedBridgeChain,
-  MsgRemoveClassCreator,
-  MsgRetire,
-  MsgSealBatch,
-  MsgSend,
-  MsgSetClassCreatorAllowlist,
-  MsgUpdateBatchMetadata,
-  MsgUpdateClassAdmin,
-  MsgUpdateClassFee,
-  MsgUpdateClassIssuers,
-  MsgUpdateClassMetadata,
-  MsgUpdateProjectAdmin,
-  MsgUpdateProjectMetadata,
-}
+export { default as MsgAddAllowedBridgeChain } from './MsgAddAllowedBridgeChain'
+export { default as MsgAddClassCreator } from './MsgAddClassCreator'
+export { default as MsgAddCreditType } from './MsgAddCreditType'
+export { default as MsgBridge } from './MsgBridge'
+export { default as MsgBridgeReceive } from './MsgBridgeReceive'
+export { default as MsgCancel } from './MsgCancel'
+export { default as MsgCreateBatch } from './MsgCreateBatch'
+export { default as MsgCreateClass } from './MsgCreateClass'
+export { default as MsgCreateProject } from './MsgCreateProject'
+export { default as MsgMintBatchCredits } from './MsgMintBatchCredits'
+export { default as MsgRemoveAllowedBridgeChain } from './MsgRemoveAllowedBridgeChain'
+export { default as MsgRemoveClassCreator } from './MsgRemoveClassCreator'
+export { default as MsgRetire } from './MsgRetire'
+export { default as MsgSealBatch } from './MsgSealBatch'
+export { default as MsgSend } from './MsgSend'
+export { default as MsgSetClassCreatorAllowlist } from './MsgSetClassCreatorAllowlist'
+export { default as MsgUpdateBatchMetadata } from './MsgUpdateBatchMetadata'
+export { default as MsgUpdateClassAdmin } from './MsgUpdateClassAdmin'
+export { default as MsgUpdateClassFee } from './MsgUpdateClassFee'
+export { default as MsgUpdateClassIssuers } from './MsgUpdateClassIssuers'
+export { default as MsgUpdateClassMetadata } from './MsgUpdateClassMetadata'
+export { default as MsgUpdateProjectAdmin } from './MsgUpdateProjectAdmin'
+export { default as MsgUpdateProjectMetadata } from './MsgUpdateProjectMetadata'

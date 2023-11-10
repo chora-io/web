@@ -1,9 +1,8 @@
 'use client'
 
-import { useContext, useState } from 'react'
-
-import { WalletContext } from 'chora'
 import { InputAddress, InputNumber, Result } from 'chora/components'
+import { WalletContext } from 'chora/contexts'
+import { useContext, useState } from 'react'
 
 import styles from './QueryBalance.module.css'
 

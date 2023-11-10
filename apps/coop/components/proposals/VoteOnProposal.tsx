@@ -1,8 +1,8 @@
 'use client'
 
-import { WalletContext } from 'chora'
 import { InputString, ResultTx } from 'chora/components'
 import { SelectExecution, SelectVote } from 'chora/components/group'
+import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'
 import { MsgVote } from 'cosmos/api/cosmos/group/v1/tx'

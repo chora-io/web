@@ -1,11 +1,10 @@
 'use client'
 
-import { useContext, useState } from 'react'
-
-import { WalletContext } from 'chora'
 import { ResultTx } from 'chora/components'
 import { MsgUpdateIssuer as MsgInputs } from 'chora/components/voucher'
+import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
+import { useContext, useState } from 'react'
 
 import styles from './MsgUpdateIssuer.module.css'
 

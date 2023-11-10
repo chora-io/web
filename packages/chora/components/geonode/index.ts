@@ -1,5 +1,3 @@
-import MsgCreate from './MsgCreate'
-import MsgUpdateCurator from './MsgUpdateCurator'
-import MsgUpdateMetadata from './MsgUpdateMetadata'
-
-export { MsgCreate, MsgUpdateCurator, MsgUpdateMetadata }
+export { default as MsgCreate } from './MsgCreate'
+export { default as MsgUpdateCurator } from './MsgUpdateCurator'
+export { default as MsgUpdateMetadata } from './MsgUpdateMetadata'

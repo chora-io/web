@@ -1,6 +1,6 @@
+import { Buffer } from 'buffer'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-import { Buffer } from 'buffer'
 
 import InputHash from './InputHash'
 import SelectDataType from './SelectDataType'

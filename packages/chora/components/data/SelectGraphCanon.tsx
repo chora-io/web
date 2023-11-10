@@ -1,6 +1,5 @@
-import * as React from 'react'
-
 import { GraphCanonicalizationAlgorithm } from 'cosmos/api/regen/data/v1/types'
+import * as React from 'react'
 
 const defaultId = 'graph-canon'
 const defaultLabel = 'canonicalization algorithm'

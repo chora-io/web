@@ -1,6 +1,5 @@
-import * as React from 'react'
-
 import { DigestAlgorithm } from 'cosmos/api/regen/data/v1/types'
+import * as React from 'react'
 
 const defaultId = 'digest-algorithm'
 const defaultLabel = 'digest algorithm'

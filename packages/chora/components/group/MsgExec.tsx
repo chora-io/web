@@ -1,8 +1,7 @@
+import { MsgExec as Msg } from 'cosmos/api/cosmos/group/v1/tx'
+import * as Long from 'long'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-import * as Long from 'long'
-
-import { MsgExec as Msg } from 'cosmos/api/cosmos/group/v1/tx'
 
 import InputAddress from '../InputAddress'
 import InputNumber from '../InputNumber'

@@ -1,8 +1,7 @@
+import { MsgUpdateCurator as Msg } from 'cosmos/api/chora/geonode/v1/msg'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import * as Long from 'long'
-
-import { MsgUpdateCurator as Msg } from 'cosmos/api/chora/geonode/v1/msg'
 
 import InputAddress from '../InputAddress'
 import InputNumber from '../InputNumber'

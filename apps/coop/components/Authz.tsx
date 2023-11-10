@@ -1,6 +1,6 @@
 'use client'
 
-import { WalletContext } from 'chora'
+import { WalletContext } from 'chora/contexts'
 import { useParams } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 

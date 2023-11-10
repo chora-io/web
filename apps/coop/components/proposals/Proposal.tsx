@@ -1,7 +1,7 @@
 'use client'
 
-import { WalletContext } from 'chora'
 import { Result, ResultTx } from 'chora/components'
+import { WalletContext } from 'chora/contexts'
 import { formatTimestamp, signAndBroadcast } from 'chora/utils'
 import { MsgExec } from 'cosmos/api/cosmos/group/v1/tx'
 import * as Long from 'long'

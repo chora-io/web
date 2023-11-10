@@ -12,16 +12,14 @@
     "url": "https://github.com/chora-io/web"
   },
   "scripts": {
-    "build": "tsup",
-    "postbuild": "cp -r assets dist && cp -r styles dist && cp package.npm.json dist/package.json",
-    "lint": "eslint --ext js,jsx,ts,tsx components/**/** contexts/**/** hooks/**/** utils/**/**",
-    "format": "prettier --write components contexts hooks utils",
+    "build": "sh ./scripts/build.sh",
+    "lint": "eslint --ext js,jsx,ts,tsx .",
+    "format": "prettier --write .",
     "test": "echo 'test not configured'",
     "clean": "rm -rf .turbo dist node_modules"
   },
   "dependencies": {
     "cosmos": "workspace:*",
-    "next": "latest",
     "react": "latest",
     "react-dom": "latest"
   },
@@ -34,11 +32,11 @@
     "@typescript-eslint/eslint-plugin": "^6",
     "@typescript-eslint/parser": "^6",
     "autoprefixer": "^10",
+    "copyfiles": "^2",
     "eslint": "^8",
     "postcss": "^8",
     "prettier": "^3",
     "tailwindcss": "^3",
-    "tsup": "^7",
     "typescript": "^5"
   }
 }

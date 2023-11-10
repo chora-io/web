@@ -1,5 +1,3 @@
-import InputAllowance from './InputAllowance'
-import MsgGrantAllowance from './MsgGrantAllowance'
-import MsgRevokeAllowance from './MsgRevokeAllowance'
-
-export { InputAllowance, MsgGrantAllowance, MsgRevokeAllowance }
+export { default as InputAllowance } from './InputAllowance'
+export { default as MsgGrantAllowance } from './MsgGrantAllowance'
+export { default as MsgRevokeAllowance } from './MsgRevokeAllowance'

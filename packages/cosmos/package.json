@@ -12,10 +12,9 @@
     "url": "https://github.com/chora-io/web"
   },
   "scripts": {
-    "build": "sh ./scripts/protocgen.sh && tsup",
-    "postbuild": "cp package.npm.json dist/package.json",
-    "lint": "eslint --ext js,jsx,ts,tsx chains/**/** modules/**",
-    "format": "prettier --write chains modules",
+    "build": "sh ./scripts/build.sh",
+    "lint": "eslint --ext js,jsx,ts,tsx .",
+    "format": "prettier --write .",
     "test": "echo 'test not configured'",
     "clean": "rm -rf .turbo api dist node_modules"
   },
@@ -25,7 +24,6 @@
     "eslint": "^8",
     "prettier": "^3",
     "ts-proto": "^1",
-    "tsup": "^7",
     "typescript": "^5"
   }
 }

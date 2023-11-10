@@ -1,6 +1,5 @@
 'use client'
 
-import { WalletContext } from 'chora'
 import {
   InputString,
   ResultTx,
@@ -8,6 +7,7 @@ import {
   SelectMessage,
 } from 'chora/components'
 import { SelectExecution } from 'chora/components/group'
+import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'
 import { MsgSubmitProposal } from 'cosmos/api/cosmos/group/v1/tx'

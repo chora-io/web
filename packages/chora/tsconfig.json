@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "outDir": "dist",
     "lib": ["dom", "dom.iterable", "esnext"],
     "declaration": true,
     "allowJs": true,
@@ -14,7 +13,6 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "index.ts",
     "global.d.ts",
     "module.d.ts",
     "components",

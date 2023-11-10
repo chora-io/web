@@ -1,7 +1,7 @@
 'use client'
 
-import { AuthContext } from 'chora'
 import { Result } from 'chora/components'
+import { AuthContext } from 'chora/contexts'
 import { useContext } from 'react'
 
 import styles from './Switch.module.css'

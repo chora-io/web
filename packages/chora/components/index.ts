@@ -1,37 +1,17 @@
-import ConnectWallet from './ConnectWallet'
-import Faucet from './Faucet'
-import Header from './Header'
-import InputAddress from './InputAddress'
-import InputDenom from './InputDenom'
-import InputIRI from './InputIRI'
-import InputJSON from './InputJSON'
-import InputNumber from './InputNumber'
-import InputString from './InputString'
-import InputTimestamp from './InputTimestamp'
-import InputURL from './InputURL'
-import Result from './Result'
-import ResultTx from './ResultTx'
-import SelectAccount from './SelectAccount'
-import SelectMessage from './SelectMessage'
-import SelectNetwork from './SelectNetwork'
-import ThemeButton from './ThemeButton'
-
-export {
-  ConnectWallet,
-  Faucet,
-  Header,
-  InputAddress,
-  InputDenom,
-  InputIRI,
-  InputJSON,
-  InputNumber,
-  InputString,
-  InputTimestamp,
-  InputURL,
-  Result,
-  ResultTx,
-  SelectAccount,
-  SelectMessage,
-  SelectNetwork,
-  ThemeButton,
-}
+export { default as ConnectWallet } from './ConnectWallet'
+export { default as Faucet } from './Faucet'
+export { default as Header } from './Header'
+export { default as InputAddress } from './InputAddress'
+export { default as InputDenom } from './InputDenom'
+export { default as InputIRI } from './InputIRI'
+export { default as InputJSON } from './InputJSON'
+export { default as InputNumber } from './InputNumber'
+export { default as InputString } from './InputString'
+export { default as InputTimestamp } from './InputTimestamp'
+export { default as InputURL } from './InputURL'
+export { default as Result } from './Result'
+export { default as ResultTx } from './ResultTx'
+export { default as SelectAccount } from './SelectAccount'
+export { default as SelectMessage } from './SelectMessage'
+export { default as SelectNetwork } from './SelectNetwork'
+export { default as ThemeButton } from './ThemeButton'

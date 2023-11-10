@@ -1,7 +1,7 @@
 'use client'
 
-import { WalletContext } from 'chora'
 import { InputString, Result } from 'chora/components'
+import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import * as jsonld from 'jsonld'
 import { useContext, useState } from 'react'

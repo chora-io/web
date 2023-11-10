@@ -1,12 +1,11 @@
-import * as React from 'react'
-import { useEffect, useState } from 'react'
-import * as Long from 'long'
-
 import {
   DecisionPolicyWindows,
   PercentageDecisionPolicy,
   ThresholdDecisionPolicy,
 } from 'cosmos/api/cosmos/group/v1/types'
+import * as Long from 'long'
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 
 import InputNumber from '../InputNumber'
 import SelectPolicyType from './SelectPolicyType'

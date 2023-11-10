@@ -1,6 +1,4 @@
-import MsgCreate from './MsgCreate'
-import MsgIssue from './MsgIssue'
-import MsgUpdateIssuer from './MsgUpdateIssuer'
-import MsgUpdateMetadata from './MsgUpdateMetadata'
-
-export { MsgCreate, MsgIssue, MsgUpdateIssuer, MsgUpdateMetadata }
+export { default as MsgCreate } from './MsgCreate'
+export { default as MsgIssue } from './MsgIssue'
+export { default as MsgUpdateIssuer } from './MsgUpdateIssuer'
+export { default as MsgUpdateMetadata } from './MsgUpdateMetadata'

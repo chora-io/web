@@ -104,7 +104,11 @@ main {
   color: var(--color-text);
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-weight: 400;
 }
 
@@ -112,7 +116,8 @@ p {
   line-height: 1.75;
 }
 
-a, a:active {
+a,
+a:active {
   color: var(--color-theme);
   font-weight: 400;
   text-decoration: none;

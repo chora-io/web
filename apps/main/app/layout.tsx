@@ -1,4 +1,4 @@
-import { ThemeContextProvider } from 'chora'
+import { ThemeContextProvider } from 'chora/contexts'
 
 import Footer from '@components/Footer'
 import Header from '@components/Header'

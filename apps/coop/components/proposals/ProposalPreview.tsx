@@ -1,4 +1,4 @@
-import { WalletContext } from 'chora'
+import { WalletContext } from 'chora/contexts'
 import Link from 'next/link'
 import { useContext } from 'react'
 

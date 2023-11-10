@@ -1,8 +1,5 @@
 'use client'
 
-import * as React from 'react'
-import { useContext, useState } from 'react'
-
 import {
   bionLocal,
   bionLocalX,
@@ -15,6 +12,9 @@ import {
   regenRedwood,
   regenRedwoodX,
 } from 'cosmos/chains'
+import * as React from 'react'
+import { useContext, useState } from 'react'
+
 import { WalletContext } from '../contexts'
 
 import styles from './Faucet.module.css'

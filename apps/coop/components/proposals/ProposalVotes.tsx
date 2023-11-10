@@ -1,7 +1,7 @@
 'use client'
 
-import { WalletContext } from 'chora'
 import { Result } from 'chora/components'
+import { WalletContext } from 'chora/contexts'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'

@@ -1,43 +1,20 @@
-import InputMember from './InputMember'
-import InputMembers from './InputMembers'
-import InputPolicy from './InputPolicy'
-import MsgCreateGroup from './MsgCreateGroup'
-import MsgCreateGroupPolicy from './MsgCreateGroupPolicy'
-import MsgCreateGroupWithPolicy from './MsgCreateGroupWithPolicy'
-import MsgExec from './MsgExec'
-import MsgLeaveGroup from './MsgLeaveGroup'
-import MsgSubmitProposal from './MsgSubmitProposal'
-import MsgUpdateGroupAdmin from './MsgUpdateGroupAdmin'
-import MsgUpdateGroupMembers from './MsgUpdateGroupMembers'
-import MsgUpdateGroupMetadata from './MsgUpdateGroupMetadata'
-import MsgUpdateGroupPolicyAdmin from './MsgUpdateGroupPolicyAdmin'
-import MsgUpdateGroupPolicyDecisionPolicy from './MsgUpdateGroupPolicyDecisionPolicy'
-import MsgUpdateGroupPolicyMetadata from './MsgUpdateGroupPolicyMetadata'
-import MsgVote from './MsgVote'
-import MsgWithdrawProposal from './MsgWithdrawProposal'
-import SelectExecution from './SelectExecution'
-import SelectPolicyType from './SelectPolicyType'
-import SelectVote from './SelectVote'
-
-export {
-  InputMember,
-  InputMembers,
-  InputPolicy,
-  MsgCreateGroup,
-  MsgCreateGroupPolicy,
-  MsgCreateGroupWithPolicy,
-  MsgExec,
-  MsgLeaveGroup,
-  MsgSubmitProposal,
-  MsgUpdateGroupAdmin,
-  MsgUpdateGroupMembers,
-  MsgUpdateGroupMetadata,
-  MsgUpdateGroupPolicyAdmin,
-  MsgUpdateGroupPolicyDecisionPolicy,
-  MsgUpdateGroupPolicyMetadata,
-  MsgVote,
-  MsgWithdrawProposal,
-  SelectExecution,
-  SelectPolicyType,
-  SelectVote,
-}
+export { default as InputMember } from './InputMember'
+export { default as InputMembers } from './InputMembers'
+export { default as InputPolicy } from './InputPolicy'
+export { default as MsgCreateGroup } from './MsgCreateGroup'
+export { default as MsgCreateGroupPolicy } from './MsgCreateGroupPolicy'
+export { default as MsgCreateGroupWithPolicy } from './MsgCreateGroupWithPolicy'
+export { default as MsgExec } from './MsgExec'
+export { default as MsgLeaveGroup } from './MsgLeaveGroup'
+export { default as MsgSubmitProposal } from './MsgSubmitProposal'
+export { default as MsgUpdateGroupAdmin } from './MsgUpdateGroupAdmin'
+export { default as MsgUpdateGroupMembers } from './MsgUpdateGroupMembers'
+export { default as MsgUpdateGroupMetadata } from './MsgUpdateGroupMetadata'
+export { default as MsgUpdateGroupPolicyAdmin } from './MsgUpdateGroupPolicyAdmin'
+export { default as MsgUpdateGroupPolicyDecisionPolicy } from './MsgUpdateGroupPolicyDecisionPolicy'
+export { default as MsgUpdateGroupPolicyMetadata } from './MsgUpdateGroupPolicyMetadata'
+export { default as MsgVote } from './MsgVote'
+export { default as MsgWithdrawProposal } from './MsgWithdrawProposal'
+export { default as SelectExecution } from './SelectExecution'
+export { default as SelectPolicyType } from './SelectPolicyType'
+export { default as SelectVote } from './SelectVote'

@@ -1,7 +1,6 @@
+import { MsgCreateBatch as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-
-import { MsgCreateBatch as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 
 import InputAddress from '../InputAddress'
 import InputIRI from '../InputIRI'

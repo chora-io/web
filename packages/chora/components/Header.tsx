@@ -1,17 +1,16 @@
 'use client'
 
-import * as React from 'react'
-import { useContext } from 'react'
-
 import Image from 'next/image'
 import Link from 'next/link'
+import * as React from 'react'
+import { useContext } from 'react'
 
 import { ThemeContext } from '../contexts'
 import ConnectWallet from './ConnectWallet'
 import ThemeButton from './ThemeButton'
 
-import choraLogoDark from '../assets/images/chora_dark_icon.png'
-import choraLogoLight from '../assets/images/chora_light_icon.png'
+import choraLogoDark from 'chora/assets/images/chora_dark_icon.png'
+import choraLogoLight from 'chora/assets/images/chora_light_icon.png'
 
 import styles from './Header.module.css'
 
@@ -43,7 +42,7 @@ const Header = () => {
           <Link
             href={
               local
-                ? 'http://' + window.location.hostname + ':8000'
+                ? 'http://' + window.location.hostname + ':3000'
                 : 'https://chora.io'
             }
           >
