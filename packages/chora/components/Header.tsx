@@ -2,29 +2,17 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import * as React from 'react'
 import { useContext } from 'react'
 
 import { ThemeContext } from '../contexts'
-import ConnectWallet from './ConnectWallet'
-import ThemeButton from './ThemeButton'
+import ThemeButton from '../components/ThemeButton'
 
-import choraLogoDark from 'chora/assets/images/chora_dark_icon.png'
-import choraLogoLight from 'chora/assets/images/chora_light_icon.png'
+import choraLogoDark from '../assets/images/chora_dark_small.png'
+import choraLogoLight from '../assets/images/chora_light_small.png'
 
 import styles from './Header.module.css'
 
-const Header = () => {
-  let local = false
-  if (
-    typeof window !== 'undefined' &&
-    (window.location.hostname == '0.0.0.0' ||
-      window.location.hostname == '127.0.0.1' ||
-      window.location.hostname == 'localhost')
-  ) {
-    local = true
-  }
-
+const Header = ({ title, itemsLeft, itemsRight }: any) => {
   const { darkTheme, setDarkTheme } = useContext(ThemeContext)
 
   const toggleTheme = () => {
@@ -37,24 +25,48 @@ const Header = () => {
 
   return (
     <div className={styles.header}>
+      <div style={{ display: 'none' }}>{darkTheme?.toString()}</div>
       <div>
-        <div className={styles.title}>
-          <Link
-            href={
-              local
-                ? 'http://' + window.location.hostname + ':3000'
-                : 'https://chora.io'
-            }
-          >
-            <Image
-              alt="chora"
-              src={darkTheme ? choraLogoDark : choraLogoLight}
-            />
-            <div>{'chora'}</div>
-          </Link>
-        </div>
+        {title ? (
+          <div className={styles.title}>
+            <Link href={title.link || '/'}>
+              <Image
+                alt="chora"
+                src={darkTheme ? choraLogoDark : choraLogoLight}
+              />
+              <div>
+                {'chora '}
+                {title.titleX && (
+                  <span style={{ opacity: '0.75' }}>{title.titleX}</span>
+                )}
+              </div>
+            </Link>
+          </div>
+        ) : (
+          <div />
+        )}
         <div className={styles.menu}>
-          <ConnectWallet />
+          {(itemsLeft || itemsRight) && (
+            <ul>
+              {itemsLeft &&
+                itemsLeft.map((item: any) => (
+                  <li key={item.title}>
+                    <Link href={item.link}>{item.title}</Link>
+                  </li>
+                ))}
+              {itemsLeft && itemsRight && (
+                <li className={styles.divider}>{'|'}</li>
+              )}
+              {itemsRight &&
+                itemsRight.map((item: any) => (
+                  <li key={item.title}>
+                    <Link href={item.link} target="_blank">
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          )}
           <ThemeButton darkTheme={darkTheme} toggleTheme={toggleTheme} />
         </div>
       </div>

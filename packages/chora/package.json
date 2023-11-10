@@ -19,9 +19,9 @@
     "clean": "rm -rf .turbo dist node_modules"
   },
   "dependencies": {
-    "cosmos": "workspace:*",
-    "react": "latest",
-    "react-dom": "latest"
+    "cosmos": "npm:@chora-io/cosmos@v0.1.0-alpha4",
+    "react": "^18",
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@keplr-wallet/proto-types": "^0.12",

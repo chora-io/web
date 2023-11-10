@@ -1,11 +1,74 @@
+/* header */
+
 .header {
-  composes: header from 'chora/styles/header.css';
+  background: var(--background-primary);
+  box-shadow: var(--box-shadow);
+  height: var(--header-height);
+  position: fixed;
+  width: 100vw;
+  z-index: 1;
 }
+
+.header > div {
+  display: flex;
+  height: inherit;
+  justify-content: space-between;
+  margin: 0 1em;
+}
+
+.header button {
+  background: none;
+}
+
+/* title */
 
 .title {
-  composes: header-title from 'chora/styles/header.css';
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 0 2em;
 }
 
+.title a {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.title img {
+  height: 40px;
+  width: 40px;
+}
+
+.title div {
+  color: var(--color-text);
+  font-size: 22px;
+  margin-left: 12px;
+}
+
+/* menu */
+
 .menu {
-  composes: header-menu from 'chora/styles/header.css';
+  display: flex;
+  height: var(--header-height);
+  margin-right: 3em;
+}
+
+.menu ul {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  list-style: none inside none;
+  margin: 0 2em;
+}
+
+.menu li {
+  margin: 0.75em;
+}
+
+/* divider */
+
+.divider {
+  color: var(--color-theme);
+  padding: 0;
 }

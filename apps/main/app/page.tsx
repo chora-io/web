@@ -1,6 +1,5 @@
+import { Background } from 'chora/components'
 import { Metadata } from 'next'
-
-import Background from '@components/Background'
 
 import styles from './page.module.css'
 
