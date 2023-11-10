@@ -3,14 +3,17 @@
 # abort on errors
 set -e
 
+# generate api from proto
+./scripts/protocgen.sh
+
 # clean up previous
 rm -rf dist
 
 # compile typescript
 tsc --outDir dist
 
-# generate api from proto
-./scripts/protocgen.sh
+# copy api directory
+cp -r api dist
 
 # copy package json
 cp package.npm.json dist/package.json

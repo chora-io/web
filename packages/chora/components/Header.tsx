@@ -27,24 +27,20 @@ const Header = ({ title, itemsLeft, itemsRight }: any) => {
     <div className={styles.header}>
       <div style={{ display: 'none' }}>{darkTheme?.toString()}</div>
       <div>
-        {title ? (
-          <div className={styles.title}>
-            <Link href={title.link || '/'}>
-              <Image
-                alt="chora"
-                src={darkTheme ? choraLogoDark : choraLogoLight}
-              />
-              <div>
-                {'chora '}
-                {title.titleX && (
-                  <span style={{ opacity: '0.75' }}>{title.titleX}</span>
-                )}
-              </div>
-            </Link>
-          </div>
-        ) : (
-          <div />
-        )}
+        <div className={styles.title}>
+          <Link href={(title && title.link) || '/'}>
+            <Image
+              alt="chora"
+              src={darkTheme ? choraLogoDark : choraLogoLight}
+            />
+            <div>
+              {'chora '}
+              {title && title.titleX && (
+                <span style={{ opacity: '0.75' }}>{title.titleX}</span>
+              )}
+            </div>
+          </Link>
+        </div>
         <div className={styles.menu}>
           {(itemsLeft || itemsRight) && (
             <ul>
