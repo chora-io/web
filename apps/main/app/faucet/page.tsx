@@ -4,7 +4,7 @@ import { Metadata } from 'next'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'chora | faucet',
+  title: 'chora | token faucet',
 }
 
 const FaucetPage = () => (

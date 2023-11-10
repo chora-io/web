@@ -1,10 +1,10 @@
 import { Metadata } from 'next'
 
-import Auth from '@components/account/Auth'
-import Email from '@components/account/Email'
-import Login from '@components/account/Login'
-import Keplr from '@components/account/Keplr'
-import Switch from '@components/account/Switch'
+import Auth from '@components/Auth'
+import Email from '@components/Email'
+import Login from '@components/Login'
+import Keplr from '@components/Keplr'
+import Switch from '@components/Switch'
 
 import styles from './page.module.css'
 

@@ -1,7 +1,7 @@
 {
   "name": "@chora-io/chora",
   "description": "chora webkit",
-  "version": "0.1.0-alpha8",
+  "version": "0.1.0-beta1",
   "homepage": "https://chora.io",
   "bugs": {
     "url": "https://github.com/chora-io/web/issues"
@@ -9,5 +9,12 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/chora-io/web"
+  },
+  "dependencies": {
+    "@keplr-wallet/proto-types": "^0.12",
+    "@keplr-wallet/types": "^0.12",
+    "cosmos": "npm:@chora-io/cosmos@v0.1.0-beta1",
+    "react": "^18",
+    "react-dom": "^18"
   }
 }

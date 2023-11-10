@@ -1,5 +1,3 @@
-import { Buffer } from 'buffer'
-
 import { PubKey } from '@keplr-wallet/proto-types/cosmos/crypto/secp256k1/keys'
 import { SignMode } from '@keplr-wallet/proto-types/cosmos/tx/signing/v1beta1/signing'
 import {
@@ -8,6 +6,7 @@ import {
   TxRaw,
 } from '@keplr-wallet/proto-types/cosmos/tx/v1beta1/tx'
 import { BroadcastMode, ChainInfo, SignDoc } from '@keplr-wallet/types'
+import { Buffer } from 'buffer'
 
 const queryAccount = '/cosmos/auth/v1beta1/accounts'
 

@@ -10,7 +10,7 @@ import choraLogoLight from '../assets//images/chora_light_small.png'
 
 import styles from './Footer.module.css'
 
-const Footer = ({ lists }: any) => {
+const Footer = ({ about, items }: any) => {
   const { darkTheme } = useContext(ThemeContext)
 
   return (
@@ -21,7 +21,13 @@ const Footer = ({ lists }: any) => {
           <Image alt="chora" src={darkTheme ? choraLogoDark : choraLogoLight} />
           <h4>{'© 2023 Chora Studio, LLC'}</h4>
         </div>
-        {lists.map((item: any) => (
+        {about && (
+          <div className={styles.list}>
+            <h3>{about.title}</h3>
+            <p>{about.paragraph}</p>
+          </div>
+        )}
+        {items.map((item: any) => (
           <div className={styles.list} key={item.title}>
             <h3>{item.title}</h3>
             <ul>

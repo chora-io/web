@@ -61,3 +61,10 @@
 .header-menu li {
   margin: 0.75em;
 }
+
+/* header-divider */
+
+.header-divider {
+  color: var(--color-theme);
+  padding: 0;
+}
