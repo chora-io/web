@@ -1,7 +1,14 @@
 .page {
-  composes: page-center from 'chora/styles/page.css';
+  composes: page from 'chora/styles/page.css';
+  align-items: center !important;
+  text-align: center !important;
 }
 
-.page div {
-  margin-bottom: 5%;
+.page h1 {
+  color: var(--color-theme) !important;
+  margin: 0.5em 0 !important;
+}
+
+.page > div {
+  margin-bottom: 5% !important;
 }

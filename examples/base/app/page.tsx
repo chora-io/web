@@ -1,15 +1,17 @@
 import { Metadata } from 'next'
 
+import Content from '@components/Content'
+
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'chora | data management',
+  title: 'base | home',
 }
 
 const HomePage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'data management'}</h1>
+      <Content />
     </div>
   </div>
 )

@@ -1,0 +1,4 @@
+.page {
+  composes: page from 'chora/styles/page.css';
+  align-items: center !important;
+}
