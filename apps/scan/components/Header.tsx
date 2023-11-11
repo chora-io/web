@@ -1,7 +1,5 @@
 'use client'
 
-import choraLogoDark from 'chora/assets/images/chora_dark_icon.png'
-import choraLogoLight from 'chora/assets/images/chora_light_icon.png'
 import { ThemeButton } from 'chora/components'
 import { ThemeContext } from 'chora/contexts'
 import Image from 'next/image'
@@ -10,6 +8,9 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useContext } from 'react'
 
 import SelectNetwork from './SelectNetwork'
+
+import choraLogoDark from 'chora/assets/images/chora_dark_icon.png'
+import choraLogoLight from 'chora/assets/images/chora_light_icon.png'
 
 import styles from './Header.module.css'
 
@@ -27,7 +28,6 @@ const Header = () => {
     }
   }
 
-  let local = false
   let network: string
 
   if (
@@ -36,7 +36,6 @@ const Header = () => {
       window.location.hostname == '127.0.0.1' ||
       window.location.hostname == 'localhost')
   ) {
-    local = true
     network = currentPathname.split('/')[1]
   } else {
     network = currentPathname.split('/')[2]
@@ -48,15 +47,10 @@ const Header = () => {
 
   return (
     <div className={styles.header}>
+      <div style={{ display: 'none' }}>{darkTheme?.toString()}</div>
       <div>
         <div className={styles.title}>
-          <Link
-            href={
-              local
-                ? 'http://' + window.location.hostname + ':8000'
-                : 'https://chora.io'
-            }
-          >
+          <Link href="https://chora.io">
             <Image
               alt="chora"
               src={darkTheme ? choraLogoDark : choraLogoLight}

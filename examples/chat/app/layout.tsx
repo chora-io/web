@@ -8,7 +8,11 @@ const Layout = ({ children }: any) => (
     <body>
       <main>
         <ThemeContextProvider>
-          <Header />
+          <Header
+            title={{
+              link: 'https://chora.io',
+            }}
+          />
           <Sidebar
             items={[
               {

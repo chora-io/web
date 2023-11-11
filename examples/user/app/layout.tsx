@@ -14,7 +14,11 @@ const Layout = ({ children }: any) => (
         <ThemeContextProvider>
           <WalletContextProvider>
             <AuthContextProvider>
-              <Header />
+              <Header
+                title={{
+                  link: 'https://chora.io',
+                }}
+              />
               <Sidebar
                 items={[
                   {

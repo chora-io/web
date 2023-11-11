@@ -1,8 +1,5 @@
 import { HeaderWallet as Header } from 'chora/components'
-import {
-  ThemeContextProvider,
-  WalletContextProvider,
-} from 'chora/contexts'
+import { ThemeContextProvider, WalletContextProvider } from 'chora/contexts'
 
 import './globals.css'
 
@@ -12,7 +9,11 @@ const Layout = ({ children }: any) => (
       <main>
         <ThemeContextProvider>
           <WalletContextProvider>
-            <Header />
+            <Header
+              title={{
+                link: 'https://chora.io',
+              }}
+            />
             {children}
           </WalletContextProvider>
         </ThemeContextProvider>

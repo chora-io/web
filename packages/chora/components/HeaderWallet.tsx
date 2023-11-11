@@ -14,7 +14,7 @@ import choraLogoLight from 'chora/assets/images/chora_light_icon.png'
 
 import styles from './HeaderWallet.module.css'
 
-const HeaderWallet = () => {
+const HeaderWallet = ({ title }: any) => {
   const { darkTheme, setDarkTheme } = useContext(ThemeContext)
 
   const toggleTheme = () => {
@@ -29,12 +29,17 @@ const HeaderWallet = () => {
     <div className={styles.header}>
       <div>
         <div className={styles.title}>
-          <Link href="/">
+          <Link href={(title && title.link) || '/'}>
             <Image
               alt="chora"
               src={darkTheme ? choraLogoDark : choraLogoLight}
             />
-            <div>{'chora'}</div>
+            <div>
+              {'chora '}
+              {title && title.titleX && (
+                <span style={{ opacity: '0.75' }}>{title.titleX}</span>
+              )}
+            </div>
           </Link>
         </div>
         <div className={styles.menu}>

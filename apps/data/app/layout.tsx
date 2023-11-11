@@ -9,7 +9,11 @@ const Layout = ({ children }: any) => (
       <main>
         <ThemeContextProvider>
           <WalletContextProvider>
-            <Header />
+            <Header
+              title={{
+                link: 'https://chora.io',
+              }}
+            />
             <Sidebar
               items={[
                 {
