@@ -21,7 +21,7 @@
     "clean": "rm -rf .next node_modules"
   },
   "dependencies": {
-    "chora": "file:../../packages/chora/dist",
+    "chora": "npm:@chora-io/chora@v0.1.0-beta2",
     "next": "^14",
     "react": "^18",
     "react-dom": "^18"

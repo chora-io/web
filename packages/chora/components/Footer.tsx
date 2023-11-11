@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import * as React from 'react'
 import { useContext } from 'react'
 
 import { ThemeContext } from '../contexts'

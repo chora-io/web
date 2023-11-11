@@ -55,7 +55,7 @@ const Layout = ({ children }: any) => (
             }}
             items={[
               {
-                title: 'app (beta)',
+                title: 'applications',
                 items: [
                   {
                     link: '/coop',
