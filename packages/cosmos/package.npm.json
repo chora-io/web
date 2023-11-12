@@ -1,7 +1,7 @@
 {
   "name": "@chora-io/cosmos",
   "description": "cosmos webkit",
-  "version": "0.1.0-beta3",
+  "version": "0.1.0-beta4",
   "homepage": "https://chora.io",
   "bugs": {
     "url": "https://github.com/chora-io/web/issues"
