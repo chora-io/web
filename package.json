@@ -1,7 +1,7 @@
 {
   "name": "web",
   "private": true,
-  "description": "chora web applications and packages",
+  "description": "chora webkit and applications",
   "version": "0.0.0",
   "homepage": "https://chora.io",
   "bugs": {

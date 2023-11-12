@@ -9,6 +9,12 @@
   width: var(--sidebar-width);
 }
 
+@media (max-width: 850px) {
+  .sidebar {
+    display: none;
+  }
+}
+
 .sidebar ul {
   list-style: none;
   padding: 2em;

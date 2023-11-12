@@ -11,7 +11,7 @@ const HomePage = () => {
   return (
     <div className={styles.container}>
       <Background />
-      <div className={styles.sectionMain}>
+      <div className={styles.banner}>
         <div>
           <h1>{'chora '}</h1>
           <p>
@@ -20,7 +20,7 @@ const HomePage = () => {
           <p>{'distributed ledger technology'}</p>
         </div>
       </div>
-      <div className={styles.sectionText}>
+      <div className={styles.content}>
         <div>
           <p>
             {
@@ -36,7 +36,7 @@ const HomePage = () => {
               ', a software research and development company specializing in infrastructure for climate solutions.'
             }
           </p>
-          <div className={styles.sectionTextLinks}>
+          <div className={styles.contentLinks}>
             <a href="https://docs.chora.io" target="_blank">
               {'view documentation ↗'}
             </a>

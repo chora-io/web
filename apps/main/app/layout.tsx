@@ -35,7 +35,7 @@ const Layout = ({ children }: any) => (
             itemsRight={[
               {
                 link: 'https://docs.chora.io',
-                title: 'docs',
+                title: 'docs ↗',
               },
             ]}
           />
@@ -45,7 +45,7 @@ const Layout = ({ children }: any) => (
               title: 'about',
               paragraph: (
                 <p>
-                  {'Chora Protocol is an initiative led by '}
+                  {'Chora is open-source software maintained by '}
                   <Link href="https://chora.studio" target="_blank">
                     {'Chora Studio'}
                   </Link>

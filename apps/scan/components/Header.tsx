@@ -2,6 +2,7 @@
 
 import { ThemeButton } from 'chora/components'
 import { ThemeContext } from 'chora/contexts'
+import { PHASE_DEVELOPMENT_SERVER } from 'next/constants'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
@@ -30,12 +31,7 @@ const Header = () => {
 
   let network: string
 
-  if (
-    typeof window !== 'undefined' &&
-    (window.location.hostname == '0.0.0.0' ||
-      window.location.hostname == '127.0.0.1' ||
-      window.location.hostname == 'localhost')
-  ) {
+  if (PHASE_DEVELOPMENT_SERVER) {
     network = currentPathname.split('/')[1]
   } else {
     network = currentPathname.split('/')[2]
@@ -48,6 +44,7 @@ const Header = () => {
   return (
     <div className={styles.header}>
       <div style={{ display: 'none' }}>{darkTheme?.toString()}</div>
+      <div style={{ display: 'none' }}>{network}</div>
       <div>
         <div className={styles.title}>
           <Link href="https://chora.io">

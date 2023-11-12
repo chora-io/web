@@ -17,6 +17,7 @@ const Layout = ({ children }: any) => (
               <Header
                 title={{
                   link: 'https://chora.io',
+                  titleX: '',
                 }}
               />
               <Sidebar

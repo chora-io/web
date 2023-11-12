@@ -1,4 +1,4 @@
 .page {
-  composes: page-not-found from 'chora/styles/page.css';
+  composes: page-center from 'chora/styles/page.css';
   margin-left: var(--sidebar-width) !important;
 }

@@ -12,8 +12,5 @@ rm -rf dist
 # compile typescript
 tsc --outDir dist
 
-# copy api directory
-cp -r api dist
-
 # copy package json
 cp package.npm.json dist/package.json

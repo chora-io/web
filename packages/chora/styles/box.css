@@ -42,6 +42,14 @@
   margin-right: 2em;
 }
 
+@media (max-width: 850px) {
+  .box-options a,
+  .box-options button {
+    display: block;
+    margin: 2em auto;
+  }
+}
+
 /* box-option-active */
 
 .box-option-active {

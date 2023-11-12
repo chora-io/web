@@ -4,6 +4,7 @@
   background: var(--background-primary);
   box-shadow: var(--box-shadow);
   height: var(--header-height);
+  overflow: hidden;
   position: fixed;
   width: 100vw;
   z-index: 1;
@@ -14,6 +15,12 @@
   height: inherit;
   justify-content: space-between;
   margin: 0 1em;
+}
+
+@media (max-width: 850px) {
+  .header > div {
+    margin: 0;
+  }
 }
 
 /* header-title */
@@ -47,7 +54,13 @@
 .header-menu {
   display: flex;
   height: var(--header-height);
-  margin-right: 3em;
+  margin-right: 2.5em;
+}
+
+@media (max-width: 850px) {
+  .header-menu > div {
+    display: none;
+  }
 }
 
 .header-menu ul {
@@ -56,6 +69,12 @@
   justify-content: center;
   list-style: none inside none;
   margin: 0 2em;
+}
+
+@media (max-width: 850px) {
+  .header-menu ul {
+    display: none;
+  }
 }
 
 .header-menu li {

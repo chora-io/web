@@ -8,13 +8,18 @@ export const metadata: Metadata = {
 }
 
 const FaucetPage = () => (
-  <div className={styles.page}>
-    <div>
-      <h1>{'token faucet'}</h1>
-      <ConnectWallet />
-      <Faucet />
+  <>
+    <div className={styles.page}>
+      <div>
+        <h1>{'token faucet'}</h1>
+        <ConnectWallet />
+        <Faucet />
+      </div>
     </div>
-  </div>
+    <div className={styles.mobile}>
+      <p>{'This page is not supported on mobile devices.'}</p>
+    </div>
+  </>
 )
 
 export default FaucetPage

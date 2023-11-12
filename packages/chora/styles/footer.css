@@ -4,7 +4,14 @@
   background: var(--background-primary);
   box-shadow: var(--box-shadow);
   height: var(--footer-height);
+  overflow: hidden;
   width: 100vw;
+}
+
+@media (max-width: 850px) {
+  .footer {
+    height: var(--footer-height-mobile);
+  }
 }
 
 .footer > div {
@@ -28,6 +35,12 @@
   width: 120px;
 }
 
+@media (max-width: 850px) {
+  .footer-title img {
+    display: none;
+  }
+}
+
 .footer-title h4 {
   display: block;
 }
@@ -40,6 +53,12 @@
   margin: 0 2em;
   max-width: 220px;
   min-width: 140px;
+}
+
+@media (max-width: 850px) {
+  .footer-list {
+    display: none;
+  }
 }
 
 .footer-list h3 {

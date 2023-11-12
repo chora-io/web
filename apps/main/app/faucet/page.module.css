@@ -1,14 +1,14 @@
 .page {
-  composes: page from 'chora/styles/page.css';
-  align-items: center !important;
-  text-align: center !important;
+  composes: page-center from 'chora/styles/page.css';
+  background: var(--background-primary) !important;
 }
 
-.page h1 {
-  color: var(--color-theme) !important;
-  margin: 0.5em 0 !important;
+@media (max-width: 850px) {
+  .page {
+    display: none;
+  }
 }
 
-.page > div {
-  margin-bottom: 5% !important;
+.mobile {
+  composes: page-no-mobile from 'chora/styles/page.css';
 }
