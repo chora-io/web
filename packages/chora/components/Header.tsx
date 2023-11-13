@@ -1,15 +1,12 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import * as React from 'react'
 import { useContext } from 'react'
 
 import { ThemeContext } from '../contexts'
-import ThemeButton from '../components/ThemeButton'
-
-import choraLogoDark from '../assets/images/chora_dark_small.png'
-import choraLogoLight from '../assets/images/chora_light_small.png'
+import HeaderTitle from './HeaderTitle'
+import ThemeButton from './ThemeButton'
 
 import styles from './Header.module.css'
 
@@ -28,20 +25,7 @@ const Header = ({ title, itemsLeft, itemsRight }: any) => {
     <div className={styles.header}>
       <div style={{ display: 'none' }}>{darkTheme?.toString()}</div>
       <div>
-        <div className={styles.title}>
-          <Link href={(title && title.link) || '/'}>
-            <Image
-              alt="chora"
-              src={darkTheme ? choraLogoDark : choraLogoLight}
-            />
-            <div>
-              {'chora '}
-              {title && title.titleX && (
-                <span style={{ opacity: '0.75' }}>{title.titleX}</span>
-              )}
-            </div>
-          </Link>
-        </div>
+        <HeaderTitle darkTheme={darkTheme} title={title} />
         <div className={styles.menu}>
           {(itemsLeft || itemsRight) && (
             <ul>

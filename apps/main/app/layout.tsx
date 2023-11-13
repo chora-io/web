@@ -1,5 +1,6 @@
 import { Footer, Header } from 'chora/components'
 import { ThemeContextProvider } from 'chora/contexts'
+import { PHASE_DEVELOPMENT_SERVER } from 'next/constants'
 import Link from 'next/link'
 
 import './globals.css'
@@ -16,19 +17,27 @@ const Layout = ({ children }: any) => (
             }}
             itemsLeft={[
               {
-                link: '/coop',
+                link: PHASE_DEVELOPMENT_SERVER
+                  ? 'http://localhost:8001'
+                  : '/coop',
                 title: 'coop',
               },
               {
-                link: '/data',
+                link: PHASE_DEVELOPMENT_SERVER
+                  ? 'http://localhost:8002'
+                  : '/data',
                 title: 'data',
               },
               {
-                link: '/mods',
+                link: PHASE_DEVELOPMENT_SERVER
+                  ? 'http://localhost:8003'
+                  : '/mods',
                 title: 'mods',
               },
               {
-                link: '/scan',
+                link: PHASE_DEVELOPMENT_SERVER
+                  ? 'http://localhost:8004'
+                  : '/scan',
                 title: 'scan',
               },
             ]}
@@ -43,9 +52,9 @@ const Layout = ({ children }: any) => (
           <Footer
             about={{
               title: 'about',
-              paragraph: (
+              text: (
                 <p>
-                  {'Chora is open-source software maintained by '}
+                  {'Chora is open-source software managed by '}
                   <Link href="https://chora.studio" target="_blank">
                     {'Chora Studio'}
                   </Link>
@@ -58,22 +67,30 @@ const Layout = ({ children }: any) => (
                 title: 'applications',
                 items: [
                   {
-                    link: '/coop',
+                    link: PHASE_DEVELOPMENT_SERVER
+                      ? 'http://localhost:8001'
+                      : '/coop',
                     target: '',
                     title: 'chora cooperative',
                   },
                   {
-                    link: '/data',
+                    link: PHASE_DEVELOPMENT_SERVER
+                      ? 'http://localhost:8002'
+                      : '/data',
                     target: '',
                     title: 'data management',
                   },
                   {
-                    link: '/mods',
+                    link: PHASE_DEVELOPMENT_SERVER
+                      ? 'http://localhost:8003'
+                      : '/mods',
                     target: '',
                     title: 'blockchain modules',
                   },
                   {
-                    link: '/scan',
+                    link: PHASE_DEVELOPMENT_SERVER
+                      ? 'http://localhost:8004'
+                      : '/scan',
                     target: '',
                     title: 'network scanner',
                   },

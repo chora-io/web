@@ -1,5 +1,6 @@
 import { HeaderWallet as Header } from 'chora/components'
 import { ThemeContextProvider, WalletContextProvider } from 'chora/contexts'
+import { PHASE_DEVELOPMENT_SERVER } from 'next/constants'
 
 import Sidebar from '@components/Sidebar'
 
@@ -13,7 +14,9 @@ const Layout = ({ children }: any) => (
           <WalletContextProvider>
             <Header
               title={{
-                link: 'https://chora.io',
+                link: PHASE_DEVELOPMENT_SERVER
+                  ? 'http://localhost:8000'
+                  : 'https://chora.io',
                 titleX: '',
               }}
             />

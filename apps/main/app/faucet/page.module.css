@@ -1,6 +1,5 @@
 .page {
   composes: page-center from 'chora/styles/page.css';
-  background: var(--background-primary) !important;
 }
 
 @media (max-width: 850px) {
@@ -10,5 +9,12 @@
 }
 
 .mobile {
-  composes: page-no-mobile from 'chora/styles/page.css';
+  display: none;
+}
+
+@media (max-width: 850px) {
+  .mobile {
+    composes: page-center from 'chora/styles/page.css';
+    display: flex !important;
+  }
 }

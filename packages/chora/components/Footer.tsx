@@ -25,7 +25,7 @@ const Footer = ({ about, items }: any) => {
         {about && (
           <div className={styles.list}>
             <h3>{about.title}</h3>
-            <p>{about.paragraph}</p>
+            <div>{about.text}</div>
           </div>
         )}
         {items.map((item: any) => (

@@ -43,7 +43,7 @@ const QueryAllBalances = () => {
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputNumber
-          id="query-balance-id"
+          id="query-all-balances-id"
           label="balance id"
           number={id}
           setNumber={setId}

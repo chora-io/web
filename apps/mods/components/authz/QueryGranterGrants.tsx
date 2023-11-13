@@ -43,7 +43,7 @@ const QueryGranterGrants = () => {
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputAddress
-          id="query-grants-granter"
+          id="query-granter-grants-granter"
           label="granter"
           network={network}
           address={granter}

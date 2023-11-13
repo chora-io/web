@@ -43,7 +43,7 @@ const QueryAttestationsByAttestor = () => {
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputAddress
-          id="query-attestations-by-address-address"
+          id="query-attestations-by-attestor-address"
           label="attestor"
           address={attestor}
           setAddress={setAttestor}
