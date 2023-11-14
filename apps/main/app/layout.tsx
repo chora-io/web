@@ -1,6 +1,5 @@
 import { Footer, Header } from 'chora/components'
 import { ThemeContextProvider } from 'chora/contexts'
-import { PHASE_DEVELOPMENT_SERVER } from 'next/constants'
 import Link from 'next/link'
 
 import './globals.css'
@@ -17,27 +16,31 @@ const Layout = ({ children }: any) => (
             }}
             itemsLeft={[
               {
-                link: PHASE_DEVELOPMENT_SERVER
-                  ? 'http://localhost:8001'
-                  : '/coop',
+                link:
+                  process.env.NODE_ENV === 'development'
+                    ? 'http://localhost:8001'
+                    : '/coop',
                 title: 'coop',
               },
               {
-                link: PHASE_DEVELOPMENT_SERVER
-                  ? 'http://localhost:8002'
-                  : '/data',
+                link:
+                  process.env.NODE_ENV === 'development'
+                    ? 'http://localhost:8002'
+                    : '/data',
                 title: 'data',
               },
               {
-                link: PHASE_DEVELOPMENT_SERVER
-                  ? 'http://localhost:8003'
-                  : '/mods',
+                link:
+                  process.env.NODE_ENV === 'development'
+                    ? 'http://localhost:8003'
+                    : '/mods',
                 title: 'mods',
               },
               {
-                link: PHASE_DEVELOPMENT_SERVER
-                  ? 'http://localhost:8004'
-                  : '/scan',
+                link:
+                  process.env.NODE_ENV === 'development'
+                    ? 'http://localhost:8004'
+                    : '/scan',
                 title: 'scan',
               },
             ]}
@@ -67,30 +70,34 @@ const Layout = ({ children }: any) => (
                 title: 'applications',
                 items: [
                   {
-                    link: PHASE_DEVELOPMENT_SERVER
-                      ? 'http://localhost:8001'
-                      : '/coop',
+                    link:
+                      process.env.NODE_ENV === 'development'
+                        ? 'http://localhost:8001'
+                        : '/coop',
                     target: '',
                     title: 'chora cooperative',
                   },
                   {
-                    link: PHASE_DEVELOPMENT_SERVER
-                      ? 'http://localhost:8002'
-                      : '/data',
+                    link:
+                      process.env.NODE_ENV === 'development'
+                        ? 'http://localhost:8002'
+                        : '/data',
                     target: '',
                     title: 'data management',
                   },
                   {
-                    link: PHASE_DEVELOPMENT_SERVER
-                      ? 'http://localhost:8003'
-                      : '/mods',
+                    link:
+                      process.env.NODE_ENV === 'development'
+                        ? 'http://localhost:8003'
+                        : '/mods',
                     target: '',
                     title: 'blockchain modules',
                   },
                   {
-                    link: PHASE_DEVELOPMENT_SERVER
-                      ? 'http://localhost:8004'
-                      : '/scan',
+                    link:
+                      process.env.NODE_ENV === 'development'
+                        ? 'http://localhost:8004'
+                        : '/scan',
                     target: '',
                     title: 'network scanner',
                   },

@@ -2,7 +2,6 @@
 
 import { HeaderTitle, ThemeButton } from 'chora/components'
 import { ThemeContext } from 'chora/contexts'
-import { PHASE_DEVELOPMENT_SERVER } from 'next/constants'
 import { usePathname, useRouter } from 'next/navigation'
 import { useContext } from 'react'
 
@@ -26,7 +25,7 @@ const Header = ({ title }) => {
 
   let network: string
 
-  if (PHASE_DEVELOPMENT_SERVER) {
+  if (process.env.NODE_ENV === 'development') {
     network = currentPathname.split('/')[1]
   } else {
     network = currentPathname.split('/')[2]

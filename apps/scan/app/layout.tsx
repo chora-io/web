@@ -1,5 +1,4 @@
 import { ThemeContextProvider, WalletContextProvider } from 'chora/contexts'
-import { PHASE_DEVELOPMENT_SERVER } from 'next/constants'
 
 import Header from '@components/Header'
 
@@ -13,9 +12,10 @@ const Layout = ({ children }: any) => (
           <WalletContextProvider>
             <Header
               title={{
-                link: PHASE_DEVELOPMENT_SERVER
-                  ? 'http://localhost:8000'
-                  : 'https://chora.io',
+                link:
+                  process.env.NODE_ENV === 'development'
+                    ? 'http://localhost:8000'
+                    : 'https://chora.io',
                 titleX: '',
               }}
             />
