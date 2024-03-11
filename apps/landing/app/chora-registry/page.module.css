@@ -1,0 +1,22 @@
+.container {
+  composes: container from 'chora/styles/main.css';
+}
+
+.banner {
+  composes: banner from 'chora/styles/main.css';
+  min-height: 35vh !important;
+  padding-top: calc(var(--header-height) + 2em);
+}
+
+.content {
+  composes: content from 'chora/styles/main.css';
+  min-height: 35vh !important;
+}
+
+.contentLinks {
+  composes: content-links from 'chora/styles/main.css';
+}
+
+.button {
+  composes: button from 'chora/styles/button.css';
+}

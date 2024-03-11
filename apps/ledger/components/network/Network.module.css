@@ -1,0 +1,45 @@
+/* box */
+
+.box {
+  composes: box from '../../../../node_modules/chora/styles/box.css';
+  display: flex;
+  justify-content: center;
+}
+
+/* table */
+
+.table {
+  border-collapse: collapse;
+  margin: 2em;
+}
+
+.table thead {
+  color: var(--color-theme);
+  font-style: italic;
+}
+
+.table th,
+.table td {
+  padding: 1.25em;
+  text-align: center;
+}
+
+@media (max-width: 1250px) {
+  .table {
+    display: flex;
+  }
+
+  .table thead td {
+    display: block;
+  }
+
+  .table tbody td {
+    display: block;
+  }
+}
+
+/* error */
+
+.error {
+  color: var(--color-error);
+}

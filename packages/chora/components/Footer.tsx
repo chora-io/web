@@ -20,7 +20,7 @@ const Footer = ({ about, items }: any) => {
       <div>
         <div className={styles.title}>
           <Image alt="chora" src={darkTheme ? choraLogoDark : choraLogoLight} />
-          <h4>{'© 2024 Chora Studio, LLC'}</h4>
+          <h4>{'© 2024 Chora Studio LLC'}</h4>
         </div>
         {about && (
           <div className={styles.list}>

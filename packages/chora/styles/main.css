@@ -60,7 +60,12 @@
   display: block;
   margin-bottom: 5%;
   max-width: 650px;
-  padding: 2em;
+  padding: 5em 0;
+}
+
+.content > div h1,
+.content > div h2 {
+  padding: 0.5em 0;
 }
 
 .content > div p {
