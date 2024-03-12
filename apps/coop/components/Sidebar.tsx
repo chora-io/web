@@ -26,7 +26,7 @@ const Sidebar = () => {
             </Link>
           </li>
         </ul>
-        <li>{'chora coop'}</li>
+        <li>{'workspace'}</li>
         <ul>
           <li>
             <Link

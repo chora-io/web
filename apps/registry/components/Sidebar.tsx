@@ -16,61 +16,64 @@ const Sidebar = () => {
     <div className={styles.sidebar}>
       <ul>
         <li>{'registry'}</li>
+        {!!network && network.includes('chora') && (
+          <ul>
+            <li>
+              <Link
+                href="/geonodes"
+                className={
+                  currentRoute === '/geonodes' ? styles.active : undefined
+                }
+              >
+                {'geonodes'}
+              </Link>
+            </li>
+          </ul>
+        )}
+        {!!network && network.includes('regen') && (
+          <ul>
+            <li>
+              <Link
+                href="/credits"
+                className={
+                  currentRoute === '/credits' ? styles.active : undefined
+                }
+              >
+                {'credits'}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/classes"
+                className={
+                  currentRoute === '/classes' ? styles.active : undefined
+                }
+              >
+                {'classes'}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/projects"
+                className={
+                  currentRoute === '/projects' ? styles.active : undefined
+                }
+              >
+                {'projects'}
+              </Link>
+            </li>
+          </ul>
+        )}
+        <li>{'workspace'}</li>
         <ul>
           <li>
             <Link
-              href="/credits"
+              href="/workspace"
               className={
-                currentRoute === '/credits' ? styles.active : undefined
+                currentRoute === '/workspace' ? styles.active : undefined
               }
             >
-              {'credits'}
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/classes"
-              className={
-                currentRoute === '/classes' ? styles.active : undefined
-              }
-            >
-              {'classes'}
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/projects"
-              className={
-                currentRoute === '/projects' ? styles.active : undefined
-              }
-            >
-              {'projects'}
-            </Link>
-          </li>
-        </ul>
-        <li>{'workflow'}</li>
-        <ul>
-          <li>
-            <Link
-              href="/workflow"
-              className={
-                currentRoute === '/workflow' ? styles.active : undefined
-              }
-            >
-              {'dashboard'}
-            </Link>
-          </li>
-        </ul>
-        <li>{'services'}</li>
-        <ul>
-          <li>
-            <Link
-              href="/services/data"
-              className={
-                currentRoute === '/services/data' ? styles.active : undefined
-              }
-            >
-              {'data service'}
+              {'overview'}
             </Link>
           </li>
         </ul>

@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import Geonodes from '@components/groups/geonodes/Geonodes'
+import SubmitProposal from '@components/groups/proposals/SubmitProposal'
 
 import styles from './page.module.css'
 
@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   title: 'chora coop',
 }
 
-const GeonodesPage = () => (
+const ProposalsNewPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'geonodes'}</h1>
-      <Geonodes />
+      <h1>{'submit proposal'}</h1>
+      <SubmitProposal />
     </div>
   </div>
 )
 
-export default GeonodesPage
+export default ProposalsNewPage

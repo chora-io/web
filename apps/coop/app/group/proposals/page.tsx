@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
-import Proposals from '@components/proposals/Proposals'
-import ProposalsNav from '@components/proposals/ProposalsNav'
+import Proposals from '@components/groups/proposals/Proposals'
+import ProposalsNav from '@components/groups/proposals/ProposalsNav'
 
 export const metadata: Metadata = {
   title: 'chora coop',

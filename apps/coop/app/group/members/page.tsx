@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
-import Members from '@components/members/Members'
-import MembersNav from '@components/members/MembersNav'
+import Members from '@components/groups/members/Members'
+import MembersNav from '@components/groups/members/MembersNav'
 
 import styles from './page.module.css'
 

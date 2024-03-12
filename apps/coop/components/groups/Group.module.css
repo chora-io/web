@@ -1,0 +1,7 @@
+.box {
+  composes: box from '../../../../node_modules/chora/styles/box.css';
+}
+
+.boxText {
+  composes: box-text from '../../../../node_modules/chora/styles/box.css';
+}

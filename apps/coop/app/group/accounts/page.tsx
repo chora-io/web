@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import Accounts from '@components/accounts/Accounts'
+import Accounts from '@components/groups/accounts/Accounts'
 
 import styles from './page.module.css'
 

@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import Vouchers from '@components/vouchers/Vouchers'
+import Vouchers from '@components/groups/vouchers/Vouchers'
 
 import styles from './page.module.css'
 

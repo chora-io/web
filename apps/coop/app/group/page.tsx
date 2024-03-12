@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import Group from '@components/home/Group'
+import Group from '@components/groups/Group'
 
 import styles from './page.module.css'
 

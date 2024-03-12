@@ -1,18 +1,15 @@
 import { Metadata } from 'next'
 
-import Geonodes from '@components/groups/geonodes/Geonodes'
-
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'chora coop',
+  title: 'chora registry',
 }
 
 const GeonodesPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'geonodes'}</h1>
-      <Geonodes />
+      <h1>{'coming soon...'}</h1>
     </div>
   </div>
 )

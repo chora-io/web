@@ -1,7 +1,7 @@
 {
   "name": "faucet",
   "private": true,
-  "description": "testnet token faucet",
+  "description": "token faucet",
   "version": "0.0.0",
   "homepage": "https://chora.io",
   "bugs": {

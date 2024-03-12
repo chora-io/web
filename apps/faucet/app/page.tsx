@@ -4,15 +4,15 @@ import { Metadata } from 'next'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'chora faucet | testnet token faucet',
+  title: 'chora faucet | token faucet',
 }
 
 const FaucetPage = () => (
   <>
     <div className={styles.page}>
       <div>
-        <h1>{'testnet token faucet'}</h1>
-        <ConnectWallet />
+        <h1>{'token faucet'}</h1>
+        <ConnectWallet testnets={true} />
         <Faucet />
       </div>
     </div>

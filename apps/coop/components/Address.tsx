@@ -19,7 +19,7 @@ const Address = ({ address }: { address: string }) => {
     <>
       {`${metadata['name']} (`}
       <Link
-        href={`/${metadata.isPolicyAddress ? 'policies' : 'members'}/${
+        href={`${metadata.isPolicyAddress ? '/group/account' : '/group/member'}/${
           metadata['address']
         }`}
       >

@@ -11,7 +11,14 @@ import * as React from 'react'
 const defaultId = 'network'
 const defaultLabel = 'network'
 
-const SelectNetwork = ({ id, label, selected, network, setNetwork }: any) => {
+const SelectNetwork = ({
+  id,
+  label,
+  selected,
+  network,
+  setNetwork,
+  testnets,
+}: any) => {
   let local = false
   if (
     typeof window !== 'undefined' &&
@@ -37,7 +44,9 @@ const SelectNetwork = ({ id, label, selected, network, setNetwork }: any) => {
           <option value={choraLocal.chainId}>{choraLocal.chainName}</option>
         )}
         <option value={choraTestnet.chainId}>{choraTestnet.chainName}</option>
-        <option value={regenMainnet.chainId}>{regenMainnet.chainName}</option>
+        {!testnets && (
+          <option value={regenMainnet.chainId}>{regenMainnet.chainName}</option>
+        )}
         {local && (
           <option value={regenLocal.chainId}>{regenLocal.chainName}</option>
         )}
