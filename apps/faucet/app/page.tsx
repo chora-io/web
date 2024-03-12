@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'chora faucet | token faucet',
 }
 
-const FaucetPage = () => (
+const HomePage = () => (
   <>
     <div className={styles.page}>
       <div>
@@ -22,4 +22,4 @@ const FaucetPage = () => (
   </>
 )
 
-export default FaucetPage
+export default HomePage

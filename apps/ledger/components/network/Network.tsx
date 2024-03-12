@@ -27,7 +27,7 @@ const Network = () => {
   }, [network])
 
   useEffect(() => {
-    if (chainInfo) {
+    if (chainInfo && chainInfo.rest) {
       // fetch latest block header data
       fetch(chainInfo.rest + queryBlocksLatest)
         .then((res) => res.json())
@@ -46,7 +46,7 @@ const Network = () => {
         setCount(count + 1)
       }, 6000) // 6 seconds
     }
-  }, [chainInfo?.rest, count])
+  }, [chainInfo, count])
 
   return (
     <div className={styles.box}>

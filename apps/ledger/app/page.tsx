@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: `chora ledger`,
 }
 
-const NetworkPage = () => (
+const HomePage = () => (
   <div className={styles.page}>
     <div>
       <h1>{'blockchain network dashboard'}</h1>
@@ -14,4 +14,4 @@ const NetworkPage = () => (
   </div>
 )
 
-export default NetworkPage
+export default HomePage

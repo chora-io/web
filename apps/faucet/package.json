@@ -12,8 +12,8 @@
     "url": "https://github.com/chora-io/web"
   },
   "scripts": {
-    "build": "next build",
     "dev": "next dev -p 8004",
+    "build": "next build",
     "start": "next start -p 8004",
     "lint": "next lint",
     "format": "prettier --write .",
@@ -29,8 +29,8 @@
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "^18.1",
+    "@types/react-dom": "^18.1",
     "@typescript-eslint/eslint-plugin": "^6",
     "@typescript-eslint/parser": "^6",
     "autoprefixer": "^10",
