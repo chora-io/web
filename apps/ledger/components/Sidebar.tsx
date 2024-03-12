@@ -15,31 +15,6 @@ const Sidebar = () => {
   return (
     <div className={styles.sidebar}>
       <ul>
-        <li>{'network'}</li>
-        <ul>
-          <li>
-            <Link
-              href="/network"
-              className={
-                currentRoute === '/network' ? styles.active : undefined
-              }
-            >
-              {'overview'}
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/network/validators"
-              className={
-                currentRoute === '/network/validators'
-                  ? styles.active
-                  : undefined
-              }
-            >
-              {'validators'}
-            </Link>
-          </li>
-        </ul>
         <li>{'account'}</li>
         <ul>
           <li>
@@ -47,6 +22,19 @@ const Sidebar = () => {
               href="/account"
               className={
                 currentRoute === '/account' ? styles.active : undefined
+              }
+            >
+              {'overview'}
+            </Link>
+          </li>
+        </ul>
+        <li>{'network'}</li>
+        <ul>
+          <li>
+            <Link
+              href="/network"
+              className={
+                currentRoute === '/network' ? styles.active : undefined
               }
             >
               {'overview'}

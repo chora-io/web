@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const HomePage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'open registry workspace'}</h1>
+      <h1>{'ecological registry workspace'}</h1>
     </div>
   </div>
 )

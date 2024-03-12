@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import Overview from '@components/account/Overview'
+import Account from '@components/account/Account'
 
 import styles from './page.module.css'
 
@@ -11,10 +11,7 @@ export const metadata: Metadata = {
 const HomePage = () => (
   <div className={styles.page}>
     <div>
-      <div className={styles.header}>
-        <h1>{'account overview'}</h1>
-      </div>
-      <Overview />
+      <Account />
     </div>
   </div>
 )

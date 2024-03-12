@@ -50,6 +50,7 @@ const Network = () => {
 
   return (
     <div className={styles.box}>
+      <h2>{'network'}</h2>
       <div>
         <table className={styles.table}>
           <thead>

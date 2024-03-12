@@ -1,7 +1,7 @@
 .boxOptions {
-  composes: box-options from '../../../../node_modules/chora/styles/box.css';
+  composes: box-options from 'chora/styles/box.css';
 }
 
 .boxOptionActive {
-  composes: box-option-active from '../../../../node_modules/chora/styles/box.css';
+  composes: box-option-active from 'chora/styles/box.css';
 }

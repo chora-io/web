@@ -2,6 +2,10 @@
 
 .box {
   composes: box from 'chora/styles/box.css';
+  text-align: center;
+}
+
+.box > div {
   display: flex;
   justify-content: center;
 }
@@ -20,7 +24,6 @@
 
 .table th,
 .table td {
-  max-width: 12em;
   padding: 1.25em;
   text-align: center;
 }
@@ -37,13 +40,6 @@
   .table tbody td {
     display: block;
   }
-}
-
-/* result */
-
-.result {
-  margin: 2em auto;
-  text-align: center;
 }
 
 /* error */

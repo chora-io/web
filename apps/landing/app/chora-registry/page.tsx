@@ -5,7 +5,7 @@ import Link from 'next/link'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'chora registry | open registry workspace',
+  title: 'chora registry | ecological registry workspace',
 }
 
 const RegistryPage = () => {
@@ -27,7 +27,7 @@ const RegistryPage = () => {
           <p>
             <i>{'decentralized ecological claims and assets'}</i>
           </p>
-          <p>{'open registry workspace'}</p>
+          <p>{'ecological registry workspace'}</p>
           <div style={{ textAlign: 'center', padding: '2em 0' }}>
             <a className={styles.button} href={appLink} target="_blank">
               {'open app ↗'}
@@ -40,7 +40,7 @@ const RegistryPage = () => {
           <div style={{ padding: '1em 0' }}>
             <p>
               {
-                'Registry is a decentralized ecological claims and asset registry and an open workspace to create and manage registry workflows.'
+                'Registry is an explorer for decentralized ecological claims and assets and an open workspace to create and manage registry workflows.'
               }
             </p>
             <p>

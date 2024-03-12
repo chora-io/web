@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 import Network from '@components/network/Network'
-import Overview from '@components/network/Overview'
+import Validators from '@components/network/Validators'
 
 import styles from './page.module.css'
 
@@ -12,9 +12,8 @@ export const metadata: Metadata = {
 const NetworkPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'network overview'}</h1>
-      <Overview />
       <Network />
+      <Validators />
     </div>
   </div>
 )

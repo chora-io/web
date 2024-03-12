@@ -3,6 +3,7 @@ import {
   choraLocal,
   choraTestnet,
   regenLocal,
+  regenMainnet,
   regenRedwood,
 } from 'cosmos/chains'
 import * as React from 'react'
@@ -30,16 +31,17 @@ const SelectNetwork = ({ id, label, selected, network, setNetwork }: any) => {
         onChange={(event) => setNetwork(event.target.value)}
       >
         {local && (
-          <option value={bionLocal.chainId}>{bionLocal.chainId}</option>
+          <option value={bionLocal.chainId}>{bionLocal.chainName}</option>
         )}
         {local && (
-          <option value={choraLocal.chainId}>{choraLocal.chainId}</option>
+          <option value={choraLocal.chainId}>{choraLocal.chainName}</option>
         )}
-        <option value={choraTestnet.chainId}>{choraTestnet.chainId}</option>
+        <option value={choraTestnet.chainId}>{choraTestnet.chainName}</option>
+        <option value={regenMainnet.chainId}>{regenMainnet.chainName}</option>
         {local && (
-          <option value={regenLocal.chainId}>{regenLocal.chainId}</option>
+          <option value={regenLocal.chainId}>{regenLocal.chainName}</option>
         )}
-        <option value={regenRedwood.chainId}>{regenRedwood.chainId}</option>
+        <option value={regenRedwood.chainId}>{regenRedwood.chainName}</option>
       </select>
     </label>
   )

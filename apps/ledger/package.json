@@ -1,7 +1,7 @@
 {
   "name": "ledger",
   "private": true,
-  "description": "open network dashboard",
+  "description": "blockchain network dashboard",
   "version": "0.0.0",
   "homepage": "https://chora.io",
   "bugs": {

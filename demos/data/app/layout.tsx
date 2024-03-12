@@ -26,6 +26,10 @@ const Layout = ({ children }: any) => (
                   title: 'convert',
                 },
                 {
+                  link: '/resolvers',
+                  title: 'resolvers',
+                },
+                {
                   link: '/server',
                   title: 'server',
                 },

@@ -1,7 +1,7 @@
 {
   "name": "registry",
   "private": true,
-  "description": "open registry workspace",
+  "description": "ecological registry workspace",
   "version": "0.0.0",
   "homepage": "https://chora.io",
   "bugs": {

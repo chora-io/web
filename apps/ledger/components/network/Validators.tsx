@@ -41,6 +41,7 @@ const Validators = () => {
 
   return (
     <div className={styles.box}>
+      <h2>{'validators'}</h2>
       <div>
         <table className={styles.table}>
           <thead>

@@ -4,7 +4,7 @@ import { Metadata } from 'next'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'chora ledger | open network dashboard',
+  title: 'chora ledger | blockchain network dashboard',
 }
 
 const ChoraLedgerPage = () => {
@@ -26,7 +26,7 @@ const ChoraLedgerPage = () => {
           <p>
             <i>{'explore and interact with distributed ledgers'}</i>
           </p>
-          <p>{'open network dashboard'}</p>
+          <p>{'blockchain network dashboard'}</p>
           <div style={{ textAlign: 'center', padding: '2em 0' }}>
             <a className={styles.button} href={appLink} target="_blank">
               {'open app ↗'}

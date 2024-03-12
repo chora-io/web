@@ -16,8 +16,8 @@ const Layout = ({ children }: any) => (
             }}
             itemsLeft={[
               {
-                link: 'chora-coops',
-                title: 'coops',
+                link: 'chora-coop',
+                title: 'coop',
               },
               {
                 link: 'chora-registry',
@@ -54,9 +54,9 @@ const Layout = ({ children }: any) => (
                 title: 'applications',
                 items: [
                   {
-                    link: '/chora-coops',
+                    link: '/chora-coop',
                     target: '',
-                    title: 'coops',
+                    title: 'coop',
                   },
                   {
                     link: '/chora-registry',
