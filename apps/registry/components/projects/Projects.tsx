@@ -18,9 +18,13 @@ const Projects = () => {
   return (
     <div className={styles.box}>
       {!error && !projects && <div>{'loading...'}</div>}
-      {!error && projects && projects.length === 0 && <div>{'no class projects found'}</div>}
+      {!error && projects && projects.length === 0 && (
+        <div>{'no class projects found'}</div>
+      )}
       {Array.isArray(projects) &&
-        projects.map((project) => <ProjectPreview key={project['id']} project={project} />)}
+        projects.map((project) => (
+          <ProjectPreview key={project['id']} project={project} />
+        ))}
       <Result error={error} />
     </div>
   )

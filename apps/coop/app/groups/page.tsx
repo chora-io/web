@@ -1,5 +1,7 @@
 import { Metadata } from 'next'
 
+import Groups from '@components/groups/Groups'
+
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
@@ -9,7 +11,8 @@ export const metadata: Metadata = {
 const HomePage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'coming soon...'}</h1>
+      <h1>{'explore groups'}</h1>
+      <Groups />
     </div>
   </div>
 )

@@ -18,7 +18,6 @@ export const useProjects = (chainInfo: any) => {
   useEffect(() => {
     // fetch credit projects from selected network
     const fetchProjects = async () => {
-
       // fetch policies by group id from selected network
       await fetch(chainInfo.rest + '/' + queryProjects)
         .then((res) => res.json())

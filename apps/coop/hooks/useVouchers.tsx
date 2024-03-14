@@ -1,13 +1,10 @@
-import { useNetworkCoop } from 'chora/hooks'
 import { useEffect, useState } from 'react'
 
 const queryVouchers = 'chora/voucher/v1/vouchers-by-issuer'
 const queryPolicies = 'cosmos/group/v1/group_policies_by_group'
 
 // fetch vouchers (curated by coop) from selected network
-export const useVouchers = (chainInfo: any) => {
-  const [groupId] = useNetworkCoop(chainInfo)
-
+export const useVouchers = (chainInfo: any, groupId: any) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [vouchers, setVouchers] = useState<any>(null)

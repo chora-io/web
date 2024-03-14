@@ -2,6 +2,7 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { useParams } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
 import ProposalPreview from '@components/groups/proposals/ProposalPreview'
@@ -10,10 +11,12 @@ import { useGroupProposals } from '@hooks/useGroupProposals'
 import styles from './Proposals.module.css'
 
 const Proposals = () => {
+  const { groupId } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch group proposals from selected network
-  const [proposals, error] = useGroupProposals(chainInfo)
+  const [proposals, error] = useGroupProposals(chainInfo, groupId)
 
   // list options
   const [sort, setSort] = useState<string>('ascending')

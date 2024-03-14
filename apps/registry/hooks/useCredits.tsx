@@ -18,7 +18,6 @@ export const useCredits = (chainInfo: any) => {
   useEffect(() => {
     // fetch credit batches from selected network
     const fetchBatches = async () => {
-
       // fetch policies by group id from selected network
       await fetch(chainInfo.rest + '/' + queryBatches)
         .then((res) => res.json())

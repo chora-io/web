@@ -18,9 +18,13 @@ const Credits = () => {
   return (
     <div className={styles.box}>
       {!error && !batches && <div>{'loading...'}</div>}
-      {!error && batches && batches.length === 0 && <div>{'no credit batches found'}</div>}
+      {!error && batches && batches.length === 0 && (
+        <div>{'no credit batches found'}</div>
+      )}
       {Array.isArray(batches) &&
-        batches.map((batch) => <CreditPreview key={batch['denom']} batch={batch} />)}
+        batches.map((batch) => (
+          <CreditPreview key={batch['denom']} batch={batch} />
+        ))}
       <Result error={error} />
     </div>
   )

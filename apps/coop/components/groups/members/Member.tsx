@@ -11,12 +11,12 @@ import { useGroupMember } from '@hooks/useGroupMember'
 import styles from './Member.module.css'
 
 const Member = () => {
-  const { address } = useParams()
+  const { address, groupId } = useParams()
 
   const { chainInfo } = useContext(WalletContext)
 
   // fetch member and member metadata from selected network and network server
-  const [member, metadata, error] = useGroupMember(chainInfo, `${address}`)
+  const [member, metadata, error] = useGroupMember(chainInfo, groupId, `${address}`)
 
   return (
     <div className={styles.box}>

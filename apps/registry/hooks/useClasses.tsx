@@ -18,7 +18,6 @@ export const useClasses = (chainInfo: any) => {
   useEffect(() => {
     // fetch credit classes from selected network
     const fetchClasses = async () => {
-
       // fetch policies by group id from selected network
       await fetch(chainInfo.rest + '/' + queryClasses)
         .then((res) => res.json())

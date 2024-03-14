@@ -1,3 +1,0 @@
-.page {
-  composes: page-with-sidebar from '../../../../../../../node_modules/chora/styles/page.css';
-}

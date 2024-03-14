@@ -1,6 +1,7 @@
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import { useGroupPolicyMetadata } from '@hooks/useGroupPolicyMetadata'
@@ -8,6 +9,8 @@ import { useGroupPolicyMetadata } from '@hooks/useGroupPolicyMetadata'
 import styles from './AccountPreview.module.css'
 
 const AccountPreview = ({ policy }: any) => {
+  const { groupId } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch policy metadata by iri from network server
@@ -23,7 +26,9 @@ const AccountPreview = ({ policy }: any) => {
         <h3>{'address'}</h3>
         <p>{policy['address']}</p>
       </div>
-      <Link href={`/group/account/${policy['address']}`}>{'view account'}</Link>
+      <Link href={`/groups/${groupId}/accounts/${policy['address']}`}>
+        {'view account'}
+      </Link>
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

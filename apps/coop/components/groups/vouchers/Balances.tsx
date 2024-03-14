@@ -12,7 +12,7 @@ import { useVoucherBalances } from '@hooks/useVoucherBalances'
 import styles from './Balances.module.css'
 
 const Balances = () => {
-  const { id } = useParams()
+  const { id, groupId } = useParams()
 
   const { chainInfo } = useContext(WalletContext)
 
@@ -42,7 +42,9 @@ const Balances = () => {
               <h3>{'total amount'}</h3>
               <p>{balance['total_amount']}</p>
             </div>
-            <Link href={`/group/voucher/${id}/${balance['address']}`}>
+            <Link
+              href={`/groups/${groupId}/vouchers/${id}/${balance['address']}`}
+            >
               {'view balance'}
             </Link>
           </div>

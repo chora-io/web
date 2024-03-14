@@ -1,11 +1,10 @@
-import { useNetworkCoop, useNetworkServer } from 'chora/hooks'
+import { useNetworkServer } from 'chora/hooks'
 import { useEffect, useState } from 'react'
 
 const queryPolicies = 'cosmos/group/v1/group_policies_by_group'
 
 // fetch group policies with metadata from selected network
-export const useGroupPoliciesWithMetadata = (chainInfo: any) => {
-  const [groupId] = useNetworkCoop(chainInfo)
+export const useGroupPoliciesWithMetadata = (chainInfo: any, groupId: any) => {
   const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results

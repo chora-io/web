@@ -1,11 +1,10 @@
-import { useNetworkCoop, useNetworkServer } from 'chora/hooks'
+import { useNetworkServer } from 'chora/hooks'
 import { useEffect, useState } from 'react'
 
 const queryMembers = 'cosmos/group/v1/group_members' // TODO(cosmos-sdk): group member query
 
 // fetch member and member metadata from selected network and network server
-export const useGroupMember = (chainInfo: any, address: string) => {
-  const [groupId] = useNetworkCoop(chainInfo)
+export const useGroupMember = (chainInfo: any, groupId: any, address: string) => {
   const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results

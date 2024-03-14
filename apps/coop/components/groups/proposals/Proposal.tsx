@@ -18,7 +18,7 @@ import styles from './Proposal.module.css'
 // TODO(cosmos-sdk): voter should be able to update vote
 
 const Proposal = () => {
-  const { id } = useParams()
+  const { id, groupId } = useParams()
 
   const { chainInfo, wallet } = useContext(WalletContext)
 
@@ -89,7 +89,9 @@ const Proposal = () => {
           <>{`vote submitted (${currentVote['option']})`}</>
         )}
         {proposal && !currentVote && !votesFinalized && (
-          <Link href={`/group/proposal/${id}/submit`}>{'submit vote'}</Link>
+          <Link href={`/groups/${groupId}/proposals/${id}/submit`}>
+            {'submit vote'}
+          </Link>
         )}
         {proposal && proposalExecutable && (
           <button onClick={handleExecute}>{'execute proposal'}</button>

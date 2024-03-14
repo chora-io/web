@@ -12,7 +12,7 @@ import { useGroupProposalVotes } from '@hooks/useGroupProposalVotes'
 import styles from './ProposalVotes.module.css'
 
 const ProposalVotes = () => {
-  const { id } = useParams()
+  const { id, groupId } = useParams()
 
   const { chainInfo } = useContext(WalletContext)
 
@@ -33,7 +33,7 @@ const ProposalVotes = () => {
               <h3>{'option'}</h3>
               <p>{vote['option']}</p>
             </div>
-            <Link href={`/group/proposal/${id}/${vote['voter']}`}>
+            <Link href={`/groups/${groupId}/proposals/${id}/${vote['voter']}`}>
               {'view vote'}
             </Link>
           </div>

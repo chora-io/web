@@ -1,6 +1,7 @@
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import { useGroupMemberMetadata } from '@hooks/useGroupMemberMetadata'
@@ -8,6 +9,8 @@ import { useGroupMemberMetadata } from '@hooks/useGroupMemberMetadata'
 import styles from './MemberPreview.module.css'
 
 const MemberPreview = ({ member }: any) => {
+  const { groupId } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch member metadata by iri from network server
@@ -23,7 +26,9 @@ const MemberPreview = ({ member }: any) => {
         <h3>{'address'}</h3>
         <p>{member['address']}</p>
       </div>
-      <Link href={`/group/member/${member['address']}`}>{'view member'}</Link>
+      <Link href={`/groups/${groupId}/members/${member['address']}`}>
+        {'view member'}
+      </Link>
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

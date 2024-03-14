@@ -1,27 +1,27 @@
 .box {
-  composes: box from '../../../../node_modules/chora/styles/box.css';
+  composes: box from 'chora/styles/box.css';
 }
 
 .boxHeader {
-  composes: box-header from '../../../../node_modules/chora/styles/box.css';
+  composes: box-header from 'chora/styles/box.css';
 }
 
 .boxItem {
-  composes: box-item from '../../../../node_modules/chora/styles/box.css';
+  composes: box-item from 'chora/styles/box.css';
 }
 
 .boxOptions {
-  composes: box-options from '../../../../node_modules/chora/styles/box.css';
+  composes: box-options from 'chora/styles/box.css';
 }
 
 .boxOptionActive {
-  composes: box-option-active from '../../../../node_modules/chora/styles/box.css';
+  composes: box-option-active from 'chora/styles/box.css';
 }
 
 .boxText {
-  composes: box-text from '../../../../node_modules/chora/styles/box.css';
+  composes: box-text from 'chora/styles/box.css';
 }
 
 .form {
-  composes: form from '../../../../node_modules/chora/styles/form.css';
+  composes: form from 'chora/styles/form.css';
 }

@@ -3,6 +3,7 @@
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
 import { formatTimestamp } from 'chora/utils'
+import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import Address from '@components/Address'
@@ -11,10 +12,12 @@ import { useGroupInfo } from '@hooks/useGroupInfo'
 import styles from './Group.module.css'
 
 const Group = () => {
+  const { groupId } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch group and group metadata from selected network and network server
-  const [group, metadata, error] = useGroupInfo(chainInfo)
+  const [group, metadata, error] = useGroupInfo(chainInfo, groupId)
 
   return (
     <div className={styles.box}>

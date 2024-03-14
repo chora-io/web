@@ -2,6 +2,7 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import GeonodePreview from '@components/groups/geonodes/GeonodePreview'
@@ -10,10 +11,12 @@ import { useGeonodes } from '@hooks/useGeonodes'
 import styles from './Geonodes.module.css'
 
 const Geonodes = () => {
+  const { groupId } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch nodes (curated by coop) from selected network
-  const [nodes, error] = useGeonodes(chainInfo)
+  const [nodes, error] = useGeonodes(chainInfo, groupId)
 
   return (
     <div className={styles.box}>

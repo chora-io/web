@@ -1,5 +1,6 @@
 import { WalletContext } from 'chora/contexts'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import { useGroupProposalMetadata } from '@hooks/useGroupProposalMetadata'
@@ -7,6 +8,8 @@ import { useGroupProposalMetadata } from '@hooks/useGroupProposalMetadata'
 import styles from './ProposalPreview.module.css'
 
 const ProposalPreview = ({ proposal }: any) => {
+  const { groupId } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch group proposal metadata from network server
@@ -34,7 +37,7 @@ const ProposalPreview = ({ proposal }: any) => {
               <p>{proposal['executor_result']}</p>
             </div>
           )}
-          <Link href={`/group/proposal/${proposal['id']}`}>
+          <Link href={`/groups/${groupId}/proposals/${proposal['id']}`}>
             {'view proposal'}
           </Link>
         </div>

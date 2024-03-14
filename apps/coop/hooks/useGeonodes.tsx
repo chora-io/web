@@ -1,13 +1,10 @@
-import { useNetworkCoop } from 'chora/hooks'
 import { useEffect, useState } from 'react'
 
 const queryGeonodes = 'chora/geonode/v1/nodes-by-curator'
 const queryPolicies = 'cosmos/group/v1/group_policies_by_group'
 
 // fetch nodes (curated by coop) from selected network
-export const useGeonodes = (chainInfo: any) => {
-  const [groupId] = useNetworkCoop(chainInfo)
-
+export const useGeonodes = (chainInfo: any, groupId: any) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [nodes, setNodes] = useState<any>(null)

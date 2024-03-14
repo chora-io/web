@@ -1,12 +1,9 @@
-import { useNetworkCoop } from 'chora/hooks'
 import { useEffect, useState } from 'react'
 
 const queryMembers = 'cosmos/group/v1/group_members'
 
 // fetch group members from selected network
-export const useGroupMembers = (chainInfo: any) => {
-  const [groupId] = useNetworkCoop(chainInfo)
-
+export const useGroupMembers = (chainInfo: any, groupId: any) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [members, setMembers] = useState<any>(null)

@@ -12,6 +12,7 @@ import { useNetworkServer } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'
 import { MsgSubmitProposal } from 'cosmos/api/cosmos/group/v1/tx'
 import * as jsonld from 'jsonld'
+import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
 
 import { useGroupPoliciesWithMetadata } from '@hooks/useGroupPoliciesWithMetadata'
@@ -19,12 +20,14 @@ import { useGroupPoliciesWithMetadata } from '@hooks/useGroupPoliciesWithMetadat
 import styles from './SubmitProposal.module.css'
 
 const SubmitProposal = () => {
+  const { groupId } = useParams()
+
   const { chainInfo, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch group policies and policies metadata from selected network
-  const [policies] = useGroupPoliciesWithMetadata(chainInfo)
+  const [policies] = useGroupPoliciesWithMetadata(chainInfo, groupId)
 
   // form input
   const [address, setAddress] = useState<string>('')

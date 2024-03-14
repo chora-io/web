@@ -1,4 +1,4 @@
-import { useNetworkCoop, useNetworkServer } from 'chora/hooks'
+import { useNetworkServer } from 'chora/hooks'
 import {
   proposalExecutorResultToJSON,
   proposalStatusToJSON,
@@ -9,8 +9,7 @@ const queryPolicies = 'cosmos/group/v1/group_policies_by_group'
 const queryProposals = 'cosmos/group/v1/proposals_by_group_policy'
 
 // fetch group proposals from selected network
-export const useGroupProposals = (chainInfo: any) => {
-  const [groupId] = useNetworkCoop(chainInfo)
+export const useGroupProposals = (chainInfo: any, groupId: any) => {
   const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results

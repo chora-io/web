@@ -2,6 +2,7 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { useParams } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
 import MemberPreview from '@components/groups/members/MemberPreview'
@@ -10,10 +11,12 @@ import { useGroupMembers } from '@hooks/useGroupMembers'
 import styles from './Members.module.css'
 
 const Members = () => {
+  const { groupId } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch group members from selected network
-  const [members, error] = useGroupMembers(chainInfo)
+  const [members, error] = useGroupMembers(chainInfo, groupId)
 
   // list options
   const [sort, setSort] = useState<string>('ascending')

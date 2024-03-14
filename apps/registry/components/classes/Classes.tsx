@@ -18,9 +18,13 @@ const Classes = () => {
   return (
     <div className={styles.box}>
       {!error && !classes && <div>{'loading...'}</div>}
-      {!error && classes && classes.length === 0 && <div>{'no credit classes found'}</div>}
+      {!error && classes && classes.length === 0 && (
+        <div>{'no credit classes found'}</div>
+      )}
       {Array.isArray(classes) &&
-        classes.map((clazz) => <ClassPreview key={clazz['id']} clazz={clazz} />)}
+        classes.map((clazz) => (
+          <ClassPreview key={clazz['id']} clazz={clazz} />
+        ))}
       <Result error={error} />
     </div>
   )
