@@ -1,0 +1,7 @@
+.boxItem {
+  composes: box-item from 'chora/styles/box.css';
+}
+
+.boxText {
+  composes: box-text from 'chora/styles/box.css';
+}

@@ -1,5 +1,7 @@
 import { Metadata } from 'next'
 
+import Classes from '@components/classes/Classes'
+
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
@@ -9,7 +11,8 @@ export const metadata: Metadata = {
 const ClassesPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'coming soon...'}</h1>
+      <h1>{'credit classes'}</h1>
+      <Classes />
     </div>
   </div>
 )
