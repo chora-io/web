@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "blakejs": "^1",
-    "chora": "npm:@chora-io/chora@v0.1.0-beta5",
+    "chora": "npm:@chora-io/chora@v0.1.0-beta6",
     "jsonld": "^8",
     "next": "^14",
     "react": "^18",

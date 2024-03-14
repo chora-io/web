@@ -1,9 +1,9 @@
 'use client'
 
-import { Result } from 'chora/components'
-import { WalletContext } from 'chora/contexts'
+// import { Result } from 'chora/components'
+// import { WalletContext } from 'chora/contexts'
 import { useParams } from 'next/navigation'
-import { useContext } from 'react'
+// import { useContext } from 'react'
 
 // import { useCredit } from '@hooks/useCredit'
 
@@ -12,7 +12,7 @@ import styles from './Credit.module.css'
 const Credit = () => {
   const { denom } = useParams()
 
-  const { chainInfo } = useContext(WalletContext)
+  // const { chainInfo } = useContext(WalletContext)
 
   // fetch batch and batch metadata from selected network and network server
   // const [batch, metadata, error] = useCredit(chainInfo, `${denom}`)

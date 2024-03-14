@@ -1,14 +1,14 @@
-import { Result } from 'chora/components'
-import { WalletContext } from 'chora/contexts'
+// import { Result } from 'chora/components'
+// import { WalletContext } from 'chora/contexts'
 import Link from 'next/link'
-import { useContext } from 'react'
+// import { useContext } from 'react'
 
 // import { useCreditMetadata } from '@hooks/useCreditMetadata'
 
 import styles from './CreditPreview.module.css'
 
 const CreditPreview = ({ batch }: any) => {
-  const { chainInfo } = useContext(WalletContext)
+  // const { chainInfo } = useContext(WalletContext)
 
   // fetch node metadata by iri from network server
   // const [metadata, error] = useCreditMetadata(chainInfo, batch.metadata)

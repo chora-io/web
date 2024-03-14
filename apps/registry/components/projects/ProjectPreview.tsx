@@ -1,14 +1,14 @@
-import { Result } from 'chora/components'
-import { WalletContext } from 'chora/contexts'
+// import { Result } from 'chora/components'
+// import { WalletContext } from 'chora/contexts'
 import Link from 'next/link'
-import { useContext } from 'react'
+// import { useContext } from 'react'
 
 // import { useProjectMetadata } from '@hooks/useProjectMetadata'
 
 import styles from './ProjectPreview.module.css'
 
 const ProjectPreview = ({ project }: any) => {
-  const { chainInfo } = useContext(WalletContext)
+  // const { chainInfo } = useContext(WalletContext)
 
   // fetch class metadata by iri from network server
   // const [metadata, error] = useProjectMetadata(chainInfo, class.metadata)

@@ -1,9 +1,9 @@
 'use client'
 
-import { Result } from 'chora/components'
-import { WalletContext } from 'chora/contexts'
+// import { Result } from 'chora/components'
+// import { WalletContext } from 'chora/contexts'
 import { useParams } from 'next/navigation'
-import { useContext } from 'react'
+// import { useContext } from 'react'
 
 // import { useProject } from '@hooks/useProject'
 
@@ -12,7 +12,7 @@ import styles from './Project.module.css'
 const Project = () => {
   const { id } = useParams()
 
-  const { chainInfo } = useContext(WalletContext)
+  // const { chainInfo } = useContext(WalletContext)
 
   // fetch class and class metadata from selected network and network server
   // const [project, metadata, error] = useProject(chainInfo, `${id}`)
