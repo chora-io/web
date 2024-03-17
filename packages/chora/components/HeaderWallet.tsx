@@ -10,7 +10,7 @@ import ThemeButton from './ThemeButton'
 
 import styles from './HeaderWallet.module.css'
 
-const HeaderWallet = ({ title, testnets }: any) => {
+const HeaderWallet = ({ title, redirect, testnets }: any) => {
   const { darkTheme, setDarkTheme } = useContext(ThemeContext)
 
   const toggleTheme = () => {
@@ -26,7 +26,7 @@ const HeaderWallet = ({ title, testnets }: any) => {
       <div>
         <HeaderTitle darkTheme={darkTheme} title={title} />
         <div className={styles.menu}>
-          <ConnectWallet testnets={testnets} />
+          <ConnectWallet redirect={redirect} testnets={testnets} />
           <ThemeButton darkTheme={darkTheme} toggleTheme={toggleTheme} />
         </div>
       </div>

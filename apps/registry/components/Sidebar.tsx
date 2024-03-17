@@ -76,6 +76,16 @@ const Sidebar = () => {
               {'overview'}
             </Link>
           </li>
+          <li>
+            <Link
+              href="/workspace/data"
+              className={
+                currentRoute === '/workspace/data' ? styles.active : undefined
+              }
+            >
+              {'data tools'}
+            </Link>
+          </li>
         </ul>
       </ul>
     </div>

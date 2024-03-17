@@ -138,8 +138,8 @@ const SubmitProposal = () => {
     <div className={styles.box}>
       <form className={styles.form} onSubmit={handleSubmit}>
         <SelectAccount
-          id="proposal-policy"
-          label="proposal policy"
+          id="group-account"
+          label="group account"
           options={policies}
           address={address}
           setAddress={setAddress}

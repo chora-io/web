@@ -5,7 +5,7 @@ import Overview from '@components/workspace/Overview'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'chora registry',
+  title: 'chora coop',
 }
 
 const WorkspacePage = () => (

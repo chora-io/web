@@ -94,13 +94,13 @@ export const useGroupProposals = (chainInfo: any, groupId: any) => {
       })
     }
 
-    // only fetch if network and group id
-    if (chainInfo?.rest && groupId) {
+    // only fetch if network, group, and server
+    if (chainInfo?.rest && groupId && serverUrl) {
       fetchProposals().catch((err) => {
         setError(err.message)
       })
     }
-  }, [chainInfo?.rest, groupId])
+  }, [chainInfo?.rest, groupId, serverUrl])
 
   return [proposals, error]
 }

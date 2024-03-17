@@ -14,7 +14,7 @@ import SelectNetwork from './SelectNetwork'
 
 import styles from './ConnectWallet.module.css'
 
-const ConnectWallet = ({ testnets }: any) => {
+const ConnectWallet = ({ redirect, testnets }: any) => {
   const { getKeplr, network, setNetwork, wallet, loading, error } =
     useContext(WalletContext)
 
@@ -71,8 +71,9 @@ const ConnectWallet = ({ testnets }: any) => {
         <SelectNetwork
           label=" "
           network={network}
-          setNetwork={setNetwork}
           selected={selected}
+          setNetwork={setNetwork}
+          redirect={redirect}
           testnets={testnets}
         />
         <button

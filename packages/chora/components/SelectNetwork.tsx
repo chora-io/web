@@ -6,6 +6,7 @@ import {
   regenMainnet,
   regenRedwood,
 } from 'cosmos/chains'
+import { useRouter } from 'next/navigation'
 import * as React from 'react'
 
 const defaultId = 'network'
@@ -14,11 +15,14 @@ const defaultLabel = 'network'
 const SelectNetwork = ({
   id,
   label,
-  selected,
   network,
+  selected,
   setNetwork,
+  redirect,
   testnets,
 }: any) => {
+  const router = useRouter()
+
   let local = false
   if (
     typeof window !== 'undefined' &&
@@ -29,13 +33,20 @@ const SelectNetwork = ({
     local = true
   }
 
+  const handleChange = (event: any) => {
+    setNetwork(event.target.value)
+    if (redirect) {
+      router.push(redirect)
+    }
+  }
+
   return (
     <label htmlFor={id ? id : defaultId}>
       {label ? label : defaultLabel}
       <select
         id={id ? id : defaultId}
         value={selected || network}
-        onChange={(event) => setNetwork(event.target.value)}
+        onChange={handleChange}
       >
         {local && (
           <option value={bionLocal.chainId}>{bionLocal.chainName}</option>

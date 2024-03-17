@@ -95,8 +95,8 @@ export const signAndBroadcast = async (
   // transaction hash
   let txHash = undefined
 
-  // transaction sign mode
-  const mode = 'block' as BroadcastMode
+  // transaction sign mode (block not supported in cosmos sdk v0.50)
+  const mode = 'sync' as BroadcastMode
 
   // signed transaction
   let signedTx = new Uint8Array(0)

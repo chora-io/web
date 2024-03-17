@@ -31,6 +31,21 @@ const Sidebar = () => {
               </Link>
             </li>
           </ul>
+        <li>{'workspace'}</li>
+        <ul>
+          <li>
+            <Link
+              href="/workspace"
+              className={
+                currentRoute === '/workspace'
+                  ? styles.active
+                  : undefined
+              }
+            >
+              {'overview'}
+            </Link>
+          </li>
+        </ul>
         </ul>
       ) : (
         <ul>
