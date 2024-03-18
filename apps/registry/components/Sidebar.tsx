@@ -28,6 +28,16 @@ const Sidebar = () => {
                 {'geonodes'}
               </Link>
             </li>
+            <li>
+              <Link
+                href="/vouchers"
+                className={
+                  currentRoute === '/vouchers' ? styles.active : undefined
+                }
+              >
+                {'vouchers'}
+              </Link>
+            </li>
           </ul>
         )}
         {!!network && network.includes('regen') && (
@@ -74,16 +84,6 @@ const Sidebar = () => {
               }
             >
               {'overview'}
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/workspace/data"
-              className={
-                currentRoute === '/workspace/data' ? styles.active : undefined
-              }
-            >
-              {'data tools'}
             </Link>
           </li>
         </ul>
