@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import Workspace from '@components/workspace/Workspace'
+import Grants from '@components/grants/Grants'
 
 import styles from './page.module.css'
 
@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   title: 'chora coop',
 }
 
-const WorkspacePage = () => (
+const GrantsPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'workspace'}</h1>
-      <Workspace />
+      <h1>{'explore grants'}</h1>
+      <Grants />
     </div>
   </div>
 )
 
-export default WorkspacePage
+export default GrantsPage

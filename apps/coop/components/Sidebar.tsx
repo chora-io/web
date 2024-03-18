@@ -18,8 +18,18 @@ const Sidebar = () => {
     <div className={styles.sidebar}>
       {!groupId ? (
         <ul>
-          <li>{'groups'}</li>
+          <li>{'explore'}</li>
           <ul>
+            <li>
+              <Link
+                href="/grants"
+                className={
+                  currentRoute === '/grants' ? styles.active : undefined
+                }
+              >
+                {'grants'}
+              </Link>
+            </li>
             <li>
               <Link
                 href="/groups"
@@ -27,7 +37,7 @@ const Sidebar = () => {
                   currentRoute === '/groups' ? styles.active : undefined
                 }
               >
-                {'explore'}
+                {'groups'}
               </Link>
             </li>
           </ul>

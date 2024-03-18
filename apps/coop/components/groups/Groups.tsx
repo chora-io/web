@@ -15,9 +15,9 @@ const Groups = () => {
   return (
     <div className={styles.box}>
       <div className={styles.boxText}>
-        <h3>
+        <p>
           <Link href={`/groups/${groupId}`}>{'Chora Cooperative'}</Link>
-        </h3>
+        </p>
       </div>
     </div>
   )

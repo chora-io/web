@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'chora coop',
 }
 
-const HomePage = () => (
+const GroupsPage = () => (
   <div className={styles.page}>
     <div>
       <h1>{'explore groups'}</h1>
@@ -17,4 +17,4 @@ const HomePage = () => (
   </div>
 )
 
-export default HomePage
+export default GroupsPage
