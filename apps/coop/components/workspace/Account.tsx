@@ -86,39 +86,42 @@ const Account = () => {
       <Result error={error} />
     </div>
   ) : (
-    <div className={styles.box}>
-      <div className={styles.boxHeader}>
-        <h2>{'Account Information'}</h2>
-        <p>{'account information stored on chora server'}</p>
-      </div>
-      <div className={styles.boxText}>
-        <h3>{'address'}</h3>
-        <p>{(account && account.address) || 'NA'}</p>
-        {account.address !== wallet.bech32Address && (
-          <p style={{ fontSize: '0.9em' }}>
-            <i>
-              {
-                'Note: Keplr account address does not match user account address.'
-              }
-            </i>
-          </p>
-        )}
-        <div className={styles.boxText}>
-          <h3>{'email'}</h3>
-          <p>{(account && account.email) || 'NA'}</p>
+    <>
+      <div className={styles.box}>
+        <div className={styles.boxHeader}>
+          <h2>{'Account Information'}</h2>
+          <p>{'account information stored on chora server'}</p>
         </div>
         <div className={styles.boxText}>
-          <h3>{'username'}</h3>
-          <p>{(account && account.username) || 'NA'}</p>
+          <h3>{'id'}</h3>
+          <p>{(account && account.id) || 'NA'}</p>
+        </div>
+        <div className={styles.boxText}>
+          <h3>{'address'}</h3>
+          <p>{(account && account.address) || 'NA'}</p>
+          {account.address !== wallet.bech32Address && (
+            <p style={{ fontSize: '0.9em' }}>
+              <i>
+                {
+                  'Note: Keplr account address does not match user account address.'
+                }
+              </i>
+            </p>
+          )}
         </div>
       </div>
-      <div className={styles.boxText}>
-        <button className={styles.button} onClick={handleDisconnect}>
-          {'disconnect'}
-        </button>
+      <div className={styles.box}>
+        <div className={styles.boxHeader}>
+          <h2>{'Disconnect Account'}</h2>
+          <p>{'authentication will be required to reconnect'}</p>
+        </div>
+        <div className={styles.boxText}>
+          <button className={styles.button} onClick={handleDisconnect}>
+            {'disconnect'}
+          </button>
+        </div>
       </div>
-      <Result error={error} />
-    </div>
+    </>
   )
 }
 

@@ -6,7 +6,7 @@ const Workflows = () => {
   return (
     <div className={styles.box}>
       <div className={styles.boxText}>
-        <p>{'Create and manage workflows for governance processes.'}</p>
+        <p>{'Create and manage workflows for group governance processes.'}</p>
       </div>
     </div>
   )

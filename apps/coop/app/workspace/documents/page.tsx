@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import Balance from '@components/vouchers/Balance'
+import Documents from '@components/workspace/documents/Documents'
 
 import styles from './page.module.css'
 
@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   title: 'chora coop',
 }
 
-const VoucherBalancePage = () => (
+const DocumentsPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'balance'}</h1>
-      <Balance />
+      <h1>{'documents'}</h1>
+      <Documents />
     </div>
   </div>
 )
 
-export default VoucherBalancePage
+export default DocumentsPage
