@@ -17,7 +17,7 @@ const Sidebar = () => {
   return (
     <div className={styles.sidebar}>
       <ul>
-        <li>{'registry'}</li>
+        <li>{'explore'}</li>
         {!!network && network.includes('chora') && (
           <ul>
             <li>

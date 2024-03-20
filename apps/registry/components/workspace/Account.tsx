@@ -69,6 +69,8 @@ const Account = () => {
 
   // remove account from local storage
   const handleDisconnect = () => {
+    // TODO: disconnect from chora server
+
     removeAccount(activeAccount)
   }
 
@@ -78,11 +80,19 @@ const Account = () => {
         <h2>{'Account Required'}</h2>
         <p>{'workspace requires an account on chora server'}</p>
       </div>
-      <div className={styles.boxText}>
-        <button className={styles.button} onClick={handleAuthenticate}>
-          {'authenticate'}
-        </button>
-      </div>
+      {wallet ? (
+        <div className={styles.boxText}>
+          <p>{'The following address will be used for authentication:'}</p>
+          <p style={{ marginTop: '0.5em' }}>{wallet.bech32Address}</p>
+          <button className={styles.button} onClick={handleAuthenticate}>
+            {'authenticate'}
+          </button>
+        </div>
+      ) : (
+        <div className={styles.boxText}>
+          <p>{'authentication requires keplr wallet to be connected'}</p>
+        </div>
+      )}
       <Result error={error} />
     </div>
   ) : (
@@ -99,7 +109,7 @@ const Account = () => {
         <div className={styles.boxText}>
           <h3>{'address'}</h3>
           <p>{(account && account.address) || 'NA'}</p>
-          {account.address !== wallet.bech32Address && (
+          {wallet && account.address !== wallet.bech32Address && (
             <p style={{ fontSize: '0.9em' }}>
               <i>
                 {
@@ -116,6 +126,7 @@ const Account = () => {
           <p>{'authentication will be required to reconnect'}</p>
         </div>
         <div className={styles.boxText}>
+          <p>{'clear authentication and disconnect from chora server'}</p>
           <button className={styles.button} onClick={handleDisconnect}>
             {'disconnect'}
           </button>
