@@ -21,7 +21,6 @@ const Layout = ({ children }: any) => (
                   link: '/',
                   titleX: 'coop',
                 }}
-                redirect="/"
               />
               <Sidebar />
               {children}

@@ -21,7 +21,6 @@ const Layout = ({ children }: any) => (
                   link: '/',
                   titleX: 'registry',
                 }}
-                redirect="/"
               />
               <Sidebar />
               {children}

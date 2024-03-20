@@ -1,6 +1,6 @@
 'use client'
 
-import { Result } from 'chora/components'
+import { Result, SelectNetwork } from 'chora/components'
 import { AuthContext, WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import { useContext, useState } from 'react'
@@ -10,7 +10,8 @@ import styles from './Account.module.css'
 const Account = () => {
   const { account, activeAccount, removeAccount, setAccount } =
     useContext(AuthContext)
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, selected, setNetwork, wallet } =
+    useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
@@ -81,13 +82,27 @@ const Account = () => {
         <p>{'workspace requires an account on chora server'}</p>
       </div>
       {wallet ? (
-        <div className={styles.boxText}>
-          <p>{'The following address will be used for authentication:'}</p>
-          <p style={{ marginTop: '0.5em' }}>{wallet.bech32Address}</p>
-          <button className={styles.button} onClick={handleAuthenticate}>
-            {'authenticate'}
-          </button>
-        </div>
+        wallet.bech32Address.includes('chora') ? (
+          <div className={styles.boxText}>
+            <p>{'The following address will be used for authentication:'}</p>
+            <p style={{ marginTop: '0.5em' }}>{wallet.bech32Address}</p>
+            <button className={styles.button} onClick={handleAuthenticate}>
+              {'authenticate'}
+            </button>
+          </div>
+        ) : (
+          <div className={styles.boxText}>
+            <p>{'Switch networks to authenticate with your chora address.'}</p>
+            <form className={styles.form}>
+              <SelectNetwork
+                label=" "
+                network={network}
+                selected={selected}
+                setNetwork={setNetwork}
+              />
+            </form>
+          </div>
+        )
       ) : (
         <div className={styles.boxText}>
           <p>{'authentication requires keplr wallet to be connected'}</p>

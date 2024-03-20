@@ -6,7 +6,6 @@ import {
   regenMainnet,
   regenRedwood,
 } from 'cosmos/chains'
-import { useRouter } from 'next/navigation'
 import * as React from 'react'
 
 const defaultId = 'network'
@@ -18,11 +17,8 @@ const SelectNetwork = ({
   network,
   selected,
   setNetwork,
-  redirect,
   testnets,
 }: any) => {
-  const router = useRouter()
-
   let local = false
   if (
     typeof window !== 'undefined' &&
@@ -35,9 +31,6 @@ const SelectNetwork = ({
 
   const handleChange = (event: any) => {
     setNetwork(event.target.value)
-    if (redirect) {
-      router.push(redirect)
-    }
   }
 
   return (
