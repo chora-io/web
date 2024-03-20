@@ -25,9 +25,7 @@ const Balance = () => {
         <div className={styles.boxItem}>
           <div className={styles.boxText}>
             <h3>{'address'}</h3>
-            <p>
-              {balance?.address ? balance.address : 'NA'}
-            </p>
+            <p>{balance?.address ? balance.address : 'NA'}</p>
           </div>
           <div className={styles.boxText}>
             <h3>{'total amount'}</h3>

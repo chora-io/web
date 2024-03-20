@@ -1,5 +1,9 @@
 import { HeaderWallet as Header } from 'chora/components'
-import { ThemeContextProvider, WalletContextProvider } from 'chora/contexts'
+import {
+  AuthContextProvider,
+  ThemeContextProvider,
+  WalletContextProvider,
+} from 'chora/contexts'
 
 import Sidebar from '@components/Sidebar'
 
@@ -11,15 +15,17 @@ const Layout = ({ children }: any) => (
       <main>
         <ThemeContextProvider>
           <WalletContextProvider>
-            <Header
-              title={{
-                link: '/',
-                titleX: 'coop',
-              }}
-              redirect="/"
-            />
-            <Sidebar />
-            {children}
+            <AuthContextProvider>
+              <Header
+                title={{
+                  link: '/',
+                  titleX: 'coop',
+                }}
+                redirect="/"
+              />
+              <Sidebar />
+              {children}
+            </AuthContextProvider>
           </WalletContextProvider>
         </ThemeContextProvider>
       </main>

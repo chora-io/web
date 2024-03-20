@@ -1,6 +1,6 @@
 'use client'
 
-import { WalletContext } from 'chora/contexts'
+import { AuthContext, WalletContext } from 'chora/contexts'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useContext } from 'react'
@@ -9,6 +9,8 @@ import styles from './Sidebar.module.css'
 
 const Sidebar = () => {
   const { network } = useContext(WalletContext)
+
+  const { activeAccount } = useContext(AuthContext)
 
   const currentRoute = usePathname()
 
@@ -86,6 +88,20 @@ const Sidebar = () => {
               {'overview'}
             </Link>
           </li>
+          {activeAccount && (
+            <li>
+              <Link
+                href="/workspace/workflows"
+                className={
+                  currentRoute === '/workspace/workflows'
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'workflows'}
+              </Link>
+            </li>
+          )}
         </ul>
       </ul>
     </div>

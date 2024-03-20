@@ -1,0 +1,20 @@
+.box {
+  composes: box from '../../../../node_modules/chora/styles/box.css';
+}
+
+.boxHeader {
+  composes: box-header from '../../../../node_modules/chora/styles/box.css';
+}
+
+.boxText {
+  composes: box-text from '../../../../node_modules/chora/styles/box.css';
+}
+
+.button {
+  padding: 0.5em 1em;
+  margin: 0.5em 0 3em 0;
+}
+
+.error {
+  color: var(--color-error);
+}

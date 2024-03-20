@@ -10,7 +10,9 @@ const ProposalsNav = () => {
 
   return (
     <div className={styles.box}>
-      <Link href={`/groups/${groupId}/proposals/submit`}>{'submit proposal'}</Link>
+      <Link href={`/groups/${groupId}/proposals/submit`}>
+        {'submit proposal'}
+      </Link>
     </div>
   )
 }

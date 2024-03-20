@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import Overview from '@components/workspace/Overview'
+import Account from '@components/workspace/Account'
 
 import styles from './page.module.css'
 
@@ -12,7 +12,7 @@ const WorkspacePage = () => (
   <div className={styles.page}>
     <div>
       <h1>{'workspace'}</h1>
-      <Overview />
+      <Account />
     </div>
   </div>
 )

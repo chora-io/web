@@ -1,6 +1,6 @@
 'use client'
 
-import { WalletContext } from 'chora/contexts'
+import { AuthContext, WalletContext } from 'chora/contexts'
 import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
 import { useContext } from 'react'
@@ -9,6 +9,8 @@ import styles from './Sidebar.module.css'
 
 const Sidebar = () => {
   const { groupId } = useParams()
+
+  const { activeAccount } = useContext(AuthContext)
 
   const { network } = useContext(WalletContext)
 
@@ -22,16 +24,6 @@ const Sidebar = () => {
           <ul>
             <li>
               <Link
-                href="/grants"
-                className={
-                  currentRoute === '/grants' ? styles.active : undefined
-                }
-              >
-                {'grants'}
-              </Link>
-            </li>
-            <li>
-              <Link
                 href="/groups"
                 className={
                   currentRoute === '/groups' ? styles.active : undefined
@@ -41,21 +33,33 @@ const Sidebar = () => {
               </Link>
             </li>
           </ul>
-        <li>{'workspace'}</li>
-        <ul>
-          <li>
-            <Link
-              href="/workspace"
-              className={
-                currentRoute === '/workspace'
-                  ? styles.active
-                  : undefined
-              }
-            >
-              {'overview'}
-            </Link>
-          </li>
-        </ul>
+          <li>{'workspace'}</li>
+          <ul>
+            <li>
+              <Link
+                href="/workspace"
+                className={
+                  currentRoute === '/workspace' ? styles.active : undefined
+                }
+              >
+                {'overview'}
+              </Link>
+            </li>
+            {activeAccount && (
+              <li>
+                <Link
+                  href="/workspace/workflows"
+                  className={
+                    currentRoute === '/workspace/workflows'
+                      ? styles.active
+                      : undefined
+                  }
+                >
+                  {'workflows'}
+                </Link>
+              </li>
+            )}
+          </ul>
         </ul>
       ) : (
         <ul>

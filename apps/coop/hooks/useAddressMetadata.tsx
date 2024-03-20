@@ -5,7 +5,11 @@ const queryMembers = 'cosmos/group/v1/group_members'
 const queryPolicy = 'cosmos/group/v1/group_policy_info'
 
 // fetch address metadata (as policy, otherwise member) from network server
-export const useAddressMetadata = (chainInfo: any, groupId: any, address: string) => {
+export const useAddressMetadata = (
+  chainInfo: any,
+  groupId: any,
+  address: string,
+) => {
   const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results

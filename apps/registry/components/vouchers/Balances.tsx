@@ -29,17 +29,13 @@ const Balances = () => {
           <div className={styles.boxItem} key={balance['address']}>
             <div className={styles.boxText}>
               <h3>{'address'}</h3>
-              <p>
-                {balance?.address ? balance.address : 'NA'}
-              </p>
+              <p>{balance?.address ? balance.address : 'NA'}</p>
             </div>
             <div className={styles.boxText}>
               <h3>{'total amount'}</h3>
               <p>{balance['total_amount']}</p>
             </div>
-            <Link
-              href={`/vouchers/${id}/${balance['address']}`}
-            >
+            <Link href={`/vouchers/${id}/${balance['address']}`}>
               {'view balance'}
             </Link>
           </div>

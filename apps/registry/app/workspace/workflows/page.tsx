@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import Account from '@components/workspace/Account'
+import Workflows from '@components/workspace/workflows/Workflows'
 
 import styles from './page.module.css'
 
@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   title: 'chora coop',
 }
 
-const WorkspacePage = () => (
+const WorkflowsPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'workspace'}</h1>
-      <Account />
+      <h1>{'workflows'}</h1>
+      <Workflows />
     </div>
   </div>
 )
 
-export default WorkspacePage
+export default WorkflowsPage
