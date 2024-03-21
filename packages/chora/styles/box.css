@@ -1,12 +1,11 @@
 /* box */
 
 .box {
-  background: var(--background-primary-transparent);
+  background: var(--background-primary);
   box-shadow: var(--box-shadow);
-  margin: 3em 0;
+  margin: 2em 0;
   padding: 2em;
-  scroll-margin-top: calc(var(--header-height) + 3em);
-  width: 70vw;
+  scroll-margin-top: calc(var(--header-height) + 2em);
 }
 
 /* box-header */

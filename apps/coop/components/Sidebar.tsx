@@ -42,7 +42,7 @@ const Sidebar = () => {
                   currentRoute === '/workspace' ? styles.active : undefined
                 }
               >
-                {'overview'}
+                {'dashboard'}
               </Link>
             </li>
             {activeAccount && (

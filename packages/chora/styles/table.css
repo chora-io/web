@@ -1,0 +1,21 @@
+/* table */
+
+.table {
+  border-collapse: collapse;
+  margin: 2em;
+  width: calc(100% - 4em);
+}
+
+.table td {
+  border: 1px solid var(--box-shadow-color);
+  padding: 1em;
+}
+
+.table tbody > tr {
+  opacity: 0.8;
+}
+
+.table tbody > tr:hover {
+  opacity: 1;
+  transition: var(--transition);
+}

@@ -10,6 +10,10 @@
   composes: box-text from 'chora/styles/box.css';
 }
 
+.form {
+  composes: form from 'chora/styles/form.css';
+}
+
 .button {
   padding: 0.5em 1em;
   margin: 2em 0;

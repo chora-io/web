@@ -1,0 +1,3 @@
+.button {
+  composes: button from 'chora/styles/button.css';
+}

@@ -1,7 +1,7 @@
 /* sidebar */
 
 .sidebar {
-  background: var(--background-primary-transparent);
+  background: var(--background-primary);
   box-shadow: var(--box-shadow);
   height: calc(100vh - var(--header-height));
   margin-top: var(--header-height);

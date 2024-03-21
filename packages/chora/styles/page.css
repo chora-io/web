@@ -7,9 +7,6 @@
 .page-center,
 .page-with-footer,
 .page-with-sidebar {
-  align-items: flex-start;
-  display: flex;
-  justify-content: center;
   min-height: 100vh;
   overflow: hidden;
 }
@@ -19,6 +16,8 @@
 .page-center {
   align-items: center;
   background: var(--background-primary);
+  display: flex;
+  justify-content: center;
   text-align: center;
 }
 
@@ -31,24 +30,18 @@
 /* page-with-sidebar */
 
 .page-with-sidebar {
-  padding-left: var(--sidebar-width);
+  margin-left: var(--sidebar-width);
 }
 
 @media (max-width: 850px) {
   .page-with-sidebar {
-    padding-left: 0;
+    margin-left: 0;
   }
 }
 
 /* page */
 /* page-with-footer */
 /* page-with-sidebar */
-
-.page h1,
-.page-with-footer h1,
-.page-with-sidebar h1 {
-  margin-bottom: 1.5em;
-}
 
 .page > div,
 .page-with-footer > div,
