@@ -3,7 +3,11 @@ import { useEffect, useState } from 'react'
 const queryGeonodes = 'chora/geonode/v1/nodes'
 
 // fetch nodes (curated by coop) from selected network
-export const useGeonodes = (chainInfo: any) => {
+export const useGeonodes = (
+  chainInfo: any,
+  maxItems: number,
+  offset: number,
+) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [nodes, setNodes] = useState<any>(null)
@@ -18,8 +22,10 @@ export const useGeonodes = (chainInfo: any) => {
   useEffect(() => {
     // fetch policies and nodes from selected network
     const fetchGeonodes = async () => {
+      const queryParams = `?pagination.limit=${maxItems}&pagination.offset=${offset}`
+
       // fetch nodes by curator address from selected network
-      await fetch(chainInfo.rest + '/' + queryGeonodes)
+      await fetch(chainInfo.rest + '/' + queryGeonodes + queryParams)
         .then((res) => res.json())
         .then((res) => {
           if (res.code) {
@@ -36,7 +42,7 @@ export const useGeonodes = (chainInfo: any) => {
         setError(err.message)
       })
     }
-  }, [chainInfo?.rest])
+  }, [chainInfo?.rest, maxItems, offset])
 
   return [nodes, error]
 }

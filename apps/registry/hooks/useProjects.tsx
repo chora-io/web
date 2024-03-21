@@ -3,7 +3,11 @@ import { useEffect, useState } from 'react'
 const queryProjects = 'regen/ecocredit/v1/projects'
 
 // fetch all credit projects from selected network
-export const useProjects = (chainInfo: any) => {
+export const useProjects = (
+  chainInfo: any,
+  maxItems: number,
+  offset: number,
+) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [projects, setProjects] = useState<any>(null)
@@ -16,10 +20,12 @@ export const useProjects = (chainInfo: any) => {
 
   // fetch on load and network change
   useEffect(() => {
+    const queryParams = `?pagination.limit=${maxItems}&pagination.offset=${offset}`
+
     // fetch credit projects from selected network
     const fetchProjects = async () => {
       // fetch policies by group id from selected network
-      await fetch(chainInfo.rest + '/' + queryProjects)
+      await fetch(chainInfo.rest + '/' + queryProjects + queryParams)
         .then((res) => res.json())
         .then((res) => {
           if (res.code) {
@@ -30,13 +36,13 @@ export const useProjects = (chainInfo: any) => {
         })
     }
 
-    // only fetch if network and group id
+    // only fetch if network
     if (chainInfo?.rest) {
       fetchProjects().catch((err) => {
         setError(err.message)
       })
     }
-  }, [chainInfo?.rest])
+  }, [chainInfo?.rest, maxItems, offset])
 
   return [projects, error]
 }

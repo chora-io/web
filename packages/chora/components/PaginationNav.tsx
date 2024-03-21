@@ -1,10 +1,10 @@
-'use client'
+import * as React from 'react'
 
-import styles from './GroupsNav.module.css'
+import styles from './PaginationNav.module.css'
 
-const Groups = ({ groups, maxItems, offset, setOffset }: any) => {
+const PaginationNav = ({ length, maxLength, offset, setOffset }: any) => {
   const pageNumber = () => {
-    return offset / maxItems + 1
+    return offset / maxLength + 1
   }
 
   return (
@@ -12,16 +12,16 @@ const Groups = ({ groups, maxItems, offset, setOffset }: any) => {
       {offset > 0 && (
         <button
           className={styles.button}
-          onClick={() => setOffset(offset - maxItems)}
+          onClick={() => setOffset(offset - maxLength)}
         >
           {'prev page'}
         </button>
       )}
       <span>{'page ' + pageNumber()}</span>
-      {groups && groups.length === maxItems && (
+      {length === maxLength && (
         <button
           className={styles.button}
-          onClick={() => setOffset(offset + maxItems)}
+          onClick={() => setOffset(offset + maxLength)}
         >
           {'next page'}
         </button>
@@ -30,4 +30,4 @@ const Groups = ({ groups, maxItems, offset, setOffset }: any) => {
   )
 }
 
-export default Groups
+export default PaginationNav

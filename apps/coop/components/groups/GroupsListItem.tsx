@@ -35,15 +35,11 @@ const GroupsListItem = ({ group }: any) => {
         <p>
           {group['admin']}
           {wallet && group.admin === wallet.bech32Address && (
-            <span style={{ fontWeight: '400', marginLeft: '5px' }}>
-              {'(active account)'}
-            </span>
+            <span className={styles.activeAccount}>{'(active account)'}</span>
           )}
         </p>
       </div>
-      <Link className={styles.button} href={`/groups/${group.id}`}>
-        {'view group'}
-      </Link>
+      <Link href={`/groups/${group.id}`}>{'view group'}</Link>
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

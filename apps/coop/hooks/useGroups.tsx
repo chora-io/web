@@ -46,7 +46,7 @@ export const useGroups = (chainInfo: any, maxItems: number, offset: number) => {
         setError(err.message)
       })
     }
-  }, [chainInfo?.rest, offset])
+  }, [chainInfo?.rest, maxItems, offset])
 
   return [groups, error]
 }

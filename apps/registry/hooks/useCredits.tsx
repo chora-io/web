@@ -3,7 +3,11 @@ import { useEffect, useState } from 'react'
 const queryBatches = 'regen/ecocredit/v1/batches'
 
 // fetch all credit batches from selected network
-export const useCredits = (chainInfo: any) => {
+export const useCredits = (
+  chainInfo: any,
+  maxItems: number,
+  offset: number,
+) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [batches, setBatches] = useState<any>(null)
@@ -18,8 +22,10 @@ export const useCredits = (chainInfo: any) => {
   useEffect(() => {
     // fetch credit batches from selected network
     const fetchBatches = async () => {
+      const queryParams = `?pagination.limit=${maxItems}&pagination.offset=${offset}`
+
       // fetch policies by group id from selected network
-      await fetch(chainInfo.rest + '/' + queryBatches)
+      await fetch(chainInfo.rest + '/' + queryBatches + queryParams)
         .then((res) => res.json())
         .then((res) => {
           if (res.code) {
@@ -30,13 +36,13 @@ export const useCredits = (chainInfo: any) => {
         })
     }
 
-    // only fetch if network and group id
+    // only fetch if network
     if (chainInfo?.rest) {
       fetchBatches().catch((err) => {
         setError(err.message)
       })
     }
-  }, [chainInfo?.rest])
+  }, [chainInfo?.rest, maxItems, offset])
 
   return [batches, error]
 }

@@ -2,15 +2,15 @@ import { WalletContext } from 'chora/contexts'
 import Link from 'next/link'
 import { useContext } from 'react'
 
-import { useGroupMetadata } from '@hooks/useGroupMetadata'
+import { useGeonodeMetadata } from '@hooks/useGeonodeMetadata'
 
-import styles from './GroupsTableRow.module.css'
+import styles from './GeonodesTableRow.module.css'
 
-const GroupsTableRow = ({ group }: any) => {
+const GeonodesTableRow = ({ node }: any) => {
   const { chainInfo, wallet } = useContext(WalletContext)
 
-  // fetch group metadata by iri from network server
-  const [metadata, error] = useGroupMetadata(chainInfo, group)
+  // fetch node metadata by iri from network server
+  const [metadata, error] = useGeonodeMetadata(chainInfo, node.metadata)
 
   // TODO: handle error
   if (error) {
@@ -19,7 +19,7 @@ const GroupsTableRow = ({ group }: any) => {
 
   return (
     <tr>
-      <td>{group.id}</td>
+      <td>{node.id}</td>
       <td>
         {metadata && metadata['name']
           ? metadata['name'].substring(0, 25) +
@@ -33,16 +33,16 @@ const GroupsTableRow = ({ group }: any) => {
           : 'NA'}
       </td>
       <td>
-        {group.admin.substring(0, 13) + '...' + group.admin.substring(38, 44)}
-        {wallet && group.admin === wallet.bech32Address && (
+        {node.curator.substring(0, 13) + '...' + node.curator.substring(38, 44)}
+        {wallet && node.curator === wallet.bech32Address && (
           <span className={styles.activeAccount}>{'(active account)'}</span>
         )}
       </td>
       <td style={{ minWidth: '120px' }}>
-        <Link href={`/groups/${group.id}`}>{'view group'}</Link>
+        <Link href={`/geonodes/${node.id}`}>{'view node'}</Link>
       </td>
     </tr>
   )
 }
 
-export default GroupsTableRow
+export default GeonodesTableRow

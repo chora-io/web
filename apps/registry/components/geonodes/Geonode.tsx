@@ -12,7 +12,7 @@ import styles from './Geonode.module.css'
 const Geonode = () => {
   const { id } = useParams()
 
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, wallet } = useContext(WalletContext)
 
   // fetch node and node metadata from selected network and network server
   const [node, metadata, error] = useGeonode(chainInfo, `${id}`)
@@ -31,7 +31,12 @@ const Geonode = () => {
       </div>
       <div className={styles.boxText}>
         <h3>{'curator'}</h3>
-        <p>{node?.curator ? node.curator : 'NA'}</p>
+        <p>
+          {node?.curator ? node.curator : 'NA'}
+          {wallet && node.curator === wallet.bech32Address && (
+            <span className={styles.activeAccount}>{'(active account)'}</span>
+          )}
+        </p>
       </div>
       <div className={styles.boxText}>
         <h3>{'latitude'}</h3>

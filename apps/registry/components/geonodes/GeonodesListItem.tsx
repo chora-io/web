@@ -5,10 +5,10 @@ import { useContext } from 'react'
 
 import { useGeonodeMetadata } from '@hooks/useGeonodeMetadata'
 
-import styles from './GeonodePreview.module.css'
+import styles from './GeonodesListItem.module.css'
 
-const GeonodePreview = ({ node }: any) => {
-  const { chainInfo } = useContext(WalletContext)
+const GeonodesListItem = ({ node }: any) => {
+  const { chainInfo, wallet } = useContext(WalletContext)
 
   // fetch node metadata by iri from network server
   const [metadata, error] = useGeonodeMetadata(chainInfo, node.metadata)
@@ -20,8 +20,19 @@ const GeonodePreview = ({ node }: any) => {
         <p>{metadata && metadata['name'] ? metadata['name'] : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
+        <h3>{'description'}</h3>
+        <p>
+          {metadata && metadata['description'] ? metadata['description'] : 'NA'}
+        </p>
+      </div>
+      <div className={styles.boxText}>
         <h3>{'curator'}</h3>
-        <p>{node?.curator ? node.curator : 'NA'}</p>
+        <p>
+          {node?.curator ? node.curator : 'NA'}
+          {wallet && node.curator === wallet.bech32Address && (
+            <span className={styles.activeAccount}>{'(active account)'}</span>
+          )}
+        </p>
       </div>
       <Link href={`/geonodes/${node['id']}`}>{'view node'}</Link>
       {error && (
@@ -33,4 +44,4 @@ const GeonodePreview = ({ node }: any) => {
   )
 }
 
-export default GeonodePreview
+export default GeonodesListItem
