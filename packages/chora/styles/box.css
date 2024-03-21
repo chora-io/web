@@ -38,7 +38,7 @@
 .box-options button {
   background: none;
   color: var(--color-theme);
-  margin-right: 2em;
+  margin-right: 1.5em;
 }
 
 @media (max-width: 850px) {

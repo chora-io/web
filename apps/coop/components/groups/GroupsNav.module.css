@@ -1,0 +1,15 @@
+.button {
+  background: none;
+  color: var(--color-theme);
+}
+
+.navigation {
+  display: flex;
+  justify-content: flex-end;
+  margin: 2em;
+}
+
+.navigation button,
+.navigation span {
+  margin-left: 1em;
+}

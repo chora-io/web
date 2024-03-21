@@ -2,8 +2,7 @@
 
 .table {
   border-collapse: collapse;
-  margin: 2em;
-  width: calc(100% - 4em);
+  width: 100%;
 }
 
 .table td {
@@ -11,8 +10,13 @@
   padding: 1em;
 }
 
+.table thead {
+  color: var(--color-theme);
+  font-weight: 400;
+}
+
 .table tbody > tr {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .table tbody > tr:hover {

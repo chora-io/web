@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const DocumentsPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'documents'}</h1>
+      <h1>{'manage documents'}</h1>
       <Documents />
     </div>
   </div>

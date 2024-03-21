@@ -34,7 +34,7 @@ const ThemeContextProvider = (props: any) => {
         root.style.backgroundColor = '#161616' // --background-secondary (dark-theme)
       } else {
         root.classList.remove('dark-theme')
-        root.style.backgroundColor = '#FAFAFA' // --background-secondary (light-theme)
+        root.style.backgroundColor = '#FCFCFC' // --background-secondary (light-theme)
       }
 
       localStorage.setItem(cachedDarkKey, darkTheme ? 'true' : 'false')

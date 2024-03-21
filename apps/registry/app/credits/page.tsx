@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const CreditsPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'credit batches'}</h1>
+      <h1>{'explore credit batches'}</h1>
       <Credits />
     </div>
   </div>

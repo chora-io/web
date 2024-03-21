@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 const queryGroup = 'cosmos/group/v1/group_info'
 
 // fetch groups from selected network
-export const useGroups = (chainInfo: any, count: number, offset: number) => {
+export const useGroups = (chainInfo: any, maxItems: number, offset: number) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [groups, setGroups] = useState<any>(null)
@@ -22,7 +22,7 @@ export const useGroups = (chainInfo: any, count: number, offset: number) => {
     const fetchGroups = async () => {
       let nextId = 1 + offset
       let groups: any[] = []
-      while (nextId !== 0 && groups.length < count) {
+      while (nextId !== 0 && groups.length < maxItems) {
         await fetch(chainInfo.rest + '/' + queryGroup + '/' + nextId)
           .then((res) => res.json())
           .then((res) => {
