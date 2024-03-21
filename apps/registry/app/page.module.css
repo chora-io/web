@@ -1,3 +1,19 @@
 .page {
   composes: page-with-sidebar from 'chora/styles/page.css';
 }
+
+.page h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.75em;
+}
+
+.page h2 {
+  opacity: 0.8;
+  margin-bottom: 1em;
+}
+
+.page p {
+  font-size: 1.1em;
+  margin: 0.5em 0;
+  text-underline-offset: 4px;
+}

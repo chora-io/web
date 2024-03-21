@@ -47,14 +47,14 @@
 .page-with-footer > div,
 .page-with-sidebar > div {
   margin-top: var(--header-height);
-  padding: 4em;
+  padding: 4em 6em;
 }
 
 @media (max-width: 850px) {
   .page > div,
   .page-with-footer > div,
   .page-with-sidebar > div {
-    padding: 2em;
+    padding: 2em 3em;
   }
 }
 
