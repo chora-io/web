@@ -6,8 +6,8 @@ import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import { useClass } from '@hooks/useClass'
-import { useResolver } from '@hooks/useResolver'
-import { useResolverMetadata } from '@hooks/useResolverMetadata'
+import { useMetadata } from '@hooks/useMetadata'
+import { useResolvers } from '@hooks/useResolvers'
 
 import styles from './Class.module.css'
 
@@ -18,17 +18,16 @@ const Class = () => {
 
   // fetch class and class metadata from selected network and network server
   const [clazz, classError] = useClass(chainInfo, `${id}`)
-  const [resolvers, resolverError] = useResolver(
+  const [resolvers, resolversError] = useResolvers(
     chainInfo,
     clazz ? clazz.metadata : null,
   )
-  const [metadata, metadataError] = useResolverMetadata(
-    chainInfo,
+  const [metadata, metadataError] = useMetadata(
     resolvers,
     clazz ? clazz.metadata : null,
   )
 
-  const error = classError || resolverError || metadataError
+  const error = classError || resolversError || metadataError
 
   return (
     <div className={styles.box}>
@@ -52,10 +51,27 @@ const Class = () => {
         <h3>{'metadata'}</h3>
         <p>{clazz && clazz['metadata'] ? clazz['metadata'] : 'NA'}</p>
       </div>
+      <hr />
+      <div className={styles.boxText}>
+        <h3>{'data stored on blockchain network'}</h3>
+        <pre>
+          <p>{JSON.stringify(clazz, null, ' ')}</p>
+        </pre>
+      </div>
+      {resolvers && resolvers.length > 0 && (
+        <div className={styles.boxText}>
+          <h3>{'data resolvers with metadata registered'}</h3>
+          <pre>
+            <p>{JSON.stringify(resolvers, null, ' ')}</p>
+          </pre>
+        </div>
+      )}
       {metadata && (
         <div className={styles.boxText}>
-          <h3>{'metadata'}</h3>
-          <p>{JSON.stringify(metadata)}</p>
+          <h3>{'data stored with data resolver service'}</h3>
+          <pre>
+            <p>{JSON.stringify(metadata, null, ' ')}</p>
+          </pre>
         </div>
       )}
       {error && (

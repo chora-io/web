@@ -7,8 +7,8 @@ import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import { useProject } from '@hooks/useProject'
-import { useResolver } from '@hooks/useResolver'
-import { useResolverMetadata } from '@hooks/useResolverMetadata'
+import { useMetadata } from '@hooks/useMetadata'
+import { useResolvers } from '@hooks/useResolvers'
 
 import styles from './Project.module.css'
 
@@ -18,17 +18,16 @@ const Project = () => {
   const { chainInfo } = useContext(WalletContext)
 
   const [project, projectError] = useProject(chainInfo, `${id}`)
-  const [resolvers, resolverError] = useResolver(
+  const [resolvers, resolversError] = useResolvers(
     chainInfo,
     project ? project.metadata : null,
   )
-  const [metadata, metadataError] = useResolverMetadata(
-    chainInfo,
+  const [metadata, metadataError] = useMetadata(
     resolvers,
     project ? project.metadata : null,
   )
 
-  const error = projectError || resolverError || metadataError
+  const error = projectError || resolversError || metadataError
 
   return (
     <div className={styles.box}>
@@ -68,10 +67,27 @@ const Project = () => {
         <h3>{'metadata'}</h3>
         <p>{project && project['metadata'] ? project['metadata'] : 'NA'}</p>
       </div>
+      <hr />
+      <div className={styles.boxText}>
+        <h3>{'data stored on blockchain network'}</h3>
+        <pre>
+          <p>{JSON.stringify(project, null, ' ')}</p>
+        </pre>
+      </div>
+      {resolvers && resolvers.length > 0 && (
+        <div className={styles.boxText}>
+          <h3>{'data resolvers with metadata registered'}</h3>
+          <pre>
+            <p>{JSON.stringify(resolvers, null, ' ')}</p>
+          </pre>
+        </div>
+      )}
       {metadata && (
         <div className={styles.boxText}>
-          <h3>{'metadata'}</h3>
-          <p>{JSON.stringify(metadata)}</p>
+          <h3>{'data stored with data resolver service'}</h3>
+          <pre>
+            <p>{JSON.stringify(metadata, null, ' ')}</p>
+          </pre>
         </div>
       )}
       {error && (

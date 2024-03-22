@@ -6,6 +6,8 @@ import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import { useGeonode } from '@hooks/useGeonode'
+// import { useMetadata } from '@hooks/useMetadata'
+import { useResolvers } from '@hooks/useResolvers'
 
 import styles from './Geonode.module.css'
 
@@ -14,8 +16,21 @@ const Geonode = () => {
 
   const { chainInfo, wallet } = useContext(WalletContext)
 
-  // fetch node and node metadata from selected network and network server
-  const [node, metadata, error] = useGeonode(chainInfo, `${id}`)
+  // TODO: fetch only node and retrieve metadata using resolvers
+  const [node, metadata, nodeError] = useGeonode(chainInfo, `${id}`)
+  const [resolvers, resolversError] = useResolvers(
+    chainInfo,
+    node ? node.metadata : null,
+  )
+
+  // TODO: fetch only node and retrieve metadata using resolvers
+  // const [metadata, metadataError] = useMetadata(
+  //   resolvers,
+  //   node ? node.metadata : null,
+  // )
+
+  const error = nodeError || resolversError
+  // const error = nodeError || resolversError || metadataError
 
   return (
     <div className={styles.box}>
@@ -54,6 +69,29 @@ const Geonode = () => {
             : 'NA'}
         </p>
       </div>
+      <hr />
+      <div className={styles.boxText}>
+        <h3>{'data stored on blockchain network'}</h3>
+        <pre>
+          <p>{JSON.stringify(node, null, ' ')}</p>
+        </pre>
+      </div>
+      {resolvers && resolvers.length > 0 && (
+        <div className={styles.boxText}>
+          <h3>{'data resolvers with metadata registered'}</h3>
+          <pre>
+            <p>{JSON.stringify(resolvers, null, ' ')}</p>
+          </pre>
+        </div>
+      )}
+      {metadata && (
+        <div className={styles.boxText}>
+          <h3>{'data stored with data resolver service'}</h3>
+          <pre>
+            <p>{JSON.stringify(metadata, null, ' ')}</p>
+          </pre>
+        </div>
+      )}
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

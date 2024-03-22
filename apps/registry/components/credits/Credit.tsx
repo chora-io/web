@@ -7,8 +7,8 @@ import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import { useCredit } from '@hooks/useCredit'
-import { useResolver } from '@hooks/useResolver'
-import { useResolverMetadata } from '@hooks/useResolverMetadata'
+import { useMetadata } from '@hooks/useMetadata'
+import { useResolvers } from '@hooks/useResolvers'
 
 import styles from './Credit.module.css'
 
@@ -18,17 +18,16 @@ const Credit = () => {
   const { chainInfo } = useContext(WalletContext)
 
   const [batch, batchError] = useCredit(chainInfo, `${denom}`)
-  const [resolvers, resolverError] = useResolver(
+  const [resolvers, resolversError] = useResolvers(
     chainInfo,
     batch ? batch.metadata : null,
   )
-  const [metadata, metadataError] = useResolverMetadata(
-    chainInfo,
+  const [metadata, metadataError] = useMetadata(
     resolvers,
     batch ? batch.metadata : null,
   )
 
-  const error = batchError || resolverError || metadataError
+  const error = batchError || resolversError || metadataError
 
   return (
     <div className={styles.box}>
@@ -68,10 +67,27 @@ const Credit = () => {
         <h3>{'metadata'}</h3>
         <p>{batch && batch['metadata'] ? batch['metadata'] : 'NA'}</p>
       </div>
+      <hr />
+      <div className={styles.boxText}>
+        <h3>{'data stored on blockchain network'}</h3>
+        <pre>
+          <p>{JSON.stringify(batch, null, ' ')}</p>
+        </pre>
+      </div>
+      {resolvers && resolvers.length > 0 && (
+        <div className={styles.boxText}>
+          <h3>{'data resolvers with metadata registered'}</h3>
+          <pre>
+            <p>{JSON.stringify(resolvers, null, ' ')}</p>
+          </pre>
+        </div>
+      )}
       {metadata && (
         <div className={styles.boxText}>
-          <h3>{'metadata'}</h3>
-          <p>{JSON.stringify(metadata)}</p>
+          <h3>{'data stored with data resolver service'}</h3>
+          <pre>
+            <p>{JSON.stringify(metadata, null, ' ')}</p>
+          </pre>
         </div>
       )}
       {error && (

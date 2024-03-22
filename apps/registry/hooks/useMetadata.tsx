@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react'
 
-// fetch metadata using resolvers
-export const useResolverMetadata = (
-  chainInfo: any,
-  resolvers: string,
-  iri: string,
-) => {
+// fetch metadata using provided resolvers
+export const useMetadata = (resolvers: any[], iri: string) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [metadata, setMetadata] = useState<any>(null)
@@ -14,15 +10,14 @@ export const useResolverMetadata = (
   useEffect(() => {
     setError(null)
     setMetadata(null)
-  }, [chainInfo?.chainId, resolvers, iri])
+  }, [resolvers, iri])
 
   // fetch on load and resolvers or iri change
   useEffect(() => {
     // fetch metadata by iri using resolvers
     const fetchMetadata = async () => {
-
-      // TODO: try with multiple data resolvers
-      const resolverUrl = resolvers[0]
+      // TODO: retry with multiple resolvers
+      const resolverUrl = resolvers[0].url
 
       await fetch(resolverUrl + iri)
         .then((res) => res.json())
