@@ -7,6 +7,8 @@ import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import { useCredit } from '@hooks/useCredit'
+import { useResolver } from '@hooks/useResolver'
+import { useResolverMetadata } from '@hooks/useResolverMetadata'
 
 import styles from './Credit.module.css'
 
@@ -15,8 +17,18 @@ const Credit = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  // fetch batch and batch metadata from selected network and network server
-  const [batch, metadata, error] = useCredit(chainInfo, `${denom}`)
+  const [batch, batchError] = useCredit(chainInfo, `${denom}`)
+  const [resolvers, resolverError] = useResolver(
+    chainInfo,
+    batch ? batch.metadata : null,
+  )
+  const [metadata, metadataError] = useResolverMetadata(
+    chainInfo,
+    resolvers,
+    batch ? batch.metadata : null,
+  )
+
+  const error = batchError || resolverError || metadataError
 
   return (
     <div className={styles.box}>
@@ -58,7 +70,8 @@ const Credit = () => {
       </div>
       {metadata && (
         <div className={styles.boxText}>
-          <p>{'metadata is available'}</p>
+          <h3>{'metadata'}</h3>
+          <p>{JSON.stringify(metadata)}</p>
         </div>
       )}
       {error && (

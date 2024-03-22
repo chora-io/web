@@ -7,6 +7,8 @@ import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import { useProject } from '@hooks/useProject'
+import { useResolver } from '@hooks/useResolver'
+import { useResolverMetadata } from '@hooks/useResolverMetadata'
 
 import styles from './Project.module.css'
 
@@ -15,8 +17,18 @@ const Project = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  // fetch project and project metadata from selected network and network server
-  const [project, metadata, error] = useProject(chainInfo, `${id}`)
+  const [project, projectError] = useProject(chainInfo, `${id}`)
+  const [resolvers, resolverError] = useResolver(
+    chainInfo,
+    project ? project.metadata : null,
+  )
+  const [metadata, metadataError] = useResolverMetadata(
+    chainInfo,
+    resolvers,
+    project ? project.metadata : null,
+  )
+
+  const error = projectError || resolverError || metadataError
 
   return (
     <div className={styles.box}>
@@ -58,7 +70,8 @@ const Project = () => {
       </div>
       {metadata && (
         <div className={styles.boxText}>
-          <p>{'metadata is available'}</p>
+          <h3>{'metadata'}</h3>
+          <p>{JSON.stringify(metadata)}</p>
         </div>
       )}
       {error && (
