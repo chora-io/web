@@ -10,6 +10,7 @@ const ProjectsTable = ({ projects }: any) => {
       <thead>
         <tr>
           <td>{'id'}</td>
+          <td>{'jurisdiction'}</td>
           <td>{'admin'}</td>
           <td>{'more'}</td>
         </tr>

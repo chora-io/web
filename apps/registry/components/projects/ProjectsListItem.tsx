@@ -11,18 +11,22 @@ const ProjectsListItem = ({ project }: any) => {
     <div className={styles.boxItem}>
       <div className={styles.boxText}>
         <h3>{'id'}</h3>
-        <p>{project.id ? project.id : 'NA'}</p>
+        <p>{project.id}</p>
+      </div>
+      <div className={styles.boxText}>
+        <h3>{'jurisdiction'}</h3>
+        <p>{project.jurisdiction}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'admin'}</h3>
         <p>
-          {project.admin ? project.admin : 'NA'}
+          {project.admin}
           {wallet && project.issuer === wallet.bech32Address && (
             <span className={styles.activeAccount}>{'(active account)'}</span>
           )}
         </p>
       </div>
-      <Link href={`/projects/${project['id']}`}>{'view project'}</Link>
+      <Link href={`/projects/${project.id}`}>{'view project'}</Link>
     </div>
   )
 }

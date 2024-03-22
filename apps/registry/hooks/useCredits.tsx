@@ -12,7 +12,7 @@ export const useCredits = (
   const [error, setError] = useState<string | null>(null)
   const [batches, setBatches] = useState<any>(null)
 
-  // reset state on network or group id change
+  // reset state on network change
   useEffect(() => {
     setError(null)
     setBatches(null)
@@ -24,7 +24,7 @@ export const useCredits = (
     const fetchBatches = async () => {
       const queryParams = `?pagination.limit=${maxItems}&pagination.offset=${offset}`
 
-      // fetch policies by group id from selected network
+      // fetch credit batches from selected network
       await fetch(chainInfo.rest + '/' + queryBatches + queryParams)
         .then((res) => res.json())
         .then((res) => {

@@ -10,6 +10,7 @@ const ProjectsTableRow = ({ project }: any) => {
   return (
     <tr>
       <td>{project.id}</td>
+      <td>{project.jurisdiction}</td>
       <td>
         {project.admin.substring(0, 13) +
           '...' +

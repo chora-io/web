@@ -11,18 +11,18 @@ const ClassesListItem = ({ clazz }: any) => {
     <div className={styles.boxItem}>
       <div className={styles.boxText}>
         <h3>{'id'}</h3>
-        <p>{clazz.id ? clazz.id : 'NA'}</p>
+        <p>{clazz.id}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'admin'}</h3>
         <p>
-          {clazz.admin ? clazz.admin : 'NA'}
+          {clazz.admin}
           {wallet && clazz.issuer === wallet.bech32Address && (
             <span className={styles.activeAccount}>{'(active account)'}</span>
           )}
         </p>
       </div>
-      <Link href={`/classes/${clazz['id']}`}>{'view class'}</Link>
+      <Link href={`/classes/${clazz.id}`}>{'view class'}</Link>
     </div>
   )
 }

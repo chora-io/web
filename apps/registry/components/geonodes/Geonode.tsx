@@ -32,8 +32,8 @@ const Geonode = () => {
       <div className={styles.boxText}>
         <h3>{'curator'}</h3>
         <p>
-          {node?.curator ? node.curator : 'NA'}
-          {wallet && node.curator === wallet.bech32Address && (
+          {node && node.curator ? node.curator : 'NA'}
+          {wallet && node && node.curator === wallet.bech32Address && (
             <span className={styles.activeAccount}>{'(active account)'}</span>
           )}
         </p>

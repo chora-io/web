@@ -28,13 +28,13 @@ const GeonodesListItem = ({ node }: any) => {
       <div className={styles.boxText}>
         <h3>{'curator'}</h3>
         <p>
-          {node?.curator ? node.curator : 'NA'}
+          {node.curator}
           {wallet && node.curator === wallet.bech32Address && (
             <span className={styles.activeAccount}>{'(active account)'}</span>
           )}
         </p>
       </div>
-      <Link href={`/geonodes/${node['id']}`}>{'view node'}</Link>
+      <Link href={`/geonodes/${node.id}`}>{'view node'}</Link>
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

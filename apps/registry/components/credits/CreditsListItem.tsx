@@ -11,22 +11,22 @@ const CreditsListItem = ({ batch }: any) => {
     <div className={styles.boxItem}>
       <div className={styles.boxText}>
         <h3>{'denom'}</h3>
-        <p>{batch?.denom ? batch.denom : 'NA'}</p>
+        <p>{batch.denom}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'issuance date'}</h3>
-        <p>{batch && batch['issuance_date'] ? batch['issuance_date'] : 'NA'}</p>
+        <p>{batch['issuance_date']}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'issuer'}</h3>
         <p>
-          {batch?.issuer ? batch.issuer : 'NA'}
+          {batch.issuer}
           {wallet && batch.issuer === wallet.bech32Address && (
             <span className={styles.activeAccount}>{'(active account)'}</span>
           )}
         </p>
       </div>
-      <Link href={`/credits/${batch['id']}`}>{'view batch'}</Link>
+      <Link href={`/credits/${batch.denom}`}>{'view batch'}</Link>
     </div>
   )
 }

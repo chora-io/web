@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import Class from '@components/classes/Class'
+import Project from '@components/projects/Project'
 
 import styles from './page.module.css'
 
@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   title: 'chora coop',
 }
 
-const ClassPage = () => (
+const ProjectPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'class projects'}</h1>
-      <Class />
+      <h1>{'class project'}</h1>
+      <Project />
     </div>
   </div>
 )
 
-export default ClassPage
+export default ProjectPage
