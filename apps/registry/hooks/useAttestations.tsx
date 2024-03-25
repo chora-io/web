@@ -1,41 +1,41 @@
 import { useEffect, useState } from 'react'
 
-const queryAnchor = '/regen/data/v1/anchor-by-iri'
+const queryAttestations = '/regen/data/v1/attestations-by-iri'
 
-// fetch anchor by iri from selected network
-export const useAnchor = (chainInfo: any, iri: string) => {
+// fetch attestations by iri from selected network
+export const useAttestations = (chainInfo: any, iri: string) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
-  const [anchor, setAnchor] = useState<any>(null)
+  const [attestations, setAttestations] = useState<any>(null)
 
   // reset state on param change
   useEffect(() => {
     setError(null)
-    setAnchor(null)
+    setAttestations(null)
   }, [chainInfo?.chainId, iri])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch anchor by iri from selected network
-    const fetchAnchor = async () => {
-      await fetch(chainInfo.rest + '/' + queryAnchor + '/' + iri)
+    // fetch attestations by iri from selected network
+    const fetchAttestations = async () => {
+      await fetch(chainInfo.rest + '/' + queryAttestations + '/' + iri)
         .then((res) => res.json())
         .then((res) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setAnchor(res['anchor'])
+            setAttestations(res['attestations'])
           }
         })
     }
 
     // only fetch if network and iri
     if (chainInfo?.rest && iri) {
-      fetchAnchor().catch((err) => {
+      fetchAttestations().catch((err) => {
         setError(err.message)
       })
     }
   }, [chainInfo?.rest, iri])
 
-  return [anchor, error]
+  return [attestations, error]
 }

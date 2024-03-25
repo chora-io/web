@@ -15,7 +15,6 @@ const Claim = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  // fetch class and class metadata from selected network and network server
   const [anchor, anchorError] = useAnchor(chainInfo, `${iri}`)
   const [metadata, metadataError] = useMetadata(chainInfo, `${iri}`)
 
@@ -28,16 +27,6 @@ const Claim = () => {
       <div className={styles.boxText}>
         <h3>{'timestamp'}</h3>
         <p>{anchor ? anchor['timestamp'] : 'NA'}</p>
-      </div>
-      <div className={styles.boxText}>
-        <h3>{'content hash'}</h3>
-        {anchor ? (
-          <pre>
-            <p>{JSON.stringify(anchor['content_hash'], null, ' ')}</p>
-          </pre>
-        ) : (
-          <p>{'NA'}</p>
-        )}
       </div>
       {anchorError && (
         <div className={styles.boxText}>

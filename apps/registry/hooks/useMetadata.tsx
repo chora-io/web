@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 const queryResolvers = 'regen/data/v1/resolvers-by-iri'
 
 // fetch metadata using network server, otherwise data resolvers
-export const useMetadata = (chainInfo: any,iri: string,) => {
+export const useMetadata = (chainInfo: any, iri: string) => {
   const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results

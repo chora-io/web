@@ -1,41 +1,41 @@
 import { useEffect, useState } from 'react'
 
-const queryAnchor = '/regen/data/v1/anchor-by-iri'
+const queryResolvers = '/regen/data/v1/resolvers-by-iri'
 
-// fetch anchor by iri from selected network
-export const useAnchor = (chainInfo: any, iri: string) => {
+// fetch resolvers by iri from selected network
+export const useResolvers = (chainInfo: any, iri: string) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
-  const [anchor, setAnchor] = useState<any>(null)
+  const [resolvers, setResolvers] = useState<any>(null)
 
   // reset state on param change
   useEffect(() => {
     setError(null)
-    setAnchor(null)
+    setResolvers(null)
   }, [chainInfo?.chainId, iri])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch anchor by iri from selected network
-    const fetchAnchor = async () => {
-      await fetch(chainInfo.rest + '/' + queryAnchor + '/' + iri)
+    // fetch resolvers by iri from selected network
+    const fetchResolvers = async () => {
+      await fetch(chainInfo.rest + '/' + queryResolvers + '/' + iri)
         .then((res) => res.json())
         .then((res) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setAnchor(res['anchor'])
+            setResolvers(res['resolvers'])
           }
         })
     }
 
     // only fetch if network and iri
     if (chainInfo?.rest && iri) {
-      fetchAnchor().catch((err) => {
+      fetchResolvers().catch((err) => {
         setError(err.message)
       })
     }
   }, [chainInfo?.rest, iri])
 
-  return [anchor, error]
+  return [resolvers, error]
 }
