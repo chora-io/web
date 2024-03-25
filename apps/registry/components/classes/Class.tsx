@@ -7,7 +7,6 @@ import { useContext } from 'react'
 
 import { useClass } from '@hooks/useClass'
 import { useMetadata } from '@hooks/useMetadata'
-import { useResolvers } from '@hooks/useResolvers'
 
 import styles from './Class.module.css'
 
@@ -18,16 +17,12 @@ const Class = () => {
 
   // fetch class and class metadata from selected network and network server
   const [clazz, classError] = useClass(chainInfo, `${id}`)
-  const [resolvers, resolversError] = useResolvers(
+  const [metadata, metadataError] = useMetadata(
     chainInfo,
     clazz ? clazz.metadata : null,
   )
-  const [metadata, metadataError] = useMetadata(
-    resolvers,
-    clazz ? clazz.metadata : null,
-  )
 
-  const error = classError || resolversError || metadataError
+  const error = classError || metadataError
 
   return (
     <div className={styles.box}>
@@ -58,17 +53,9 @@ const Class = () => {
           <p>{JSON.stringify(clazz, null, ' ')}</p>
         </pre>
       </div>
-      {resolvers && resolvers.length > 0 && (
-        <div className={styles.boxText}>
-          <h3>{'data resolvers with metadata registered'}</h3>
-          <pre>
-            <p>{JSON.stringify(resolvers, null, ' ')}</p>
-          </pre>
-        </div>
-      )}
       {metadata && (
         <div className={styles.boxText}>
-          <h3>{'data stored with data resolver service'}</h3>
+          <h3>{'data stored with data provider service'}</h3>
           <pre>
             <p>{JSON.stringify(metadata, null, ' ')}</p>
           </pre>

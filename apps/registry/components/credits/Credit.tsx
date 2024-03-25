@@ -8,7 +8,6 @@ import { useContext } from 'react'
 
 import { useCredit } from '@hooks/useCredit'
 import { useMetadata } from '@hooks/useMetadata'
-import { useResolvers } from '@hooks/useResolvers'
 
 import styles from './Credit.module.css'
 
@@ -18,16 +17,12 @@ const Credit = () => {
   const { chainInfo } = useContext(WalletContext)
 
   const [batch, batchError] = useCredit(chainInfo, `${denom}`)
-  const [resolvers, resolversError] = useResolvers(
+  const [metadata, metadataError] = useMetadata(
     chainInfo,
     batch ? batch.metadata : null,
   )
-  const [metadata, metadataError] = useMetadata(
-    resolvers,
-    batch ? batch.metadata : null,
-  )
 
-  const error = batchError || resolversError || metadataError
+  const error = batchError || metadataError
 
   return (
     <div className={styles.box}>
@@ -74,17 +69,9 @@ const Credit = () => {
           <p>{JSON.stringify(batch, null, ' ')}</p>
         </pre>
       </div>
-      {resolvers && resolvers.length > 0 && (
-        <div className={styles.boxText}>
-          <h3>{'data resolvers with metadata registered'}</h3>
-          <pre>
-            <p>{JSON.stringify(resolvers, null, ' ')}</p>
-          </pre>
-        </div>
-      )}
       {metadata && (
         <div className={styles.boxText}>
-          <h3>{'data stored with data resolver service'}</h3>
+          <h3>{'data stored with data provider service'}</h3>
           <pre>
             <p>{JSON.stringify(metadata, null, ' ')}</p>
           </pre>

@@ -2,29 +2,23 @@ import { useEffect, useState } from 'react'
 
 const queryClasses = 'regen/ecocredit/v1/classes'
 
-// fetch all credit classes from selected network
-export const useClasses = (
-  chainInfo: any,
-  maxItems: number,
-  offset: number,
-) => {
+// fetch credit classes from selected network
+export const useClasses = (chainInfo: any, limit: number, offset: number) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [classes, setClasses] = useState<any>(null)
 
-  // reset state on network or group id change
+  // reset state on param change
   useEffect(() => {
     setError(null)
     setClasses(null)
-  }, [chainInfo?.chainId])
+  }, [chainInfo?.chainId, limit, offset])
 
-  // fetch on load and network change
+  // fetch on load and param change
   useEffect(() => {
-    const queryParams = `?pagination.limit=${maxItems}&pagination.offset=${offset}`
-
     // fetch credit classes from selected network
     const fetchClasses = async () => {
-      // fetch policies by group id from selected network
+      const queryParams = `?pagination.limit=${limit}&pagination.offset=${offset}`
       await fetch(chainInfo.rest + '/' + queryClasses + queryParams)
         .then((res) => res.json())
         .then((res) => {
@@ -42,7 +36,7 @@ export const useClasses = (
         setError(err.message)
       })
     }
-  }, [chainInfo?.rest, maxItems, offset])
+  }, [chainInfo?.rest, limit, offset])
 
   return [classes, error]
 }

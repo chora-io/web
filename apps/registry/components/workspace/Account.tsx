@@ -48,7 +48,6 @@ const Account = () => {
     await fetch(serverUrl + '/auth/keplr', {
       method: 'POST',
       body: JSON.stringify({
-        token: activeAccount ? activeAccount.token : undefined,
         address: wallet.bech32Address,
         signature,
       }),
@@ -75,42 +74,48 @@ const Account = () => {
     removeAccount(activeAccount)
   }
 
-  return !account ? (
-    <div className={styles.box}>
-      <div className={styles.boxHeader}>
-        <h2>{'Account Required'}</h2>
-        <p>{'workspace requires an account on chora server'}</p>
-      </div>
-      {wallet ? (
-        wallet.bech32Address.includes('chora') ? (
-          <div className={styles.boxText}>
-            <p>{'The following address will be used for authentication:'}</p>
-            <p style={{ marginTop: '0.5em' }}>{wallet.bech32Address}</p>
-            <button className={styles.button} onClick={handleAuthenticate}>
-              {'authenticate'}
-            </button>
-          </div>
+  if (!account) {
+    return (
+      <div className={styles.box}>
+        <div className={styles.boxHeader}>
+          <h2>{'Account Required'}</h2>
+          <p>{'workspace requires an account on chora server'}</p>
+        </div>
+        {wallet ? (
+          wallet.bech32Address.includes('chora') ? (
+            <div className={styles.boxText}>
+              <p>{'The following address will be used for authentication:'}</p>
+              <p style={{ marginTop: '0.5em' }}>{wallet.bech32Address}</p>
+              <button className={styles.button} onClick={handleAuthenticate}>
+                {'authenticate'}
+              </button>
+            </div>
+          ) : (
+            <div className={styles.boxText}>
+              <p>
+                {'Switch networks to authenticate with your chora address.'}
+              </p>
+              <form className={styles.form}>
+                <SelectNetwork
+                  label=" "
+                  network={network}
+                  selected={selected}
+                  setNetwork={setNetwork}
+                />
+              </form>
+            </div>
+          )
         ) : (
           <div className={styles.boxText}>
-            <p>{'Switch networks to authenticate with your chora address.'}</p>
-            <form className={styles.form}>
-              <SelectNetwork
-                label=" "
-                network={network}
-                selected={selected}
-                setNetwork={setNetwork}
-              />
-            </form>
+            <p>{'authentication requires keplr wallet to be connected'}</p>
           </div>
-        )
-      ) : (
-        <div className={styles.boxText}>
-          <p>{'authentication requires keplr wallet to be connected'}</p>
-        </div>
-      )}
-      <Result error={error} />
-    </div>
-  ) : (
+        )}
+        <Result error={error} />
+      </div>
+    )
+  }
+
+  return (
     <>
       <div className={styles.box}>
         <div className={styles.boxHeader}>

@@ -6,8 +6,7 @@ import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import { useGeonode } from '@hooks/useGeonode'
-// import { useMetadata } from '@hooks/useMetadata'
-import { useResolvers } from '@hooks/useResolvers'
+import { useMetadata } from '@hooks/useMetadata'
 
 import styles from './Geonode.module.css'
 
@@ -16,21 +15,13 @@ const Geonode = () => {
 
   const { chainInfo, wallet } = useContext(WalletContext)
 
-  // TODO: fetch only node and retrieve metadata using resolvers
-  const [node, metadata, nodeError] = useGeonode(chainInfo, `${id}`)
-  const [resolvers, resolversError] = useResolvers(
+  const [node, nodeError] = useGeonode(chainInfo, `${id}`)
+  const [metadata, metadataError] = useMetadata(
     chainInfo,
     node ? node.metadata : null,
   )
 
-  // TODO: fetch only node and retrieve metadata using resolvers
-  // const [metadata, metadataError] = useMetadata(
-  //   resolvers,
-  //   node ? node.metadata : null,
-  // )
-
-  const error = nodeError || resolversError
-  // const error = nodeError || resolversError || metadataError
+  const error = nodeError || metadataError
 
   return (
     <div className={styles.box}>
@@ -76,17 +67,9 @@ const Geonode = () => {
           <p>{JSON.stringify(node, null, ' ')}</p>
         </pre>
       </div>
-      {resolvers && resolvers.length > 0 && (
-        <div className={styles.boxText}>
-          <h3>{'data resolvers with metadata registered'}</h3>
-          <pre>
-            <p>{JSON.stringify(resolvers, null, ' ')}</p>
-          </pre>
-        </div>
-      )}
       {metadata && (
         <div className={styles.boxText}>
-          <h3>{'data stored with data resolver service'}</h3>
+          <h3>{'data stored with data provider service'}</h3>
           <pre>
             <p>{JSON.stringify(metadata, null, ' ')}</p>
           </pre>

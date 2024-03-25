@@ -6,7 +6,7 @@ import PostData from '@components/server/PostData'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'chora registry',
+  title: 'chora data',
 }
 
 const ServerPage = () => (

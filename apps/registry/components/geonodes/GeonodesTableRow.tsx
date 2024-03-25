@@ -2,7 +2,7 @@ import { WalletContext } from 'chora/contexts'
 import Link from 'next/link'
 import { useContext } from 'react'
 
-import { useGeonodeMetadata } from '@hooks/useGeonodeMetadata'
+import { useMetadata } from '@hooks/useMetadata'
 
 import styles from './GeonodesTableRow.module.css'
 
@@ -10,7 +10,7 @@ const GeonodesTableRow = ({ node }: any) => {
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // fetch node metadata by iri from network server
-  const [metadata, error] = useGeonodeMetadata(chainInfo, node.metadata)
+  const [metadata, error] = useMetadata(chainInfo, node.metadata)
 
   // TODO: handle error
   if (error) {

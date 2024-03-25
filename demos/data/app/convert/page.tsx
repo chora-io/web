@@ -5,7 +5,7 @@ import ConvertData from '@components/convert/ConvertData'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'chora registry',
+  title: 'chora data',
 }
 
 const ConvertPage = () => (

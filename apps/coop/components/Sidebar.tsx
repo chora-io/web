@@ -10,7 +10,7 @@ import styles from './Sidebar.module.css'
 const Sidebar = () => {
   const { groupId } = useParams()
 
-  const { activeAccount } = useContext(AuthContext)
+  const { account } = useContext(AuthContext)
 
   const { network } = useContext(WalletContext)
 
@@ -45,7 +45,7 @@ const Sidebar = () => {
                 {'dashboard'}
               </Link>
             </li>
-            {activeAccount && (
+            {account && (
               <>
                 <li>
                   <Link

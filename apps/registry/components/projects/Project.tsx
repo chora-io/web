@@ -8,7 +8,6 @@ import { useContext } from 'react'
 
 import { useProject } from '@hooks/useProject'
 import { useMetadata } from '@hooks/useMetadata'
-import { useResolvers } from '@hooks/useResolvers'
 
 import styles from './Project.module.css'
 
@@ -18,16 +17,12 @@ const Project = () => {
   const { chainInfo } = useContext(WalletContext)
 
   const [project, projectError] = useProject(chainInfo, `${id}`)
-  const [resolvers, resolversError] = useResolvers(
+  const [metadata, metadataError] = useMetadata(
     chainInfo,
     project ? project.metadata : null,
   )
-  const [metadata, metadataError] = useMetadata(
-    resolvers,
-    project ? project.metadata : null,
-  )
 
-  const error = projectError || resolversError || metadataError
+  const error = projectError || metadataError
 
   return (
     <div className={styles.box}>
@@ -74,17 +69,9 @@ const Project = () => {
           <p>{JSON.stringify(project, null, ' ')}</p>
         </pre>
       </div>
-      {resolvers && resolvers.length > 0 && (
-        <div className={styles.boxText}>
-          <h3>{'data resolvers with metadata registered'}</h3>
-          <pre>
-            <p>{JSON.stringify(resolvers, null, ' ')}</p>
-          </pre>
-        </div>
-      )}
       {metadata && (
         <div className={styles.boxText}>
-          <h3>{'data stored with data resolver service'}</h3>
+          <h3>{'data stored with data provider service'}</h3>
           <pre>
             <p>{JSON.stringify(metadata, null, ' ')}</p>
           </pre>

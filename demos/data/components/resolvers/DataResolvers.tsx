@@ -4,7 +4,7 @@ import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
 import { useContext } from 'react'
 
-import { useDataResolvers } from 'registry/hooks/useDataResolvers'
+import { useDataResolvers } from '@hooks/useDataResolvers'
 
 import styles from './DataResolvers.module.css'
 

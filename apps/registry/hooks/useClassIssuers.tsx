@@ -8,17 +8,16 @@ export const useClassIssuers = (chainInfo: any, classId: string) => {
   const [error, setError] = useState<string | null>(null)
   const [issuers, setIssuers] = useState<any>(null)
 
-  // reset state on network or class id change
+  // reset state on param change
   useEffect(() => {
     setError(null)
     setIssuers(null)
   }, [chainInfo?.chainId])
 
-  // fetch on load and network change
+  // fetch on load and param change
   useEffect(() => {
-    // fetch class issuers from selected network
+    // fetch class issuers by class id from selected network
     const fetchBatches = async () => {
-      // fetch issuers by class id from selected network
       await fetch(chainInfo.rest + '/' + queryClassIssuers + '/' + classId)
         .then((res) => res.json())
         .then((res) => {
@@ -30,8 +29,8 @@ export const useClassIssuers = (chainInfo: any, classId: string) => {
         })
     }
 
-    // only fetch if network
-    if (chainInfo?.rest) {
+    // only fetch if network and id
+    if (chainInfo?.rest && classId) {
       fetchBatches().catch((err) => {
         setError(err.message)
       })

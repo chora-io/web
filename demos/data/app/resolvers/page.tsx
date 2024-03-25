@@ -5,7 +5,7 @@ import DataResolvers from '@components/resolvers/DataResolvers'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'chora registry',
+  title: 'chora data',
 }
 
 const ResolversPage = () => (
