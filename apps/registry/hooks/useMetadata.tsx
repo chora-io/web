@@ -36,7 +36,7 @@ export const useMetadata = (chainInfo: any, iri: string) => {
         })
 
       if (!metadata) {
-        let resolvers: any[]
+        let resolvers: any[] = []
 
         // fetch data resolvers by iri
         await fetch(chainInfo.rest + '/' + queryResolvers + '/' + iri)
