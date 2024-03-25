@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 const queryResolvers = 'regen/data/v1/resolvers-by-iri'
 
 // fetch metadata using network server, otherwise data resolvers
-export const useMetadata = (chainInfo: any, iri: string) => {
+export const useMetadata = (chainInfo: any,iri: string,) => {
   const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results
@@ -35,9 +35,10 @@ export const useMetadata = (chainInfo: any, iri: string) => {
           setError(err.message)
         })
 
-      if (!metadata) {
-        let resolvers: any[] = []
+      let resolvers: any[] = []
 
+      // only if metadata not available on network server
+      if (!metadata) {
         // fetch data resolvers by iri
         await fetch(chainInfo.rest + '/' + queryResolvers + '/' + iri)
           .then((res) => res.json())
@@ -48,27 +49,27 @@ export const useMetadata = (chainInfo: any, iri: string) => {
               resolvers = res['resolvers']
             }
           })
+      }
 
-        // only if resolvers
-        if (resolvers && resolvers.length) {
-          // TODO: retry with multiple resolvers
-          const resolverUrl = resolvers[0].url
+      // only if no metadata and resolvers available
+      if (!metadata && resolvers.length > 0) {
+        // TODO: retry with multiple resolvers
+        const resolverUrl = resolvers[0].url
 
-          // fetch metadata using data resolver
-          await fetch(resolverUrl + iri)
-            .then((res) => res.json())
-            .then((res) => {
-              if (res.error) {
-                setError(res.error)
-              } else {
-                // TODO: standard/expected response?
-                setMetadata(JSON.parse(res['jsonld']))
-              }
-            })
-            .catch((err) => {
-              setError(err.message)
-            })
-        }
+        // fetch metadata using data resolver
+        await fetch(resolverUrl + iri)
+          .then((res) => res.json())
+          .then((res) => {
+            if (res.error) {
+              setError(res.error)
+            } else {
+              // TODO: standard/expected response?
+              setMetadata(JSON.parse(res['jsonld']))
+            }
+          })
+          .catch((err) => {
+            setError(err.message)
+          })
       }
     }
 

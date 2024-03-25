@@ -5,7 +5,7 @@ import Credit from '@components/credits/Credit'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'chora coop',
+  title: 'chora registry',
 }
 
 const CreditPage = () => (

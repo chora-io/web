@@ -83,13 +83,19 @@ const Account = () => {
         </div>
         {wallet ? (
           wallet.bech32Address.includes('chora') ? (
-            <div className={styles.boxText}>
-              <p>{'The following address will be used for authentication:'}</p>
-              <p style={{ marginTop: '0.5em' }}>{wallet.bech32Address}</p>
-              <button className={styles.button} onClick={handleAuthenticate}>
-                {'authenticate'}
-              </button>
-            </div>
+            <>
+              <div className={styles.boxText}>
+                <p>
+                  {'The following address will be used for authentication:'}
+                </p>
+                <p style={{ marginTop: '0.5em' }}>{wallet.bech32Address}</p>
+              </div>
+              <div className={styles.boxText}>
+                <button className={styles.button} onClick={handleAuthenticate}>
+                  {'authenticate'}
+                </button>
+              </div>
+            </>
           ) : (
             <div className={styles.boxText}>
               <p>
@@ -133,7 +139,7 @@ const Account = () => {
             <p style={{ fontSize: '0.9em' }}>
               <i>
                 {
-                  'Note: Keplr account address does not match user account address.'
+                  "Note: Address does not match active account address and that's ok."
                 }
               </i>
             </p>
@@ -143,10 +149,9 @@ const Account = () => {
       <div className={styles.box}>
         <div className={styles.boxHeader}>
           <h2>{'Disconnect Account'}</h2>
-          <p>{'authentication will be required to reconnect'}</p>
+          <p>{'clear authentication and disconnect from chora server'}</p>
         </div>
         <div className={styles.boxText}>
-          <p>{'clear authentication and disconnect from chora server'}</p>
           <button className={styles.button} onClick={handleDisconnect}>
             {'disconnect'}
           </button>

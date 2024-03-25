@@ -6,7 +6,7 @@ import ClassIssuers from '@components/classes/ClassIssuers'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'chora coop',
+  title: 'chora registry',
 }
 
 const ClassPage = () => (

@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import Project from '@components/projects/Project'
+import Claim from '@components/claims/Claim'
 
 import styles from './page.module.css'
 
@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   title: 'chora registry',
 }
 
-const ProjectPage = () => (
+const ClaimPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'class project'}</h1>
-      <Project />
+      <h1>{'data claim'}</h1>
+      <Claim />
     </div>
   </div>
 )
 
-export default ProjectPage
+export default ClaimPage

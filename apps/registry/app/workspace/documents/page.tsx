@@ -5,7 +5,7 @@ import Documents from '@components/workspace/documents/Documents'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'chora coop',
+  title: 'chora registry',
 }
 
 const DocumentsPage = () => (

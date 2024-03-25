@@ -22,6 +22,16 @@ const Sidebar = () => {
           <ul>
             <li>
               <Link
+                href="/claims"
+                className={
+                  currentRoute === '/claims' ? styles.active : undefined
+                }
+              >
+                {'claims'}
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/geonodes"
                 className={
                   currentRoute === '/geonodes' ? styles.active : undefined
@@ -34,6 +44,16 @@ const Sidebar = () => {
         )}
         {!!network && network.includes('regen') && (
           <ul>
+            <li>
+              <Link
+                href="/claims"
+                className={
+                  currentRoute === '/claims' ? styles.active : undefined
+                }
+              >
+                {'claims'}
+              </Link>
+            </li>
             <li>
               <Link
                 href="/credits"
