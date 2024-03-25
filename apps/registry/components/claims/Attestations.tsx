@@ -26,7 +26,7 @@ const Attestations = () => {
         ))}
       {attestations &&
         attestations.map((attestation: any) => (
-          <>
+          <div className={styles.boxItem} key={attestation['attestor']}>
             <div className={styles.boxText}>
               <h3>{'attestor'}</h3>
               <p>{attestation ? attestation['attestor'] : 'NA'}</p>
@@ -36,7 +36,7 @@ const Attestations = () => {
               <p>{attestation ? attestation['timestamp'] : 'NA'}</p>
             </div>
             <hr />
-          </>
+          </div>
         ))}
       {error && (
         <div className={styles.boxText}>

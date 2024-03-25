@@ -2,6 +2,7 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
@@ -60,6 +61,20 @@ const Geonode = () => {
             : 'NA'}
         </p>
       </div>
+      <div className={styles.boxText}>
+        <h3>{'metadata'}</h3>
+        {error ? (
+          <p>{node ? node.metadata : 'NA'}</p>
+        ) : (
+          <p>
+            {node && node.metadata ? (
+              <Link href={`/claims/${node.metadata}`}>{node.metadata}</Link>
+            ) : (
+              'NA'
+            )}
+          </p>
+        )}
+      </div>
       <hr />
       <div className={styles.boxText}>
         <h3>{'data stored on blockchain network'}</h3>
@@ -75,6 +90,7 @@ const Geonode = () => {
           </pre>
         </div>
       )}
+
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

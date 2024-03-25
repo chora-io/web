@@ -2,6 +2,7 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
@@ -41,6 +42,20 @@ const Class = () => {
       <div className={styles.boxText}>
         <h3>{'admin'}</h3>
         <p>{clazz && clazz['admin'] ? clazz['admin'] : 'NA'}</p>
+      </div>
+      <div className={styles.boxText}>
+        <h3>{'metadata'}</h3>
+        {error ? (
+          <p>{clazz ? clazz.metadata : 'NA'}</p>
+        ) : (
+          <p>
+            {clazz && clazz.metadata ? (
+              <Link href={`/claims/${clazz.metadata}`}>{clazz.metadata}</Link>
+            ) : (
+              'NA'
+            )}
+          </p>
+        )}
       </div>
       <hr />
       <div className={styles.boxText}>

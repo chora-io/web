@@ -58,6 +58,22 @@ const Project = () => {
           {project && project['reference_id'] ? project['reference_id'] : 'NA'}
         </p>
       </div>
+      <div className={styles.boxText}>
+        <h3>{'metadata'}</h3>
+        {error ? (
+          <p>{project ? project.metadata : 'NA'}</p>
+        ) : (
+          <p>
+            {project && project.metadata ? (
+              <Link href={`/claims/${project.metadata}`}>
+                {project.metadata}
+              </Link>
+            ) : (
+              'NA'
+            )}
+          </p>
+        )}
+      </div>
       <hr />
       <div className={styles.boxText}>
         <h3>{'data stored on blockchain network'}</h3>

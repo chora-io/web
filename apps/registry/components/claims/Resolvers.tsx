@@ -26,7 +26,7 @@ const Resolvers = () => {
         ))}
       {resolvers &&
         resolvers.map((resolver: any) => (
-          <>
+          <div className={styles.boxItem} key={resolver['id']}>
             <div className={styles.boxText}>
               <h3>{'id'}</h3>
               <p>{resolver ? resolver['id'] : 'NA'}</p>
@@ -40,7 +40,7 @@ const Resolvers = () => {
               <p>{resolver ? resolver['url'] : 'NA'}</p>
             </div>
             <hr />
-          </>
+          </div>
         ))}
       {error && (
         <div className={styles.boxText}>
