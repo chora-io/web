@@ -21,9 +21,11 @@ const ClassIssuers = () => {
     <div className={styles.box}>
       {issuers &&
         issuers.map((issuer: any) => (
-          <div className={styles.boxText} key={issuer}>
-            <h3>{'issuer'}</h3>
-            <p>{issuer}</p>
+          <div className={styles.boxItem} key={issuer}>
+            <div className={styles.boxText}>
+              <h3>{'issuer'}</h3>
+              <p>{issuer}</p>
+            </div>
           </div>
         ))}
       {error && (

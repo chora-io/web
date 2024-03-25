@@ -31,10 +31,6 @@ const Class = () => {
         <p>{id ? id : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
-        <h3>{'admin'}</h3>
-        <p>{clazz && clazz['admin'] ? clazz['admin'] : 'NA'}</p>
-      </div>
-      <div className={styles.boxText}>
         <h3>{'credit type abbrev'}</h3>
         <p>
           {clazz && clazz['credit_type_abbrev']
@@ -43,8 +39,8 @@ const Class = () => {
         </p>
       </div>
       <div className={styles.boxText}>
-        <h3>{'metadata'}</h3>
-        <p>{clazz && clazz['metadata'] ? clazz['metadata'] : 'NA'}</p>
+        <h3>{'admin'}</h3>
+        <p>{clazz && clazz['admin'] ? clazz['admin'] : 'NA'}</p>
       </div>
       <hr />
       <div className={styles.boxText}>

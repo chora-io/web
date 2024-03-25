@@ -14,6 +14,10 @@ const ClassesListItem = ({ clazz }: any) => {
         <p>{clazz.id}</p>
       </div>
       <div className={styles.boxText}>
+        <h3>{'credit type abbrev'}</h3>
+        <p>{clazz['credit_type_abbrev']}</p>
+      </div>
+      <div className={styles.boxText}>
         <h3>{'admin'}</h3>
         <p>
           {clazz.admin}

@@ -10,6 +10,7 @@ const ClassesTable = ({ classes }: any) => {
       <thead>
         <tr>
           <td>{'id'}</td>
+          <td>{'credit type abbrev'}</td>
           <td>{'admin'}</td>
           <td>{'more'}</td>
         </tr>

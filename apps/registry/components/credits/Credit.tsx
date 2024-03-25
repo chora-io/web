@@ -58,10 +58,6 @@ const Credit = () => {
         <h3>{'end date'}</h3>
         <p>{batch && batch['end_date'] ? batch['end_date'] : 'NA'}</p>
       </div>
-      <div className={styles.boxText}>
-        <h3>{'metadata'}</h3>
-        <p>{batch && batch['metadata'] ? batch['metadata'] : 'NA'}</p>
-      </div>
       <hr />
       <div className={styles.boxText}>
         <h3>{'data stored on blockchain network'}</h3>

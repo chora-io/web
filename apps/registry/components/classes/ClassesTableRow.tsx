@@ -10,6 +10,7 @@ const ClassesTableRow = ({ clazz }: any) => {
   return (
     <tr>
       <td>{clazz.id}</td>
+      <td>{clazz['credit_type_abbrev']}</td>
       <td>
         {clazz.admin.substring(0, 13) + '...' + clazz.admin.substring(38, 44)}
         {wallet && clazz.admin === wallet.bech32Address && (

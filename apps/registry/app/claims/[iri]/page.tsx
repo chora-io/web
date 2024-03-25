@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
 
 import Attestations from '@components/claims/Attestations'
-import Claim from '@components/claims/Claim'
+import Anchor from '@components/claims/Anchor'
+import Resolved from '@components/claims/Resolved'
 import Resolvers from '@components/claims/Resolvers'
 
 import styles from './page.module.css'
@@ -13,10 +14,12 @@ export const metadata: Metadata = {
 const ClaimPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'data claim'}</h1>
-      <Claim />
-      <h1>{'data registration'}</h1>
+      <h1>{'data anchor'}</h1>
+      <Anchor />
+      <h1>{'data resolvers'}</h1>
       <Resolvers />
+      <h1>{'resolved data'}</h1>
+      <Resolved />
       <h1>{'data attestations'}</h1>
       <Attestations />
     </div>
