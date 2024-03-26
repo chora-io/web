@@ -21,27 +21,25 @@ const ProposalPreview = ({ proposal }: any) => {
   return (
     <div className={styles.boxItem}>
       {!proposal && !metadata && !error && <div>{'loading...'}</div>}
-      {proposal && metadata && (
-        <div>
-          <div className={styles.boxText}>
-            <h3>{'name'}</h3>
-            <p>{metadata['name'] ? metadata['name'] : 'NA'}</p>
-          </div>
-          <div className={styles.boxText}>
-            <h3>{'status'}</h3>
-            <p>{proposal['status']}</p>
-          </div>
-          {proposal['status'] === 'PROPOSAL_STATUS_ACCEPTED' && (
-            <div className={styles.boxText}>
-              <h3>{'executor result'}</h3>
-              <p>{proposal['executor_result']}</p>
-            </div>
-          )}
-          <Link href={`/groups/${groupId}/proposals/${proposal['id']}`}>
-            {'view proposal'}
-          </Link>
+      <div>
+        <div className={styles.boxText}>
+          <h3>{'name'}</h3>
+          <p>{metadata && metadata['name'] ? metadata['name'] : 'NA'}</p>
         </div>
-      )}
+        <div className={styles.boxText}>
+          <h3>{'status'}</h3>
+          <p>{proposal && proposal['status'] ? proposal['status'] : 'NA'}</p>
+        </div>
+        {proposal && proposal['status'] === 'PROPOSAL_STATUS_ACCEPTED' && (
+          <div className={styles.boxText}>
+            <h3>{'executor result'}</h3>
+            <p>{proposal['executor_result']}</p>
+          </div>
+        )}
+        <Link href={`/groups/${groupId}/proposals/${proposal['id']}`}>
+          {'view proposal'}
+        </Link>
+      </div>
       {error && <div>{error}</div>}
     </div>
   )

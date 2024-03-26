@@ -140,6 +140,7 @@ const Sidebar = () => {
               </Link>
             </li>
           </ul>
+          <li>{'extensions'}</li>
           {!!network && network.includes('chora') && (
             <ul>
               <li>
@@ -184,6 +185,20 @@ const Sidebar = () => {
               </li>
             </ul>
           )}
+          <ul>
+            <li>
+              <Link
+                href={`/groups/${groupId}/resolvers`}
+                className={
+                  currentRoute === `/groups/${groupId}/resolvers`
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'resolvers'}
+              </Link>
+            </li>
+          </ul>
         </ul>
       )}
     </div>

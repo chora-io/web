@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const EcocreditsPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'coming soon...'}</h1>
+      <h1>{'group ecocredits'}</h1>
     </div>
   </div>
 )

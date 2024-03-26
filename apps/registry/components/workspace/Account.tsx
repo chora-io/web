@@ -3,7 +3,7 @@
 import { Result, SelectNetwork } from 'chora/components'
 import { AuthContext, WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 
 import styles from './Account.module.css'
 

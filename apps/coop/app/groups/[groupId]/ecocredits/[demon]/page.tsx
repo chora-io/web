@@ -9,7 +9,9 @@ export const metadata: Metadata = {
 const EcocreditPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'ecocredit batch'}</h1>
+      <h1>{'ecocredit classes'}</h1>
+      <h1>{'ecocredit projects'}</h1>
+      <h1>{'ecocredit batches'}</h1>
     </div>
   </div>
 )

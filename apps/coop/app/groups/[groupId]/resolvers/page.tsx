@@ -1,20 +1,17 @@
 import { Metadata } from 'next'
 
-import Vouchers from '@components/groups/vouchers/Vouchers'
-
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
   title: 'chora coop',
 }
 
-const VouchersPage = () => (
+const ResolversPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'group vouchers'}</h1>
-      <Vouchers />
+      <h1>{'group resolvers'}</h1>
     </div>
   </div>
 )
 
-export default VouchersPage
+export default ResolversPage

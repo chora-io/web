@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import Vouchers from '@components/groups/vouchers/Vouchers'
+import CreateGroup from '@components/groups/CreateGroup'
 
 import styles from './page.module.css'
 
@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   title: 'chora coop',
 }
 
-const VouchersPage = () => (
+const CreatePage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'group vouchers'}</h1>
-      <Vouchers />
+      <h1>{'create group'}</h1>
+      <CreateGroup />
     </div>
   </div>
 )
 
-export default VouchersPage
+export default CreatePage
