@@ -4,11 +4,12 @@ import { useEffect, useState } from 'react'
 
 import InputAddress from '../InputAddress'
 import InputIRI from '../InputIRI'
+import InputIssuers from './InputIssuers'
 import InputString from '../InputString'
 
 const MsgCreateClass = ({ network, setMessage, useWallet, wallet }: any) => {
   const [admin, setAdmin] = useState<string>('')
-  const [issuers, setIssuers] = useState<string>('')
+  const [issuers, setIssuers] = useState<any[]>([])
   const [metadata, setMetadata] = useState<string>('')
   const [creditTypeAbbrev, setCreditTypeAbbrev] = useState<string>('')
   const [feeDenom, setFeeDenom] = useState<string>('')
@@ -17,7 +18,7 @@ const MsgCreateClass = ({ network, setMessage, useWallet, wallet }: any) => {
   useEffect(() => {
     const msg = {
       admin: wallet ? wallet.bech32Address : admin,
-      issuers: [], // TODO
+      issuers: issuers.map((issuer: any) => issuer.address),
       metadata: metadata,
       creditTypeAbbrev: creditTypeAbbrev,
       fee: { denom: feeDenom, amount: feeAmount },
@@ -43,12 +44,12 @@ const MsgCreateClass = ({ network, setMessage, useWallet, wallet }: any) => {
           setAddress={setAdmin}
         />
       )}
-      <InputString
+      <p style={{ marginBottom: '1.5em' }}>{'issuers'}</p>
+      <InputIssuers
         id="msg-create-class-issuers"
         label="issuers"
-        placeholder="[ not implemented ]"
-        string={issuers}
-        setString={setIssuers}
+        issuers={issuers}
+        setIssuers={setIssuers}
       />
       <InputIRI
         id="msg-create-class-metadata"

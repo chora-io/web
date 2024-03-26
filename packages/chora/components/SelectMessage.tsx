@@ -60,6 +60,20 @@ import {
   MsgRegisterResolver as DataMsgRegisterResolver,
 } from './data'
 
+// regen.ecocredit.v1
+import {
+  MsgCreateClass as EcocreditMsgCreateClass,
+  MsgCreateBatch as EcocreditMsgCreateBatch,
+  MsgCreateProject as EcocreditMsgCreateProject,
+  MsgRetire as EcocreditMsgRetire,
+  MsgSend as EcocreditMsgSend,
+  MsgUpdateClassAdmin as EcocreditMsgUpdateClassAdmin,
+  MsgUpdateClassIssuers as EcocreditMsgUpdateClassIssuers,
+  MsgUpdateClassMetadata as EcocreditMsgUpdateClassMetadata,
+  MsgUpdateProjectAdmin as EcocreditMsgUpdateProjectAdmin,
+  MsgUpdateProjectMetadata as EcocreditMsgUpdateProjectMetadata,
+} from './ecocredit'
+
 import styles from './SelectMessage.module.css'
 
 const defaultId = 'message'
@@ -98,6 +112,16 @@ const defaultOptions = [
   'regen.data.v1.MsgAttest',
   'regen.data.v1.MsgDefineResolver',
   'regen.data.v1.MsgRegisterResolver',
+  'regen.ecocredit.v1.MsgCreateBatch',
+  'regen.ecocredit.v1.MsgCreateClass',
+  'regen.ecocredit.v1.MsgCreateProject',
+  'regen.ecocredit.v1.MsgRetire',
+  'regen.ecocredit.v1.MsgSend',
+  'regen.ecocredit.v1.MsgUpdateClassAdmin',
+  'regen.ecocredit.v1.MsgUpdateClassIssuers',
+  'regen.ecocredit.v1.MsgUpdateClassMetadata',
+  'regen.ecocredit.v1.MsgUpdateProjectAdmin',
+  'regen.ecocredit.v1.MsgUpdateProjectMetadata',
 ]
 
 const SelectMessage = ({
@@ -354,6 +378,86 @@ const SelectMessage = ({
           <DataMsgRegisterResolver network={network} setMessage={setMessage} />
         </div>
       )}
+      {!typeOnly && selected === 'regen.ecocredit.v1.MsgCreateBatch' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <EcocreditMsgCreateBatch network={network} setMessage={setMessage} />
+        </div>
+      )}
+      {!typeOnly && selected === 'regen.ecocredit.v1.MsgCreateClass' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <EcocreditMsgCreateClass network={network} setMessage={setMessage} />
+        </div>
+      )}
+      {!typeOnly && selected === 'regen.ecocredit.v1.MsgCreateProject' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <EcocreditMsgCreateProject
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {!typeOnly && selected === 'regen.ecocredit.v1.MsgRetire' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <EcocreditMsgRetire network={network} setMessage={setMessage} />
+        </div>
+      )}
+      {!typeOnly && selected === 'regen.ecocredit.v1.MsgSend' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <EcocreditMsgSend network={network} setMessage={setMessage} />
+        </div>
+      )}
+      {!typeOnly && selected === 'regen.ecocredit.v1.MsgUpdateClassAdmin' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <EcocreditMsgUpdateClassAdmin
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {!typeOnly && selected === 'regen.ecocredit.v1.MsgUpdateClassIssuers' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <EcocreditMsgUpdateClassIssuers
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {!typeOnly &&
+        selected === 'regen.ecocredit.v1.MsgUpdateClassMetadata' && (
+          <div className={styles.message}>
+            <h3>{selected}</h3>
+            <EcocreditMsgUpdateClassMetadata
+              network={network}
+              setMessage={setMessage}
+            />
+          </div>
+        )}
+      {!typeOnly && selected === 'regen.ecocredit.v1.MsgUpdateProjectAdmin' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <EcocreditMsgUpdateProjectAdmin
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {!typeOnly &&
+        selected === 'regen.ecocredit.v1.MsgUpdateProjectMetadata' && (
+          <div className={styles.message}>
+            <h3>{selected}</h3>
+            <EcocreditMsgUpdateProjectMetadata
+              network={network}
+              setMessage={setMessage}
+            />
+          </div>
+        )}
     </>
   )
 }

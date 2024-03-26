@@ -24,7 +24,7 @@ const Resolvers = () => {
             <p>{'No registration records found.'}</p>
           </div>
         ))}
-      {resolvers &&
+      {Array.isArray(resolvers) &&
         resolvers.map((resolver: any) => (
           <div className={styles.boxItem} key={resolver['id']}>
             <div className={styles.boxText}>

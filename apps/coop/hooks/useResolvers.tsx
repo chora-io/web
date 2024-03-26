@@ -20,8 +20,6 @@ export const useResolvers = (chainInfo: any, groupId: string) => {
   useEffect(() => {
     // fetch policies and resolvers from selected network
     const fetchPolicies = async () => {
-      let addrs: string[] = []
-
       // fetch policies by group id from selected network
       await fetch(chainInfo.rest + '/' + queryPolicies + '/' + groupId)
         .then((res) => res.json())
@@ -30,6 +28,9 @@ export const useResolvers = (chainInfo: any, groupId: string) => {
             setError(res.message)
           } else {
             setPolicies(res['group_policies'])
+            if (res['group_policies'].length === 0) {
+              setResolvers([])
+            }
           }
         })
     }
