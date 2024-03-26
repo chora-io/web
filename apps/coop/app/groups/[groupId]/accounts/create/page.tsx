@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const CreatePage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'create group account'}</h1>
+      <h1>{'create account'}</h1>
       <CreateAccount />
     </div>
   </div>

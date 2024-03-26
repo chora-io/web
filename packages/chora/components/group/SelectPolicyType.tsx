@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-const defaultId = 'policy-type'
-const defaultLabel = 'policy type'
+const defaultId = 'decision-policy-type'
+const defaultLabel = 'decision policy type'
 
 const SelectPolicyType = ({ id, label, type, setType }: any) => (
   <label htmlFor={id ? id : defaultId}>

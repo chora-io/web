@@ -59,8 +59,8 @@ const UpdateAccountAdmin = () => {
     <div className={styles.box}>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputAddress
-          id="group-admin"
-          label="group admin"
+          id="account-admin"
+          label="account admin"
           network={network}
           address={newAdmin}
           setAddress={setNewAdmin}

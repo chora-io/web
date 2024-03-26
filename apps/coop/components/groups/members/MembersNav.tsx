@@ -14,7 +14,6 @@ const MembersNav = () => {
         <Link href={`/groups/${groupId}/members/update`}>
           {'update members'}
         </Link>
-        <Link href={`/groups/${groupId}/members/leave`}>{'leave group'}</Link>
       </div>
     </div>
   )

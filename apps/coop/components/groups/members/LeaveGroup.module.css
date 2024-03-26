@@ -9,3 +9,7 @@
 .form {
   composes: form from 'chora/styles/form.css';
 }
+
+.form button {
+  margin: 0 !important;
+}
