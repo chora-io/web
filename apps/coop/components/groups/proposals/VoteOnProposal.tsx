@@ -16,7 +16,7 @@ import styles from './VoteOnProposal.module.css'
 const VoteOnProposal = () => {
   const { id } = useParams()
 
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
@@ -80,7 +80,9 @@ const VoteOnProposal = () => {
         if (data.code) {
           setError(data.message)
         } else {
-          iri = data['iri']
+          iri = network.includes('chora')
+            ? data['iri']
+            : network.split('-')[0] + ':' + data['iri'].split(':')[1]
         }
       })
       .catch((err) => {

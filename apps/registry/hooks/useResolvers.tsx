@@ -6,7 +6,7 @@ const queryResolvers = '/regen/data/v1/resolvers-by-iri'
 export const useResolvers = (chainInfo: any, iri: string) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
-  const [resolvers, setResolvers] = useState<any>(null)
+  const [resolvers, setResolvers] = useState<any[] | null>(null)
 
   // reset state on param change
   useEffect(() => {

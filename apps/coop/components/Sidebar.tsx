@@ -173,14 +173,26 @@ const Sidebar = () => {
             <ul>
               <li>
                 <Link
-                  href={`/groups/${groupId}/ecocredits`}
+                  href={`/groups/${groupId}/classes`}
                   className={
-                    currentRoute === `/groups/${groupId}/ecocredits`
+                    currentRoute === `/groups/${groupId}/classes`
                       ? styles.active
                       : undefined
                   }
                 >
-                  {'ecocredits'}
+                  {'classes'}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`/groups/${groupId}/projects`}
+                  className={
+                    currentRoute === `/groups/${groupId}/projects`
+                      ? styles.active
+                      : undefined
+                  }
+                >
+                  {'projects'}
                 </Link>
               </li>
             </ul>

@@ -2,24 +2,24 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
-import { useDataResolvers } from '@hooks/useDataResolvers'
+import Address from '@components/Address'
+import { useResolvers } from '@hooks/useResolvers'
 
-import styles from './DataResolvers.module.css'
+import styles from './Resolvers.module.css'
 
-const DataResolvers = () => {
+const Resolvers = () => {
+  const { groupId } = useParams()
   const { chainInfo } = useContext(WalletContext)
 
   // fetch data resolvers from selected network
-  const [resolvers, error] = useDataResolvers(chainInfo)
+  const [resolvers, error] = useResolvers(chainInfo, `${groupId}`)
 
   return (
     <div className={styles.box}>
-      <div className={styles.boxHeader}>
-        <h2>{'data resolvers'}</h2>
-        <p>{`data resolvers registered on ${chainInfo?.chainId}`}</p>
-      </div>
+      {!error && !resolvers && <p>{'loading...'}</p>}
       {Array.isArray(resolvers) &&
         resolvers.map((resolver: any) => (
           <div className={styles.boxItem} key={resolver['id']}>
@@ -33,12 +33,18 @@ const DataResolvers = () => {
             </div>
             <div className={styles.boxText}>
               <h3>{'manager'}</h3>
-              <p>{resolver['manager']}</p>
+              <p>
+                {resolver['manager'] ? (
+                  <Address address={resolver['manager']} />
+                ) : (
+                  'NA'
+                )}
+              </p>
             </div>
           </div>
         ))}
       {chainInfo?.chainId && resolvers?.length === 0 && (
-        <p>{`no data resolvers found on ${chainInfo?.chainId}`}</p>
+        <p>{'no resolvers found'}</p>
       )}
       {error && (
         <div className={styles.boxText}>
@@ -49,4 +55,4 @@ const DataResolvers = () => {
   )
 }
 
-export default DataResolvers
+export default Resolvers

@@ -10,11 +10,7 @@ const MembersNav = () => {
 
   return (
     <div className={styles.box}>
-      <div className={styles.boxOptions}>
-        <Link href={`/groups/${groupId}/members/update`}>
-          {'update members'}
-        </Link>
-      </div>
+      <Link href={`/groups/${groupId}/members/update`}>{'update members'}</Link>
     </div>
   )
 }

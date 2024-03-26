@@ -77,7 +77,9 @@ const CreateGroup = () => {
         if (data.code) {
           setError(data.message)
         } else {
-          iri = data['iri']
+          iri = network.includes('chora')
+            ? data['iri']
+            : network.split('-')[0] + ':' + data['iri'].split(':')[1]
         }
       })
       .catch((err) => {
