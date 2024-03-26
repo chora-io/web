@@ -35,7 +35,6 @@ const Attestations = () => {
               <h3>{'timestamp'}</h3>
               <p>{attestation ? attestation['timestamp'] : 'NA'}</p>
             </div>
-            <hr />
           </div>
         ))}
       {error && (

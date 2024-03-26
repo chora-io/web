@@ -39,7 +39,6 @@ const Resolvers = () => {
               <h3>{'url'}</h3>
               <p>{resolver ? resolver['url'] : 'NA'}</p>
             </div>
-            <hr />
           </div>
         ))}
       {error && (

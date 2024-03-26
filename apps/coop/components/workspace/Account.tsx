@@ -18,6 +18,9 @@ const Account = () => {
   // authentication error
   const [error, setError] = useState<string | null>(null)
 
+  // switched from network
+  const [switched, setSwitched] = useState<string | null>(null)
+
   // authenticate user with keplr wallet
   const handleAuthenticate = async () => {
     // reset authentication error
@@ -74,6 +77,18 @@ const Account = () => {
     removeAccount(activeAccount)
   }
 
+  // set switch when switching networks
+  const handleSetNetwork = (value: any) => {
+    setSwitched(network)
+    setNetwork(value)
+  }
+
+  // switch back network and clear switched
+  const handleSwitchBack = () => {
+    setNetwork(switched)
+    setSwitched(null)
+  }
+
   if (!account) {
     return (
       <div className={styles.box}>
@@ -106,7 +121,7 @@ const Account = () => {
                   label=" "
                   network={network}
                   selected={selected}
-                  setNetwork={setNetwork}
+                  setNetwork={handleSetNetwork}
                 />
               </form>
             </div>
@@ -123,6 +138,19 @@ const Account = () => {
 
   return (
     <>
+      {switched && (
+        <div className={styles.box}>
+          <div className={styles.boxHeader}>
+            <h2>{'Switch Back'}</h2>
+            <p>{`switch back to ${switched}`}</p>
+          </div>
+          <div className={styles.boxText}>
+            <button className={styles.button} onClick={handleSwitchBack}>
+              {'switch back'}
+            </button>
+          </div>
+        </div>
+      )}
       <div className={styles.box}>
         <div className={styles.boxHeader}>
           <h2>{'Account Information'}</h2>

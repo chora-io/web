@@ -26,11 +26,6 @@ const Anchor = () => {
         <h3>{'timestamp'}</h3>
         <p>{anchor ? anchor['timestamp'] : 'NA'}</p>
       </div>
-      {anchorError && (
-        <div className={styles.boxText}>
-          <Result error={anchorError} />
-        </div>
-      )}
       <hr />
       {anchor && (
         <div className={styles.boxText}>
@@ -38,6 +33,11 @@ const Anchor = () => {
           <pre>
             <p>{JSON.stringify(anchor, null, ' ')}</p>
           </pre>
+        </div>
+      )}
+      {anchorError && (
+        <div className={styles.boxText}>
+          <Result error={anchorError} />
         </div>
       )}
     </div>

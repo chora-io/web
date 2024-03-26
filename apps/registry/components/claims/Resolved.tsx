@@ -14,13 +14,20 @@ const Resolved = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  const [metadata, metadataError] = useMetadata(chainInfo, `${iri}`)
+  const [metadata, metadataError, resolverUrl] = useMetadata(
+    chainInfo,
+    `${iri}`,
+  )
 
   return (
     <div className={styles.box}>
       <div className={styles.boxText}>
         <h3>{'iri'}</h3>
         <p>{iri ? iri.toString().replace('%3A', ':') : 'NA'}</p>
+      </div>
+      <div className={styles.boxText}>
+        <h3>{'resolver url'}</h3>
+        <p>{resolverUrl ? resolverUrl : 'NA'}</p>
       </div>
       <hr />
       {metadata && (

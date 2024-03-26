@@ -10,6 +10,7 @@ export const useMetadata = (chainInfo: any, iri: string) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [metadata, setMetadata] = useState<any>(null)
+  const [resolverUrl, setResolverUrl] = useState<string | null>(null)
 
   // reset state on param change
   useEffect(() => {
@@ -29,6 +30,7 @@ export const useMetadata = (chainInfo: any, iri: string) => {
             setError(res.error)
           } else {
             setMetadata(JSON.parse(res['jsonld']))
+            setResolverUrl(serverUrl + '/data/')
           }
         })
         .catch((err) => {
@@ -54,10 +56,10 @@ export const useMetadata = (chainInfo: any, iri: string) => {
       // only if no metadata and resolvers available
       if (!metadata && resolvers.length > 0) {
         // TODO: retry with multiple resolvers
-        const resolverUrl = resolvers[0].url
+        const url = resolvers[0].url
 
         // fetch metadata using data resolver
-        await fetch(resolverUrl + iri)
+        await fetch(url + iri)
           .then((res) => res.json())
           .then((res) => {
             if (res.error) {
@@ -65,6 +67,7 @@ export const useMetadata = (chainInfo: any, iri: string) => {
             } else {
               // TODO: standard/expected response?
               setMetadata(JSON.parse(res['jsonld']))
+              setResolverUrl(url)
             }
           })
           .catch((err) => {
@@ -81,5 +84,5 @@ export const useMetadata = (chainInfo: any, iri: string) => {
     }
   }, [chainInfo, serverUrl, iri])
 
-  return [metadata, error]
+  return [metadata, error, resolverUrl]
 }
