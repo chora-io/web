@@ -50,27 +50,24 @@ const Network = () => {
 
   return (
     <div className={styles.box}>
-      <h2>{'network'}</h2>
-      <div>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <td>{'chain id'}</td>
-              <td>{'latest block date'}</td>
-              <td>{'latest block time'}</td>
-              <td>{'latest block height'}</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className={error ? styles.error : undefined}>
-              <td>{chainInfo?.chainId || 'loading...'}</td>
-              <td>{error || date || 'loading...'}</td>
-              <td>{error || time || 'loading...'}</td>
-              <td>{error || height || 'loading...'}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <td>{'chain id'}</td>
+            <td>{'latest block date'}</td>
+            <td>{'latest block time'}</td>
+            <td>{'latest block height'}</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className={error ? styles.error : undefined}>
+            <td>{chainInfo?.chainId || 'loading...'}</td>
+            <td>{error || date || 'loading...'}</td>
+            <td>{error || time || 'loading...'}</td>
+            <td>{error || height || 'loading...'}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   )
 }

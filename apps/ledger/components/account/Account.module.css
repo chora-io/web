@@ -1,12 +1,7 @@
 .box {
   composes: box from 'chora/styles/box.css';
-  text-align: center;
 }
 
-.box h2 {
-  margin-bottom: 1.5em;
-}
-
-.box p {
-  margin: 1.5em 0;
+.boxText {
+  composes: box-text from 'chora/styles/box.css';
 }

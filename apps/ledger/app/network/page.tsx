@@ -12,7 +12,9 @@ export const metadata: Metadata = {
 const NetworkPage = () => (
   <div className={styles.page}>
     <div>
+      <h1>{'network'}</h1>
       <Network />
+      <h1>{'validators'}</h1>
       <Validators />
     </div>
   </div>

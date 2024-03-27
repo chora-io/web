@@ -10,9 +10,22 @@ const Account = () => {
 
   return (
     <div className={styles.box}>
-      <h2>{'account'}</h2>
-      <p>{wallet?.name}</p>
-      <p>{wallet?.bech32Address}</p>
+      {wallet ? (
+        <>
+          <div className={styles.boxText}>
+            <h3>{'name'}</h3>
+            <p>{wallet.name}</p>
+          </div>
+          <div className={styles.boxText}>
+            <h3>{'address'}</h3>
+            <p>{wallet.bech32Address}</p>
+          </div>
+        </>
+      ) : (
+        <div className={styles.boxText}>
+          <p>{'keplr wallet not connected'}</p>
+        </div>
+      )}
     </div>
   )
 }

@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 const HomePage = () => (
   <div className={styles.page}>
     <div>
+      <h1>{'account'}</h1>
       <Account />
     </div>
   </div>
