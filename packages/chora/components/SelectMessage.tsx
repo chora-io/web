@@ -8,7 +8,7 @@ import {
   MsgCreate as GeonodeMsgCreate,
   MsgUpdateCurator as GeonodeMsgUpdateCurator,
   MsgUpdateMetadata as GeonodeMsgUpdateMetadata,
-} from './geonode'
+} from './chora.geonode.v1'
 
 // chora.voucher.v1
 import {
@@ -16,23 +16,23 @@ import {
   MsgIssue as VoucherMsgIssue,
   MsgUpdateIssuer as VoucherMsgUpdateIssuer,
   MsgUpdateMetadata as VoucherMsgUpdateMetadata,
-} from './voucher'
+} from './chora.voucher.v1'
 
 // cosmos.authz.v1beta1
 import {
   MsgExec as AuthzMsgExec,
   MsgGrant as AuthzMsgGrant,
   MsgRevoke as AuthzMsgRevoke,
-} from './authz'
+} from './cosmos.authz.v1beta1'
 
 // cosmos.bank.v1beta1
-import { MsgSend as BankMsgSend } from './bank'
+import { MsgSend as BankMsgSend } from './cosmos.bank.v1beta1'
 
 // cosmos.feegrant.v1beta1
 import {
   MsgGrantAllowance as FeegrantMsgGrantAllowance,
   MsgRevokeAllowance as FeegrantMsgRevokeAllowance,
-} from './feegrant'
+} from './cosmos.feegrant.v1beta1'
 
 // cosmos.group.v1
 import {
@@ -50,7 +50,7 @@ import {
   MsgUpdateGroupPolicyMetadata as GroupMsgUpdateGroupPolicyMetadata,
   MsgVote as GroupMsgVote,
   MsgWithdrawProposal as GroupMsgWithdrawProposal,
-} from './group'
+} from './cosmos.group.v1'
 
 // regen.data.v1
 import {
@@ -58,7 +58,7 @@ import {
   MsgAttest as DataMsgAttest,
   MsgDefineResolver as DataMsgDefineResolver,
   MsgRegisterResolver as DataMsgRegisterResolver,
-} from './data'
+} from './regen.data.v1'
 
 // regen.ecocredit.v1
 import {
@@ -72,7 +72,7 @@ import {
   MsgUpdateClassMetadata as EcocreditMsgUpdateClassMetadata,
   MsgUpdateProjectAdmin as EcocreditMsgUpdateProjectAdmin,
   MsgUpdateProjectMetadata as EcocreditMsgUpdateProjectMetadata,
-} from './ecocredit'
+} from './regen.ecocredit.v1'
 
 import styles from './SelectMessage.module.css'
 

@@ -1,9 +1,9 @@
 import { Metadata } from 'next'
 
-import ModuleInfo from '@components/modules/feegrant/ModuleInfo'
-import MsgGrantAllowance from '@components/modules/feegrant/MsgGrantAllowance'
-import MsgRevokeAllowance from '@components/modules/feegrant/MsgRevokeAllowance'
-import QueryAllowance from '@components/modules/feegrant/QueryAllowance'
+import ModuleInfo from '@components/modules/cosmos.feegrant.v1beta1/ModuleInfo'
+import MsgGrantAllowance from '@components/modules/cosmos.feegrant.v1beta1/MsgGrantAllowance'
+import MsgRevokeAllowance from '@components/modules/cosmos.feegrant.v1beta1/MsgRevokeAllowance'
+import QueryAllowance from '@components/modules/cosmos.feegrant.v1beta1/QueryAllowance'
 
 import styles from './page.module.css'
 

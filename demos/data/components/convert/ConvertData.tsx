@@ -5,7 +5,7 @@ import {
   SelectDigestAlgorithm,
   SelectGraphCanon,
   SelectGraphMerkle,
-} from 'chora/components/data'
+} from 'chora/components/regen.data.v1'
 import { WalletContext } from 'chora/contexts'
 import * as blake from 'blakejs'
 import { Buffer } from 'buffer'

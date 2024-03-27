@@ -3,18 +3,5 @@
 }
 
 .active {
-  composes: sidebar-link-active from 'chora/styles/sidebar.css';
-  background: none;
-  color: var(--color-theme);
-}
-
-.button {
-  background: none;
-  border: none;
-  color: var(--color-theme);
-}
-
-.sidebar ul ul {
-  font-size: 0.85em;
-  padding: 0 0 0 0.85em;
+  composes: active from 'chora/styles/sidebar.css';
 }

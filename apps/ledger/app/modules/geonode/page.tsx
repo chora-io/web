@@ -1,12 +1,12 @@
 import { Metadata } from 'next'
 
-import ModuleInfo from '@components/modules/geonode/ModuleInfo'
-import MsgCreate from '@components/modules/geonode/MsgCreate'
-import MsgUpdateCurator from '@components/modules/geonode/MsgUpdateCurator'
-import MsgUpdateMetadata from '@components/modules/geonode/MsgUpdateMetadata'
-import QueryNode from '@components/modules/geonode/QueryNode'
-import QueryNodes from '@components/modules/geonode/QueryNodes'
-import QueryNodesByCurator from '@components/modules/geonode/QueryNodesByCurator'
+import ModuleInfo from '@components/modules/chora.geonode.v1/ModuleInfo'
+import MsgCreate from '@components/modules/chora.geonode.v1/MsgCreate'
+import MsgUpdateCurator from '@components/modules/chora.geonode.v1/MsgUpdateCurator'
+import MsgUpdateMetadata from '@components/modules/chora.geonode.v1/MsgUpdateMetadata'
+import QueryNode from '@components/modules/chora.geonode.v1/QueryNode'
+import QueryNodes from '@components/modules/chora.geonode.v1/QueryNodes'
+import QueryNodesByCurator from '@components/modules/chora.geonode.v1/QueryNodesByCurator'
 
 import styles from './page.module.css'
 

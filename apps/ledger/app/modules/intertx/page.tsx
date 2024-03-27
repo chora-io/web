@@ -1,9 +1,9 @@
 import { Metadata } from 'next'
 
-import ModuleInfo from '@components/modules/intertx/ModuleInfo'
-import MsgRegisterAccount from '@components/modules/intertx/MsgRegisterAccount'
-import MsgSubmitTx from '@components/modules/intertx/MsgSubmitTx'
-import QueryInterchainAccount from '@components/modules/intertx/QueryInterchainAccount'
+import ModuleInfo from '@components/modules/regen.intertx.v1/ModuleInfo'
+import MsgRegisterAccount from '@components/modules/regen.intertx.v1/MsgRegisterAccount'
+import MsgSubmitTx from '@components/modules/regen.intertx.v1/MsgSubmitTx'
+import QueryInterchainAccount from '@components/modules/regen.intertx.v1/QueryInterchainAccount'
 
 import styles from './page.module.css'
 

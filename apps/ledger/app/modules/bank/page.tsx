@@ -1,11 +1,11 @@
 import { Metadata } from 'next'
 
-import ModuleInfo from '@components/modules/bank/ModuleInfo'
-import MsgMultiSend from '@components/modules/bank/MsgMultiSend'
-import MsgSend from '@components/modules/bank/MsgSend'
-import MsgSetSendEnabled from '@components/modules/bank/MsgSetSendEnabled'
-import QueryAllBalances from '@components/modules/bank/QueryAllBalances'
-import QueryBalance from '@components/modules/bank/QueryBalance'
+import ModuleInfo from '@components/modules/cosmos.bank.v1beta1/ModuleInfo'
+import MsgMultiSend from '@components/modules/cosmos.bank.v1beta1/MsgMultiSend'
+import MsgSend from '@components/modules/cosmos.bank.v1beta1/MsgSend'
+import MsgSetSendEnabled from '@components/modules/cosmos.bank.v1beta1/MsgSetSendEnabled'
+import QueryAllBalances from '@components/modules/cosmos.bank.v1beta1/QueryAllBalances'
+import QueryBalance from '@components/modules/cosmos.bank.v1beta1/QueryBalance'
 
 import styles from './page.module.css'
 

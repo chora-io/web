@@ -6,7 +6,7 @@ import {
   SelectAccount,
   SelectMessage,
 } from 'chora/components'
-import { SelectExecution } from 'chora/components/group'
+import { SelectExecution } from 'chora/components/cosmos.group.v1'
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'

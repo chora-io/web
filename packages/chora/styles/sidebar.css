@@ -5,8 +5,15 @@
   box-shadow: var(--box-shadow);
   height: calc(100vh - var(--header-height));
   margin-top: var(--header-height);
+  overflow-y: scroll;
   position: fixed;
+  scrollbar-width: none; /* Firefox */
   width: var(--sidebar-width);
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
 
 @media (max-width: 850px) {
@@ -26,8 +33,13 @@
   padding: 0.8em;
 }
 
-/* sidebar-link-active */
+.sidebar ul ul {
+  font-size: 0.85em;
+  padding: 0 0 0 0.85em;
+}
 
-.sidebar-link-active {
+/* active */
+
+.active {
   font-weight: 500;
 }

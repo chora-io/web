@@ -1,12 +1,12 @@
 import { Metadata } from 'next'
 
-import ModuleInfo from '@components/modules/authz/ModuleInfo'
-import MsgExec from '@components/modules/authz/MsgExec'
-import MsgGrant from '@components/modules/authz/MsgGrant'
-import MsgRevoke from '@components/modules/authz/MsgRevoke'
-import QueryGranteeGrants from '@components/modules/authz/QueryGranteeGrants'
-import QueryGranterGrants from '@components/modules/authz/QueryGranterGrants'
-import QueryGrants from '@components/modules/authz/QueryGrants'
+import ModuleInfo from '@components/modules/cosmos.authz.v1beta1/ModuleInfo'
+import MsgExec from '@components/modules/cosmos.authz.v1beta1/MsgExec'
+import MsgGrant from '@components/modules/cosmos.authz.v1beta1/MsgGrant'
+import MsgRevoke from '@components/modules/cosmos.authz.v1beta1/MsgRevoke'
+import QueryGranteeGrants from '@components/modules/cosmos.authz.v1beta1/QueryGranteeGrants'
+import QueryGranterGrants from '@components/modules/cosmos.authz.v1beta1/QueryGranterGrants'
+import QueryGrants from '@components/modules/cosmos.authz.v1beta1/QueryGrants'
 
 import styles from './page.module.css'
 

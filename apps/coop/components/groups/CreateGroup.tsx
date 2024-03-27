@@ -1,7 +1,7 @@
 'use client'
 
 import { InputString, ResultTx } from 'chora/components'
-import { InputMembers } from 'chora/components/group'
+import { InputMembers } from 'chora/components/cosmos.group.v1'
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'
