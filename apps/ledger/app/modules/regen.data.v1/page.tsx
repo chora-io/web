@@ -23,11 +23,11 @@ export const metadata: Metadata = {
   title: `chora ledger`,
 }
 
-const DataPage = () => {
+const ModulePage = () => {
   return (
     <div className={styles.page}>
       <div>
-        <h1>{'data module'}</h1>
+        <h1>{'regen.data.v1'}</h1>
         <ModuleInfo />
         <ConvertHashToIRI />
         <ConvertIRIToHash />
@@ -49,4 +49,4 @@ const DataPage = () => {
   )
 }
 
-export default DataPage
+export default ModulePage

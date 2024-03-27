@@ -11,10 +11,10 @@ export const metadata: Metadata = {
   title: `chora ledger`,
 }
 
-const FeegrantPage = () => (
+const ModulePage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'feegrant module'}</h1>
+      <h1>{'cosmos.feegrant.v1beta1'}</h1>
       <ModuleInfo />
       <MsgGrantAllowance />
       <MsgRevokeAllowance />
@@ -23,4 +23,4 @@ const FeegrantPage = () => (
   </div>
 )
 
-export default FeegrantPage
+export default ModulePage

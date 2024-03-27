@@ -11,10 +11,10 @@ export const metadata: Metadata = {
   title: `chora ledger`,
 }
 
-const InterTxPage = () => (
+const ModulePage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'intertx module'}</h1>
+      <h1>{'regen.intertx.v1'}</h1>
       <ModuleInfo />
       <MsgRegisterAccount />
       <MsgSubmitTx />
@@ -23,4 +23,4 @@ const InterTxPage = () => (
   </div>
 )
 
-export default InterTxPage
+export default ModulePage

@@ -13,10 +13,10 @@ export const metadata: Metadata = {
   title: `chora ledger`,
 }
 
-const BankPage = () => (
+const ModulePage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'bank module'}</h1>
+      <h1>{'cosmos.bank.v1beta1'}</h1>
       <ModuleInfo />
       <MsgMultiSend />
       <MsgSend />
@@ -27,4 +27,4 @@ const BankPage = () => (
   </div>
 )
 
-export default BankPage
+export default ModulePage

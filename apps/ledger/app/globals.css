@@ -1,1 +1,5 @@
 @import 'chora/styles/globals.css';
+
+:root {
+  --sidebar-width: 280px;
+}

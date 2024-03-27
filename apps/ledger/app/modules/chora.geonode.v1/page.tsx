@@ -14,10 +14,10 @@ export const metadata: Metadata = {
   title: `chora ledger`,
 }
 
-const GeonodePage = () => (
+const ModulePage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'geonode module'}</h1>
+      <h1>{'chora.geonode.v1'}</h1>
       <ModuleInfo />
       <MsgCreate />
       <MsgUpdateCurator />
@@ -29,4 +29,4 @@ const GeonodePage = () => (
   </div>
 )
 
-export default GeonodePage
+export default ModulePage

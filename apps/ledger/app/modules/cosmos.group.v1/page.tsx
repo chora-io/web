@@ -35,10 +35,10 @@ export const metadata: Metadata = {
   title: `chora ledger`,
 }
 
-const GroupPage = () => (
+const ModulePage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'group module'}</h1>
+      <h1>{'cosmos.group.v1'}</h1>
       <ModuleInfo />
       <MsgCreateGroup />
       <MsgCreateGroupWithPolicy />
@@ -71,4 +71,4 @@ const GroupPage = () => (
   </div>
 )
 
-export default GroupPage
+export default ModulePage

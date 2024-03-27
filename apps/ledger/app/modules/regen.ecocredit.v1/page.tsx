@@ -57,10 +57,10 @@ export const metadata: Metadata = {
   title: `chora ledger`,
 }
 
-const EcocreditPage = () => (
+const ModulePage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'ecocredit module'}</h1>
+      <h1>{'regen.ecocredit.v1'}</h1>
       <ModuleInfo />
       <MsgAddAllowedBridgeChain />
       <MsgAddClassCreator />
@@ -115,4 +115,4 @@ const EcocreditPage = () => (
   </div>
 )
 
-export default EcocreditPage
+export default ModulePage

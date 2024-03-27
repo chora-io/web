@@ -18,10 +18,10 @@ export const metadata: Metadata = {
   title: `chora ledger`,
 }
 
-const VoucherPage = () => (
+const ModulePage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'voucher module'}</h1>
+      <h1>{'chora.voucher.v1'}</h1>
       <ModuleInfo />
       <MsgCreate />
       <MsgIssue />
@@ -37,4 +37,4 @@ const VoucherPage = () => (
   </div>
 )
 
-export default VoucherPage
+export default ModulePage

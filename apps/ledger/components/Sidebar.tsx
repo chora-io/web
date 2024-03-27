@@ -43,173 +43,189 @@ const Sidebar = () => {
         </ul>
         <li>{'modules'}</li>
         {!!network && network.includes('chora') && (
-          <ul>
+          <ul className={styles.modules}>
             <li>
               <Link
-                href="/modules/authz"
+                href="/modules/chora.geonode.v1"
                 className={
-                  currentRoute === '/modules/authz' ? styles.active : undefined
-                }
-              >
-                {'authz'}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/modules/bank"
-                className={
-                  currentRoute === '/modules/bank' ? styles.active : undefined
-                }
-              >
-                {'bank'}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/modules/data"
-                className={
-                  currentRoute === '/modules/data' ? styles.active : undefined
-                }
-              >
-                {'data'}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/modules/feegrant"
-                className={
-                  currentRoute === '/modules/feegrant'
+                  currentRoute === '/modules/chora.geonode.v1'
                     ? styles.active
                     : undefined
                 }
               >
-                {'feegrant'}
+                {'chora.geonode.v1'}
               </Link>
             </li>
             <li>
               <Link
-                href="/modules/geonode"
+                href="/modules/chora.voucher.v1"
                 className={
-                  currentRoute === '/modules/geonode'
+                  currentRoute === '/modules/chora.voucher.v1'
                     ? styles.active
                     : undefined
                 }
               >
-                {'geonode'}
+                {'chora.voucher.v1'}
               </Link>
             </li>
             <li>
               <Link
-                href="/modules/group"
+                href="/modules/cosmos.authz.v1beta1"
                 className={
-                  currentRoute === '/modules/group' ? styles.active : undefined
-                }
-              >
-                {'group'}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/modules/intertx"
-                className={
-                  currentRoute === '/modules/intertx'
+                  currentRoute === '/modules/cosmos.authz.v1beta1'
                     ? styles.active
                     : undefined
                 }
               >
-                {'intertx'}
+                {'cosmos.authz.v1beta1'}
               </Link>
             </li>
             <li>
               <Link
-                href="/modules/voucher"
+                href="/modules/cosmos.bank.v1beta1"
                 className={
-                  currentRoute === '/modules/voucher'
+                  currentRoute === '/modules/cosmos.bank.v1beta1'
                     ? styles.active
                     : undefined
                 }
               >
-                {'voucher'}
+                {'cosmos.bank.v1beta1'}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/modules/cosmos.feegrant.v1beta1"
+                className={
+                  currentRoute === '/modules/cosmos.feegrant.v1beta1'
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'cosmos.feegrant.v1beta1'}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/modules/cosmos.group.v1"
+                className={
+                  currentRoute === '/modules/cosmos.group.v1'
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'cosmos.group.v1'}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/modules/regen.data.v1"
+                className={
+                  currentRoute === '/modules/regen.data.v1'
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'regen.data.v1'}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/modules/regen.intertx.v1"
+                className={
+                  currentRoute === '/modules/regen.intertx.v1'
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'regen.intertx.v1'}
               </Link>
             </li>
           </ul>
         )}
         {!!network && network.includes('regen') && (
-          <ul>
+          <ul className={styles.modules}>
             <li>
               <Link
-                href="/modules/authz"
+                href="/modules/cosmos.authz.v1beta1"
                 className={
-                  currentRoute === '/modules/authz' ? styles.active : undefined
-                }
-              >
-                {'authz'}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/modules/bank"
-                className={
-                  currentRoute === '/modules/bank' ? styles.active : undefined
-                }
-              >
-                {'bank'}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/modules/data"
-                className={
-                  currentRoute === '/modules/data' ? styles.active : undefined
-                }
-              >
-                {'data'}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/modules/ecocredit"
-                className={
-                  currentRoute === '/modules/ecocredit'
+                  currentRoute === '/modules/cosmos.authz.v1beta1'
                     ? styles.active
                     : undefined
                 }
               >
-                {'ecocredit'}
+                {'cosmos.authz.v1beta1'}
               </Link>
             </li>
             <li>
               <Link
-                href="/modules/feegrant"
+                href="/modules/cosmos.bank.v1beta1"
                 className={
-                  currentRoute === '/modules/feegrant'
+                  currentRoute === '/modules/cosmos.bank.v1beta1'
                     ? styles.active
                     : undefined
                 }
               >
-                {'feegrant'}
+                {'cosmos.bank.v1beta1'}
               </Link>
             </li>
             <li>
               <Link
-                href="/modules/group"
+                href="/modules/cosmos.feegrant.v1beta1"
                 className={
-                  currentRoute === '/modules/group' ? styles.active : undefined
-                }
-              >
-                {'group'}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/modules/intertx"
-                className={
-                  currentRoute === '/modules/intertx'
+                  currentRoute === '/modules/cosmos.feegrant.v1beta1'
                     ? styles.active
                     : undefined
                 }
               >
-                {'intertx'}
+                {'cosmos.feegrant.v1beta1'}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/modules/cosmos.group.v1"
+                className={
+                  currentRoute === '/modules/cosmos.group.v1'
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'cosmos.group.v1'}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/modules/regen.data.v1"
+                className={
+                  currentRoute === '/modules/regen.data.v1'
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'regen.data.v1'}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/modules/regen.ecocredit.v1"
+                className={
+                  currentRoute === '/modules/regen.ecocredit.v1'
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'regen.ecocredit.v1'}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/modules/regen.intertx.v1"
+                className={
+                  currentRoute === '/modules/regen.intertx.v1'
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'regen.intertx.v1'}
               </Link>
             </li>
           </ul>

@@ -2,6 +2,11 @@
   composes: sidebar from 'chora/styles/sidebar.css';
 }
 
+.modules {
+  font-size: 0.75em !important;
+  margin-left: 0.25em;
+}
+
 .active {
   composes: active from 'chora/styles/sidebar.css';
 }

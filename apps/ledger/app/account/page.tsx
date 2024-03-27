@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: `chora ledger`,
 }
 
-const HomePage = () => (
+const AccountPage = () => (
   <div className={styles.page}>
     <div>
       <h1>{'account'}</h1>
@@ -17,4 +17,4 @@ const HomePage = () => (
   </div>
 )
 
-export default HomePage
+export default AccountPage

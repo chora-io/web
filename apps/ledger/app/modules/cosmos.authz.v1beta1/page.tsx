@@ -14,10 +14,10 @@ export const metadata: Metadata = {
   title: `chora ledger`,
 }
 
-const AuthzPage = () => (
+const ModulePage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'authz module'}</h1>
+      <h1>{'cosmos.authz.v1beta1'}</h1>
       <ModuleInfo />
       <MsgExec />
       <MsgGrant />
@@ -29,4 +29,4 @@ const AuthzPage = () => (
   </div>
 )
 
-export default AuthzPage
+export default ModulePage
