@@ -6,6 +6,24 @@ import "cosmos/msg/v1/msg.proto";
 import "gogoproto/gogo.proto";
 import "google/protobuf/timestamp.proto";
 
+option go_package = "github.com/chora-io/mods/voucher/types/v1";
+
+// Msg is the Msg service.
+service Msg {
+
+  // Create creates a voucher.
+  rpc Create(MsgCreate) returns (MsgCreateResponse);
+
+  // Issue issues vouchers to a recipient.
+  rpc Issue(MsgIssue) returns (MsgIssueResponse);
+
+  // UpdateIssuer updates the issuer of a voucher.
+  rpc UpdateIssuer(MsgUpdateIssuer) returns (MsgUpdateIssuerResponse);
+
+  // UpdateMetadata updates the metadata of a voucher.
+  rpc UpdateMetadata(MsgUpdateMetadata) returns (MsgUpdateMetadataResponse);
+}
+
 // MsgCreate is the Msg/Create request type.
 message MsgCreate {
   option (cosmos.msg.v1.signer) = "issuer";
@@ -15,6 +33,13 @@ message MsgCreate {
 
   // metadata is the metadata of the voucher.
   string metadata = 2;
+}
+
+// MsgCreateResponse is the Msg/Create response type.
+message MsgCreateResponse {
+
+  // id is the unique identifier of the voucher.
+  uint64 id = 1;
 }
 
 // MsgIssue is the Msg/Issue request type.
@@ -40,6 +65,13 @@ message MsgIssue {
   string metadata = 6;
 }
 
+// MsgIssueResponse is the Msg/Issue response type.
+message MsgIssueResponse {
+
+  // id is the unique identifier of the voucher.
+  uint64 id = 1;
+}
+
 // MsgUpdateIssuer is the Msg/UpdateIssuer request type.
 message MsgUpdateIssuer {
   option (cosmos.msg.v1.signer) = "issuer";
@@ -54,6 +86,13 @@ message MsgUpdateIssuer {
   string new_issuer = 3;
 }
 
+// MsgUpdateIssuerResponse is the Msg/UpdateIssuer response type.
+message MsgUpdateIssuerResponse {
+
+  // id is the unique identifier of the voucher.
+  uint64 id = 1;
+}
+
 // MsgUpdateMetadata is the Msg/UpdateMetadata request type.
 message MsgUpdateMetadata {
   option (cosmos.msg.v1.signer) = "issuer";
@@ -66,4 +105,11 @@ message MsgUpdateMetadata {
 
   // new_metadata is the new metadata of the voucher.
   string new_metadata = 3;
+}
+
+// MsgUpdateMetadataResponse is the Msg/UpdateMetadata response type.
+message MsgUpdateMetadataResponse {
+
+  // id is the unique identifier of the voucher.
+  uint64 id = 1;
 }

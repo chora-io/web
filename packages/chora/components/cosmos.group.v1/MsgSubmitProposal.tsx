@@ -1,5 +1,7 @@
-import { MsgSubmitProposal as Msg } from 'cosmos/api/cosmos/group/v1/tx'
-import { execFromJSON } from 'cosmos/api/cosmos/group/v1/types'
+import {
+  execFromJSON,
+  MsgSubmitProposal as Msg,
+} from 'cosmos/api/cosmos/group/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 

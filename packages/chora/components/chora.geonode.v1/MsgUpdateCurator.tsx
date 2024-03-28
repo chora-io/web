@@ -1,7 +1,7 @@
 import { MsgUpdateCurator as Msg } from 'cosmos/api/chora/geonode/v1/msg'
+import * as Long from 'long'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-import * as Long from 'long'
 
 import InputAddress from '../InputAddress'
 import InputNumber from '../InputNumber'
@@ -19,7 +19,7 @@ const MsgUpdateCurator = ({ network, setMessage, useWallet, wallet }: any) => {
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: '/chora.voucher.v1.MsgUpdateCurator',
+      typeUrl: '/chora.geonode.v1.MsgUpdateCurator',
       value: Msg.encode(msg).finish(),
     }
 

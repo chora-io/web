@@ -7,7 +7,7 @@ import "cosmos/base/v1beta1/coin.proto";
 import "cosmos/msg/v1/msg.proto";
 import "amino/amino.proto";
 
-option go_package = "github.com/cosmos/cosmos-sdk/x/bank/types";
+option go_package = "cosmossdk.io/x/bank/types";
 
 // Params defines the parameters for the bank module.
 message Params {
@@ -70,6 +70,7 @@ message Supply {
 
   option (cosmos_proto.implements_interface) = "cosmos.bank.v1beta1.SupplyI";
 
+  // total is the total supply of coins across the network.
   repeated cosmos.base.v1beta1.Coin total = 1 [
     (gogoproto.nullable)     = false,
     (amino.dont_omitempty)   = true,

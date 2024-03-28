@@ -46,6 +46,18 @@ const Sidebar = () => {
           <ul className={styles.modules}>
             <li>
               <Link
+                href="/modules/chora.content.v1"
+                className={
+                  currentRoute === '/modules/chora.content.v1'
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'chora.content.v1'}
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/modules/chora.geonode.v1"
                 className={
                   currentRoute === '/modules/chora.geonode.v1'

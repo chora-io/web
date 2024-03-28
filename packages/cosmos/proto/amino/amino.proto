@@ -4,6 +4,10 @@ package amino;
 
 import "google/protobuf/descriptor.proto";
 
+// TODO(fdymylja): once we fully migrate to protov2 the go_package needs to be updated.
+// We need this right now because gogoproto codegen needs to import the extension.
+option go_package = "github.com/cosmos/cosmos-sdk/types/tx/amino";
+
 extend google.protobuf.MessageOptions {
   // name is the string used when registering a concrete
   // type into the Amino type registry, via the Amino codec's
@@ -72,4 +76,9 @@ extend google.protobuf.FieldOptions {
   // out := AminoJSONEncoder(&f);
   // out == {"baz":""}
   bool dont_omitempty = 11110005;
+
+  // oneof_name sets the type name for the given field oneof field.  This is used
+  // by the Amino JSON encoder to encode the type of the oneof field, and must be the same string in
+  // the RegisterConcrete() method usage used to register the concrete type.
+  string oneof_name = 11110006;
 }

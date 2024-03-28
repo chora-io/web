@@ -48,6 +48,13 @@ export const choraLocalX = {
   server: 'http://127.0.0.1:3000',
   modules: [
     {
+      apiPackage: 'chora.content.v1',
+      documentation: 'https://docs.chora.io/specs/content',
+      gitRepository: 'https://github.com/chora-io/mods',
+      gitVersion: 'v0.0.0',
+      gitVersionLink: 'https://github.com/chora-io/mods/tree/main',
+    },
+    {
       apiPackage: 'chora.geonode.v1',
       documentation: 'https://docs.chora.io/specs/geonode',
       gitRepository: 'https://github.com/chora-io/mods',

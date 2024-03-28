@@ -1,4 +1,4 @@
-import { Exec } from 'cosmos/api/cosmos/group/v1/types'
+import { Exec } from 'cosmos/api/cosmos/group/v1/tx'
 import * as React from 'react'
 
 const SelectExecution = ({ id, label, execution, setExecution }: any) => (
