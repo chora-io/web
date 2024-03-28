@@ -22,6 +22,8 @@ const MsgSubmitProposal = ({ network, setMessage, useWallet, wallet }: any) => {
       $type: 'cosmos.group.v1.MsgSubmitProposal',
       proposers: wallet ? [wallet.bech32Address] : [proposer],
       groupPolicyAddress: address,
+      title: '', // TODO
+      summary: '', // TODO
       metadata: metadata,
       messages: propMessage ? [propMessage] : [],
       exec: execFromJSON(execution),

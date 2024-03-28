@@ -1,97 +1,43 @@
-import { useContext, useEffect, useState } from 'react'
-
 import { WalletContext } from 'chora/contexts'
-import {
-  bionLocal,
-  bionLocalX,
-  choraLocal,
-  choraLocalX,
-  choraTestnet,
-  choraTestnetX,
-  regenLocal,
-  regenLocalX,
-  regenMainnet,
-  regenMainnetX,
-  regenRedwood,
-  regenRedwoodX,
-} from 'cosmos/chains'
+import { useNetworkModules } from 'chora/hooks'
+import { useContext, useEffect, useState } from 'react'
 
 import styles from './MoreInfo.module.css'
 
 const MoreInfo = ({ module }: any) => {
-  const { network } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
+
+  const [modules] = useNetworkModules(chainInfo)
+
   const [moduleInfo, setModuleInfo] = useState<any>(null)
 
   useEffect(() => {
-    let chainInfoX: any
-    switch (network) {
-      case bionLocal.chainId:
-        chainInfoX = bionLocalX
-        break
-      case choraLocal.chainId:
-        chainInfoX = choraLocalX
-        break
-      case choraTestnet.chainId:
-        chainInfoX = choraTestnetX
-        break
-      case regenLocal.chainId:
-        chainInfoX = regenLocalX
-        break
-      case regenMainnet.chainId:
-        chainInfoX = regenMainnetX
-        break
-      case regenRedwood.chainId:
-        chainInfoX = regenRedwoodX
-        break
-      default:
-        chainInfoX = choraTestnetX
-        break
+    if (modules) {
+      setModuleInfo(
+        modules.find((m: any) => m.apiPackage === module.apiPackage),
+      )
     }
-    setModuleInfo(
-      chainInfoX.modules.find((m: any) => m.apiPackage === module.apiPackage),
-    )
-  }, [module, network])
+  }, [modules, module.apiPackage])
 
   const renderApiInfo = () => (
     <div>
       <h4>{'api information (chora webkit)'}</h4>
-      <p>{`api package: ${module.apiPackage}`}</p>
-      <p>
-        {`api documentation: `}
-        <a href={module.apiDocumentation} target="_blank">
-          {module.apiDocumentation}
-        </a>
-      </p>
-      <p>
-        {`api version: `}
-        <a href={module.apiVersionLink} target="_blank">
-          {module.apiVersion}
-        </a>
-      </p>
+      <p>{`api repository: ${module.apiRepository}`}</p>
+      <p>{`api version: ${module.apiVersion}`}</p>
+      <a href={module.documentation} target="_blank">
+        {'view api documentation'}
+      </a>
     </div>
   )
 
   const renderModuleInfo = () => (
     <div>
       <h4>{`module information (${network})`}</h4>
-      <p>
-        {`documentation: `}
-        <a href={moduleInfo.documentation} target="_blank">
-          {moduleInfo.documentation}
-        </a>
-      </p>
-      <p>
-        {`git repository: `}
-        <a href={moduleInfo.gitRepository} target="_blank">
-          {moduleInfo.gitRepository}
-        </a>
-      </p>
-      <p>
-        {`git version: `}
-        <a href={moduleInfo.gitVersionLink} target="_blank">
-          {moduleInfo.gitVersion}
-        </a>
-      </p>
+      <p>{`git repository: ${moduleInfo.gitRepository}`}</p>
+      <p>{`git version: ${moduleInfo.gitVersion}`}</p>
+      <a href={moduleInfo.documentation} target="_blank">
+        {'view module documentation'}
+      </a>
     </div>
   )
 

@@ -17,3 +17,12 @@
   flex: 1 0 calc(50% - 2em);
   margin: 1em;
 }
+
+.inactive a {
+  color: var(--color-text) !important;
+  font-weight: 300 !important;
+}
+
+.inactive a:hover {
+  opacity: 1 !important;
+}

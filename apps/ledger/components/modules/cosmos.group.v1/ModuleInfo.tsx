@@ -91,6 +91,9 @@ const ModuleInfo = () => {
           <li>
             <a href="#query-group-policy-info">{'QueryGroupPolicyInfo'}</a>
           </li>
+          <li className={styles.inactive}>
+            <a href="#query-groups">{'QueryGroups'}</a>
+          </li>
           <li>
             <a href="#query-groups-by-admin">{'QueryGroupsByAdmin'}</a>
           </li>

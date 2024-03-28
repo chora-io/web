@@ -22,6 +22,9 @@ const ModuleInfo = () => {
       <div className={styles.box}>
         {showInfo && <MoreInfo module={cosmosBankV1beta1} />}
         <ul>
+          <li className={styles.inactive}>
+            <a href="#msg-burn">{'MsgBurn'}</a>
+          </li>
           <li>
             <a href="#msg-multi-send">{'MsgMultiSend'}</a>
           </li>
@@ -30,6 +33,9 @@ const ModuleInfo = () => {
           </li>
           <li>
             <a href="#msg-set-send-enabled">{'MsgSetSendEnabled'}</a>
+          </li>
+          <li className={styles.inactive}>
+            <a href="#msg-update-params">{'MsgUpdateParams'}</a>
           </li>
           <li>
             <a href="#query-all-balances">{'QueryAllBalances'}</a>
@@ -40,14 +46,27 @@ const ModuleInfo = () => {
           <li>
             <a href="#query-denom-metadata">{'QueryDenomMetadata'}</a>
           </li>
+          <li className={styles.inactive}>
+            <a href="#query-denom-metadata-by-query-string">
+              {'QueryDenomMetadataByQueryString'}
+            </a>
+          </li>
           <li>
             <a href="#query-denom-owners">{'QueryDenomOwners'}</a>
           </li>
+          <li className={styles.inactive}>
+            <a href="#query-denom-owners-by-query">
+              {'QueryDenomOwnersByQuery'}
+            </a>
+          </li>
           <li>
             <a href="#query-denoms-metadata">{'QueryDenomsMetadata'}</a>
           </li>
           <li>
             <a href="#query-denoms-metadata">{'QueryDenomsMetadata'}</a>
+          </li>
+          <li className={styles.inactive}>
+            <a href="#query-params">{'QueryParams'}</a>
           </li>
           <li>
             <a href="#query-send-enabled">{'QuerySendEnabled'}</a>

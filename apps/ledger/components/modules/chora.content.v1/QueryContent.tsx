@@ -42,7 +42,7 @@ const QueryContent = () => {
     <div id="query-content" className={styles.box}>
       <div className={styles.boxHeader}>
         <h2>{'QueryContent'}</h2>
-        <p>{'query a content by the id of the content'}</p>
+        <p>{'query content by the id of the content'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputNumber

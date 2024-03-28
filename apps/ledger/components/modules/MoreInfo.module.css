@@ -11,6 +11,11 @@
   margin-left: 1em;
 }
 
+.info a {
+  display: inline-block;
+  padding: 1em;
+}
+
 .error {
   color: var(--color-error);
 }

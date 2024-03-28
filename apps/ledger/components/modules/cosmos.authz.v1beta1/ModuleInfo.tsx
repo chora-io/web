@@ -28,6 +28,9 @@ const ModuleInfo = () => {
           <li>
             <a href="#msg-grant">{'MsgGrant'}</a>
           </li>
+          <li className={styles.inactive}>
+            <a href="#msg-prune-expired-grants">{'MsgPruneExpiredGrants'}</a>
+          </li>
           <li>
             <a href="#msg-revoke">{'MsgRevoke'}</a>
           </li>
