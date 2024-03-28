@@ -44,26 +44,54 @@ export const choraTestnet = {
 }
 
 export const choraTestnetX = {
-  coopId: '1',
   faucet: 'https://testnet.chora.io/faucet/',
   server: 'https://server.chora.io',
   modules: [
     {
-      moduleName: 'authz',
+      apiPackage: 'chora.geonode.v1',
+      documentation: 'https://docs.chora.io/specs/geonode',
+      gitRepository: 'https://github.com/chora-io/mods',
+      gitVersion: 'v0.0.0',
+      gitVersionLink: 'https://github.com/chora-io/mods/tree/main',
+    },
+    {
+      apiPackage: 'chora.voucher.v1',
+      documentation: 'https://docs.chora.io/specs/voucher',
+      gitRepository: 'https://github.com/chora-io/mods',
+      gitVersion: 'v0.0.0',
+      gitVersionLink: 'https://github.com/chora-io/mods/tree/main',
+    },
+    {
+      apiPackage: 'cosmos.authz.v1beta1',
       documentation: 'https://docs.cosmos.network/main/modules/authz',
       gitRepository: 'https://github.com/cosmos/cosmos-sdk',
       gitVersion: 'v0.46.13',
       gitVersionLink: 'https://github.com/cosmos/cosmos-sdk/tree/v0.46.13',
     },
     {
-      moduleName: 'bank',
+      apiPackage: 'cosmos.bank.v1beta1',
       documentation: 'https://docs.cosmos.network/main/modules/bank',
       gitRepository: 'https://github.com/cosmos/cosmos-sdk',
       gitVersion: 'v0.46.13',
       gitVersionLink: 'https://github.com/cosmos/cosmos-sdk/tree/v0.46.13',
     },
     {
-      moduleName: 'data',
+      apiPackage: 'cosmos.feegrant.v1beta1',
+      documentation: 'https://docs.cosmos.network/main/modules/feegrant',
+      gitRepository: 'https://github.com/cosmos/cosmos-sdk',
+      gitVersion: 'v0.46.13',
+      gitVersionLink: 'https://github.com/cosmos/cosmos-sdk/tree/v0.46.13',
+    },
+
+    {
+      apiPackage: 'cosmos.group.v1',
+      documentation: 'https://docs.cosmos.network/main/modules/group',
+      gitRepository: 'https://github.com/cosmos/cosmos-sdk',
+      gitVersion: 'v0.46.13',
+      gitVersionLink: 'https://github.com/cosmos/cosmos-sdk/tree/v0.46.13',
+    },
+    {
+      apiPackage: 'regen.data.v1',
       documentation: 'https://docs.regen.network/modules/data',
       gitRepository: 'https://github.com/regen-network/regen-ledger',
       gitVersion: 'v5.1.2',
@@ -71,40 +99,12 @@ export const choraTestnetX = {
         'https://github.com/regen-network/regen-ledger/tree/v5.1.2',
     },
     {
-      moduleName: 'feegrant',
-      documentation: 'https://docs.cosmos.network/main/modules/feegrant',
-      gitRepository: 'https://github.com/cosmos/cosmos-sdk',
-      gitVersion: 'v0.46.13',
-      gitVersionLink: 'https://github.com/cosmos/cosmos-sdk/tree/v0.46.13',
-    },
-    {
-      moduleName: 'geonode',
-      documentation: 'https://docs.chora.io/specs/geonode',
-      gitRepository: 'https://github.com/chora-io/mods',
-      gitVersion: 'v0.0.0',
-      gitVersionLink: 'https://github.com/chora-io/mods/tree/main',
-    },
-    {
-      moduleName: 'group',
-      documentation: 'https://docs.cosmos.network/main/modules/group',
-      gitRepository: 'https://github.com/cosmos/cosmos-sdk',
-      gitVersion: 'v0.46.13',
-      gitVersionLink: 'https://github.com/cosmos/cosmos-sdk/tree/v0.46.13',
-    },
-    {
-      moduleName: 'intertx',
+      apiPackage: 'regen.intertx.v1',
       documentation: 'https://docs.regen.network/modules/intertx',
       gitRepository: 'https://github.com/regen-network/regen-ledger',
       gitVersion: 'v5.1.2',
       gitVersionLink:
         'https://github.com/regen-network/regen-ledger/tree/v5.1.2',
-    },
-    {
-      moduleName: 'voucher',
-      documentation: 'https://docs.chora.io/specs/voucher',
-      gitRepository: 'https://github.com/chora-io/mods',
-      gitVersion: 'v0.0.0',
-      gitVersionLink: 'https://github.com/chora-io/mods/tree/main',
     },
   ],
 }

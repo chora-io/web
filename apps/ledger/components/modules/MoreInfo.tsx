@@ -48,7 +48,7 @@ const MoreInfo = ({ module }: any) => {
         break
     }
     setModuleInfo(
-      chainInfoX.modules.find((m: any) => m.moduleName === module.moduleName),
+      chainInfoX.modules.find((m: any) => m.apiPackage === module.apiPackage),
     )
   }, [module, network])
 

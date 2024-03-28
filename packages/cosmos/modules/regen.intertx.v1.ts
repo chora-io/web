@@ -1,5 +1,4 @@
 export const regenIntertxV1 = {
-  moduleName: 'intertx',
   apiDocumentation:
     'https://buf.build/regen/regen-ledger/docs/main:regen.intertx.v1',
   apiPackage: 'regen.intertx.v1',

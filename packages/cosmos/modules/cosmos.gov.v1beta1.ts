@@ -1,7 +1,8 @@
 export const cosmosGovV1beta1 = {
-  moduleName: 'gov',
-  apiDocumentation: '',
+  apiDocumentation:
+    'https://buf.build/cosmos/cosmos-sdk/docs/main:cosmos.gov.v1beta1',
   apiPackage: 'cosmos.gov.v1beta1',
-  apiVersion: '',
-  apiVersionLink: '',
+  apiVersion: '05419252bcc241ea8023acf1ed4cadc5',
+  apiVersionLink:
+    'https://buf.build/cosmos/cosmos-sdk/docs/05419252bcc241ea8023acf1ed4cadc5:cosmos.gov.v1beta1',
 }

@@ -1,7 +1,8 @@
 export const cosmosEvidenceV1beta1 = {
-  moduleName: 'evidence',
-  apiDocumentation: '',
+  apiDocumentation:
+    'https://buf.build/cosmos/cosmos-sdk/docs/main:cosmos.evidence.v1beta1',
   apiPackage: 'cosmos.evidence.v1beta1',
-  apiVersion: '',
-  apiVersionLink: '',
+  apiVersion: '05419252bcc241ea8023acf1ed4cadc5',
+  apiVersionLink:
+    'https://buf.build/cosmos/cosmos-sdk/docs/05419252bcc241ea8023acf1ed4cadc5:cosmos.evidence.v1beta1',
 }

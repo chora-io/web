@@ -1,5 +1,4 @@
 export const regenEcocreditV1 = {
-  moduleName: 'ecocredit',
   apiDocumentation:
     'https://buf.build/regen/regen-ledger/docs/main:regen.ecocredit.v1',
   apiPackage: 'regen.ecocredit.v1',

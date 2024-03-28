@@ -44,23 +44,22 @@ export const bionLocal = {
 }
 
 export const bionLocalX = {
-  coopId: '1',
   faucet: 'http://127.0.0.1:8000',
   server: 'http://127.0.0.1:3000',
   modules: [
     {
-      moduleName: 'group',
-      documentation: 'https://docs.cosmos.network/main/modules/group',
-      gitRepository: 'https://github.com/cosmos/cosmos-sdk',
-      gitVersion: 'v0.46.13',
-      gitVersionLink: 'https://github.com/cosmos/cosmos-sdk/tree/v0.46.13',
-    },
-    {
-      moduleName: 'validator',
+      apiPackage: 'chora.validator.v1',
       documentation: 'https://docs.chora.io/specs/validator',
       gitRepository: 'https://github.com/chora-io/mods',
       gitVersion: 'v0.0.0',
       gitVersionLink: 'https://github.com/chora-io/mods/main',
+    },
+    {
+      apiPackage: 'cosmos.group.v1',
+      documentation: 'https://docs.cosmos.network/main/modules/group',
+      gitRepository: 'https://github.com/cosmos/cosmos-sdk',
+      gitVersion: 'v0.46.13',
+      gitVersionLink: 'https://github.com/cosmos/cosmos-sdk/tree/v0.46.13',
     },
   ],
 }

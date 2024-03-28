@@ -1,5 +1,4 @@
 export const regenDataV1 = {
-  moduleName: 'data',
   apiDocumentation:
     'https://buf.build/regen/regen-ledger/docs/main:regen.data.v1',
   apiPackage: 'regen.data.v1',

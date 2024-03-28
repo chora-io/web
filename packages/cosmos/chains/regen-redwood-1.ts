@@ -44,26 +44,47 @@ export const regenRedwood = {
 }
 
 export const regenRedwoodX = {
-  coopId: '10',
   faucet: 'https://redwood.chora.io/faucet/',
   server: 'https://server.chora.io',
   modules: [
     {
-      moduleName: 'authz',
+      apiPackage: 'cosmos.authz.v1beta1',
       documentation: 'https://docs.cosmos.network/main/modules/authz',
       gitRepository: 'https://github.com/cosmos/cosmos-sdk',
       gitVersion: 'v0.46.13',
       gitVersionLink: 'https://github.com/cosmos/cosmos-sdk/tree/v0.46.13',
     },
     {
-      moduleName: 'bank',
+      apiPackage: 'cosmos.bank.v1beta1',
       documentation: 'https://docs.cosmos.network/main/modules/bank',
       gitRepository: 'https://github.com/cosmos/cosmos-sdk',
       gitVersion: 'v0.46.13',
       gitVersionLink: 'https://github.com/cosmos/cosmos-sdk/tree/v0.46.13',
     },
     {
-      moduleName: 'data',
+      apiPackage: 'cosmos.feegrant.v1beta1',
+      documentation: 'https://docs.cosmos.network/main/modules/feegrant',
+      gitRepository: 'https://github.com/cosmos/cosmos-sdk',
+      gitVersion: 'v0.46.13',
+      gitVersionLink: 'https://github.com/cosmos/cosmos-sdk/tree/v0.46.13',
+    },
+    {
+      apiPackage: 'cosmos.group.v1',
+      documentation: 'https://docs.cosmos.network/main/modules/group',
+      gitRepository: 'https://github.com/cosmos/cosmos-sdk',
+      gitVersion: 'v0.46.13',
+      gitVersionLink: 'https://github.com/cosmos/cosmos-sdk/tree/v0.46.13',
+    },
+    {
+      apiPackage: 'regen.intertx.v1',
+      gitRepository: 'https://github.com/regen-network/regen-ledger',
+      gitVersion: 'v5.1.2',
+      gitVersionLink:
+        'https://github.com/regen-network/regen-ledger/tree/v5.1.2',
+      documentation: 'https://docs.regen.network/modules/intertx',
+    },
+    {
+      apiPackage: 'regen.data.v1',
       documentation: 'https://docs.regen.network/modules/data',
       gitRepository: 'https://github.com/regen-network/regen-ledger',
       gitVersion: 'v5.1.2',
@@ -71,34 +92,12 @@ export const regenRedwoodX = {
         'https://github.com/regen-network/regen-ledger/tree/v5.1.2',
     },
     {
-      moduleName: 'ecocredit',
+      apiPackage: 'regen.ecocredit.v1',
       documentation: 'https://docs.regen.network/modules/ecocredit',
       gitRepository: 'https://github.com/regen-network/regen-ledger',
       gitVersion: 'v5.1.2',
       gitVersionLink:
         'https://github.com/regen-network/regen-ledger/tree/v5.1.2',
-    },
-    {
-      moduleName: 'feegrant',
-      documentation: 'https://docs.cosmos.network/main/modules/feegrant',
-      gitRepository: 'https://github.com/cosmos/cosmos-sdk',
-      gitVersion: 'v0.46.13',
-      gitVersionLink: 'https://github.com/cosmos/cosmos-sdk/tree/v0.46.13',
-    },
-    {
-      moduleName: 'group',
-      documentation: 'https://docs.cosmos.network/main/modules/group',
-      gitRepository: 'https://github.com/cosmos/cosmos-sdk',
-      gitVersion: 'v0.46.13',
-      gitVersionLink: 'https://github.com/cosmos/cosmos-sdk/tree/v0.46.13',
-    },
-    {
-      moduleName: 'intertx',
-      gitRepository: 'https://github.com/regen-network/regen-ledger',
-      gitVersion: 'v5.1.2',
-      gitVersionLink:
-        'https://github.com/regen-network/regen-ledger/tree/v5.1.2',
-      documentation: 'https://docs.regen.network/modules/intertx',
     },
   ],
 }
