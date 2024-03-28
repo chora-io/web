@@ -53,11 +53,5 @@ export const bionLocalX = {
       gitRepository: 'https://github.com/chora-io/mods',
       gitVersion: 'validator/v0.0.0',
     },
-    {
-      apiPackage: 'cosmos.group.v1',
-      documentation: 'https://docs.cosmos.network/v0.46/modules/group',
-      gitRepository: 'https://github.com/cosmos/cosmos-sdk',
-      gitVersion: 'v0.46.13',
-    },
   ],
 }

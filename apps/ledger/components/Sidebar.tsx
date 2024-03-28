@@ -74,6 +74,20 @@ const Sidebar = () => {
               </Link>
             </li>
           )}
+          {modules?.some((m) => m.apiPackage === 'chora.validator.v1') && (
+            <li>
+              <Link
+                href="/modules/chora.validator.v1"
+                className={
+                  currentRoute === '/modules/chora.validator.v1'
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'chora.validator.v1'}
+              </Link>
+            </li>
+          )}
           {modules?.some((m) => m.apiPackage === 'chora.voucher.v1') && (
             <li>
               <Link
