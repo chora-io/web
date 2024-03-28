@@ -1,6 +1,12 @@
 'use client'
 
-import { InputJSON, Result } from 'chora/components'
+import {
+  InputJSON,
+  InputsFromJSON,
+  Result,
+  SelectContext,
+  SelectInput,
+} from 'chora/components'
 import {
   SelectDigestAlgorithm,
   SelectGraphCanon,
@@ -9,10 +15,6 @@ import {
 import { WalletContext } from 'chora/contexts'
 import * as jsonld from 'jsonld'
 import { useContext, useEffect, useState } from 'react'
-
-import InputsFromJSON from '@components/InputsFromJSON'
-import SelectContext from '@components/SelectContext'
-import SelectInput from '@components/SelectInput'
 
 import styles from './PostData.module.css'
 

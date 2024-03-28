@@ -1,7 +1,5 @@
 import { Metadata } from 'next'
 
-import Content from '@components/Content'
-
 import styles from './page.module.css'
 
 export const metadata: Metadata = {

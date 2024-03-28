@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import AnchorData from '@components/anchor/AnchorData'
+import AnchoredData from '@components/anchor/AnchoredData'
 
 import styles from './page.module.css'
 
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const AnchorPage = () => (
   <div className={styles.page}>
     <div>
-      <AnchorData />
+      <AnchoredData />
     </div>
   </div>
 )

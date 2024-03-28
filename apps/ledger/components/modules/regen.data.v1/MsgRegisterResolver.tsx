@@ -1,6 +1,6 @@
 'use client'
 
-import { ResultTx } from 'chora/components'
+import { ResultTx, SelectInput } from 'chora/components'
 import {
   MsgRegisterResolver as MsgInputs,
   MsgRegisterResolverJSON as MsgInputsJSON,
@@ -8,8 +8,6 @@ import {
 import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
 import { useContext, useState } from 'react'
-
-import SelectInput from '@components/modules/SelectInput'
 
 import styles from './MsgRegisterResolver.module.css'
 

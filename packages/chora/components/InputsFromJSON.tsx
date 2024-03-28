@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 const InputsFromJSON = ({ example, json, setJson }: any) => {
   const inputs: any[] = []
 

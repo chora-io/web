@@ -1,33 +1,35 @@
 'use client'
 
-import {
-  InputJSON,
-  InputsFromJSON,
-  Result,
-  SelectContext,
-  SelectInput,
-} from 'chora/components'
+import { MsgAnchor as Msg } from 'cosmos/api/regen/data/v1/tx'
 import {
   SelectDigestAlgorithm,
   SelectGraphCanon,
   SelectGraphMerkle,
 } from 'chora/components/regen.data.v1'
+import {
+  InputJSON,
+  InputsFromJSON,
+  Result,
+  ResultTx,
+  SelectContext,
+  SelectInput,
+} from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { useNetworkServer } from 'chora/hooks'
+import { signAndBroadcast } from 'chora/utils'
 import * as blake from 'blakejs'
 import { Buffer } from 'buffer'
 import * as jsonld from 'jsonld'
 import { useContext, useEffect, useState } from 'react'
 
-import styles from './ConvertData.module.css'
+import styles from './CreateClaim.module.css'
 
 const contextUrl = 'https://schema.chora.io/contexts/index.jsonld'
-const convertHashToIri = '/regen/data/v1/convert-hash-to-iri'
 
-const ConvertData = () => {
-  const { chainInfo } = useContext(WalletContext)
+const CreateClaim = () => {
+  const { chainInfo, wallet } = useContext(WalletContext)
 
-  // input option
-  const [input, setInput] = useState('form')
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   // data schema
   const [context, setContext] = useState<string>('')
@@ -41,6 +43,10 @@ const ConvertData = () => {
   // error and success
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<any>(null)
+  const [txError, setTxError] = useState<string | null>(null)
+  const [txSuccess, setTxSuccess] = useState<any>(null)
+
+  const [input, setInput] = useState<string>('form')
 
   useEffect(() => {
     // fetch available schemas
@@ -60,11 +66,6 @@ const ConvertData = () => {
     event.preventDefault()
 
     setJson(template)
-    setError(null)
-  }
-
-  const handleSetJson = (value: any) => {
-    setJson(value)
     setError(null)
   }
 
@@ -101,22 +102,38 @@ const ConvertData = () => {
     }
   }
 
-  const handleSubmit = async (event: any) => {
+  const handleSetInput = (input: string) => {
+    setInput(input)
+    setError(null)
+    setSuccess(null)
+  }
+
+  const handleSetJson = (value: any) => {
+    setJson(value)
+    setError(null)
+  }
+
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
     setError(null)
     setSuccess(null)
+
+    if (!wallet) {
+      setError('keplr not connected')
+      return
+    }
 
     // check and parse JSON
     let doc: any
     try {
       doc = JSON.parse(json)
     } catch (err) {
-      setError('invalid json') // TODO: type error null
+      setError('invalid json')
       return
     }
 
-    // check and normalize object
+    // check and normalize JSON-LD
     const normalized = await jsonld
       .normalize(doc, {
         algorithm: 'URDNA2015',
@@ -132,56 +149,69 @@ const ConvertData = () => {
       return
     }
 
-    // generate hash bytes using blake2b
-    const bz = blake.blake2b(normalized || '', undefined, 32)
-
-    const contentHash = {
-      graph: {
-        hash: Buffer.from(bz).toString('base64'),
-        digestAlgorithm: 'DIGEST_ALGORITHM_BLAKE2B_256',
-        canonicalizationAlgorithm: 'GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015',
-        merkleTree: 'GRAPH_MERKLE_TREE_NONE_UNSPECIFIED',
-      },
+    const body = {
+      canon: 'URDNA2015',
+      context: context,
+      digest: 'BLAKE2B_256',
+      jsonld: json,
+      merkle: 'UNSPECIFIED',
     }
 
-    await fetch(chainInfo.rest + convertHashToIri, {
+    await fetch(serverUrl + '/data', {
       method: 'POST',
-      body: JSON.stringify({ contentHash }),
+      body: JSON.stringify(body),
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(
-            JSON.stringify(
-              {
-                iri: data.iri,
-                contentHash,
-              },
-              null,
-              '  ',
-            ),
-          )
+          setSuccess(JSON.stringify(data, null, '  '))
         }
       })
       .catch((err) => {
         setError(err.message)
       })
-  }
 
-  const handleSetInput = (input: string) => {
-    setInput(input)
-    setError(null)
-    setSuccess(null)
+    const bz = blake.blake2b(normalized || '', undefined, 32)
+
+    const contentHash = {
+      $type: 'regen.data.v1.ContentHash',
+      graph: {
+        $type: 'regen.data.v1.ContentHash.Graph',
+        hash: Buffer.from(bz).toString('base64'),
+        digestAlgorithm: 1, // DIGEST_ALGORITHM_BLAKE2B_256
+        canonicalizationAlgorithm: 1, // GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015
+        merkleTree: 0, // GRAPH_MERKLE_TREE_NONE_UNSPECIFIED
+      },
+    }
+
+    const msg = {
+      sender: wallet.bech32Address,
+      contentHash: contentHash,
+    } as unknown as Msg
+
+    const msgAny = {
+      typeUrl: '/regen.data.v1.MsgAnchor',
+      value: Msg.encode(msg).finish(),
+    }
+
+    // sign and broadcast message to selected network
+    await signAndBroadcast(chainInfo, wallet.bech32Address, [msgAny])
+      .then((res) => {
+        setTxSuccess(res)
+      })
+      .catch((err) => {
+        if (err.message === "Cannot read properties of null (reading 'key')") {
+          setTxError('keplr account does not exist on the selected network')
+        } else {
+          setTxError(err.message)
+        }
+      })
   }
 
   return (
     <div className={styles.box}>
-      <div className={styles.boxHeader}>
-        <h2>{'convert data'}</h2>
-        <p>{'convert data to iri and content hash'}</p>
-      </div>
       <SelectInput input={input} setInput={handleSetInput} />
       {input == 'form' ? (
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -203,7 +233,7 @@ const ConvertData = () => {
             merkle={''} // disabled until multiple options exist
             setMerkle={() => {}} // disabled until multiple options exist
           />
-          <button type="submit">{'convert'}</button>
+          <button type="submit">{'post and anchor'}</button>
         </form>
       ) : (
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -231,12 +261,13 @@ const ConvertData = () => {
             merkle={''} // disabled until multiple options exist
             setMerkle={() => {}} // disabled until multiple options exist
           />
-          <button type="submit">{'convert'}</button>
+          <button type="submit">{'post and anchor'}</button>
         </form>
       )}
       <Result error={error} success={success} />
+      <ResultTx error={txError} rest={chainInfo?.rest} success={txSuccess} />
     </div>
   )
 }
 
-export default ConvertData
+export default CreateClaim

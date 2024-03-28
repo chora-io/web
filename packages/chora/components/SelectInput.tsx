@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 import styles from './SelectInput.module.css'
 
 const SelectInput = ({ input, setInput }: any) => (
