@@ -150,6 +150,18 @@ export const regenLocalX = {
       gitVersion: 'x/ecocredit/v3.3.1',
     },
     {
+      apiPackage: 'regen.ecocredit.basket.v1',
+      documentation: 'https://docs.regen.network/modules/ecocredit',
+      gitRepository: 'https://github.com/regen-network/regen-ledger',
+      gitVersion: 'x/ecocredit/v3.3.1',
+    },
+    {
+      apiPackage: 'regen.ecocredit.marketplace.v1',
+      documentation: 'https://docs.regen.network/modules/ecocredit',
+      gitRepository: 'https://github.com/regen-network/regen-ledger',
+      gitVersion: 'x/ecocredit/v3.3.1',
+    },
+    {
       apiPackage: 'regen.intertx.v1',
       documentation: 'https://docs.regen.network/modules/intertx',
       gitRepository: 'https://github.com/regen-network/regen-ledger',

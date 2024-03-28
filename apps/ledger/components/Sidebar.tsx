@@ -356,6 +356,38 @@ const Sidebar = () => {
               </Link>
             </li>
           )}
+          {modules?.some(
+            (m) => m.apiPackage === 'regen.ecocredit.basket.v1',
+          ) && (
+            <li>
+              <Link
+                href="/modules/regen.ecocredit.basket.v1"
+                className={
+                  currentRoute === '/modules/regen.ecocredit.basket.v1'
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'regen.ecocredit.basket.v1'}
+              </Link>
+            </li>
+          )}
+          {modules?.some(
+            (m) => m.apiPackage === 'regen.ecocredit.marketplace.v1',
+          ) && (
+            <li>
+              <Link
+                href="/modules/regen.ecocredit.marketplace.v1"
+                className={
+                  currentRoute === '/modules/regen.ecocredit.marketplace.v1'
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'regen.ecocredit.marketplace.v1'}
+              </Link>
+            </li>
+          )}
           {modules?.some((m) => m.apiPackage === 'regen.intertx.v1') && (
             <li>
               <Link
