@@ -9,9 +9,9 @@ import { useContext } from 'react'
 import { useCredit } from '@hooks/useCredit'
 import { useMetadata } from '@hooks/useMetadata'
 
-import styles from './Credit.module.css'
+import styles from './Batch.module.css'
 
-const Credit = () => {
+const Batch = () => {
   const { denom } = useParams()
 
   const { chainInfo } = useContext(WalletContext)
@@ -96,4 +96,4 @@ const Credit = () => {
   )
 }
 
-export default Credit
+export default Batch

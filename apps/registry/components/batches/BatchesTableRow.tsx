@@ -2,9 +2,9 @@ import { WalletContext } from 'chora/contexts'
 import Link from 'next/link'
 import { useContext } from 'react'
 
-import styles from './CreditsTableRow.module.css'
+import styles from './BatchesTableRow.module.css'
 
-const CreditsTableRow = ({ batch }: any) => {
+const BatchesTableRow = ({ batch }: any) => {
   const { wallet } = useContext(WalletContext)
 
   return (
@@ -18,10 +18,10 @@ const CreditsTableRow = ({ batch }: any) => {
         )}
       </td>
       <td style={{ minWidth: '120px' }}>
-        <Link href={`/credits/${batch.denom}`}>{'view batch'}</Link>
+        <Link href={`/batches/${batch.denom}`}>{'view batch'}</Link>
       </td>
     </tr>
   )
 }
 
-export default CreditsTableRow
+export default BatchesTableRow

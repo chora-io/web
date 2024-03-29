@@ -1,10 +1,10 @@
 'use client'
 
-import CreditsTableRow from '@components/credits/CreditsTableRow'
+import BatchesTableRow from '@components/batches/BatchesTableRow'
 
-import styles from './CreditsTable.module.css'
+import styles from './BatchesTable.module.css'
 
-const CreditsTable = ({ batches }: any) => {
+const BatchesTable = ({ batches }: any) => {
   return (
     <table className={styles.table}>
       <thead>
@@ -18,11 +18,11 @@ const CreditsTable = ({ batches }: any) => {
       <tbody>
         {batches &&
           batches.map((batch: any) => (
-            <CreditsTableRow key={batch.denom} batch={batch} />
+            <BatchesTableRow key={batch.denom} batch={batch} />
           ))}
       </tbody>
     </table>
   )
 }
 
-export default CreditsTable
+export default BatchesTable

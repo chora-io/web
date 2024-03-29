@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import Credit from '@components/credits/Credit'
+import CreateProject from '@components/projects/CreateProject'
 
 import styles from './page.module.css'
 
@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   title: 'chora registry',
 }
 
-const CreditPage = () => (
+const CreatePage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'credit batch'}</h1>
-      <Credit />
+      <h1>{'create class project'}</h1>
+      <CreateProject />
     </div>
   </div>
 )
 
-export default CreditPage
+export default CreatePage

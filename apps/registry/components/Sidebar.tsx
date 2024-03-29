@@ -81,19 +81,19 @@ const Sidebar = () => {
     )
   }
 
-  if (currentRoute.includes('credits') && denom) {
+  if (currentRoute.includes('batches') && denom) {
     return (
       <div className={styles.sidebar}>
         <ul>
           <ul>
             <li style={{ padding: '1em 0' }}>
               <Link
-                href="/credits"
+                href="/batches"
                 className={
-                  currentRoute === '/credits' ? styles.active : undefined
+                  currentRoute === '/batches' ? styles.active : undefined
                 }
               >
-                {'← credits'}
+                {'← batches'}
               </Link>
             </li>
           </ul>
@@ -101,9 +101,9 @@ const Sidebar = () => {
           <ul>
             <li>
               <Link
-                href={`/credits/${denom}`}
+                href={`/batches/${denom}`}
                 className={
-                  currentRoute === `/credits/${denom}`
+                  currentRoute === `/batches/${denom}`
                     ? styles.active
                     : undefined
                 }
@@ -227,16 +227,6 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                href="/credits"
-                className={
-                  currentRoute === '/credits' ? styles.active : undefined
-                }
-              >
-                {'credits'}
-              </Link>
-            </li>
-            <li>
-              <Link
                 href="/classes"
                 className={
                   currentRoute === '/classes' ? styles.active : undefined
@@ -253,6 +243,16 @@ const Sidebar = () => {
                 }
               >
                 {'projects'}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/batches"
+                className={
+                  currentRoute === '/batches' ? styles.active : undefined
+                }
+              >
+                {'batches'}
               </Link>
             </li>
           </ul>

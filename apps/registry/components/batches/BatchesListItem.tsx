@@ -2,9 +2,9 @@ import { WalletContext } from 'chora/contexts'
 import Link from 'next/link'
 import { useContext } from 'react'
 
-import styles from './CreditsListItem.module.css'
+import styles from './BatchesListItem.module.css'
 
-const CreditsListItem = ({ batch }: any) => {
+const BatchesListItem = ({ batch }: any) => {
   const { wallet } = useContext(WalletContext)
 
   return (
@@ -26,9 +26,9 @@ const CreditsListItem = ({ batch }: any) => {
           )}
         </p>
       </div>
-      <Link href={`/credits/${batch.denom}`}>{'view batch'}</Link>
+      <Link href={`/batches/${batch.denom}`}>{'view batch'}</Link>
     </div>
   )
 }
 
-export default CreditsListItem
+export default BatchesListItem

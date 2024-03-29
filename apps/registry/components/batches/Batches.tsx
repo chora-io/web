@@ -4,13 +4,13 @@ import { PaginationNav, Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
 import { useContext, useState } from 'react'
 
-import CreditsList from '@components/credits/CreditsList'
-import CreditsTable from '@components/credits/CreditsTable'
+import BatchesList from '@components/batches/BatchesList'
+import BatchesTable from '@components/batches/BatchesTable'
 import { useCredits } from '@hooks/useCredits'
 
-import styles from './Credits.module.css'
+import styles from './Batches.module.css'
 
-const Credits = () => {
+const Batches = () => {
   const { chainInfo } = useContext(WalletContext)
 
   const [offset, setOffset] = useState(0)
@@ -40,9 +40,9 @@ const Credits = () => {
       {batches && batches.length > 0 && (
         <>
           {view === 'table' ? (
-            <CreditsTable batches={batches} />
+            <BatchesTable batches={batches} />
           ) : (
-            <CreditsList batches={batches} />
+            <BatchesList batches={batches} />
           )}
           <PaginationNav
             length={batches ? batches.length : 0}
@@ -57,4 +57,4 @@ const Credits = () => {
   )
 }
 
-export default Credits
+export default Batches
