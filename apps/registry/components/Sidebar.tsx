@@ -255,6 +255,16 @@ const Sidebar = () => {
                 {'batches'}
               </Link>
             </li>
+            <li>
+              <Link
+                href="/baskets"
+                className={
+                  currentRoute === '/baskets' ? styles.active : undefined
+                }
+              >
+                {'baskets'}
+              </Link>
+            </li>
           </ul>
         )}
         <li>{'workspace'}</li>

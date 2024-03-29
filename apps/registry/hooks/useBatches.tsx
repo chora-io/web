@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 const queryBatches = 'regen/ecocredit/v1/batches'
 
 // fetch credit batches from selected network
-export const useCredits = (chainInfo: any, limit: number, offset: number) => {
+export const useBatches = (chainInfo: any, limit: number, offset: number) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [batches, setBatches] = useState<any>(null)

@@ -4,20 +4,20 @@ import { PaginationNav, Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
 import { useContext, useState } from 'react'
 
-import BatchesList from '@components/batches/BatchesList'
-import BatchesTable from '@components/batches/BatchesTable'
-import { useBatches } from '@hooks/useBatches'
+import BasketsList from '@components/baskets/BasketsList'
+import BasketsTable from '@components/baskets/BasketsTable'
+import { useBaskets } from '@hooks/useBaskets'
 
-import styles from './Batches.module.css'
+import styles from './Baskets.module.css'
 
-const Batches = () => {
+const Baskets = () => {
   const { chainInfo } = useContext(WalletContext)
 
   const [offset, setOffset] = useState(0)
   const [view, setView] = useState('table')
 
-  // fetch batches from selected network
-  const [batches, error] = useBatches(chainInfo, 5, offset)
+  // fetch baskets from selected network
+  const [baskets, error] = useBaskets(chainInfo, 5, offset)
 
   return (
     <div className={styles.box}>
@@ -35,17 +35,17 @@ const Batches = () => {
           {'list view'}
         </button>
       </div>
-      {!batches && !error && <p>{'loading...'}</p>}
-      {batches && batches.length === 0 && <p>{'no batches found'}</p>}
-      {batches && batches.length > 0 && (
+      {!baskets && !error && <p>{'loading...'}</p>}
+      {baskets && baskets.length === 0 && <p>{'no baskets found'}</p>}
+      {baskets && baskets.length > 0 && (
         <>
           {view === 'table' ? (
-            <BatchesTable batches={batches} />
+            <BasketsTable baskets={baskets} />
           ) : (
-            <BatchesList batches={batches} />
+            <BasketsList baskets={baskets} />
           )}
           <PaginationNav
-            length={batches ? batches.length : 0}
+            length={baskets ? baskets.length : 0}
             maxLength={5}
             offset={offset}
             setOffset={setOffset}
@@ -57,4 +57,4 @@ const Batches = () => {
   )
 }
 
-export default Batches
+export default Baskets

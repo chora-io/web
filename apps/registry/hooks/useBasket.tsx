@@ -1,41 +1,41 @@
 import { useEffect, useState } from 'react'
 
-const queryBatch = 'regen/ecocredit/v1/batch'
+const queryBasket = 'regen/ecocredit/basket/v1/basket'
 
-// fetch credit batch from selected network
-export const useCredit = (chainInfo: any, denom: string) => {
+// fetch basket from selected network
+export const useBasket = (chainInfo: any, denom: string) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
-  const [batch, setBatch] = useState<any>(null)
+  const [basket, setBasket] = useState<any>(null)
 
   // reset state on param change
   useEffect(() => {
     setError(null)
-    setBatch(null)
+    setBasket(null)
   }, [chainInfo?.chainId, denom])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch credit batch from selected network
-    const fetchBatch = async () => {
-      await fetch(chainInfo.rest + '/' + queryBatch + '/' + denom)
+    // fetch basket from selected network
+    const fetchBasket = async () => {
+      await fetch(chainInfo.rest + '/' + queryBasket + '/' + denom)
         .then((res) => res.json())
         .then((res) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setBatch(res.batch)
+            setBasket(res['basket_info'])
           }
         })
     }
 
     // only fetch if network and denom
     if (chainInfo?.rest && denom) {
-      fetchBatch().catch((err) => {
+      fetchBasket().catch((err) => {
         setError(err.message)
       })
     }
   }, [chainInfo?.rest, denom])
 
-  return [batch, error]
+  return [basket, error]
 }

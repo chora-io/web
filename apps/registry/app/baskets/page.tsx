@@ -1,0 +1,22 @@
+import { Metadata } from 'next'
+
+import Baskets from '@components/baskets/Baskets'
+import BasketsNav from '@components/baskets/BasketsNav'
+
+import styles from './page.module.css'
+
+export const metadata: Metadata = {
+  title: 'chora registry',
+}
+
+const CreditsPage = () => (
+  <div className={styles.page}>
+    <div>
+      <h1>{'explore baskets'}</h1>
+      <BasketsNav />
+      <Baskets />
+    </div>
+  </div>
+)
+
+export default CreditsPage

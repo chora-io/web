@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
-import { useCredit } from '@hooks/useCredit'
+import { useBatch } from '@hooks/useBatch'
 import { useMetadata } from '@hooks/useMetadata'
 
 import styles from './Batch.module.css'
@@ -16,7 +16,7 @@ const Batch = () => {
 
   const { chainInfo } = useContext(WalletContext)
 
-  const [batch, batchError] = useCredit(chainInfo, `${denom}`)
+  const [batch, batchError] = useBatch(chainInfo, `${denom}`)
   const [metadata, metadataError] = useMetadata(
     chainInfo,
     batch ? batch.metadata : null,
