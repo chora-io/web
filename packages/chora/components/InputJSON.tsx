@@ -6,13 +6,14 @@ const InputJSON = ({
   id,
   label,
   json,
+  disabled,
   placeholder,
   setJson,
   useTemplate,
   showUseTemplate,
 }: any) => (
   <label htmlFor={id ? id : 'json'}>
-    {label ? label : 'json object'}
+    {label ? label : 'json-ld'}
     {showUseTemplate && (
       <button className={styles.button} onClick={useTemplate}>
         {json.length > 0 ? 'reset template' : 'use template'}
@@ -21,8 +22,9 @@ const InputJSON = ({
     <textarea
       id={id ? id : 'json'}
       value={json}
+      disabled={disabled}
       className={styles.long}
-      placeholder={placeholder || '{}'}
+      placeholder={placeholder || '{\n  "@context":""\n}'}
       onChange={(event) => setJson(event.target.value)}
     />
   </label>

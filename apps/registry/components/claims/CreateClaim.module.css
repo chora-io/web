@@ -2,10 +2,32 @@
   composes: box from 'chora/styles/box.css';
 }
 
-.boxHeader {
-  composes: box-header from 'chora/styles/box.css';
+.boxOptions {
+  composes: box-options from 'chora/styles/box.css';
+}
+
+.boxOptionActive {
+  composes: box-option-active from 'chora/styles/box.css';
+}
+
+.boxText {
+  composes: box-text from 'chora/styles/box.css';
 }
 
 .form {
   composes: form from 'chora/styles/form.css';
+}
+
+.button {
+  composes: button from 'chora/styles/button.css';
+  margin: 0 1em 1em 0 !important;
+}
+
+.buttonDisabled {
+  composes: button;
+  opacity: 0.25;
+}
+
+.buttonDisabled:hover {
+  opacity: 0.25 !important;
 }

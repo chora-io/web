@@ -1,6 +1,7 @@
 'use client'
 
-import { MsgAnchor as Msg } from 'cosmos/api/regen/data/v1/tx'
+import { MsgAttest as Msg } from 'cosmos/api/regen/data/v1/tx'
+import { ContentHash_Graph } from 'cosmos/api/regen/data/v1/types'
 import {
   SelectDigestAlgorithm,
   SelectGraphCanon,
@@ -12,7 +13,6 @@ import {
   Result,
   ResultTx,
   SelectContext,
-  SelectInput,
 } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
@@ -25,6 +25,7 @@ import { useContext, useEffect, useState } from 'react'
 import styles from './CreateClaim.module.css'
 
 const contextUrl = 'https://schema.chora.io/contexts/index.jsonld'
+const convertHashToIri = '/regen/data/v1/convert-hash-to-iri'
 
 const CreateClaim = () => {
   const { chainInfo, wallet } = useContext(WalletContext)
@@ -40,13 +41,13 @@ const CreateClaim = () => {
   // json input
   const [json, setJson] = useState<string>('')
 
-  // error and success
+  // error and results
   const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState<any>(null)
-  const [txError, setTxError] = useState<string | null>(null)
+  const [contentHash, setContentHash] = useState<any>(null)
+  const [iri, setIri] = useState<string>('')
   const [txSuccess, setTxSuccess] = useState<any>(null)
 
-  const [input, setInput] = useState<string>('form')
+  const [input, setInput] = useState<string>('custom-json')
 
   useEffect(() => {
     // fetch available schemas
@@ -105,7 +106,6 @@ const CreateClaim = () => {
   const handleSetInput = (input: string) => {
     setInput(input)
     setError(null)
-    setSuccess(null)
   }
 
   const handleSetJson = (value: any) => {
@@ -113,16 +113,12 @@ const CreateClaim = () => {
     setError(null)
   }
 
-  const handleSubmit = async (event: { preventDefault: () => void }) => {
+  const handleSubmitGenerate = async (event: {
+    preventDefault: () => void
+  }) => {
     event.preventDefault()
 
     setError(null)
-    setSuccess(null)
-
-    if (!wallet) {
-      setError('keplr not connected')
-      return
-    }
 
     // check and parse JSON
     let doc: any
@@ -149,9 +145,51 @@ const CreateClaim = () => {
       return
     }
 
+    // generate blake2b hash bytes
+    const bz = blake.blake2b(normalized || '', undefined, 32)
+
+    // generate base64 encoded string
+    const hash = Buffer.from(bz).toString('base64')
+
+    setContentHash({
+      graph: {
+        hash: hash,
+        digestAlgorithm: 'DIGEST_ALGORITHM_BLAKE2B_256',
+        canonicalizationAlgorithm: 'GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015',
+        merkleTree: 'GRAPH_MERKLE_TREE_NONE_UNSPECIFIED',
+      },
+    })
+  }
+
+  const handleSubmitConvert = async (event: { preventDefault: () => void }) => {
+    event.preventDefault()
+
+    setError(null)
+
+    await fetch(chainInfo.rest + convertHashToIri, {
+      method: 'POST',
+      body: JSON.stringify({ contentHash }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.code) {
+          setError(data.message)
+        } else {
+          setIri(data.iri)
+        }
+      })
+      .catch((err) => {
+        setError(err.message)
+      })
+  }
+
+  const handleSubmitServer = async (event: { preventDefault: () => void }) => {
+    event.preventDefault()
+
+    setError(null)
+
     const body = {
       canon: 'URDNA2015',
-      context: context,
       digest: 'BLAKE2B_256',
       jsonld: json,
       merkle: 'UNSPECIFIED',
@@ -166,33 +204,33 @@ const CreateClaim = () => {
         if (data.code) {
           setError(data.message)
         } else {
-          setSuccess(JSON.stringify(data, null, '  '))
+          setIri(data.iri)
         }
       })
       .catch((err) => {
         setError(err.message)
       })
+  }
 
-    const bz = blake.blake2b(normalized || '', undefined, 32)
+  const handleSubmitAnchorAndAttest = async (event: {
+    preventDefault: () => void
+  }) => {
+    event.preventDefault()
 
-    const contentHash = {
-      $type: 'regen.data.v1.ContentHash',
-      graph: {
-        $type: 'regen.data.v1.ContentHash.Graph',
-        hash: Buffer.from(bz).toString('base64'),
-        digestAlgorithm: 1, // DIGEST_ALGORITHM_BLAKE2B_256
-        canonicalizationAlgorithm: 1, // GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015
-        merkleTree: 0, // GRAPH_MERKLE_TREE_NONE_UNSPECIFIED
-      },
+    setError(null)
+
+    if (!wallet) {
+      setError('keplr not connected')
+      return
     }
 
     const msg = {
-      sender: wallet.bech32Address,
-      contentHash: contentHash,
+      attestor: wallet.bech32Address,
+      contentHashes: [ContentHash_Graph.fromJSON(contentHash.graph)],
     } as unknown as Msg
 
     const msgAny = {
-      typeUrl: '/regen.data.v1.MsgAnchor',
+      typeUrl: '/regen.data.v1.MsgAttest',
       value: Msg.encode(msg).finish(),
     }
 
@@ -203,69 +241,128 @@ const CreateClaim = () => {
       })
       .catch((err) => {
         if (err.message === "Cannot read properties of null (reading 'key')") {
-          setTxError('keplr account does not exist on the selected network')
+          setError('keplr account does not exist on the selected network')
         } else {
-          setTxError(err.message)
+          setError(err.message)
         }
       })
   }
 
   return (
     <div className={styles.box}>
-      <SelectInput input={input} setInput={handleSetInput} />
-      {input == 'form' ? (
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <SelectContext
-            context={context}
-            contexts={contexts}
-            setContext={handleSetContext}
-          />
-          <InputsFromJSON example={example} json={json} setJson={setJson} />
-          <SelectDigestAlgorithm
-            digest={''} // disabled until multiple options exist
-            setDigest={() => {}} // disabled until multiple options exist
-          />
-          <SelectGraphCanon
-            canon={''} // disabled until multiple options exist
-            setCanon={() => {}} // disabled until multiple options exist
-          />
-          <SelectGraphMerkle
-            merkle={''} // disabled until multiple options exist
-            setMerkle={() => {}} // disabled until multiple options exist
-          />
-          <button type="submit">{'submit'}</button>
-        </form>
-      ) : (
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <SelectContext
-            context={context}
-            contexts={contexts}
-            setContext={handleSetContext}
-          />
+      <div className={styles.boxOptions}>
+        <button
+          className={
+            input == 'custom-json' ? styles.boxOptionActive : undefined
+          }
+          onClick={() => handleSetInput('custom-json')}
+        >
+          {'custom json'}
+        </button>
+        <button
+          className={
+            input == 'schema-form' ? styles.boxOptionActive : undefined
+          }
+          onClick={() => handleSetInput('schema-form')}
+        >
+          {'schema form'}
+        </button>
+        <button
+          className={
+            input == 'schema-json' ? styles.boxOptionActive : undefined
+          }
+          onClick={() => handleSetInput('schema-json')}
+        >
+          {'schema json'}
+        </button>
+      </div>
+      <form className={styles.form}>
+        {input === 'custom-json' && (
           <InputJSON
             json={json}
             placeholder={example}
             setJson={handleSetJson}
-            useTemplate={handleGenJson}
-            showUseTemplate={context.length > 0}
           />
-          <SelectDigestAlgorithm
-            digest={''} // disabled until multiple options exist
-            setDigest={() => {}} // disabled until multiple options exist
-          />
-          <SelectGraphCanon
-            canon={''} // disabled until multiple options exist
-            setCanon={() => {}} // disabled until multiple options exist
-          />
-          <SelectGraphMerkle
-            merkle={''} // disabled until multiple options exist
-            setMerkle={() => {}} // disabled until multiple options exist
-          />
-          <button type="submit">{'submit'}</button>
-        </form>
-      )}
-      <Result error={error} success={success} />
-      <ResultTx error={txError} rest={chainInfo?.rest} success={txSuccess} />
+        )}
+        {input === 'schema-form' && (
+          <>
+            <SelectContext
+              context={context}
+              contexts={contexts}
+              setContext={handleSetContext}
+            />
+            <InputsFromJSON example={example} json={json} setJson={setJson} />
+          </>
+        )}
+        {input === 'schema-json' && (
+          <>
+            <SelectContext
+              context={context}
+              contexts={contexts}
+              setContext={handleSetContext}
+            />
+            <InputJSON
+              json={json}
+              placeholder={example}
+              setJson={handleSetJson}
+              useTemplate={handleGenJson}
+              showUseTemplate={context.length > 0}
+            />
+          </>
+        )}
+        <SelectDigestAlgorithm
+          digest={''} // disabled until multiple options exist
+          setDigest={() => {}} // disabled until multiple options exist
+        />
+        <SelectGraphCanon
+          canon={''} // disabled until multiple options exist
+          setCanon={() => {}} // disabled until multiple options exist
+        />
+        <SelectGraphMerkle
+          merkle={''} // disabled until multiple options exist
+          setMerkle={() => {}} // disabled until multiple options exist
+        />
+      </form>
+      <button
+        className={!json ? styles.buttonDisabled : styles.button}
+        onClick={handleSubmitGenerate}
+        disabled={!json}
+      >
+        {'generate hash'}
+      </button>
+      <button
+        className={!contentHash ? styles.buttonDisabled : styles.button}
+        onClick={handleSubmitConvert}
+        disabled={!contentHash}
+      >
+        {'convert to iri'}
+      </button>
+      <button
+        className={!json ? styles.buttonDisabled : styles.button}
+        onClick={handleSubmitServer}
+        disabled={!json}
+      >
+        {'post to server'}
+      </button>
+      <button
+        className={!contentHash ? styles.buttonDisabled : styles.button}
+        onClick={handleSubmitAnchorAndAttest}
+        disabled={!contentHash}
+      >
+        {'anchor and attest'}
+      </button>
+      <div className={styles.boxText}>
+        <Result error={error} />
+      </div>
+      <div className={styles.boxText}>
+        {contentHash && (
+          <Result success={JSON.stringify(contentHash, null, '  ')} />
+        )}
+      </div>
+      <div className={styles.boxText}>{iri && <Result success={iri} />}</div>
+      <div className={styles.boxText}>
+        <ResultTx rest={chainInfo?.rest} success={txSuccess} />
+      </div>
     </div>
   )
 }
