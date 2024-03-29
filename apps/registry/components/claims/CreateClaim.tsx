@@ -233,7 +233,7 @@ const CreateClaim = () => {
             merkle={''} // disabled until multiple options exist
             setMerkle={() => {}} // disabled until multiple options exist
           />
-          <button type="submit">{'post and anchor'}</button>
+          <button type="submit">{'submit'}</button>
         </form>
       ) : (
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -261,7 +261,7 @@ const CreateClaim = () => {
             merkle={''} // disabled until multiple options exist
             setMerkle={() => {}} // disabled until multiple options exist
           />
-          <button type="submit">{'post and anchor'}</button>
+          <button type="submit">{'submit'}</button>
         </form>
       )}
       <Result error={error} success={success} />

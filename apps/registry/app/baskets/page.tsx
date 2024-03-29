@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   title: 'chora registry',
 }
 
-const CreditsPage = () => (
+const BasketsPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'explore baskets'}</h1>
+      <h1>{'explore credit baskets'}</h1>
       <BasketsNav />
       <Baskets />
     </div>
   </div>
 )
 
-export default CreditsPage
+export default BasketsPage

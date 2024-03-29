@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const CreditPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'basket'}</h1>
+      <h1>{'credit basket'}</h1>
       <Basket />
     </div>
   </div>

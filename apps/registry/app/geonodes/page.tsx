@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const GeonodesPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'explore geonodes'}</h1>
+      <h1>{'explore geospatial nodes'}</h1>
       <GeonodesNav />
       <Geonodes />
     </div>

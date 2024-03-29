@@ -17,7 +17,7 @@ export const useBaskets = (chainInfo: any, limit: number, offset: number) => {
   // fetch on load and param change
   useEffect(() => {
     // fetch baskets from selected network
-    const fetchBatches = async () => {
+    const fetchBaskets = async () => {
       const queryParams = `?pagination.limit=${limit}&pagination.offset=${offset}`
       await fetch(chainInfo.rest + '/' + queryBaskets + queryParams)
         .then((res) => res.json())
@@ -27,7 +27,7 @@ export const useBaskets = (chainInfo: any, limit: number, offset: number) => {
           } else {
             setBaskets(
               // TODO(regen-ledger): redundant basket denom prefix
-              res['baskets'].map((basket: any) => ({
+              res['baskets_info'].map((basket: any) => ({
                 denom: basket['basket_denom'],
                 ...basket,
               })),
@@ -38,7 +38,7 @@ export const useBaskets = (chainInfo: any, limit: number, offset: number) => {
 
     // only fetch if network
     if (chainInfo?.rest) {
-      fetchBatches().catch((err) => {
+      fetchBaskets().catch((err) => {
         setError(err.message)
       })
     }

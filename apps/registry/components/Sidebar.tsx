@@ -117,6 +117,42 @@ const Sidebar = () => {
     )
   }
 
+  if (currentRoute.includes('baskets') && denom) {
+    return (
+      <div className={styles.sidebar}>
+        <ul>
+          <ul>
+            <li style={{ padding: '1em 0' }}>
+              <Link
+                href="/baskets"
+                className={
+                  currentRoute === '/baskets' ? styles.active : undefined
+                }
+              >
+                {'← baskets'}
+              </Link>
+            </li>
+          </ul>
+          <li>{'credit basket'}</li>
+          <ul>
+            <li>
+              <Link
+                href={`/baskets/${denom}`}
+                className={
+                  currentRoute === `/baskets/${denom}`
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'overview'}
+              </Link>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    )
+  }
+
   if (currentRoute.includes('geonodes') && id) {
     return (
       <div className={styles.sidebar}>
