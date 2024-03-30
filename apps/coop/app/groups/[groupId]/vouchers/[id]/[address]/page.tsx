@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'chora coop',
 }
 
-const VoucherBalancePage = () => (
+const BalancePage = () => (
   <div className={styles.page}>
     <div>
       <h1>{'balance'}</h1>
@@ -17,4 +17,4 @@ const VoucherBalancePage = () => (
   </div>
 )
 
-export default VoucherBalancePage
+export default BalancePage

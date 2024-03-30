@@ -16,6 +16,7 @@ const Background = () => {
   return (
     <div className={styles.background}>
       <Image alt="chora" src={darkTheme ? darkBackground : lightBackground} />
+      <div />
     </div>
   )
 }

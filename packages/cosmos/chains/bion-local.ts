@@ -16,18 +16,18 @@ export const bionLocal = {
   },
   currencies: [
     {
-      coinDenom: 'STAKE',
-      coinMinimalDenom: 'stake',
+      coinDenom: 'BION',
+      coinMinimalDenom: 'ubion',
       coinDecimals: 6,
-      coinGeckoId: 'stake',
+      coinGeckoId: 'bion',
     },
   ],
   feeCurrencies: [
     {
-      coinDenom: 'STAKE',
-      coinMinimalDenom: 'stake',
+      coinDenom: 'BION',
+      coinMinimalDenom: 'ubion',
       coinDecimals: 6,
-      coinGeckoId: 'stake',
+      coinGeckoId: 'bion',
       gasPriceStep: {
         low: 0.01,
         average: 0.025,
@@ -36,10 +36,10 @@ export const bionLocal = {
     },
   ],
   stakeCurrency: {
-    coinDenom: 'STAKE',
-    coinMinimalDenom: 'stake',
+    coinDenom: 'BION',
+    coinMinimalDenom: 'ubion',
     coinDecimals: 6,
-    coinGeckoId: 'stake',
+    coinGeckoId: 'bion',
   },
 }
 

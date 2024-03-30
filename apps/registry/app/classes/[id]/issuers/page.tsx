@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'chora registry',
 }
 
-const ClassPage = () => (
+const IssuersPage = () => (
   <div className={styles.page}>
     <div>
       <h1>{'class issuers'}</h1>
@@ -17,4 +17,4 @@ const ClassPage = () => (
   </div>
 )
 
-export default ClassPage
+export default IssuersPage

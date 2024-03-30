@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'chora registry',
 }
 
-const CreditPage = () => (
+const BatchPage = () => (
   <div className={styles.page}>
     <div>
       <h1>{'credit batch'}</h1>
@@ -17,4 +17,4 @@ const CreditPage = () => (
   </div>
 )
 
-export default CreditPage
+export default BatchPage

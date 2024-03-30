@@ -17,3 +17,8 @@
   margin: 0.5em 0;
   text-underline-offset: 4px;
 }
+
+.beta {
+  font-weight: 400;
+  text-decoration: underline;
+}

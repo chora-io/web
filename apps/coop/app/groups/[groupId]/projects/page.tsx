@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'chora coop',
 }
 
-const EcocreditsPage = () => (
+const ProjectsPage = () => (
   <div className={styles.page}>
     <div>
       <h1>{'group projects'}</h1>
@@ -17,4 +17,4 @@ const EcocreditsPage = () => (
   </div>
 )
 
-export default EcocreditsPage
+export default ProjectsPage

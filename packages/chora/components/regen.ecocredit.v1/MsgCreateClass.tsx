@@ -44,12 +44,12 @@ const MsgCreateClass = ({ network, setMessage, useWallet, wallet }: any) => {
           setAddress={setAdmin}
         />
       )}
-      <p style={{ marginBottom: '1.5em' }}>{'issuers'}</p>
-      <InputIssuers
-        id="msg-create-class-issuers"
-        label="issuers"
-        issuers={issuers}
-        setIssuers={setIssuers}
+      <InputString
+        id="msg-create-class-credit-type"
+        label="credit type"
+        placeholder="C"
+        string={creditTypeAbbrev}
+        setString={setCreditTypeAbbrev}
       />
       <InputIRI
         id="msg-create-class-metadata"
@@ -58,12 +58,12 @@ const MsgCreateClass = ({ network, setMessage, useWallet, wallet }: any) => {
         iri={metadata}
         setIri={setMetadata}
       />
-      <InputString
-        id="msg-create-class-credit-type"
-        label="credit type"
-        placeholder="C"
-        string={creditTypeAbbrev}
-        setString={setCreditTypeAbbrev}
+      <p style={{ marginBottom: '1.5em' }}>{'issuers'}</p>
+      <InputIssuers
+        id="msg-create-class-issuers"
+        label="issuers"
+        issuers={issuers}
+        setIssuers={setIssuers}
       />
       <InputString
         id="msg-create-class-fee-denom"

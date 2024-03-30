@@ -1,16 +1,15 @@
-.container {
-  composes: container from 'chora/styles/main.css';
+.page {
+  composes: page from 'chora/styles/page.css';
 }
 
 .banner {
   composes: banner from 'chora/styles/main.css';
-  min-height: 35vh !important;
-  padding-top: calc(var(--header-height) + 2em);
+  padding: 2em 0 1em 0;
 }
 
 .content {
   composes: content from 'chora/styles/main.css';
-  min-height: 35vh !important;
+  min-height: 60vh; /* not enough content */
 }
 
 .contentLinks {

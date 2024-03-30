@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: 'chora coop',
 }
 
-const MembersPage = () => (
+const MemberPage = () => (
   <div className={styles.page}>
     <div>
       <h1>{'group member'}</h1>
@@ -23,4 +23,4 @@ const MembersPage = () => (
   </div>
 )
 
-export default MembersPage
+export default MemberPage

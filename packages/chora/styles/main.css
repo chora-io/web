@@ -1,10 +1,3 @@
-/* container */
-
-.container {
-  background: var(--background-primary-transparent);
-  width: 100vw;
-}
-
 /* banner */
 
 .banner {
@@ -12,7 +5,6 @@
   display: flex;
   font-size: 1.5em;
   justify-content: center;
-  min-height: 100vh;
   text-align: center;
 }
 
@@ -22,16 +14,12 @@
   }
 }
 
-.banner div {
-  margin-bottom: 2%;
-}
-
 .banner h1 {
   padding: 0.2em 0;
 }
 
 .banner p {
-  padding: 0.4em 0;
+  padding: 0.3em 0;
 }
 
 .banner p > i {
@@ -46,7 +34,6 @@
   display: flex;
   font-size: 1.2em;
   justify-content: center;
-  min-height: 100vh;
 }
 
 @media (max-width: 850px) {
@@ -58,9 +45,8 @@
 
 .content > div {
   display: block;
-  margin-bottom: 5%;
   max-width: 650px;
-  padding: 5em 0;
+  padding: 4em 0;
 }
 
 .content > div h1,

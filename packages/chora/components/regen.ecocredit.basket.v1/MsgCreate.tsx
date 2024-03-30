@@ -52,8 +52,8 @@ const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
         setString={setName}
       />
       <InputString
-        id="msg-create-desciption"
-        label="basket desciption"
+        id="msg-create-description"
+        label="basket description"
         placeholder="Nature Carbon Ton"
         string={description}
         setString={setDescription}

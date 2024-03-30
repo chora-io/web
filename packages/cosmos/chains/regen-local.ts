@@ -16,18 +16,18 @@ export const regenLocal = {
   },
   currencies: [
     {
-      coinDenom: 'STAKE',
-      coinMinimalDenom: 'stake',
+      coinDenom: 'REGEN',
+      coinMinimalDenom: 'uregen',
       coinDecimals: 6,
-      coinGeckoId: 'stake',
+      coinGeckoId: 'regen',
     },
   ],
   feeCurrencies: [
     {
-      coinDenom: 'STAKE',
-      coinMinimalDenom: 'stake',
+      coinDenom: 'REGEN',
+      coinMinimalDenom: 'uregen',
       coinDecimals: 6,
-      coinGeckoId: 'stake',
+      coinGeckoId: 'regen',
       gasPriceStep: {
         low: 0.01,
         average: 0.025,
@@ -36,10 +36,10 @@ export const regenLocal = {
     },
   ],
   stakeCurrency: {
-    coinDenom: 'STAKE',
-    coinMinimalDenom: 'stake',
+    coinDenom: 'REGEN',
+    coinMinimalDenom: 'uregen',
     coinDecimals: 6,
-    coinGeckoId: 'stake',
+    coinGeckoId: 'regen',
   },
 }
 

@@ -13,9 +13,7 @@ const HomePage = () => (
       <h2>{'group governance workspace'}</h2>
       <p>
         {'This application is a '}
-        <span style={{ fontWeight: '400', textDecoration: 'underline' }}>
-          {'beta application'}
-        </span>
+        <span className={styles.beta}>{'beta application'}</span>
         {'. This application is not ready for production use.'}
       </p>
       <p>

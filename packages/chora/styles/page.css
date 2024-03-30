@@ -1,35 +1,34 @@
 /* page */
 /* page-center */
-/* page-with-footer */
 /* page-with-sidebar */
 
-.page,
-.page-center,
-.page-with-footer,
-.page-with-sidebar {
+.page {
   min-height: 100vh;
   overflow: hidden;
+}
+
+.page > div {
+  margin-top: var(--header-height);
 }
 
 /* page-center */
 
 .page-center {
+  composes: page;
   align-items: center;
-  background: var(--background-primary);
   display: flex;
   justify-content: center;
   text-align: center;
 }
 
-/* page-with-footer */
-
-.page-with-footer {
-  margin-bottom: var(--footer-height);
+.page-center > div {
+  margin-bottom: 5%;
 }
 
 /* page-with-sidebar */
 
 .page-with-sidebar {
+  composes: page;
   margin-left: var(--sidebar-width);
 }
 
@@ -39,36 +38,35 @@
   }
 }
 
-/* page */
-/* page-with-footer */
-/* page-with-sidebar */
-
-.page > div,
-.page-with-footer > div,
 .page-with-sidebar > div {
-  margin-top: var(--header-height);
   padding: 3em 4em;
 }
 
 @media (max-width: 850px) {
-  .page > div,
-  .page-with-footer > div,
   .page-with-sidebar > div {
     padding: 0;
   }
 }
 
-/* page-center */
+/* page-not-found */
 
-.page-center h1 {
+.page-not-found {
+  composes: page-center;
+  background: var(--background-primary);
+}
+
+.page-not-found h1 {
   color: var(--color-theme);
+  font-size: 3em;
+  margin-bottom: 0.25em;
 }
 
-.page-center h1,
-.page-center h2 {
-  margin: 0.5em 0;
+.page-not-found h2 {
+  font-size: 2em;
+  font-weight: 300;
+  margin-bottom: 0.5em;
 }
 
-.page-center > div {
-  margin-bottom: 2.5%;
+.page-not-found p {
+  font-style: italic;
 }

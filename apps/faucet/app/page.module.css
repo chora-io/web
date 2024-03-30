@@ -1,20 +1,4 @@
 .page {
   composes: page-center from 'chora/styles/page.css';
-}
-
-@media (max-width: 850px) {
-  .page {
-    display: none;
-  }
-}
-
-.mobile {
-  display: none;
-}
-
-@media (max-width: 850px) {
-  .mobile {
-    composes: page-center from 'chora/styles/page.css';
-    display: flex !important;
-  }
+  background: var(--background-primary);
 }

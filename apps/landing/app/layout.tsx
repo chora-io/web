@@ -1,4 +1,4 @@
-import { Footer, Header } from 'chora/components'
+import { Background, Footer, Header } from 'chora/components'
 import { ThemeContextProvider } from 'chora/contexts'
 import Link from 'next/link'
 
@@ -9,6 +9,7 @@ const Layout = ({ children }: any) => (
     <body>
       <main>
         <ThemeContextProvider>
+          <Background />
           <Header
             title={{
               link: '/',

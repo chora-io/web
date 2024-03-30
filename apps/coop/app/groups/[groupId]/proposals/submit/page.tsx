@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'chora coop',
 }
 
-const ProposalsNewPage = () => (
+const SubmitPage = () => (
   <div className={styles.page}>
     <div>
       <h1>{'submit proposal'}</h1>
@@ -17,4 +17,4 @@ const ProposalsNewPage = () => (
   </div>
 )
 
-export default ProposalsNewPage
+export default SubmitPage
