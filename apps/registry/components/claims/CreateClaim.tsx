@@ -44,7 +44,8 @@ const CreateClaim = () => {
   // error and results
   const [error, setError] = useState<string | null>(null)
   const [contentHash, setContentHash] = useState<any>(null)
-  const [iri, setIri] = useState<string>('')
+  const [convertSuccess, setConvertSuccess] = useState<string | null>(null)
+  const [serverSuccess, setServerSuccess] = useState<string | null>(null)
   const [txSuccess, setTxSuccess] = useState<any>(null)
 
   const [input, setInput] = useState<string>('custom-json')
@@ -119,6 +120,7 @@ const CreateClaim = () => {
     event.preventDefault()
 
     setError(null)
+    setContentHash(null)
 
     // check and parse JSON
     let doc: any
@@ -165,6 +167,7 @@ const CreateClaim = () => {
     event.preventDefault()
 
     setError(null)
+    setConvertSuccess(null)
 
     await fetch(chainInfo.rest + convertHashToIri, {
       method: 'POST',
@@ -175,7 +178,7 @@ const CreateClaim = () => {
         if (data.code) {
           setError(data.message)
         } else {
-          setIri(data.iri)
+          setConvertSuccess(`${data.iri} (converted from hash)`)
         }
       })
       .catch((err) => {
@@ -187,6 +190,7 @@ const CreateClaim = () => {
     event.preventDefault()
 
     setError(null)
+    setServerSuccess(null)
 
     const body = {
       canon: 'URDNA2015',
@@ -201,10 +205,10 @@ const CreateClaim = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.code) {
-          setError(data.message)
+        if (data.error) {
+          setError(data.error)
         } else {
-          setIri(data.iri)
+          setServerSuccess(`${data.iri} (stored on chora server)`)
         }
       })
       .catch((err) => {
@@ -323,11 +327,7 @@ const CreateClaim = () => {
           setMerkle={() => {}} // disabled until multiple options exist
         />
       </form>
-      <button
-        className={!json ? styles.buttonDisabled : styles.button}
-        onClick={handleSubmitGenerate}
-        disabled={!json}
-      >
+      <button className={styles.button} onClick={handleSubmitGenerate}>
         {'generate hash'}
       </button>
       <button
@@ -337,11 +337,7 @@ const CreateClaim = () => {
       >
         {'convert to iri'}
       </button>
-      <button
-        className={!json ? styles.buttonDisabled : styles.button}
-        onClick={handleSubmitServer}
-        disabled={!json}
-      >
+      <button className={styles.button} onClick={handleSubmitServer}>
         {'post to server'}
       </button>
       <button
@@ -349,17 +345,22 @@ const CreateClaim = () => {
         onClick={handleSubmitAnchorAndAttest}
         disabled={!contentHash}
       >
-        {'anchor and attest'}
+        {'finalize claim'}
       </button>
       <div className={styles.boxText}>
         <Result error={error} />
       </div>
       <div className={styles.boxText}>
-        {contentHash && (
-          <Result success={JSON.stringify(contentHash, null, '  ')} />
-        )}
+        <Result
+          success={contentHash && JSON.stringify(contentHash, null, '  ')}
+        />
       </div>
-      <div className={styles.boxText}>{iri && <Result success={iri} />}</div>
+      <div className={styles.boxText}>
+        <Result success={convertSuccess} />
+      </div>
+      <div className={styles.boxText}>
+        <Result success={serverSuccess} />
+      </div>
       <div className={styles.boxText}>
         <ResultTx rest={chainInfo?.rest} success={txSuccess} />
       </div>

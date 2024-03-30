@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import Class from '@components/classes/Class'
+import Reporters from '@components/geonodes/Reporters'
 
 import styles from './page.module.css'
 
@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 const ClassPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'credit class'}</h1>
-      <Class />
+      <h1>{'geonode reporters'}</h1>
+      <Reporters />
     </div>
   </div>
 )

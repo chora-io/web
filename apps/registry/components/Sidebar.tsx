@@ -75,6 +75,18 @@ const Sidebar = () => {
                 {'overview'}
               </Link>
             </li>
+            <li>
+              <Link
+                href={`/classes/${id}/issuers`}
+                className={
+                  currentRoute === `/classes/${id}/issuers`
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'issuers'}
+              </Link>
+            </li>
           </ul>
         </ul>
       </div>
@@ -179,6 +191,18 @@ const Sidebar = () => {
                 }
               >
                 {'overview'}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={`/geonodes/${id}/reporters`}
+                className={
+                  currentRoute === `/geonodes/${id}/reporters`
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'reporters'}
               </Link>
             </li>
           </ul>

@@ -36,8 +36,7 @@ const Claims = () => {
   return (
     <div className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>{'Look Up Data Claim'}</h2>
-        <p>{'look up data claim using content identifier'}</p>
+        <p>{'Look up data claim by content identifier...'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputIRI

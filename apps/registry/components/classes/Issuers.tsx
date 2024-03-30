@@ -7,9 +7,9 @@ import { useContext } from 'react'
 
 import { useClassIssuers } from '@hooks/useClassIssuers'
 
-import styles from './ClassIssuers.module.css'
+import styles from './Issuers.module.css'
 
-const ClassIssuers = () => {
+const Issuers = () => {
   const { id } = useParams()
 
   const { chainInfo } = useContext(WalletContext)
@@ -37,4 +37,4 @@ const ClassIssuers = () => {
   )
 }
 
-export default ClassIssuers
+export default Issuers
