@@ -13,7 +13,6 @@ import styles from './ProposalVotes.module.css'
 
 const ProposalVotes = () => {
   const { id, groupId } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
   // fetch proposal votes from selected network

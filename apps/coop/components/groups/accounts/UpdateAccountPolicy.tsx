@@ -14,21 +14,20 @@ const UpdateAccountMetadata = () => {
   const { address } = useParams()
   const { chainInfo, wallet } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [policy, setPolicy] = useState<any>(undefined)
 
-  // fetch and form error and success
+  // error and success
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<any>(null)
 
-  // submit group
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
     setError(null)
     setSuccess(null)
 
-    // set submit group message
+    // set message
     const msg = {
       $type: 'cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy',
       admin: wallet['bech32Address'],
@@ -66,11 +65,9 @@ const UpdateAccountMetadata = () => {
         />
         <button type="submit">{'submit'}</button>
       </form>
-      {(success || error) && (
-        <div className={styles.boxResultBelow}>
-          <ResultTx error={error} rest={chainInfo?.rest} success={success} />
-        </div>
-      )}
+      <div className={styles.boxText}>
+        <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+      </div>
     </div>
   )
 }

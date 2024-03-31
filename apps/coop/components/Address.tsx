@@ -7,7 +7,6 @@ import { useAddressMetadata } from '@hooks/useAddressMetadata'
 
 const Address = ({ address }: { address: string }) => {
   const { groupId } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
   // fetch address metadata (as policy, otherwise member) from network server

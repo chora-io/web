@@ -11,7 +11,7 @@ const queryGroupPoliciesByGroup = '/cosmos/group/v1/group_policies_by_group'
 const QueryGroupPoliciesByGroup = () => {
   const { chainInfo } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [id, setId] = useState<string>('')
 
   // error and success

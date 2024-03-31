@@ -11,7 +11,7 @@ const queryCreditType = '/regen/ecocredit/v1/credit-type'
 const QueryCreditType = () => {
   const { chainInfo } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [abbrev, setAbbrev] = useState<string>('')
 
   // error and success

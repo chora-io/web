@@ -21,7 +21,6 @@ import styles from './SubmitProposal.module.css'
 
 const SubmitProposal = () => {
   const { groupId } = useParams()
-
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
@@ -29,18 +28,17 @@ const SubmitProposal = () => {
   // fetch group policies and policies metadata from selected network
   const [policies] = useGroupPoliciesWithMetadata(chainInfo, groupId)
 
-  // form input
+  // form inputs
   const [address, setAddress] = useState<string>('')
   const [name, setName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [message, setMessage] = useState<any>(null)
   const [execution, setExecution] = useState<string>('')
 
-  // fetch and form error and success
+  // error and success
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<any>(null)
 
-  // submit proposal
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
@@ -173,11 +171,9 @@ const SubmitProposal = () => {
         />
         <button type="submit">{'submit'}</button>
       </form>
-      {(success || error) && (
-        <div className={styles.boxResultBelow}>
-          <ResultTx error={error} rest={chainInfo?.rest} success={success} />
-        </div>
-      )}
+      <div className={styles.boxText}>
+        <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+      </div>
     </div>
   )
 }

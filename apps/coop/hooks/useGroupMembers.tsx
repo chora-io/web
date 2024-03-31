@@ -2,19 +2,19 @@ import { useEffect, useState } from 'react'
 
 const queryMembers = 'cosmos/group/v1/group_members'
 
-// fetch group members from selected network
+// fetch group members by group id from selected network
 export const useGroupMembers = (chainInfo: any, groupId: any) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [members, setMembers] = useState<any>(null)
 
-  // reset state on network or group id change
+  // reset state on param change
   useEffect(() => {
     setError(null)
     setMembers(null)
   }, [chainInfo?.chainId, groupId])
 
-  // fetch on load and network or group id change
+  // fetch on load and param change
   useEffect(() => {
     // fetch members from selected network
     const fetchMembers = async () => {
@@ -38,7 +38,7 @@ export const useGroupMembers = (chainInfo: any, groupId: any) => {
         })
     }
 
-    // only fetch if network and group id
+    // only fetch if params available
     if (chainInfo?.rest && groupId) {
       fetchMembers().catch((err) => {
         setError(err.message)

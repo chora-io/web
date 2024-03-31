@@ -3,20 +3,20 @@ import { useEffect, useState } from 'react'
 const queryPolicies = 'cosmos/group/v1/group_policies_by_group'
 const queryResolver = 'regen/data/v1/resolver'
 
-// fetch data resolvers from selected network
-export const useResolvers = (chainInfo: any, groupId: string) => {
+// fetch data resolvers managed by group from selected network
+export const useGroupResolvers = (chainInfo: any, groupId: string) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [policies, setPolicies] = useState<any[] | null>([])
   const [resolvers, setResolvers] = useState<any[] | null>(null)
 
-  // reset state on network change
+  // reset state on param change
   useEffect(() => {
     setError(null)
     setResolvers(null)
   }, [chainInfo?.chainId])
 
-  // fetch on load and network change
+  // fetch on load and param change
   useEffect(() => {
     // fetch policies and resolvers from selected network
     const fetchPolicies = async () => {
@@ -35,7 +35,7 @@ export const useResolvers = (chainInfo: any, groupId: string) => {
         })
     }
 
-    // only fetch if network and group id
+    // only fetch if params available
     if (chainInfo?.rest && groupId) {
       fetchPolicies().catch((err) => {
         setError(err.message)
@@ -73,7 +73,7 @@ export const useResolvers = (chainInfo: any, groupId: string) => {
       setResolvers(resolvers)
     }
 
-    // only fetch if network and policies
+    // only fetch if params available
     if (chainInfo?.rest && policies?.length) {
       fetchResolvers().catch((err) => {
         setError(err.message)

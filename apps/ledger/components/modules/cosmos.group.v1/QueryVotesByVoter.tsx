@@ -11,7 +11,7 @@ const queryVotesByVoter = '/cosmos/group/v1/votes_by_voter'
 const QueryVotesByVoter = () => {
   const { chainInfo, network } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [voter, setVoter] = useState<string>('')
 
   // error and success

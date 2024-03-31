@@ -10,14 +10,14 @@ export const useAuthzGrants = (chainInfo: any, address: string) => {
   const [grantsGrantee, setGrantsGrantee] = useState<any[] | null>(null)
   const [grantsGranter, setGrantsGranter] = useState<any[] | null>(null)
 
-  // reset state on network or address change
+  // reset state on params change
   useEffect(() => {
     setError(null)
     setGrantsGrantee(null)
     setGrantsGranter(null)
   }, [chainInfo?.chainId, address])
 
-  // fetch on load and network or address change
+  // fetch on load and params change
   useEffect(() => {
     // fetch grants by grantee from selected network
     const fetchGrantsByGrantee = async () => {
@@ -34,7 +34,6 @@ export const useAuthzGrants = (chainInfo: any, address: string) => {
 
     // fetch grants by granter from selected network
     const fetchGrantsByGranter = async () => {
-      // fetch grants by granter from selected network
       await fetch(chainInfo.rest + '/' + queryGrantsByGranter + '/' + address)
         .then((res) => res.json())
         .then((res) => {
@@ -46,7 +45,7 @@ export const useAuthzGrants = (chainInfo: any, address: string) => {
         })
     }
 
-    // only fetch if network and address
+    // only fetch if params available
     if (chainInfo?.rest && address) {
       fetchGrantsByGrantee().catch((err) => {
         setError(err.message)

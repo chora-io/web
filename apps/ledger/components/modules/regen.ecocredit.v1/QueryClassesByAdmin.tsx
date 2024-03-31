@@ -11,7 +11,7 @@ const queryClassesByAdmin = '/regen/ecocredit/v1/classes-by-admin'
 const QueryClassesByAdmin = () => {
   const { chainInfo, network } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [admin, setAdmin] = useState<string>('')
 
   // error and success

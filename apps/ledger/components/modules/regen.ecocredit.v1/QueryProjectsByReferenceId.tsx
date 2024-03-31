@@ -12,7 +12,7 @@ const queryProjectsByReferenceId =
 const QueryProjectsByReferenceId = () => {
   const { chainInfo } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [referenceId, setClassId] = useState<string>('')
 
   // error and success

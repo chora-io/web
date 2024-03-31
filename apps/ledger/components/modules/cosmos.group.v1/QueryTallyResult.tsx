@@ -11,7 +11,7 @@ const queryTallyResult = '/cosmos/group/v1/proposals' // + "/tally"
 const QueryTallyResult = () => {
   const { chainInfo } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [id, setId] = useState<string>('')
 
   // error and success

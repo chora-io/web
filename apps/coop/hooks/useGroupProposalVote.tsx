@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 const queryVote = 'cosmos/group/v1/vote_by_proposal_voter'
 
-// fetch proposal vote and vote metadata from selected network and network server
+// fetch vote by proposal id and address from selected network or indexer service
 export const useGroupProposalVote = (
   chainInfo: any,
   proposalId: string,
@@ -15,20 +15,17 @@ export const useGroupProposalVote = (
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [vote, setVote] = useState<any>(null)
-  const [metadata, setMetadata] = useState<any>(null)
 
-  // reset state on network, server, proposal id, or address change
+  // reset state on param change
   useEffect(() => {
     setError(null)
     setVote(null)
-    setMetadata(null)
   }, [chainInfo?.chainId, serverUrl, proposalId, address])
 
-  // fetch on load and network, server, proposal id, or address change
+  // fetch on load and param change
   useEffect(() => {
     // fetch vote from selected network
     const fetchVote = async () => {
-      // fetch vote from selected network
       await fetch(
         chainInfo.rest + '/' + queryVote + '/' + proposalId + '/' + address,
       )
@@ -49,7 +46,6 @@ export const useGroupProposalVote = (
 
     // fetch indexed vote from network server
     const fetchVoteIdx = async () => {
-      // fetch idx vote from network server
       await fetch(
         serverUrl +
           '/idx/' +
@@ -77,7 +73,7 @@ export const useGroupProposalVote = (
         })
     }
 
-    // only fetch if network, server, proposal id, and address
+    // only fetch if params available
     if (chainInfo?.rest && serverUrl && proposalId && address) {
       fetchVote().catch((err) => {
         setError(err.message)
@@ -88,39 +84,5 @@ export const useGroupProposalVote = (
     }
   }, [chainInfo?.rest, serverUrl, proposalId, address])
 
-  // fetch on load and server or vote metadata change
-  useEffect(() => {
-    // fetch vote metadata from network server
-    const fetchMetadata = async () => {
-      // fetch vote metadata from network server
-      await fetch(serverUrl + '/data/' + vote.metadata)
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.error) {
-            setError(res.error)
-          } else {
-            const data = JSON.parse(res['jsonld'])
-            if (
-              data['@context'] !==
-              'https://schema.chora.io/contexts/group_vote.jsonld'
-            ) {
-              setError('unsupported metadata schema')
-            } else {
-              setMetadata(data)
-            }
-          }
-        })
-        .catch((err) => {
-          setError(err.message)
-        })
-    }
-    // only fetch if server and vote metadata
-    if (serverUrl && vote?.metadata) {
-      fetchMetadata().catch((err) => {
-        setError(err.message)
-      })
-    }
-  }, [serverUrl, vote?.metadata])
-
-  return [vote, metadata, error]
+  return [vote, error]
 }

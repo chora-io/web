@@ -19,16 +19,15 @@ const CreateAccount = () => {
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
-  // form input
+  // form inputs
   const [name, setName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [policy, setPolicy] = useState<any>(undefined)
 
-  // fetch and form error and success
+  // error and success
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<any>(null)
 
-  // submit group
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
@@ -94,7 +93,7 @@ const CreateAccount = () => {
       return
     }
 
-    // set submit group message
+    // set message
     const msg = {
       $type: 'cosmos.group.v1.MsgCreateGroupPolicy',
       admin: wallet['bech32Address'],
@@ -147,11 +146,9 @@ const CreateAccount = () => {
         />
         <button type="submit">{'submit'}</button>
       </form>
-      {(success || error) && (
-        <div className={styles.boxResultBelow}>
-          <ResultTx error={error} rest={chainInfo?.rest} success={success} />
-        </div>
-      )}
+      <div className={styles.boxText}>
+        <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+      </div>
     </div>
   )
 }

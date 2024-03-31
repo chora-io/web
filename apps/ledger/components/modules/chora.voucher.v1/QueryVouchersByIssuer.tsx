@@ -11,7 +11,7 @@ const queryVouchersByIssuer = '/chora/voucher/v1/vouchers-by-issuer'
 const QueryVouchersByIssuer = () => {
   const { chainInfo, network } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [issuer, setIssuer] = useState<string>('')
 
   // error and success

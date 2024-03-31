@@ -2,6 +2,7 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { useMetadata } from 'chora/hooks'
 import { formatTimestamp } from 'chora/utils'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
@@ -13,15 +14,22 @@ import styles from './ProposalVote.module.css'
 
 const ProposalVote = () => {
   const { id, address } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
-  // fetch proposal vote and vote metadata from selected network and network server
-  const [vote, metadata, error] = useGroupProposalVote(
+  // fetch proposal vote from selected network or indexer service
+  const [vote, voteError] = useGroupProposalVote(
     chainInfo,
     `${id}`,
     `${address}`,
   )
+
+  // fetch metadata from network server, otherwise resolve
+  const [metadata, metadataError] = useMetadata(
+    chainInfo,
+    vote ? vote.metadata : null,
+  )
+
+  const error = voteError || metadataError
 
   return (
     <div className={styles.box}>

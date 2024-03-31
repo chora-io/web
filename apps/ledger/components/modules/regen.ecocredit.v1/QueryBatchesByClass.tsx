@@ -11,7 +11,7 @@ const queryBatchesByClass = '/regen/ecocredit/v1/batches-by-class'
 const QueryBatchesByClass = () => {
   const { chainInfo } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [classId, setDenom] = useState<string>('')
 
   // error and success

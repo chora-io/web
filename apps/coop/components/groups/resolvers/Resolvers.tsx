@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import Address from '@components/Address'
-import { useResolvers } from '@hooks/useResolvers'
+import { useGroupResolvers } from '@hooks/useGroupResolvers'
 
 import styles from './Resolvers.module.css'
 
@@ -15,7 +15,7 @@ const Resolvers = () => {
   const { chainInfo } = useContext(WalletContext)
 
   // fetch data resolvers from selected network
-  const [resolvers, error] = useResolvers(chainInfo, `${groupId}`)
+  const [resolvers, error] = useGroupResolvers(chainInfo, `${groupId}`)
 
   return (
     <div className={styles.box}>

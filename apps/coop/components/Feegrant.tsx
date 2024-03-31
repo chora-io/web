@@ -11,7 +11,6 @@ import styles from './Feegrant.module.css'
 
 const Feegrant = () => {
   const { address } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
   // fetch feegrant allowances by address from selected network

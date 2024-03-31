@@ -9,12 +9,9 @@ import styles from './Sidebar.module.css'
 
 const Sidebar = () => {
   const { groupId } = useParams()
-
-  const { account } = useContext(AuthContext)
-
-  const { network } = useContext(WalletContext)
-
   const currentRoute = usePathname()
+  const { account } = useContext(AuthContext)
+  const { network } = useContext(WalletContext)
 
   if (groupId) {
     return (

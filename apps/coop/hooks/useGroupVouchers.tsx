@@ -3,19 +3,19 @@ import { useEffect, useState } from 'react'
 const queryVouchers = 'chora/voucher/v1/vouchers-by-issuer'
 const queryPolicies = 'cosmos/group/v1/group_policies_by_group'
 
-// fetch vouchers (curated by coop) from selected network
-export const useVouchers = (chainInfo: any, groupId: any) => {
+// fetch vouchers issued by group from selected network
+export const useGroupVouchers = (chainInfo: any, groupId: any) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [vouchers, setVouchers] = useState<any>(null)
 
-  // reset state on network or group id change
+  // reset state on param change
   useEffect(() => {
     setError(null)
     setVouchers(null)
   }, [chainInfo?.chainId, groupId])
 
-  // fetch on load and network or group id change
+  // fetch on load and param change
   useEffect(() => {
     // fetch policies and vouchers from selected network
     const fetchPoliciesAndVouchers = async () => {
@@ -56,7 +56,7 @@ export const useVouchers = (chainInfo: any, groupId: any) => {
       })
     }
 
-    // only fetch if network and group id
+    // only fetch if params available
     if (chainInfo?.rest && groupId) {
       fetchPoliciesAndVouchers().catch((err) => {
         setError(err.message)

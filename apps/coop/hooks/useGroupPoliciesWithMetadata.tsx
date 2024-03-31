@@ -11,13 +11,13 @@ export const useGroupPoliciesWithMetadata = (chainInfo: any, groupId: any) => {
   const [error, setError] = useState<string | null>(null)
   const [policies, setPolicies] = useState<any[] | null>(null)
 
-  // reset state on network, server, or group id change
+  // reset state on param change
   useEffect(() => {
     setError(null)
     setPolicies(null)
   }, [chainInfo?.chainId, serverUrl, groupId])
 
-  // fetch on load and network, server, or group id change
+  // fetch on load and param change
   useEffect(() => {
     // fetch policies with metadata from selected network and network server
     const fetchPoliciesWithMetadata = async () => {
@@ -82,7 +82,7 @@ export const useGroupPoliciesWithMetadata = (chainInfo: any, groupId: any) => {
       })
     }
 
-    // only fetch if network, server, and group id
+    // only fetch if params available
     if (chainInfo?.rest && serverUrl && groupId) {
       fetchPoliciesWithMetadata().catch((err) => {
         setError(err.message)

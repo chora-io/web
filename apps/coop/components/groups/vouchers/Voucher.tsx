@@ -2,6 +2,7 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { useMetadata } from 'chora/hooks'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
@@ -12,11 +13,18 @@ import styles from './Voucher.module.css'
 
 const Voucher = () => {
   const { id } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
-  // fetch voucher and voucher metadata from selected network and network server
-  const [voucher, metadata, error] = useVoucher(chainInfo, `${id}`)
+  // fetch voucher from selected network
+  const [voucher, voucherError] = useVoucher(chainInfo, `${id}`)
+
+  // fetch metadata from network server, otherwise resolve
+  const [metadata, metadataError] = useMetadata(
+    chainInfo,
+    voucher ? voucher.metadata : null,
+  )
+
+  const error = voucherError || metadataError
 
   return (
     <div className={styles.box}>

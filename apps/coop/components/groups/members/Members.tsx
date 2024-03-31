@@ -12,7 +12,6 @@ import styles from './Members.module.css'
 
 const Members = () => {
   const { groupId } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
   // fetch group members from selected network

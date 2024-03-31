@@ -2,6 +2,7 @@
 
 import { Result, ResultTx } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { useMetadata } from 'chora/hooks'
 import { formatTimestamp, signAndBroadcast } from 'chora/utils'
 import { MsgExec } from 'cosmos/api/cosmos/group/v1/tx'
 import * as Long from 'long'
@@ -19,19 +20,21 @@ import styles from './Proposal.module.css'
 
 const Proposal = () => {
   const { id, groupId } = useParams()
-
   const { chainInfo, wallet } = useContext(WalletContext)
 
-  // fetch group proposal and proposal metadata from selected network and network server
-  const [proposal, metadata, proposalError] = useGroupProposal(
+  // fetch proposal from selected network or indexer service
+  const [proposal, proposalError] = useGroupProposal(chainInfo, `${id}`)
+
+  // fetch metadata from network server, otherwise resolve
+  const [metadata, metadataError] = useMetadata(
     chainInfo,
-    `${id}`,
+    proposal ? proposal.metadata : null,
   )
 
-  // fetch group proposal votes from selected network (used to determine available actions)
+  // fetch group proposal votes from selected network (to determine available actions)
   const [votes, votesError] = useGroupProposalVotes(chainInfo, `${id}`)
 
-  const error = proposalError || votesError
+  const error = proposalError || metadataError || votesError
 
   // execution error and results
   const [execError, setExecError] = useState<string | null>(null)
@@ -84,10 +87,12 @@ const Proposal = () => {
 
   return (
     <div className={styles.box}>
-      <div className={styles.boxOptions}>
-        {proposal && currentVote && (
+      {proposal && currentVote && (
+        <div className={styles.boxOptions}>
           <>{`vote submitted (${currentVote['option']})`}</>
-        )}
+        </div>
+      )}
+      <div className={styles.boxOptions}>
         {proposal && !currentVote && !votesFinalized && (
           <Link href={`/groups/${groupId}/proposals/${id}/submit`}>
             {'submit vote'}

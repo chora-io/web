@@ -13,7 +13,7 @@ const Login = () => {
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
-  // form input
+  // form inputs
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 

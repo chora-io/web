@@ -6,17 +6,16 @@ import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import ProjectPreview from '@components/groups/projects/ProjectPreview'
-import { useCreditProjects } from '@hooks/useCreditProjects'
+import { useGroupProjects } from '@hooks/useGroupProjects'
 
 import styles from './Projects.module.css'
 
 const Projects = () => {
   const { groupId } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
-  // fetch credit projects (administered by coop) from selected network
-  const [projects, error] = useCreditProjects(chainInfo, groupId)
+  // fetch class projects administered by group from selected network
+  const [projects, error] = useGroupProjects(chainInfo, groupId)
 
   return (
     <div className={styles.box}>

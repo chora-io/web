@@ -11,7 +11,7 @@ const queryGroupPolicyInfo = '/cosmos/group/v1/group_policy_info'
 const QueryGroupPolicyInfo = () => {
   const { chainInfo, network } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [address, setAddress] = useState<string>('')
 
   // error and success

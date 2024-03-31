@@ -11,7 +11,7 @@ const queryBatchesByProject = '/regen/ecocredit/v1/batches-by-project'
 const QueryBatchesByProject = () => {
   const { chainInfo } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [projectId, setProjectId] = useState<string>('')
 
   // error and success

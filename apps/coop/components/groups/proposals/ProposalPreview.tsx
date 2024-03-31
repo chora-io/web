@@ -1,22 +1,17 @@
 import { WalletContext } from 'chora/contexts'
+import { useMetadata } from 'chora/hooks'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
-
-import { useGroupProposalMetadata } from '@hooks/useGroupProposalMetadata'
 
 import styles from './ProposalPreview.module.css'
 
 const ProposalPreview = ({ proposal }: any) => {
   const { groupId } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
-  // fetch group proposal metadata from network server
-  const [metadata, error] = useGroupProposalMetadata(
-    chainInfo,
-    proposal.metadata,
-  )
+  // fetch metadata from network server, otherwise resolve
+  const [metadata, error] = useMetadata(chainInfo, proposal.metadata)
 
   return (
     <div className={styles.boxItem}>

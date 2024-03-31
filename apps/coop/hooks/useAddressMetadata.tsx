@@ -16,13 +16,13 @@ export const useAddressMetadata = (
   const [error, setError] = useState<string | null>(null)
   const [metadata, setMetadata] = useState<any>(null)
 
-  // reset state on network, server, group id, or address change
+  // reset state on param change
   useEffect(() => {
     setError(null)
     setMetadata(null)
   }, [chainInfo?.chainId, serverUrl, groupId, address])
 
-  // fetch on load and network, server, group id, or address change
+  // fetch on load and param change
   useEffect(() => {
     // fetch metadata from selected network and network server
     const fetchMetadata = async () => {
@@ -72,20 +72,11 @@ export const useAddressMetadata = (
               setError(res.error)
             } else {
               const data = JSON.parse(res['jsonld'])
-              if (
-                data['@context'] !==
-                  'https://schema.chora.io/contexts/group_policy.jsonld' &&
-                data['@context'] !==
-                  'https://schema.chora.io/contexts/group_member.jsonld'
-              ) {
-                setError('unsupported metadata schema')
-              } else {
-                setMetadata({
-                  isPolicyAddress,
-                  address,
-                  name: data['name'],
-                })
-              }
+              setMetadata({
+                isPolicyAddress,
+                address,
+                name: data['name'],
+              })
             }
           })
           .catch((err) => {
@@ -94,7 +85,7 @@ export const useAddressMetadata = (
       }
     }
 
-    // only fetch if network, server, group id, and address
+    // only fetch if params available
     if ((chainInfo?.rest, serverUrl && groupId && address)) {
       fetchMetadata().catch((err) => {
         setError(err.message)

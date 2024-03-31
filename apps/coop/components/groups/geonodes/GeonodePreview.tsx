@@ -1,21 +1,20 @@
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { useMetadata } from 'chora/hooks'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import Address from '@components/Address'
-import { useGeonodeMetadata } from '@hooks/useGeonodeMetadata'
 
 import styles from './GeonodePreview.module.css'
 
 const GeonodePreview = ({ node }: any) => {
   const { groupId } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
-  // fetch node metadata by iri from network server
-  const [metadata, error] = useGeonodeMetadata(chainInfo, node.metadata)
+  // fetch metadata from network server, otherwise resolve
+  const [metadata, error] = useMetadata(chainInfo, node.metadata)
 
   return (
     <div className={styles.boxItem}>

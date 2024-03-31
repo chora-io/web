@@ -11,7 +11,7 @@ const queryNodesByCurator = '/chora/geonode/v1/nodes-by-curator'
 const QueryNodesByCurator = () => {
   const { chainInfo, network } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [curator, setCurator] = useState<string>('')
 
   // error and success

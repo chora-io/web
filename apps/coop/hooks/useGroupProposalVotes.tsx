@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 const queryVotes = 'cosmos/group/v1/votes_by_proposal'
 
-// fetch vote and vote metadata from selected network and network server
+// fetch votes by proposal id from selected network or indexer service
 export const useGroupProposalVotes = (chainInfo: any, proposalId: string) => {
   const [serverUrl] = useNetworkServer(chainInfo)
 
@@ -12,13 +12,13 @@ export const useGroupProposalVotes = (chainInfo: any, proposalId: string) => {
   const [error, setError] = useState<string | null>(null)
   const [votes, setVotes] = useState<any>(null)
 
-  // reset state on network or proposal id change
+  // reset state on param change
   useEffect(() => {
     setError(null)
     setVotes(null)
   }, [chainInfo?.chainId, proposalId])
 
-  // fetch on load and network or proposal id change
+  // fetch on load and param change
   useEffect(() => {
     // fetch votes and voters from selected network and network server
     const fetchVotes = async () => {
@@ -65,7 +65,7 @@ export const useGroupProposalVotes = (chainInfo: any, proposalId: string) => {
       setVotes(vs)
     }
 
-    // only fetch if network, server, and proposal id
+    // only fetch if params available
     if (chainInfo?.rest && serverUrl && proposalId) {
       fetchVotes().catch((err) => {
         setError(err.message)

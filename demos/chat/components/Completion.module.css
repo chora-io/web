@@ -6,8 +6,8 @@
   composes: box-header from 'chora/styles/box.css';
 }
 
-.boxResultBelow {
-  composes: box-result-below from 'chora/styles/box.css';
+.boxText {
+  composes: box-text from 'chora/styles/box.css';
 }
 
 .form {

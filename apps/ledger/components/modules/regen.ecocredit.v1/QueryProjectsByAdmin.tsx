@@ -11,7 +11,7 @@ const queryProjectsByAdmin = '/regen/ecocredit/v1/projects-by-admin'
 const QueryProjectsByAdmin = () => {
   const { chainInfo, network } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [admin, setAdmin] = useState<string>('')
 
   // error and success

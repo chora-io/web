@@ -11,7 +11,7 @@ const queryGroupMembers = '/cosmos/group/v1/group_members'
 const QueryGroupMembers = () => {
   const { chainInfo } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [id, setId] = useState<string>('')
 
   // error and success

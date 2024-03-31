@@ -2,19 +2,19 @@ import { useEffect, useState } from 'react'
 
 const queryPolicies = 'cosmos/group/v1/group_policies_by_group'
 
-// fetch group policies from selected network
+// fetch group policies by group id from selected network
 export const useGroupPolicies = (chainInfo: any, groupId: any) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [policies, setPolicies] = useState<any[] | null>(null)
 
-  // reset state on network or group id change
+  // reset state on param change
   useEffect(() => {
     setError(null)
     setPolicies(null)
   }, [chainInfo?.chainId, groupId])
 
-  // fetch on load and network or group id change
+  // fetch on load and param change
   useEffect(() => {
     // fetch policies from selected network
     const fetchPolicies = async () => {
@@ -39,7 +39,7 @@ export const useGroupPolicies = (chainInfo: any, groupId: any) => {
         })
     }
 
-    // only fetch if network and group id
+    // only fetch if params available
     if (chainInfo?.rest && groupId) {
       fetchPolicies().catch((err) => {
         setError(err.message)

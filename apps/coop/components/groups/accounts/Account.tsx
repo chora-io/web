@@ -2,6 +2,7 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { useMetadata } from 'chora/hooks'
 import { formatTimestamp } from 'chora/utils'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
@@ -13,11 +14,18 @@ import styles from './Account.module.css'
 
 const Account = () => {
   const { address } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
-  // fetch policy and policy metadata from selected network and network server
-  const [policy, metadata, error] = useGroupPolicy(chainInfo, `${address}`)
+  // fetch policy from selected network
+  const [policy, policyError] = useGroupPolicy(chainInfo, `${address}`)
+
+  // fetch metadata from network server, otherwise resolve
+  const [metadata, metadataError] = useMetadata(
+    chainInfo,
+    policy ? policy.metadata : null,
+  )
+
+  const error = policyError || metadataError
 
   return (
     <div className={styles.box}>

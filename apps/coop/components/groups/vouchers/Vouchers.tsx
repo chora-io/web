@@ -6,17 +6,16 @@ import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import VoucherPreview from '@components/groups/vouchers/VoucherPreview'
-import { useVouchers } from '@hooks/useVouchers'
+import { useGroupVouchers } from '@hooks/useGroupVouchers'
 
 import styles from './Vouchers.module.css'
 
 const Vouchers = () => {
   const { groupId } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
-  // fetch vouchers (curated by coop) from selected network
-  const [vouchers, error] = useVouchers(chainInfo, groupId)
+  // fetch vouchers issued by group from selected network
+  const [vouchers, error] = useGroupVouchers(chainInfo, groupId)
 
   return (
     <div className={styles.box}>

@@ -14,18 +14,17 @@ const LeaveGroup = () => {
   const { groupId } = useParams()
   const { chainInfo, wallet } = useContext(WalletContext)
 
-  // fetch and form error and success
+  // error and success
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<any>(null)
 
-  // submit group
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
     setError(null)
     setSuccess(null)
 
-    // set submit group message
+    // set message
     const msg = {
       $type: 'cosmos.group.v1.MsgLeaveGroup',
       address: wallet['bech32Address'],
@@ -57,11 +56,9 @@ const LeaveGroup = () => {
       <form className={styles.form} onSubmit={handleSubmit}>
         <button type="submit">{'submit'}</button>
       </form>
-      {(success || error) && (
-        <div className={styles.boxResultBelow}>
-          <ResultTx error={error} rest={chainInfo?.rest} success={success} />
-        </div>
-      )}
+      <div className={styles.boxText}>
+        <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+      </div>
     </div>
   )
 }

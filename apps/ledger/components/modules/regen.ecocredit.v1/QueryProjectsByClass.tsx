@@ -11,7 +11,7 @@ const queryProjectsByClass = '/regen/ecocredit/v1/projects-by-class'
 const QueryProjectsByClass = () => {
   const { chainInfo } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [classId, setClassId] = useState<string>('')
 
   // error and success

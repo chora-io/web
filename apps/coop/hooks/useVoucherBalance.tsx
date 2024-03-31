@@ -12,19 +12,17 @@ export const useVoucherBalance = (
   const [error, setError] = useState<string | null>(null)
   const [balance, setBalance] = useState<any>(null)
 
-  // reset state on network, voucher id, or address change
+  // reset state on param change
   useEffect(() => {
     setError(null)
     setBalance(null)
   }, [chainInfo?.chainId, voucherId, address])
 
-  // fetch on load and network, voucher id, or address change
+  // fetch on load and param change
   useEffect(() => {
     // fetch balance from selected network
     const fetchBalance = async () => {
       let balance: any
-
-      // fetch balance from selected network
       await fetch(
         chainInfo.rest + '/' + queryBalance + '/' + voucherId + '/' + address,
       )
@@ -39,7 +37,7 @@ export const useVoucherBalance = (
         })
     }
 
-    // only fetch if network, voucher id, and address
+    // only fetch if params available
     if (chainInfo?.rest && voucherId && address) {
       fetchBalance().catch((err) => {
         setError(err.message)

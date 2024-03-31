@@ -2,12 +2,13 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { useMetadata } from 'chora/hooks'
+import { formatTimestamp } from 'chora/utils'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import { useBatch } from '@hooks/useBatch'
-import { useMetadata } from '@hooks/useMetadata'
 
 import styles from './Batch.module.css'
 
@@ -32,7 +33,11 @@ const Batch = () => {
       </div>
       <div className={styles.boxText}>
         <h3>{'issuance date'}</h3>
-        <p>{batch && batch['issuance_date'] ? batch['issuance_date'] : 'NA'}</p>
+        <p>
+          {batch && batch['issuance_date']
+            ? formatTimestamp(batch['issuance_date'])
+            : 'NA'}
+        </p>
       </div>
       <div className={styles.boxText}>
         <h3>{'issuer'}</h3>
@@ -52,11 +57,19 @@ const Batch = () => {
       </div>
       <div className={styles.boxText}>
         <h3>{'start date'}</h3>
-        <p>{batch && batch['start_date'] ? batch['start_date'] : 'NA'}</p>
+        <p>
+          {batch && batch['start_date']
+            ? formatTimestamp(batch['start_date'])
+            : 'NA'}
+        </p>
       </div>
       <div className={styles.boxText}>
         <h3>{'end date'}</h3>
-        <p>{batch && batch['end_date'] ? batch['end_date'] : 'NA'}</p>
+        <p>
+          {batch && batch['end_date']
+            ? formatTimestamp(batch['end_date'])
+            : 'NA'}
+        </p>
       </div>
       <div className={styles.boxText}>
         <h3>{'metadata'}</h3>

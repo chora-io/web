@@ -15,21 +15,19 @@ import styles from './VoteOnProposal.module.css'
 
 const VoteOnProposal = () => {
   const { id } = useParams()
-
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
-  // form input
+  // form inputs
   const [vote, setVote] = useState<string>('')
   const [reason, setReason] = useState<string>('')
   const [execution, setExecution] = useState<string>('')
 
-  // form error and success
+  // error and success
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<any>(null)
 
-  // submit vote
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
@@ -144,11 +142,9 @@ const VoteOnProposal = () => {
         />
         <button type="submit">{'submit'}</button>
       </form>
-      {(success || error) && (
-        <div className={styles.boxResultBelow}>
-          <ResultTx error={error} rest={chainInfo?.rest} success={success} />
-        </div>
-      )}
+      <div className={styles.boxText}>
+        <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+      </div>
     </div>
   )
 }

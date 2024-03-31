@@ -11,7 +11,7 @@ const queryBalance = '/regen/ecocredit/v1/balance'
 const QueryBalance = () => {
   const { chainInfo, network } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [address, setAddress] = useState<string>('')
   const [denom, setDenom] = useState<string>('')
 

@@ -2,6 +2,7 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { useMetadata } from 'chora/hooks'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
@@ -12,11 +13,18 @@ import styles from './Geonode.module.css'
 
 const Geonode = () => {
   const { id } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
-  // fetch node and node metadata from selected network and network server
-  const [node, metadata, error] = useGeonode(chainInfo, `${id}`)
+  // fetch node from selected network
+  const [node, nodeError] = useGeonode(chainInfo, `${id}`)
+
+  // fetch metadata from network server, otherwise resolve
+  const [metadata, metadataError] = useMetadata(
+    chainInfo,
+    node ? node.metadata : null,
+  )
+
+  const error = nodeError || metadataError
 
   return (
     <div className={styles.box}>

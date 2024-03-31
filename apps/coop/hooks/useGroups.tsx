@@ -8,13 +8,13 @@ export const useGroups = (chainInfo: any, maxItems: number, offset: number) => {
   const [error, setError] = useState<string | null>(null)
   const [groups, setGroups] = useState<any>(null)
 
-  // reset state on network change
+  // reset state on param change
   useEffect(() => {
     setError(null)
     setGroups(null)
   }, [chainInfo?.chainId])
 
-  // fetch on load and network change
+  // fetch on load and param change
   useEffect(() => {
     // TODO(cosmos-sdk): query all groups with pagination..?
 
@@ -40,7 +40,7 @@ export const useGroups = (chainInfo: any, maxItems: number, offset: number) => {
       setGroups(groups)
     }
 
-    // only fetch if network
+    // only fetch if params available
     if (chainInfo?.rest) {
       fetchGroups().catch((err) => {
         setError(err.message)

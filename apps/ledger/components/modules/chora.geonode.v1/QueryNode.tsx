@@ -11,7 +11,7 @@ const queryNode = '/chora/geonode/v1/node'
 const QueryNode = () => {
   const { chainInfo } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [id, setId] = useState<string>('')
 
   // error and success

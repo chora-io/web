@@ -11,7 +11,7 @@ const queryContent = '/chora/content/v1/content'
 const QueryContent = () => {
   const { chainInfo } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [id, setId] = useState<string>('')
 
   // error and success

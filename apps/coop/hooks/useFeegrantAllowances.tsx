@@ -10,14 +10,14 @@ export const useFeegrantAllowances = (chainInfo: any, address: string) => {
   const [allowancesGrantee, setAllowancesGrantee] = useState<any[] | null>(null)
   const [allowancesGranter, setAllowancesGranter] = useState<any[] | null>(null)
 
-  // reset state on network or address change
+  // reset state on params change
   useEffect(() => {
     setError(null)
     setAllowancesGrantee(null)
     setAllowancesGranter(null)
   }, [chainInfo?.chainId, address])
 
-  // fetch on load and network or address change
+  // fetch on load and params change
   useEffect(() => {
     // fetch allowances by grantee from selected network
     const fetchAllowancesByGrantee = async () => {
@@ -49,7 +49,7 @@ export const useFeegrantAllowances = (chainInfo: any, address: string) => {
         })
     }
 
-    // only fetch if network and address
+    // only fetch if params available
     if (chainInfo?.rest && address) {
       fetchAllowancesByGrantee().catch((err) => {
         setError(err.message)

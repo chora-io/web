@@ -11,7 +11,7 @@ const queryBalancesByBatch = '/regen/ecocredit/v1/balances-by-batch'
 const QueryBalancesByBatch = () => {
   const { chainInfo } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [denom, setDenom] = useState<string>('')
 
   // error and success

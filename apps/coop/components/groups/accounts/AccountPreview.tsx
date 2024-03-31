@@ -1,20 +1,18 @@
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { useMetadata } from 'chora/hooks'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
-
-import { useGroupPolicyMetadata } from '@hooks/useGroupPolicyMetadata'
 
 import styles from './AccountPreview.module.css'
 
 const AccountPreview = ({ policy }: any) => {
   const { groupId } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
-  // fetch policy metadata by iri from network server
-  const [metadata, error] = useGroupPolicyMetadata(chainInfo, policy.metadata)
+  // fetch metadata from network server, otherwise resolve
+  const [metadata, error] = useMetadata(chainInfo, policy.metadata)
 
   return (
     <div className={styles.boxItem}>

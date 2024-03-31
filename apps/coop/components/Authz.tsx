@@ -11,7 +11,6 @@ import styles from './Authz.module.css'
 
 const Authz = () => {
   const { address } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
   // fetch authz grants by address from selected network

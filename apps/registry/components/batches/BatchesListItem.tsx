@@ -1,4 +1,5 @@
 import { WalletContext } from 'chora/contexts'
+import { formatTimestamp } from 'chora/utils'
 import Link from 'next/link'
 import { useContext } from 'react'
 
@@ -15,7 +16,7 @@ const BatchesListItem = ({ batch }: any) => {
       </div>
       <div className={styles.boxText}>
         <h3>{'issuance date'}</h3>
-        <p>{batch['issuance_date']}</p>
+        <p>{formatTimestamp(batch['issuance_date'])}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'issuer'}</h3>

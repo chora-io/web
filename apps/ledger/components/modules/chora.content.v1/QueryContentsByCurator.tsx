@@ -11,7 +11,7 @@ const queryContentsByCurator = '/chora/content/v1/contents-by-curator'
 const QueryContentsByCurator = () => {
   const { chainInfo, network } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [curator, setCurator] = useState<string>('')
 
   // error and success

@@ -12,7 +12,6 @@ import styles from './Proposals.module.css'
 
 const Proposals = () => {
   const { groupId } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
   // fetch group proposals from selected network

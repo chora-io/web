@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 const queryResolvers = 'regen/data/v1/resolvers-by-iri'
 
-// fetch metadata using network server, otherwise data resolvers
+// fetch metadata by iri from network server, otherwise resolve
 export const useMetadata = (chainInfo: any, iri: string) => {
   const [serverUrl] = useNetworkServer(chainInfo)
 
@@ -20,8 +20,10 @@ export const useMetadata = (chainInfo: any, iri: string) => {
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch metadata by iri using network server, otherwise data resolvers
+    // fetch metadata by iri from network server, otherwise resolve
     const fetchMetadata = async () => {
+      let metadata: string = ''
+
       // fetch metadata using network server
       await fetch(serverUrl + '/data/' + iri)
         .then((res) => res.json())
@@ -29,7 +31,7 @@ export const useMetadata = (chainInfo: any, iri: string) => {
           if (res.error) {
             setError(res.error)
           } else {
-            setMetadata(JSON.parse(res['jsonld']))
+            metadata = JSON.parse(res['jsonld'])
             setResolverUrl(serverUrl + '/data/')
           }
         })
@@ -37,10 +39,12 @@ export const useMetadata = (chainInfo: any, iri: string) => {
           setError(err.message)
         })
 
-      let resolvers: any[] = []
+      setMetadata(metadata)
 
-      // only if metadata not available on network server
+      // only resolve if metadata not available on network server
       if (!metadata) {
+        let resolvers: any[] = []
+
         // fetch data resolvers by iri
         await fetch(chainInfo.rest + '/' + queryResolvers + '/' + iri)
           .then((res) => res.json())
@@ -51,28 +55,28 @@ export const useMetadata = (chainInfo: any, iri: string) => {
               resolvers = res['resolvers']
             }
           })
-      }
 
-      // only if no metadata and resolvers available
-      if (!metadata && resolvers.length > 0) {
-        // TODO: retry with multiple resolvers
-        const url = resolvers[0].url
+        // only if resolvers available
+        if (resolvers.length > 0) {
+          // TODO: retry with multiple resolvers
+          const url = resolvers[0].url
 
-        // fetch metadata using data resolver
-        await fetch(url + iri)
-          .then((res) => res.json())
-          .then((res) => {
-            if (res.error) {
-              setError(res.error)
-            } else {
-              // TODO: standard/expected response?
-              setMetadata(JSON.parse(res['jsonld']))
-              setResolverUrl(url)
-            }
-          })
-          .catch((err) => {
-            setError(err.message)
-          })
+          // fetch metadata using data resolver
+          await fetch(url + iri)
+            .then((res) => res.json())
+            .then((res) => {
+              if (res.error) {
+                setError(res.error)
+              } else {
+                // TODO: standard/expected response?
+                setMetadata(JSON.parse(res['jsonld']))
+                setResolverUrl(url)
+              }
+            })
+            .catch((err) => {
+              setError(err.message)
+            })
+        }
       }
     }
 

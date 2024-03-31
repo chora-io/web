@@ -2,10 +2,9 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { useMetadata } from 'chora/hooks'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
-
-import { useMetadata } from '@hooks/useMetadata'
 
 import styles from './Resolved.module.css'
 

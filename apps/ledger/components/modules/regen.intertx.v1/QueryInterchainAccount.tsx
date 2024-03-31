@@ -11,7 +11,7 @@ const queryInterchainAccount = '/regen/intertx/v1/interchain-account'
 const QueryInterchainAccount = () => {
   const { chainInfo, network } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [owner, setOwner] = useState<string>('')
   const [connectionId, setConnectionId] = useState<string>('')
 

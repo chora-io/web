@@ -11,7 +11,7 @@ const queryBalancesByAddress = '/chora/voucher/v1/balances-by-address'
 const QueryBalancesByAddress = () => {
   const { chainInfo } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [address, setAddress] = useState<string>('')
 
   // error and success

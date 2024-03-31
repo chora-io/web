@@ -11,7 +11,7 @@ const queryBatchesByIssuer = '/regen/ecocredit/v1/batches-by-issuer'
 const QueryBatchesByIssuer = () => {
   const { chainInfo, network } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [issuer, setIssuer] = useState<string>('')
 
   // error and success

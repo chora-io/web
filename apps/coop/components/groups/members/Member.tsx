@@ -2,6 +2,7 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { useMetadata } from 'chora/hooks'
 import { formatTimestamp } from 'chora/utils'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
@@ -12,15 +13,18 @@ import styles from './Member.module.css'
 
 const Member = () => {
   const { address, groupId } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
-  // fetch member and member metadata from selected network and network server
-  const [member, metadata, error] = useGroupMember(
+  // fetch member from selected network
+  const [member, memberError] = useGroupMember(chainInfo, groupId, `${address}`)
+
+  // fetch metadata from network server, otherwise resolve
+  const [metadata, metadataError] = useMetadata(
     chainInfo,
-    groupId,
-    `${address}`,
+    member ? member.metadata : null,
   )
+
+  const error = memberError || metadataError
 
   return (
     <div className={styles.box}>

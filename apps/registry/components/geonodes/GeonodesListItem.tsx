@@ -1,9 +1,8 @@
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { useMetadata } from 'chora/hooks'
 import Link from 'next/link'
 import { useContext } from 'react'
-
-import { useMetadata } from '@hooks/useMetadata'
 
 import styles from './GeonodesListItem.module.css'
 

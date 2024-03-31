@@ -11,7 +11,7 @@ const queryVoucher = '/chora/voucher/v1/voucher'
 const QueryVoucher = () => {
   const { chainInfo } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [id, setId] = useState<string>('')
 
   // error and success

@@ -13,7 +13,6 @@ import styles from './Balances.module.css'
 
 const Balances = () => {
   const { id, groupId } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
   // fetch voucher balances from selected network

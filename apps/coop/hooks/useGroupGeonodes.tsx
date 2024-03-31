@@ -1,24 +1,24 @@
 import { useEffect, useState } from 'react'
 
-const queryProjects = 'regen/ecocredit/v1/projects-by-admin'
+const queryGeonodes = 'chora/geonode/v1/nodes-by-curator'
 const queryPolicies = 'cosmos/group/v1/group_policies_by_group'
 
-// fetch projects (curated by coop) from selected network
-export const useCreditProjects = (chainInfo: any, groupId: any) => {
+// fetch geonodes curated by group from selected network
+export const useGroupGeonodes = (chainInfo: any, groupId: any) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
-  const [projects, setProjects] = useState<any>(null)
+  const [nodes, setNodes] = useState<any>(null)
 
-  // reset state on network or group id change
+  // reset state on param change
   useEffect(() => {
     setError(null)
-    setProjects(null)
+    setNodes(null)
   }, [chainInfo?.chainId, groupId])
 
-  // fetch on load and network or group id change
+  // fetch on load and param change
   useEffect(() => {
-    // fetch policies and projects from selected network
-    const fetchPoliciesAndProjects = async () => {
+    // fetch policies and nodes from selected network
+    const fetchPoliciesAndNodes = async () => {
       let addrs: string[] = []
 
       // fetch policies by group id from selected network
@@ -34,35 +34,35 @@ export const useCreditProjects = (chainInfo: any, groupId: any) => {
           }
         })
 
-      const cs: any[] = []
+      const ns: any[] = []
 
       // create promise for all async fetch calls
       const promise = addrs.map(async (addr) => {
-        // fetch projects by admin address from selected network
-        await fetch(chainInfo.rest + '/' + queryProjects + '/' + addr)
+        // fetch nodes by curator address from selected network
+        await fetch(chainInfo.rest + '/' + queryGeonodes + '/' + addr)
           .then((res) => res.json())
           .then((res) => {
             if (res.code) {
               setError(res.message)
             } else {
-              res['projects'].map((n: any) => cs.push({ admin: addr, ...n }))
+              res['nodes'].map((n: any) => ns.push({ curator: addr, ...n }))
             }
           })
       })
 
       // set state after promise all complete
       await Promise.all(promise).then(() => {
-        setProjects(cs)
+        setNodes(ns)
       })
     }
 
-    // only fetch if network and group id
+    // only fetch if params available
     if (chainInfo?.rest && groupId) {
-      fetchPoliciesAndProjects().catch((err) => {
+      fetchPoliciesAndNodes().catch((err) => {
         setError(err.message)
       })
     }
   }, [chainInfo?.rest, groupId])
 
-  return [projects, error]
+  return [nodes, error]
 }

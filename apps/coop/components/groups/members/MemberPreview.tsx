@@ -1,20 +1,18 @@
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { useMetadata } from 'chora/hooks'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
-
-import { useGroupMemberMetadata } from '@hooks/useGroupMemberMetadata'
 
 import styles from './MemberPreview.module.css'
 
 const MemberPreview = ({ member }: any) => {
   const { groupId } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
-  // fetch member metadata by iri from network server
-  const [metadata, error] = useGroupMemberMetadata(chainInfo, member.metadata)
+  // fetch metadata from network server, otherwise resolve
+  const [metadata, error] = useMetadata(chainInfo, member.metadata)
 
   return (
     <div className={styles.boxItem}>

@@ -12,7 +12,6 @@ import styles from './Accounts.module.css'
 
 const Accounts = () => {
   const { groupId } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
   // fetch group policies from selected network

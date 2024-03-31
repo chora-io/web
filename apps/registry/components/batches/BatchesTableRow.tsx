@@ -1,4 +1,5 @@
 import { WalletContext } from 'chora/contexts'
+import { formatTimestamp } from 'chora/utils'
 import Link from 'next/link'
 import { useContext } from 'react'
 
@@ -10,7 +11,7 @@ const BatchesTableRow = ({ batch }: any) => {
   return (
     <tr>
       <td>{batch.denom}</td>
-      <td>{batch['issuance_date']}</td>
+      <td>{formatTimestamp(batch['issuance_date'])}</td>
       <td>
         {batch.issuer.substring(0, 13) + '...' + batch.issuer.substring(38, 44)}
         {wallet && batch.issuer === wallet.bech32Address && (

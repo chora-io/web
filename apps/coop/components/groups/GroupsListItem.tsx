@@ -1,17 +1,19 @@
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { useMetadata } from 'chora/hooks'
 import Link from 'next/link'
 import { useContext } from 'react'
-
-import { useGroupMetadata } from '@hooks/useGroupMetadata'
 
 import styles from './GroupsListItem.module.css'
 
 const GroupsListItem = ({ group }: any) => {
   const { chainInfo, wallet } = useContext(WalletContext)
 
-  // fetch group metadata by iri from network server
-  const [metadata, error] = useGroupMetadata(chainInfo, group)
+  // fetch metadata from network server, otherwise resolve
+  const [metadata, error] = useMetadata(
+    chainInfo,
+    group ? group.metadata : null,
+  )
 
   // TODO: handle error
   if (error) {

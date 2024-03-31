@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 const queryPolicies = 'cosmos/group/v1/group_policies_by_group'
 const queryProposals = 'cosmos/group/v1/proposals_by_group_policy'
 
-// fetch group proposals from selected network
+// fetch group proposals from selected network or indexer service
 export const useGroupProposals = (chainInfo: any, groupId: any) => {
   const [serverUrl] = useNetworkServer(chainInfo)
 
@@ -16,13 +16,13 @@ export const useGroupProposals = (chainInfo: any, groupId: any) => {
   const [error, setError] = useState<string | null>(null)
   const [proposals, setProposals] = useState<any[] | null>(null)
 
-  // reset state on network or group id change
+  // reset state on param change
   useEffect(() => {
     setError(null)
     setProposals(null)
   }, [chainInfo?.chainId, groupId])
 
-  // fetch on load and network or group id change
+  // fetch on load and param change
   useEffect(() => {
     // fetch proposals and metadata from selected network and network server
     const fetchProposals = async () => {
@@ -94,7 +94,7 @@ export const useGroupProposals = (chainInfo: any, groupId: any) => {
       })
     }
 
-    // only fetch if network, group, and server
+    // only fetch if params available
     if (chainInfo?.rest && groupId && serverUrl) {
       fetchProposals().catch((err) => {
         setError(err.message)

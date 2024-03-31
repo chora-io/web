@@ -11,7 +11,7 @@ const queryClassIssuers = '/regen/ecocredit/v1/class-issuers'
 const QueryClassIssuers = () => {
   const { chainInfo } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [id, setId] = useState<string>('')
 
   // error and success

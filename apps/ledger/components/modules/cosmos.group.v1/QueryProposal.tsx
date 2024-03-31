@@ -11,7 +11,7 @@ const queryProposal = '/cosmos/group/v1/proposal'
 const QueryProposal = () => {
   const { chainInfo } = useContext(WalletContext)
 
-  // form input
+  // form inputs
   const [id, setId] = useState<string>('')
 
   // error and success
