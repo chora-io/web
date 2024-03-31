@@ -167,7 +167,7 @@ const Account = () => {
             <p style={{ fontSize: '0.9em' }}>
               <i>
                 {
-                  "Note: Address does not match active account address and that's ok."
+                  "Note: Address does not match active keplr account and that's ok."
                 }
               </i>
             </p>

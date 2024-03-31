@@ -13,7 +13,7 @@ const GeonodePreview = ({ node }: any) => {
   const { groupId } = useParams()
   const { chainInfo } = useContext(WalletContext)
 
-  // fetch metadata from network server, otherwise resolve
+  // parse metadata or fetch from network server, otherwise resolve
   const [metadata, error] = useMetadata(chainInfo, node.metadata)
 
   return (

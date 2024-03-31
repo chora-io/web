@@ -18,7 +18,7 @@ const Voucher = () => {
   // fetch voucher from selected network
   const [voucher, voucherError] = useVoucher(chainInfo, `${id}`)
 
-  // fetch metadata from network server, otherwise resolve
+  // parse metadata or fetch from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(
     chainInfo,
     voucher ? voucher.metadata : null,

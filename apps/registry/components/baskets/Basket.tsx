@@ -17,7 +17,7 @@ const Basket = () => {
   // fetch credit basket from selected network
   const [basket, basketError] = useBasket(chainInfo, `${denom}`)
 
-  // fetch metadata from network server, otherwise resolve
+  // parse metadata or fetch from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(
     chainInfo,
     basket ? basket.metadata : null,

@@ -23,7 +23,7 @@ const ProposalVote = () => {
     `${address}`,
   )
 
-  // fetch metadata from network server, otherwise resolve
+  // parse metadata or fetch from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(
     chainInfo,
     vote ? vote.metadata : null,

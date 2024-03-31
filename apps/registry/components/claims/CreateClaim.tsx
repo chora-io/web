@@ -10,6 +10,7 @@ import {
 import {
   InputJSON,
   InputsFromJSON,
+  InputString,
   Result,
   ResultTx,
   SelectContext,
@@ -48,6 +49,7 @@ const CreateClaim = () => {
   const [error, setError] = useState<string | null>(null)
   const [contentHash, setContentHash] = useState<any>(null)
   const [convertSuccess, setConvertSuccess] = useState<string | null>(null)
+  const [registerSuccess, setRegisterSuccess] = useState<string | null>(null)
   const [serverSuccess, setServerSuccess] = useState<string | null>(null)
   const [txSuccess, setTxSuccess] = useState<any>(null)
 
@@ -179,7 +181,7 @@ const CreateClaim = () => {
         if (data.code) {
           setError(data.message)
         } else {
-          setConvertSuccess(`${data.iri} (converted from hash)`)
+          setConvertSuccess(data.iri)
         }
       })
       .catch((err) => {
@@ -209,7 +211,7 @@ const CreateClaim = () => {
         if (data.error) {
           setError(data.error)
         } else {
-          setServerSuccess(`${data.iri} (stored on chora server)`)
+          setServerSuccess(data.iri)
         }
       })
       .catch((err) => {
@@ -251,6 +253,27 @@ const CreateClaim = () => {
           setError(err.message)
         }
       })
+  }
+
+  const handleSubmitRegister = async (event: {
+    preventDefault: () => void
+  }) => {
+    event.preventDefault()
+
+    setError(null)
+
+    if (!wallet) {
+      setError('keplr not connected')
+      return
+    }
+
+    // TODO: look up existing resolver by url and manager
+
+    // TODO: if existing resolver, register data to resolver
+
+    // TODO: if no resolver, define resolver and register data
+
+    setRegisterSuccess('not yet implemented')
   }
 
   return (
@@ -338,9 +361,6 @@ const CreateClaim = () => {
       >
         {'convert to iri'}
       </button>
-      <button className={styles.button} onClick={handleSubmitServer}>
-        {'post to server'}
-      </button>
       <button
         className={!contentHash ? styles.buttonDisabled : styles.button}
         onClick={handleSubmitAnchorAndAttest}
@@ -359,12 +379,53 @@ const CreateClaim = () => {
       <div className={styles.boxText}>
         <Result success={convertSuccess} />
       </div>
-      <div className={styles.boxText}>
-        <Result success={serverSuccess} />
-      </div>
+
       <div className={styles.boxText}>
         <ResultTx rest={chainInfo?.rest} success={txSuccess} />
       </div>
+      {txSuccess && (
+        <>
+          <hr />
+          <div className={styles.boxText}>
+            <p>
+              {
+                'Post data to chora server to make it available to this application and anyone with the iri.'
+              }
+            </p>
+          </div>
+          <div className={styles.boxText}>
+            <button className={styles.button} onClick={handleSubmitServer}>
+              {'post to server'}
+            </button>
+          </div>
+          <div className={styles.boxText}>
+            <Result success={serverSuccess} />
+          </div>
+          <div className={styles.boxText}>
+            <p>
+              {
+                'Register data to a resolver to make the data available for lookup using the current network.'
+              }
+            </p>
+          </div>
+          <form className={styles.form}>
+            <InputString
+              label={'resolver url'}
+              placeholder={'https://server.chora.io/data/'}
+              string={''}
+              setString={() => console.log('')}
+            />
+          </form>
+          <div className={styles.boxText}>
+            <button className={styles.button} onClick={handleSubmitRegister}>
+              {'register data'}
+            </button>
+          </div>
+          <div className={styles.boxText}>
+            <Result success={registerSuccess} />
+          </div>
+        </>
+      )}
     </div>
   )
 }

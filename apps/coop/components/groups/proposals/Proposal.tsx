@@ -25,7 +25,7 @@ const Proposal = () => {
   // fetch proposal from selected network or indexer service
   const [proposal, proposalError] = useGroupProposal(chainInfo, `${id}`)
 
-  // fetch metadata from network server, otherwise resolve
+  // parse metadata or fetch from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(
     chainInfo,
     proposal ? proposal.metadata : null,

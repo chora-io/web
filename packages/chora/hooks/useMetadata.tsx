@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 
 const queryResolvers = 'regen/data/v1/resolvers-by-iri'
 
-// fetch metadata by iri from network server, otherwise resolve
-export const useMetadata = (chainInfo: any, iri: string) => {
+// parse metadata or fetch from network server, otherwise resolve
+export const useMetadata = (chainInfo: any, unresolved: string) => {
   const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results
@@ -16,26 +16,28 @@ export const useMetadata = (chainInfo: any, iri: string) => {
   useEffect(() => {
     setError(null)
     setMetadata(null)
-  }, [chainInfo?.chainId, iri])
+  }, [chainInfo?.chainId, unresolved])
 
   // fetch on load and param change
   useEffect(() => {
-    // check json string
-    try {
-      const parsedJson = JSON.parse(iri)
-      setMetadata(parsedJson)
-      return // exit effect
-    } catch (e) {
-      // continue
-    }
+    if (typeof unresolved === 'string') {
+      // check json string
+      try {
+        const parsedJson = JSON.parse(unresolved)
+        setMetadata(parsedJson)
+        return // exit effect
+      } catch (e) {
+        // continue
+      }
 
-    // check ipfs url
-    if (iri.includes('ipfs://')) {
-      // TODO: fetch data from ipfs
+      // check ipfs url
+      if (unresolved.includes('ipfs://')) {
+        // TODO: fetch data from ipfs
 
-      console.error('ipfs not supported')
+        console.error('ipfs not supported')
 
-      return // exit effect
+        return // exit effect
+      }
     }
 
     // fetch metadata by iri from network server, otherwise resolve
@@ -43,7 +45,7 @@ export const useMetadata = (chainInfo: any, iri: string) => {
       let metadata: string = ''
 
       // fetch metadata using network server
-      await fetch(serverUrl + '/data/' + iri)
+      await fetch(serverUrl + '/data/' + unresolved)
         .then((res) => res.json())
         .then((res) => {
           if (res.error) {
@@ -64,7 +66,7 @@ export const useMetadata = (chainInfo: any, iri: string) => {
         let resolvers: any[] = []
 
         // fetch data resolvers by iri
-        await fetch(chainInfo.rest + '/' + queryResolvers + '/' + iri)
+        await fetch(chainInfo.rest + '/' + queryResolvers + '/' + unresolved)
           .then((res) => res.json())
           .then((res) => {
             if (res.code) {
@@ -80,7 +82,7 @@ export const useMetadata = (chainInfo: any, iri: string) => {
           const url = resolvers[0].url
 
           // fetch metadata using data resolver
-          await fetch(url + iri)
+          await fetch(url + unresolved)
             .then((res) => res.json())
             .then((res) => {
               if (res.error) {
@@ -99,12 +101,12 @@ export const useMetadata = (chainInfo: any, iri: string) => {
     }
 
     // only fetch if params available
-    if (chainInfo?.rest && serverUrl && iri) {
+    if (chainInfo?.rest && serverUrl && unresolved) {
       fetchMetadata().catch((err) => {
         setError(err.message)
       })
     }
-  }, [chainInfo, serverUrl, iri])
+  }, [chainInfo, serverUrl, unresolved])
 
   return [metadata, error, resolverUrl]
 }

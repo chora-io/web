@@ -19,7 +19,7 @@ const Group = () => {
   // fetch group and group metadata from selected network and network server
   const [group, groupError] = useGroupInfo(chainInfo, groupId)
 
-  // fetch metadata from network server, otherwise resolve
+  // parse metadata or fetch from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(
     chainInfo,
     group ? group.metadata : null,

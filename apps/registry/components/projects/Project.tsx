@@ -18,7 +18,7 @@ const Project = () => {
   // fetch project from selected network
   const [project, projectError] = useProject(chainInfo, `${id}`)
 
-  // fetch metadata from network server, otherwise resolve
+  // parse metadata or fetch from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(
     chainInfo,
     project ? project.metadata : null,

@@ -19,7 +19,7 @@ const Account = () => {
   // fetch policy from selected network
   const [policy, policyError] = useGroupPolicy(chainInfo, `${address}`)
 
-  // fetch metadata from network server, otherwise resolve
+  // parse metadata or fetch from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(
     chainInfo,
     policy ? policy.metadata : null,

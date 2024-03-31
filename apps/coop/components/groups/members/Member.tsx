@@ -18,7 +18,7 @@ const Member = () => {
   // fetch member from selected network
   const [member, memberError] = useGroupMember(chainInfo, groupId, `${address}`)
 
-  // fetch metadata from network server, otherwise resolve
+  // parse metadata or fetch from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(
     chainInfo,
     member ? member.metadata : null,

@@ -26,7 +26,7 @@ export const useAddressMetadata = (
   useEffect(() => {
     // fetch metadata from selected network and network server
     const fetchMetadata = async () => {
-      let iri: string | undefined
+      let unresolved: string | undefined
       let isPolicyAddress = false
 
       // handle metadata as policy, otherwise member
@@ -40,7 +40,7 @@ export const useAddressMetadata = (
               throw Error(res.message)
             } else {
               isPolicyAddress = true
-              iri = res['info']['metadata']
+              unresolved = res['info']['metadata']
             }
           })
       } catch (e) {
@@ -57,16 +57,16 @@ export const useAddressMetadata = (
                 (m: any) => m['member']['address'] === address,
               )
               if (found) {
-                iri = found['member']['metadata']
+                unresolved = found['member']['metadata']
               }
             }
           })
       }
 
-      if (typeof iri !== 'undefined') {
+      if (typeof unresolved === 'string') {
         // check json string
         try {
-          const parsedJson = JSON.parse(iri)
+          const parsedJson = JSON.parse(unresolved)
           setMetadata({
             isPolicyAddress,
             address,
@@ -78,7 +78,7 @@ export const useAddressMetadata = (
         }
 
         // check ipfs url
-        if (iri.includes('ipfs://')) {
+        if (unresolved.includes('ipfs://')) {
           // TODO: fetch data from ipfs
 
           console.error('ipfs not supported')
@@ -87,7 +87,7 @@ export const useAddressMetadata = (
         }
 
         // fetch member metadata from network server
-        await fetch(serverUrl + '/data/' + iri)
+        await fetch(serverUrl + '/data/' + unresolved)
           .then((res) => res.json())
           .then((res) => {
             if (res.error) {

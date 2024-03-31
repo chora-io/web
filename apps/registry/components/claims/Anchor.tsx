@@ -2,6 +2,7 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { formatTimestamp } from 'chora/utils'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
@@ -24,7 +25,7 @@ const Anchor = () => {
       </div>
       <div className={styles.boxText}>
         <h3>{'timestamp'}</h3>
-        <p>{anchor ? anchor['timestamp'] : 'NA'}</p>
+        <p>{anchor ? formatTimestamp(anchor['timestamp']) : 'NA'}</p>
       </div>
       <hr />
       {anchor && (

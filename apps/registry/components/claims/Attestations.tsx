@@ -2,6 +2,7 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { formatTimestamp } from 'chora/utils'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
@@ -33,7 +34,9 @@ const Attestations = () => {
             </div>
             <div className={styles.boxText}>
               <h3>{'timestamp'}</h3>
-              <p>{attestation ? attestation['timestamp'] : 'NA'}</p>
+              <p>
+                {attestation ? formatTimestamp(attestation['timestamp']) : 'NA'}
+              </p>
             </div>
           </div>
         ))}

@@ -171,5 +171,5 @@ pre {
 }
 
 hr {
-  border: 1px solid var(--box-shadow-color);
+  border: 0.05em solid var(--box-shadow-color);
 }
