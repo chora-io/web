@@ -13,11 +13,12 @@ import styles from './Class.module.css'
 
 const Class = () => {
   const { id } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
-  // fetch class and class metadata from selected network and network server
+  // fetch credit class from selected network
   const [clazz, classError] = useClass(chainInfo, `${id}`)
+
+  // fetch metadata from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(
     chainInfo,
     clazz ? clazz.metadata : null,

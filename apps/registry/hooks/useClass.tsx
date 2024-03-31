@@ -29,7 +29,7 @@ export const useClass = (chainInfo: any, id: string) => {
         })
     }
 
-    // only fetch if network and id
+    // only fetch if params available
     if (chainInfo?.rest && id) {
       fetchClass().catch((err) => {
         setError(err.message)

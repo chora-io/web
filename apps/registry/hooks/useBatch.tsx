@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 const queryBatch = 'regen/ecocredit/v1/batch'
 
-// fetch credit batch from selected network
+// fetch credit batch by denom from selected network
 export const useBatch = (chainInfo: any, denom: string) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
@@ -29,7 +29,7 @@ export const useBatch = (chainInfo: any, denom: string) => {
         })
     }
 
-    // only fetch if network and denom
+    // only fetch if params available
     if (chainInfo?.rest && denom) {
       fetchBatch().catch((err) => {
         setError(err.message)

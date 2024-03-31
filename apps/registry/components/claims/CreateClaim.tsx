@@ -32,13 +32,16 @@ const CreateClaim = () => {
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
+  // input option
+  const [input, setInput] = useState<string>('custom-json')
+
   // data schema
   const [context, setContext] = useState<string>('')
   const [contexts, setContexts] = useState<string[]>([])
   const [example, setExample] = useState<string>('')
   const [template, setTemplate] = useState<string>('')
 
-  // json input
+  // form inputs
   const [json, setJson] = useState<string>('')
 
   // error and results
@@ -47,8 +50,6 @@ const CreateClaim = () => {
   const [convertSuccess, setConvertSuccess] = useState<string | null>(null)
   const [serverSuccess, setServerSuccess] = useState<string | null>(null)
   const [txSuccess, setTxSuccess] = useState<any>(null)
-
-  const [input, setInput] = useState<string>('custom-json')
 
   useEffect(() => {
     // fetch available schemas

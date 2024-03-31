@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 const queryBasket = 'regen/ecocredit/basket/v1/basket'
 
-// fetch basket from selected network
+// fetch credit basket by denom from selected network
 export const useBasket = (chainInfo: any, denom: string) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
@@ -29,7 +29,7 @@ export const useBasket = (chainInfo: any, denom: string) => {
         })
     }
 
-    // only fetch if network and denom
+    // only fetch if params available
     if (chainInfo?.rest && denom) {
       fetchBasket().catch((err) => {
         setError(err.message)

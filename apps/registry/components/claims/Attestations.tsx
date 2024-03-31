@@ -11,9 +11,9 @@ import styles from './Attestations.module.css'
 
 const Attestations = () => {
   const { iri } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
+  // fetch data attestations from selected network
   const [attestations, error] = useAttestations(chainInfo, `${iri}`)
 
   return (

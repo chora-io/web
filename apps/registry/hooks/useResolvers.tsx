@@ -29,7 +29,7 @@ export const useResolvers = (chainInfo: any, iri: string) => {
         })
     }
 
-    // only fetch if network and iri
+    // only fetch if params available
     if (chainInfo?.rest && iri) {
       fetchResolvers().catch((err) => {
         setError(err.message)

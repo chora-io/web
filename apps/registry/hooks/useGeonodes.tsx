@@ -30,7 +30,7 @@ export const useGeonodes = (chainInfo: any, limit: number, offset: number) => {
         })
     }
 
-    // only fetch if network
+    // only fetch if params available
     if (chainInfo?.rest) {
       fetchGeonodes().catch((err) => {
         setError(err.message)

@@ -12,10 +12,12 @@ import styles from './Basket.module.css'
 
 const Basket = () => {
   const { denom } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
+  // fetch credit basket from selected network
   const [basket, basketError] = useBasket(chainInfo, `${denom}`)
+
+  // fetch metadata from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(
     chainInfo,
     basket ? basket.metadata : null,

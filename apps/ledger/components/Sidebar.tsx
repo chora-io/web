@@ -9,11 +9,10 @@ import { useContext } from 'react'
 import styles from './Sidebar.module.css'
 
 const Sidebar = () => {
+  const currentRoute = usePathname()
   const { chainInfo } = useContext(WalletContext)
 
   const [modules] = useNetworkModules(chainInfo)
-
-  const currentRoute = usePathname()
 
   return (
     <div className={styles.sidebar}>

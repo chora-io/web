@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 const queryAnchor = '/regen/data/v1/anchor-by-iri'
 
-// fetch anchor by iri from selected network
+// fetch data anchor by iri from selected network
 export const useAnchor = (chainInfo: any, iri: string) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
@@ -29,7 +29,7 @@ export const useAnchor = (chainInfo: any, iri: string) => {
         })
     }
 
-    // only fetch if network and iri
+    // only fetch if params available
     if (chainInfo?.rest && iri) {
       fetchAnchor().catch((err) => {
         setError(err.message)

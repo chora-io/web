@@ -11,7 +11,10 @@ import styles from './CreateGeonode.module.css'
 const CreateGeonode = () => {
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
+  // form inputs
   const [message, setMessage] = useState<any>(null)
+
+  // error and success
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<any>(null)
 

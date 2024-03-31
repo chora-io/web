@@ -14,10 +14,12 @@ import styles from './Batch.module.css'
 
 const Batch = () => {
   const { denom } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
+  // fetch credit batch from selected network
   const [batch, batchError] = useBatch(chainInfo, `${denom}`)
+
+  // fetch metadata from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(
     chainInfo,
     batch ? batch.metadata : null,

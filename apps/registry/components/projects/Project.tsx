@@ -13,10 +13,12 @@ import styles from './Project.module.css'
 
 const Project = () => {
   const { id } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
+  // fetch project from selected network
   const [project, projectError] = useProject(chainInfo, `${id}`)
+
+  // fetch metadata from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(
     chainInfo,
     project ? project.metadata : null,

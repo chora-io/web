@@ -30,7 +30,7 @@ export const useBatches = (chainInfo: any, limit: number, offset: number) => {
         })
     }
 
-    // only fetch if network
+    // only fetch if params available
     if (chainInfo?.rest) {
       fetchBatches().catch((err) => {
         setError(err.message)

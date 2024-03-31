@@ -11,9 +11,9 @@ import styles from './Resolvers.module.css'
 
 const Resolvers = () => {
   const { iri } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
+  // fetch data resolvers from selected network
   const [resolvers, error] = useResolvers(chainInfo, `${iri}`)
 
   return (

@@ -16,7 +16,7 @@ const Batches = () => {
   const [offset, setOffset] = useState(0)
   const [view, setView] = useState('table')
 
-  // fetch batches from selected network
+  // fetch credit batches from selected network
   const [batches, error] = useBatches(chainInfo, 5, offset)
 
   return (

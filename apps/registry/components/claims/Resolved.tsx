@@ -10,9 +10,9 @@ import styles from './Resolved.module.css'
 
 const Resolved = () => {
   const { iri } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
+  // fetch data from network server, otherwise resolve
   const [metadata, metadataError, resolverUrl] = useMetadata(
     chainInfo,
     `${iri}`,

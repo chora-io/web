@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 const queryAttestations = '/regen/data/v1/attestations-by-iri'
 
-// fetch attestations by iri from selected network
+// fetch data attestations by iri from selected network
 export const useAttestations = (chainInfo: any, iri: string) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
@@ -29,7 +29,7 @@ export const useAttestations = (chainInfo: any, iri: string) => {
         })
     }
 
-    // only fetch if network and iri
+    // only fetch if params available
     if (chainInfo?.rest && iri) {
       fetchAttestations().catch((err) => {
         setError(err.message)

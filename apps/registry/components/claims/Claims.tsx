@@ -13,7 +13,10 @@ const Claims = () => {
   const router = useRouter()
   const { chainInfo, network } = useContext(WalletContext)
 
+  // form inputs
   const [iri, setIri] = useState<string>('')
+
+  // error and success
   const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (event: any) => {

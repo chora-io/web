@@ -9,7 +9,7 @@ import styles from './GeonodesListItem.module.css'
 const GeonodesListItem = ({ node }: any) => {
   const { chainInfo, wallet } = useContext(WalletContext)
 
-  // fetch node metadata by iri from network server
+  // fetch metadata from network server, otherwise resolve
   const [metadata, error] = useMetadata(chainInfo, node.metadata)
 
   return (

@@ -11,9 +11,9 @@ import styles from './Anchor.module.css'
 
 const Anchor = () => {
   const { iri } = useParams()
-
   const { chainInfo } = useContext(WalletContext)
 
+  // fetch data anchor from selected network
   const [anchor, anchorError] = useAnchor(chainInfo, `${iri}`)
 
   return (

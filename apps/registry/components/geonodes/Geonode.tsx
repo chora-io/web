@@ -13,10 +13,12 @@ import styles from './Geonode.module.css'
 
 const Geonode = () => {
   const { id } = useParams()
-
   const { chainInfo, wallet } = useContext(WalletContext)
 
+  // fetch node from selected network
   const [node, nodeError] = useGeonode(chainInfo, `${id}`)
+
+  // fetch metadata from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(
     chainInfo,
     node ? node.metadata : null,

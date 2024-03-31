@@ -2,19 +2,19 @@ import { useEffect, useState } from 'react'
 
 const queryProject = 'regen/ecocredit/v1/project'
 
-// fetch project and project metadata from selected network and network server
+// fetch class project by id from selected network
 export const useProject = (chainInfo: any, id: string) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [project, setProject] = useState<any>(null)
 
-  // reset state on network, server, or id change
+  // reset state on param change
   useEffect(() => {
     setError(null)
     setProject(null)
   }, [chainInfo?.chainId, id])
 
-  // fetch on load and network or id change
+  // fetch on load and param change
   useEffect(() => {
     // fetch project by id from selected network
     const fetchProject = async () => {
@@ -29,7 +29,7 @@ export const useProject = (chainInfo: any, id: string) => {
         })
     }
 
-    // only fetch if network and id
+    // only fetch if params available
     if (chainInfo?.rest && id) {
       fetchProject().catch((err) => {
         setError(err.message)
