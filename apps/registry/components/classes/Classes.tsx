@@ -36,7 +36,7 @@ const Classes = () => {
         </button>
       </div>
       {!classes && !error && <p>{'loading...'}</p>}
-      {classes && classes.length === 0 && <p>{'no classes found'}</p>}
+      {!error && classes && classes.length === 0 && <p>{'no classes found'}</p>}
       {classes && classes.length > 0 && (
         <>
           {view === 'table' ? (

@@ -36,7 +36,9 @@ const Projects = () => {
         </button>
       </div>
       {!projects && !error && <p>{'loading...'}</p>}
-      {projects && projects.length === 0 && <p>{'no projects found'}</p>}
+      {!error && projects && projects.length === 0 && (
+        <p>{'no projects found'}</p>
+      )}
       {projects && projects.length > 0 && (
         <>
           {view === 'table' ? (

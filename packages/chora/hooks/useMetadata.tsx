@@ -20,6 +20,24 @@ export const useMetadata = (chainInfo: any, iri: string) => {
 
   // fetch on load and param change
   useEffect(() => {
+    // check json string
+    try {
+      const parsedJson = JSON.parse(iri)
+      setMetadata(parsedJson)
+      return // exit effect
+    } catch (e) {
+      // continue
+    }
+
+    // check ipfs url
+    if (iri.includes('ipfs://')) {
+      // TODO: fetch data from ipfs
+
+      console.error('ipfs not supported')
+
+      return // exit effect
+    }
+
     // fetch metadata by iri from network server, otherwise resolve
     const fetchMetadata = async () => {
       let metadata: string = ''
@@ -80,7 +98,7 @@ export const useMetadata = (chainInfo: any, iri: string) => {
       }
     }
 
-    // only fetch if network, server, and iri
+    // only fetch if params available
     if (chainInfo?.rest && serverUrl && iri) {
       fetchMetadata().catch((err) => {
         setError(err.message)

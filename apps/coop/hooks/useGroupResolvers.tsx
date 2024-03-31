@@ -67,6 +67,7 @@ export const useGroupResolvers = (chainInfo: any, groupId: string) => {
             }
           })
           .catch((err) => {
+            nextId = 0
             setError(err.message)
           })
       }

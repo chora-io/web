@@ -1,3 +1,5 @@
+'use client'
+
 import {
   bionLocal,
   choraLocal,
@@ -7,6 +9,9 @@ import {
   regenRedwood,
 } from 'cosmos/chains'
 import * as React from 'react'
+import { useEffect, useState } from 'react'
+
+import { defaultNetwork } from '../contexts/WalletContext'
 
 const defaultId = 'network'
 const defaultLabel = 'network'
@@ -19,15 +24,18 @@ const SelectNetwork = ({
   setNetwork,
   testnets,
 }: any) => {
-  let local = false
-  if (
-    typeof window !== 'undefined' &&
-    (window.location.hostname == '0.0.0.0' ||
-      window.location.hostname == '127.0.0.1' ||
-      window.location.hostname == 'localhost')
-  ) {
-    local = true
-  }
+  const [local, setLocal] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (
+      typeof window !== 'undefined' &&
+      (window.location.hostname == '0.0.0.0' ||
+        window.location.hostname == '127.0.0.1' ||
+        window.location.hostname == 'localhost')
+    ) {
+      setLocal(true)
+    }
+  }, [])
 
   const handleChange = (event: any) => {
     setNetwork(event.target.value)
@@ -38,7 +46,7 @@ const SelectNetwork = ({
       {label ? label : defaultLabel}
       <select
         id={id ? id : defaultId}
-        value={selected || network}
+        value={selected || network || defaultNetwork}
         onChange={handleChange}
       >
         {local && (

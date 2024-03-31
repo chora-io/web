@@ -34,6 +34,7 @@ export const useGroups = (chainInfo: any, maxItems: number, offset: number) => {
             }
           })
           .catch((err) => {
+            nextId = 0
             setError(err.message)
           })
       }

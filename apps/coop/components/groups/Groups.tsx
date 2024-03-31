@@ -36,7 +36,7 @@ const Groups = () => {
         </button>
       </div>
       {!groups && !error && <p>{'loading...'}</p>}
-      {groups && groups.length === 0 && <p>{'no groups found'}</p>}
+      {!error && groups && groups.length === 0 && <p>{'no groups found'}</p>}
       {groups && groups.length > 0 && (
         <>
           {view === 'table' ? (

@@ -49,14 +49,18 @@ const AuthContextProvider = (props: any) => {
   const [serverUrl] = useNetworkServer(chainInfo)
 
   const [account, setAccount] = useState<any>(null)
-  const [activeAccount, setActiveAccount] = useState<any>(getCachedAccount())
-  const [activeAccounts, setActiveAccounts] = useState<any[] | null>(
-    getCachedAccounts(),
-  )
+  const [activeAccount, setActiveAccount] = useState<any>(null)
+  const [activeAccounts, setActiveAccounts] = useState<any[] | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   // check active account is authenticated
   useEffect(() => {
+    if (!activeAccount) {
+      setActiveAccount(getCachedAccount())
+    }
+    if (!activeAccounts) {
+      setActiveAccounts(getCachedAccounts())
+    }
     if (serverUrl && (!account || !activeAccount) && !error)
       checkToken().catch((err) => {
         setError(err.message)

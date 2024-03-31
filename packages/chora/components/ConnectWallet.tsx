@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   WalletContext,
@@ -20,49 +20,45 @@ const ConnectWallet = ({ testnets }: any) => {
 
   // TODO: reconsider loading and whether the following should be within the context
 
-  let address: string
-  let connected: boolean
-  let selected: string
+  const [address, setAddress] = useState<string>('')
+  const [connected, setConnected] = useState<boolean>(false)
+  const [selected, setSelected] = useState<string>('')
 
-  if (typeof localStorage !== 'undefined') {
-    // loading wallet from cache
-    if (loading === true) {
-      address = localStorage.getItem(cachedAddressKey) || ''
-      connected = localStorage.getItem(cachedConnectedKey) === 'true'
-      selected = localStorage.getItem(cachedNetworkKey) || defaultNetwork
+  useEffect(() => {
+    if (typeof localStorage !== 'undefined') {
+      // loading wallet from cache
+      if (loading === true) {
+        setAddress(localStorage.getItem(cachedAddressKey) || '')
+        setConnected(localStorage.getItem(cachedConnectedKey) === 'true')
+        setSelected(localStorage.getItem(cachedNetworkKey) || defaultNetwork)
 
-      // loading complete and wallet unavailable
-    } else if (!wallet) {
-      address = ''
-      connected = false
-      selected = network || defaultNetwork
+        // loading complete and wallet unavailable
+      } else if (!wallet) {
+        setAddress('')
+        setConnected(false)
+        setSelected(network || defaultNetwork)
 
-      localStorage.setItem(cachedAddressKey, '')
-      localStorage.setItem(cachedConnectedKey, 'false')
-      localStorage.setItem(cachedNetworkKey, selected)
+        localStorage.setItem(cachedAddressKey, '')
+        localStorage.setItem(cachedConnectedKey, 'false')
+        localStorage.setItem(cachedNetworkKey, network || defaultNetwork)
 
-      // loading complete and wallet available
-    } else {
-      address = wallet.bech32Address
-      connected = true
-      selected = network || defaultNetwork
+        // loading complete and wallet available
+      } else {
+        setAddress(wallet.bech32Address)
+        setConnected(true)
+        setSelected(network || defaultNetwork)
 
-      localStorage.setItem(cachedAddressKey, address)
-      localStorage.setItem(cachedConnectedKey, 'true')
-      localStorage.setItem(cachedNetworkKey, selected)
+        localStorage.setItem(cachedAddressKey, wallet.bech32Address)
+        localStorage.setItem(cachedConnectedKey, 'true')
+        localStorage.setItem(cachedNetworkKey, network || defaultNetwork)
+      }
     }
-
-    // local storage unavailable
-  } else {
-    address = wallet ? wallet.bech32Address : ''
-    connected = wallet ? true : false
-    selected = network || defaultNetwork
-  }
+  }, [network, wallet, loading])
 
   return (
     <div className={styles.connect}>
       {error && <span className={styles.error}>{error}</span>}
-      {address !== '' && (
+      {address.length > 0 && (
         <span className={styles.address}>
           {address.substring(0, 13) + '...' + address.substring(38, 44)}
         </span>

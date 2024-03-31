@@ -34,6 +34,7 @@ export const useDataResolvers = (chainInfo: any) => {
             }
           })
           .catch((err) => {
+            nextId = 0
             setError(err.message)
           })
       }

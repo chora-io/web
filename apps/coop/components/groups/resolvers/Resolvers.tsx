@@ -43,7 +43,7 @@ const Resolvers = () => {
             </div>
           </div>
         ))}
-      {chainInfo?.chainId && resolvers?.length === 0 && (
+      {!error && chainInfo?.chainId && resolvers?.length === 0 && (
         <p>{'no resolvers found'}</p>
       )}
       {error && (

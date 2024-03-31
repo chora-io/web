@@ -27,7 +27,7 @@ export const useAddressMetadata = (
     // fetch metadata from selected network and network server
     const fetchMetadata = async () => {
       let iri: string | undefined
-      let isPolicyAddress: boolean
+      let isPolicyAddress = false
 
       // handle metadata as policy, otherwise member
       try {
@@ -64,6 +64,28 @@ export const useAddressMetadata = (
       }
 
       if (typeof iri !== 'undefined') {
+        // check json string
+        try {
+          const parsedJson = JSON.parse(iri)
+          setMetadata({
+            isPolicyAddress,
+            address,
+            name: parsedJson['name'],
+          })
+          return // exit effect
+        } catch (e) {
+          // continue
+        }
+
+        // check ipfs url
+        if (iri.includes('ipfs://')) {
+          // TODO: fetch data from ipfs
+
+          console.error('ipfs not supported')
+
+          return // exit effect
+        }
+
         // fetch member metadata from network server
         await fetch(serverUrl + '/data/' + iri)
           .then((res) => res.json())

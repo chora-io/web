@@ -36,7 +36,7 @@ const Geonodes = () => {
         </button>
       </div>
       {!nodes && !error && <p>{'loading...'}</p>}
-      {nodes && nodes.length === 0 && <p>{'no nodes found'}</p>}
+      {!error && nodes && nodes.length === 0 && <p>{'no nodes found'}</p>}
       {nodes && nodes.length > 0 && (
         <>
           {view === 'table' ? (

@@ -36,7 +36,7 @@ const Baskets = () => {
         </button>
       </div>
       {!baskets && !error && <p>{'loading...'}</p>}
-      {baskets && baskets.length === 0 && <p>{'no baskets found'}</p>}
+      {!error && baskets && baskets.length === 0 && <p>{'no baskets found'}</p>}
       {baskets && baskets.length > 0 && (
         <>
           {view === 'table' ? (
