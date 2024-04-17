@@ -1,6 +1,6 @@
 'use client'
 
-import { ResultTx, SelectInput } from 'chora/components'
+import { ResultTx, SelectOptionInput } from 'chora/components'
 import {
   MsgRegisterResolver as MsgInputs,
   MsgRegisterResolverJSON as MsgInputsJSON,
@@ -46,7 +46,7 @@ const MsgRegisterResolverView = () => {
         <h2>{'MsgRegisterResolver'}</h2>
         <p>{'register data to a data resolver'}</p>
       </div>
-      <SelectInput input={input} setInput={handleSetInput} />
+      <SelectOptionInput input={input} setInput={handleSetInput} />
       {input == 'form' ? (
         <form className={styles.form} onSubmit={handleSubmit}>
           <MsgInputs setMessage={setMessage} useWallet={true} wallet={wallet} />

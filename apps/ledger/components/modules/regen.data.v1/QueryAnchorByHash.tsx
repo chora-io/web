@@ -1,6 +1,6 @@
 'use client'
 
-import { Result, SelectInput } from 'chora/components'
+import { Result, SelectOptionInput } from 'chora/components'
 import {
   InputContentHash,
   InputContentHashJSON,
@@ -71,7 +71,7 @@ const QueryAnchorByHash = () => {
         <h2>{'QueryAnchorByHash'}</h2>
         <p>{'query a data anchor by the content hash of the data'}</p>
       </div>
-      <SelectInput input={input} setInput={handleSetInput} />
+      <SelectOptionInput input={input} setInput={handleSetInput} />
       {input == 'form' ? (
         <form className={styles.form} onSubmit={handleSubmit}>
           <InputContentHash

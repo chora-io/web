@@ -5,7 +5,7 @@ import {
   InputsFromJSON,
   Result,
   SelectContext,
-  SelectInput,
+  SelectOptionInput,
 } from 'chora/components'
 import {
   SelectDigestAlgorithm,
@@ -182,7 +182,7 @@ const ConvertData = () => {
         <h2>{'convert data'}</h2>
         <p>{'convert data to iri and content hash'}</p>
       </div>
-      <SelectInput input={input} setInput={handleSetInput} />
+      <SelectOptionInput input={input} setInput={handleSetInput} />
       {input == 'form' ? (
         <form className={styles.form} onSubmit={handleSubmit}>
           <SelectContext

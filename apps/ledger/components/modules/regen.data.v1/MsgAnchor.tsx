@@ -1,6 +1,6 @@
 'use client'
 
-import { ResultTx, SelectInput } from 'chora/components'
+import { ResultTx, SelectOptionInput } from 'chora/components'
 import {
   MsgAnchor as MsgInputs,
   MsgAnchorJSON as MsgInputsJSON,
@@ -46,7 +46,7 @@ const MsgAnchor = () => {
         <h2>{'MsgAnchor'}</h2>
         <p>{'anchor data'}</p>
       </div>
-      <SelectInput input={input} setInput={handleSetInput} />
+      <SelectOptionInput input={input} setInput={handleSetInput} />
       {input === 'form' ? (
         <form className={styles.form} onSubmit={handleSubmit}>
           <MsgInputs setMessage={setMessage} useWallet={true} wallet={wallet} />

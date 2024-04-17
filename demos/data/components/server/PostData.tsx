@@ -5,7 +5,7 @@ import {
   InputsFromJSON,
   Result,
   SelectContext,
-  SelectInput,
+  SelectOptionInput,
 } from 'chora/components'
 import {
   SelectDigestAlgorithm,
@@ -177,7 +177,7 @@ const PostData = () => {
         <h2>{'post data'}</h2>
         <p>{'post data to chora server and generate iri'}</p>
       </div>
-      <SelectInput input={input} setInput={handleSetInput} />
+      <SelectOptionInput input={input} setInput={handleSetInput} />
       {input == 'form' ? (
         <form className={styles.form} onSubmit={handleSubmit}>
           <SelectContext
