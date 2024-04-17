@@ -3,9 +3,8 @@ import * as Long from 'long'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputContentHash from './InputContentHash'
-import InputNumber from '../InputNumber'
+import { InputAddress, InputNumber } from '..'
+import { InputContentHash } from '.'
 
 const MsgRegisterResolver = ({
   network,

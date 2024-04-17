@@ -7,8 +7,8 @@ import * as Long from 'long'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputNumber from '../InputNumber'
-import SelectPolicyType from './SelectPolicyType'
+import { InputNumber } from '..'
+import { SelectPolicyType } from '.'
 
 const defaultId = 'policy'
 const defaultLabel = 'policy'

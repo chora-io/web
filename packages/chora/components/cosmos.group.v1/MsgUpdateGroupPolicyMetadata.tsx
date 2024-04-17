@@ -2,8 +2,7 @@ import { MsgUpdateGroupPolicyMetadata as Msg } from 'cosmos/api/cosmos/group/v1/
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputIRI from '../InputIRI'
+import { InputAddress, InputIRI } from '..'
 
 const MsgUpdateGroupPolicyMetadata = ({
   network,

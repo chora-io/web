@@ -2,9 +2,7 @@ import { MsgSubmitTx as Msg } from 'cosmos/api/regen/intertx/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputString from '../InputString'
-import SelectMessage from '../SelectMessage'
+import { InputAddress, InputString, SelectMessage } from '..'
 
 const MsgSubmitTx = ({ network, setMessage, useWallet, wallet }: any) => {
   const [owner, setOwner] = useState<string>('')

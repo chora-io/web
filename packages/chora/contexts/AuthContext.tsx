@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { createContext, useContext, useEffect, useState } from 'react'
 
-import { WalletContext } from './WalletContext'
+import { WalletContext } from '../contexts'
 import { useNetworkServer } from '../hooks'
 
 const cachedAuthAccount = 'chora-auth-account'

@@ -2,8 +2,7 @@ import { MsgRegisterAccount as Msg } from 'cosmos/api/regen/intertx/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputString from '../InputString'
+import { InputAddress, InputString } from '..'
 
 const MsgRegisterAccount = ({
   network,

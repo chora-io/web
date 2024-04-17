@@ -5,9 +5,9 @@ import Link from 'next/link'
 import * as React from 'react'
 import { useContext } from 'react'
 
-import { ThemeContext } from '../contexts'
 import choraLogoDark from '../assets//images/chora_dark_small.png'
 import choraLogoLight from '../assets//images/chora_light_small.png'
+import { ThemeContext } from '../contexts'
 
 import styles from './Footer.module.css'
 

@@ -2,12 +2,14 @@ import { Buffer } from 'buffer'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputHash from './InputHash'
-import SelectDataType from './SelectDataType'
-import SelectDigestAlgorithm from './SelectDigestAlgorithm'
-import SelectGraphCanon from './SelectGraphCanon'
-import SelectGraphMerkle from './SelectGraphMerkle'
-import SelectRawMedia from './SelectRawMedia'
+import {
+  InputHash,
+  SelectDataType,
+  SelectDigestAlgorithm,
+  SelectGraphCanon,
+  SelectGraphMerkle,
+  SelectRawMedia,
+} from '.'
 
 const defaultId = 'content-hash'
 

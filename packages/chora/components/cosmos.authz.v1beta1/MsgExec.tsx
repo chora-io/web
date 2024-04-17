@@ -2,8 +2,7 @@ import { MsgExec as Msg } from 'cosmos/api/cosmos/authz/v1beta1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import SelectMessage from '../SelectMessage'
+import { InputAddress, SelectMessage } from '..'
 
 const MsgExec = ({ network, setMessage, useWallet, wallet }: any) => {
   const [grantee, setGrantee] = useState<string>('')

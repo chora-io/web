@@ -3,14 +3,14 @@
 import * as React from 'react'
 import { useContext, useEffect, useState } from 'react'
 
+import { WalletContext } from '../contexts'
 import {
-  WalletContext,
   cachedAddressKey,
   cachedConnectedKey,
   cachedNetworkKey,
   defaultNetwork,
 } from '../contexts/WalletContext'
-import SelectNetwork from './SelectNetwork'
+import { SelectNetwork } from '.'
 
 import styles from './ConnectWallet.module.css'
 

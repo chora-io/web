@@ -80,7 +80,7 @@ const Sidebar = () => {
               </Link>
             </li>
           </ul>
-          <li>{'extensions'}</li>
+          <li>{'extended'}</li>
           {!!network && network.includes('chora') && (
             <ul>
               <li>

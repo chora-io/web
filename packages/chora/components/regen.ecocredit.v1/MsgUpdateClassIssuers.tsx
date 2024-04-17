@@ -2,9 +2,8 @@ import { MsgUpdateClassIssuers as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputIssuers from './InputIssuers'
-import InputString from '../InputString'
+import { InputAddress, InputString } from '..'
+import { InputIssuers } from '.'
 
 const MsgUpdateClassIssuers = ({
   network,

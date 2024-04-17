@@ -2,8 +2,7 @@ import { MsgSetSendEnabled as Msg } from 'cosmos/api/cosmos/bank/v1beta1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputString from '../InputString'
+import { InputAddress, InputString } from '..'
 
 const MsgSetSendEnabled = ({ network, setMessage, useWallet, wallet }: any) => {
   const [authority, setAuthority] = useState<string>('')

@@ -3,8 +3,7 @@ import * as Long from 'long'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputNumber from '../InputNumber'
+import { InputAddress, InputNumber } from '..'
 
 const MsgUpdateIssuer = ({ network, setMessage, useWallet, wallet }: any) => {
   const [id, setId] = useState<string>('')

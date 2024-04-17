@@ -1,9 +1,7 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputIRI from '../InputIRI'
-import InputNumber from '../InputNumber'
+import { InputAddress, InputIRI, InputNumber } from '..'
 
 const defaultId = 'member'
 const defaultLabel = 'member'

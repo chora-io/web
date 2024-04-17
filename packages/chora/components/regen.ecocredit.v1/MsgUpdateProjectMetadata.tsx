@@ -2,9 +2,7 @@ import { MsgUpdateProjectMetadata as Msg } from 'cosmos/api/regen/ecocredit/v1/t
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputIRI from '../InputIRI'
-import InputString from '../InputString'
+import { InputAddress, InputIRI, InputString } from '..'
 
 const MsgUpdateProjectMetadata = ({
   network,

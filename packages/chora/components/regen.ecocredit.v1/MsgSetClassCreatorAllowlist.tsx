@@ -2,8 +2,7 @@ import { MsgSetClassCreatorAllowlist as Msg } from 'cosmos/api/regen/ecocredit/v
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import SelectBoolean from '../SelectBoolean'
+import { InputAddress, SelectBoolean } from '..'
 
 const MsgSetClassCreatorAllowlist = ({
   network,

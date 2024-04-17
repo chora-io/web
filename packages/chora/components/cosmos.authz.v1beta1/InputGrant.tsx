@@ -2,8 +2,7 @@ import { GenericAuthorization } from 'cosmos/api/cosmos/authz/v1beta1/authz'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputTimestamp from '../InputTimestamp'
-import SelectMessage from '../SelectMessage'
+import { InputTimestamp, SelectMessage } from '..'
 
 const defaultId = 'grant'
 const defaultLabel = 'grant'

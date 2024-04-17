@@ -2,8 +2,7 @@ import { MsgRemoveAllowedBridgeChain as Msg } from 'cosmos/api/regen/ecocredit/v
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputString from '../InputString'
+import { InputAddress, InputString } from '..'
 
 const MsgRemoveAllowedBridgeChain = ({
   network,

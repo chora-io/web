@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
+import { InputAddress } from '..'
 
 const defaultId = 'issuer'
 const defaultLabel = 'issuer'

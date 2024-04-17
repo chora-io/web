@@ -2,10 +2,7 @@ import { MsgBridgeReceive as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputIRI from '../InputIRI'
-import InputString from '../InputString'
-import InputTimestamp from '../InputTimestamp'
+import { InputAddress, InputIRI, InputString, InputTimestamp } from '..'
 
 const MsgBridgeReceive = ({ network, setMessage, useWallet, wallet }: any) => {
   const [issuer, setIssuer] = useState<string>('')

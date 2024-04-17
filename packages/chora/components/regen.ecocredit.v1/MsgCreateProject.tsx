@@ -2,9 +2,7 @@ import { MsgCreateProject as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputIRI from '../InputIRI'
-import InputString from '../InputString'
+import { InputAddress, InputIRI, InputString } from '..'
 
 const MsgCreateProject = ({ network, setMessage, useWallet, wallet }: any) => {
   const [admin, setAdmin] = useState<string>('')

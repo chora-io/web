@@ -2,9 +2,7 @@ import { MsgSend as Msg } from '@keplr-wallet/proto-types/cosmos/bank/v1beta1/tx
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputDenom from '../InputDenom'
-import InputNumber from '../InputNumber'
+import { InputAddress, InputDenom, InputNumber } from '..'
 
 const MsgSend = ({ network, setMessage, useWallet, wallet }: any) => {
   const [fromAddress, setFromAddress] = useState<string>('')

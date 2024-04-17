@@ -5,10 +5,8 @@ import {
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputIRI from '../InputIRI'
-import SelectExecution from './SelectExecution'
-import SelectMessage from '../SelectMessage'
+import { InputAddress, InputIRI, SelectMessage } from '..'
+import { SelectExecution } from '.'
 
 const MsgSubmitProposal = ({ network, setMessage, useWallet, wallet }: any) => {
   const [proposer, setProposer] = useState<string>('')

@@ -4,9 +4,9 @@ import Image from 'next/image'
 import * as React from 'react'
 import { useContext } from 'react'
 
-import { ThemeContext } from '../contexts'
 import darkBackground from '../assets/images/chora_dark.png'
 import lightBackground from '../assets/images/chora_light.png'
+import { ThemeContext } from '../contexts'
 
 import styles from './Background.module.css'
 

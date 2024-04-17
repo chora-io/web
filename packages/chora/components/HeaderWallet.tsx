@@ -4,9 +4,7 @@ import * as React from 'react'
 import { useContext } from 'react'
 
 import { ThemeContext } from '../contexts'
-import ConnectWallet from './ConnectWallet'
-import HeaderTitle from './HeaderTitle'
-import ThemeButton from './ThemeButton'
+import { ConnectWallet, HeaderTitle, ThemeButton } from '.'
 
 import styles from './HeaderWallet.module.css'
 

@@ -3,9 +3,8 @@ import * as Long from 'long'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputMembers from './InputMembers'
-import InputNumber from '../InputNumber'
+import { InputAddress, InputNumber } from '..'
+import { InputMembers } from '.'
 
 const MsgUpdateGroupMembers = ({
   network,

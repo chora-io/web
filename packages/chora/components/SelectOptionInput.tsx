@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-import styles from './SelectInput.module.css'
+import styles from './SelectOptionInput.module.css'
 
-const SelectInput = ({ input, setInput }: any) => (
+const SelectOptionInput = ({ input, setInput }: any) => (
   <div className={styles.boxOptions}>
     <button
       className={input == 'form' ? styles.boxOptionActive : undefined}
@@ -19,4 +19,4 @@ const SelectInput = ({ input, setInput }: any) => (
   </div>
 )
 
-export default SelectInput
+export default SelectOptionInput

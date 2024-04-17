@@ -5,8 +5,7 @@ import * as React from 'react'
 import { useContext } from 'react'
 
 import { ThemeContext } from '../contexts'
-import HeaderTitle from './HeaderTitle'
-import ThemeButton from './ThemeButton'
+import { HeaderTitle, ThemeButton } from '.'
 
 import styles from './Header.module.css'
 

@@ -2,8 +2,7 @@ import { MsgCreate as Msg } from 'cosmos/api/chora/voucher/v1/msg'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputIRI from '../InputIRI'
+import { InputAddress, InputIRI } from '..'
 
 const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
   const [issuer, setIssuer] = useState<string>('')

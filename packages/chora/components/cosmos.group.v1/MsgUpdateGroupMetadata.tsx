@@ -3,9 +3,7 @@ import * as Long from 'long'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputIRI from '../InputIRI'
-import InputNumber from '../InputNumber'
+import { InputAddress, InputIRI, InputNumber } from '..'
 
 const MsgUpdateGroupMetadata = ({
   network,

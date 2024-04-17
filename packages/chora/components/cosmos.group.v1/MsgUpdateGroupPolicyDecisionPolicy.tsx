@@ -2,8 +2,8 @@ import { MsgUpdateGroupPolicyDecisionPolicy as Msg } from 'cosmos/api/cosmos/gro
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputPolicy from './InputPolicy'
+import { InputAddress } from '..'
+import { InputPolicy } from '.'
 
 const MsgUpdateGroupPolicyDecisionPolicy = ({
   network,

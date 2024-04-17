@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { useEffect } from 'react'
 
-import InputIssuer from './InputIssuer'
-import ManageList from '../ManageList'
+import { ManageList } from '..'
+import { InputIssuer } from '.'
 
 const defaultId = 'issuers'
 

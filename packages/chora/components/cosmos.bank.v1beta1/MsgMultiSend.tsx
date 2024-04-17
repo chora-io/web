@@ -2,9 +2,7 @@ import { MsgMultiSend as Msg } from '@keplr-wallet/proto-types/cosmos/bank/v1bet
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputDenom from '../InputDenom'
-import InputNumber from '../InputNumber'
+import { InputAddress, InputDenom, InputNumber } from '..'
 
 const MsgMultiSend = ({ network, setMessage, useWallet, wallet }: any) => {
   const [fromAddress, setFromAddress] = useState<string>('')

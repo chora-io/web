@@ -2,8 +2,7 @@ import { MsgCreate as Msg } from 'cosmos/api/chora/geonode/v1/msg'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputIRI from '../InputIRI'
+import { InputAddress, InputIRI } from '..'
 
 const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
   const [curator, setCurator] = useState<string>('')

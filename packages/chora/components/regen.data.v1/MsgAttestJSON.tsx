@@ -2,8 +2,8 @@ import { MsgAttest as Msg } from 'cosmos/api/regen/data/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputContentHashJSON from './InputContentHashJSON'
+import { InputAddress } from '..'
+import { InputContentHashJSON } from '.'
 
 const MsgAttestJSON = ({ network, setMessage, useWallet, wallet }: any) => {
   const [attestor, setSender] = useState<string>('')

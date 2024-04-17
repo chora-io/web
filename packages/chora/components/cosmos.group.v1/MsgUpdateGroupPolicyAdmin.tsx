@@ -2,7 +2,7 @@ import { MsgUpdateGroupPolicyAdmin as Msg } from 'cosmos/api/cosmos/group/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
+import { InputAddress } from '..'
 
 const MsgUpdateGroupPolicyAdmin = ({
   network,

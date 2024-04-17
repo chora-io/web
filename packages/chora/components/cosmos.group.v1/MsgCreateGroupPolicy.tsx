@@ -3,10 +3,8 @@ import * as Long from 'long'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputIRI from '../InputIRI'
-import InputNumber from '../InputNumber'
-import InputPolicy from './InputPolicy'
+import { InputAddress, InputIRI, InputNumber } from '..'
+import { InputPolicy } from '.'
 
 const MsgCreateGroupPolicy = ({
   network,

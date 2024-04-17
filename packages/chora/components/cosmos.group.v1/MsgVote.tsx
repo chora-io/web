@@ -4,11 +4,8 @@ import * as Long from 'long'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputIRI from '../InputIRI'
-import InputNumber from '../InputNumber'
-import SelectExecution from './SelectExecution'
-import SelectVote from './SelectVote'
+import { InputAddress, InputIRI, InputNumber } from '..'
+import { SelectExecution, SelectVote } from '.'
 
 const MsgVote = ({ network, setMessage, useWallet, wallet }: any) => {
   const [voter, setVoter] = useState<string>('')

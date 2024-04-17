@@ -2,8 +2,7 @@ import { MsgCreate as Msg } from 'cosmos/api/regen/ecocredit/basket/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputString from '../InputString'
+import { InputAddress, InputString } from '..'
 
 const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
   const [curator, setCurator] = useState<string>('')

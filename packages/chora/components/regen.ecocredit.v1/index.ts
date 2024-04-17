@@ -1,3 +1,5 @@
+export { default as InputIssuer } from './InputIssuer'
+export { default as InputIssuers } from './InputIssuers'
 export { default as MsgAddAllowedBridgeChain } from './MsgAddAllowedBridgeChain'
 export { default as MsgAddClassCreator } from './MsgAddClassCreator'
 export { default as MsgAddCreditType } from './MsgAddCreditType'

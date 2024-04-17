@@ -2,8 +2,8 @@ import { MsgGrantAllowance as Msg } from 'cosmos/api/cosmos/feegrant/v1beta1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import InputAddress from '../InputAddress'
-import InputAllowance from './InputAllowance'
+import { InputAddress } from '..'
+import { InputAllowance } from '.'
 
 const MsgGrantAllowance = ({ network, setMessage, useWallet, wallet }: any) => {
   const [granter, setGranter] = useState<string>('')
