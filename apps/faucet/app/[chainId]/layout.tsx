@@ -18,11 +18,17 @@ const Layout = ({ children }: any) => {
   }, [network, initialNetwork])
 
   useEffect(() => {
-    if (initialNetwork && network !== initialNetwork && chainId !== network) {
-      router.push(`/`)
-    }
-    if (initialNetwork && network === initialNetwork && chainId !== network) {
-      setNetwork(chainId)
+    // check if route param does not match network
+    if (initialNetwork && chainId !== network) {
+      // if network change, update router path
+      if (network !== initialNetwork) {
+        router.push(`/${network}`)
+      }
+
+      // if route change, update wallet context
+      if (network === initialNetwork) {
+        setNetwork(chainId)
+      }
     }
   }, [chainId, network, initialNetwork, router, setNetwork])
 

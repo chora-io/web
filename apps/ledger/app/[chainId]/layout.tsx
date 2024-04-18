@@ -6,7 +6,7 @@ import { useContext, useState, useEffect } from 'react'
 
 const Layout = ({ children }: any) => {
   const { chainId } = useParams()
-  const currentRoute = usePathname()
+  const pathname = usePathname()
   const router = useRouter()
   const { network, setNetwork } = useContext(WalletContext)
 
@@ -19,14 +19,20 @@ const Layout = ({ children }: any) => {
   }, [network, initialNetwork])
 
   useEffect(() => {
-    if (initialNetwork && network !== initialNetwork && chainId !== network) {
-      // TODO: reconsider this layout routing variation when adding params
-      const slitRoute = currentRoute.split('/')
-      const nextRoute = currentRoute.replace(slitRoute[1], network)
-      router.push(nextRoute)
-    }
-    if (initialNetwork && network === initialNetwork && chainId !== network) {
-      setNetwork(chainId)
+    // check if route param does not match network
+    if (initialNetwork && chainId !== network) {
+      // if network change, update router path
+      if (network !== initialNetwork) {
+        const splitRoute = pathname.split('/')
+
+        // use current pathname but replace network parameter
+        router.push(pathname.replace(splitRoute[1], network))
+      }
+
+      // if route change, update wallet context
+      if (network === initialNetwork) {
+        setNetwork(chainId)
+      }
     }
   }, [chainId, network, initialNetwork, router, setNetwork])
 
