@@ -1,4 +1,4 @@
-import { HeaderWallet as Header } from 'chora/components'
+import { Header } from 'chora/components'
 import { ThemeContextProvider, WalletContextProvider } from 'chora/contexts'
 
 import './globals.css'
@@ -14,7 +14,6 @@ const Layout = ({ children }: any) => (
                 link: '/',
                 titleX: 'faucet',
               }}
-              testnets={true}
             />
             {children}
           </WalletContextProvider>

@@ -13,7 +13,7 @@ import styles from './ProposalVotes.module.css'
 
 const ProposalVotes = () => {
   const { id, groupId } = useParams()
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // fetch proposal votes from selected network
   const [votes, error] = useGroupProposalVotes(chainInfo, `${id}`)
@@ -32,7 +32,9 @@ const ProposalVotes = () => {
               <h3>{'option'}</h3>
               <p>{vote['option']}</p>
             </div>
-            <Link href={`/groups/${groupId}/proposals/${id}/${vote['voter']}`}>
+            <Link
+              href={`/${network}/${groupId}/proposals/${id}/${vote['voter']}`}
+            >
               {'view vote'}
             </Link>
           </div>

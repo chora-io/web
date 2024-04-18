@@ -20,9 +20,9 @@ const Sidebar = () => {
           <ul>
             <li style={{ padding: '1em 0' }}>
               <Link
-                href="/groups"
+                href={`/${network}`}
                 className={
-                  currentRoute === '/groups' ? styles.active : undefined
+                  currentRoute === `/${network}` ? styles.active : undefined
                 }
               >
                 {'← groups'}
@@ -33,9 +33,9 @@ const Sidebar = () => {
           <ul>
             <li>
               <Link
-                href={`/groups/${groupId}`}
+                href={`/${network}/${groupId}`}
                 className={
-                  currentRoute === `/groups/${groupId}`
+                  currentRoute === `/${network}/${groupId}`
                     ? styles.active
                     : undefined
                 }
@@ -45,9 +45,9 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                href={`/groups/${groupId}/accounts`}
+                href={`/${network}/${groupId}/accounts`}
                 className={
-                  currentRoute === `/groups/${groupId}/accounts`
+                  currentRoute === `/${network}/${groupId}/accounts`
                     ? styles.active
                     : undefined
                 }
@@ -57,9 +57,9 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                href={`/groups/${groupId}/members`}
+                href={`/${network}/${groupId}/members`}
                 className={
-                  currentRoute === `/groups/${groupId}/members`
+                  currentRoute === `/${network}/${groupId}/members`
                     ? styles.active
                     : undefined
                 }
@@ -69,9 +69,9 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                href={`/groups/${groupId}/proposals`}
+                href={`/${network}/${groupId}/proposals`}
                 className={
-                  currentRoute === `/groups/${groupId}/proposals`
+                  currentRoute === `/${network}/${groupId}/proposals`
                     ? styles.active
                     : undefined
                 }
@@ -85,9 +85,9 @@ const Sidebar = () => {
             <ul>
               <li>
                 <Link
-                  href={`/groups/${groupId}/geonodes`}
+                  href={`/${network}/${groupId}/geonodes`}
                   className={
-                    currentRoute === `/groups/${groupId}/geonodes`
+                    currentRoute === `/${network}/${groupId}/geonodes`
                       ? styles.active
                       : undefined
                   }
@@ -97,9 +97,9 @@ const Sidebar = () => {
               </li>
               <li>
                 <Link
-                  href={`/groups/${groupId}/vouchers`}
+                  href={`/${network}/${groupId}/vouchers`}
                   className={
-                    currentRoute === `/groups/${groupId}/vouchers`
+                    currentRoute === `/${network}/${groupId}/vouchers`
                       ? styles.active
                       : undefined
                   }
@@ -113,9 +113,9 @@ const Sidebar = () => {
             <ul>
               <li>
                 <Link
-                  href={`/groups/${groupId}/classes`}
+                  href={`/${network}/${groupId}/classes`}
                   className={
-                    currentRoute === `/groups/${groupId}/classes`
+                    currentRoute === `/${network}/${groupId}/classes`
                       ? styles.active
                       : undefined
                   }
@@ -125,9 +125,9 @@ const Sidebar = () => {
               </li>
               <li>
                 <Link
-                  href={`/groups/${groupId}/projects`}
+                  href={`/${network}/${groupId}/projects`}
                   className={
-                    currentRoute === `/groups/${groupId}/projects`
+                    currentRoute === `/${network}/${groupId}/projects`
                       ? styles.active
                       : undefined
                   }
@@ -140,9 +140,9 @@ const Sidebar = () => {
           <ul>
             <li>
               <Link
-                href={`/groups/${groupId}/resolvers`}
+                href={`/${network}/${groupId}/resolvers`}
                 className={
-                  currentRoute === `/groups/${groupId}/resolvers`
+                  currentRoute === `/${network}/${groupId}/resolvers`
                     ? styles.active
                     : undefined
                 }
@@ -163,8 +163,10 @@ const Sidebar = () => {
         <ul>
           <li>
             <Link
-              href="/groups"
-              className={currentRoute === '/groups' ? styles.active : undefined}
+              href={`/${network}`}
+              className={
+                currentRoute === `/${network}` ? styles.active : undefined
+              }
             >
               {'groups'}
             </Link>

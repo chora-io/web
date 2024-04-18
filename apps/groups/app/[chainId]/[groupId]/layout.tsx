@@ -14,7 +14,7 @@ const Layout = ({ children }: any) => {
     if (!initial) {
       setInitial(network)
     } else if (initial !== network) {
-      router.push('/groups')
+      router.push(`/${network}`)
     }
   }, [initial, network, router])
 

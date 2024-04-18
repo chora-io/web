@@ -13,7 +13,7 @@ import styles from './Balances.module.css'
 
 const Balances = () => {
   const { id, groupId } = useParams()
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // fetch voucher balances from selected network
   const [balances, error] = useVoucherBalances(chainInfo, `${id}`)
@@ -42,7 +42,7 @@ const Balances = () => {
               <p>{balance['total_amount']}</p>
             </div>
             <Link
-              href={`/groups/${groupId}/vouchers/${id}/${balance['address']}`}
+              href={`/${network}/${groupId}/vouchers/${id}/${balance['address']}`}
             >
               {'view balance'}
             </Link>

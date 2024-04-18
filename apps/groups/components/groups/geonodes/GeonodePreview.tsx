@@ -11,7 +11,7 @@ import styles from './GeonodePreview.module.css'
 
 const GeonodePreview = ({ node }: any) => {
   const { groupId } = useParams()
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, error] = useMetadata(chainInfo, node.metadata)
@@ -26,7 +26,7 @@ const GeonodePreview = ({ node }: any) => {
         <h3>{'curator'}</h3>
         <p>{node?.curator ? <Address address={node.curator} /> : 'NA'}</p>
       </div>
-      <Link href={`/groups/${groupId}/geonodes/${node['id']}`}>
+      <Link href={`/${network}/${groupId}/geonodes/${node['id']}`}>
         {'view node'}
       </Link>
       {error && (

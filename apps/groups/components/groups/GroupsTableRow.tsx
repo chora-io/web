@@ -6,7 +6,7 @@ import { useContext } from 'react'
 import styles from './GroupsTableRow.module.css'
 
 const GroupsTableRow = ({ group }: any) => {
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, error] = useMetadata(
@@ -41,7 +41,7 @@ const GroupsTableRow = ({ group }: any) => {
         )}
       </td>
       <td style={{ minWidth: '120px' }}>
-        <Link href={`/groups/${group.id}`}>{'view group'}</Link>
+        <Link href={`/${network}/${group.id}`}>{'view group'}</Link>
       </td>
     </tr>
   )

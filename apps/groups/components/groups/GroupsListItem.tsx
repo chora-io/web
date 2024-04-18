@@ -7,7 +7,7 @@ import { useContext } from 'react'
 import styles from './GroupsListItem.module.css'
 
 const GroupsListItem = ({ group }: any) => {
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, error] = useMetadata(
@@ -41,7 +41,7 @@ const GroupsListItem = ({ group }: any) => {
           )}
         </p>
       </div>
-      <Link href={`/groups/${group.id}`}>{'view group'}</Link>
+      <Link href={`/${network}/${group.id}`}>{'view group'}</Link>
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

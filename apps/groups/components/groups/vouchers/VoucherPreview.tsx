@@ -11,7 +11,7 @@ import styles from './VoucherPreview.module.css'
 
 const VoucherPreview = ({ voucher }: any) => {
   const { groupId } = useParams()
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, error] = useMetadata(chainInfo, voucher.metadata)
@@ -26,7 +26,7 @@ const VoucherPreview = ({ voucher }: any) => {
         <h3>{'issuer'}</h3>
         <p>{voucher?.issuer ? <Address address={voucher.issuer} /> : 'NA'}</p>
       </div>
-      <Link href={`/groups/${groupId}/vouchers/${voucher['id']}`}>
+      <Link href={`/${network}/${groupId}/vouchers/${voucher['id']}`}>
         {'view voucher'}
       </Link>
       {error && (

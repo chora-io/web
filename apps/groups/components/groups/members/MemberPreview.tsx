@@ -9,7 +9,7 @@ import styles from './MemberPreview.module.css'
 
 const MemberPreview = ({ member }: any) => {
   const { groupId } = useParams()
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, error] = useMetadata(chainInfo, member.metadata)
@@ -24,7 +24,7 @@ const MemberPreview = ({ member }: any) => {
         <h3>{'address'}</h3>
         <p>{member['address']}</p>
       </div>
-      <Link href={`/groups/${groupId}/members/${member['address']}`}>
+      <Link href={`/${network}/${groupId}/members/${member['address']}`}>
         {'view member'}
       </Link>
       {error && (

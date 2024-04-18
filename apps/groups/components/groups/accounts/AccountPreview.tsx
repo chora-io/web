@@ -9,7 +9,7 @@ import styles from './AccountPreview.module.css'
 
 const AccountPreview = ({ policy }: any) => {
   const { groupId } = useParams()
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, error] = useMetadata(chainInfo, policy.metadata)
@@ -24,7 +24,7 @@ const AccountPreview = ({ policy }: any) => {
         <h3>{'address'}</h3>
         <p>{policy['address']}</p>
       </div>
-      <Link href={`/groups/${groupId}/accounts/${policy['address']}`}>
+      <Link href={`/${network}/${groupId}/accounts/${policy['address']}`}>
         {'view account'}
       </Link>
       {error && (

@@ -8,7 +8,7 @@ import styles from './ProposalPreview.module.css'
 
 const ProposalPreview = ({ proposal }: any) => {
   const { groupId } = useParams()
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, error] = useMetadata(chainInfo, proposal.metadata)
@@ -31,7 +31,7 @@ const ProposalPreview = ({ proposal }: any) => {
             <p>{proposal['executor_result']}</p>
           </div>
         )}
-        <Link href={`/groups/${groupId}/proposals/${proposal['id']}`}>
+        <Link href={`/${network}/${groupId}/proposals/${proposal['id']}`}>
           {'view proposal'}
         </Link>
       </div>

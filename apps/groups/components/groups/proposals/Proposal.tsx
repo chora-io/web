@@ -20,7 +20,7 @@ import styles from './Proposal.module.css'
 
 const Proposal = () => {
   const { id, groupId } = useParams()
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // fetch proposal from selected network or indexer service
   const [proposal, proposalError] = useGroupProposal(chainInfo, `${id}`)
@@ -94,7 +94,7 @@ const Proposal = () => {
       )}
       <div className={styles.boxOptions}>
         {proposal && !currentVote && !votesFinalized && (
-          <Link href={`/groups/${groupId}/proposals/${id}/submit`}>
+          <Link href={`/${network}/${groupId}/proposals/${id}/submit`}>
             {'submit vote'}
           </Link>
         )}
