@@ -6,25 +6,32 @@ import { useContext, useState, useEffect } from 'react'
 
 const Layout = ({ children }: any) => {
   const { chainId } = useParams()
-  const router = useRouter()
   const { network, setNetwork } = useContext(WalletContext)
+  const router = useRouter()
 
+  const [initialChainId, setInitialChainId] = useState<string | null>(null)
   const [initialNetwork, setInitialNetwork] = useState<string | null>(null)
 
   useEffect(() => {
-    if (network && !initialNetwork) {
+    if (chainId) {
+      setInitialChainId(`${chainId}`)
+    }
+  }, [chainId])
+
+  useEffect(() => {
+    if (network) {
       setInitialNetwork(network)
     }
-  }, [network, initialNetwork])
+  }, [network])
 
   useEffect(() => {
     if (initialNetwork && network !== initialNetwork && chainId !== network) {
-      router.push('/')
+      router.push(`/${network}/account`)
     }
-    if (initialNetwork && network === initialNetwork && chainId !== network) {
+    if (initialChainId && chainId !== initialChainId && chainId !== network) {
       setNetwork(chainId)
     }
-  }, [chainId, network, initialNetwork, router, setNetwork])
+  }, [chainId, network, initialChainId, initialNetwork, router, setNetwork])
 
   return <div>{children}</div>
 }

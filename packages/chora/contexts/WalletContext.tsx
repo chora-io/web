@@ -55,6 +55,48 @@ const WalletContextProvider = (props: any) => {
       localStorage.setItem(cachedNetworkKey, defaultNetwork)
     }
 
+    if (network !== null && network !== chainInfo?.chainId) {
+      switch (network) {
+        case bionLocal.chainId:
+          setChainInfo(bionLocal)
+          break
+        case choraLocal.chainId:
+          setChainInfo(choraLocal)
+          break
+        case choraTestnet.chainId:
+          setChainInfo(choraTestnet)
+          break
+        case regenLocal.chainId:
+          setChainInfo(regenLocal)
+          break
+        case regenMainnet.chainId:
+          setChainInfo(regenMainnet)
+          break
+        case regenRedwood.chainId:
+          setChainInfo(regenRedwood)
+          break
+      }
+
+      // check if network is still enabled
+      window.keplr
+        ?.enable(network)
+        .then(() => {
+          // get wallet from connected network
+          window.keplr
+            ?.getKey(network)
+            .then((wallet) => {
+              setLoading(false)
+              setWallet(wallet)
+            })
+            .catch(() => {
+              setLoading(false)
+            })
+        })
+        .catch(() => {
+          setLoading(false)
+        })
+    }
+
     if (cachedNetwork !== '' && cachedNetwork !== chainInfo?.chainId) {
       setNetwork(cachedNetwork)
 

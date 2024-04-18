@@ -7,7 +7,7 @@ import { useContext } from 'react'
 import styles from './GeonodesListItem.module.css'
 
 const GeonodesListItem = ({ node }: any) => {
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, error] = useMetadata(chainInfo, node.metadata)
@@ -33,7 +33,7 @@ const GeonodesListItem = ({ node }: any) => {
           )}
         </p>
       </div>
-      <Link href={`/geonodes/${node.id}`}>{'view node'}</Link>
+      <Link href={`/${network}/geonodes/${node.id}`}>{'view node'}</Link>
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

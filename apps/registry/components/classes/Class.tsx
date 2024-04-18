@@ -13,7 +13,7 @@ import styles from './Class.module.css'
 
 const Class = () => {
   const { id } = useParams()
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // fetch credit class from selected network
   const [clazz, classError] = useClass(chainInfo, `${id}`)
@@ -51,7 +51,9 @@ const Class = () => {
         ) : (
           <p>
             {clazz && clazz.metadata ? (
-              <Link href={`/claims/${clazz.metadata}`}>{clazz.metadata}</Link>
+              <Link href={`/${network}/claims/${clazz.metadata}`}>
+                {clazz.metadata}
+              </Link>
             ) : (
               'NA'
             )}

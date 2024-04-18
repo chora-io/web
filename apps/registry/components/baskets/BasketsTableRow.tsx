@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import styles from './BasketsTableRow.module.css'
 
 const BasketsTableRow = ({ basket }: any) => {
-  const { wallet } = useContext(WalletContext)
+  const { network, wallet } = useContext(WalletContext)
 
   return (
     <tr>
@@ -19,7 +19,9 @@ const BasketsTableRow = ({ basket }: any) => {
         )}
       </td>
       <td style={{ minWidth: '120px' }}>
-        <Link href={`/baskets/${basket.denom}`}>{'view basket'}</Link>
+        <Link href={`/${network}/baskets/${basket.denom}`}>
+          {'view basket'}
+        </Link>
       </td>
     </tr>
   )

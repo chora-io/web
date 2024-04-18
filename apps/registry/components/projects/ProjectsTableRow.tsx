@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import styles from './ProjectsTableRow.module.css'
 
 const ProjectsTableRow = ({ project }: any) => {
-  const { wallet } = useContext(WalletContext)
+  const { network, wallet } = useContext(WalletContext)
 
   return (
     <tr>
@@ -20,7 +20,9 @@ const ProjectsTableRow = ({ project }: any) => {
         )}
       </td>
       <td style={{ minWidth: '120px' }}>
-        <Link href={`/projects/${project.id}`}>{'view project'}</Link>
+        <Link href={`/${network}/projects/${project.id}`}>
+          {'view project'}
+        </Link>
       </td>
     </tr>
   )

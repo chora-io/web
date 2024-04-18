@@ -28,7 +28,7 @@ const Claims = () => {
         if (res.code) {
           setError(res.message)
         } else {
-          router.push(`/claims/${iri}`)
+          router.push(`/${network}/claims/${iri}`)
         }
       })
       .catch((err) => {

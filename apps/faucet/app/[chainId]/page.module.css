@@ -1,0 +1,4 @@
+.page {
+  composes: page-center from 'chora/styles/page.css';
+  background: var(--background-primary);
+}

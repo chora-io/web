@@ -14,7 +14,7 @@ import styles from './Batch.module.css'
 
 const Batch = () => {
   const { denom } = useParams()
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // fetch credit batch from selected network
   const [batch, batchError] = useBatch(chainInfo, `${denom}`)
@@ -49,7 +49,7 @@ const Batch = () => {
         <h3>{'project id'}</h3>
         <p>
           {batch && batch['project_id'] ? (
-            <Link href={`/projects/${batch['project_id']}`}>
+            <Link href={`/${network}/projects/${batch['project_id']}`}>
               {batch['project_id']}
             </Link>
           ) : (
@@ -80,7 +80,9 @@ const Batch = () => {
         ) : (
           <p>
             {batch && batch.metadata ? (
-              <Link href={`/claims/${batch.metadata}`}>{batch.metadata}</Link>
+              <Link href={`/${network}/claims/${batch.metadata}`}>
+                {batch.metadata}
+              </Link>
             ) : (
               'NA'
             )}

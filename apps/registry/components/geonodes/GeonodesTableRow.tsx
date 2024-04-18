@@ -6,7 +6,7 @@ import { useContext } from 'react'
 import styles from './GeonodesTableRow.module.css'
 
 const GeonodesTableRow = ({ node }: any) => {
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, error] = useMetadata(chainInfo, node.metadata)
@@ -38,7 +38,7 @@ const GeonodesTableRow = ({ node }: any) => {
         )}
       </td>
       <td style={{ minWidth: '120px' }}>
-        <Link href={`/geonodes/${node.id}`}>{'view node'}</Link>
+        <Link href={`/${network}/geonodes/${node.id}`}>{'view node'}</Link>
       </td>
     </tr>
   )

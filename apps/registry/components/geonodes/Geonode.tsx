@@ -13,7 +13,7 @@ import styles from './Geonode.module.css'
 
 const Geonode = () => {
   const { id } = useParams()
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // fetch node from selected network
   const [node, nodeError] = useGeonode(chainInfo, `${id}`)
@@ -70,7 +70,9 @@ const Geonode = () => {
         ) : (
           <p>
             {node && node.metadata ? (
-              <Link href={`/claims/${node.metadata}`}>{node.metadata}</Link>
+              <Link href={`/${network}/claims/${node.metadata}`}>
+                {node.metadata}
+              </Link>
             ) : (
               'NA'
             )}

@@ -1,11 +1,12 @@
 'use client'
 
 import { WalletContext } from 'chora/contexts'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams, usePathname, useRouter } from 'next/navigation'
 import { useContext, useState, useEffect } from 'react'
 
 const Layout = ({ children }: any) => {
   const { chainId } = useParams()
+  const currentRoute = usePathname()
   const router = useRouter()
   const { network, setNetwork } = useContext(WalletContext)
 
@@ -19,7 +20,10 @@ const Layout = ({ children }: any) => {
 
   useEffect(() => {
     if (initialNetwork && network !== initialNetwork && chainId !== network) {
-      router.push('/')
+      // TODO: reconsider this layout routing variation when adding params
+      const slitRoute = currentRoute.split('/')
+      const nextRoute = currentRoute.replace(slitRoute[1], network)
+      router.push(nextRoute)
     }
     if (initialNetwork && network === initialNetwork && chainId !== network) {
       setNetwork(chainId)

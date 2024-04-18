@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import styles from './ProjectsListItem.module.css'
 
 const ProjectsListItem = ({ project }: any) => {
-  const { wallet } = useContext(WalletContext)
+  const { network, wallet } = useContext(WalletContext)
 
   return (
     <div className={styles.boxItem}>
@@ -26,7 +26,7 @@ const ProjectsListItem = ({ project }: any) => {
           )}
         </p>
       </div>
-      <Link href={`/projects/${project.id}`}>{'view project'}</Link>
+      <Link href={`/${network}/projects/${project.id}`}>{'view project'}</Link>
     </div>
   )
 }

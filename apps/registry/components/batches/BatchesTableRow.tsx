@@ -6,7 +6,7 @@ import { useContext } from 'react'
 import styles from './BatchesTableRow.module.css'
 
 const BatchesTableRow = ({ batch }: any) => {
-  const { wallet } = useContext(WalletContext)
+  const { network, wallet } = useContext(WalletContext)
 
   return (
     <tr>
@@ -19,7 +19,7 @@ const BatchesTableRow = ({ batch }: any) => {
         )}
       </td>
       <td style={{ minWidth: '120px' }}>
-        <Link href={`/batches/${batch.denom}`}>{'view batch'}</Link>
+        <Link href={`/${network}/batches/${batch.denom}`}>{'view batch'}</Link>
       </td>
     </tr>
   )

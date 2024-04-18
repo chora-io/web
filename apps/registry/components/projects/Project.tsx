@@ -13,7 +13,7 @@ import styles from './Project.module.css'
 
 const Project = () => {
   const { id } = useParams()
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // fetch project from selected network
   const [project, projectError] = useProject(chainInfo, `${id}`)
@@ -46,7 +46,7 @@ const Project = () => {
         <h3>{'class id'}</h3>
         <p>
           {project && project['class_id'] ? (
-            <Link href={`/classes/${project['class_id']}`}>
+            <Link href={`/${network}/classes/${project['class_id']}`}>
               {project['class_id']}
             </Link>
           ) : (
@@ -67,7 +67,7 @@ const Project = () => {
         ) : (
           <p>
             {project && project.metadata ? (
-              <Link href={`/claims/${project.metadata}`}>
+              <Link href={`/${network}/claims/${project.metadata}`}>
                 {project.metadata}
               </Link>
             ) : (

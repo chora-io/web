@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import styles from './BasketsListItem.module.css'
 
 const BasketsListItem = ({ basket }: any) => {
-  const { wallet } = useContext(WalletContext)
+  const { network, wallet } = useContext(WalletContext)
 
   return (
     <div className={styles.boxItem}>
@@ -22,7 +22,7 @@ const BasketsListItem = ({ basket }: any) => {
           )}
         </p>
       </div>
-      <Link href={`/baskets/${basket.denom}`}>{'view basket'}</Link>
+      <Link href={`/${network}/baskets/${basket.denom}`}>{'view basket'}</Link>
     </div>
   )
 }

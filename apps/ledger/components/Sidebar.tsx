@@ -10,7 +10,7 @@ import styles from './Sidebar.module.css'
 
 const Sidebar = () => {
   const currentRoute = usePathname()
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   const [modules] = useNetworkModules(chainInfo)
 
@@ -21,9 +21,11 @@ const Sidebar = () => {
         <ul>
           <li>
             <Link
-              href="/account"
+              href={`/${network}/account`}
               className={
-                currentRoute === '/account' ? styles.active : undefined
+                currentRoute === `/${network}/account`
+                  ? styles.active
+                  : undefined
               }
             >
               {'overview'}
@@ -34,9 +36,11 @@ const Sidebar = () => {
         <ul>
           <li>
             <Link
-              href="/network"
+              href={`/${network}/network`}
               className={
-                currentRoute === '/network' ? styles.active : undefined
+                currentRoute === `/${network}/network`
+                  ? styles.active
+                  : undefined
               }
             >
               {'overview'}
@@ -48,9 +52,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'chora.content.v1') && (
             <li>
               <Link
-                href="/modules/chora.content.v1"
+                href={`/${network}/modules/chora.content.v1`}
                 className={
-                  currentRoute === '/modules/chora.content.v1'
+                  currentRoute === `/${network}/modules/chora.content.v1`
                     ? styles.active
                     : undefined
                 }
@@ -62,9 +66,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'chora.geonode.v1') && (
             <li>
               <Link
-                href="/modules/chora.geonode.v1"
+                href={`/${network}/modules/chora.geonode.v1`}
                 className={
-                  currentRoute === '/modules/chora.geonode.v1'
+                  currentRoute === `/${network}/modules/chora.geonode.v1`
                     ? styles.active
                     : undefined
                 }
@@ -76,9 +80,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'chora.validator.v1') && (
             <li>
               <Link
-                href="/modules/chora.validator.v1"
+                href={`/${network}/modules/chora.validator.v1`}
                 className={
-                  currentRoute === '/modules/chora.validator.v1'
+                  currentRoute === `/${network}/modules/chora.validator.v1`
                     ? styles.active
                     : undefined
                 }
@@ -90,9 +94,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'chora.voucher.v1') && (
             <li>
               <Link
-                href="/modules/chora.voucher.v1"
+                href={`/${network}/modules/chora.voucher.v1`}
                 className={
-                  currentRoute === '/modules/chora.voucher.v1'
+                  currentRoute === `/${network}/modules/chora.voucher.v1`
                     ? styles.active
                     : undefined
                 }
@@ -104,9 +108,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'cosmos.auth.v1beta1') && (
             <li>
               <Link
-                href="/modules/cosmos.auth.v1beta1"
+                href={`/${network}/modules/cosmos.auth.v1beta1`}
                 className={
-                  currentRoute === '/modules/cosmos.auth.v1beta1'
+                  currentRoute === `/${network}/modules/cosmos.auth.v1beta1`
                     ? styles.active
                     : undefined
                 }
@@ -118,9 +122,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'cosmos.authz.v1beta1') && (
             <li>
               <Link
-                href="/modules/cosmos.authz.v1beta1"
+                href={`/${network}/modules/cosmos.authz.v1beta1`}
                 className={
-                  currentRoute === '/modules/cosmos.authz.v1beta1'
+                  currentRoute === `/${network}/modules/cosmos.authz.v1beta1`
                     ? styles.active
                     : undefined
                 }
@@ -132,9 +136,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'cosmos.bank.v1beta1') && (
             <li>
               <Link
-                href="/modules/cosmos.bank.v1beta1"
+                href={`/${network}/modules/cosmos.bank.v1beta1`}
                 className={
-                  currentRoute === '/modules/cosmos.bank.v1beta1'
+                  currentRoute === `/${network}/modules/cosmos.bank.v1beta1`
                     ? styles.active
                     : undefined
                 }
@@ -146,9 +150,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'cosmos.circuit.v1') && (
             <li>
               <Link
-                href="/modules/cosmos.circuit.v1"
+                href={`/${network}/modules/cosmos.circuit.v1`}
                 className={
-                  currentRoute === '/modules/cosmos.circuit.v1'
+                  currentRoute === `/${network}/modules/cosmos.circuit.v1`
                     ? styles.active
                     : undefined
                 }
@@ -160,9 +164,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'cosmos.consensus.v1') && (
             <li>
               <Link
-                href="/modules/cosmos.consensus.v1"
+                href={`/${network}/modules/cosmos.consensus.v1`}
                 className={
-                  currentRoute === '/modules/cosmos.consensus.v1'
+                  currentRoute === `/${network}/modules/cosmos.consensus.v1`
                     ? styles.active
                     : undefined
                 }
@@ -174,9 +178,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'cosmos.crisis.v1beta1') && (
             <li>
               <Link
-                href="/modules/cosmos.crisis.v1beta1"
+                href={`/${network}/modules/cosmos.crisis.v1beta1`}
                 className={
-                  currentRoute === '/modules/cosmos.crisis.v1beta1'
+                  currentRoute === `/${network}/modules/cosmos.crisis.v1beta1`
                     ? styles.active
                     : undefined
                 }
@@ -190,9 +194,10 @@ const Sidebar = () => {
           ) && (
             <li>
               <Link
-                href="/modules/cosmos.distribution.v1beta1"
+                href={`/${network}/modules/cosmos.distribution.v1beta1`}
                 className={
-                  currentRoute === '/modules/cosmos.distribution.v1beta1'
+                  currentRoute ===
+                  `/${network}/modules/cosmos.distribution.v1beta1`
                     ? styles.active
                     : undefined
                 }
@@ -204,9 +209,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'cosmos.evidence.v1beta1') && (
             <li>
               <Link
-                href="/modules/cosmos.evidence.v1beta1"
+                href={`/${network}/modules/cosmos.evidence.v1beta1`}
                 className={
-                  currentRoute === '/modules/cosmos.evidence.v1beta1'
+                  currentRoute === `/${network}/modules/cosmos.evidence.v1beta1`
                     ? styles.active
                     : undefined
                 }
@@ -218,9 +223,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'cosmos.feegrant.v1beta1') && (
             <li>
               <Link
-                href="/modules/cosmos.feegrant.v1beta1"
+                href={`/${network}/modules/cosmos.feegrant.v1beta1`}
                 className={
-                  currentRoute === '/modules/cosmos.feegrant.v1beta1'
+                  currentRoute === `/${network}/modules/cosmos.feegrant.v1beta1`
                     ? styles.active
                     : undefined
                 }
@@ -232,9 +237,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'cosmos.gov.v1') && (
             <li>
               <Link
-                href="/modules/cosmos.gov.v1"
+                href={`/${network}/modules/cosmos.gov.v1`}
                 className={
-                  currentRoute === '/modules/cosmos.gov.v1'
+                  currentRoute === `/${network}/modules/cosmos.gov.v1`
                     ? styles.active
                     : undefined
                 }
@@ -246,9 +251,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'cosmos.gov.v1beta1') && (
             <li>
               <Link
-                href="/modules/cosmos.gov.v1beta1"
+                href={`/${network}/modules/cosmos.gov.v1beta1`}
                 className={
-                  currentRoute === '/modules/cosmos.gov.v1beta1'
+                  currentRoute === `/${network}/modules/cosmos.gov.v1beta1`
                     ? styles.active
                     : undefined
                 }
@@ -260,9 +265,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'cosmos.group.v1') && (
             <li>
               <Link
-                href="/modules/cosmos.group.v1"
+                href={`/${network}/modules/cosmos.group.v1`}
                 className={
-                  currentRoute === '/modules/cosmos.group.v1'
+                  currentRoute === `/${network}/modules/cosmos.group.v1`
                     ? styles.active
                     : undefined
                 }
@@ -274,9 +279,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'cosmos.mint.v1beta1') && (
             <li>
               <Link
-                href="/modules/cosmos.mint.v1beta1"
+                href={`/${network}/modules/cosmos.mint.v1beta1`}
                 className={
-                  currentRoute === '/modules/cosmos.mint.v1beta1'
+                  currentRoute === `/${network}/modules/cosmos.mint.v1beta1`
                     ? styles.active
                     : undefined
                 }
@@ -288,9 +293,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'cosmos.params.v1beta1') && (
             <li>
               <Link
-                href="/modules/cosmos.params.v1beta1"
+                href={`/${network}/modules/cosmos.params.v1beta1`}
                 className={
-                  currentRoute === '/modules/cosmos.params.v1beta1'
+                  currentRoute === `/${network}/modules/cosmos.params.v1beta1`
                     ? styles.active
                     : undefined
                 }
@@ -302,9 +307,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'cosmos.slashing.v1beta1') && (
             <li>
               <Link
-                href="/modules/cosmos.slashing.v1beta1"
+                href={`/${network}/modules/cosmos.slashing.v1beta1`}
                 className={
-                  currentRoute === '/modules/cosmos.slashing.v1beta1'
+                  currentRoute === `/${network}/modules/cosmos.slashing.v1beta1`
                     ? styles.active
                     : undefined
                 }
@@ -316,9 +321,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'cosmos.staking.v1beta1') && (
             <li>
               <Link
-                href="/modules/cosmos.staking.v1beta1"
+                href={`/${network}/modules/cosmos.staking.v1beta1`}
                 className={
-                  currentRoute === '/modules/cosmos.staking.v1beta1'
+                  currentRoute === `/${network}/modules/cosmos.staking.v1beta1`
                     ? styles.active
                     : undefined
                 }
@@ -330,9 +335,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'cosmos.upgrade.v1beta1') && (
             <li>
               <Link
-                href="/modules/cosmos.upgrade.v1beta1"
+                href={`/${network}/modules/cosmos.upgrade.v1beta1`}
                 className={
-                  currentRoute === '/modules/cosmos.upgrade.v1beta1'
+                  currentRoute === `/${network}/modules/cosmos.upgrade.v1beta1`
                     ? styles.active
                     : undefined
                 }
@@ -344,9 +349,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'regen.data.v1') && (
             <li>
               <Link
-                href="/modules/regen.data.v1"
+                href={`/${network}/modules/regen.data.v1`}
                 className={
-                  currentRoute === '/modules/regen.data.v1'
+                  currentRoute === `/${network}/modules/regen.data.v1`
                     ? styles.active
                     : undefined
                 }
@@ -358,9 +363,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'regen.ecocredit.v1') && (
             <li>
               <Link
-                href="/modules/regen.ecocredit.v1"
+                href={`/${network}/modules/regen.ecocredit.v1`}
                 className={
-                  currentRoute === '/modules/regen.ecocredit.v1'
+                  currentRoute === `/${network}/modules/regen.ecocredit.v1`
                     ? styles.active
                     : undefined
                 }
@@ -374,9 +379,10 @@ const Sidebar = () => {
           ) && (
             <li>
               <Link
-                href="/modules/regen.ecocredit.basket.v1"
+                href={`/${network}/modules/regen.ecocredit.basket.v1`}
                 className={
-                  currentRoute === '/modules/regen.ecocredit.basket.v1'
+                  currentRoute ===
+                  `/${network}/modules/regen.ecocredit.basket.v1`
                     ? styles.active
                     : undefined
                 }
@@ -390,9 +396,10 @@ const Sidebar = () => {
           ) && (
             <li>
               <Link
-                href="/modules/regen.ecocredit.marketplace.v1"
+                href={`/${network}/modules/regen.ecocredit.marketplace.v1`}
                 className={
-                  currentRoute === '/modules/regen.ecocredit.marketplace.v1'
+                  currentRoute ===
+                  `/${network}/modules/regen.ecocredit.marketplace.v1`
                     ? styles.active
                     : undefined
                 }
@@ -404,9 +411,9 @@ const Sidebar = () => {
           {modules?.some((m) => m.apiPackage === 'regen.intertx.v1') && (
             <li>
               <Link
-                href="/modules/regen.intertx.v1"
+                href={`/${network}/modules/regen.intertx.v1`}
                 className={
-                  currentRoute === '/modules/regen.intertx.v1'
+                  currentRoute === `/${network}/modules/regen.intertx.v1`
                     ? styles.active
                     : undefined
                 }

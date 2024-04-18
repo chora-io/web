@@ -19,7 +19,7 @@ const Layout = ({ children }: any) => {
 
   useEffect(() => {
     if (initialNetwork && network !== initialNetwork && chainId !== network) {
-      router.push('/')
+      router.push(`/`)
     }
     if (initialNetwork && network === initialNetwork && chainId !== network) {
       setNetwork(chainId)

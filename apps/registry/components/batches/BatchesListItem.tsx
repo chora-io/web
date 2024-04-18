@@ -6,7 +6,7 @@ import { useContext } from 'react'
 import styles from './BatchesListItem.module.css'
 
 const BatchesListItem = ({ batch }: any) => {
-  const { wallet } = useContext(WalletContext)
+  const { network, wallet } = useContext(WalletContext)
 
   return (
     <div className={styles.boxItem}>
@@ -27,7 +27,7 @@ const BatchesListItem = ({ batch }: any) => {
           )}
         </p>
       </div>
-      <Link href={`/batches/${batch.denom}`}>{'view batch'}</Link>
+      <Link href={`/${network}/batches/${batch.denom}`}>{'view batch'}</Link>
     </div>
   )
 }
