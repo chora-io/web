@@ -11,8 +11,15 @@ import styles from './UserSidebar.module.css'
 const UserSidebar = () => {
   const { account, activeAccount, removeAccount, setAccount } =
     useContext(AuthContext)
-  const { chainInfo, getKeplr, network, selected, setNetwork, wallet } =
-    useContext(WalletContext)
+  const {
+    chainInfo,
+    getKeplr,
+    network,
+    selected,
+    setNetwork,
+    wallet,
+    error: keplrError,
+  } = useContext(WalletContext)
   const { showUser } = useContext(UserContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
@@ -101,8 +108,16 @@ const UserSidebar = () => {
           <p>{wallet && wallet.bech32Address}</p>
         </div>
       ) : (
-        <div style={{ margin: '2em' }}>
-          <button onClick={getKeplr}>{'connect'}</button>
+        <div>
+          <i>{'connect to keplr wallet to access additional features'}</i>
+          <p>{'keplr wallet will connect to the following network:'}</p>
+          <p>{network}</p>
+          <div style={{ margin: '2em' }}>
+            <button className={styles.button} onClick={getKeplr}>
+              {'connect'}
+            </button>
+          </div>
+          {keplrError && <p className={styles.error}>{keplrError}</p>}
         </div>
       )}
       <hr />
@@ -112,7 +127,6 @@ const UserSidebar = () => {
           <p>{account && account.id}</p>
           <i>{'chora server account address'}</i>
           <p>{account && account.address}</p>
-          <hr />
           <div style={{ margin: '2em' }}>
             {switched && (
               <button className={styles.button} onClick={handleSwitchBack}>
@@ -126,7 +140,7 @@ const UserSidebar = () => {
         </div>
       ) : (
         <div>
-          <i>{'Connect to chora server to access additional features'}</i>
+          <i>{'connect to chora server to access additional features'}</i>
           {wallet ? (
             wallet.bech32Address.includes('chora') ? (
               <>

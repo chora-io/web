@@ -34,7 +34,7 @@ const Layout = ({ children }: any) => {
         setNetwork(chainId)
       }
     }
-  }, [chainId, initialNetwork, network, router, setNetwork])
+  }, [chainId, initialNetwork, network, pathname, router, setNetwork])
 
   return <div>{children}</div>
 }

@@ -12,8 +12,7 @@ import styles from './HeaderWallet.module.css'
 const HeaderWallet = ({ title, testnets, noUser }: any) => {
   const { darkTheme, setDarkTheme } = useContext(ThemeContext)
   const { showUser, setShowUser } = useContext(UserContext)
-  const { network, setNetwork, wallet, loading, error } =
-    useContext(WalletContext)
+  const { network, setNetwork, wallet, loading } = useContext(WalletContext)
 
   const [selected, setSelected] = useState<string>('')
 
@@ -52,7 +51,6 @@ const HeaderWallet = ({ title, testnets, noUser }: any) => {
       <div>
         <HeaderTitle darkTheme={darkTheme} title={title} />
         <div className={styles.menu}>
-          {error && <span className={styles.error}>{error}</span>}
           <form className={styles.form}>
             <SelectNetwork
               label=" "
