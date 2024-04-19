@@ -7,9 +7,9 @@ const defaultId = 'member'
 const defaultLabel = 'member'
 
 const InputMember = ({ id, label, network, member, setMember }: any) => {
-  const [address, setAddress] = useState<string>('')
-  const [metadata, setMetadata] = useState<string>('')
-  const [weight, setWeight] = useState<string>('')
+  const [address, setAddress] = useState<string>(member.address || '')
+  const [metadata, setMetadata] = useState<string>(member.metadata || '')
+  const [weight, setWeight] = useState<string>(member.weight || '')
 
   useEffect(() => {
     const m = {

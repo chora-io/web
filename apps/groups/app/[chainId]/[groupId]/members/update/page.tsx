@@ -12,10 +12,10 @@ export const metadata: Metadata = {
 const UpdatePage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'leave group'}</h1>
-      <LeaveGroup />
       <h1>{'update members'}</h1>
       <UpdateMembers />
+      <h1>{'leave group'}</h1>
+      <LeaveGroup />
     </div>
   </div>
 )

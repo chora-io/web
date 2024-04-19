@@ -9,11 +9,15 @@ import * as Long from 'long'
 import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
 
+import { useGroupMembers } from '@hooks/useGroupMembers'
+
 import styles from './UpdateMembers.module.css'
 
 const UpdateMembers = () => {
   const { groupId } = useParams()
   const { chainInfo, network, wallet } = useContext(WalletContext)
+
+  const [initMembers, membersError] = useGroupMembers(chainInfo, groupId)
 
   // form inputs
   const [members, setMembers] = useState<any[]>([])
@@ -58,17 +62,23 @@ const UpdateMembers = () => {
 
   return (
     <div className={styles.box}>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <InputMembers
-          id="group-members"
-          network={network}
-          members={members}
-          setMembers={setMembers}
-        />
-        <button type="submit">{'submit'}</button>
-      </form>
+      {initMembers && (
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <InputMembers
+            id="group-members"
+            network={network}
+            members={initMembers.map((member) => member.member)}
+            setMembers={setMembers}
+          />
+          <button type="submit">{'submit'}</button>
+        </form>
+      )}
       <div className={styles.boxText}>
-        <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+        <ResultTx
+          error={membersError || error}
+          rest={chainInfo?.rest}
+          success={success}
+        />
       </div>
     </div>
   )
