@@ -9,3 +9,17 @@
 .menu {
   composes: header-menu from 'chora/styles/header.css';
 }
+
+.menu > form,
+.menu > button {
+  margin-left: 1em;
+}
+
+.form {
+  composes: form from 'chora/styles/form.css';
+  margin: 0.25em;
+}
+
+.error {
+  color: var(--color-error);
+}

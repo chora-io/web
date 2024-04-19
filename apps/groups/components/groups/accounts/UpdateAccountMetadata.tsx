@@ -124,7 +124,7 @@ const UpdateAccountMetadata = () => {
         <InputString
           id="account-name"
           label="account name"
-          placeholder="Updated Account"
+          placeholder="Updated Dashboard"
           string={name}
           setString={setName}
         />

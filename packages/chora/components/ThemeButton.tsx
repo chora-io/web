@@ -11,7 +11,7 @@ const ThemeButton = ({ darkTheme, toggleTheme }: any) => (
       viewBox="0 0 100 100"
     >
       <circle cx="50" cy="50" r="40" fill={darkTheme ? '#F5F5F5' : '#0A0A0A'} />
-      <circle cx="60" cy="50" r="35" fill={darkTheme ? '#111111' : '#FFFFFF'} />
+      <circle cx="60" cy="50" r="37" fill={darkTheme ? '#111111' : '#FFFFFF'} />
     </svg>
   </button>
 )

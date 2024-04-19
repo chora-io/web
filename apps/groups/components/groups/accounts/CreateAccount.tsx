@@ -128,7 +128,7 @@ const CreateAccount = () => {
         <InputString
           id="account-name"
           label="account name"
-          placeholder="New Account"
+          placeholder="New Dashboard"
           string={name}
           setString={setName}
         />

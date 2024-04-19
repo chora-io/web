@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import Account from '@components/workspace/Account'
+import Dashboard from '@components/workspace/Dashboard'
 
 import styles from './page.module.css'
 
@@ -12,7 +12,7 @@ const WorkspacePage = () => (
   <div className={styles.page}>
     <div>
       <h1>{'workspace dashboard'}</h1>
-      <Account />
+      <Dashboard />
     </div>
   </div>
 )

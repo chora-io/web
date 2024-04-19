@@ -1,6 +1,6 @@
 'use client'
 
-import { AuthContext, WalletContext } from 'chora/contexts'
+import { WalletContext } from 'chora/contexts'
 import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
 import { useContext } from 'react'
@@ -10,7 +10,6 @@ import styles from './Sidebar.module.css'
 const Sidebar = () => {
   const { groupId } = useParams()
   const currentRoute = usePathname()
-  const { account } = useContext(AuthContext)
   const { network } = useContext(WalletContext)
 
   if (groupId) {
@@ -184,34 +183,30 @@ const Sidebar = () => {
               {'dashboard'}
             </Link>
           </li>
-          {account && (
-            <>
-              <li>
-                <Link
-                  href="/workspace/workflows"
-                  className={
-                    currentRoute === '/workspace/workflows'
-                      ? styles.active
-                      : undefined
-                  }
-                >
-                  {'workflows'}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/workspace/documents"
-                  className={
-                    currentRoute === '/workspace/documents'
-                      ? styles.active
-                      : undefined
-                  }
-                >
-                  {'documents'}
-                </Link>
-              </li>
-            </>
-          )}
+          <li>
+            <Link
+              href="/workspace/workflows"
+              className={
+                currentRoute === '/workspace/workflows'
+                  ? styles.active
+                  : undefined
+              }
+            >
+              {'workflows'}
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/workspace/documents"
+              className={
+                currentRoute === '/workspace/documents'
+                  ? styles.active
+                  : undefined
+              }
+            >
+              {'documents'}
+            </Link>
+          </li>
         </ul>
       </ul>
     </div>

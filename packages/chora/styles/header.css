@@ -68,7 +68,7 @@
   display: flex;
   justify-content: center;
   list-style: none inside none;
-  margin: 0 2em;
+  margin: 0 1em;
 }
 
 @media (max-width: 850px) {
@@ -78,7 +78,7 @@
 }
 
 .header-menu li {
-  margin: 0.75em;
+  margin: 0.65em;
 }
 
 /* header-divider */

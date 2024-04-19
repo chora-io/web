@@ -12,10 +12,10 @@ const Layout = ({ children }: any) => {
   const [initialNetwork, setInitialNetwork] = useState<string | null>(null)
 
   useEffect(() => {
-    if (network && !initialNetwork) {
+    if (!initialNetwork && network) {
       setInitialNetwork(network)
     }
-  }, [network, initialNetwork])
+  }, [initialNetwork, network])
 
   useEffect(() => {
     // check if route param does not match network
@@ -31,7 +31,7 @@ const Layout = ({ children }: any) => {
         setNetwork(chainId)
       }
     }
-  }, [chainId, network, initialNetwork, router, setNetwork])
+  }, [chainId, initialNetwork, network, router, setNetwork])
 
   return <div>{children}</div>
 }

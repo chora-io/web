@@ -3,7 +3,6 @@
 .connect {
   display: inline-flex;
   height: var(--header-height);
-  margin-right: 1em;
 }
 
 /* error */

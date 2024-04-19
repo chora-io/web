@@ -9,6 +9,7 @@
   position: fixed;
   scrollbar-width: none; /* Firefox */
   width: var(--sidebar-width);
+  z-index: 1;
   -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
 
