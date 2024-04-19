@@ -84,6 +84,18 @@ const Sidebar = () => {
             <ul>
               <li>
                 <Link
+                  href={`/${network}/${groupId}/claims`}
+                  className={
+                    currentRoute === `/${network}/${groupId}/claims`
+                      ? styles.active
+                      : undefined
+                  }
+                >
+                  {'claims'}
+                </Link>
+              </li>
+              <li>
+                <Link
                   href={`/${network}/${groupId}/geonodes`}
                   className={
                     currentRoute === `/${network}/${groupId}/geonodes`
@@ -112,6 +124,18 @@ const Sidebar = () => {
             <ul>
               <li>
                 <Link
+                  href={`/${network}/${groupId}/claims`}
+                  className={
+                    currentRoute === `/${network}/${groupId}/claims`
+                      ? styles.active
+                      : undefined
+                  }
+                >
+                  {'claims'}
+                </Link>
+              </li>
+              <li>
+                <Link
                   href={`/${network}/${groupId}/classes`}
                   className={
                     currentRoute === `/${network}/${groupId}/classes`
@@ -132,6 +156,30 @@ const Sidebar = () => {
                   }
                 >
                   {'projects'}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`/${network}/${groupId}/batches`}
+                  className={
+                    currentRoute === `/${network}/${groupId}/batches`
+                      ? styles.active
+                      : undefined
+                  }
+                >
+                  {'batches'}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`/${network}/${groupId}/baskets`}
+                  className={
+                    currentRoute === `/${network}/${groupId}/baskets`
+                      ? styles.active
+                      : undefined
+                  }
+                >
+                  {'baskets'}
                 </Link>
               </li>
             </ul>
