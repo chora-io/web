@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import Resolvers from '@components/groups/resolvers/Resolvers'
+import AllSpecies from '@components/groups/species/AllSpecies'
 
 import styles from './page.module.css'
 
@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   title: 'chora groups',
 }
 
-const ResolversPage = () => (
+const SpeciesPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'group data resolvers'}</h1>
-      <Resolvers />
+      <h1>{'group species'}</h1>
+      <AllSpecies />
     </div>
   </div>
 )
 
-export default ResolversPage
+export default SpeciesPage

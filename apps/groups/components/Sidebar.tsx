@@ -79,7 +79,7 @@ const Sidebar = () => {
               </Link>
             </li>
           </ul>
-          <li>{'extended'}</li>
+          <li>{'manage'}</li>
           {!!network && network.includes('chora') && (
             <ul>
               <li>
@@ -96,14 +96,38 @@ const Sidebar = () => {
               </li>
               <li>
                 <Link
-                  href={`/${network}/${groupId}/geonodes`}
+                  href={`/${network}/${groupId}/locales`}
                   className={
-                    currentRoute === `/${network}/${groupId}/geonodes`
+                    currentRoute === `/${network}/${groupId}/locales`
                       ? styles.active
                       : undefined
                   }
                 >
-                  {'geonodes'}
+                  {'locales'}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`/${network}/${groupId}/habitats`}
+                  className={
+                    currentRoute === `/${network}/${groupId}/habitats`
+                      ? styles.active
+                      : undefined
+                  }
+                >
+                  {'habitats'}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`/${network}/${groupId}/species`}
+                  className={
+                    currentRoute === `/${network}/${groupId}/species`
+                      ? styles.active
+                      : undefined
+                  }
+                >
+                  {'species'}
                 </Link>
               </li>
               <li>

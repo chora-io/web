@@ -208,18 +208,6 @@ const Sidebar = () => {
                 {'overview'}
               </Link>
             </li>
-            <li>
-              <Link
-                href={`/${network}/geonodes/${id}/reporters`}
-                className={
-                  currentRoute === `/${network}/geonodes/${id}/reporters`
-                    ? styles.active
-                    : undefined
-                }
-              >
-                {'reporters'}
-              </Link>
-            </li>
           </ul>
         </ul>
       </div>
@@ -284,14 +272,38 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                href={`/${network}/geonodes`}
+                href={`/${network}/locales`}
                 className={
-                  currentRoute === `/${network}/geonodes`
+                  currentRoute === `/${network}/locales`
                     ? styles.active
                     : undefined
                 }
               >
-                {'geonodes'}
+                {'locales'}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={`/${network}/habitats`}
+                className={
+                  currentRoute === `/${network}/habitats`
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'habitats'}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={`/${network}/species`}
+                className={
+                  currentRoute === `/${network}/species`
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'species'}
               </Link>
             </li>
           </ul>
