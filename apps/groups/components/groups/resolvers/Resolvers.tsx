@@ -19,7 +19,7 @@ const Resolvers = () => {
 
   return (
     <div className={styles.box}>
-      {!error && !resolvers && <p>{'loading...'}</p>}
+      {!error && !resolvers && <div>{'loading...'}</div>}
       {Array.isArray(resolvers) &&
         resolvers.map((resolver: any) => (
           <div className={styles.boxItem} key={resolver['id']}>
@@ -44,7 +44,7 @@ const Resolvers = () => {
           </div>
         ))}
       {!error && chainInfo?.chainId && resolvers?.length === 0 && (
-        <p>{'no resolvers found'}</p>
+        <div>{'no resolvers found'}</div>
       )}
       {error && (
         <div className={styles.boxText}>

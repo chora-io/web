@@ -67,7 +67,7 @@ const UpdateMembers = () => {
           <InputMembers
             id="group-members"
             network={network}
-            members={initMembers.map((member) => member.member)}
+            members={initMembers.map((member: any) => member.member)}
             setMembers={setMembers}
           />
           <button type="submit">{'submit'}</button>
