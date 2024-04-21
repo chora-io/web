@@ -272,38 +272,38 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                href={`/${network}/locales`}
+                href={`/${network}/subjects`}
                 className={
-                  currentRoute === `/${network}/locales`
+                  currentRoute === `/${network}/subjects`
                     ? styles.active
                     : undefined
                 }
               >
-                {'locales'}
+                {'subjects'}
               </Link>
             </li>
             <li>
               <Link
-                href={`/${network}/habitats`}
+                href={`/${network}/monitors`}
                 className={
-                  currentRoute === `/${network}/habitats`
+                  currentRoute === `/${network}/monitors`
                     ? styles.active
                     : undefined
                 }
               >
-                {'habitats'}
+                {'monitors'}
               </Link>
             </li>
             <li>
               <Link
-                href={`/${network}/species`}
+                href={`/${network}/verifiers`}
                 className={
-                  currentRoute === `/${network}/species`
+                  currentRoute === `/${network}/verifiers`
                     ? styles.active
                     : undefined
                 }
               >
-                {'species'}
+                {'verifiers'}
               </Link>
             </li>
           </ul>
