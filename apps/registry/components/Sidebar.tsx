@@ -176,31 +176,31 @@ const Sidebar = () => {
     )
   }
 
-  if (currentRoute.includes('geonodes') && id) {
+  if (currentRoute.includes('monitors') && id) {
     return (
       <div className={styles.sidebar}>
         <ul>
           <ul>
             <li style={{ padding: '1em 0' }}>
               <Link
-                href={`/${network}/geonodes`}
+                href={`/${network}/monitors`}
                 className={
-                  currentRoute === `/${network}/geonodes`
+                  currentRoute === `/${network}/monitors`
                     ? styles.active
                     : undefined
                 }
               >
-                {'← geonodes'}
+                {'← monitors'}
               </Link>
             </li>
           </ul>
-          <li>{'geonode'}</li>
+          <li>{'monitor'}</li>
           <ul>
             <li>
               <Link
-                href={`/${network}/geonodes/${id}`}
+                href={`/${network}/monitors/${id}`}
                 className={
-                  currentRoute === `/${network}/geonodes/${id}`
+                  currentRoute === `/${network}/monitors/${id}`
                     ? styles.active
                     : undefined
                 }
@@ -239,6 +239,158 @@ const Sidebar = () => {
                 href={`/${network}/projects/${id}`}
                 className={
                   currentRoute === `/${network}/projects/${id}`
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'overview'}
+              </Link>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    )
+  }
+
+  if (currentRoute.includes('resolvers') && id) {
+    return (
+      <div className={styles.sidebar}>
+        <ul>
+          <ul>
+            <li style={{ padding: '1em 0' }}>
+              <Link
+                href={`/${network}/resolvers`}
+                className={
+                  currentRoute === `/${network}/resolvers`
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'← resolvers'}
+              </Link>
+            </li>
+          </ul>
+          <li>{'resolver'}</li>
+          <ul>
+            <li>
+              <Link
+                href={`/${network}/resolvers/${id}`}
+                className={
+                  currentRoute === `/${network}/resolvers/${id}`
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'overview'}
+              </Link>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    )
+  }
+
+  if (currentRoute.includes('subjects') && id) {
+    return (
+      <div className={styles.sidebar}>
+        <ul>
+          <ul>
+            <li style={{ padding: '1em 0' }}>
+              <Link
+                href={`/${network}/subjects`}
+                className={
+                  currentRoute === `/${network}/subjects`
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'← subjects'}
+              </Link>
+            </li>
+          </ul>
+          <li>{'subject'}</li>
+          <ul>
+            <li>
+              <Link
+                href={`/${network}/subjects/${id}`}
+                className={
+                  currentRoute === `/${network}/subjects/${id}`
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'overview'}
+              </Link>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    )
+  }
+
+  if (currentRoute.includes('verifiers') && id) {
+    return (
+      <div className={styles.sidebar}>
+        <ul>
+          <ul>
+            <li style={{ padding: '1em 0' }}>
+              <Link
+                href={`/${network}/verifiers`}
+                className={
+                  currentRoute === `/${network}/verifiers`
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'← verifiers'}
+              </Link>
+            </li>
+          </ul>
+          <li>{'verifier'}</li>
+          <ul>
+            <li>
+              <Link
+                href={`/${network}/verifiers/${id}`}
+                className={
+                  currentRoute === `/${network}/verifiers/${id}`
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'overview'}
+              </Link>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    )
+  }
+
+  if (currentRoute.includes('vouchers') && id) {
+    return (
+      <div className={styles.sidebar}>
+        <ul>
+          <ul>
+            <li style={{ padding: '1em 0' }}>
+              <Link
+                href={`/${network}/vouchers`}
+                className={
+                  currentRoute === `/${network}/vouchers`
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'← vouchers'}
+              </Link>
+            </li>
+          </ul>
+          <li>{'voucher'}</li>
+          <ul>
+            <li>
+              <Link
+                href={`/${network}/vouchers/${id}`}
+                className={
+                  currentRoute === `/${network}/vouchers/${id}`
                     ? styles.active
                     : undefined
                 }
@@ -306,6 +458,30 @@ const Sidebar = () => {
                 {'verifiers'}
               </Link>
             </li>
+            <li>
+              <Link
+                href={`/${network}/vouchers`}
+                className={
+                  currentRoute === `/${network}/vouchers`
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'vouchers'}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={`/${network}/resolvers`}
+                className={
+                  currentRoute === `/${network}/resolvers`
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'resolvers'}
+              </Link>
+            </li>
           </ul>
         )}
         {!!network && network.includes('regen') && (
@@ -368,6 +544,18 @@ const Sidebar = () => {
                 }
               >
                 {'baskets'}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={`/${network}/resolvers`}
+                className={
+                  currentRoute === `/${network}/resolvers`
+                    ? styles.active
+                    : undefined
+                }
+              >
+                {'resolvers'}
               </Link>
             </li>
           </ul>

@@ -1,0 +1,5 @@
+.activeAccount {
+  color: var(--color-theme);
+  font-weight: 400;
+  margin-left: 5px;
+}

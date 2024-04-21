@@ -142,6 +142,18 @@ const Sidebar = () => {
                   {'vouchers'}
                 </Link>
               </li>
+              <li>
+                <Link
+                  href={`/${network}/${groupId}/resolvers`}
+                  className={
+                    currentRoute === `/${network}/${groupId}/resolvers`
+                      ? styles.active
+                      : undefined
+                  }
+                >
+                  {'resolvers'}
+                </Link>
+              </li>
             </ul>
           )}
           {!!network && network.includes('regen') && (
@@ -206,22 +218,20 @@ const Sidebar = () => {
                   {'baskets'}
                 </Link>
               </li>
+              <li>
+                <Link
+                  href={`/${network}/${groupId}/resolvers`}
+                  className={
+                    currentRoute === `/${network}/${groupId}/resolvers`
+                      ? styles.active
+                      : undefined
+                  }
+                >
+                  {'resolvers'}
+                </Link>
+              </li>
             </ul>
           )}
-          <ul>
-            <li>
-              <Link
-                href={`/${network}/${groupId}/resolvers`}
-                className={
-                  currentRoute === `/${network}/${groupId}/resolvers`
-                    ? styles.active
-                    : undefined
-                }
-              >
-                {'resolvers'}
-              </Link>
-            </li>
-          </ul>
         </ul>
       </div>
     )

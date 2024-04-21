@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'chora registry',
 }
 
-const VerifierPage = () => (
+const VerifiersPage = () => (
   <div className={styles.page}>
     <div>
       <h1>{'explore verifiers'}</h1>
@@ -19,4 +19,4 @@ const VerifierPage = () => (
   </div>
 )
 
-export default VerifierPage
+export default VerifiersPage

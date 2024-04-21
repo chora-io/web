@@ -4,16 +4,16 @@ import { WalletContext } from 'chora/contexts'
 import Link from 'next/link'
 import { useContext } from 'react'
 
-import styles from './VerifiersNav.module.css'
+import styles from './ResolversNav.module.css'
 
-const VerifiersNav = () => {
+const ResolversNav = () => {
   const { network } = useContext(WalletContext)
 
   return (
     <div className={styles.box}>
-      <Link href={`/${network}/verifiers/add`}>{'add verifier'}</Link>
+      <Link href={`/${network}/resolvers/add`}>{'add resolver'}</Link>
     </div>
   )
 }
 
-export default VerifiersNav
+export default ResolversNav
