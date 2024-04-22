@@ -12,12 +12,13 @@ export const useAttestations = (chainInfo: any, iri: string) => {
   useEffect(() => {
     setError(null)
     setAttestations(null)
-  }, [chainInfo?.chainId, iri])
+  }, [chainInfo?.rest, iri])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch attestations by iri from selected network
+    // fetch data attestations from selected network
     const fetchAttestations = async () => {
+      // fetch data attestations by iri from selected network
       await fetch(chainInfo.rest + '/' + queryAttestations + '/' + iri)
         .then((res) => res.json())
         .then((res) => {

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 const queryBalances = 'chora/voucher/v1/balances-by-voucher'
 
-// fetch voucher balances from selected network
+// fetch voucher balances by voucher id from selected network
 export const useVoucherBalances = (chainInfo: any, voucherId: string) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
@@ -12,12 +12,13 @@ export const useVoucherBalances = (chainInfo: any, voucherId: string) => {
   useEffect(() => {
     setError(null)
     setBalances(null)
-  }, [chainInfo?.chainId, voucherId])
+  }, [chainInfo?.rest, voucherId])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch balances from selected network
+    // fetch voucher balances from selected network
     const fetchBalances = async () => {
+      // fetch voucher balances by voucher id from selected network
       await fetch(chainInfo.rest + '/' + queryBalances + '/' + voucherId)
         .then((res) => res.json())
         .then((res) => {

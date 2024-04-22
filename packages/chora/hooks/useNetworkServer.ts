@@ -9,6 +9,7 @@ import {
   regenMainnetX,
 } from 'cosmos/chains'
 
+// set network server based on chain configuration
 export const useNetworkServer = (chainInfo: any) => {
   const [serverUrl, setServerUrl] = useState<string | null>(null)
 

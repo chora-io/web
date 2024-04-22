@@ -1,13 +1,9 @@
 import { useEffect, useState } from 'react'
 
-import { useNetworkServer } from '.'
-
 const queryVoucher = 'chora/voucher/v1/voucher'
 
 // fetch voucher by id from selected network
 export const useVoucher = (chainInfo: any, voucherId: string) => {
-  const [serverUrl] = useNetworkServer(chainInfo)
-
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [voucher, setVoucher] = useState<any>(null)
@@ -16,12 +12,13 @@ export const useVoucher = (chainInfo: any, voucherId: string) => {
   useEffect(() => {
     setError(null)
     setVoucher(null)
-  }, [chainInfo?.chainId, serverUrl, voucherId])
+  }, [chainInfo?.rest, voucherId])
 
   // fetch on load and param change
   useEffect(() => {
     // fetch voucher from selected network
     const fetchVoucher = async () => {
+      // fetch voucher by id from selected network
       await fetch(chainInfo.rest + '/' + queryVoucher + '/' + voucherId)
         .then((res) => res.json())
         .then((res) => {

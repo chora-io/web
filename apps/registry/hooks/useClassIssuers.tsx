@@ -12,12 +12,13 @@ export const useClassIssuers = (chainInfo: any, classId: string) => {
   useEffect(() => {
     setError(null)
     setIssuers(null)
-  }, [chainInfo?.chainId])
+  }, [chainInfo?.rest, classId])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch class issuers by class id from selected network
+    // fetch class issuers from selected network
     const fetchBatches = async () => {
+      // fetch class issuers by class id from selected network
       await fetch(chainInfo.rest + '/' + queryClassIssuers + '/' + classId)
         .then((res) => res.json())
         .then((res) => {

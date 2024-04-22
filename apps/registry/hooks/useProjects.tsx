@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 const queryProjects = 'regen/ecocredit/v1/projects'
 
-// fetch class projects from selected network
+// fetch class projects with pagination from selected network
 export const useProjects = (chainInfo: any, limit: number, offset: number) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
@@ -12,13 +12,15 @@ export const useProjects = (chainInfo: any, limit: number, offset: number) => {
   useEffect(() => {
     setError(null)
     setProjects(null)
-  }, [chainInfo?.chainId])
+  }, [chainInfo?.rest, limit, offset])
 
   // fetch on load and param change
   useEffect(() => {
     // fetch class projects from selected network
     const fetchProjects = async () => {
       const queryParams = `?pagination.limit=${limit}&pagination.offset=${offset}`
+
+      // fetch class projects with pagination from selected network
       await fetch(chainInfo.rest + '/' + queryProjects + queryParams)
         .then((res) => res.json())
         .then((res) => {

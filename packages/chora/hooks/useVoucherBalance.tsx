@@ -16,12 +16,13 @@ export const useVoucherBalance = (
   useEffect(() => {
     setError(null)
     setBalance(null)
-  }, [chainInfo?.chainId, voucherId, address])
+  }, [chainInfo?.rest, voucherId, address])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch balance from selected network
+    // fetch voucher balance from selected network
     const fetchBalance = async () => {
+      // fetch voucher balance by voucher id and address from selected network
       await fetch(
         chainInfo.rest + '/' + queryBalance + '/' + voucherId + '/' + address,
       )

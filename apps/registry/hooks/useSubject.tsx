@@ -13,12 +13,13 @@ export const useSubject = (chainInfo: any, id: string) => {
   useEffect(() => {
     setError(null)
     setSubject(null)
-  }, [chainInfo?.chainId, id])
+  }, [chainInfo?.rest, id])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch subject by id from selected network
+    // fetch subject from selected network
     const fetchSubject = async () => {
+      // fetch subject by id from selected network
       await fetch(chainInfo.rest + '/' + querySubject + '/' + id)
         .then((res) => res.json())
         .then((res) => {

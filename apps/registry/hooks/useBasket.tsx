@@ -12,12 +12,13 @@ export const useBasket = (chainInfo: any, denom: string) => {
   useEffect(() => {
     setError(null)
     setBasket(null)
-  }, [chainInfo?.chainId, denom])
+  }, [chainInfo?.rest, denom])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch basket from selected network
+    // fetch credit basket from selected network
     const fetchBasket = async () => {
+      // fetch credit basket by denom from selected network
       await fetch(chainInfo.rest + '/' + queryBasket + '/' + denom)
         .then((res) => res.json())
         .then((res) => {

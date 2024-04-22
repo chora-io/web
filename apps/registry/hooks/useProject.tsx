@@ -12,12 +12,13 @@ export const useProject = (chainInfo: any, id: string) => {
   useEffect(() => {
     setError(null)
     setProject(null)
-  }, [chainInfo?.chainId, id])
+  }, [chainInfo?.rest, id])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch project by id from selected network
+    // fetch project from selected network
     const fetchProject = async () => {
+      // fetch project by id from selected network
       await fetch(chainInfo.rest + '/' + queryProject + '/' + id)
         .then((res) => res.json())
         .then((res) => {

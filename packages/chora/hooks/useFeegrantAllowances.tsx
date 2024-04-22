@@ -15,12 +15,13 @@ export const useFeegrantAllowances = (chainInfo: any, address: string) => {
     setError(null)
     setAllowancesGrantee(null)
     setAllowancesGranter(null)
-  }, [chainInfo?.chainId, address])
+  }, [chainInfo?.rest, address])
 
   // fetch on load and params change
   useEffect(() => {
-    // fetch allowances by grantee from selected network
+    // fetch feegrant allowances by grantee from selected network
     const fetchAllowancesByGrantee = async () => {
+      // fetch feegrant allowances by grantee from selected network
       await fetch(
         chainInfo.rest + '/' + queryAllowancesByGrantee + '/' + address,
       )
@@ -34,8 +35,9 @@ export const useFeegrantAllowances = (chainInfo: any, address: string) => {
         })
     }
 
-    // fetch allowances by granter from selected network
+    // fetch feegrant allowances by granter from selected network
     const fetchAllowancesByGranter = async () => {
+      // fetch feegrant allowances by granter from selected network
       await fetch(
         chainInfo.rest + '/' + queryAllowancesByGranter + '/' + address,
       )

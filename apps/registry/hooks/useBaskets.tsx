@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 const queryBaskets = 'regen/ecocredit/basket/v1/baskets'
 
-// fetch credit baskets from selected network
+// fetch credit baskets with pagination from selected network
 export const useBaskets = (chainInfo: any, limit: number, offset: number) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
@@ -12,13 +12,15 @@ export const useBaskets = (chainInfo: any, limit: number, offset: number) => {
   useEffect(() => {
     setError(null)
     setBaskets(null)
-  }, [chainInfo?.chainId])
+  }, [chainInfo?.rest, limit, offset])
 
   // fetch on load and param change
   useEffect(() => {
     // fetch baskets from selected network
     const fetchBaskets = async () => {
       const queryParams = `?pagination.limit=${limit}&pagination.offset=${offset}`
+
+      // fetch credit baskets with pagination from selected network
       await fetch(chainInfo.rest + '/' + queryBaskets + queryParams)
         .then((res) => res.json())
         .then((res) => {

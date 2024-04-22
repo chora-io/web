@@ -12,12 +12,13 @@ export const useClass = (chainInfo: any, id: string) => {
   useEffect(() => {
     setError(null)
     setClass(null)
-  }, [chainInfo?.chainId, id])
+  }, [chainInfo?.rest, id])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch credit class by id from selected network
+    // fetch credit class from selected network
     const fetchClass = async () => {
+      // fetch credit class by id from selected network
       await fetch(chainInfo.rest + '/' + queryClass + '/' + id)
         .then((res) => res.json())
         .then((res) => {

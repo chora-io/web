@@ -12,12 +12,13 @@ export const useBatch = (chainInfo: any, denom: string) => {
   useEffect(() => {
     setError(null)
     setBatch(null)
-  }, [chainInfo?.chainId, denom])
+  }, [chainInfo?.rest, denom])
 
   // fetch on load and param change
   useEffect(() => {
     // fetch credit batch from selected network
     const fetchBatch = async () => {
+      // fetch credit batch by denom from selected network
       await fetch(chainInfo.rest + '/' + queryBatch + '/' + denom)
         .then((res) => res.json())
         .then((res) => {

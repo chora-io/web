@@ -12,12 +12,13 @@ export const useResolvers = (chainInfo: any, iri: string) => {
   useEffect(() => {
     setError(null)
     setResolvers(null)
-  }, [chainInfo?.chainId, iri])
+  }, [chainInfo?.rest, iri])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch resolvers by iri from selected network
+    // fetch resolvers from selected network
     const fetchResolvers = async () => {
+      // fetch resolvers by iri from selected network
       await fetch(chainInfo.rest + '/' + queryResolvers + '/' + iri)
         .then((res) => res.json())
         .then((res) => {

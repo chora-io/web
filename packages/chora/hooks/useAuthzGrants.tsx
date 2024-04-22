@@ -15,12 +15,13 @@ export const useAuthzGrants = (chainInfo: any, address: string) => {
     setError(null)
     setGrantsGrantee(null)
     setGrantsGranter(null)
-  }, [chainInfo?.chainId, address])
+  }, [chainInfo?.rest, address])
 
   // fetch on load and params change
   useEffect(() => {
-    // fetch grants by grantee from selected network
+    // fetch authz grants by grantee from selected network
     const fetchGrantsByGrantee = async () => {
+      // fetch authz grants by grantee from selected network
       await fetch(chainInfo.rest + '/' + queryGrantsByGrantee + '/' + address)
         .then((res) => res.json())
         .then((res) => {
@@ -32,8 +33,9 @@ export const useAuthzGrants = (chainInfo: any, address: string) => {
         })
     }
 
-    // fetch grants by granter from selected network
+    // fetch authz grants by granter from selected network
     const fetchGrantsByGranter = async () => {
+      // fetch authz grants by granter from selected network
       await fetch(chainInfo.rest + '/' + queryGrantsByGranter + '/' + address)
         .then((res) => res.json())
         .then((res) => {

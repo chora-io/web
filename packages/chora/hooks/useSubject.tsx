@@ -1,14 +1,10 @@
 import { useEffect, useState } from 'react'
 
-import { useNetworkServer } from '.'
-
 // TODO(mods): refactor geonode to use "subjects"
 const querySubject = 'chora/geonode/v1/node'
 
 // fetch subject by id from selected network
 export const useSubject = (chainInfo: any, id: string) => {
-  const [serverUrl] = useNetworkServer(chainInfo)
-
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [subject, setSubject] = useState<any>(null)
@@ -17,12 +13,13 @@ export const useSubject = (chainInfo: any, id: string) => {
   useEffect(() => {
     setError(null)
     setSubject(null)
-  }, [chainInfo?.chainId, serverUrl, id])
+  }, [chainInfo?.rest, id])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch subject by id from selected network
+    // fetch subject from selected network
     const fetchSubject = async () => {
+      // fetch subject by id from selected network
       await fetch(chainInfo.rest + '/' + querySubject + '/' + id)
         .then((res) => res.json())
         .then((res) => {

@@ -12,12 +12,13 @@ export const useAnchor = (chainInfo: any, iri: string) => {
   useEffect(() => {
     setError(null)
     setAnchor(null)
-  }, [chainInfo?.chainId, iri])
+  }, [chainInfo?.rest, iri])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch anchor by iri from selected network
+    // fetch data anchor from selected network
     const fetchAnchor = async () => {
+      // fetch data anchor by iri from selected network
       await fetch(chainInfo.rest + '/' + queryAnchor + '/' + iri)
         .then((res) => res.json())
         .then((res) => {

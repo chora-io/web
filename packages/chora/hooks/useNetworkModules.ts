@@ -9,6 +9,7 @@ import {
   regenMainnetX,
 } from 'cosmos/chains'
 
+// set network modules based on chain configuration
 export const useNetworkModules = (chainInfo: any) => {
   const [modules, setModules] = useState<any[] | null>(null)
 

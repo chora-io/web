@@ -16,7 +16,7 @@ export const useMetadata = (chainInfo: any, unresolved: string) => {
   useEffect(() => {
     setError(null)
     setMetadata(null)
-  }, [chainInfo?.chainId, unresolved])
+  }, [chainInfo?.rest, serverUrl, unresolved])
 
   // fetch on load and param change
   useEffect(() => {
@@ -106,7 +106,7 @@ export const useMetadata = (chainInfo: any, unresolved: string) => {
         setError(err.message)
       })
     }
-  }, [chainInfo, serverUrl, unresolved])
+  }, [chainInfo?.rest, serverUrl, unresolved])
 
   return [metadata, error, resolverUrl]
 }
