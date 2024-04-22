@@ -12,12 +12,13 @@ export const useGroupMembers = (chainInfo: any, groupId: any) => {
   useEffect(() => {
     setError(null)
     setMembers(null)
-  }, [chainInfo?.chainId, groupId])
+  }, [chainInfo?.rest, groupId])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch members from selected network
+    // fetch group members from selected network
     const fetchMembers = async () => {
+      // fetch group members by group id from selected network
       await fetch(chainInfo.rest + '/' + queryMembers + '/' + groupId)
         .then((res) => res.json())
         .then((res) => {

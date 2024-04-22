@@ -12,13 +12,13 @@ export const useGroupPolicies = (chainInfo: any, groupId: any) => {
   useEffect(() => {
     setError(null)
     setPolicies(null)
-  }, [chainInfo?.chainId, groupId])
+  }, [chainInfo?.rest, groupId])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch policies from selected network
+    // fetch group policies from selected network
     const fetchPolicies = async () => {
-      // fetch policies by group id from selected network
+      // fetch group policies by group id from selected network
       await fetch(chainInfo.rest + '/' + queryPolicies + '/' + groupId)
         .then((res) => res.json())
         .then((res) => {

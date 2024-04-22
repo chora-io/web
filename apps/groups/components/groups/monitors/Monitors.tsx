@@ -1,6 +1,6 @@
 'use client'
 
-import styles from './Habitats.module.css'
+import styles from './Monitors.module.css'
 
 const Monitors = () => {
   return (

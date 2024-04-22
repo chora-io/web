@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import AddResolver from '@components/resolvers/AddResolver'
+import RegisterResolver from '@components/resolvers/RegisterResolver'
 
 import styles from './page.module.css'
 
@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   title: 'chora registry',
 }
 
-const AddPage = () => (
+const RegisterPage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'add resolver'}</h1>
-      <AddResolver />
+      <h1>{'register resolver'}</h1>
+      <RegisterResolver />
     </div>
   </div>
 )
 
-export default AddPage
+export default RegisterPage

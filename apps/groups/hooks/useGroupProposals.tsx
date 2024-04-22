@@ -5,11 +5,14 @@ import {
 } from 'cosmos/api/cosmos/group/v1/types'
 import { useEffect, useState } from 'react'
 
-const queryPolicies = 'cosmos/group/v1/group_policies_by_group'
 const queryProposals = 'cosmos/group/v1/proposals_by_group_policy'
 
-// fetch group proposals from selected network or indexer service
-export const useGroupProposals = (chainInfo: any, groupId: any) => {
+// fetch group proposals by policy addresses from selected network or network server
+export const useGroupProposals = (
+  chainInfo: any,
+  groupId: any,
+  policies: any[],
+) => {
   const [serverUrl] = useNetworkServer(chainInfo)
 
   // fetch error and results
@@ -20,33 +23,25 @@ export const useGroupProposals = (chainInfo: any, groupId: any) => {
   useEffect(() => {
     setError(null)
     setProposals(null)
-  }, [chainInfo?.chainId, groupId])
+  }, [
+    chainInfo?.chainId,
+    chainInfo?.rest,
+    serverUrl && groupId,
+    policies?.length,
+  ])
 
   // fetch on load and param change
   useEffect(() => {
     // fetch proposals and metadata from selected network and network server
     const fetchProposals = async () => {
-      let addrs: string[] = []
-
-      // fetch policies from selected network
-      await fetch(chainInfo.rest + '/' + queryPolicies + '/' + groupId)
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.code) {
-            setError(res.message)
-          } else {
-            res['group_policies'].map((policy: any) => {
-              addrs.push(policy['address'])
-            })
-          }
-        })
-
       let ps: any[] = []
 
       // create promise for all async fetch calls
-      const promise = addrs.map(async (addr) => {
-        // fetch proposals from selected network
-        await fetch(chainInfo.rest + '/' + queryProposals + '/' + addr)
+      const promise = policies.map(async (policy) => {
+        // fetch proposals by policy address from selected network
+        await fetch(
+          chainInfo.rest + '/' + queryProposals + '/' + policy.address,
+        )
           .then((res) => res.json())
           .then((res) => {
             if (res.code) {
@@ -95,12 +90,24 @@ export const useGroupProposals = (chainInfo: any, groupId: any) => {
     }
 
     // only fetch if params available
-    if (chainInfo?.rest && groupId && serverUrl) {
+    if (
+      chainInfo?.chainId &&
+      chainInfo?.rest &&
+      serverUrl &&
+      groupId &&
+      policies?.length
+    ) {
       fetchProposals().catch((err) => {
         setError(err.message)
       })
     }
-  }, [chainInfo?.rest, groupId, serverUrl])
+  }, [
+    chainInfo?.chainId,
+    chainInfo?.rest,
+    serverUrl,
+    groupId,
+    policies?.length,
+  ])
 
   return [proposals, error]
 }

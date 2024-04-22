@@ -2,20 +2,22 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
-import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import ProjectPreview from '@components/groups/projects/ProjectPreview'
+import { GroupContext } from '@contexts/GroupContext'
 import { useGroupProjects } from '@hooks/useGroupProjects'
 
 import styles from './Projects.module.css'
 
 const Projects = () => {
-  const { groupId } = useParams()
+  const { policies, policiesError } = useContext(GroupContext)
   const { chainInfo } = useContext(WalletContext)
 
   // fetch class projects administered by group from selected network
-  const [projects, error] = useGroupProjects(chainInfo, groupId)
+  const [projects, projectsError] = useGroupProjects(chainInfo, policies)
+
+  const error = policiesError || projectsError
 
   return (
     <div className={styles.box}>

@@ -1,5 +1,6 @@
-import { useNetworkServer } from 'chora/hooks'
 import { useEffect, useState } from 'react'
+
+import { useNetworkServer } from '.'
 
 // TODO(mods): refactor geonode to use "subjects"
 const querySubject = 'chora/geonode/v1/node'

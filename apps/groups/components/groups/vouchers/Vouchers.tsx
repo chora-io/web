@@ -2,20 +2,22 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
-import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import VoucherPreview from '@components/groups/vouchers/VoucherPreview'
+import { GroupContext } from '@contexts/GroupContext'
 import { useGroupVouchers } from '@hooks/useGroupVouchers'
 
 import styles from './Vouchers.module.css'
 
 const Vouchers = () => {
-  const { groupId } = useParams()
+  const { policies, policiesError } = useContext(GroupContext)
   const { chainInfo } = useContext(WalletContext)
 
   // fetch vouchers issued by group from selected network
-  const [vouchers, error] = useGroupVouchers(chainInfo, groupId)
+  const [vouchers, vouchersError] = useGroupVouchers(chainInfo, policies)
+
+  const error = policiesError || vouchersError
 
   return (
     <div className={styles.box}>

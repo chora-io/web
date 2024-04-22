@@ -2,20 +2,22 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
-import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import ClassPreview from '@components/groups/classes/ClassPreview'
+import { GroupContext } from '@contexts/GroupContext'
 import { useGroupClasses } from '@hooks/useGroupClasses'
 
 import styles from './Classes.module.css'
 
 const Classes = () => {
-  const { groupId } = useParams()
+  const { policies, policiesError } = useContext(GroupContext)
   const { chainInfo } = useContext(WalletContext)
 
   // fetch credit classes administered by group from selected network
-  const [classes, error] = useGroupClasses(chainInfo, groupId)
+  const [classes, classesError] = useGroupClasses(chainInfo, policies)
+
+  const error = policiesError || classesError
 
   return (
     <div className={styles.box}>

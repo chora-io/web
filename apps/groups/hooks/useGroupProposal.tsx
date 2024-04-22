@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 
 const queryProposal = 'cosmos/group/v1/proposal'
 
-// fetch proposal from selected network or indexer service
+// fetch group proposal by id from selected network or network server
 export const useGroupProposal = (chainInfo: any, proposalId: string) => {
   const [serverUrl] = useNetworkServer(chainInfo)
 
@@ -19,13 +19,13 @@ export const useGroupProposal = (chainInfo: any, proposalId: string) => {
   useEffect(() => {
     setError(null)
     setProposal(null)
-  }, [chainInfo?.chainId, serverUrl, proposalId])
+  }, [chainInfo?.chainId, chainInfo?.rest, serverUrl, proposalId])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch proposal from selected network
+    // fetch group proposal from selected network
     const fetchProposal = async () => {
-      // fetch proposal from selected network
+      // fetch group proposal by id from selected network
       await fetch(chainInfo.rest + '/' + queryProposal + '/' + proposalId)
         .then((res) => res.json())
         .then((res) => {
@@ -74,7 +74,7 @@ export const useGroupProposal = (chainInfo: any, proposalId: string) => {
     }
 
     // only fetch if params available
-    if (chainInfo?.rest && serverUrl && proposalId) {
+    if (chainInfo?.chainId && chainInfo?.rest && serverUrl && proposalId) {
       fetchProposal().catch((err) => {
         setError(err.message)
       })
@@ -82,7 +82,7 @@ export const useGroupProposal = (chainInfo: any, proposalId: string) => {
         setError(err.message)
       })
     }
-  }, [chainInfo?.rest, serverUrl, proposalId])
+  }, [chainInfo?.chainId, chainInfo?.rest, serverUrl, proposalId])
 
   return [proposal, error]
 }

@@ -16,15 +16,15 @@ export const useGroupProposalVotes = (chainInfo: any, proposalId: string) => {
   useEffect(() => {
     setError(null)
     setVotes(null)
-  }, [chainInfo?.chainId, proposalId])
+  }, [chainInfo?.chainId, chainInfo?.rest, serverUrl && proposalId])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch votes and voters from selected network and network server
+    // fetch votes from selected network and network server
     const fetchVotes = async () => {
       let vs: any[] = []
 
-      // fetch votes from selected network
+      // fetch votes by proposal id from selected network
       await fetch(chainInfo.rest + '/' + queryVotes + '/' + proposalId)
         .then((res) => res.json())
         .then((res) => {
@@ -66,12 +66,12 @@ export const useGroupProposalVotes = (chainInfo: any, proposalId: string) => {
     }
 
     // only fetch if params available
-    if (chainInfo?.rest && serverUrl && proposalId) {
+    if (chainInfo?.chainId && chainInfo?.rest && serverUrl && proposalId) {
       fetchVotes().catch((err) => {
         setError(err.message)
       })
     }
-  }, [chainInfo?.rest, serverUrl, proposalId])
+  }, [chainInfo?.chainId, chainInfo?.rest, serverUrl, proposalId])
 
   return [votes, error]
 }

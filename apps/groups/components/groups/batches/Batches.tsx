@@ -2,20 +2,22 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
-import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import BatchPreview from '@components/groups/batches/BatchPreview'
+import { GroupContext } from '@contexts/GroupContext'
 import { useGroupBatches } from '@hooks/useGroupBatches'
 
 import styles from './Batches.module.css'
 
 const Batches = () => {
-  const { groupId } = useParams()
+  const { policies, policiesError } = useContext(GroupContext)
   const { chainInfo } = useContext(WalletContext)
 
   // fetch credit batches administered by group from selected network
-  const [batches, error] = useGroupBatches(chainInfo, groupId)
+  const [batches, batchesError] = useGroupBatches(chainInfo, policies)
+
+  const error = policiesError || batchesError
 
   return (
     <div className={styles.box}>

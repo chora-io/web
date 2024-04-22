@@ -11,7 +11,7 @@ const VouchersNav = () => {
 
   return (
     <div className={styles.box}>
-      <Link href={`/${network}/vouchers/add`}>{'add voucher'}</Link>
+      <Link href={`/${network}/vouchers/create`}>{'create voucher'}</Link>
     </div>
   )
 }

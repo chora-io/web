@@ -2,12 +2,12 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
+import { useVoucherBalance } from 'chora/hooks'
 import { formatTimestamp } from 'chora/utils'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import Address from '@components/Address'
-import { useVoucherBalance } from '@hooks/useVoucherBalance'
 
 import styles from './Balance.module.css'
 

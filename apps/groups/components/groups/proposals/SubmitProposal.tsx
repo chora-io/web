@@ -12,21 +12,24 @@ import { useNetworkServer } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'
 import { MsgSubmitProposal } from 'cosmos/api/cosmos/group/v1/tx'
 import * as jsonld from 'jsonld'
-import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
 
+import { GroupContext } from '@contexts/GroupContext'
 import { useGroupPoliciesWithMetadata } from '@hooks/useGroupPoliciesWithMetadata'
 
 import styles from './SubmitProposal.module.css'
 
 const SubmitProposal = () => {
-  const { groupId } = useParams()
+  const { policies, policiesError } = useContext(GroupContext)
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
-  // fetch group policies and policies metadata from selected network
-  const [policies] = useGroupPoliciesWithMetadata(chainInfo, groupId)
+  // fetch metadata for each group policy from network server
+  const [withMetadata, withMetadataError] = useGroupPoliciesWithMetadata(
+    serverUrl,
+    policies,
+  )
 
   // form inputs
   const [address, setAddress] = useState<string>('')
@@ -140,7 +143,7 @@ const SubmitProposal = () => {
         <SelectAccount
           id="group-account"
           label="group account"
-          options={policies}
+          options={withMetadata}
           address={address}
           setAddress={setAddress}
         />
@@ -172,7 +175,11 @@ const SubmitProposal = () => {
         <button type="submit">{'submit'}</button>
       </form>
       <div className={styles.boxText}>
-        <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+        <ResultTx
+          error={policiesError || withMetadataError || error}
+          rest={chainInfo?.rest}
+          success={success}
+        />
       </div>
     </div>
   )

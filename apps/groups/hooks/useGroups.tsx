@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+// TODO(cosmos-sdk): query all groups with pagination
 const queryGroup = 'cosmos/group/v1/group_info'
 
 // fetch groups from selected network
@@ -16,7 +17,7 @@ export const useGroups = (chainInfo: any, maxItems: number, offset: number) => {
 
   // fetch on load and param change
   useEffect(() => {
-    // TODO(cosmos-sdk): query all groups with pagination..?
+    // TODO(cosmos-sdk): query all groups with pagination
 
     // fetch groups by incrementing id until not found
     const fetchGroups = async () => {

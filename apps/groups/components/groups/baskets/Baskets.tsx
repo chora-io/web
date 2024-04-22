@@ -2,20 +2,22 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
-import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import BasketPreview from '@components/groups/baskets/BasketPreview'
+import { GroupContext } from '@contexts/GroupContext'
 import { useGroupBaskets } from '@hooks/useGroupBaskets'
 
 import styles from './Baskets.module.css'
 
 const Baskets = () => {
-  const { groupId } = useParams()
+  const { policies, policiesError } = useContext(GroupContext)
   const { chainInfo } = useContext(WalletContext)
 
-  // fetch credit baskets administered by group from selected network
-  const [baskets, error] = useGroupBaskets(chainInfo, groupId)
+  // fetch credit baskets curated by group from selected network
+  const [baskets, basketsError] = useGroupBaskets(chainInfo, policies)
+
+  const error = policiesError || basketsError
 
   return (
     <div className={styles.box}>

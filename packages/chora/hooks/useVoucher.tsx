@@ -1,5 +1,6 @@
-import { useNetworkServer } from 'chora/hooks'
 import { useEffect, useState } from 'react'
+
+import { useNetworkServer } from '.'
 
 const queryVoucher = 'chora/voucher/v1/voucher'
 

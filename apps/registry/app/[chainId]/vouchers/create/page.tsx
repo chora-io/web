@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import AddVoucher from '@components/vouchers/AddVoucher'
+import CreateVoucher from '@components/vouchers/CreateVoucher'
 
 import styles from './page.module.css'
 
@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   title: 'chora registry',
 }
 
-const AddPage = () => (
+const CreatePage = () => (
   <div className={styles.page}>
     <div>
-      <h1>{'add voucher'}</h1>
-      <AddVoucher />
+      <h1>{'create voucher'}</h1>
+      <CreateVoucher />
     </div>
   </div>
 )
 
-export default AddPage
+export default CreatePage

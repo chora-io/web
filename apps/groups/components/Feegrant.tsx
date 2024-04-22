@@ -1,11 +1,11 @@
 'use client'
 
 import { WalletContext } from 'chora/contexts'
+import { useFeegrantAllowances } from 'chora/hooks'
 import { useParams } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
 import FeegrantAllowance from '@components/FeegrantAllowance'
-import { useFeegrantAllowances } from '@hooks/useFeegrantAllowances'
 
 import styles from './Feegrant.module.css'
 

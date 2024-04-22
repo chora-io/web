@@ -1,44 +1,29 @@
-import { useNetworkServer } from 'chora/hooks'
 import { useEffect, useState } from 'react'
 
-const queryPolicies = 'cosmos/group/v1/group_policies_by_group'
-
-// fetch group policies with metadata from selected network
-export const useGroupPoliciesWithMetadata = (chainInfo: any, groupId: any) => {
-  const [serverUrl] = useNetworkServer(chainInfo)
-
+// fetch metadata for each group policy from network server
+export const useGroupPoliciesWithMetadata = (
+  serverUrl: any,
+  policies: any[],
+) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
-  const [policies, setPolicies] = useState<any[] | null>(null)
+  const [withMetadata, setWithMetadata] = useState<any[] | null>(null)
 
   // reset state on param change
   useEffect(() => {
     setError(null)
-    setPolicies(null)
-  }, [chainInfo?.chainId, serverUrl, groupId])
+    setWithMetadata(null)
+  }, [serverUrl, policies?.length])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch policies with metadata from selected network and network server
-    const fetchPoliciesWithMetadata = async () => {
+    // fetch metadata from network server
+    const fetchMetadata = async () => {
       let ps: any[] = []
 
-      // fetch policies from selected network
-      await fetch(chainInfo.rest + '/' + queryPolicies + '/' + groupId)
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.code) {
-            setError(res.message)
-          } else {
-            res['group_policies'].map((p: any) => {
-              ps.push(p)
-            })
-          }
-        })
-
       // create promise for all async fetch calls
-      const promise = ps.map(async (p, i) => {
-        // fetch policy metadata from network server
+      const promise = policies.map(async (p, i) => {
+        // fetch metadata for group policy from network server
         await fetch(serverUrl + '/data/' + p['metadata'])
           .then((res) => res.json())
           .then((res) => {
@@ -46,16 +31,9 @@ export const useGroupPoliciesWithMetadata = (chainInfo: any, groupId: any) => {
               setError(res.error)
             } else {
               const data = JSON.parse(res['jsonld'])
-              if (
-                data['@context'] !==
-                'https://schema.chora.io/contexts/group_policy.jsonld'
-              ) {
-                setError('unsupported metadata schema')
-              } else {
-                ps[i] = {
-                  ...ps[i],
-                  ...data,
-                }
+              ps[i] = {
+                ...ps[i],
+                ...data,
               }
             }
           })
@@ -78,17 +56,17 @@ export const useGroupPoliciesWithMetadata = (chainInfo: any, groupId: any) => {
           })
         }
 
-        setPolicies(ps)
+        setWithMetadata(ps)
       })
     }
 
     // only fetch if params available
-    if (chainInfo?.rest && serverUrl && groupId) {
-      fetchPoliciesWithMetadata().catch((err) => {
+    if (serverUrl && policies?.length) {
+      fetchMetadata().catch((err) => {
         setError(err.message)
       })
     }
-  }, [chainInfo?.rest, serverUrl, groupId])
+  }, [serverUrl, policies?.length])
 
-  return [policies, error]
+  return [withMetadata, error]
 }

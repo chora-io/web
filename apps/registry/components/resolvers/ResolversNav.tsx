@@ -11,7 +11,7 @@ const ResolversNav = () => {
 
   return (
     <div className={styles.box}>
-      <Link href={`/${network}/resolvers/add`}>{'add resolver'}</Link>
+      <Link href={`/${network}/resolvers/register`}>{'register resolver'}</Link>
     </div>
   )
 }

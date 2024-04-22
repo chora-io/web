@@ -1,11 +1,11 @@
 'use client'
 
 import { WalletContext } from 'chora/contexts'
+import { useAuthzGrants } from 'chora/hooks'
 import { useParams } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
 import AuthzGrant from '@components/AuthzGrant'
-import { useAuthzGrants } from '@hooks/useAuthzGrants'
 
 import styles from './Authz.module.css'
 

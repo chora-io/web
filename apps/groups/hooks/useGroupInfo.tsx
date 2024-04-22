@@ -1,12 +1,9 @@
-import { useNetworkServer } from 'chora/hooks'
 import { useEffect, useState } from 'react'
 
 const queryGroupInfo = 'cosmos/group/v1/group_info'
 
-// fetch group from selected network
+// fetch group by id from selected network
 export const useGroupInfo = (chainInfo: any, groupId: any) => {
-  const [serverUrl] = useNetworkServer(chainInfo)
-
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [group, setGroup] = useState<any>(null)
@@ -15,12 +12,13 @@ export const useGroupInfo = (chainInfo: any, groupId: any) => {
   useEffect(() => {
     setError(null)
     setGroup(null)
-  }, [chainInfo?.chainId, groupId, serverUrl])
+  }, [chainInfo?.rest, groupId])
 
   // fetch on load and param change
   useEffect(() => {
     // fetch group from selected network
     const fetchGroup = async () => {
+      // fetch group by id from selected network
       await fetch(chainInfo.rest + '/' + queryGroupInfo + '/' + groupId)
         .then((res) => res.json())
         .then((res) => {

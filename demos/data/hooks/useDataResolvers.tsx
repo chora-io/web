@@ -16,7 +16,7 @@ export const useDataResolvers = (chainInfo: any) => {
 
   // fetch on load and network change
   useEffect(() => {
-    // TODO(regen-ledger): query all data resolvers with pagination..?
+    // TODO(regen-ledger): query all data resolvers with pagination
 
     // fetch resolvers by incrementing id until not found
     const fetchResolvers = async () => {

@@ -22,7 +22,6 @@ export const useVoucherBalance = (
   useEffect(() => {
     // fetch balance from selected network
     const fetchBalance = async () => {
-      let balance: any
       await fetch(
         chainInfo.rest + '/' + queryBalance + '/' + voucherId + '/' + address,
       )
@@ -31,7 +30,6 @@ export const useVoucherBalance = (
           if (res.code) {
             setError(res.message)
           } else {
-            balance = res
             setBalance(res)
           }
         })

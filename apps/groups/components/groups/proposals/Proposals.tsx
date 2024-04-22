@@ -6,16 +6,24 @@ import { useParams } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
 import ProposalPreview from '@components/groups/proposals/ProposalPreview'
+import { GroupContext } from '@contexts/GroupContext'
 import { useGroupProposals } from '@hooks/useGroupProposals'
 
 import styles from './Proposals.module.css'
 
 const Proposals = () => {
   const { groupId } = useParams()
+  const { policies, policiesError } = useContext(GroupContext)
   const { chainInfo } = useContext(WalletContext)
 
   // fetch group proposals from selected network
-  const [proposals, error] = useGroupProposals(chainInfo, groupId)
+  const [proposals, proposalsError] = useGroupProposals(
+    chainInfo,
+    groupId,
+    policies,
+  )
+
+  const error = policiesError || proposalsError
 
   // list options
   const [sort, setSort] = useState<string>('ascending')

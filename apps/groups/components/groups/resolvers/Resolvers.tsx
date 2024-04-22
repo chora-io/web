@@ -2,20 +2,22 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
-import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import Address from '@components/Address'
+import { GroupContext } from '@contexts/GroupContext'
 import { useGroupResolvers } from '@hooks/useGroupResolvers'
 
 import styles from './Resolvers.module.css'
 
 const Resolvers = () => {
-  const { groupId } = useParams()
+  const { policies, policiesError } = useContext(GroupContext)
   const { chainInfo } = useContext(WalletContext)
 
   // fetch data resolvers from selected network
-  const [resolvers, error] = useGroupResolvers(chainInfo, `${groupId}`)
+  const [resolvers, resolversError] = useGroupResolvers(chainInfo, policies)
+
+  const error = policiesError || resolversError
 
   return (
     <div className={styles.box}>

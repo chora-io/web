@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
 
 const queryProjects = 'regen/ecocredit/v1/projects-by-admin'
-const queryPolicies = 'cosmos/group/v1/group_policies_by_group'
 
 // fetch class projects administered by group from selected network
-export const useGroupProjects = (chainInfo: any, groupId: any) => {
+export const useGroupProjects = (chainInfo: any, policies: any[]) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [projects, setProjects] = useState<any>(null)
@@ -13,56 +12,43 @@ export const useGroupProjects = (chainInfo: any, groupId: any) => {
   useEffect(() => {
     setError(null)
     setProjects(null)
-  }, [chainInfo?.chainId, groupId])
+  }, [chainInfo?.rest, policies?.length])
 
   // fetch on load and param change
   useEffect(() => {
-    // fetch policies and projects from selected network
-    const fetchPoliciesAndProjects = async () => {
-      let addrs: string[] = []
-
-      // fetch policies by group id from selected network
-      await fetch(chainInfo.rest + '/' + queryPolicies + '/' + groupId)
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.code) {
-            setError(res.message)
-          } else {
-            res['group_policies'].map((policy: any) => {
-              addrs.push(policy['address'])
-            })
-          }
-        })
-
-      const cs: any[] = []
+    // fetch class projects from selected network
+    const fetchProjects = async () => {
+      const ps: any[] = []
 
       // create promise for all async fetch calls
-      const promise = addrs.map(async (addr) => {
-        // fetch projects by admin address from selected network
-        await fetch(chainInfo.rest + '/' + queryProjects + '/' + addr)
+      const promise = policies.map(async (policy) => {
+        // fetch class projects by admin address from selected network
+        await fetch(chainInfo.rest + '/' + queryProjects + '/' + policy.address)
           .then((res) => res.json())
           .then((res) => {
             if (res.code) {
               setError(res.message)
             } else {
-              res['projects'].map((n: any) => cs.push({ admin: addr, ...n }))
+              res['projects'].map((n: any) =>
+                ps.push({ admin: policy.address, ...n }),
+              )
             }
           })
       })
 
       // set state after promise all complete
       await Promise.all(promise).then(() => {
-        setProjects(cs)
+        setProjects(ps)
       })
     }
 
     // only fetch if params available
-    if (chainInfo?.rest && groupId) {
-      fetchPoliciesAndProjects().catch((err) => {
+    if (chainInfo?.rest && policies?.length) {
+      fetchProjects().catch((err) => {
         setError(err.message)
       })
     }
-  }, [chainInfo?.rest, groupId])
+  }, [chainInfo?.rest, policies?.length])
 
   return [projects, error]
 }

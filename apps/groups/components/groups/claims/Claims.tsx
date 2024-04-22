@@ -2,20 +2,22 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
-import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import ClaimPreview from '@components/groups/claims/ClaimPreview'
-import { useGroupClaims } from '@hooks/useGroupClaims'
+import { GroupContext } from '@contexts/GroupContext'
+import { useGroupAttestations } from '@hooks/useGroupAttestations'
 
 import styles from './Claims.module.css'
 
 const Claims = () => {
-  const { groupId } = useParams()
+  const { policies, policiesError } = useContext(GroupContext)
   const { chainInfo } = useContext(WalletContext)
 
   // fetch credit claims administered by group from selected network
-  const [claims, error] = useGroupClaims(chainInfo, groupId)
+  const [claims, claimsError] = useGroupAttestations(chainInfo, policies)
+
+  const error = policiesError || claimsError
 
   return (
     <div className={styles.box}>

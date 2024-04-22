@@ -1,31 +1,45 @@
 import { WalletContext } from 'chora/contexts'
+import { useMetadata } from 'chora/hooks'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
-import { useAddressMetadata } from '@hooks/useAddressMetadata'
+import { GroupContext } from '@contexts/GroupContext'
 
 const Address = ({ address }: { address: string }) => {
   const { groupId } = useParams()
+  const { policies, policiesError, members, membersError } =
+    useContext(GroupContext)
   const { chainInfo, network } = useContext(WalletContext)
 
-  // fetch address metadata (as policy, otherwise member) from network server
-  const [metadata, error] = useAddressMetadata(chainInfo, groupId, address)
+  let isPolicyAddress = false
+  let unresolvedMetadata = ''
 
-  // TODO: display error?
-  if (error) {
-    console.error(error)
+  const policy = policies?.find((p: any) => p.address === address)
+  const member = members?.find((m: any) => m.member.address === address)
+
+  if (policy) {
+    isPolicyAddress = true
+    unresolvedMetadata = policy.metadata
+  } else if (member) {
+    unresolvedMetadata = member.member.metadata
+  }
+
+  // fetch metadata from network server
+  const [metadata, metadataError] = useMetadata(chainInfo, unresolvedMetadata)
+
+  // TODO: handle error
+  if (policiesError || membersError || metadataError) {
+    console.error(policiesError || membersError || metadataError)
   }
 
   return metadata ? (
     <>
       {`${metadata['name']} (`}
       <Link
-        href={`${metadata.isPolicyAddress ? `/${network}/${groupId}/accounts` : `/${network}/${groupId}/members`}/${
-          metadata['address']
-        }`}
+        href={`${isPolicyAddress ? `/${network}/${groupId}/accounts` : `/${network}/${groupId}/members`}/${address}`}
       >
-        {metadata['address']}
+        {address}
       </Link>
       {')'}
     </>

@@ -2,20 +2,16 @@
 
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
-import { useParams } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
 import AccountPreview from '@components/groups/accounts/AccountPreview'
-import { useGroupPolicies } from '@hooks/useGroupPolicies'
+import { GroupContext } from '@contexts/GroupContext'
 
 import styles from './Accounts.module.css'
 
 const Accounts = () => {
-  const { groupId } = useParams()
+  const { policies, policiesError: error } = useContext(GroupContext)
   const { chainInfo } = useContext(WalletContext)
-
-  // fetch group policies from selected network
-  const [policies, error] = useGroupPolicies(chainInfo, groupId)
 
   // list options
   const [sort, setSort] = useState<string>('ascending')

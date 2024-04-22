@@ -8,16 +8,16 @@ import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import Address from '@components/Address'
-import { useGroupPolicy } from '@hooks/useGroupPolicy'
+import { GroupContext } from '@contexts/GroupContext'
 
 import styles from './Account.module.css'
 
 const Account = () => {
   const { address } = useParams()
+  const { policies, policiesError } = useContext(GroupContext)
   const { chainInfo } = useContext(WalletContext)
 
-  // fetch policy from selected network
-  const [policy, policyError] = useGroupPolicy(chainInfo, `${address}`)
+  const policy = policies?.find((p: any) => p.address === address)
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(
@@ -25,7 +25,7 @@ const Account = () => {
     policy ? policy.metadata : null,
   )
 
-  const error = policyError || metadataError
+  const error = policiesError || metadataError
 
   return (
     <div className={styles.box}>
