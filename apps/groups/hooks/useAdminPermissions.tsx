@@ -4,7 +4,7 @@ import { GroupContext } from '@contexts/GroupContext'
 
 // determine admin, policy admin and group member, and admin authorized
 export const useAdminPermissions = (wallet: any, msgType: string) => {
-  const { grantsGrantee } = useContext(GroupContext) // TODO: error
+  const { authzGrantee } = useContext(GroupContext) // TODO: error
   const { group, members, policies } = useContext(GroupContext) // TODO: errors
 
   // admin, policy admin and group member, and admin authorized
@@ -30,14 +30,14 @@ export const useAdminPermissions = (wallet: any, msgType: string) => {
   }, [policies?.length, members?.length, wallet?.bech32Address])
 
   useEffect(() => {
-    if (grantsGrantee && wallet) {
-      const authz = grantsGrantee.find(
+    if (authzGrantee && wallet) {
+      const authz = authzGrantee.find(
         (g: any) =>
           g.granter === group.admin && g.grant.authorization.msg === msgType,
       )
       setIsAuthz(authz ? true : false)
     }
-  }, [grantsGrantee?.length, wallet?.bech32Address])
+  }, [authzGrantee?.length, wallet?.bech32Address])
 
   return [isAdmin, isPolicy, isAuthz]
 }

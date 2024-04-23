@@ -1,5 +1,5 @@
 export { useAuthzGrants } from './useAuthzGrants'
-export { useFeegrantAllowances } from './useFeegrantAllowances'
+export { useFeeGrants } from './useFeeGrants'
 export { useMetadata } from './useMetadata'
 export { useNetworkModules } from './useNetworkModules'
 export { useNetworkServer } from './useNetworkServer'

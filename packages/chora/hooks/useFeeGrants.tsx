@@ -4,17 +4,17 @@ const queryAllowancesByGrantee = 'cosmos/feegrant/v1beta1/allowances'
 const queryAllowancesByGranter = 'cosmos/feegrant/v1beta1/issued'
 
 // fetch feegrant allowances by address from selected network
-export const useFeegrantAllowances = (chainInfo: any, address: string) => {
+export const useFeeGrants = (chainInfo: any, address: string) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
-  const [allowancesGrantee, setAllowancesGrantee] = useState<any[] | null>(null)
-  const [allowancesGranter, setAllowancesGranter] = useState<any[] | null>(null)
+  const [feeGrantee, setFeeGrantee] = useState<any[] | null>(null)
+  const [feeGranter, setFeeGranter] = useState<any[] | null>(null)
 
   // reset state on params change
   useEffect(() => {
     setError(null)
-    setAllowancesGrantee(null)
-    setAllowancesGranter(null)
+    setFeeGrantee(null)
+    setFeeGranter(null)
   }, [chainInfo?.rest, address])
 
   // fetch on load and params change
@@ -30,7 +30,7 @@ export const useFeegrantAllowances = (chainInfo: any, address: string) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setAllowancesGrantee(res['allowances'])
+            setFeeGrantee(res['allowances'])
           }
         })
     }
@@ -46,7 +46,7 @@ export const useFeegrantAllowances = (chainInfo: any, address: string) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setAllowancesGranter(res['allowances'])
+            setFeeGranter(res['allowances'])
           }
         })
     }
@@ -62,5 +62,5 @@ export const useFeegrantAllowances = (chainInfo: any, address: string) => {
     }
   }, [chainInfo?.rest, address])
 
-  return [allowancesGrantee, allowancesGranter, error]
+  return [feeGrantee, feeGranter, error]
 }

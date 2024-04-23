@@ -7,14 +7,14 @@ const queryGrantsByGranter = 'cosmos/authz/v1beta1/grants/granter'
 export const useAuthzGrants = (chainInfo: any, address: string) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
-  const [grantsGrantee, setGrantsGrantee] = useState<any[] | null>(null)
-  const [grantsGranter, setGrantsGranter] = useState<any[] | null>(null)
+  const [authzGrantee, setAuthzGrantee] = useState<any[] | null>(null)
+  const [authzGranter, setAuthzGranter] = useState<any[] | null>(null)
 
   // reset state on params change
   useEffect(() => {
     setError(null)
-    setGrantsGrantee(null)
-    setGrantsGranter(null)
+    setAuthzGrantee(null)
+    setAuthzGranter(null)
   }, [chainInfo?.rest, address])
 
   // fetch on load and params change
@@ -28,7 +28,7 @@ export const useAuthzGrants = (chainInfo: any, address: string) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setGrantsGrantee(res['grants'])
+            setAuthzGrantee(res['grants'])
           }
         })
     }
@@ -42,7 +42,7 @@ export const useAuthzGrants = (chainInfo: any, address: string) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setGrantsGranter(res['grants'])
+            setAuthzGranter(res['grants'])
           }
         })
     }
@@ -58,5 +58,5 @@ export const useAuthzGrants = (chainInfo: any, address: string) => {
     }
   }, [chainInfo?.rest, address])
 
-  return [grantsGrantee, grantsGranter, error]
+  return [authzGrantee, authzGranter, error]
 }

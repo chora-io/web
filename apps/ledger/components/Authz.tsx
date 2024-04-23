@@ -1,23 +1,19 @@
 'use client'
 
-import { WalletContext } from 'chora/contexts'
-import { useAuthzGrants } from 'chora/hooks'
-import { useParams } from 'next/navigation'
+import { AccountContext, WalletContext } from 'chora/contexts'
 import { useContext, useEffect, useState } from 'react'
 
-import AuthzGrant from '@components/AuthzGrant'
+import AuthzGrant from './AuthzGrant'
 
 import styles from './Authz.module.css'
 
 const Authz = () => {
-  const { address } = useParams()
-  const { chainInfo } = useContext(WalletContext)
-
-  // fetch authz grants by address from selected network
-  const [authzGrantee, authzGranter, error] = useAuthzGrants(
-    chainInfo,
-    `${address}`,
-  )
+  const {
+    authzGrantee,
+    authzGranter,
+    authzError: error,
+  } = useContext(AccountContext)
+  const { chainInfo, wallet } = useContext(WalletContext)
 
   // view options
   const [filter, setFilter] = useState<string>('grantee')
@@ -25,7 +21,7 @@ const Authz = () => {
   // reset state on address or network change
   useEffect(() => {
     setFilter('grantee')
-  }, [address, chainInfo?.chainId])
+  }, [chainInfo?.rest, wallet?.bech32Address])
 
   return (
     <div className={styles.box}>

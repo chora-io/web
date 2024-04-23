@@ -4,7 +4,7 @@ import { GroupContext } from '@contexts/GroupContext'
 
 // determine group member and member authorized
 export const useMemberPermissions = (wallet: any, msgType: string) => {
-  const { grantsGrantee } = useContext(GroupContext) // TODO: error
+  const { authzGrantee } = useContext(GroupContext) // TODO: error
   const { members } = useContext(GroupContext) // TODO: errors
 
   const [isMember, setIsMember] = useState<boolean>(false)
@@ -20,15 +20,15 @@ export const useMemberPermissions = (wallet: any, msgType: string) => {
   }, [members?.length, wallet?.bech32Address])
 
   useEffect(() => {
-    if (grantsGrantee && wallet) {
-      const authz = grantsGrantee.find(
+    if (authzGrantee && wallet) {
+      const authz = authzGrantee.find(
         (g: any) =>
           members.find((m: any) => m.member.address === g.granter) &&
           g.grant.authorization.msg === msgType,
       )
       setIsAuthz(authz ? true : false)
     }
-  }, [grantsGrantee?.length, wallet?.bech32Address])
+  }, [authzGrantee?.length, wallet?.bech32Address])
 
   return [isMember, isAuthz]
 }
