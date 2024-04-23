@@ -24,6 +24,8 @@ const CreateGroup = () => {
   const [name, setName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [members, setMembers] = useState<any[]>([])
+
+  // metadata format
   const [metadataFormat, setMetadataFormat] = useState<string>('json')
 
   // error and success
@@ -161,6 +163,11 @@ const CreateGroup = () => {
         </span>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
+        <SelectMetadataFormat
+          network={network}
+          metadataFormat={metadataFormat}
+          setMetadataFormat={setMetadataFormat}
+        />
         <InputString
           id="group-name"
           label="group name"
@@ -181,11 +188,6 @@ const CreateGroup = () => {
           network={network}
           members={members}
           setMembers={setMembers}
-        />
-        <SelectMetadataFormat
-          network={network}
-          metadataFormat={metadataFormat}
-          setMetadataFormat={setMetadataFormat}
         />
         <button type="submit">{'submit'}</button>
       </form>

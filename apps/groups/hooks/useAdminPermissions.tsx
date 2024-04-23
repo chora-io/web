@@ -21,14 +21,14 @@ export const useAdminPermissions = (wallet: any, msgType: string) => {
   }, [group?.admin, wallet?.bech32Address])
 
   useEffect(() => {
-    if (policies && members && wallet) {
+    if (group && policies && members && wallet) {
       const admin = policies.find((p: any) => p.address === group.admin)
       const member = members.find(
         (m: any) => m.member.address === wallet.bech32Address,
       )
       setIsPolicy(admin && member ? true : false)
     }
-  }, [policies?.length, members?.length, wallet?.bech32Address])
+  }, [group, policies?.length, members?.length, wallet?.bech32Address])
 
   useEffect(() => {
     if (authzGrantee && wallet) {

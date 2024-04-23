@@ -1,7 +1,7 @@
 'use client'
 
 import { ResultTx } from 'chora/components'
-import { InputString } from 'chora/components/forms'
+import { InputString, SelectMetadataFormat } from 'chora/components/forms'
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'
@@ -29,6 +29,9 @@ const UpdateAccountMetadata = () => {
   const [name, setName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
 
+  // metadata format
+  const [metadataFormat, setMetadataFormat] = useState<string>('json')
+
   // error and success
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<any>(null)
@@ -39,63 +42,78 @@ const UpdateAccountMetadata = () => {
     setError(null)
     setSuccess(null)
 
-    // set JSON-LD document
-    const doc = {
-      '@context': 'https://schema.chora.io/contexts/group_policy.jsonld',
-      name: name,
-      description: description,
+    let metadata: string = ''
+
+    // handle metadata format json
+    if (metadataFormat === 'json') {
+      metadata = JSON.stringify({
+        name: name,
+        description: description,
+      })
     }
 
-    // check and normalize JSON-LD document
-    const normalized = await jsonld
-      .normalize(doc, {
-        algorithm: 'URDNA2015',
-        format: 'application/n-quads',
-      })
-      .catch((err) => {
-        setError(err.message)
+    // handle metadata format iri
+    if (metadataFormat === 'iri') {
+      // set JSON-LD document
+      const doc = {
+        '@context': 'https://schema.chora.io/contexts/group_policy.jsonld',
+        name: name,
+        description: description,
+      }
+
+      // check and normalize JSON-LD document
+      const normalized = await jsonld
+        .normalize(doc, {
+          algorithm: 'URDNA2015',
+          format: 'application/n-quads',
+        })
+        .catch((err) => {
+          setError(err.message)
+          return
+        })
+
+      // return error if empty
+      if (normalized == '') {
+        setError('JSON-LD empty after normalized')
         return
+      }
+
+      // set post request body
+      const body = {
+        canon: 'URDNA2015',
+        context: 'https://schema.chora.io/contexts/group_policy.jsonld',
+        digest: 'BLAKE2B_256',
+        jsonld: JSON.stringify(doc),
+        merkle: 'UNSPECIFIED',
+      }
+
+      let iri: string | undefined
+
+      // post data to network server
+      await fetch(serverUrl + '/data', {
+        method: 'POST',
+        body: JSON.stringify(body),
       })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.code) {
+            setError(data.message)
+          } else {
+            iri = network.includes('chora')
+              ? data['iri']
+              : network.split('-')[0] + ':' + data['iri'].split(':')[1]
+          }
+        })
+        .catch((err) => {
+          setError(err.message)
+        })
 
-    // return error if empty
-    if (normalized == '') {
-      setError('JSON-LD empty after normalized')
-      return
-    }
+      // return error if iri never set
+      if (typeof iri === 'undefined') {
+        return
+      }
 
-    // set post request body
-    const body = {
-      canon: 'URDNA2015',
-      context: 'https://schema.chora.io/contexts/group_policy.jsonld',
-      digest: 'BLAKE2B_256',
-      jsonld: JSON.stringify(doc),
-      merkle: 'UNSPECIFIED',
-    }
-
-    let iri: string | undefined
-
-    // post data to network server
-    await fetch(serverUrl + '/data', {
-      method: 'POST',
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.code) {
-          setError(data.message)
-        } else {
-          iri = network.includes('chora')
-            ? data['iri']
-            : network.split('-')[0] + ':' + data['iri'].split(':')[1]
-        }
-      })
-      .catch((err) => {
-        setError(err.message)
-      })
-
-    // return error if iri never set
-    if (typeof iri === 'undefined') {
-      return
+      metadata = iri
     }
 
     // set message
@@ -103,7 +121,7 @@ const UpdateAccountMetadata = () => {
       $type: 'cosmos.group.v1.MsgUpdateGroupPolicyMetadata',
       admin: wallet['bech32Address'],
       groupPolicyAddress: `${address}`,
-      metadata: iri,
+      metadata: metadata,
     } as unknown as MsgUpdateGroupPolicyMetadata
 
     // convert message to any message
@@ -143,6 +161,11 @@ const UpdateAccountMetadata = () => {
         </span>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
+        <SelectMetadataFormat
+          network={network}
+          metadataFormat={metadataFormat}
+          setMetadataFormat={setMetadataFormat}
+        />
         <InputString
           id="account-name"
           label="account name"

@@ -1,7 +1,7 @@
 'use client'
 
 import { ResultTx } from 'chora/components'
-import { InputString } from 'chora/components/forms'
+import { InputString, SelectMetadataFormat } from 'chora/components/forms'
 import {
   SelectExecution,
   SelectVote,
@@ -35,6 +35,9 @@ const VoteOnProposal = () => {
   const [reason, setReason] = useState<string>('')
   const [execution, setExecution] = useState<string>('')
 
+  // metadata format
+  const [metadataFormat, setMetadataFormat] = useState<string>('json')
+
   // error and success
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<any>(null)
@@ -45,62 +48,76 @@ const VoteOnProposal = () => {
     setError(null)
     setSuccess(null)
 
-    // set JSON-LD document
-    const doc = {
-      '@context': 'https://schema.chora.io/contexts/group_vote.jsonld',
-      reason: reason,
+    let metadata: string = ''
+
+    // handle metadata format json
+    if (metadataFormat === 'json') {
+      metadata = JSON.stringify({
+        reason: reason,
+      })
     }
 
-    // check and normalize JSON-LD document
-    const normalized = await jsonld
-      .normalize(doc, {
-        algorithm: 'URDNA2015',
-        format: 'application/n-quads',
-      })
-      .catch((err) => {
-        setError(err.message)
+    // handle metadata format iri
+    if (metadataFormat === 'iri') {
+      // set JSON-LD document
+      const doc = {
+        '@context': 'https://schema.chora.io/contexts/group_vote.jsonld',
+        reason: reason,
+      }
+
+      // check and normalize JSON-LD document
+      const normalized = await jsonld
+        .normalize(doc, {
+          algorithm: 'URDNA2015',
+          format: 'application/n-quads',
+        })
+        .catch((err) => {
+          setError(err.message)
+          return
+        })
+
+      // return error if empty
+      if (normalized == '') {
+        setError('JSON-LD empty after normalized')
         return
+      }
+
+      // set post request body
+      const body = {
+        canon: 'URDNA2015',
+        context: 'https://schema.chora.io/contexts/group_vote.jsonld',
+        digest: 'BLAKE2B_256',
+        jsonld: JSON.stringify(doc),
+        merkle: 'UNSPECIFIED',
+      }
+
+      let iri: string | undefined
+
+      // post data to network server
+      await fetch(serverUrl + '/data', {
+        method: 'POST',
+        body: JSON.stringify(body),
       })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.code) {
+            setError(data.message)
+          } else {
+            iri = network.includes('chora')
+              ? data['iri']
+              : network.split('-')[0] + ':' + data['iri'].split(':')[1]
+          }
+        })
+        .catch((err) => {
+          setError(err.message)
+        })
 
-    // return error if empty
-    if (normalized == '') {
-      setError('JSON-LD empty after normalized')
-      return
-    }
+      // return error if iri never set
+      if (typeof iri === 'undefined') {
+        return
+      }
 
-    // set post request body
-    const body = {
-      canon: 'URDNA2015',
-      context: 'https://schema.chora.io/contexts/group_vote.jsonld',
-      digest: 'BLAKE2B_256',
-      jsonld: JSON.stringify(doc),
-      merkle: 'UNSPECIFIED',
-    }
-
-    let iri: string | undefined
-
-    // post data to network server
-    await fetch(serverUrl + '/data', {
-      method: 'POST',
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.code) {
-          setError(data.message)
-        } else {
-          iri = network.includes('chora')
-            ? data['iri']
-            : network.split('-')[0] + ':' + data['iri'].split(':')[1]
-        }
-      })
-      .catch((err) => {
-        setError(err.message)
-      })
-
-    // return error if iri never set
-    if (typeof iri === 'undefined') {
-      return
+      metadata = iri
     }
 
     // set submit proposal message
@@ -109,7 +126,7 @@ const VoteOnProposal = () => {
       voter: wallet.bech32Address,
       proposalId: Long.fromString(`${id}`),
       option: vote,
-      metadata: iri,
+      metadata: metadata,
       exec: execution,
     } as unknown as MsgVote
 
@@ -147,6 +164,11 @@ const VoteOnProposal = () => {
           label="vote option"
           vote={vote}
           setVote={setVote}
+        />
+        <SelectMetadataFormat
+          network={network}
+          metadataFormat={metadataFormat}
+          setMetadataFormat={setMetadataFormat}
         />
         <InputString
           id="vote-reason"
