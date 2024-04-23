@@ -10,8 +10,7 @@ const ResolversTable = ({ resolvers }: any) => {
       <thead>
         <tr>
           <td>{'id'}</td>
-          <td>{'name'}</td>
-          <td>{'description'}</td>
+          <td>{'url'}</td>
           <td>{'manager'}</td>
           <td>{'more'}</td>
         </tr>

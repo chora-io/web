@@ -23,7 +23,10 @@ export const useMetadata = (chainInfo: any, unresolved: string) => {
     if (typeof unresolved === 'string') {
       // check json string
       try {
+        console.log('unresolved', unresolved)
         const parsedJson = JSON.parse(unresolved)
+
+        console.log('parsedJson', parsedJson)
         setMetadata(parsedJson)
         return // exit effect
       } catch (e) {

@@ -1,42 +1,54 @@
 import { useEffect, useState } from 'react'
 
-const queryResolvers = '/regen/data/v1/resolvers-by-iri'
+// TODO(regen-ledger): query all data resolvers with pagination
+const queryResolver = '/regen/data/v1/resolver'
 
-// fetch resolvers by iri from selected network
-export const useResolvers = (chainInfo: any, iri: string) => {
+// fetch data resolvers from selected network
+export const useResolvers = (chainInfo: any, limit: number, offset: number) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [resolvers, setResolvers] = useState<any[] | null>(null)
 
-  // reset state on param change
+  // reset state on network change
   useEffect(() => {
     setError(null)
     setResolvers(null)
-  }, [chainInfo?.rest, iri])
+  }, [chainInfo?.rest, limit, offset])
 
-  // fetch on load and param change
+  // fetch on load and network change
   useEffect(() => {
-    // fetch resolvers from selected network
+    // TODO(regen-ledger): query all data resolvers with pagination
+
+    // fetch resolvers by incrementing id until not found
     const fetchResolvers = async () => {
-      // fetch resolvers by iri from selected network
-      await fetch(chainInfo.rest + '/' + queryResolvers + '/' + iri)
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.code) {
-            setError(res.message)
-          } else {
-            setResolvers(res['resolvers'])
-          }
-        })
+      let nextId = 1 + offset
+      let resolvers: any[] = []
+      while (nextId !== 0 && resolvers.length < limit) {
+        await fetch(chainInfo.rest + '/' + queryResolver + '/' + nextId)
+          .then((res) => res.json())
+          .then((res) => {
+            if (res.code) {
+              nextId = 0
+            } else {
+              resolvers.push(res['resolver'])
+              nextId++
+            }
+          })
+          .catch((err) => {
+            nextId = 0
+            setError(err.message)
+          })
+      }
+      setResolvers(resolvers)
     }
 
-    // only fetch if params available
-    if (chainInfo?.rest && iri) {
+    // only fetch if network
+    if (chainInfo?.rest) {
       fetchResolvers().catch((err) => {
         setError(err.message)
       })
     }
-  }, [chainInfo?.rest, iri])
+  }, [chainInfo?.rest, limit, offset])
 
   return [resolvers, error]
 }

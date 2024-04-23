@@ -2,20 +2,23 @@
 
 import { Result } from 'chora/components'
 import { PaginationNav } from 'chora/components/tables'
-import { useState } from 'react'
+import { WalletContext } from 'chora/contexts'
+import { useContext, useState } from 'react'
 
 import ResolversList from '@components/resolvers/ResolversList'
 import ResolversTable from '@components/resolvers/ResolversTable'
+import { useResolvers } from '@hooks/useResolvers'
 
 import styles from './Resolvers.module.css'
 
 const Resolvers = () => {
+  const { chainInfo } = useContext(WalletContext)
+
   const [offset, setOffset] = useState(0)
   const [view, setView] = useState('table')
 
-  // TODO: fetch resolvers from selected network
-  const resolvers: any[] = []
-  const error = null
+  // fetch resolvers from selected network
+  const [resolvers, error] = useResolvers(chainInfo, 5, offset)
 
   return (
     <div className={styles.box}>

@@ -5,7 +5,7 @@ import { WalletContext } from 'chora/contexts'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
-import { useResolvers } from '@hooks/useResolvers'
+import { useResolversByIRI } from '@hooks/useResolversByIRI'
 
 import styles from './Resolvers.module.css'
 
@@ -14,7 +14,7 @@ const Resolvers = () => {
   const { chainInfo } = useContext(WalletContext)
 
   // fetch data resolvers from selected network
-  const [resolvers, error] = useResolvers(chainInfo, `${iri}`)
+  const [resolvers, error] = useResolversByIRI(chainInfo, `${iri}`)
 
   return (
     <div className={styles.box}>

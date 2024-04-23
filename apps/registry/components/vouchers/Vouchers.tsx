@@ -2,20 +2,23 @@
 
 import { Result } from 'chora/components'
 import { PaginationNav } from 'chora/components/tables'
-import { useState } from 'react'
+import { WalletContext } from 'chora/contexts'
+import { useContext, useState } from 'react'
 
 import VouchersList from '@components/vouchers/VouchersList'
 import VouchersTable from '@components/vouchers/VouchersTable'
+import { useVouchers } from '@hooks/useVouchers'
 
 import styles from './Vouchers.module.css'
 
 const Vouchers = () => {
+  const { chainInfo } = useContext(WalletContext)
+
   const [offset, setOffset] = useState(0)
   const [view, setView] = useState('table')
 
-  // TODO: fetch vouchers from selected network
-  const vouchers: any[] = []
-  const error = null
+  // fetch vouchers from selected network
+  const [vouchers, error] = useVouchers(chainInfo, 5, offset)
 
   return (
     <div className={styles.box}>
