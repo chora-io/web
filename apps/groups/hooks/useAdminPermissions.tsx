@@ -1,10 +1,11 @@
+import { AccountContext } from 'chora/contexts'
 import { useContext, useEffect, useState } from 'react'
 
 import { GroupContext } from '@contexts/GroupContext'
 
 // determine admin, policy admin and group member, and admin authorized
 export const useAdminPermissions = (wallet: any, msgType: string) => {
-  const { authzGrantee } = useContext(GroupContext) // TODO: error
+  const { authzGrantee } = useContext(AccountContext) // TODO: error
   const { group, members, policies } = useContext(GroupContext) // TODO: errors
 
   // admin, policy admin and group member, and admin authorized

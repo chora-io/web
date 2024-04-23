@@ -1,10 +1,11 @@
+import { AccountContext } from 'chora/contexts'
 import { useContext, useEffect, useState } from 'react'
 
 import { GroupContext } from '@contexts/GroupContext'
 
 // determine group member and member authorized
 export const useMemberPermissions = (wallet: any, msgType: string) => {
-  const { authzGrantee } = useContext(GroupContext) // TODO: error
+  const { authzGrantee } = useContext(AccountContext) // TODO: error
   const { members } = useContext(GroupContext) // TODO: errors
 
   const [isMember, setIsMember] = useState<boolean>(false)

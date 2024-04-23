@@ -1,30 +1,44 @@
 'use client'
 
 import { ResultTx } from 'chora/components'
-import { InputString } from 'chora/components/forms'
+import { InputString, SelectMetadataFormat } from 'chora/components/forms'
 import { InputMembers } from 'chora/components/forms/cosmos.group.v1'
-import { WalletContext } from 'chora/contexts'
+import { AccountContext, WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'
 import { MsgCreateGroup } from 'cosmos/api/cosmos/group/v1/tx'
 import * as jsonld from 'jsonld'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import styles from './CreateGroup.module.css'
 
 const CreateGroup = () => {
+  const { authzGrantee } = useContext(AccountContext) // TODO: error
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
+
+  const [isAuthz, setIsAuthz] = useState<boolean>(false)
 
   // form inputs
   const [name, setName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [members, setMembers] = useState<any[]>([])
+  const [metadataFormat, setMetadataFormat] = useState<string>('json')
 
   // error and success
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<any>(null)
+
+  useEffect(() => {
+    if (authzGrantee && wallet) {
+      const authz = authzGrantee.find(
+        (g: any) =>
+          g.grant.authorization.msg === '/cosmos.group.v1.MsgCreateGroup',
+      )
+      setIsAuthz(authz ? true : false)
+    }
+  }, [authzGrantee, wallet])
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
@@ -32,63 +46,78 @@ const CreateGroup = () => {
     setError(null)
     setSuccess(null)
 
-    // set JSON-LD document
-    const doc = {
-      '@context': 'https://schema.chora.io/contexts/group.jsonld',
-      name: name,
-      description: description,
+    let metadata: string = ''
+
+    // handle metadata format json
+    if (metadataFormat === 'json') {
+      metadata = JSON.stringify({
+        name: name,
+        description: description,
+      })
     }
 
-    // check and normalize JSON-LD document
-    const normalized = await jsonld
-      .normalize(doc, {
-        algorithm: 'URDNA2015',
-        format: 'application/n-quads',
-      })
-      .catch((err) => {
-        setError(err.message)
+    // handle metadata format iri
+    if (metadataFormat === 'iri') {
+      // set JSON-LD document
+      const doc = {
+        '@context': 'https://schema.chora.io/contexts/group.jsonld',
+        name: name,
+        description: description,
+      }
+
+      // check and normalize JSON-LD document
+      const normalized = await jsonld
+        .normalize(doc, {
+          algorithm: 'URDNA2015',
+          format: 'application/n-quads',
+        })
+        .catch((err) => {
+          setError(err.message)
+          return
+        })
+
+      // return error if empty
+      if (normalized == '') {
+        setError('JSON-LD empty after normalized')
         return
+      }
+
+      // set post request body
+      const body = {
+        canon: 'URDNA2015',
+        context: 'https://schema.chora.io/contexts/group.jsonld',
+        digest: 'BLAKE2B_256',
+        jsonld: JSON.stringify(doc),
+        merkle: 'UNSPECIFIED',
+      }
+
+      let iri: string | undefined
+
+      // post data to network server
+      await fetch(serverUrl + '/data', {
+        method: 'POST',
+        body: JSON.stringify(body),
       })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.code) {
+            setError(data.message)
+          } else {
+            iri = network.includes('chora')
+              ? data['iri']
+              : network.split('-')[0] + ':' + data['iri'].split(':')[1]
+          }
+        })
+        .catch((err) => {
+          setError(err.message)
+        })
 
-    // return error if empty
-    if (normalized == '') {
-      setError('JSON-LD empty after normalized')
-      return
-    }
+      // return error if iri never set
+      if (typeof iri === 'undefined') {
+        return
+      }
 
-    // set post request body
-    const body = {
-      canon: 'URDNA2015',
-      context: 'https://schema.chora.io/contexts/group.jsonld',
-      digest: 'BLAKE2B_256',
-      jsonld: JSON.stringify(doc),
-      merkle: 'UNSPECIFIED',
-    }
-
-    let iri: string | undefined
-
-    // post data to network server
-    await fetch(serverUrl + '/data', {
-      method: 'POST',
-      body: JSON.stringify(body),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.code) {
-          setError(data.message)
-        } else {
-          iri = network.includes('chora')
-            ? data['iri']
-            : network.split('-')[0] + ':' + data['iri'].split(':')[1]
-        }
-      })
-      .catch((err) => {
-        setError(err.message)
-      })
-
-    // return error if iri never set
-    if (typeof iri === 'undefined') {
-      return
+      metadata = iri
     }
 
     // set message
@@ -96,7 +125,7 @@ const CreateGroup = () => {
       $type: 'cosmos.group.v1.MsgCreateGroup',
       admin: wallet['bech32Address'],
       members: members,
-      metadata: iri,
+      metadata: metadata,
     } as unknown as MsgCreateGroup
 
     // convert message to any message
@@ -121,6 +150,16 @@ const CreateGroup = () => {
 
   return (
     <div className={styles.box}>
+      <div className={styles.boxOptions}>
+        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
+          <b>{'✓'}</b>
+          <span style={{ marginLeft: '0.5em' }}>{'new admin'}</span>
+        </span>
+        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
+          <b>{isAuthz ? '✓' : 'x'}</b>
+          <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
+        </span>
+      </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputString
           id="group-name"
@@ -136,11 +175,17 @@ const CreateGroup = () => {
           string={description}
           setString={setDescription}
         />
+        {members && members.length === 0 && <label>{'group members'}</label>}
         <InputMembers
           id="group-members"
           network={network}
           members={members}
           setMembers={setMembers}
+        />
+        <SelectMetadataFormat
+          network={network}
+          metadataFormat={metadataFormat}
+          setMetadataFormat={setMetadataFormat}
         />
         <button type="submit">{'submit'}</button>
       </form>
