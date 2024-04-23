@@ -9,6 +9,8 @@ import * as jsonld from 'jsonld'
 import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
 
+import { useAdminPermissions } from '@hooks/useAdminPermissions'
+
 import styles from './UpdateAccountMetadata.module.css'
 
 const UpdateAccountMetadata = () => {
@@ -16,6 +18,11 @@ const UpdateAccountMetadata = () => {
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
+
+  const [isAdmin, isPolicy, isAuthz] = useAdminPermissions(
+    wallet,
+    '/cosmos.group.v1.MsgUpdateGroupPolicyMetadata',
+  )
 
   // form inputs
   const [name, setName] = useState<string>('')
@@ -120,6 +127,20 @@ const UpdateAccountMetadata = () => {
 
   return (
     <div className={styles.box}>
+      <div className={styles.boxOptions}>
+        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
+          <b>{isAdmin ? '✓' : 'x'}</b>
+          <span style={{ marginLeft: '0.5em' }}>{'admin account'}</span>
+        </span>
+        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
+          <b>{isPolicy ? '✓' : 'x'}</b>
+          <span style={{ marginLeft: '0.5em' }}>{'policy + member'}</span>
+        </span>
+        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
+          <b>{isAuthz ? '✓' : 'x'}</b>
+          <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
+        </span>
+      </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputString
           id="account-name"

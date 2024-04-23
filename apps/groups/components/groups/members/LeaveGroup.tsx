@@ -8,11 +8,18 @@ import * as Long from 'long'
 import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
 
+import { useAdminPermissions } from '@hooks/useAdminPermissions'
+
 import styles from './LeaveGroup.module.css'
 
 const LeaveGroup = () => {
   const { groupId } = useParams()
   const { chainInfo, wallet } = useContext(WalletContext)
+
+  const [isMember, isAuthz] = useAdminPermissions(
+    wallet,
+    '/cosmos.group.v1.MsgLeaveGroup',
+  )
 
   // error and success
   const [error, setError] = useState<string | null>(null)
@@ -53,6 +60,16 @@ const LeaveGroup = () => {
 
   return (
     <div className={styles.box}>
+      <div className={styles.boxOptions}>
+        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
+          <b>{isMember ? '✓' : 'x'}</b>
+          <span style={{ marginLeft: '0.5em' }}>{'group member'}</span>
+        </span>
+        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
+          <b>{isAuthz ? '✓' : 'x'}</b>
+          <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
+        </span>
+      </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <button type="submit">{'submit'}</button>
       </form>

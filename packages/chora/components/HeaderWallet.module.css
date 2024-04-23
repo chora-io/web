@@ -10,9 +10,12 @@
   composes: header-menu from 'chora/styles/header.css';
 }
 
-.menu > form,
+.menu > form {
+  margin-right: 0.75em;
+}
+
 .menu > button {
-  margin-left: 1em;
+  margin: 0 0.75em;
 }
 
 .form {

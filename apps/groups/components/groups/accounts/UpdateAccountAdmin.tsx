@@ -7,11 +7,18 @@ import { MsgUpdateGroupPolicyAdmin } from 'cosmos/api/cosmos/group/v1/tx'
 import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
 
+import { useAdminPermissions } from '@hooks/useAdminPermissions'
+
 import styles from './UpdateAccountAdmin.module.css'
 
 const UpdateAccountAdmin = () => {
   const { address } = useParams()
   const { chainInfo, network, wallet } = useContext(WalletContext)
+
+  const [isAdmin, isPolicy, isAuthz] = useAdminPermissions(
+    wallet,
+    '/cosmos.group.v1.MsgUpdateGroupPolicyAdmin',
+  )
 
   // form inputs
   const [newAdmin, setNewAdmin] = useState<string>('')
@@ -56,6 +63,20 @@ const UpdateAccountAdmin = () => {
 
   return (
     <div className={styles.box}>
+      <div className={styles.boxOptions}>
+        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
+          <b>{isAdmin ? '✓' : 'x'}</b>
+          <span style={{ marginLeft: '0.5em' }}>{'admin account'}</span>
+        </span>
+        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
+          <b>{isPolicy ? '✓' : 'x'}</b>
+          <span style={{ marginLeft: '0.5em' }}>{'policy + member'}</span>
+        </span>
+        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
+          <b>{isAuthz ? '✓' : 'x'}</b>
+          <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
+        </span>
+      </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputAddress
           id="account-admin"

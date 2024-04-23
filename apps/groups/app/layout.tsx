@@ -7,6 +7,7 @@ import {
 } from 'chora/contexts'
 
 import Sidebar from '@components/Sidebar'
+import { AuthzContextProvider } from '@contexts/AuthzContext'
 
 import './globals.css'
 
@@ -18,15 +19,17 @@ const Layout = ({ children }: any) => (
           <WalletContextProvider>
             <AuthContextProvider>
               <UserContextProvider>
-                <Header
-                  title={{
-                    link: '/',
-                    titleX: 'groups',
-                  }}
-                />
-                <Sidebar />
-                <UserSidebar />
-                {children}
+                <AuthzContextProvider>
+                  <Header
+                    title={{
+                      link: '/',
+                      titleX: 'groups',
+                    }}
+                  />
+                  <Sidebar />
+                  <UserSidebar />
+                  {children}
+                </AuthzContextProvider>
               </UserContextProvider>
             </AuthContextProvider>
           </WalletContextProvider>

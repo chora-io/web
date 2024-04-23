@@ -15,6 +15,7 @@ import * as jsonld from 'jsonld'
 import { useContext, useState } from 'react'
 
 import { GroupContext } from '@contexts/GroupContext'
+import { useAdminPermissions } from '@hooks/useAdminPermissions'
 import { useGroupPoliciesWithMetadata } from '@hooks/useGroupPoliciesWithMetadata'
 
 import styles from './SubmitProposal.module.css'
@@ -24,6 +25,11 @@ const SubmitProposal = () => {
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
+
+  const [isMember, isAuthz] = useAdminPermissions(
+    wallet,
+    '/cosmos.group.v1.MsgSubmitProposal',
+  )
 
   // fetch metadata for each group policy from network server
   const [withMetadata, withMetadataError] = useGroupPoliciesWithMetadata(
@@ -139,6 +145,16 @@ const SubmitProposal = () => {
 
   return (
     <div className={styles.box}>
+      <div className={styles.boxOptions}>
+        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
+          <b>{isMember ? '✓' : 'x'}</b>
+          <span style={{ marginLeft: '0.5em' }}>{'group member'}</span>
+        </span>
+        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
+          <b>{isAuthz ? '✓' : 'x'}</b>
+          <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
+        </span>
+      </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <SelectAccount
           id="group-account"
