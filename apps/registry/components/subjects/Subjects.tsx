@@ -1,6 +1,7 @@
 'use client'
 
-import { PaginationNav, Result } from 'chora/components'
+import { Result } from 'chora/components'
+import { PaginationNav } from 'chora/components/tables'
 import { WalletContext } from 'chora/contexts'
 import { useContext, useState } from 'react'
 

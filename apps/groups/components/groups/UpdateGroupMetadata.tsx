@@ -1,6 +1,7 @@
 'use client'
 
-import { InputString, ResultTx } from 'chora/components'
+import { ResultTx } from 'chora/components'
+import { InputString } from 'chora/components/forms'
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'
@@ -146,7 +147,7 @@ const UpdateGroupMetadata = () => {
         <InputString
           id="group-name"
           label="group name"
-          placeholder="New Group"
+          placeholder="Updated Group"
           string={name}
           setString={setName}
         />

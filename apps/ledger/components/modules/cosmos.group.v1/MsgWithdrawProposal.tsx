@@ -1,7 +1,7 @@
 'use client'
 
 import { ResultTx } from 'chora/components'
-import { MsgWithdrawProposal as MsgInputs } from 'chora/components/cosmos.group.v1'
+import { MsgWithdrawProposal as MsgInputs } from 'chora/components/forms/cosmos.group.v1'
 import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
 import { useContext, useState } from 'react'

@@ -1,6 +1,7 @@
 'use client'
 
-export { AuthContext, AuthContextProvider } from './AuthContext'
+export { AccountContext, AccountContextProvider } from './AccountContext'
+export { MenuContext, MenuContextProvider } from './MenuContext'
+export { ServerContext, ServerContextProvider } from './ServerContext'
 export { ThemeContext, ThemeContextProvider } from './ThemeContext'
-export { UserContext, UserContextProvider } from './UserContext'
 export { WalletContext, WalletContextProvider } from './WalletContext'

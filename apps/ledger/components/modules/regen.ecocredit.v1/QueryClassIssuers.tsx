@@ -1,6 +1,7 @@
 'use client'
 
-import { InputString, Result } from 'chora/components'
+import { Result } from 'chora/components'
+import { InputString } from 'chora/components/forms'
 import { WalletContext } from 'chora/contexts'
 import { useContext, useState } from 'react'
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { ResultTx } from 'chora/components'
-import { InputPolicy } from 'chora/components/cosmos.group.v1'
+import { InputPolicy } from 'chora/components/forms/cosmos.group.v1'
 import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
 import { MsgUpdateGroupPolicyDecisionPolicy } from 'cosmos/api/cosmos/group/v1/tx'

@@ -1,7 +1,7 @@
 'use client'
 
 import { ResultTx } from 'chora/components'
-import { MsgDefineResolver as MsgInputs } from 'chora/components/regen.data.v1'
+import { MsgDefineResolver as MsgInputs } from 'chora/components/forms/regen.data.v1'
 import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
 import { useContext, useState } from 'react'

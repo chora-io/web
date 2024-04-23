@@ -1,7 +1,8 @@
 'use client'
 
-import { Result, SelectNetwork } from 'chora/components'
-import { AuthContext, UserContext, WalletContext } from 'chora/contexts'
+import { Result } from 'chora/components'
+import { SelectNetwork } from 'chora/components/forms'
+import { ServerContext, MenuContext, WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import * as React from 'react'
 import { useContext, useState } from 'react'
@@ -10,7 +11,7 @@ import styles from './UserSidebar.module.css'
 
 const UserSidebar = () => {
   const { account, activeAccount, removeAccount, setAccount } =
-    useContext(AuthContext)
+    useContext(ServerContext)
   const {
     chainInfo,
     getKeplr,
@@ -20,7 +21,7 @@ const UserSidebar = () => {
     wallet,
     error: keplrError,
   } = useContext(WalletContext)
-  const { showUser } = useContext(UserContext)
+  const { showUser } = useContext(MenuContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
 

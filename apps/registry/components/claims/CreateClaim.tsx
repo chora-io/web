@@ -6,15 +6,14 @@ import {
   SelectDigestAlgorithm,
   SelectGraphCanon,
   SelectGraphMerkle,
-} from 'chora/components/regen.data.v1'
+} from 'chora/components/forms/regen.data.v1'
+import { Result, ResultTx } from 'chora/components'
 import {
   InputJSON,
   InputsFromJSON,
   InputString,
-  Result,
-  ResultTx,
   SelectContext,
-} from 'chora/components'
+} from 'chora/components/forms'
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'

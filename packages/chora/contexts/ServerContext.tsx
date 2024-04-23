@@ -41,9 +41,9 @@ const setCachedAccounts = (accounts: any[]) => {
   localStorage.setItem(cachedAuthAccounts, JSON.stringify(accounts))
 }
 
-const AuthContext = createContext<any>({})
+const ServerContext = createContext<any>({})
 
-const AuthContextProvider = (props: any) => {
+const ServerContextProvider = (props: any) => {
   const { chainInfo } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
@@ -209,7 +209,7 @@ const AuthContextProvider = (props: any) => {
   }
 
   return (
-    <AuthContext.Provider
+    <ServerContext.Provider
       value={{
         account,
         activeAccount,
@@ -224,8 +224,8 @@ const AuthContextProvider = (props: any) => {
       }}
     >
       {props.children}
-    </AuthContext.Provider>
+    </ServerContext.Provider>
   )
 }
 
-export { AuthContext, AuthContextProvider }
+export { ServerContext, ServerContextProvider }

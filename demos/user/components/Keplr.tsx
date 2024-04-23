@@ -1,14 +1,14 @@
 'use client'
 
 import { Result } from 'chora/components'
-import { AuthContext, WalletContext } from 'chora/contexts'
+import { ServerContext, WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import { useContext, useState } from 'react'
 
 import styles from './Keplr.module.css'
 
 const Keplr = () => {
-  const { account, activeAccount, setAccount } = useContext(AuthContext)
+  const { account, activeAccount, setAccount } = useContext(ServerContext)
   const { chainInfo, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)

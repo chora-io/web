@@ -1,13 +1,14 @@
 'use client'
 
-import { WalletContext } from 'chora/contexts'
-import { useAuthzGrants } from 'chora/hooks'
 import * as React from 'react'
 import { createContext, useContext } from 'react'
 
-const AuthzContext = createContext<any>({})
+import { WalletContext } from '.'
+import { useAuthzGrants } from '../hooks'
 
-const AuthzContextProvider = (props: any) => {
+const AccountContext = createContext<any>({})
+
+const AccountContextProvider = (props: any) => {
   const { chainInfo, wallet } = useContext(WalletContext)
 
   const [grantsGrantee, grantsGranter, grantsError] = useAuthzGrants(
@@ -16,7 +17,7 @@ const AuthzContextProvider = (props: any) => {
   )
 
   return (
-    <AuthzContext.Provider
+    <AccountContext.Provider
       value={{
         grantsGrantee,
         grantsGranter,
@@ -24,8 +25,8 @@ const AuthzContextProvider = (props: any) => {
       }}
     >
       {props.children}
-    </AuthzContext.Provider>
+    </AccountContext.Provider>
   )
 }
 
-export { AuthzContext, AuthzContextProvider }
+export { AccountContext, AccountContextProvider }

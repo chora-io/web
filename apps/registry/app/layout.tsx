@@ -1,8 +1,9 @@
 import { HeaderWallet as Header, UserSidebar } from 'chora/components'
 import {
-  AuthContextProvider,
+  AccountContextProvider,
+  MenuContextProvider,
+  ServerContextProvider,
   ThemeContextProvider,
-  UserContextProvider,
   WalletContextProvider,
 } from 'chora/contexts'
 
@@ -15,21 +16,23 @@ const Layout = ({ children }: any) => (
     <body>
       <main>
         <ThemeContextProvider>
-          <WalletContextProvider>
-            <AuthContextProvider>
-              <UserContextProvider>
-                <Header
-                  title={{
-                    link: '/',
-                    titleX: 'registry',
-                  }}
-                />
-                <Sidebar />
-                <UserSidebar />
-                {children}
-              </UserContextProvider>
-            </AuthContextProvider>
-          </WalletContextProvider>
+          <MenuContextProvider>
+            <WalletContextProvider>
+              <AccountContextProvider>
+                <ServerContextProvider>
+                  <Header
+                    title={{
+                      link: '/',
+                      titleX: 'registry',
+                    }}
+                  />
+                  <Sidebar />
+                  <UserSidebar />
+                  {children}
+                </ServerContextProvider>
+              </AccountContextProvider>
+            </WalletContextProvider>
+          </MenuContextProvider>
         </ThemeContextProvider>
       </main>
     </body>

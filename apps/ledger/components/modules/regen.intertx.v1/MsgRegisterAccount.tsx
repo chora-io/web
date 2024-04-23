@@ -1,7 +1,7 @@
 'use client'
 
 import { ResultTx } from 'chora/components'
-import { MsgRegisterAccount as MsgInputs } from 'chora/components/regen.intertx.v1'
+import { MsgRegisterAccount as MsgInputs } from 'chora/components/forms/regen.intertx.v1'
 import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
 import { useContext, useState } from 'react'

@@ -1,10 +1,11 @@
 'use client'
 
-import { ResultTx, SelectOptionInput } from 'chora/components'
+import { ResultTx } from 'chora/components'
+import { SelectOptionInput } from 'chora/components/forms'
 import {
   MsgAttest as MsgInputs,
   MsgAttestJSON as MsgInputsJSON,
-} from 'chora/components/regen.data.v1'
+} from 'chora/components/forms/regen.data.v1'
 import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
 import { useContext, useState } from 'react'

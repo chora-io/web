@@ -1,6 +1,7 @@
 'use client'
 
-import { InputAddress, ResultTx } from 'chora/components'
+import { ResultTx } from 'chora/components'
+import { InputAddress } from 'chora/components/forms'
 import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
 import { MsgUpdateGroupPolicyAdmin } from 'cosmos/api/cosmos/group/v1/tx'

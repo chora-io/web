@@ -1,7 +1,7 @@
 'use client'
 
 import { ResultTx } from 'chora/components'
-import { MsgSend as MsgInputs } from 'chora/components/cosmos.bank.v1beta1'
+import { MsgSend as MsgInputs } from 'chora/components/forms/cosmos.bank.v1beta1'
 import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
 import { useContext, useState } from 'react'

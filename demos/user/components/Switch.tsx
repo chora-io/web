@@ -1,7 +1,7 @@
 'use client'
 
 import { Result } from 'chora/components'
-import { AuthContext } from 'chora/contexts'
+import { ServerContext } from 'chora/contexts'
 import { useContext } from 'react'
 
 import styles from './Switch.module.css'
@@ -15,7 +15,7 @@ const Switch = () => {
     removeAccounts,
     removeAccountFromAccounts,
     switchAccount,
-  } = useContext(AuthContext)
+  } = useContext(ServerContext)
 
   const handleRemoveAccountFromList = (id: string) => {
     // only remove active account if selected

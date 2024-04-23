@@ -1,12 +1,12 @@
 'use client'
 
-import { AuthContext } from 'chora/contexts'
+import { ServerContext } from 'chora/contexts'
 import { useContext } from 'react'
 
 import styles from './Auth.module.css'
 
 const Auth = () => {
-  const { account } = useContext(AuthContext)
+  const { account } = useContext(ServerContext)
 
   return (
     <div className={styles.box}>

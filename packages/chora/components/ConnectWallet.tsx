@@ -10,7 +10,7 @@ import {
   cachedNetworkKey,
   defaultNetwork,
 } from '../contexts/WalletContext'
-import { SelectNetwork } from '.'
+import { SelectNetwork } from './forms'
 
 import styles from './ConnectWallet.module.css'
 

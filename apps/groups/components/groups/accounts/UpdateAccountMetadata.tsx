@@ -1,6 +1,7 @@
 'use client'
 
-import { InputString, ResultTx } from 'chora/components'
+import { ResultTx } from 'chora/components'
+import { InputString } from 'chora/components/forms'
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'
@@ -145,7 +146,7 @@ const UpdateAccountMetadata = () => {
         <InputString
           id="account-name"
           label="account name"
-          placeholder="Updated Dashboard"
+          placeholder="Updated Account"
           string={name}
           setString={setName}
         />

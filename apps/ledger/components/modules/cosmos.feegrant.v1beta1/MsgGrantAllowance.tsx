@@ -1,7 +1,7 @@
 'use client'
 
 import { ResultTx } from 'chora/components'
-import { MsgGrantAllowance as MsgInputs } from 'chora/components/cosmos.feegrant.v1beta1'
+import { MsgGrantAllowance as MsgInputs } from 'chora/components/forms/cosmos.feegrant.v1beta1'
 import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
 import { useContext, useState } from 'react'

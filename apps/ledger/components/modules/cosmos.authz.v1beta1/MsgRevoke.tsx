@@ -1,7 +1,7 @@
 'use client'
 
 import { ResultTx } from 'chora/components'
-import { MsgRevoke as MsgInputs } from 'chora/components/cosmos.authz.v1beta1'
+import { MsgRevoke as MsgInputs } from 'chora/components/forms/cosmos.authz.v1beta1'
 import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
 import { useContext, useState } from 'react'

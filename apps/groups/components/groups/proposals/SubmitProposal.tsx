@@ -1,12 +1,12 @@
 'use client'
 
+import { ResultTx } from 'chora/components'
 import {
   InputString,
-  ResultTx,
   SelectAccount,
   SelectMessage,
-} from 'chora/components'
-import { SelectExecution } from 'chora/components/cosmos.group.v1'
+} from 'chora/components/forms'
+import { SelectExecution } from 'chora/components/forms/cosmos.group.v1'
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'
@@ -15,7 +15,7 @@ import * as jsonld from 'jsonld'
 import { useContext, useState } from 'react'
 
 import { GroupContext } from '@contexts/GroupContext'
-import { useAdminPermissions } from '@hooks/useAdminPermissions'
+import { useMemberPermissions } from '@hooks/useMemberPermissions'
 import { useGroupPoliciesWithMetadata } from '@hooks/useGroupPoliciesWithMetadata'
 
 import styles from './SubmitProposal.module.css'
@@ -26,7 +26,7 @@ const SubmitProposal = () => {
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
-  const [isMember, isAuthz] = useAdminPermissions(
+  const [isMember, isAuthz] = useMemberPermissions(
     wallet,
     '/cosmos.group.v1.MsgSubmitProposal',
   )

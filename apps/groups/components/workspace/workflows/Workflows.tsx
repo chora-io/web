@@ -1,12 +1,12 @@
 'use client'
 
-import { AuthContext } from 'chora/contexts'
+import { ServerContext } from 'chora/contexts'
 import { useContext } from 'react'
 
 import styles from './Workflows.module.css'
 
 const Workflows = () => {
-  const { account } = useContext(AuthContext)
+  const { account } = useContext(ServerContext)
 
   if (!account) {
     return (

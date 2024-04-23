@@ -1,14 +1,14 @@
 'use client'
 
 import { InputString, Result } from 'chora/components'
-import { AuthContext, WalletContext } from 'chora/contexts'
+import { ServerContext, WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import { useContext, useState } from 'react'
 
 import styles from './Login.module.css'
 
 const Login = () => {
-  const { account, activeAccount, setAccount } = useContext(AuthContext)
+  const { account, activeAccount, setAccount } = useContext(ServerContext)
   const { chainInfo } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)

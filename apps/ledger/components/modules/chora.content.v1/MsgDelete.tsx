@@ -1,7 +1,7 @@
 'use client'
 
 import { ResultTx } from 'chora/components'
-import { MsgDelete as MsgInputs } from 'chora/components/chora.content.v1'
+import { MsgDelete as MsgInputs } from 'chora/components/forms/chora.content.v1'
 import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
 import { useContext, useState } from 'react'

@@ -1,7 +1,11 @@
 'use client'
 
-import { InputString, ResultTx } from 'chora/components'
-import { SelectExecution, SelectVote } from 'chora/components/cosmos.group.v1'
+import { ResultTx } from 'chora/components'
+import { InputString } from 'chora/components/forms'
+import {
+  SelectExecution,
+  SelectVote,
+} from 'chora/components/forms/cosmos.group.v1'
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'
@@ -11,7 +15,7 @@ import * as Long from 'long'
 import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
 
-import { useAdminPermissions } from '@hooks/useAdminPermissions'
+import { useMemberPermissions } from '@hooks/useMemberPermissions'
 
 import styles from './VoteOnProposal.module.css'
 
@@ -21,7 +25,7 @@ const VoteOnProposal = () => {
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
-  const [isMember, isAuthz] = useAdminPermissions(
+  const [isMember, isAuthz] = useMemberPermissions(
     wallet,
     '/cosmos.group.v1.MsgVote',
   )

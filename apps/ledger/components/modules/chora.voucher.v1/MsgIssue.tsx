@@ -1,7 +1,7 @@
 'use client'
 
 import { ResultTx } from 'chora/components'
-import { MsgIssue as MsgInputs } from 'chora/components/chora.voucher.v1'
+import { MsgIssue as MsgInputs } from 'chora/components/forms/chora.voucher.v1'
 import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
 import { useContext, useState } from 'react'

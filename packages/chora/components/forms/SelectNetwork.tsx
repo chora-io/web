@@ -11,7 +11,7 @@ import {
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import { defaultNetwork } from '../contexts/WalletContext'
+import { defaultNetwork } from '../../contexts/WalletContext'
 
 const defaultId = 'network'
 const defaultLabel = 'network'

@@ -1,10 +1,11 @@
 'use client'
 
-import { Result, SelectOptionInput } from 'chora/components'
+import { Result } from 'chora/components'
+import { SelectOptionInput } from 'chora/components/forms'
 import {
   InputContentHash,
   InputContentHashJSON,
-} from 'chora/components/regen.data.v1'
+} from 'chora/components/forms/regen.data.v1'
 import { WalletContext } from 'chora/contexts'
 import { useContext, useState } from 'react'
 

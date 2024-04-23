@@ -1,7 +1,7 @@
 'use client'
 
 import { ResultTx } from 'chora/components'
-import { MsgAddCreditType as MsgInputs } from 'chora/components/regen.ecocredit.v1'
+import { MsgAddCreditType as MsgInputs } from 'chora/components/forms/regen.ecocredit.v1'
 import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
 import { useContext, useState } from 'react'

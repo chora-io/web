@@ -1,6 +1,7 @@
 'use client'
 
-import { PaginationNav, Result } from 'chora/components'
+import { Result } from 'chora/components'
+import { PaginationNav } from 'chora/components/tables'
 import { useState } from 'react'
 
 import MonitorsList from '@components/monitors/MonitorsList'

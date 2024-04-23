@@ -1,13 +1,13 @@
 import { HeaderWallet as Header, UserSidebar } from 'chora/components'
 import {
-  AuthContextProvider,
+  AccountContextProvider,
+  MenuContextProvider,
+  ServerContextProvider,
   ThemeContextProvider,
-  UserContextProvider,
   WalletContextProvider,
 } from 'chora/contexts'
 
 import Sidebar from '@components/Sidebar'
-import { AuthzContextProvider } from '@contexts/AuthzContext'
 
 import './globals.css'
 
@@ -16,10 +16,10 @@ const Layout = ({ children }: any) => (
     <body>
       <main>
         <ThemeContextProvider>
-          <WalletContextProvider>
-            <AuthContextProvider>
-              <UserContextProvider>
-                <AuthzContextProvider>
+          <MenuContextProvider>
+            <WalletContextProvider>
+              <AccountContextProvider>
+                <ServerContextProvider>
                   <Header
                     title={{
                       link: '/',
@@ -29,10 +29,10 @@ const Layout = ({ children }: any) => (
                   <Sidebar />
                   <UserSidebar />
                   {children}
-                </AuthzContextProvider>
-              </UserContextProvider>
-            </AuthContextProvider>
-          </WalletContextProvider>
+                </ServerContextProvider>
+              </AccountContextProvider>
+            </WalletContextProvider>
+          </MenuContextProvider>
         </ThemeContextProvider>
       </main>
     </body>
