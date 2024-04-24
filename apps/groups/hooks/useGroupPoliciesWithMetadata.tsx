@@ -23,23 +23,36 @@ export const useGroupPoliciesWithMetadata = (
 
       // create promise for all async fetch calls
       const promise = policies.map(async (p, i) => {
-        // fetch metadata for group policy from network server
-        await fetch(serverUrl + '/data/' + p['metadata'])
-          .then((res) => res.json())
-          .then((res) => {
-            if (res.error) {
-              setError(res.error)
-            } else {
-              const data = JSON.parse(res['jsonld'])
-              ps[i] = {
-                ...ps[i],
-                ...data,
-              }
-            }
-          })
-          .catch((err) => {
-            setError(err.message)
-          })
+        // check if parsable, otherwise fetch
+        try {
+          let parsed = JSON.parse(p['metadata'])
+          ps[i] = {
+            ...p,
+            ...parsed,
+          }
+        } catch (e) {
+          // do nothing with error
+
+          if (p['metadata']) {
+            // fetch metadata for group policy from network server
+            await fetch(serverUrl + '/data/' + p['metadata'])
+              .then((res) => res.json())
+              .then((res) => {
+                if (res.error) {
+                  setError(res.error)
+                } else {
+                  const data = JSON.parse(res['jsonld'])
+                  ps[i] = {
+                    ...ps[i],
+                    ...data,
+                  }
+                }
+              })
+              .catch((err) => {
+                setError(err.message)
+              })
+          }
+        }
       })
 
       // set state after promise all complete

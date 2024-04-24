@@ -4,9 +4,9 @@ import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
 import { useContext } from 'react'
 
-import Address from '@components/Address'
 import { GroupContext } from '@contexts/GroupContext'
 import { useGroupResolvers } from '@hooks/useGroupResolvers'
+import ResolverPreview from './ResolverPreview'
 
 import styles from './Resolvers.module.css'
 
@@ -23,27 +23,8 @@ const Resolvers = () => {
     <div className={styles.box}>
       {!error && !resolvers && <div>{'loading...'}</div>}
       {Array.isArray(resolvers) &&
-        resolvers.map((resolver: any) => (
-          <div className={styles.boxItem} key={resolver['id']}>
-            <div className={styles.boxText}>
-              <h3>{'id'}</h3>
-              <p>{resolver['id']}</p>
-            </div>
-            <div className={styles.boxText}>
-              <h3>{'url'}</h3>
-              <p>{resolver['url']}</p>
-            </div>
-            <div className={styles.boxText}>
-              <h3>{'manager'}</h3>
-              <p>
-                {resolver['manager'] ? (
-                  <Address address={resolver['manager']} />
-                ) : (
-                  'NA'
-                )}
-              </p>
-            </div>
-          </div>
+        resolvers.map((resolver) => (
+          <ResolverPreview key={resolver['id']} resolver={resolver} />
         ))}
       {!error && chainInfo?.chainId && resolvers?.length === 0 && (
         <div>{'no resolvers found'}</div>

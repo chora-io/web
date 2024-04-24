@@ -14,11 +14,13 @@ import styles from './Groups.module.css'
 const Groups = () => {
   const { chainInfo } = useContext(WalletContext)
 
+  const limit = 5
+
   const [offset, setOffset] = useState(0)
   const [view, setView] = useState('table')
 
   // fetch groups from selected network
-  const [groups, error] = useGroups(chainInfo, 5, offset)
+  const [groups, error] = useGroups(chainInfo, limit, offset)
 
   return (
     <div className={styles.box}>
@@ -47,7 +49,7 @@ const Groups = () => {
           )}
           <PaginationNav
             length={groups ? groups.length : 0}
-            maxLength={5}
+            limit={limit}
             offset={offset}
             setOffset={setOffset}
           />

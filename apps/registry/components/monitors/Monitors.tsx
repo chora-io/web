@@ -10,6 +10,8 @@ import MonitorsTable from '@components/monitors/MonitorsTable'
 import styles from './Monitors.module.css'
 
 const Monitors = () => {
+  const limit = 5
+
   const [offset, setOffset] = useState(0)
   const [view, setView] = useState('table')
 
@@ -46,7 +48,7 @@ const Monitors = () => {
           )}
           <PaginationNav
             length={monitors ? monitors.length : 0}
-            maxLength={5}
+            limit={limit}
             offset={offset}
             setOffset={setOffset}
           />

@@ -10,6 +10,8 @@ import VerifiersTable from '@components/verifiers/VerifiersTable'
 import styles from './Verifiers.module.css'
 
 const Verifiers = () => {
+  const limit = 5
+
   const [offset, setOffset] = useState(0)
   const [view, setView] = useState('table')
 
@@ -46,7 +48,7 @@ const Verifiers = () => {
           )}
           <PaginationNav
             length={verifiers ? verifiers.length : 0}
-            maxLength={5}
+            limit={limit}
             offset={offset}
             setOffset={setOffset}
           />

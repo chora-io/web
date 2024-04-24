@@ -1,61 +1,39 @@
 'use client'
 
-import { Result } from 'chora/components'
-import { PaginationNav } from 'chora/components/tables'
+import { Baskets } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
+import Link from 'next/link'
 import { useContext, useState } from 'react'
 
-import BasketsList from '@components/baskets/BasketsList'
-import BasketsTable from '@components/baskets/BasketsTable'
 import { useBaskets } from '@hooks/useBaskets'
 
-import styles from './Baskets.module.css'
+const BasketsContainer = () => {
+  const { chainInfo, network } = useContext(WalletContext)
 
-const Baskets = () => {
-  const { chainInfo } = useContext(WalletContext)
+  const limit = 5
 
   const [offset, setOffset] = useState(0)
   const [view, setView] = useState('table')
 
   // fetch baskets from selected network
-  const [baskets, error] = useBaskets(chainInfo, 5, offset)
+  const [baskets, error] = useBaskets(chainInfo, limit, offset)
+
+  const renderLink = (denom: string) => (
+    <Link href={`/${network}/baskets/${denom}`}>{'view basket'}</Link>
+  )
 
   return (
-    <div className={styles.box}>
-      <div className={styles.boxOptions}>
-        <button
-          className={view === 'table' ? styles.active : undefined}
-          onClick={() => setView('table')}
-        >
-          {'table view'}
-        </button>
-        <button
-          className={view === 'list' ? styles.active : undefined}
-          onClick={() => setView('list')}
-        >
-          {'list view'}
-        </button>
-      </div>
-      {!baskets && !error && <p>{'loading...'}</p>}
-      {!error && baskets && baskets.length === 0 && <p>{'no baskets found'}</p>}
-      {baskets && baskets.length > 0 && (
-        <>
-          {view === 'table' ? (
-            <BasketsTable baskets={baskets} />
-          ) : (
-            <BasketsList baskets={baskets} />
-          )}
-          <PaginationNav
-            length={baskets ? baskets.length : 0}
-            maxLength={5}
-            offset={offset}
-            setOffset={setOffset}
-          />
-        </>
-      )}
-      <Result error={error} />
-    </div>
+    <Baskets
+      baskets={baskets}
+      error={error}
+      renderLink={renderLink}
+      limit={limit}
+      offset={offset}
+      setOffset={setOffset}
+      view={view}
+      setView={setView}
+    />
   )
 }
 
-export default Baskets
+export default BasketsContainer

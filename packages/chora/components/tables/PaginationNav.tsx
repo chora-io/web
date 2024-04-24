@@ -2,9 +2,9 @@ import * as React from 'react'
 
 import styles from './PaginationNav.module.css'
 
-const PaginationNav = ({ length, maxLength, offset, setOffset }: any) => {
+const PaginationNav = ({ length, limit, offset, setOffset }: any) => {
   const pageNumber = () => {
-    return offset / maxLength + 1
+    return offset / limit + 1
   }
 
   return (
@@ -12,16 +12,16 @@ const PaginationNav = ({ length, maxLength, offset, setOffset }: any) => {
       {offset > 0 && (
         <button
           className={styles.button}
-          onClick={() => setOffset(offset - maxLength)}
+          onClick={() => setOffset(offset - limit)}
         >
           {'prev page'}
         </button>
       )}
       <span>{'page ' + pageNumber()}</span>
-      {length === maxLength && (
+      {length === limit && (
         <button
           className={styles.button}
-          onClick={() => setOffset(offset + maxLength)}
+          onClick={() => setOffset(offset + limit)}
         >
           {'next page'}
         </button>

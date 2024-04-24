@@ -1,37 +1,41 @@
 'use client'
 
-import { Result } from 'chora/components'
+import { Classes } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
+import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
-import ClassPreview from '@components/groups/classes/ClassPreview'
+import Address from '@components/Address'
 import { GroupContext } from '@contexts/GroupContext'
 import { useGroupClasses } from '@hooks/useGroupClasses'
 
-import styles from './Classes.module.css'
-
-const Classes = () => {
+const ClassesContainer = () => {
+  const { groupId } = useParams()
   const { policies, policiesError } = useContext(GroupContext)
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
+
+  // TODO: limit, offset, setOffset, view, setView
 
   // fetch credit classes administered by group from selected network
   const [classes, classesError] = useGroupClasses(chainInfo, policies)
 
   const error = policiesError || classesError
 
+  const renderAddress = (address: string) => <Address address={address} />
+
+  const renderLink = (denom: string) => (
+    <Link href={`/${network}/${groupId}/classes/${denom}`}>{'view class'}</Link>
+  )
+
   return (
-    <div className={styles.box}>
-      {!error && !classes && <div>{'loading...'}</div>}
-      {!error && classes && classes.length === 0 && (
-        <div>{'no classes found'}</div>
-      )}
-      {Array.isArray(classes) &&
-        classes.map((clazz) => (
-          <ClassPreview key={clazz['id']} clazz={clazz} />
-        ))}
-      <Result error={error} />
-    </div>
+    <Classes
+      classes={classes}
+      error={error}
+      renderAddress={renderAddress}
+      renderLink={renderLink}
+    />
   )
 }
 
-export default Classes
+export default ClassesContainer

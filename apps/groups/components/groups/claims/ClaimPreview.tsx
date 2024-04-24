@@ -1,8 +1,16 @@
+import { WalletContext } from 'chora/contexts'
+import Link from 'next/link'
+import { useParams } from 'next/navigation'
+import { useContext } from 'react'
+
 import Address from '@components/Address'
 
 import styles from './ClaimPreview.module.css'
 
 const ClaimPreview = ({ claim }: any) => {
+  const { groupId } = useParams()
+  const { network } = useContext(WalletContext)
+
   return (
     <div className={styles.boxItem}>
       <div className={styles.boxText}>
@@ -19,6 +27,9 @@ const ClaimPreview = ({ claim }: any) => {
           {claim['attestor'] ? <Address address={claim['attestor']} /> : 'NA'}
         </p>
       </div>
+      <Link href={`/${network}/${groupId}/claims/${claim['iri']}`}>
+        {'view claim'}
+      </Link>
     </div>
   )
 }

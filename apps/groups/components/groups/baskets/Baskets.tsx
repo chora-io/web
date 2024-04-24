@@ -1,37 +1,43 @@
 'use client'
 
-import { Result } from 'chora/components'
+import { Baskets } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
+import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
-import BasketPreview from '@components/groups/baskets/BasketPreview'
+import Address from '@components/Address'
 import { GroupContext } from '@contexts/GroupContext'
 import { useGroupBaskets } from '@hooks/useGroupBaskets'
 
-import styles from './Baskets.module.css'
-
-const Baskets = () => {
+const BasketsContainer = () => {
+  const { groupId } = useParams()
   const { policies, policiesError } = useContext(GroupContext)
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
+
+  // TODO: limit, offset, setOffset, view, setView
 
   // fetch credit baskets curated by group from selected network
   const [baskets, basketsError] = useGroupBaskets(chainInfo, policies)
 
   const error = policiesError || basketsError
 
+  const renderAddress = (address: string) => <Address address={address} />
+
+  const renderLink = (denom: string) => (
+    <Link href={`/${network}/${groupId}/baskets/${denom}`}>
+      {'view basket'}
+    </Link>
+  )
+
   return (
-    <div className={styles.box}>
-      {!error && !baskets && <div>{'loading...'}</div>}
-      {!error && baskets && baskets.length === 0 && (
-        <div>{'no baskets found'}</div>
-      )}
-      {Array.isArray(baskets) &&
-        baskets.map((basket) => (
-          <BasketPreview key={basket['denom']} basket={basket} />
-        ))}
-      <Result error={error} />
-    </div>
+    <Baskets
+      baskets={baskets}
+      error={error}
+      renderAddress={renderAddress}
+      renderLink={renderLink}
+    />
   )
 }
 
-export default Baskets
+export default BasketsContainer

@@ -81,17 +81,16 @@ const UpdateMembers = () => {
           <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
         </span>
       </div>
-      {initMembers && (
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <InputMembers
-            id="group-members"
-            network={network}
-            members={initMembers.map((member: any) => member.member)}
-            setMembers={setMembers}
-          />
-          <button type="submit">{'submit'}</button>
-        </form>
-      )}
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <InputMembers
+          id="group-members"
+          network={network}
+          members={members}
+          initMembers={initMembers.map((m: any) => m.member)}
+          setMembers={setMembers}
+        />
+        <button type="submit">{'submit'}</button>
+      </form>
       <div className={styles.boxText}>
         <ResultTx
           error={membersError || error}

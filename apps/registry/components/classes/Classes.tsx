@@ -1,61 +1,39 @@
 'use client'
 
-import { Result } from 'chora/components'
-import { PaginationNav } from 'chora/components/tables'
+import { Classes } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
+import Link from 'next/link'
 import { useContext, useState } from 'react'
 
-import ClassesList from '@components/classes/ClassesList'
-import ClassesTable from '@components/classes/ClassesTable'
 import { useClasses } from '@hooks/useClasses'
 
-import styles from './Classes.module.css'
+const ClassesContainer = () => {
+  const { chainInfo, network } = useContext(WalletContext)
 
-const Classes = () => {
-  const { chainInfo } = useContext(WalletContext)
+  const limit = 5
 
   const [offset, setOffset] = useState(0)
   const [view, setView] = useState('table')
 
   // fetch classes from selected network
-  const [classes, error] = useClasses(chainInfo, 5, offset)
+  const [classes, error] = useClasses(chainInfo, limit, offset)
+
+  const renderLink = (classId: string) => (
+    <Link href={`/${network}/classes/${classId}`}>{'view class'}</Link>
+  )
 
   return (
-    <div className={styles.box}>
-      <div className={styles.boxOptions}>
-        <button
-          className={view === 'table' ? styles.active : undefined}
-          onClick={() => setView('table')}
-        >
-          {'table view'}
-        </button>
-        <button
-          className={view === 'list' ? styles.active : undefined}
-          onClick={() => setView('list')}
-        >
-          {'list view'}
-        </button>
-      </div>
-      {!classes && !error && <p>{'loading...'}</p>}
-      {!error && classes && classes.length === 0 && <p>{'no classes found'}</p>}
-      {classes && classes.length > 0 && (
-        <>
-          {view === 'table' ? (
-            <ClassesTable classes={classes} />
-          ) : (
-            <ClassesList classes={classes} />
-          )}
-          <PaginationNav
-            length={classes ? classes.length : 0}
-            maxLength={5}
-            offset={offset}
-            setOffset={setOffset}
-          />
-        </>
-      )}
-      <Result error={error} />
-    </div>
+    <Classes
+      classes={classes}
+      error={error}
+      renderLink={renderLink}
+      limit={limit}
+      offset={offset}
+      setOffset={setOffset}
+      view={view}
+      setView={setView}
+    />
   )
 }
 
-export default Classes
+export default ClassesContainer

@@ -135,7 +135,7 @@ const SubmitProposal = () => {
     // set submit proposal message
     const msg = {
       $type: 'cosmos.group.v1.MsgSubmitProposal',
-      proposers: [wallet['bech32Address']],
+      proposers: [wallet.bech32Address],
       groupPolicyAddress: address,
       metadata: metadata,
       messages: message ? [message] : [],
@@ -178,7 +178,11 @@ const SubmitProposal = () => {
         <SelectAccount
           id="group-account"
           label="group account"
-          options={withMetadata}
+          options={
+            withMetadata?.length
+              ? withMetadata
+              : policies?.map((p: any) => ({ address: p.address }))
+          }
           address={address}
           setAddress={setAddress}
         />

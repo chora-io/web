@@ -14,11 +14,13 @@ import styles from './Subjects.module.css'
 const Subjects = () => {
   const { chainInfo } = useContext(WalletContext)
 
+  const limit = 5
+
   const [offset, setOffset] = useState(0)
   const [view, setView] = useState('table')
 
   // fetch subjects from selected network
-  const [subjects, error] = useSubjects(chainInfo, 5, offset)
+  const [subjects, error] = useSubjects(chainInfo, limit, offset)
 
   return (
     <div className={styles.box}>
@@ -49,7 +51,7 @@ const Subjects = () => {
           )}
           <PaginationNav
             length={subjects ? subjects.length : 0}
-            maxLength={5}
+            limit={limit}
             offset={offset}
             setOffset={setOffset}
           />

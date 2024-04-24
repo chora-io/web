@@ -1,37 +1,43 @@
 'use client'
 
-import { Result } from 'chora/components'
+import { Projects } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
+import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
-import ProjectPreview from '@components/groups/projects/ProjectPreview'
+import Address from '@components/Address'
 import { GroupContext } from '@contexts/GroupContext'
 import { useGroupProjects } from '@hooks/useGroupProjects'
 
-import styles from './Projects.module.css'
-
-const Projects = () => {
+const ProjectsContainer = () => {
+  const { groupId } = useParams()
   const { policies, policiesError } = useContext(GroupContext)
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
+
+  // TODO: limit, offset, setOffset, view, setView
 
   // fetch class projects administered by group from selected network
   const [projects, projectsError] = useGroupProjects(chainInfo, policies)
 
   const error = policiesError || projectsError
 
+  const renderAddress = (address: string) => <Address address={address} />
+
+  const renderLink = (denom: string) => (
+    <Link href={`/${network}/${groupId}/projects/${denom}`}>
+      {'view project'}
+    </Link>
+  )
+
   return (
-    <div className={styles.box}>
-      {!error && !projects && <div>{'loading...'}</div>}
-      {!error && projects && projects.length === 0 && (
-        <div>{'no projects found'}</div>
-      )}
-      {Array.isArray(projects) &&
-        projects.map((project) => (
-          <ProjectPreview key={project['id']} project={project} />
-        ))}
-      <Result error={error} />
-    </div>
+    <Projects
+      projects={projects}
+      error={error}
+      renderAddress={renderAddress}
+      renderLink={renderLink}
+    />
   )
 }
 
-export default Projects
+export default ProjectsContainer

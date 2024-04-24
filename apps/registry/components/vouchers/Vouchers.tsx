@@ -14,11 +14,13 @@ import styles from './Vouchers.module.css'
 const Vouchers = () => {
   const { chainInfo } = useContext(WalletContext)
 
+  const limit = 5
+
   const [offset, setOffset] = useState(0)
   const [view, setView] = useState('table')
 
   // fetch vouchers from selected network
-  const [vouchers, error] = useVouchers(chainInfo, 5, offset)
+  const [vouchers, error] = useVouchers(chainInfo, limit, offset)
 
   return (
     <div className={styles.box}>
@@ -49,7 +51,7 @@ const Vouchers = () => {
           )}
           <PaginationNav
             length={vouchers ? vouchers.length : 0}
-            maxLength={5}
+            limit={limit}
             offset={offset}
             setOffset={setOffset}
           />

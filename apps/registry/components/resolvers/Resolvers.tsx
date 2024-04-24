@@ -14,11 +14,13 @@ import styles from './Resolvers.module.css'
 const Resolvers = () => {
   const { chainInfo } = useContext(WalletContext)
 
+  const limit = 5
+
   const [offset, setOffset] = useState(0)
   const [view, setView] = useState('table')
 
   // fetch resolvers from selected network
-  const [resolvers, error] = useResolvers(chainInfo, 5, offset)
+  const [resolvers, error] = useResolvers(chainInfo, limit, offset)
 
   return (
     <div className={styles.box}>
@@ -49,7 +51,7 @@ const Resolvers = () => {
           )}
           <PaginationNav
             length={resolvers ? resolvers.length : 0}
-            maxLength={5}
+            limit={limit}
             offset={offset}
             setOffset={setOffset}
           />

@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import Issuers from '@components/classes/Issuers'
+import ClassIssuers from '@components/classes/ClassIssuers'
 
 import styles from './page.module.css'
 
@@ -12,7 +12,7 @@ const IssuersPage = () => (
   <div className={styles.page}>
     <div>
       <h1>{'class issuers'}</h1>
-      <Issuers />
+      <ClassIssuers />
     </div>
   </div>
 )

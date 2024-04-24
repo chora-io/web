@@ -1,17 +1,31 @@
 import * as React from 'react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { ManageList } from '..'
 import { InputMember } from '.'
 
 const defaultId = 'members'
 
-const InputMembers = ({ id, network, members, setMembers }: any) => {
+const InputMembers = ({
+  id,
+  network,
+  members,
+  initMembers,
+  setMembers,
+}: any) => {
+  const [initialized, setInitialized] = useState<boolean>(false)
+
   useEffect(() => {
-    let ms = [...members]
+    let ms: any[]
+    if (initialized) {
+      ms = [...members]
+    } else {
+      ms = initMembers ? [...initMembers] : []
+      setInitialized(true)
+    }
     ms = ms.map((m, i) => ({ index: i, ...m }))
     setMembers(ms)
-  }, [members.length])
+  }, [members?.length])
 
   const handleSetMember = (member: any) => {
     const ms = [...members]
@@ -22,7 +36,7 @@ const InputMembers = ({ id, network, members, setMembers }: any) => {
   const handleAddMember = (event: any) => {
     event?.preventDefault()
     const ms = [...members]
-    ms.push({ address: '', weight: '', metadata: '' })
+    ms.push({ index: members.length, address: '', weight: '', metadata: '' })
     setMembers(ms)
   }
 
