@@ -1,15 +1,14 @@
 'use client'
 
+import { Authz } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
 import { useAuthzGrants } from 'chora/hooks'
 import { useParams } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
-import AuthzGrant from '@components/AuthzGrant'
+import Address from '@components/Address'
 
-import styles from './Authz.module.css'
-
-const Authz = () => {
+const AuthzContainer = () => {
   const { address } = useParams()
   const { chainInfo } = useContext(WalletContext)
 
@@ -27,48 +26,18 @@ const Authz = () => {
     setFilter('grantee')
   }, [address, chainInfo?.chainId])
 
+  const renderAddress = (address: string) => <Address address={address} />
+
   return (
-    <div className={styles.box}>
-      <div className={styles.boxOptions}>
-        <button
-          className={filter === 'grantee' ? styles.boxOptionActive : undefined}
-          onClick={() => setFilter('grantee')}
-        >
-          {'grantee'}
-        </button>
-        <button
-          className={filter === 'granter' ? styles.boxOptionActive : undefined}
-          onClick={() => setFilter('granter')}
-        >
-          {'granter'}
-        </button>
-      </div>
-      {!error && !authzGrantee && !authzGranter && <div>{'loading...'}</div>}
-      {filter === 'grantee' && (
-        <div>
-          {Array.isArray(authzGrantee) &&
-            authzGrantee.map((grant, i) => (
-              <AuthzGrant key={i} grant={grant} />
-            ))}
-          {authzGrantee && authzGrantee.length === 0 && (
-            <div>{'no authorizations granted to this account'}</div>
-          )}
-        </div>
-      )}
-      {filter === 'granter' && (
-        <div>
-          {Array.isArray(authzGranter) &&
-            authzGranter.map((grant, i) => (
-              <AuthzGrant key={i} grant={grant} />
-            ))}
-          {authzGranter && authzGranter.length === 0 && (
-            <div>{'no authorizations granted by this account'}</div>
-          )}
-        </div>
-      )}
-      {error && <div>{error}</div>}
-    </div>
+    <Authz
+      authzGrantee={authzGrantee}
+      authzGranter={authzGranter}
+      error={error}
+      filter={filter}
+      setFilter={setFilter}
+      renderAddress={renderAddress}
+    />
   )
 }
 
-export default Authz
+export default AuthzContainer

@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
-import Authz from '@components/Authz'
-import Feegrant from '@components/Feegrant'
+import Authz from '@components/account/Authz'
+import Feegrant from '@components/account/Feegrant'
 import Account from '@components/account/Account'
 
 import styles from './page.module.css'

@@ -1,24 +1,19 @@
 'use client'
 
-import { AccountContext, WalletContext } from 'chora/contexts'
-import { useContext, useEffect, useState } from 'react'
+import * as React from 'react'
 
-import FeegrantAllowance from 'components/FeegrantAllowance'
+import { FeegrantListItem } from '../tables'
 
 import styles from './Feegrant.module.css'
 
-const Feegrant = () => {
-  const { feeGrantee, feeGranter, feeError: error } = useContext(AccountContext)
-  const { chainInfo, wallet } = useContext(WalletContext)
-
-  // view options
-  const [filter, setFilter] = useState<string>('grantee')
-
-  // reset state on address or network change
-  useEffect(() => {
-    setFilter('grantee')
-  }, [chainInfo?.rest, wallet?.bech32Address])
-
+const Feegrant = ({
+  feeGrantee,
+  feeGranter,
+  error,
+  filter,
+  setFilter,
+  renderAddress,
+}: any) => {
   return (
     <div className={styles.box}>
       <div className={styles.boxOptions}>
@@ -39,8 +34,12 @@ const Feegrant = () => {
       {filter === 'grantee' && (
         <div>
           {Array.isArray(feeGrantee) &&
-            feeGrantee.map((allowance, i) => (
-              <FeegrantAllowance key={i} allowance={allowance} />
+            feeGrantee.map((grant, i) => (
+              <FeegrantListItem
+                key={i}
+                grant={grant}
+                renderAddress={renderAddress}
+              />
             ))}
           {feeGrantee && feeGrantee.length === 0 && (
             <div>{'no fee allowances granted to this account'}</div>
@@ -51,7 +50,11 @@ const Feegrant = () => {
         <div>
           {Array.isArray(feeGranter) &&
             feeGranter.map((allowance, i) => (
-              <FeegrantAllowance key={i} allowance={allowance} />
+              <FeegrantListItem
+                key={i}
+                allowance={allowance}
+                renderAddress={renderAddress}
+              />
             ))}
           {feeGranter && feeGranter.length === 0 && (
             <div>{'no fee allowances granted by this account'}</div>

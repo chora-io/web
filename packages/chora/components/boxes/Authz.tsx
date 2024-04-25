@@ -1,28 +1,19 @@
 'use client'
 
-import { AccountContext, WalletContext } from 'chora/contexts'
-import { useContext, useEffect, useState } from 'react'
+import * as React from 'react'
 
-import AuthzGrant from './AuthzGrant'
+import { AuthzListItem } from '../tables'
 
 import styles from './Authz.module.css'
 
-const Authz = () => {
-  const {
-    authzGrantee,
-    authzGranter,
-    authzError: error,
-  } = useContext(AccountContext)
-  const { chainInfo, wallet } = useContext(WalletContext)
-
-  // view options
-  const [filter, setFilter] = useState<string>('grantee')
-
-  // reset state on address or network change
-  useEffect(() => {
-    setFilter('grantee')
-  }, [chainInfo?.rest, wallet?.bech32Address])
-
+const Authz = ({
+  authzGrantee,
+  authzGranter,
+  error,
+  filter,
+  setFilter,
+  renderAddress,
+}: any) => {
   return (
     <div className={styles.box}>
       <div className={styles.boxOptions}>
@@ -44,7 +35,11 @@ const Authz = () => {
         <div>
           {Array.isArray(authzGrantee) &&
             authzGrantee.map((grant, i) => (
-              <AuthzGrant key={i} grant={grant} />
+              <AuthzListItem
+                key={i}
+                grant={grant}
+                renderAddress={renderAddress}
+              />
             ))}
           {authzGrantee && authzGrantee.length === 0 && (
             <div>{'no authorizations granted to this account'}</div>
@@ -55,7 +50,11 @@ const Authz = () => {
         <div>
           {Array.isArray(authzGranter) &&
             authzGranter.map((grant, i) => (
-              <AuthzGrant key={i} grant={grant} />
+              <AuthzListItem
+                key={i}
+                grant={grant}
+                renderAddress={renderAddress}
+              />
             ))}
           {authzGranter && authzGranter.length === 0 && (
             <div>{'no authorizations granted by this account'}</div>
