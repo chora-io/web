@@ -1,6 +1,7 @@
 'use client'
 
 import { WalletContext } from 'chora/contexts'
+import { useMetadata } from 'chora/hooks'
 import { useParams } from 'next/navigation'
 import * as React from 'react'
 import { createContext, useContext } from 'react'
@@ -18,6 +19,7 @@ const GroupContextProvider = (props: any) => {
   const [group, groupError] = useGroupInfo(chainInfo, groupId)
   const [policies, policiesError] = useGroupPolicies(chainInfo, groupId)
   const [members, membersError] = useGroupMembers(chainInfo, groupId)
+  const [metadata, metadataError] = useMetadata(chainInfo, group?.metadata)
 
   return (
     <GroupContext.Provider
@@ -28,6 +30,8 @@ const GroupContextProvider = (props: any) => {
         policiesError,
         members,
         membersError,
+        metadata,
+        metadataError,
       }}
     >
       {props.children}

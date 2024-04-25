@@ -3,19 +3,21 @@
 import { ResultTx } from 'chora/components'
 import { InputString, SelectMetadataFormat } from 'chora/components/forms'
 import { WalletContext } from 'chora/contexts'
-import { useNetworkServer } from 'chora/hooks'
+import { useMetadata, useNetworkServer } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'
 import { MsgUpdateGroupPolicyMetadata } from 'cosmos/api/cosmos/group/v1/tx'
 import * as jsonld from 'jsonld'
 import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
 
+import { GroupContext } from '@contexts/GroupContext'
 import { useAdminPermissions } from '@hooks/useAdminPermissions'
 
 import styles from './UpdateAccountMetadata.module.css'
 
 const UpdateAccountMetadata = () => {
   const { address } = useParams()
+  const { policies } = useContext(GroupContext)
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
@@ -24,6 +26,16 @@ const UpdateAccountMetadata = () => {
     wallet,
     '/cosmos.group.v1.MsgUpdateGroupPolicyMetadata',
   )
+
+  const [metadata, metadataError] = useMetadata(
+    chainInfo,
+    policies?.find((p: any) => p.address === address)?.metadata,
+  )
+
+  // TODO: handle error
+  if (metadataError) {
+    console.error(metadataError)
+  }
 
   // form inputs
   const [name, setName] = useState<string>('')
@@ -171,6 +183,7 @@ const UpdateAccountMetadata = () => {
           label="account name"
           placeholder="Updated Account"
           string={name}
+          initString={metadata?.name}
           setString={setName}
         />
         <InputString
@@ -178,6 +191,7 @@ const UpdateAccountMetadata = () => {
           label="account description"
           placeholder="A group account for resource management."
           string={description}
+          initString={metadata?.description}
           setString={setDescription}
         />
         <button type="submit">{'submit'}</button>

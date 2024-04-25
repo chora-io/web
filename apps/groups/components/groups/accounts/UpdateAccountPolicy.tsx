@@ -8,12 +8,14 @@ import { MsgUpdateGroupPolicyDecisionPolicy } from 'cosmos/api/cosmos/group/v1/t
 import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
 
+import { GroupContext } from '@contexts/GroupContext'
 import { useAdminPermissions } from '@hooks/useAdminPermissions'
 
 import styles from './UpdateAccountMetadata.module.css'
 
 const UpdateAccountMetadata = () => {
   const { address } = useParams()
+  const { policies } = useContext(GroupContext)
   const { chainInfo, wallet } = useContext(WalletContext)
 
   const [isAdmin, isPolicy, isAuthz] = useAdminPermissions(
@@ -82,6 +84,7 @@ const UpdateAccountMetadata = () => {
         <InputPolicy
           id="account-decision-policy"
           label="account decision policy"
+          initPolicy={policies?.find((p: any) => p.address === address)}
           setPolicy={setPolicy}
         />
         <button type="submit">{'submit'}</button>

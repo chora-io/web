@@ -17,7 +17,7 @@ const InputMembers = ({
 
   useEffect(() => {
     let ms: any[]
-    if (initialized) {
+    if (initialized && members) {
       ms = [...members]
     } else {
       ms = initMembers ? [...initMembers] : []

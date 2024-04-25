@@ -11,9 +11,11 @@ import { useContext, useState } from 'react'
 import { useAdminPermissions } from '@hooks/useAdminPermissions'
 
 import styles from './UpdateAccountAdmin.module.css'
+import { GroupContext } from '@contexts/GroupContext'
 
 const UpdateAccountAdmin = () => {
   const { address } = useParams()
+  const { policies } = useContext(GroupContext)
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [isAdmin, isPolicy, isAuthz] = useAdminPermissions(
@@ -84,6 +86,7 @@ const UpdateAccountAdmin = () => {
           label="account admin"
           network={network}
           address={newAdmin}
+          initAddress={policies?.find((p: any) => p.address === address)?.admin}
           setAddress={setNewAdmin}
         />
         <button type="submit">{'submit'}</button>

@@ -17,7 +17,7 @@ const thresholdPlaceholder = '1'
 const percentagePlaceholder = '0.5'
 const periodPlaceholder = '3600'
 
-const InputPolicy = ({ id, label, setPolicy }: any) => {
+const InputPolicy = ({ id, label, initPolicy, setPolicy }: any) => {
   const [type, setType] = useState<string>('threshold')
   const [threshold, setThreshold] = useState<string>('')
   const [percentage, setPercentage] = useState<string>('')
@@ -71,6 +71,13 @@ const InputPolicy = ({ id, label, setPolicy }: any) => {
       <SelectPolicyType
         id={(id || defaultId) + '-type'}
         type={type}
+        initType={
+          initPolicy &&
+          initPolicy['decision_policy']['@type'] ===
+            '/cosmos.group.v1.ThresholdDecisionPolicy'
+            ? 'threshold'
+            : 'percentage'
+        }
         setType={setType}
       />
       {type == 'threshold' ? (
@@ -79,6 +86,7 @@ const InputPolicy = ({ id, label, setPolicy }: any) => {
           label={(label || defaultLabel) + ' threshold'}
           placeholder={thresholdPlaceholder}
           number={threshold}
+          initNumber={initPolicy && initPolicy['decision_policy'].threshold}
           setNumber={setThreshold}
         />
       ) : (
@@ -87,6 +95,7 @@ const InputPolicy = ({ id, label, setPolicy }: any) => {
           label={(label || defaultLabel) + ' percentage'}
           placeholder={percentagePlaceholder}
           number={percentage}
+          initNumber={initPolicy && initPolicy['decision_policy'].percentage}
           setNumber={setPercentage}
         />
       )}
@@ -95,6 +104,13 @@ const InputPolicy = ({ id, label, setPolicy }: any) => {
         label={(label || defaultLabel) + ' voting period'}
         placeholder={periodPlaceholder}
         number={votingPeriod}
+        initNumber={
+          initPolicy &&
+          initPolicy['decision_policy'].windows['voting_period'].replace(
+            's',
+            '',
+          )
+        }
         setNumber={setVotingPeriod}
       />
       <InputNumber
@@ -102,6 +118,13 @@ const InputPolicy = ({ id, label, setPolicy }: any) => {
         label={(label || defaultLabel) + ' min execution period'}
         placeholder={periodPlaceholder}
         number={minExecutionPeriod}
+        initNumber={
+          initPolicy &&
+          initPolicy['decision_policy'].windows['min_execution_period'].replace(
+            's',
+            '',
+          )
+        }
         setNumber={setMinExecutionPeriod}
       />
     </>

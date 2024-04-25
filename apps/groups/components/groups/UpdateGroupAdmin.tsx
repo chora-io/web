@@ -9,12 +9,14 @@ import * as Long from 'long'
 import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
 
+import { GroupContext } from '@contexts/GroupContext'
 import { useAdminPermissions } from '@hooks/useAdminPermissions'
 
 import styles from './UpdateGroupAdmin.module.css'
 
 const UpdateGroupAdmin = () => {
   const { groupId } = useParams()
+  const { group } = useContext(GroupContext)
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [isAdmin, isPolicy, isAuthz] = useAdminPermissions(
@@ -85,6 +87,7 @@ const UpdateGroupAdmin = () => {
           label="group admin"
           network={network}
           address={address}
+          initAddress={group?.admin}
           setAddress={setAddress}
         />
         <button type="submit">{'submit'}</button>

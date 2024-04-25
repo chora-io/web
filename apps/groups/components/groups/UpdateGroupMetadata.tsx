@@ -11,12 +11,14 @@ import * as Long from 'long'
 import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
 
+import { GroupContext } from '@contexts/GroupContext'
 import { useAdminPermissions } from '@hooks/useAdminPermissions'
 
 import styles from './UpdateGroupMetadata.module.css'
 
 const UpdateGroupMetadata = () => {
   const { groupId } = useParams()
+  const { metadata } = useContext(GroupContext)
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
@@ -172,6 +174,7 @@ const UpdateGroupMetadata = () => {
           label="group name"
           placeholder="Updated Group"
           string={name}
+          initString={metadata?.name}
           setString={setName}
         />
         <InputString
@@ -179,6 +182,7 @@ const UpdateGroupMetadata = () => {
           label="group description"
           placeholder="A group of members with shared resources."
           string={description}
+          initString={metadata?.description}
           setString={setDescription}
         />
         <button type="submit">{'submit'}</button>

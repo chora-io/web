@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useEffect, useState } from 'react'
 
 const defaultId = 'address'
 const defaultLabel = 'address'
@@ -17,6 +18,7 @@ const InputAddress = ({
   long,
   network,
   address,
+  initAddress,
   setAddress,
 }: any) => {
   let noLabel = false
@@ -36,6 +38,15 @@ const InputAddress = ({
       defaultPlaceholder = regenAddress
     }
   }
+
+  const [initialized, setInitialized] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (!initialized && !address && initAddress) {
+      setAddress(initAddress)
+      setInitialized(true)
+    }
+  }, [initialized, initAddress, setAddress, setInitialized])
 
   return (
     <label htmlFor={id ? id : defaultId}>
