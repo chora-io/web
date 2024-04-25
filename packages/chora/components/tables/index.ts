@@ -1,3 +1,4 @@
+export { default as AttestationsListItem } from './AttestationsListItem'
 export { default as BasketsList } from './BasketsList'
 export { default as BasketsListItem } from './BasketsListItem'
 export { default as BasketsTable } from './BasketsTable'

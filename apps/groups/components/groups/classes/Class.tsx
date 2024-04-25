@@ -24,7 +24,7 @@ const ClassContainer = () => {
 
   const error = classError || metadataError
 
-  const renderAddress = (address) => <Address address={address} />
+  const renderAddress = (address: string) => <Address address={address} />
 
   const renderMetadata = (metadata: string) => (
     <Link href={`/${network}/claims/${metadata}`}>{metadata}</Link>

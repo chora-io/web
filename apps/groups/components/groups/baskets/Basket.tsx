@@ -15,7 +15,7 @@ const BasketContainer = () => {
   // fetch credit basket from selected network
   const [basket, error] = useBasket(chainInfo, `${denom}`)
 
-  const renderAddress = (address) => <Address address={address} />
+  const renderAddress = (address: string) => <Address address={address} />
 
   return <Basket basket={basket} error={error} renderAddress={renderAddress} />
 }
