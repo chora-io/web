@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 
+import Balances from '@components/vouchers/Balances'
 import Voucher from '@components/vouchers/Voucher'
 
 import styles from './page.module.css'
@@ -13,6 +14,8 @@ const VoucherPage = () => (
     <div>
       <h1>{'voucher'}</h1>
       <Voucher />
+      <h1>{'balances'}</h1>
+      <Balances />
     </div>
   </div>
 )

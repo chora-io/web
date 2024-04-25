@@ -2,10 +2,9 @@
 
 import { Attestations } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
+import { useAttestations } from 'chora/hooks'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
-
-import { useAttestations } from '@hooks/useAttestations'
 
 const AttestationsContainer = () => {
   const { iri } = useParams()

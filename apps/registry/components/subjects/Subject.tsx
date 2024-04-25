@@ -2,12 +2,10 @@
 
 import { Subject } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
-import { useMetadata } from 'chora/hooks'
+import { useMetadata, useSubject } from 'chora/hooks'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
-
-import { useSubject } from '@hooks/useSubject'
 
 const SubjectContainer = () => {
   const { id } = useParams()

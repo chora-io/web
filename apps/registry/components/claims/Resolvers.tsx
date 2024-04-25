@@ -2,7 +2,7 @@
 
 import { Resolvers } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
-import { useResolvers } from 'chora/hooks/useResolvers'
+import { useResolvers } from 'chora/hooks'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 

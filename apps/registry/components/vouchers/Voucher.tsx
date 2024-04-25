@@ -2,12 +2,10 @@
 
 import { Voucher } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
-import { useMetadata } from 'chora/hooks'
+import { useMetadata, useVoucher } from 'chora/hooks'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
-
-import { useVoucher } from '@hooks/useVoucher'
 
 const VoucherContainer = () => {
   const { id } = useParams()

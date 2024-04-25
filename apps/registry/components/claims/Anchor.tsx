@@ -2,10 +2,9 @@
 
 import { Anchor } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
+import { useAnchor } from 'chora/hooks'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
-
-import { useAnchor } from '@hooks/useAnchor'
 
 const AnchorContainer = () => {
   const { iri } = useParams()

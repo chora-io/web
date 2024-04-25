@@ -6,10 +6,12 @@
   composes: box-item from 'chora/styles/box.css';
 }
 
-.boxItemSub {
-  composes: box-item-sub from 'chora/styles/box.css';
-}
-
 .boxText {
   composes: box-text from 'chora/styles/box.css';
+}
+
+.activeAccount {
+  color: var(--color-theme);
+  font-weight: 400;
+  margin-left: 5px;
 }

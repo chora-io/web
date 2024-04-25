@@ -2,10 +2,9 @@
 
 import { Resolver } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
+import { useResolver } from 'chora/hooks'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
-
-import { useResolver } from '@hooks/useResolver'
 
 const ResolverContainer = () => {
   const { id } = useParams()
