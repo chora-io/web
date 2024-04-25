@@ -1,37 +1,39 @@
 'use client'
 
-import { Result } from 'chora/components'
+import { Vouchers } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
+import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
-import VoucherPreview from '@components/groups/vouchers/VoucherPreview'
+import Address from '@components/Address'
 import { GroupContext } from '@contexts/GroupContext'
 import { useGroupVouchers } from '@hooks/useGroupVouchers'
 
-import styles from './Vouchers.module.css'
-
-const Vouchers = () => {
+const VouchersContainer = () => {
+  const { groupId } = useParams()
   const { policies, policiesError } = useContext(GroupContext)
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // fetch vouchers issued by group from selected network
   const [vouchers, vouchersError] = useGroupVouchers(chainInfo, policies)
 
   const error = policiesError || vouchersError
 
+  const renderAddress = (address: string) => <Address address={address} />
+
+  const renderLink = (id: string) => (
+    <Link href={`/${network}/${groupId}/vouchers/${id}`}>{'view voucher'}</Link>
+  )
+
   return (
-    <div className={styles.box}>
-      {!error && !vouchers && <div>{'loading...'}</div>}
-      {!error && vouchers && vouchers.length === 0 && (
-        <div>{'no vouchers found'}</div>
-      )}
-      {Array.isArray(vouchers) &&
-        vouchers.map((voucher) => (
-          <VoucherPreview key={voucher['id']} voucher={voucher} />
-        ))}
-      <Result error={error} />
-    </div>
+    <Vouchers
+      vouchers={vouchers}
+      error={error}
+      renderAddress={renderAddress}
+      renderLink={renderLink}
+    />
   )
 }
 
-export default Vouchers
+export default VouchersContainer

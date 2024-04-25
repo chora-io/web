@@ -4,36 +4,31 @@ import * as React from 'react'
 import { useContext } from 'react'
 
 import { WalletContext } from '../../contexts'
-import { formatTimestamp } from '../../utils'
 
-import styles from './AttestationsListItem.module.css'
+import styles from './ResolversListItem.module.css'
 
-const AttestationsListItem = ({
-  attestation,
-  renderAddress,
-  renderLink,
-}: any) => {
+const ResolversListItem = ({ resolver, renderAddress, renderLink }: any) => {
   const { wallet } = useContext(WalletContext)
 
   return (
     <div className={styles.boxItem}>
       <div className={styles.boxText}>
-        <h3>{'iri'}</h3>
-        <p>{attestation['iri'] || 'NA'}</p>
+        <h3>{'id'}</h3>
+        <p>{resolver['id']}</p>
       </div>
       <div className={styles.boxText}>
-        <h3>{'timestamp'}</h3>
-        <p>{attestation ? formatTimestamp(attestation['timestamp']) : 'NA'}</p>
+        <h3>{'url'}</h3>
+        <p>{resolver['url']}</p>
       </div>
       <div className={styles.boxText}>
-        <h3>{'attestor'}</h3>
+        <h3>{'manager'}</h3>
         <p>
           {renderAddress ? (
-            renderAddress(attestation.attestor)
+            renderAddress(resolver.manager)
           ) : (
             <>
-              {attestation.attestor}
-              {wallet && attestation.attestor === wallet.bech32Address && (
+              {resolver.manager}
+              {wallet && resolver.manager === wallet.bech32Address && (
                 <span className={styles.activeAccount}>
                   {'(active account)'}
                 </span>
@@ -42,9 +37,9 @@ const AttestationsListItem = ({
           )}
         </p>
       </div>
-      {renderLink && renderLink(attestation.iri)}
+      {renderLink && renderLink(resolver.id)}
     </div>
   )
 }
 
-export default AttestationsListItem
+export default ResolversListItem

@@ -1,41 +1,41 @@
 'use client'
 
-import { Result } from 'chora/components'
+import { Resolvers } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
+import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
+import Address from '@components/Address'
 import { GroupContext } from '@contexts/GroupContext'
 import { useGroupResolvers } from '@hooks/useGroupResolvers'
-import ResolverPreview from './ResolverPreview'
 
-import styles from './Resolvers.module.css'
-
-const Resolvers = () => {
+const ResolversContainer = () => {
+  const { groupId } = useParams()
   const { policies, policiesError } = useContext(GroupContext)
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // fetch data resolvers from selected network
   const [resolvers, resolversError] = useGroupResolvers(chainInfo, policies)
 
   const error = policiesError || resolversError
 
+  const renderAddress = (address: string) => <Address address={address} />
+
+  const renderLink = (id: string) => (
+    <Link href={`/${network}/${groupId}/resolvers/${id}`}>
+      {'view resolver'}
+    </Link>
+  )
+
   return (
-    <div className={styles.box}>
-      {!error && !resolvers && <div>{'loading...'}</div>}
-      {Array.isArray(resolvers) &&
-        resolvers.map((resolver) => (
-          <ResolverPreview key={resolver['id']} resolver={resolver} />
-        ))}
-      {!error && chainInfo?.chainId && resolvers?.length === 0 && (
-        <div>{'no resolvers found'}</div>
-      )}
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
-    </div>
+    <Resolvers
+      resolvers={resolvers}
+      error={error}
+      renderAddress={renderAddress}
+      renderLink={renderLink}
+    />
   )
 }
 
-export default Resolvers
+export default ResolversContainer

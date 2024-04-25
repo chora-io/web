@@ -1,6 +1,6 @@
 'use client'
 
-import { Result } from 'chora/components'
+import { Voucher } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
 import { useMetadata, useVoucher } from 'chora/hooks'
 import { useParams } from 'next/navigation'
@@ -8,9 +8,7 @@ import { useContext } from 'react'
 
 import Address from '@components/Address'
 
-import styles from './Voucher.module.css'
-
-const Voucher = () => {
+const VoucherContainer = () => {
   const { id } = useParams()
   const { chainInfo } = useContext(WalletContext)
 
@@ -25,29 +23,16 @@ const Voucher = () => {
 
   const error = voucherError || metadataError
 
+  const renderAddress = (address: string) => <Address address={address} />
+
   return (
-    <div className={styles.box}>
-      <div className={styles.boxText}>
-        <h3>{'name'}</h3>
-        <p>{metadata && metadata['name'] ? metadata['name'] : 'NA'}</p>
-      </div>
-      <div className={styles.boxText}>
-        <h3>{'description'}</h3>
-        <p>
-          {metadata && metadata['description'] ? metadata['description'] : 'NA'}
-        </p>
-      </div>
-      <div className={styles.boxText}>
-        <h3>{'issuer'}</h3>
-        <p>{voucher?.issuer ? <Address address={voucher.issuer} /> : 'NA'}</p>
-      </div>
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
-    </div>
+    <Voucher
+      voucher={voucher}
+      metadata={metadata}
+      error={error}
+      renderAddress={renderAddress}
+    />
   )
 }
 
-export default Voucher
+export default VoucherContainer

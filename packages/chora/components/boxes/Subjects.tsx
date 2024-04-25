@@ -3,12 +3,12 @@
 import * as React from 'react'
 
 import { Result } from '..'
-import { PaginationNav, ResolversList } from '../tables'
+import { PaginationNav, SubjectsList } from '../tables'
 
-import styles from './Resolvers.module.css'
+import styles from './Subjects.module.css'
 
-const Resolvers = ({
-  resolvers,
+const Subjects = ({
+  subjects,
   error,
   renderAddress,
   renderLink,
@@ -36,18 +36,20 @@ const Resolvers = ({
           </button>
         </div>
       )}
-      {!resolvers && !error && <div>{'loading...'}</div>}
-      {resolvers && resolvers.length === 0 && <div>{'no resolvers found'}</div>}
-      {resolvers && resolvers.length > 0 && (
+      {!error && !subjects && <div>{'loading...'}</div>}
+      {!error && subjects && subjects.length === 0 && (
+        <div>{'no subjects found'}</div>
+      )}
+      {subjects && subjects.length > 0 && (
         <>
-          <ResolversList
-            resolvers={resolvers}
+          <SubjectsList
+            subjects={subjects}
             renderAddress={renderAddress}
             renderLink={renderLink}
           />
           {limit && (
             <PaginationNav
-              length={resolvers ? resolvers.length : 0}
+              length={subjects ? subjects.length : 0}
               limit={limit}
               offset={offset}
               setOffset={setOffset}
@@ -60,4 +62,4 @@ const Resolvers = ({
   )
 }
 
-export default Resolvers
+export default Subjects

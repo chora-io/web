@@ -36,8 +36,10 @@ const Batches = ({
           </button>
         </div>
       )}
-      {!batches && !error && <p>{'loading...'}</p>}
-      {!error && batches && batches.length === 0 && <p>{'no batches found'}</p>}
+      {!batches && !error && <div>{'loading...'}</div>}
+      {!error && batches && batches.length === 0 && (
+        <div>{'no batches found'}</div>
+      )}
       {batches && batches.length > 0 && (
         <>
           {view === 'table' ? (

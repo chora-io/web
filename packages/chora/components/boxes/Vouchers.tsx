@@ -3,12 +3,12 @@
 import * as React from 'react'
 
 import { Result } from '..'
-import { PaginationNav, ResolversList } from '../tables'
+import { PaginationNav, VouchersList } from '../tables'
 
-import styles from './Resolvers.module.css'
+import styles from './Vouchers.module.css'
 
-const Resolvers = ({
-  resolvers,
+const Vouchers = ({
+  vouchers,
   error,
   renderAddress,
   renderLink,
@@ -36,18 +36,20 @@ const Resolvers = ({
           </button>
         </div>
       )}
-      {!resolvers && !error && <div>{'loading...'}</div>}
-      {resolvers && resolvers.length === 0 && <div>{'no resolvers found'}</div>}
-      {resolvers && resolvers.length > 0 && (
+      {!error && !vouchers && <div>{'loading...'}</div>}
+      {!error && vouchers && vouchers.length === 0 && (
+        <div>{'no vouchers found'}</div>
+      )}
+      {vouchers && vouchers.length > 0 && (
         <>
-          <ResolversList
-            resolvers={resolvers}
+          <VouchersList
+            vouchers={vouchers}
             renderAddress={renderAddress}
             renderLink={renderLink}
           />
           {limit && (
             <PaginationNav
-              length={resolvers ? resolvers.length : 0}
+              length={vouchers ? vouchers.length : 0}
               limit={limit}
               offset={offset}
               setOffset={setOffset}
@@ -60,4 +62,4 @@ const Resolvers = ({
   )
 }
 
-export default Resolvers
+export default Vouchers

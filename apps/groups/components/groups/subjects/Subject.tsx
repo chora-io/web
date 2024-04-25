@@ -1,6 +1,6 @@
 'use client'
 
-import { Result } from 'chora/components'
+import { Subject } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
 import { useMetadata, useSubject } from 'chora/hooks'
 import { useParams } from 'next/navigation'
@@ -8,9 +8,7 @@ import { useContext } from 'react'
 
 import Address from '@components/Address'
 
-import styles from './Subject.module.css'
-
-const Subject = () => {
+const SubjectContainer = () => {
   const { id } = useParams()
   const { chainInfo } = useContext(WalletContext)
 
@@ -25,45 +23,16 @@ const Subject = () => {
 
   const error = subjectError || metadataError
 
+  const renderAddress = (address: string) => <Address address={address} />
+
   return (
-    <div className={styles.box}>
-      <div className={styles.boxText}>
-        <h3>{'name'}</h3>
-        <p>{metadata && metadata['name'] ? metadata['name'] : 'NA'}</p>
-      </div>
-      <div className={styles.boxText}>
-        <h3>{'description'}</h3>
-        <p>
-          {metadata && metadata['description'] ? metadata['description'] : 'NA'}
-        </p>
-      </div>
-      <div className={styles.boxText}>
-        <h3>{'steward'}</h3>
-        <p>{subject?.curator ? <Address address={subject.curator} /> : 'NA'}</p>
-      </div>
-      <div className={styles.boxText}>
-        <h3>{'latitude'}</h3>
-        <p>
-          {metadata && metadata['geo'] && metadata['geo']['latitude']
-            ? metadata['geo']['latitude']
-            : 'NA'}
-        </p>
-      </div>
-      <div className={styles.boxText}>
-        <h3>{'longitude'}</h3>
-        <p>
-          {metadata && metadata['geo'] && metadata['geo']['longitude']
-            ? metadata['geo']['longitude']
-            : 'NA'}
-        </p>
-      </div>
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
-    </div>
+    <Subject
+      subject={subject}
+      metadata={metadata}
+      error={error}
+      renderAddress={renderAddress}
+    />
   )
 }
 
-export default Subject
+export default SubjectContainer

@@ -10,7 +10,7 @@ import { useContext } from 'react'
 import Address from '@components/Address'
 
 const BatchContainer = () => {
-  const { denom } = useParams()
+  const { denom, groupId } = useParams()
   const { chainInfo, network } = useContext(WalletContext)
 
   // fetch batch from selected network
@@ -26,12 +26,10 @@ const BatchContainer = () => {
 
   const renderAddress = (address: string) => <Address address={address} />
 
-  const renderMetadata = (metadata: string) => (
-    <Link href={`/${network}/claims/${metadata}`}>{metadata}</Link>
-  )
-
   const renderProjectId = (projectId: string) => (
-    <Link href={`/${network}/projects/${projectId}`}>{projectId}</Link>
+    <Link href={`/${network}/${groupId}/projects/${projectId}`}>
+      {projectId}
+    </Link>
   )
 
   return (
@@ -40,7 +38,6 @@ const BatchContainer = () => {
       metadata={metadata}
       error={error}
       renderAddress={renderAddress}
-      renderMetadata={renderMetadata}
       renderProjectId={renderProjectId}
     />
   )

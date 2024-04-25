@@ -1,37 +1,39 @@
 'use client'
 
-import { Result } from 'chora/components'
+import { Subjects } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
+import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
-import SubjectPreview from '@components/groups/subjects/SubjectPreview'
+import Address from '@components/Address'
 import { GroupContext } from '@contexts/GroupContext'
 import { useGroupSubjects } from '@hooks/useGroupSubjects'
 
-import styles from './Subjects.module.css'
-
-const Subjects = () => {
+const SubjectsContainer = () => {
+  const { groupId } = useParams()
   const { policies, policiesError } = useContext(GroupContext)
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // fetch subjects curated by group from selected network
   const [subjects, subjectsError] = useGroupSubjects(chainInfo, policies)
 
   const error = policiesError || subjectsError
 
+  const renderAddress = (address: string) => <Address address={address} />
+
+  const renderLink = (id: string) => (
+    <Link href={`/${network}/${groupId}/subjects/${id}`}>{'view subject'}</Link>
+  )
+
   return (
-    <div className={styles.box}>
-      {!error && !subjects && <div>{'loading...'}</div>}
-      {!error && subjects && subjects.length === 0 && (
-        <div>{'no subjects found'}</div>
-      )}
-      {Array.isArray(subjects) &&
-        subjects.map((subject) => (
-          <SubjectPreview key={subject['id']} subject={subject} />
-        ))}
-      <Result error={error} />
-    </div>
+    <Subjects
+      subjects={subjects}
+      error={error}
+      renderAddress={renderAddress}
+      renderLink={renderLink}
+    />
   )
 }
 
-export default Subjects
+export default SubjectsContainer

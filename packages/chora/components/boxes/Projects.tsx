@@ -36,9 +36,9 @@ const Projects = ({
           </button>
         </div>
       )}
-      {!projects && !error && <p>{'loading...'}</p>}
+      {!projects && !error && <div>{'loading...'}</div>}
       {!error && projects && projects.length === 0 && (
-        <p>{'no projects found'}</p>
+        <div>{'no projects found'}</div>
       )}
       {projects && projects.length > 0 && (
         <>
@@ -55,12 +55,14 @@ const Projects = ({
               renderLink={renderLink}
             />
           )}
-          <PaginationNav
-            length={projects ? projects.length : 0}
-            limit={limit}
-            offset={offset}
-            setOffset={setOffset}
-          />
+          {limit && (
+            <PaginationNav
+              length={projects ? projects.length : 0}
+              limit={limit}
+              offset={offset}
+              setOffset={setOffset}
+            />
+          )}
         </>
       )}
       <Result error={error} />
