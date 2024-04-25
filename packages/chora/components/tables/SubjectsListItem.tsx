@@ -22,6 +22,12 @@ const SubjectsListItem = ({ subject, renderAddress, renderLink }: any) => {
         <p>{metadata && metadata['name'] ? metadata['name'] : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
+        <h3>{'description'}</h3>
+        <p>
+          {metadata && metadata['description'] ? metadata['description'] : 'NA'}
+        </p>
+      </div>
+      <div className={styles.boxText}>
         <h3>{'steward'}</h3>
         <p>
           {renderAddress ? (

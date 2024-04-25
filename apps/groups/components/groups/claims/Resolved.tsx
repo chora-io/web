@@ -11,12 +11,16 @@ const ResolvedContainer = () => {
   const { chainInfo } = useContext(WalletContext)
 
   // parse metadata or fetch from network server, otherwise resolve
-  const [metadata, metadataError] = useMetadata(chainInfo, `${iri}`)
+  const [metadata, metadataError, resolverUrl] = useMetadata(
+    chainInfo,
+    `${iri}`,
+  )
 
   return (
     <Resolved
       iri={`${iri}`.replace('%3A', ':')}
       metadata={metadata}
+      resolverUrl={resolverUrl}
       error={metadataError}
     />
   )

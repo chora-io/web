@@ -8,11 +8,21 @@ import { WalletContext } from '../../contexts'
 
 import styles from './Subject.module.css'
 
-const Subject = ({ subject, metadata, error, renderAddress }: any) => {
+const Subject = ({
+  subject,
+  metadata,
+  error,
+  renderAddress,
+  renderMetadata,
+}: any) => {
   const { wallet } = useContext(WalletContext)
 
   return (
     <div className={styles.box}>
+      <div className={styles.boxText}>
+        <h3>{'id'}</h3>
+        <p>{subject && subject['id'] ? subject['id'] : 'NA'}</p>
+      </div>
       <div className={styles.boxText}>
         <h3>{'name'}</h3>
         <p>{metadata && metadata['name'] ? metadata['name'] : 'NA'}</p>
@@ -52,6 +62,29 @@ const Subject = ({ subject, metadata, error, renderAddress }: any) => {
             : 'NA'}
         </p>
       </div>
+      <div className={styles.boxText}>
+        <h3>{'metadata'}</h3>
+        {metadata && renderMetadata ? (
+          <p>{renderMetadata(subject.metadata)}</p>
+        ) : (
+          <p>{subject?.metadata || 'NA'}</p>
+        )}
+      </div>
+      <hr />
+      <div className={styles.boxText}>
+        <h3>{'data stored on blockchain network'}</h3>
+        <pre>
+          <p>{JSON.stringify(subject, null, ' ')}</p>
+        </pre>
+      </div>
+      {metadata && (
+        <div className={styles.boxText}>
+          <h3>{'data stored with data provider service'}</h3>
+          <pre>
+            <p>{JSON.stringify(metadata, null, ' ')}</p>
+          </pre>
+        </div>
+      )}
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

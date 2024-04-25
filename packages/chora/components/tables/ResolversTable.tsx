@@ -1,10 +1,12 @@
 'use client'
 
-import ResolversTableRow from '@components/resolvers/ResolversTableRow'
+import * as React from 'react'
+
+import { ResolversTableRow } from '.'
 
 import styles from './ResolversTable.module.css'
 
-const ResolversTable = ({ resolvers }: any) => {
+const ResolversTable = ({ resolvers, renderAddress, renderLink }: any) => {
   return (
     <table className={styles.table}>
       <thead>
@@ -18,7 +20,12 @@ const ResolversTable = ({ resolvers }: any) => {
       <tbody>
         {resolvers &&
           resolvers.map((resolver: any) => (
-            <ResolversTableRow key={resolver.id} resolver={resolver} />
+            <ResolversTableRow
+              key={resolver.id}
+              resolver={resolver}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
           ))}
       </tbody>
     </table>

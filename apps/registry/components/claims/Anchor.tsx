@@ -1,48 +1,20 @@
 'use client'
 
-import { Result } from 'chora/components'
+import { Anchor } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
-import { formatTimestamp } from 'chora/utils'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
 import { useAnchor } from '@hooks/useAnchor'
 
-import styles from './Anchor.module.css'
-
-const Anchor = () => {
+const AnchorContainer = () => {
   const { iri } = useParams()
   const { chainInfo } = useContext(WalletContext)
 
   // fetch data anchor from selected network
-  const [anchor, anchorError] = useAnchor(chainInfo, `${iri}`)
+  const [anchor, error] = useAnchor(chainInfo, `${iri}`)
 
-  return (
-    <div className={styles.box}>
-      <div className={styles.boxText}>
-        <h3>{'iri'}</h3>
-        <p>{iri ? iri.toString().replace('%3A', ':') : 'NA'}</p>
-      </div>
-      <div className={styles.boxText}>
-        <h3>{'timestamp'}</h3>
-        <p>{anchor ? formatTimestamp(anchor['timestamp']) : 'NA'}</p>
-      </div>
-      <hr />
-      {anchor && (
-        <div className={styles.boxText}>
-          <h3>{'data stored on blockchain network'}</h3>
-          <pre>
-            <p>{JSON.stringify(anchor, null, ' ')}</p>
-          </pre>
-        </div>
-      )}
-      {anchorError && (
-        <div className={styles.boxText}>
-          <Result error={anchorError} />
-        </div>
-      )}
-    </div>
-  )
+  return <Anchor anchor={anchor} error={error} />
 }
 
-export default Anchor
+export default AnchorContainer

@@ -3,7 +3,7 @@
 import * as React from 'react'
 
 import { Result } from '..'
-import { PaginationNav, VouchersList } from '../tables'
+import { PaginationNav, VouchersList, VouchersTable } from '../tables'
 
 import styles from './Vouchers.module.css'
 
@@ -42,11 +42,19 @@ const Vouchers = ({
       )}
       {vouchers && vouchers.length > 0 && (
         <>
-          <VouchersList
-            vouchers={vouchers}
-            renderAddress={renderAddress}
-            renderLink={renderLink}
-          />
+          {view === 'table' ? (
+            <VouchersTable
+              vouchers={vouchers}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
+          ) : (
+            <VouchersList
+              vouchers={vouchers}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
+          )}
           {limit && (
             <PaginationNav
               length={vouchers ? vouchers.length : 0}

@@ -1,53 +1,19 @@
 'use client'
 
-import { Result } from 'chora/components'
+import { Resolvers } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
+import { useResolvers } from 'chora/hooks/useResolvers'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
-import { useResolversByIRI } from '@hooks/useResolversByIRI'
-
-import styles from './Resolvers.module.css'
-
-const Resolvers = () => {
+const ResolversContainer = () => {
   const { iri } = useParams()
   const { chainInfo } = useContext(WalletContext)
 
   // fetch data resolvers from selected network
-  const [resolvers, error] = useResolversByIRI(chainInfo, `${iri}`)
+  const [resolvers, error] = useResolvers(chainInfo, `${iri}`)
 
-  return (
-    <div className={styles.box}>
-      {!resolvers ||
-        (resolvers.length === 0 && (
-          <div className={styles.boxText}>
-            <p>{'No registration records found.'}</p>
-          </div>
-        ))}
-      {Array.isArray(resolvers) &&
-        resolvers.map((resolver: any) => (
-          <div className={styles.boxItem} key={resolver['id']}>
-            <div className={styles.boxText}>
-              <h3>{'id'}</h3>
-              <p>{resolver ? resolver['id'] : 'NA'}</p>
-            </div>
-            <div className={styles.boxText}>
-              <h3>{'manager'}</h3>
-              <p>{resolver ? resolver['manager'] : 'NA'}</p>
-            </div>
-            <div className={styles.boxText}>
-              <h3>{'url'}</h3>
-              <p>{resolver ? resolver['url'] : 'NA'}</p>
-            </div>
-          </div>
-        ))}
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
-    </div>
-  )
+  return <Resolvers resolvers={resolvers} error={error} />
 }
 
-export default Resolvers
+export default ResolversContainer

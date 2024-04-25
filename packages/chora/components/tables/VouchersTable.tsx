@@ -1,10 +1,12 @@
 'use client'
 
-import VouchersTableRow from '@components/vouchers/VouchersTableRow'
+import * as React from 'react'
+
+import { VouchersTableRow } from '.'
 
 import styles from './VouchersTable.module.css'
 
-const VouchersTable = ({ vouchers }: any) => {
+const VouchersTable = ({ vouchers, renderAddress, renderLink }: any) => {
   return (
     <table className={styles.table}>
       <thead>
@@ -19,7 +21,12 @@ const VouchersTable = ({ vouchers }: any) => {
       <tbody>
         {vouchers &&
           vouchers.map((voucher: any) => (
-            <VouchersTableRow key={voucher.id} voucher={voucher} />
+            <VouchersTableRow
+              key={voucher.id}
+              voucher={voucher}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
           ))}
       </tbody>
     </table>

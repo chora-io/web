@@ -6,12 +6,16 @@ import { Result } from '..'
 
 import styles from './Resolved.module.css'
 
-const Resolved = ({ iri, metadata, error }: any) => {
+const Resolved = ({ iri, metadata, resolverUrl, error }: any) => {
   return (
     <div className={styles.box}>
       <div className={styles.boxText}>
         <h3>{'iri'}</h3>
         <p>{iri || 'NA'}</p>
+      </div>
+      <div className={styles.boxText}>
+        <h3>{'resolver url'}</h3>
+        <p>{resolverUrl || 'NA'}</p>
       </div>
       <hr />
       {metadata && (

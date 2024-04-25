@@ -1,10 +1,12 @@
 'use client'
 
-import SubjectsTableRow from '@components/subjects/SubjectsTableRow'
+import * as React from 'react'
+
+import { SubjectsTableRow } from '.'
 
 import styles from './SubjectsTable.module.css'
 
-const SubjectsTable = ({ subjects }: any) => {
+const SubjectsTable = ({ subjects, renderAddress, renderLink }: any) => {
   return (
     <table className={styles.table}>
       <thead>
@@ -19,7 +21,12 @@ const SubjectsTable = ({ subjects }: any) => {
       <tbody>
         {subjects &&
           subjects.map((subject: any) => (
-            <SubjectsTableRow key={subject.id} subject={subject} />
+            <SubjectsTableRow
+              key={subject.id}
+              subject={subject}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
           ))}
       </tbody>
     </table>

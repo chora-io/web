@@ -1,12 +1,15 @@
-import { WalletContext } from 'chora/contexts'
-import { useMetadata } from 'chora/hooks'
-import Link from 'next/link'
+'use client'
+
+import * as React from 'react'
 import { useContext } from 'react'
+
+import { WalletContext } from '../../contexts'
+import { useMetadata } from '../../hooks'
 
 import styles from './VouchersTableRow.module.css'
 
-const VouchersTableRow = ({ voucher }: any) => {
-  const { chainInfo, network, wallet } = useContext(WalletContext)
+const VouchersTableRow = ({ voucher, renderAddress, renderLink }: any) => {
+  const { chainInfo, wallet } = useContext(WalletContext)
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, error] = useMetadata(chainInfo, voucher.metadata)
@@ -31,18 +34,20 @@ const VouchersTableRow = ({ voucher }: any) => {
             (metadata['description'].length > 50 ? '...' : '')
           : 'NA'}
       </td>
-      <td>
-        {voucher.issuer.substring(0, 13) +
-          '...' +
-          voucher.issuer.substring(38, 44)}
-        {wallet && voucher.issuer === wallet.bech32Address && (
-          <span className={styles.activeAccount}>{'(active account)'}</span>
-        )}
-      </td>
+      {renderAddress ? (
+        <td>{renderAddress(voucher.issuer)}</td>
+      ) : (
+        <td>
+          {voucher.issuer.substring(0, 13) +
+            '...' +
+            voucher.issuer.substring(38, 44)}
+          {wallet && voucher.issuer === wallet.bech32Address && (
+            <span className={styles.activeAccount}>{'(active account)'}</span>
+          )}
+        </td>
+      )}
       <td style={{ minWidth: '120px' }}>
-        <Link href={`/${network}/vouchers/${voucher.id}`}>
-          {'view voucher'}
-        </Link>
+        {renderLink && renderLink(voucher.id)}
       </td>
     </tr>
   )

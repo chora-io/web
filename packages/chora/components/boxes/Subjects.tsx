@@ -3,7 +3,7 @@
 import * as React from 'react'
 
 import { Result } from '..'
-import { PaginationNav, SubjectsList } from '../tables'
+import { PaginationNav, SubjectsList, SubjectsTable } from '../tables'
 
 import styles from './Subjects.module.css'
 
@@ -42,11 +42,19 @@ const Subjects = ({
       )}
       {subjects && subjects.length > 0 && (
         <>
-          <SubjectsList
-            subjects={subjects}
-            renderAddress={renderAddress}
-            renderLink={renderLink}
-          />
+          {view === 'table' ? (
+            <SubjectsTable
+              subjects={subjects}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
+          ) : (
+            <SubjectsList
+              subjects={subjects}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
+          )}
           {limit && (
             <PaginationNav
               length={subjects ? subjects.length : 0}

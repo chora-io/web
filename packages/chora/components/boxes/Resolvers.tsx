@@ -3,7 +3,7 @@
 import * as React from 'react'
 
 import { Result } from '..'
-import { PaginationNav, ResolversList } from '../tables'
+import { PaginationNav, ResolversList, ResolversTable } from '../tables'
 
 import styles from './Resolvers.module.css'
 
@@ -40,11 +40,19 @@ const Resolvers = ({
       {resolvers && resolvers.length === 0 && <div>{'no resolvers found'}</div>}
       {resolvers && resolvers.length > 0 && (
         <>
-          <ResolversList
-            resolvers={resolvers}
-            renderAddress={renderAddress}
-            renderLink={renderLink}
-          />
+          {view === 'table' ? (
+            <ResolversTable
+              resolvers={resolvers}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
+          ) : (
+            <ResolversList
+              resolvers={resolvers}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
+          )}
           {limit && (
             <PaginationNav
               length={resolvers ? resolvers.length : 0}

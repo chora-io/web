@@ -1,18 +1,14 @@
 'use client'
 
-import { Result } from 'chora/components'
-import { PaginationNav } from 'chora/components/tables'
+import { Resolvers } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
+import Link from 'next/link'
 import { useContext, useState } from 'react'
 
-import ResolversList from '@components/resolvers/ResolversList'
-import ResolversTable from '@components/resolvers/ResolversTable'
 import { useResolvers } from '@hooks/useResolvers'
 
-import styles from './Resolvers.module.css'
-
-const Resolvers = () => {
-  const { chainInfo } = useContext(WalletContext)
+const ResolversContainer = () => {
+  const { chainInfo, network } = useContext(WalletContext)
 
   const limit = 5
 
@@ -22,44 +18,22 @@ const Resolvers = () => {
   // fetch resolvers from selected network
   const [resolvers, error] = useResolvers(chainInfo, limit, offset)
 
+  const renderLink = (resolverId: string) => (
+    <Link href={`/${network}/resolvers/${resolverId}`}>{'view resolver'}</Link>
+  )
+
   return (
-    <div className={styles.box}>
-      <div className={styles.boxOptions}>
-        <button
-          className={view === 'table' ? styles.active : undefined}
-          onClick={() => setView('table')}
-        >
-          {'table view'}
-        </button>
-        <button
-          className={view === 'list' ? styles.active : undefined}
-          onClick={() => setView('list')}
-        >
-          {'list view'}
-        </button>
-      </div>
-      {!resolvers && !error && <p>{'loading...'}</p>}
-      {!error && resolvers && resolvers.length === 0 && (
-        <p>{'no resolvers found'}</p>
-      )}
-      {resolvers && resolvers.length > 0 && (
-        <>
-          {view === 'table' ? (
-            <ResolversTable resolvers={resolvers} />
-          ) : (
-            <ResolversList resolvers={resolvers} />
-          )}
-          <PaginationNav
-            length={resolvers ? resolvers.length : 0}
-            limit={limit}
-            offset={offset}
-            setOffset={setOffset}
-          />
-        </>
-      )}
-      <Result error={error} />
-    </div>
+    <Resolvers
+      resolvers={resolvers}
+      error={error}
+      renderLink={renderLink}
+      limit={limit}
+      offset={offset}
+      setOffset={setOffset}
+      view={view}
+      setView={setView}
+    />
   )
 }
 
-export default Resolvers
+export default ResolversContainer

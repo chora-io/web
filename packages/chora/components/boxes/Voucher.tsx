@@ -8,11 +8,21 @@ import { WalletContext } from '../../contexts'
 
 import styles from './Voucher.module.css'
 
-const Voucher = ({ voucher, metadata, error, renderAddress }: any) => {
+const Voucher = ({
+  voucher,
+  metadata,
+  error,
+  renderAddress,
+  renderMetadata,
+}: any) => {
   const { wallet } = useContext(WalletContext)
 
   return (
     <div className={styles.box}>
+      <div className={styles.boxText}>
+        <h3>{'id'}</h3>
+        <p>{voucher?.id || 'NA'}</p>
+      </div>
       <div className={styles.boxText}>
         <h3>{'name'}</h3>
         <p>{metadata && metadata['name'] ? metadata['name'] : 'NA'}</p>
@@ -36,6 +46,29 @@ const Voucher = ({ voucher, metadata, error, renderAddress }: any) => {
           </p>
         )}
       </div>
+      <div className={styles.boxText}>
+        <h3>{'metadata'}</h3>
+        {metadata && renderMetadata ? (
+          <p>{renderMetadata(voucher.metadata)}</p>
+        ) : (
+          <p>{voucher?.metadata || 'NA'}</p>
+        )}
+      </div>
+      <hr />
+      <div className={styles.boxText}>
+        <h3>{'data stored on blockchain network'}</h3>
+        <pre>
+          <p>{JSON.stringify(voucher, null, ' ')}</p>
+        </pre>
+      </div>
+      {metadata && (
+        <div className={styles.boxText}>
+          <h3>{'data stored with data provider service'}</h3>
+          <pre>
+            <p>{JSON.stringify(metadata, null, ' ')}</p>
+          </pre>
+        </div>
+      )}
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

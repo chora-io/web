@@ -1,18 +1,14 @@
 'use client'
 
-import { Result } from 'chora/components'
-import { PaginationNav } from 'chora/components/tables'
+import { Vouchers } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
+import Link from 'next/link'
 import { useContext, useState } from 'react'
 
-import VouchersList from '@components/vouchers/VouchersList'
-import VouchersTable from '@components/vouchers/VouchersTable'
 import { useVouchers } from '@hooks/useVouchers'
 
-import styles from './Vouchers.module.css'
-
-const Vouchers = () => {
-  const { chainInfo } = useContext(WalletContext)
+const VouchersContainer = () => {
+  const { chainInfo, network } = useContext(WalletContext)
 
   const limit = 5
 
@@ -22,44 +18,22 @@ const Vouchers = () => {
   // fetch vouchers from selected network
   const [vouchers, error] = useVouchers(chainInfo, limit, offset)
 
+  const renderLink = (voucherId: string) => (
+    <Link href={`/${network}/vouchers/${voucherId}`}>{'view voucher'}</Link>
+  )
+
   return (
-    <div className={styles.box}>
-      <div className={styles.boxOptions}>
-        <button
-          className={view === 'table' ? styles.active : undefined}
-          onClick={() => setView('table')}
-        >
-          {'table view'}
-        </button>
-        <button
-          className={view === 'list' ? styles.active : undefined}
-          onClick={() => setView('list')}
-        >
-          {'list view'}
-        </button>
-      </div>
-      {!vouchers && !error && <p>{'loading...'}</p>}
-      {!error && vouchers && vouchers.length === 0 && (
-        <p>{'no vouchers found'}</p>
-      )}
-      {vouchers && vouchers.length > 0 && (
-        <>
-          {view === 'table' ? (
-            <VouchersTable vouchers={vouchers} />
-          ) : (
-            <VouchersList vouchers={vouchers} />
-          )}
-          <PaginationNav
-            length={vouchers ? vouchers.length : 0}
-            limit={limit}
-            offset={offset}
-            setOffset={setOffset}
-          />
-        </>
-      )}
-      <Result error={error} />
-    </div>
+    <Vouchers
+      vouchers={vouchers}
+      error={error}
+      renderLink={renderLink}
+      limit={limit}
+      offset={offset}
+      setOffset={setOffset}
+      view={view}
+      setView={setView}
+    />
   )
 }
 
-export default Vouchers
+export default VouchersContainer
