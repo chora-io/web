@@ -164,11 +164,6 @@ const UpdateGroupMetadata = () => {
         </span>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <SelectMetadataFormat
-          network={network}
-          metadataFormat={metadataFormat}
-          setMetadataFormat={setMetadataFormat}
-        />
         <InputString
           id="group-name"
           label="group name"
@@ -184,6 +179,12 @@ const UpdateGroupMetadata = () => {
           string={description}
           initString={metadata?.description}
           setString={setDescription}
+        />
+        <hr />
+        <SelectMetadataFormat
+          network={network}
+          metadataFormat={metadataFormat}
+          setMetadataFormat={setMetadataFormat}
         />
         <button type="submit">{'submit'}</button>
       </form>

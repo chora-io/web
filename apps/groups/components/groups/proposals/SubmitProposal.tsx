@@ -186,11 +186,6 @@ const SubmitProposal = () => {
           address={address}
           setAddress={setAddress}
         />
-        <SelectMetadataFormat
-          network={network}
-          metadataFormat={metadataFormat}
-          setMetadataFormat={setMetadataFormat}
-        />
         <InputString
           id="proposal-name"
           label="proposal name"
@@ -217,6 +212,12 @@ const SubmitProposal = () => {
           label="proposal execution"
           execution={execution}
           setExecution={setExecution}
+        />
+        <hr />
+        <SelectMetadataFormat
+          network={network}
+          metadataFormat={metadataFormat}
+          setMetadataFormat={setMetadataFormat}
         />
         <button type="submit">{'submit'}</button>
       </form>

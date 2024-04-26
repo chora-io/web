@@ -165,11 +165,6 @@ const CreateAccount = () => {
         </span>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <SelectMetadataFormat
-          network={network}
-          metadataFormat={metadataFormat}
-          setMetadataFormat={setMetadataFormat}
-        />
         <InputString
           id="account-name"
           label="account name"
@@ -188,6 +183,12 @@ const CreateAccount = () => {
           id="account-decision-policy"
           label="account decision policy"
           setPolicy={setPolicy}
+        />
+        <hr />
+        <SelectMetadataFormat
+          network={network}
+          metadataFormat={metadataFormat}
+          setMetadataFormat={setMetadataFormat}
         />
         <button type="submit">{'submit'}</button>
       </form>

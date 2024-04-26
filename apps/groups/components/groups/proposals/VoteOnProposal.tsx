@@ -165,11 +165,6 @@ const VoteOnProposal = () => {
           vote={vote}
           setVote={setVote}
         />
-        <SelectMetadataFormat
-          network={network}
-          metadataFormat={metadataFormat}
-          setMetadataFormat={setMetadataFormat}
-        />
         <InputString
           id="vote-reason"
           label="vote reason"
@@ -182,6 +177,12 @@ const VoteOnProposal = () => {
           label="proposal execution"
           execution={execution}
           setExecution={setExecution}
+        />
+        <hr />
+        <SelectMetadataFormat
+          network={network}
+          metadataFormat={metadataFormat}
+          setMetadataFormat={setMetadataFormat}
         />
         <button type="submit">{'submit'}</button>
       </form>
