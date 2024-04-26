@@ -41,8 +41,6 @@ const InputSendCredits = ({ id, credits, setCredits }: any) => {
     }
   }
 
-  console.log('credits', credits)
-
   return (
     <>
       {credits.length === 0 && <label>{'credits'}</label>}
