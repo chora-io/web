@@ -3,6 +3,14 @@
 import * as React from 'react'
 import { useState } from 'react'
 
+// chora.content.v1
+import {
+  MsgCreate as ContentMsgCreate,
+  MsgDelete as ContentMsgDelete,
+  MsgUpdateCurator as ContentMsgUpdateCurator,
+  MsgUpdateMetadata as ContentMsgUpdateMetadata,
+} from './chora.content.v1'
+
 // chora.geonode.v1
 import {
   MsgCreate as GeonodeMsgCreate,
@@ -26,7 +34,11 @@ import {
 } from './cosmos.authz.v1beta1'
 
 // cosmos.bank.v1beta1
-import { MsgSend as BankMsgSend } from './cosmos.bank.v1beta1'
+import {
+  MsgMultiSend as BankMsgMultiSend,
+  MsgSend as BankMsgSend,
+  MsgSetSendEnabled as BankMsgSetSendEnabled,
+} from './cosmos.bank.v1beta1'
 
 // cosmos.feegrant.v1beta1
 import {
@@ -62,17 +74,33 @@ import {
 
 // regen.ecocredit.v1
 import {
-  MsgCreateClass as EcocreditMsgCreateClass,
+  MsgAddAllowedBridgeChain as EcocreditMsgAddAllowedBridgeChain,
+  MsgAddClassCreator as EcocreditMsgAddClassCreator,
+  MsgAddCreditType as EcocreditMsgAddCreditType,
+  MsgBridge as EcocreditMsgBridge,
+  MsgBridgeReceive as EcocreditMsgBridgeReceive,
+  MsgCancel as EcocreditMsgCancel,
   MsgCreateBatch as EcocreditMsgCreateBatch,
+  MsgCreateClass as EcocreditMsgCreateClass,
   MsgCreateProject as EcocreditMsgCreateProject,
+  MsgMintBatchCredits as EcocreditMsgMintBatchCredits,
+  MsgRemoveAllowedBridgeChain as EcocreditMsgRemoveAllowedBridgeChain,
+  MsgRemoveClassCreator as EcocreditMsgRemoveClassCreator,
   MsgRetire as EcocreditMsgRetire,
+  MsgSealBatch as EcocreditMsgSealBatch,
   MsgSend as EcocreditMsgSend,
+  MsgSetClassCreatorAllowlist as EcocreditMsgSetClassCreatorAllowlist,
+  MsgUpdateBatchMetadata as EcocreditMsgUpdateBatchMetadata,
   MsgUpdateClassAdmin as EcocreditMsgUpdateClassAdmin,
+  MsgUpdateClassFee as EcocreditMsgUpdateClassFee,
   MsgUpdateClassIssuers as EcocreditMsgUpdateClassIssuers,
   MsgUpdateClassMetadata as EcocreditMsgUpdateClassMetadata,
   MsgUpdateProjectAdmin as EcocreditMsgUpdateProjectAdmin,
   MsgUpdateProjectMetadata as EcocreditMsgUpdateProjectMetadata,
 } from './regen.ecocredit.v1'
+
+// regen.ecocredit.basket.v1
+import { MsgCreate as BasketMsgCreate } from './regen.ecocredit.basket.v1'
 
 import styles from './SelectMessage.module.css'
 
@@ -81,6 +109,10 @@ const defaultLabel = 'message'
 
 // all available messages
 const defaultOptions = [
+  'chora.geonode.v1.MsgCreate',
+  'chora.geonode.v1.MsgDelete',
+  'chora.geonode.v1.MsgUpdateCurator',
+  'chora.geonode.v1.MsgUpdateMetadata',
   'chora.geonode.v1.MsgCreate',
   'chora.geonode.v1.MsgUpdateCurator',
   'chora.geonode.v1.MsgUpdateMetadata',
@@ -91,7 +123,9 @@ const defaultOptions = [
   'cosmos.authz.v1beta1.MsgExec',
   'cosmos.authz.v1beta1.MsgGrant',
   'cosmos.authz.v1beta1.MsgRevoke',
+  'cosmos.bank.v1beta1.BankMsgMultiSend',
   'cosmos.bank.v1beta1.MsgSend',
+  'cosmos.bank.v1beta1.BankMsgSetSendEnabled',
   'cosmos.feegrant.v1beta1.MsgGrantAllowance',
   'cosmos.feegrant.v1beta1.MsgRevokeAllowance',
   'cosmos.group.v1.MsgCreateGroup',
@@ -112,16 +146,30 @@ const defaultOptions = [
   'regen.data.v1.MsgAttest',
   'regen.data.v1.MsgDefineResolver',
   'regen.data.v1.MsgRegisterResolver',
+  'regen.ecocredit.v1.MsgAddAllowedBridgeChain',
+  'regen.ecocredit.v1.MsgAddClassCreator',
+  'regen.ecocredit.v1.MsgAddCreditType',
+  'regen.ecocredit.v1.MsgBridge',
+  'regen.ecocredit.v1.MsgBridgeReceive',
+  'regen.ecocredit.v1.MsgCancel',
   'regen.ecocredit.v1.MsgCreateBatch',
   'regen.ecocredit.v1.MsgCreateClass',
   'regen.ecocredit.v1.MsgCreateProject',
+  'regen.ecocredit.v1.MsgMintBatchCredits',
+  'regen.ecocredit.v1.MsgRemoveAllowedBridgeChain',
+  'regen.ecocredit.v1.MsgRemoveClassCreator',
   'regen.ecocredit.v1.MsgRetire',
+  'regen.ecocredit.v1.MsgSealBatch',
   'regen.ecocredit.v1.MsgSend',
+  'regen.ecocredit.v1.MsgSetClassCreatorAllowlist',
+  'regen.ecocredit.v1.MsgUpdateBatchMetadata',
   'regen.ecocredit.v1.MsgUpdateClassAdmin',
+  'regen.ecocredit.v1.MsgUpdateClassFee',
   'regen.ecocredit.v1.MsgUpdateClassIssuers',
   'regen.ecocredit.v1.MsgUpdateClassMetadata',
   'regen.ecocredit.v1.MsgUpdateProjectAdmin',
   'regen.ecocredit.v1.MsgUpdateProjectMetadata',
+  'regen.ecocredit.basket.v1.MsgCreate',
 ]
 
 const SelectMessage = ({
@@ -160,6 +208,30 @@ const SelectMessage = ({
           ))}
         </select>
       </label>
+      {!typeOnly && selected === 'chora.content.v1.MsgCreate' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <ContentMsgCreate network={network} setMessage={setMessage} />
+        </div>
+      )}
+      {!typeOnly && selected === 'chora.content.v1.MsgDelete' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <ContentMsgDelete network={network} setMessage={setMessage} />
+        </div>
+      )}
+      {!typeOnly && selected === 'chora.content.v1.MsgUpdateCurator' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <ContentMsgUpdateCurator network={network} setMessage={setMessage} />
+        </div>
+      )}
+      {!typeOnly && selected === 'chora.contContentMsgUpdateMetadata' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <ContentMsgUpdateMetadata network={network} setMessage={setMessage} />
+        </div>
+      )}
       {!typeOnly && selected === 'chora.geonode.v1.MsgCreate' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
@@ -220,10 +292,22 @@ const SelectMessage = ({
           <AuthzMsgRevoke network={network} setMessage={setMessage} />
         </div>
       )}
+      {!typeOnly && selected === 'cosmos.bank.v1beta1.MsgMultiSend' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <BankMsgMultiSend network={network} setMessage={setMessage} />
+        </div>
+      )}
       {!typeOnly && selected === 'cosmos.bank.v1beta1.MsgSend' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
           <BankMsgSend network={network} setMessage={setMessage} />
+        </div>
+      )}
+      {!typeOnly && selected === 'cosmos.bank.v1beBankMsgSetSendEnabled' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <BankMsgSetSendEnabled network={network} setMessage={setMessage} />
         </div>
       )}
       {!typeOnly &&
@@ -378,6 +462,55 @@ const SelectMessage = ({
           <DataMsgRegisterResolver network={network} setMessage={setMessage} />
         </div>
       )}
+      {!typeOnly &&
+        selected === 'regen.ecocredit.v1.MsgAddAllowedBridgeChain' && (
+          <div className={styles.message}>
+            <h3>{selected}</h3>
+            <EcocreditMsgAddAllowedBridgeChain
+              network={network}
+              setMessage={setMessage}
+            />
+          </div>
+        )}
+      {!typeOnly && selected === 'regen.ecocredit.v1.MsgAddClassCreator' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <EcocreditMsgAddClassCreator
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {!typeOnly && selected === 'regen.ecocredit.v1.MsgAddCreditType' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <EcocreditMsgAddCreditType
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {!typeOnly && selected === 'regen.ecocredit.v1.MsgBridge' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <EcocreditMsgBridge network={network} setMessage={setMessage} />
+        </div>
+      )}
+      {!typeOnly && selected === 'regen.ecocredit.v1.MsgBridgeReceive' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <EcocreditMsgBridgeReceive
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {!typeOnly && selected === 'regen.ecocredit.v1.MsgCancel' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <EcocreditMsgCancel network={network} setMessage={setMessage} />
+        </div>
+      )}
       {!typeOnly && selected === 'regen.ecocredit.v1.MsgCreateBatch' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
@@ -399,10 +532,44 @@ const SelectMessage = ({
           />
         </div>
       )}
+      {!typeOnly && selected === 'regen.ecocredit.v1.MsgMintBatchCredits' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <EcocreditMsgMintBatchCredits
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {!typeOnly &&
+        selected === 'regen.ecocredit.v1.MsgRemoveAllowedBridgeChain' && (
+          <div className={styles.message}>
+            <h3>{selected}</h3>
+            <EcocreditMsgRemoveAllowedBridgeChain
+              network={network}
+              setMessage={setMessage}
+            />
+          </div>
+        )}
+      {!typeOnly && selected === 'regen.ecocredit.v1.MsgRemoveClassCreator' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <EcocreditMsgRemoveClassCreator
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
       {!typeOnly && selected === 'regen.ecocredit.v1.MsgRetire' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
           <EcocreditMsgRetire network={network} setMessage={setMessage} />
+        </div>
+      )}
+      {!typeOnly && selected === 'regen.ecocredit.v1.MsgSealBatch' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <EcocreditMsgSealBatch network={network} setMessage={setMessage} />
         </div>
       )}
       {!typeOnly && selected === 'regen.ecocredit.v1.MsgSend' && (
@@ -411,10 +578,39 @@ const SelectMessage = ({
           <EcocreditMsgSend network={network} setMessage={setMessage} />
         </div>
       )}
+      {!typeOnly &&
+        selected === 'regen.ecocredit.v1.MsgSetClassCreatorAllowlist' && (
+          <div className={styles.message}>
+            <h3>{selected}</h3>
+            <EcocreditMsgSetClassCreatorAllowlist
+              network={network}
+              setMessage={setMessage}
+            />
+          </div>
+        )}
+      {!typeOnly &&
+        selected === 'regen.ecocredit.v1.MsgUpdateBatchMetadata' && (
+          <div className={styles.message}>
+            <h3>{selected}</h3>
+            <EcocreditMsgUpdateBatchMetadata
+              network={network}
+              setMessage={setMessage}
+            />
+          </div>
+        )}
       {!typeOnly && selected === 'regen.ecocredit.v1.MsgUpdateClassAdmin' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
           <EcocreditMsgUpdateClassAdmin
+            network={network}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {!typeOnly && selected === 'regen.ecocredit.v1.MsgUpdateClassFee' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <EcocreditMsgUpdateClassFee
             network={network}
             setMessage={setMessage}
           />
@@ -458,6 +654,12 @@ const SelectMessage = ({
             />
           </div>
         )}
+      {!typeOnly && selected === 'regen.ecocredit.basket.v1.MsgCreate' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <BasketMsgCreate network={network} setMessage={setMessage} />
+        </div>
+      )}
     </>
   )
 }

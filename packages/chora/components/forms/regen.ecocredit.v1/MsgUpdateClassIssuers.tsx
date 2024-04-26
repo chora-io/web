@@ -51,17 +51,17 @@ const MsgUpdateClassIssuers = ({
         iri={classId}
         setIri={setClassId}
       />
-      <p style={{ marginBottom: '1.5em' }}>{'add issuers'}</p>
       <InputIssuers
         id="msg-update-class-issuers-add-issuers"
         label="add issuers"
+        lockLabel={true}
         issuers={addIssuers}
         setIssuers={setAddIssuers}
       />
-      <p style={{ marginBottom: '1.5em' }}>{'remove issuers'}</p>
       <InputIssuers
         id="msg-update-class-issuers-remove-issuers"
         label="remove issuers"
+        lockLabel={true}
         issuers={removeIssuers}
         setIssuers={setRemoveIssuers}
       />

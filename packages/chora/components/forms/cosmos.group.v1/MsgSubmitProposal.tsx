@@ -5,14 +5,14 @@ import {
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import { InputAddress, InputIRI, SelectMessage } from '..'
+import { InputAddress, InputIRI, InputMessages } from '..'
 import { SelectExecution } from '.'
 
 const MsgSubmitProposal = ({ network, setMessage, useWallet, wallet }: any) => {
   const [proposer, setProposer] = useState<string>('')
   const [address, setAddress] = useState<string>('')
   const [metadata, setMetadata] = useState<string>('')
-  const [propMessage, setPropMessage] = useState<any>(undefined)
+  const [messages, setMessages] = useState<any[]>([])
   const [execution, setExecution] = useState<string>('')
 
   useEffect(() => {
@@ -20,10 +20,8 @@ const MsgSubmitProposal = ({ network, setMessage, useWallet, wallet }: any) => {
       $type: 'cosmos.group.v1.MsgSubmitProposal',
       proposers: wallet ? [wallet.bech32Address] : [proposer],
       groupPolicyAddress: address,
-      title: '', // TODO
-      summary: '', // TODO
       metadata: metadata,
-      messages: propMessage ? [propMessage] : [],
+      messages: messages,
       exec: execFromJSON(execution),
     } as unknown as Msg
 
@@ -33,7 +31,7 @@ const MsgSubmitProposal = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     setMessage(msgAny)
-  }, [proposer, address, metadata, propMessage, execution, wallet])
+  }, [proposer, address, metadata, messages, execution, wallet])
 
   return (
     <>
@@ -61,12 +59,12 @@ const MsgSubmitProposal = ({ network, setMessage, useWallet, wallet }: any) => {
         iri={metadata}
         setIri={setMetadata}
       />
-      <SelectMessage
-        id="msg-submit-proposal-message"
-        label="message"
+      <InputMessages
+        id="msg-submit-proposal-messages"
+        label="messages"
         network={network}
-        message={propMessage}
-        setMessage={setPropMessage}
+        messages={messages}
+        setMessages={setMessages}
       />
       <SelectExecution
         id="msg-submit-proposal-execution"

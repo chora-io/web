@@ -6,7 +6,14 @@ import { InputIssuer } from '.'
 
 const defaultId = 'issuers'
 
-const InputIssuers = ({ id, network, issuers, setIssuers }: any) => {
+const InputIssuers = ({
+  id,
+  label,
+  lockLabel,
+  network,
+  issuers,
+  setIssuers,
+}: any) => {
   useEffect(() => {
     let is = [...issuers]
     is = is.map((m, i) => ({ index: i, ...m }))
@@ -37,7 +44,9 @@ const InputIssuers = ({ id, network, issuers, setIssuers }: any) => {
 
   return (
     <>
-      {issuers.length === 0 && <label>{'issuers'}</label>}
+      {(lockLabel || issuers.length === 0) && (
+        <label>{label || 'issuers'}</label>
+      )}
       {issuers.map((issuer: any, index: number) => (
         <InputIssuer
           key={index}

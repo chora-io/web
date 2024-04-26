@@ -4,7 +4,7 @@ import { ResultTx } from 'chora/components'
 import {
   InputString,
   SelectAccount,
-  SelectMessage,
+  InputMessages,
   SelectMetadataFormat,
 } from 'chora/components/forms'
 import { SelectExecution } from 'chora/components/forms/cosmos.group.v1'
@@ -42,7 +42,7 @@ const SubmitProposal = () => {
   const [address, setAddress] = useState<string>('')
   const [name, setName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
-  const [message, setMessage] = useState<any>(null)
+  const [messages, setMessages] = useState<any[]>([])
   const [execution, setExecution] = useState<string>('')
 
   // metadata format
@@ -138,7 +138,7 @@ const SubmitProposal = () => {
       proposers: [wallet.bech32Address],
       groupPolicyAddress: address,
       metadata: metadata,
-      messages: message ? [message] : [],
+      messages: messages,
       exec: execution,
     } as unknown as MsgSubmitProposal
 
@@ -205,10 +205,12 @@ const SubmitProposal = () => {
           string={description}
           setString={setDescription}
         />
-        <SelectMessage
-          id="proposal-message"
-          label="proposal message"
-          setMessage={setMessage}
+        <InputMessages
+          id="proposal-messages"
+          label="proposal messages"
+          network={network}
+          messages={messages}
+          setMessages={setMessages}
         />
         <SelectExecution
           id="proposal-execution"
