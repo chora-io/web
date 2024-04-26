@@ -2,6 +2,7 @@ import { MsgMintBatchCredits as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
+import { InputIssuances } from '.'
 import { InputAddress, InputString } from '..'
 
 const MsgMintBatchCredits = ({
@@ -12,7 +13,7 @@ const MsgMintBatchCredits = ({
 }: any) => {
   const [issuer, setIssuer] = useState<string>('')
   const [batchDenom, setBatchDenom] = useState<string>('')
-  const [issuance, setIssuance] = useState<string>('')
+  const [issuance, setIssuance] = useState<any[]>([])
   const [originTxId, setOriginTxId] = useState<string>('')
   const [originTxSource, setOriginTxSource] = useState<string>('')
   const [originTxContract, setOriginTxContract] = useState<string>('')
@@ -22,7 +23,7 @@ const MsgMintBatchCredits = ({
     const msg = {
       issuer: wallet ? wallet.bech32Address : issuer,
       batchDenom: batchDenom,
-      issuance: [], // TODO
+      issuance: issuance,
       originTx: {
         id: originTxId,
         source: originTxSource,
@@ -67,12 +68,11 @@ const MsgMintBatchCredits = ({
         string={batchDenom}
         setString={setBatchDenom}
       />
-      <InputString
-        id="msg-mint-batch-credits-issuance"
+      <InputIssuances
+        id="msg-create-batch-issuance"
         label="issuance"
-        placeholder="[ not implemented ]"
-        string={issuance}
-        setString={setIssuance}
+        issuances={issuance}
+        setIssuances={setIssuance}
       />
       <InputString
         id="msg-mint-batch-credits-origin-tx-id"

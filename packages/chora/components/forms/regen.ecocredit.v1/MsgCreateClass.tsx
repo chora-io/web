@@ -56,7 +56,6 @@ const MsgCreateClass = ({ network, setMessage, useWallet, wallet }: any) => {
         iri={metadata}
         setIri={setMetadata}
       />
-      <p style={{ marginBottom: '1.5em' }}>{'issuers'}</p>
       <InputIssuers
         id="msg-create-class-issuers"
         label="issuers"

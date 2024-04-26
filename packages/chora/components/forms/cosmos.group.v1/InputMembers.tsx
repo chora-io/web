@@ -51,6 +51,7 @@ const InputMembers = ({
 
   return (
     <>
+      {members.length === 0 && <label>{'members'}</label>}
       {members.map((member: any, index: number) => (
         <InputMember
           key={index}

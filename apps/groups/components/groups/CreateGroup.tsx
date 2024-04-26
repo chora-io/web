@@ -182,7 +182,6 @@ const CreateGroup = () => {
           string={description}
           setString={setDescription}
         />
-        {members && members.length === 0 && <label>{'group members'}</label>}
         <InputMembers
           id="group-members"
           network={network}

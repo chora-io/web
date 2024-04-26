@@ -2,18 +2,19 @@ import { MsgSend as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import { InputAddress, InputString } from '..'
+import { InputAddress } from '..'
+import { InputSendCredits } from '.'
 
 const MsgSend = ({ network, setMessage, useWallet, wallet }: any) => {
   const [sender, setSender] = useState<string>('')
   const [recipient, setRecipient] = useState<string>('')
-  const [credits, setCredits] = useState<string>('')
+  const [credits, setCredits] = useState<any[]>([])
 
   useEffect(() => {
     const msg = {
       sender: wallet ? wallet.bech32Address : sender,
       recipient: recipient,
-      credits: [], // TODO
+      credits: credits,
     } as unknown as Msg
 
     const msgAny = {
@@ -43,12 +44,11 @@ const MsgSend = ({ network, setMessage, useWallet, wallet }: any) => {
         address={recipient}
         setAddress={setRecipient}
       />
-      <InputString
+      <InputSendCredits
         id="msg-send-credits"
         label="credits"
-        placeholder="[ not implemented ]"
-        string={credits}
-        setString={setCredits}
+        credits={credits}
+        setCredits={setCredits}
       />
     </>
   )

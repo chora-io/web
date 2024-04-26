@@ -37,6 +37,7 @@ const InputIssuers = ({ id, network, issuers, setIssuers }: any) => {
 
   return (
     <>
+      {issuers.length === 0 && <label>{'issuers'}</label>}
       {issuers.map((issuer: any, index: number) => (
         <InputIssuer
           key={index}

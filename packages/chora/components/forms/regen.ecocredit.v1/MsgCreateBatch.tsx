@@ -2,12 +2,13 @@ import { MsgCreateBatch as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
+import { InputIssuances } from '.'
 import { InputAddress, InputIRI, InputString, InputTimestamp } from '..'
 
 const MsgCreateBatch = ({ network, setMessage, useWallet, wallet }: any) => {
   const [issuer, setIssuer] = useState<string>('')
   const [projectId, setProjectId] = useState<string>('')
-  const [issuance, setIssuance] = useState<string>('')
+  const [issuance, setIssuance] = useState<any[]>([])
   const [metadata, setMetadata] = useState<string>('')
   const [startDate, setStartDate] = useState<string>('')
   const [endDate, setEndDate] = useState<string>('')
@@ -16,7 +17,7 @@ const MsgCreateBatch = ({ network, setMessage, useWallet, wallet }: any) => {
     const msg = {
       issuer: wallet ? wallet.bech32Address : issuer,
       projectId: projectId,
-      issuance: [], // TODO
+      issuance: issuance,
       metadata: metadata,
       startDate: new Date(startDate),
       endDate: new Date(endDate),
@@ -56,12 +57,11 @@ const MsgCreateBatch = ({ network, setMessage, useWallet, wallet }: any) => {
         iri={metadata}
         setIri={setMetadata}
       />
-      <InputString
+      <InputIssuances
         id="msg-create-batch-issuance"
         label="issuance"
-        placeholder="[ not implemented ]"
-        string={issuance}
-        setString={setIssuance}
+        issuances={issuance}
+        setIssuances={setIssuance}
       />
       <InputTimestamp
         id="msg-create-batch-start-date"

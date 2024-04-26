@@ -2,20 +2,21 @@ import { MsgBridge as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
+import { InputCredits } from '.'
 import { InputAddress, InputString } from '..'
 
 const MsgBridge = ({ network, setMessage, useWallet, wallet }: any) => {
   const [owner, setOwner] = useState<string>('')
   const [target, setTarget] = useState<string>('')
   const [recipient, setRecipient] = useState<string>('')
-  const [credits, setCredits] = useState<string>('')
+  const [credits, setCredits] = useState<any[]>([])
 
   useEffect(() => {
     const msg = {
       owner: wallet ? wallet.bech32Address : owner,
       target: target,
       recipient: recipient,
-      credits: [], // TODO
+      credits: credits,
     } as unknown as Msg
 
     const msgAny = {
@@ -52,12 +53,11 @@ const MsgBridge = ({ network, setMessage, useWallet, wallet }: any) => {
         address={recipient}
         setAddress={setRecipient}
       />
-      <InputString
+      <InputCredits
         id="msg-bridge-credits"
         label="credits"
-        placeholder="[ not implemented ]"
-        string={credits}
-        setString={setCredits}
+        credits={credits}
+        setCredits={setCredits}
       />
     </>
   )

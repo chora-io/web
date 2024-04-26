@@ -2,17 +2,18 @@ import { MsgCancel as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import { InputAddress, InputIRI, InputString } from '..'
+import { InputCredits } from '.'
+import { InputAddress, InputIRI } from '..'
 
 const MsgCancel = ({ network, setMessage, useWallet, wallet }: any) => {
   const [owner, setOwner] = useState<string>('')
-  const [credits, setCredits] = useState<string>('')
+  const [credits, setCredits] = useState<any[]>([])
   const [reason, setReason] = useState<string>('')
 
   useEffect(() => {
     const msg = {
       owner: wallet ? wallet.bech32Address : owner,
-      credits: [], // TODO
+      credits: credits,
       reason: reason,
     } as unknown as Msg
 
@@ -36,12 +37,11 @@ const MsgCancel = ({ network, setMessage, useWallet, wallet }: any) => {
           setAddress={setOwner}
         />
       )}
-      <InputString
+      <InputCredits
         id="msg-cancel-credits"
         label="credits"
-        placeholder="[ not implemented ]"
-        string={credits}
-        setString={setCredits}
+        credits={credits}
+        setCredits={setCredits}
       />
       <InputIRI
         id="msg-cancel-reason"
