@@ -6,10 +6,14 @@ import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
 import { useContext, useState } from 'react'
 
+import { usePermissions } from '@hooks/usePermissions'
+
 import styles from './CreateClass.module.css'
 
 const CreateClass = () => {
   const { chainInfo, network, wallet } = useContext(WalletContext)
+
+  const [isAuthz] = usePermissions(wallet, '/regen.ecocredit.v1.MsgCreateClass')
 
   const [message, setMessage] = useState<any>(null)
   const [error, setError] = useState<string | null>(null)
@@ -32,6 +36,16 @@ const CreateClass = () => {
 
   return (
     <div id="msg-create-class" className={styles.box}>
+      <div className={styles.boxOptions}>
+        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
+          <b>{'?'}</b>
+          <span style={{ marginLeft: '0.5em' }}>{'class creator'}</span>
+        </span>
+        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
+          <b>{isAuthz ? '✓' : 'x'}</b>
+          <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
+        </span>
+      </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <MsgInputs
           network={network}

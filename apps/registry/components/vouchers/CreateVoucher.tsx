@@ -13,6 +13,8 @@ import { signAndBroadcast } from 'chora/utils'
 import * as jsonld from 'jsonld'
 import { useContext, useEffect, useState } from 'react'
 
+import { usePermissions } from '@hooks/usePermissions'
+
 import styles from './CreateVoucher.module.css'
 
 const contextUrl = 'https://schema.chora.io/contexts/voucher.jsonld'
@@ -21,6 +23,11 @@ const CreateVoucher = () => {
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
+
+  const [isAuthz] = usePermissions(
+    wallet,
+    '/regen.ecocredit.v1.MsgCreateProject',
+  )
 
   const [context, setContext] = useState<string>('')
   const [example, setExample] = useState<string>('')
@@ -188,6 +195,16 @@ const CreateVoucher = () => {
 
   return (
     <div id="msg-create-voucher" className={styles.box}>
+      <div className={styles.boxOptions}>
+        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
+          <b>{'✓'}</b>
+          <span style={{ marginLeft: '0.5em' }}>{'new issuer'}</span>
+        </span>
+        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
+          <b>{isAuthz ? '✓' : 'x'}</b>
+          <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
+        </span>
+      </div>
       <div className={styles.boxOptions}>
         <button
           className={

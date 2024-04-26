@@ -8,7 +8,7 @@ import * as Long from 'long'
 import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
 
-import { useMemberPermissions } from '@hooks/useMemberPermissions'
+import { usePermissionsMember } from '@hooks/usePermissionsMember'
 
 import styles from './LeaveGroup.module.css'
 
@@ -16,7 +16,7 @@ const LeaveGroup = () => {
   const { groupId } = useParams()
   const { chainInfo, wallet } = useContext(WalletContext)
 
-  const [isMember, isAuthz] = useMemberPermissions(
+  const [isMember, isAuthz] = usePermissionsMember(
     wallet,
     '/cosmos.group.v1.MsgLeaveGroup',
   )

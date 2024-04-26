@@ -10,7 +10,7 @@ import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
 
 import { GroupContext } from '@contexts/GroupContext'
-import { useAdminPermissions } from '@hooks/useAdminPermissions'
+import { usePermissionsAdmin } from '@hooks/usePermissionsAdmin'
 
 import styles from './UpdateGroupAdmin.module.css'
 
@@ -19,7 +19,7 @@ const UpdateGroupAdmin = () => {
   const { group } = useContext(GroupContext)
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
-  const [isAdmin, isPolicy, isAuthz] = useAdminPermissions(
+  const [isAdmin, isPolicy, isAuthz] = usePermissionsAdmin(
     wallet,
     '/cosmos.group.v1.MsgUpdateGroupAdmin',
   )

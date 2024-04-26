@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react'
 import { GroupContext } from '@contexts/GroupContext'
 
 // determine group member and member authorized
-export const useMemberPermissions = (wallet: any, msgType: string) => {
+export const usePermissionsMember = (wallet: any, msgType: string) => {
   const { authzGrantee } = useContext(AccountContext) // TODO: error
   const { members } = useContext(GroupContext) // TODO: errors
 

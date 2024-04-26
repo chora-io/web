@@ -22,6 +22,8 @@ import { Buffer } from 'buffer'
 import * as jsonld from 'jsonld'
 import { useContext, useEffect, useState } from 'react'
 
+import { usePermissions } from '@hooks/usePermissions'
+
 import styles from './CreateClaim.module.css'
 
 const contextUrl = 'https://schema.chora.io/contexts/index.jsonld'
@@ -31,6 +33,8 @@ const CreateClaim = () => {
   const { chainInfo, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
+
+  const [isAuthz] = usePermissions(wallet, '/regen.data.v1.MsgAttest')
 
   // input option
   const [input, setInput] = useState<string>('custom-json')
@@ -277,6 +281,16 @@ const CreateClaim = () => {
 
   return (
     <div className={styles.box}>
+      <div className={styles.boxOptions}>
+        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
+          <b>{'✓'}</b>
+          <span style={{ marginLeft: '0.5em' }}>{'new attestor'}</span>
+        </span>
+        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
+          <b>{isAuthz ? '✓' : 'x'}</b>
+          <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
+        </span>
+      </div>
       <div className={styles.boxOptions}>
         <button
           className={

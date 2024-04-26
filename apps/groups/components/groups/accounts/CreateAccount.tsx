@@ -12,7 +12,7 @@ import * as Long from 'long'
 import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
 
-import { useAdminPermissions } from '@hooks/useAdminPermissions'
+import { usePermissionsAdmin } from '@hooks/usePermissionsAdmin'
 
 import styles from './CreateAccount.module.css'
 
@@ -22,7 +22,7 @@ const CreateAccount = () => {
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
-  const [isAdmin, isPolicy, isAuthz] = useAdminPermissions(
+  const [isAdmin, isPolicy, isAuthz] = usePermissionsAdmin(
     wallet,
     '/cosmos.group.v1.MsgCreateGroupPolicy',
   )

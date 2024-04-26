@@ -16,7 +16,7 @@ import * as jsonld from 'jsonld'
 import { useContext, useState } from 'react'
 
 import { GroupContext } from '@contexts/GroupContext'
-import { useMemberPermissions } from '@hooks/useMemberPermissions'
+import { usePermissionsMember } from '@hooks/usePermissionsMember'
 import { useGroupPoliciesWithMetadata } from '@hooks/useGroupPoliciesWithMetadata'
 
 import styles from './SubmitProposal.module.css'
@@ -27,7 +27,7 @@ const SubmitProposal = () => {
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
-  const [isMember, isAuthz] = useMemberPermissions(
+  const [isMember, isAuthz] = usePermissionsMember(
     wallet,
     '/cosmos.group.v1.MsgSubmitProposal',
   )

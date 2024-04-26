@@ -15,7 +15,7 @@ import * as Long from 'long'
 import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
 
-import { useMemberPermissions } from '@hooks/useMemberPermissions'
+import { usePermissionsMember } from '@hooks/usePermissionsMember'
 
 import styles from './VoteOnProposal.module.css'
 
@@ -25,7 +25,7 @@ const VoteOnProposal = () => {
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
-  const [isMember, isAuthz] = useMemberPermissions(
+  const [isMember, isAuthz] = usePermissionsMember(
     wallet,
     '/cosmos.group.v1.MsgVote',
   )
