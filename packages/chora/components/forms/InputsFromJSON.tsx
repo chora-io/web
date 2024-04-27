@@ -15,11 +15,14 @@ const InputsFromJSON = ({ example, json, setJson }: any) => {
       // whether input should be hidden
       const hidden = k === '@context'
 
+      // whether input is a number (for label)
+      const isNumber = typeof Number(k) === 'number'
+
       // push non-object value to inputs
       if (typeof v !== 'object') {
         inputs.push({
           id: k,
-          label: k,
+          label: isNumber ? Number(k) + 1 : k,
           placeholder: v,
           hidden: hidden,
           value: hidden ? parsedExample[k] : parsedJson[k],

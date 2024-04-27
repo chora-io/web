@@ -1,15 +1,9 @@
 import * as React from 'react'
 
-const defaultId = 'credit class'
-const defaultLabel = 'credit class'
+const defaultId = 'project'
+const defaultLabel = 'project'
 
-const SelectCreditClass = ({
-  id,
-  label,
-  options,
-  selected,
-  setSelected,
-}: any) => (
+const SelectProject = ({ id, label, options, selected, setSelected }: any) => (
   <label htmlFor={id ? id : defaultId}>
     {label ? label : defaultLabel}
     <select
@@ -27,4 +21,4 @@ const SelectCreditClass = ({
   </label>
 )
 
-export default SelectCreditClass
+export default SelectProject
