@@ -1,3 +1,4 @@
+import { Breadcrumb } from 'chora/components'
 import { Metadata } from 'next'
 
 import CreateGroup from '@components/groups/CreateGroup'
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 const CreatePage = () => (
   <div className={styles.page}>
     <div>
+      <Breadcrumb text="← groups" />
       <h1>{'create group'}</h1>
       <CreateGroup />
     </div>

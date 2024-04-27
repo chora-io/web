@@ -1,3 +1,4 @@
+import { Breadcrumb } from 'chora/components'
 import { Metadata } from 'next'
 
 import Class from '@components/groups/classes/Class'
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 const ClassPage = () => (
   <div className={styles.page}>
     <div>
+      <Breadcrumb text="← classes" />
       <h1>{'group credit class'}</h1>
       <Class />
       <h1>{'class issuers'}</h1>

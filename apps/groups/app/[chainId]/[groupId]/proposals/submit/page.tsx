@@ -1,3 +1,4 @@
+import { Breadcrumb } from 'chora/components'
 import { Metadata } from 'next'
 
 import SubmitProposal from '@components/groups/proposals/SubmitProposal'
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 const SubmitPage = () => (
   <div className={styles.page}>
     <div>
+      <Breadcrumb text="← proposals" />
       <h1>{'submit proposal'}</h1>
       <SubmitProposal />
     </div>

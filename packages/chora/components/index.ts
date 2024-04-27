@@ -1,4 +1,5 @@
 export { default as Background } from './Background'
+export { default as Breadcrumb } from './Breadcrumb'
 export { default as ConnectWallet } from './ConnectWallet'
 export { default as Faucet } from './Faucet'
 export { default as Footer } from './Footer'

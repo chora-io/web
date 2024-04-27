@@ -1,3 +1,4 @@
+import { Breadcrumb } from 'chora/components'
 import { Metadata } from 'next'
 
 import Balances from '@components/groups/vouchers/Balances'
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 const VoucherPage = () => (
   <div className={styles.page}>
     <div>
+      <Breadcrumb text="← vouchers" />
       <h1>{'voucher'}</h1>
       <Voucher />
       <h1>{'balances'}</h1>

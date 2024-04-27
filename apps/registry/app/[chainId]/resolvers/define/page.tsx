@@ -1,3 +1,4 @@
+import { Breadcrumb } from 'chora/components'
 import { Metadata } from 'next'
 
 import DefineResolver from '@components/resolvers/DefineResolver'
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 const DefinePage = () => (
   <div className={styles.page}>
     <div>
+      <Breadcrumb text="← resolvers" />
       <h1>{'define resolver'}</h1>
       <DefineResolver />
     </div>

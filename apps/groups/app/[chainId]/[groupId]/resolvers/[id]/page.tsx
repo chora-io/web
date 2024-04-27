@@ -1,3 +1,4 @@
+import { Breadcrumb } from 'chora/components'
 import { Metadata } from 'next'
 
 import Resolver from '@components/groups/resolvers/Resolver'
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 const ResolverPage = () => (
   <div className={styles.page}>
     <div>
+      <Breadcrumb text="← resolvers" />
       <h1>{'group data resolver'}</h1>
       <Resolver />
     </div>

@@ -1,3 +1,4 @@
+import { Breadcrumb } from 'chora/components'
 import { Metadata } from 'next'
 
 import Anchor from '@components/groups/claims/Anchor'
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 const ClaimPage = () => (
   <div className={styles.page}>
     <div>
+      <Breadcrumb text="← claims" />
       <h1>{'data anchor'}</h1>
       <Anchor />
       <h1>{'data resolved'}</h1>

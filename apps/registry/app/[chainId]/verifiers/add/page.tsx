@@ -1,3 +1,4 @@
+import { Breadcrumb } from 'chora/components'
 import { Metadata } from 'next'
 
 import AddVerifier from '@components/verifiers/AddVerifier'
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 const AddPage = () => (
   <div className={styles.page}>
     <div>
+      <Breadcrumb text="← verifiers" />
       <h1>{'add verifier'}</h1>
       <AddVerifier />
     </div>

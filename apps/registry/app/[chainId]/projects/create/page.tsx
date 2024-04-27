@@ -1,3 +1,4 @@
+import { Breadcrumb } from 'chora/components'
 import { Metadata } from 'next'
 
 import CreateProject from '@components/projects/CreateProject'
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 const CreatePage = () => (
   <div className={styles.page}>
     <div>
+      <Breadcrumb text="← projects" />
       <h1>{'create class project'}</h1>
       <CreateProject />
     </div>

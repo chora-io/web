@@ -1,3 +1,4 @@
+import { Breadcrumb } from 'chora/components'
 import { Metadata } from 'next'
 
 import UpdateAccountAdmin from '@components/groups/accounts/UpdateAccountAdmin'
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 const UpdatePage = () => (
   <div className={styles.page}>
     <div>
+      <Breadcrumb text="← account" />
       <h1>{'update admin'}</h1>
       <UpdateAccountAdmin />
       <h1>{'update metadata'}</h1>

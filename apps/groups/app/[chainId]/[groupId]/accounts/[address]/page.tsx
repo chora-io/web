@@ -1,3 +1,4 @@
+import { Breadcrumb } from 'chora/components'
 import { Metadata } from 'next'
 
 import Authz from '@components/Authz'
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 const AccountPage = () => (
   <div className={styles.page}>
     <div>
+      <Breadcrumb text="← accounts" />
       <h1>{'group account'}</h1>
       <AccountNav />
       <Account />

@@ -1,3 +1,4 @@
+import { Breadcrumb } from 'chora/components'
 import { Metadata } from 'next'
 
 import CreateClaim from '@components/claims/CreateClaim'
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 const CreatePage = () => (
   <div className={styles.page}>
     <div>
+      <Breadcrumb text="← claims" />
       <h1>{'create data claim'}</h1>
       <CreateClaim />
     </div>

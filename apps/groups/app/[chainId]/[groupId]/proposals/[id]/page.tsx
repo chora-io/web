@@ -1,3 +1,4 @@
+import { Breadcrumb } from 'chora/components'
 import { Metadata } from 'next'
 
 import Proposal from '@components/groups/proposals/Proposal'
@@ -12,6 +13,7 @@ import styles from './page.module.css'
 const ProposalPage = () => (
   <div className={styles.page}>
     <div>
+      <Breadcrumb text="← proposals" />
       <h1>{'group proposal'}</h1>
       <Proposal />
       <h1>{'group proposal votes'}</h1>

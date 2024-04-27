@@ -1,3 +1,4 @@
+import { Breadcrumb } from 'chora/components'
 import { Metadata } from 'next'
 
 import AddSubject from '@components/subjects/AddSubject'
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 const AddPage = () => (
   <div className={styles.page}>
     <div>
+      <Breadcrumb text="← subjects" />
       <h1>{'add subject'}</h1>
       <AddSubject />
     </div>

@@ -1,3 +1,4 @@
+import { Breadcrumb } from 'chora/components'
 import { Metadata } from 'next'
 
 import AddMonitor from '@components/monitors/AddMonitor'
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 const AddPage = () => (
   <div className={styles.page}>
     <div>
+      <Breadcrumb text="← monitors" />
       <h1>{'add monitor'}</h1>
       <AddMonitor />
     </div>
