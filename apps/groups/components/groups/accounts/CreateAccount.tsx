@@ -1,13 +1,17 @@
 'use client'
 
+import { MsgCreateGroupPolicy } from 'cosmos/api/cosmos/group/v1/tx'
 import { ResultTx } from 'chora/components'
-import { InputString, SelectDataStorage } from 'chora/components/forms'
+import {
+  InputJSON,
+  InputsFromJSON,
+  SelectOption,
+  SelectStorage,
+} from 'chora/components/forms'
 import { InputPolicy } from 'chora/components/forms/cosmos.group.v1'
 import { WalletContext } from 'chora/contexts'
-import { useNetworkServer } from 'chora/hooks'
-import { signAndBroadcast } from 'chora/utils'
-import { MsgCreateGroupPolicy } from 'cosmos/api/cosmos/group/v1/tx'
-import * as jsonld from 'jsonld'
+import { useNetworkServer, useSchema } from 'chora/hooks'
+import { postToServer, signAndBroadcast } from 'chora/utils'
 import * as Long from 'long'
 import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
@@ -16,20 +20,27 @@ import { usePermissionsAdmin } from '@hooks/usePermissionsAdmin'
 
 import styles from './CreateAccount.module.css'
 
+const contextUrl = 'https://schema.chora.io/contexts/group_policy.jsonld'
+
 const CreateAccount = () => {
   const { groupId } = useParams()
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
+  const [context, example, template] = useSchema(contextUrl)
 
   const [isAdmin, isPolicy, isAuthz] = usePermissionsAdmin(
     wallet,
     '/cosmos.group.v1.MsgCreateGroupPolicy',
   )
 
-  // form inputs
-  const [name, setName] = useState<string>('')
-  const [description, setDescription] = useState<string>('')
+  // input option
+  const [input, setInput] = useState('schema-form')
+
+  // metadata input
+  const [json, setJson] = useState<string>('')
+
+  // message inputs
   const [policy, setPolicy] = useState<any>(undefined)
 
   // data storage
@@ -47,76 +58,29 @@ const CreateAccount = () => {
 
     let metadata: string = ''
 
+    // try to parse JSON
+    let parsed: any
+    try {
+      parsed = JSON.parse(json)
+    } catch (err) {
+      setError('invalid json')
+    }
+
     // handle data storage json
     if (dataStorage === 'json') {
-      metadata = JSON.stringify({
-        name: name,
-        description: description,
-      })
+      delete parsed['@context']
+      metadata = parsed
     }
 
     // handle data storage iri
-    if (dataStorage === 'server') {
-      // set JSON-LD document
-      const doc = {
-        '@context': 'https://schema.chora.io/contexts/group_policy.jsonld',
-        name: name,
-        description: description,
-      }
-
-      // check and normalize JSON-LD document
-      const normalized = await jsonld
-        .normalize(doc, {
-          algorithm: 'URDNA2015',
-          format: 'application/n-quads',
+    if (dataStorage === 'server' && serverUrl) {
+      await postToServer(parsed, network, serverUrl)
+        .then((res) => {
+          metadata = res
         })
         .catch((err) => {
-          setError(err.message)
-          return
+          setError(err)
         })
-
-      // return error if empty
-      if (normalized == '') {
-        setError('JSON-LD empty after normalized')
-        return
-      }
-
-      // set post request body
-      const body = {
-        canon: 'URDNA2015',
-        context: 'https://schema.chora.io/contexts/group_policy.jsonld',
-        digest: 'BLAKE2B_256',
-        jsonld: JSON.stringify(doc),
-        merkle: 'UNSPECIFIED',
-      }
-
-      let iri: string | undefined
-
-      // post data to network server
-      await fetch(serverUrl + '/data', {
-        method: 'POST',
-        body: JSON.stringify(body),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.code) {
-            setError(data.message)
-          } else {
-            iri = network.includes('chora')
-              ? data['iri']
-              : network.split('-')[0] + ':' + data['iri'].split(':')[1]
-          }
-        })
-        .catch((err) => {
-          setError(err.message)
-        })
-
-      // return error if iri never set
-      if (typeof iri === 'undefined') {
-        return
-      }
-
-      metadata = iri
     }
 
     // set message
@@ -165,27 +129,35 @@ const CreateAccount = () => {
         </span>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <InputString
-          id="account-name"
-          label="account name"
-          placeholder="New Account"
-          string={name}
-          setString={setName}
+        <SelectOption
+          id="metadata"
+          label="metadata"
+          options={[
+            { id: 'schema-form', label: 'schema form' },
+            { id: 'custom-json', label: 'custom json' },
+          ]}
+          setSelected={setInput}
         />
-        <InputString
-          id="account-description"
-          label="account description"
-          placeholder="A group account for group administration."
-          string={description}
-          setString={setDescription}
-        />
+        {input === 'schema-form' && (
+          <InputsFromJSON example={example} json={json} setJson={setJson} />
+        )}
+        {input === 'custom-json' && (
+          <InputJSON
+            json={json}
+            placeholder={example}
+            setJson={setJson}
+            useTemplate={() => setJson(template)}
+            showUseTemplate={context.length > 0}
+          />
+        )}
+        <hr />
         <InputPolicy
           id="account-decision-policy"
           label="account decision policy"
           setPolicy={setPolicy}
         />
         <hr />
-        <SelectDataStorage
+        <SelectStorage
           network={network}
           dataStorage={dataStorage}
           setDataStorage={setDataStorage}

@@ -6,7 +6,7 @@ import {
   InputJSON,
   InputsFromJSON,
   InputTimestamp,
-  SelectDataStorage,
+  SelectStorage,
 } from 'chora/components/forms'
 import {
   InputIssuances,
@@ -215,7 +215,7 @@ const CreateBatch = () => {
     <div id="msg-create-batch" className={styles.box}>
       <div className={styles.boxOptions}>
         <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{!projectId || isLoading? '?' : isIssuer ? '✓' : 'x'}</b>
+          <b>{!projectId || isLoading ? '?' : isIssuer ? '✓' : 'x'}</b>
           <span style={{ marginLeft: '0.5em' }}>{'class issuer'}</span>
         </span>
         <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
@@ -280,7 +280,7 @@ const CreateBatch = () => {
           setTimestamp={setEndDate}
         />
         <hr />
-        <SelectDataStorage
+        <SelectStorage
           network={network}
           dataStorage={dataStorage}
           setDataStorage={setDataStorage}

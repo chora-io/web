@@ -1,9 +1,9 @@
 import * as React from 'react'
 
-const defaultId = 'data-storage'
-const defaultLabel = 'data storage'
+const defaultId = 'metadata-storage'
+const defaultLabel = 'metadata storage'
 
-const SelectDataStorage = ({
+const SelectStorage = ({
   id,
   label,
   network,
@@ -19,14 +19,14 @@ const SelectDataStorage = ({
     >
       <option value={'json'}>
         {
-          'none (convert metadata to json and use json string for the metadata field)'
+          'none (ignore json-ld context and use raw json string for the metadata field)'
         }
       </option>
       <option value={'server'}>
-        {`server (post metadata to chora server and use ${network ? network.split('-')[0] + ' iri' : 'network iri'} for the metadata field)`}
+        {`server (store json-ld on chora server and use ${network ? network.split('-')[0] + ' iri' : 'network iri'} for the metadata field)`}
       </option>
     </select>
   </label>
 )
 
-export default SelectDataStorage
+export default SelectStorage

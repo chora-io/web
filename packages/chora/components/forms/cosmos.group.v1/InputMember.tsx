@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import { InputAddress, InputIRI, InputNumber } from '..'
+import { InputAddress, InputString, InputNumber } from '..'
 
 const defaultId = 'member'
 const defaultLabel = 'member'
@@ -31,11 +31,12 @@ const InputMember = ({ id, label, network, member, setMember }: any) => {
         address={address}
         setAddress={setAddress}
       />
-      <InputIRI
+      <InputString
         id={(id || defaultId) + '-metadata'}
         label={(label || defaultLabel) + ' metadata'}
-        iri={metadata}
-        setIri={setMetadata}
+        placeholder={'{"name":"Alice"}'}
+        string={metadata}
+        setString={setMetadata}
       />
       <InputNumber
         id={(id || defaultId) + '-weight'}

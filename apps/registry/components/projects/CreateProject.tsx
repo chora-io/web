@@ -6,7 +6,7 @@ import {
   InputJSON,
   InputsFromJSON,
   InputString,
-  SelectDataStorage,
+  SelectStorage,
 } from 'chora/components/forms'
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
@@ -210,7 +210,7 @@ const CreateProject = () => {
     <div id="msg-create-project" className={styles.box}>
       <div className={styles.boxOptions}>
         <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{!classId || isLoading? '?' : isIssuer ? '✓' : 'x'}</b>
+          <b>{!classId || isLoading ? '?' : isIssuer ? '✓' : 'x'}</b>
           <span style={{ marginLeft: '0.5em' }}>{'class issuer'}</span>
         </span>
         <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
@@ -272,7 +272,7 @@ const CreateProject = () => {
           setString={setReferenceId}
         />
         <hr />
-        <SelectDataStorage
+        <SelectStorage
           network={network}
           dataStorage={dataStorage}
           setDataStorage={setDataStorage}

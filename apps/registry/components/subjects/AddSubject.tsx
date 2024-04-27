@@ -5,7 +5,7 @@ import { ResultTx } from 'chora/components'
 import {
   InputJSON,
   InputsFromJSON,
-  SelectDataStorage,
+  SelectStorage,
 } from 'chora/components/forms'
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
@@ -238,7 +238,7 @@ const AddSubject = () => {
           />
         )}
         <hr />
-        <SelectDataStorage
+        <SelectStorage
           network={network}
           dataStorage={dataStorage}
           setDataStorage={setDataStorage}

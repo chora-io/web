@@ -6,7 +6,7 @@ import {
   InputJSON,
   InputsFromJSON,
   InputString,
-  SelectDataStorage,
+  SelectStorage,
 } from 'chora/components/forms'
 import {
   InputIssuers,
@@ -279,7 +279,7 @@ const CreateClass = () => {
           string={classFee?.amount || ''}
         />
         <hr />
-        <SelectDataStorage
+        <SelectStorage
           network={network}
           dataStorage={dataStorage}
           setDataStorage={setDataStorage}
