@@ -6,6 +6,7 @@ import {
   InputJSON,
   InputsFromJSON,
   InputString,
+  SelectOption,
   SelectStorage,
 } from 'chora/components/forms'
 import {
@@ -13,11 +14,10 @@ import {
   SelectCreditType,
 } from 'chora/components/forms/regen.ecocredit.v1'
 import { WalletContext } from 'chora/contexts'
-import { useNetworkServer } from 'chora/hooks'
+import { useNetworkServer, useSchema } from 'chora/hooks'
 import { useClassFee, useCreditTypes } from 'chora/hooks'
-import { signAndBroadcast } from 'chora/utils'
-import * as jsonld from 'jsonld'
-import { useContext, useEffect, useState } from 'react'
+import { postToServer, signAndBroadcast } from 'chora/utils'
+import { useContext, useState } from 'react'
 
 import { usePermissionsClass } from '@hooks/usePermissionsClass'
 
@@ -30,6 +30,8 @@ const CreateClass = () => {
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
+  const [context, example, template] = useSchema(contextUrl)
+
   const [classFee] = useClassFee(chainInfo) // TODO: error
   const [creditTypes] = useCreditTypes(chainInfo) // TODO: error
 
@@ -37,10 +39,6 @@ const CreateClass = () => {
     wallet,
     '/regen.ecocredit.v1.MsgCreateClass',
   )
-
-  const [context, setContext] = useState<string>('')
-  const [example, setExample] = useState<string>('')
-  const [template, setTemplate] = useState<string>('')
 
   // input option
   const [input, setInput] = useState<string>('schema-form')
@@ -57,55 +55,6 @@ const CreateClass = () => {
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<any>(null)
 
-  useEffect(() => {
-    // fetch schema context
-    fetch(contextUrl)
-      .then((res) => res.json())
-      .then((data) => {
-        setContext(JSON.stringify(data, null, '  '))
-      })
-      .catch((err) => {
-        setContext(err.message)
-      })
-
-    // fetch schema example
-    fetch(contextUrl.replace('contexts', 'examples'))
-      .then((res) => res.json())
-      .then((data) => {
-        setExample(JSON.stringify(data, null, '  '))
-      })
-      .catch((err) => {
-        setExample(err.message)
-      })
-
-    // fetch schema template
-    fetch(contextUrl.replace('contexts', 'templates'))
-      .then((res) => res.json())
-      .then((data) => {
-        setTemplate(JSON.stringify(data, null, '  '))
-      })
-      .catch((err) => {
-        setTemplate(err.message)
-      })
-  }, [])
-
-  const handleGenJson = (event: any) => {
-    event.preventDefault()
-
-    setJson(template)
-    setError(null)
-  }
-
-  const handleSetInput = (input: string) => {
-    setInput(input)
-    setError(null)
-  }
-
-  const handleSetJson = (value: any) => {
-    setJson(value)
-    setError(null)
-  }
-
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
 
@@ -114,75 +63,29 @@ const CreateClass = () => {
 
     let metadata: string = ''
 
+    // try to parse JSON
+    let parsed: any
+    try {
+      parsed = JSON.parse(json)
+    } catch (err) {
+      setError('invalid json')
+    }
+
     // handle data storage json
     if (dataStorage === 'json') {
-      metadata = json
+      delete parsed['@context']
+      metadata = parsed
     }
 
     // handle data storage iri
-    if (dataStorage === 'server') {
-      // check and parse JSON
-      let doc: any
-      try {
-        doc = JSON.parse(json)
-      } catch (err) {
-        setError('invalid json')
-        return
-      }
-
-      // check and normalize JSON-LD document
-      const normalized = await jsonld
-        .normalize(doc, {
-          algorithm: 'URDNA2015',
-          format: 'application/n-quads',
+    if (dataStorage === 'server' && serverUrl) {
+      await postToServer(parsed, network, serverUrl)
+        .then((res) => {
+          metadata = res
         })
         .catch((err) => {
-          setError(err.message)
-          return
+          setError(err)
         })
-
-      // return error if empty
-      if (normalized == '') {
-        setError('JSON-LD empty after normalized')
-        return
-      }
-
-      // set post request body
-      const body = {
-        canon: 'URDNA2015',
-        context: 'https://schema.chora.io/contexts/voucher.jsonld',
-        digest: 'BLAKE2B_256',
-        jsonld: json,
-        merkle: 'UNSPECIFIED',
-      }
-
-      let iri: string | undefined
-
-      // post data to network server
-      await fetch(serverUrl + '/data', {
-        method: 'POST',
-        body: JSON.stringify(body),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.code) {
-            setError(data.message)
-          } else {
-            iri = network.includes('chora')
-              ? data['iri']
-              : network.split('-')[0] + ':' + data['iri'].split(':')[1]
-          }
-        })
-        .catch((err) => {
-          setError(err.message)
-        })
-
-      // return error if iri never set
-      if (typeof iri === 'undefined') {
-        return
-      }
-
-      metadata = iri
     }
 
     const msg = {
@@ -219,24 +122,6 @@ const CreateClass = () => {
           <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
         </span>
       </div>
-      <div className={styles.boxOptions}>
-        <button
-          className={
-            input == 'schema-form' ? styles.boxOptionActive : undefined
-          }
-          onClick={() => handleSetInput('schema-form')}
-        >
-          {'schema form'}
-        </button>
-        <button
-          className={
-            input == 'schema-json' ? styles.boxOptionActive : undefined
-          }
-          onClick={() => handleSetInput('schema-json')}
-        >
-          {'schema json'}
-        </button>
-      </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <SelectCreditType
           id="msg-create-class-credit-type"
@@ -245,25 +130,36 @@ const CreateClass = () => {
           selected={creditTypeAbbrev}
           setSelected={setCreditTypeAbbrev}
         />
+        <hr />
+        <SelectOption
+          id="metadata"
+          label="metadata"
+          options={[
+            { id: 'schema-form', label: 'schema form' },
+            { id: 'custom-json', label: 'custom json' },
+          ]}
+          setSelected={setInput}
+        />
         {input === 'schema-form' && (
           <InputsFromJSON example={example} json={json} setJson={setJson} />
         )}
-        {input === 'schema-json' && (
+        {input === 'custom-json' && (
           <InputJSON
-            label="metadata"
             json={json}
             placeholder={example}
-            setJson={handleSetJson}
-            useTemplate={handleGenJson}
+            setJson={setJson}
+            useTemplate={() => setJson(template)}
             showUseTemplate={context.length > 0}
           />
         )}
+        <hr />
         <InputIssuers
           id="msg-create-class-issuers"
           label="issuers"
           issuers={issuers}
           setIssuers={setIssuers}
         />
+        <hr />
         <InputString
           id="msg-create-class-fee-denom"
           label="fee denom"

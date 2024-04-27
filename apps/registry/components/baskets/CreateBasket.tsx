@@ -3,11 +3,14 @@
 import { MsgCreate as Msg } from 'cosmos/api/regen/ecocredit/basket/v1/tx'
 import { ResultTx } from 'chora/components'
 import { InputString } from 'chora/components/forms'
+import { SelectCreditType } from 'chora/components/forms/regen.ecocredit.v1'
+import { InputCreditClasses } from 'chora/components/forms/regen.ecocredit.basket.v1'
 import { WalletContext } from 'chora/contexts'
-import { useBasketFee } from 'chora/hooks'
+import { useBasketFee, useCreditTypes } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'
 import { useContext, useState } from 'react'
 
+import { useClassesByType } from '@hooks/useClassesByType'
 import { usePermissions } from '@hooks/usePermissions'
 
 import styles from './CreateBasket.module.css'
@@ -16,6 +19,7 @@ const CreateBasket = () => {
   const { chainInfo, wallet } = useContext(WalletContext)
 
   const [basketFee] = useBasketFee(chainInfo) // TODO: error
+  const [creditTypes] = useCreditTypes(chainInfo) // TODO: error
 
   const [isAuthz] = usePermissions(
     wallet,
@@ -25,10 +29,13 @@ const CreateBasket = () => {
   const [name, setName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [creditTypeAbbrev, setCreditTypeAbbrev] = useState<string>('')
-  const [allowedClasses, setAllowedClasses] = useState<string>('')
+  const [allowedClass, setAllowedClass] = useState<string[]>([])
 
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<any>(null)
+
+  // NOTE: must come after credit type form input state is declared
+  const [classes] = useClassesByType(chainInfo, creditTypeAbbrev) // TODO: error
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
@@ -41,7 +48,7 @@ const CreateBasket = () => {
       name: name,
       description: description,
       creditTypeAbbrev: creditTypeAbbrev,
-      allowedClasses: allowedClasses,
+      allowedClasses: allowedClass.map((c: any) => c.id),
       fee: [{ denom: basketFee.denom, amount: basketFee.amount }],
     } as unknown as Msg
 
@@ -86,20 +93,21 @@ const CreateBasket = () => {
           string={description}
           setString={setDescription}
         />
-        <InputString
-          id="msg-create-credit-type-abbrev"
-          label="credit type abbrev"
-          placeholder="C"
-          string={creditTypeAbbrev}
-          setString={setCreditTypeAbbrev}
+        <hr />
+        <SelectCreditType
+          id="msg-create-credit-type"
+          label="credit type"
+          options={creditTypes}
+          selected={creditTypeAbbrev}
+          setSelected={setCreditTypeAbbrev}
         />
-        <InputString
+        <InputCreditClasses
           id="msg-create-allowed-classes"
-          label="allowed classes"
-          placeholder="C03"
-          string={allowedClasses}
-          setString={setAllowedClasses}
+          options={classes ? classes : []}
+          classes={allowedClass}
+          setClasses={setAllowedClass}
         />
+        <hr />
         <InputString
           id="msg-create-basket-fee-denom"
           label="fee denom"

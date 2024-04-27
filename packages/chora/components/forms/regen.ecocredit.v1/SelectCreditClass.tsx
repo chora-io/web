@@ -3,18 +3,11 @@ import * as React from 'react'
 const defaultId = 'credit class'
 const defaultLabel = 'credit class'
 
-const SelectCreditClass = ({
-  id,
-  label,
-  options,
-  selected,
-  setSelected,
-}: any) => (
+const SelectCreditClass = ({ id, label, options, setSelected }: any) => (
   <label htmlFor={id ? id : defaultId}>
     {label ? label : defaultLabel}
     <select
       id={id ? id : defaultId}
-      value={selected}
       onChange={(event) => setSelected(event.target.value)}
     >
       <option value="">{'--- select ---'}</option>

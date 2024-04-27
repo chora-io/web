@@ -13,6 +13,7 @@ import {
   InputsFromJSON,
   InputString,
   SelectContext,
+  SelectOption,
 } from 'chora/components/forms'
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
@@ -37,7 +38,7 @@ const CreateClaim = () => {
   const [isAuthz] = usePermissions(wallet, '/regen.data.v1.MsgAttest')
 
   // input option
-  const [input, setInput] = useState<string>('custom-json')
+  const [input, setInput] = useState<string>('schema-form')
 
   // data schema
   const [context, setContext] = useState<string>('')
@@ -108,11 +109,6 @@ const CreateClaim = () => {
       setExample('')
       setTemplate('')
     }
-  }
-
-  const handleSetInput = (input: string) => {
-    setInput(input)
-    setError(null)
   }
 
   const handleSetJson = (value: any) => {
@@ -291,40 +287,16 @@ const CreateClaim = () => {
           <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
         </span>
       </div>
-      <div className={styles.boxOptions}>
-        <button
-          className={
-            input == 'custom-json' ? styles.boxOptionActive : undefined
-          }
-          onClick={() => handleSetInput('custom-json')}
-        >
-          {'custom json'}
-        </button>
-        <button
-          className={
-            input == 'schema-form' ? styles.boxOptionActive : undefined
-          }
-          onClick={() => handleSetInput('schema-form')}
-        >
-          {'schema form'}
-        </button>
-        <button
-          className={
-            input == 'schema-json' ? styles.boxOptionActive : undefined
-          }
-          onClick={() => handleSetInput('schema-json')}
-        >
-          {'schema json'}
-        </button>
-      </div>
       <form className={styles.form}>
-        {input === 'custom-json' && (
-          <InputJSON
-            json={json}
-            placeholder={example}
-            setJson={handleSetJson}
-          />
-        )}
+        <SelectOption
+          id="jsonld-document"
+          label="input format"
+          options={[
+            { id: 'schema-form', label: 'schema form' },
+            { id: 'custom-json', label: 'custom json' },
+          ]}
+          setSelected={setInput}
+        />
         {input === 'schema-form' && (
           <>
             <SelectContext
@@ -335,7 +307,7 @@ const CreateClaim = () => {
             <InputsFromJSON example={example} json={json} setJson={setJson} />
           </>
         )}
-        {input === 'schema-json' && (
+        {input === 'custom-json' && (
           <>
             <SelectContext
               context={context}
@@ -351,6 +323,7 @@ const CreateClaim = () => {
             />
           </>
         )}
+        <hr />
         <SelectDigestAlgorithm
           digest={''} // disabled until multiple options exist
           setDigest={() => {}} // disabled until multiple options exist
@@ -392,7 +365,6 @@ const CreateClaim = () => {
       <div className={styles.boxText}>
         <Result success={convertSuccess} />
       </div>
-
       <div className={styles.boxText}>
         <ResultTx rest={chainInfo?.rest} success={txSuccess} />
       </div>
