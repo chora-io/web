@@ -1,7 +1,7 @@
 'use client'
 
 import { ResultTx } from 'chora/components'
-import { InputString, SelectMetadataFormat } from 'chora/components/forms'
+import { InputString, SelectDataStorage } from 'chora/components/forms'
 import { InputMembers } from 'chora/components/forms/cosmos.group.v1'
 import { AccountContext, WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
@@ -25,8 +25,8 @@ const CreateGroup = () => {
   const [description, setDescription] = useState<string>('')
   const [members, setMembers] = useState<any[]>([])
 
-  // metadata format
-  const [metadataFormat, setMetadataFormat] = useState<string>('json')
+  // data storage
+  const [dataStorage, setDataStorage] = useState<string>('json')
 
   // error and success
   const [error, setError] = useState<string | null>(null)
@@ -50,16 +50,16 @@ const CreateGroup = () => {
 
     let metadata: string = ''
 
-    // handle metadata format json
-    if (metadataFormat === 'json') {
+    // handle data storage json
+    if (dataStorage === 'json') {
       metadata = JSON.stringify({
         name: name,
         description: description,
       })
     }
 
-    // handle metadata format iri
-    if (metadataFormat === 'iri') {
+    // handle data storage iri
+    if (dataStorage === 'server') {
       // set JSON-LD document
       const doc = {
         '@context': 'https://schema.chora.io/contexts/group.jsonld',
@@ -184,10 +184,10 @@ const CreateGroup = () => {
           setMembers={setMembers}
         />
         <hr />
-        <SelectMetadataFormat
+        <SelectDataStorage
           network={network}
-          metadataFormat={metadataFormat}
-          setMetadataFormat={setMetadataFormat}
+          dataStorage={dataStorage}
+          setDataStorage={setDataStorage}
         />
         <button type="submit">{'submit'}</button>
       </form>

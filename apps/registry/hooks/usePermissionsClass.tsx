@@ -16,6 +16,9 @@ export const usePermissionsClass = (wallet: any, msgType: string) => {
   // account authorized
   const [isAuthz, setIsAuthz] = useState<boolean>(false)
 
+  // loading permissions
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+
   const error = allowlistError || creatorsError
 
   // TODO: handle error
@@ -26,9 +29,11 @@ export const usePermissionsClass = (wallet: any, msgType: string) => {
   useEffect(() => {
     if (allowlist === 'disabled') {
       setIsCreator(true)
+      setIsLoading(false)
     } else if (Array.isArray(creators) && wallet) {
       const creator = creators.find((c: string) => c === wallet.bech32Address)
       setIsCreator(creator ? true : false)
+      setIsLoading(false)
     }
   }, [allowlist, creators, wallet?.bech32Address])
 
@@ -41,5 +46,5 @@ export const usePermissionsClass = (wallet: any, msgType: string) => {
     }
   }, [authzGrantee?.length, wallet?.bech32Address])
 
-  return [isCreator, isAuthz]
+  return [isCreator, isAuthz, isLoading]
 }

@@ -55,12 +55,14 @@ const Classes = ({
               renderLink={renderLink}
             />
           )}
-          <PaginationNav
-            length={classes ? classes.length : 0}
-            limit={limit}
-            offset={offset}
-            setOffset={setOffset}
-          />
+          {limit && (
+            <PaginationNav
+              length={classes ? classes.length : 0}
+              limit={limit}
+              offset={offset}
+              setOffset={setOffset}
+            />
+          )}
         </>
       )}
       <Result error={error} />

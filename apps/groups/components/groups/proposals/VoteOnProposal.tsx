@@ -1,7 +1,7 @@
 'use client'
 
 import { ResultTx } from 'chora/components'
-import { InputString, SelectMetadataFormat } from 'chora/components/forms'
+import { InputString, SelectDataStorage } from 'chora/components/forms'
 import {
   SelectExecution,
   SelectVote,
@@ -35,8 +35,8 @@ const VoteOnProposal = () => {
   const [reason, setReason] = useState<string>('')
   const [execution, setExecution] = useState<string>('')
 
-  // metadata format
-  const [metadataFormat, setMetadataFormat] = useState<string>('json')
+  // data storage
+  const [dataStorage, setDataStorage] = useState<string>('json')
 
   // error and success
   const [error, setError] = useState<string | null>(null)
@@ -50,15 +50,15 @@ const VoteOnProposal = () => {
 
     let metadata: string = ''
 
-    // handle metadata format json
-    if (metadataFormat === 'json') {
+    // handle data storage json
+    if (dataStorage === 'json') {
       metadata = JSON.stringify({
         reason: reason,
       })
     }
 
-    // handle metadata format iri
-    if (metadataFormat === 'iri') {
+    // handle data storage iri
+    if (dataStorage === 'server') {
       // set JSON-LD document
       const doc = {
         '@context': 'https://schema.chora.io/contexts/group_vote.jsonld',
@@ -179,10 +179,10 @@ const VoteOnProposal = () => {
           setExecution={setExecution}
         />
         <hr />
-        <SelectMetadataFormat
+        <SelectDataStorage
           network={network}
-          metadataFormat={metadataFormat}
-          setMetadataFormat={setMetadataFormat}
+          dataStorage={dataStorage}
+          setDataStorage={setDataStorage}
         />
         <button type="submit">{'submit'}</button>
       </form>

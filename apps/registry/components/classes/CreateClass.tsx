@@ -6,7 +6,7 @@ import {
   InputJSON,
   InputsFromJSON,
   InputString,
-  SelectMetadataFormat,
+  SelectDataStorage,
 } from 'chora/components/forms'
 import {
   InputIssuers,
@@ -33,7 +33,7 @@ const CreateClass = () => {
   const [classFee] = useClassFee(chainInfo) // TODO: error
   const [creditTypes] = useCreditTypes(chainInfo) // TODO: error
 
-  const [isCreator, isAuthz] = usePermissionsClass(
+  const [isCreator, isAuthz, isLoading] = usePermissionsClass(
     wallet,
     '/regen.ecocredit.v1.MsgCreateClass',
   )
@@ -48,8 +48,8 @@ const CreateClass = () => {
   // form inputs
   const [json, setJson] = useState<string>('')
 
-  // metadata format
-  const [metadataFormat, setMetadataFormat] = useState<string>('json')
+  // data storage
+  const [dataStorage, setDataStorage] = useState<string>('json')
 
   const [issuers, setIssuers] = useState<any[]>([])
   const [creditTypeAbbrev, setCreditTypeAbbrev] = useState<string>('')
@@ -114,13 +114,13 @@ const CreateClass = () => {
 
     let metadata: string = ''
 
-    // handle metadata format json
-    if (metadataFormat === 'json') {
+    // handle data storage json
+    if (dataStorage === 'json') {
       metadata = json
     }
 
-    // handle metadata format iri
-    if (metadataFormat === 'iri') {
+    // handle data storage iri
+    if (dataStorage === 'server') {
       // check and parse JSON
       let doc: any
       try {
@@ -211,7 +211,7 @@ const CreateClass = () => {
     <div id="msg-create-class" className={styles.box}>
       <div className={styles.boxOptions}>
         <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{isCreator ? '✓' : 'x'}</b>
+          <b>{isLoading ? '?' : isCreator ? '✓' : 'x'}</b>
           <span style={{ marginLeft: '0.5em' }}>{'class creator'}</span>
         </span>
         <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
@@ -279,10 +279,10 @@ const CreateClass = () => {
           string={classFee?.amount || ''}
         />
         <hr />
-        <SelectMetadataFormat
+        <SelectDataStorage
           network={network}
-          metadataFormat={metadataFormat}
-          setMetadataFormat={setMetadataFormat}
+          dataStorage={dataStorage}
+          setDataStorage={setDataStorage}
         />
         <button type="submit">{'submit'}</button>
       </form>

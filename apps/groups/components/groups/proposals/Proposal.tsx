@@ -88,8 +88,11 @@ const Proposal = () => {
   return (
     <div className={styles.box}>
       <div className={styles.boxOptions}>
+        {proposal && votesFinalized && !proposalExecutable && (
+          <p>{'no further action can be taken'}</p>
+        )}
         {proposal && currentVote && (
-          <>{`vote submitted (${currentVote['option']})`}</>
+          <p>{`vote submitted (${currentVote['option']})`}</p>
         )}
         {proposal && !currentVote && !votesFinalized && (
           <Link href={`/${network}/${groupId}/proposals/${id}/submit`}>
@@ -98,9 +101,6 @@ const Proposal = () => {
         )}
         {proposal && proposalExecutable && (
           <button onClick={handleExecute}>{'execute proposal'}</button>
-        )}
-        {proposal && votesFinalized && !proposalExecutable && (
-          <>{'no further action can be taken'}</>
         )}
         {!proposal && !error && <>{'loading...'}</>}
         {!proposal && error && <Result error={error} />}

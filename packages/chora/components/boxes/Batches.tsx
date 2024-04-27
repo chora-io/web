@@ -55,12 +55,14 @@ const Batches = ({
               renderLink={renderLink}
             />
           )}
-          <PaginationNav
-            length={batches ? batches.length : 0}
-            limit={limit}
-            offset={offset}
-            setOffset={setOffset}
-          />
+          {limit && (
+            <PaginationNav
+              length={batches ? batches.length : 0}
+              limit={limit}
+              offset={offset}
+              setOffset={setOffset}
+            />
+          )}
         </>
       )}
       <Result error={error} />

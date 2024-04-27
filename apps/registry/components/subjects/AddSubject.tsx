@@ -5,7 +5,7 @@ import { ResultTx } from 'chora/components'
 import {
   InputJSON,
   InputsFromJSON,
-  SelectMetadataFormat,
+  SelectDataStorage,
 } from 'chora/components/forms'
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
@@ -39,8 +39,8 @@ const AddSubject = () => {
   // form inputs
   const [json, setJson] = useState<string>('')
 
-  // metadata format
-  const [metadataFormat, setMetadataFormat] = useState<string>('json')
+  // data storage
+  const [dataStorage, setDataStorage] = useState<string>('json')
 
   // error and success
   const [error, setError] = useState<string | null>(null)
@@ -103,13 +103,13 @@ const AddSubject = () => {
 
     let metadata: string = ''
 
-    // handle metadata format json
-    if (metadataFormat === 'json') {
+    // handle data storage json
+    if (dataStorage === 'json') {
       metadata = json
     }
 
-    // handle metadata format iri
-    if (metadataFormat === 'iri') {
+    // handle data storage iri
+    if (dataStorage === 'server') {
       // check and parse JSON
       let doc: any
       try {
@@ -238,10 +238,10 @@ const AddSubject = () => {
           />
         )}
         <hr />
-        <SelectMetadataFormat
+        <SelectDataStorage
           network={network}
-          metadataFormat={metadataFormat}
-          setMetadataFormat={setMetadataFormat}
+          dataStorage={dataStorage}
+          setDataStorage={setDataStorage}
         />
         <button type="submit">{'submit'}</button>
       </form>

@@ -2,7 +2,7 @@
 
 import { Class } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
-import { useMetadata, useSubject } from 'chora/hooks'
+import { useMetadata, useClass } from 'chora/hooks'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
@@ -13,7 +13,7 @@ const ClassContainer = () => {
   const { chainInfo } = useContext(WalletContext)
 
   // fetch class from selected network
-  const [clazz, classError] = useSubject(chainInfo, `${id}`)
+  const [clazz, classError] = useClass(chainInfo, `${id}`)
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(

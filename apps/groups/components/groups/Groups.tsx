@@ -47,12 +47,14 @@ const Groups = () => {
           ) : (
             <GroupsList groups={groups} />
           )}
-          <PaginationNav
-            length={groups ? groups.length : 0}
-            limit={limit}
-            offset={offset}
-            setOffset={setOffset}
-          />
+          {limit && (
+            <PaginationNav
+              length={groups ? groups.length : 0}
+              limit={limit}
+              offset={offset}
+              setOffset={setOffset}
+            />
+          )}
         </>
       )}
       <Result error={error} />

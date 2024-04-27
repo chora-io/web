@@ -19,6 +19,9 @@ export const usePermissionsIssuer = (
   // account authorized
   const [isAuthz, setIsAuthz] = useState<boolean>(false)
 
+  // loading permissions
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+
   // TODO: handle error
   if (error) {
     console.error(error)
@@ -28,6 +31,7 @@ export const usePermissionsIssuer = (
     if (issuers && wallet) {
       const issuer = issuers.find((c: string) => c === wallet.bech32Address)
       setIsIssuer(issuer ? true : false)
+      setIsLoading(false)
     }
   }, [issuers, wallet?.bech32Address])
 
@@ -40,5 +44,5 @@ export const usePermissionsIssuer = (
     }
   }, [authzGrantee?.length, wallet?.bech32Address])
 
-  return [isIssuer, isAuthz]
+  return [isIssuer, isAuthz, isLoading]
 }

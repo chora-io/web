@@ -5,7 +5,7 @@ import {
   InputString,
   SelectAccount,
   InputMessages,
-  SelectMetadataFormat,
+  SelectDataStorage,
 } from 'chora/components/forms'
 import { SelectExecution } from 'chora/components/forms/cosmos.group.v1'
 import { WalletContext } from 'chora/contexts'
@@ -45,8 +45,8 @@ const SubmitProposal = () => {
   const [messages, setMessages] = useState<any[]>([])
   const [execution, setExecution] = useState<string>('')
 
-  // metadata format
-  const [metadataFormat, setMetadataFormat] = useState<string>('json')
+  // data storage
+  const [dataStorage, setDataStorage] = useState<string>('json')
 
   // error and success
   const [error, setError] = useState<string | null>(null)
@@ -60,16 +60,16 @@ const SubmitProposal = () => {
 
     let metadata: string = ''
 
-    // handle metadata format json
-    if (metadataFormat === 'json') {
+    // handle data storage json
+    if (dataStorage === 'json') {
       metadata = JSON.stringify({
         name: name,
         description: description,
       })
     }
 
-    // handle metadata format iri
-    if (metadataFormat === 'iri') {
+    // handle data storage iri
+    if (dataStorage === 'server') {
       // set JSON-LD document
       const doc = {
         '@context': 'https://schema.chora.io/contexts/group_proposal.jsonld',
@@ -214,10 +214,10 @@ const SubmitProposal = () => {
           setExecution={setExecution}
         />
         <hr />
-        <SelectMetadataFormat
+        <SelectDataStorage
           network={network}
-          metadataFormat={metadataFormat}
-          setMetadataFormat={setMetadataFormat}
+          dataStorage={dataStorage}
+          setDataStorage={setDataStorage}
         />
         <button type="submit">{'submit'}</button>
       </form>

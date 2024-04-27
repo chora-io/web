@@ -6,7 +6,7 @@ import {
   InputJSON,
   InputsFromJSON,
   InputString,
-  SelectMetadataFormat,
+  SelectDataStorage,
 } from 'chora/components/forms'
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
@@ -39,8 +39,8 @@ const CreateProject = () => {
   // form inputs
   const [json, setJson] = useState<string>('')
 
-  // metadata format
-  const [metadataFormat, setMetadataFormat] = useState<string>('json')
+  // data storage
+  const [dataStorage, setDataStorage] = useState<string>('json')
 
   const [classId, setClassId] = useState<string>('')
   const [jurisdiction, setJurisdiction] = useState<string>('')
@@ -50,7 +50,7 @@ const CreateProject = () => {
   const [success, setSuccess] = useState<any>(null)
 
   // NOTE: must come after class id form input state is declared
-  const [isIssuer, isAuthz] = usePermissionsIssuer(
+  const [isIssuer, isAuthz, isLoading] = usePermissionsIssuer(
     wallet,
     classId,
     '/regen.ecocredit.v1.MsgCreateProject',
@@ -113,13 +113,13 @@ const CreateProject = () => {
 
     let metadata: string = ''
 
-    // handle metadata format json
-    if (metadataFormat === 'json') {
+    // handle data storage json
+    if (dataStorage === 'json') {
       metadata = json
     }
 
-    // handle metadata format iri
-    if (metadataFormat === 'iri') {
+    // handle data storage iri
+    if (dataStorage === 'server') {
       // check and parse JSON
       let doc: any
       try {
@@ -210,7 +210,7 @@ const CreateProject = () => {
     <div id="msg-create-project" className={styles.box}>
       <div className={styles.boxOptions}>
         <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{isIssuer ? '✓' : 'x'}</b>
+          <b>{!classId || isLoading? '?' : isIssuer ? '✓' : 'x'}</b>
           <span style={{ marginLeft: '0.5em' }}>{'class issuer'}</span>
         </span>
         <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
@@ -272,10 +272,10 @@ const CreateProject = () => {
           setString={setReferenceId}
         />
         <hr />
-        <SelectMetadataFormat
+        <SelectDataStorage
           network={network}
-          metadataFormat={metadataFormat}
-          setMetadataFormat={setMetadataFormat}
+          dataStorage={dataStorage}
+          setDataStorage={setDataStorage}
         />
         <button type="submit">{'submit'}</button>
       </form>

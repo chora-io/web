@@ -35,7 +35,7 @@ const ProposalVote = () => {
     <div className={styles.box}>
       {!vote && !metadata && !error && <div>{'loading...'}</div>}
       {vote && metadata && (
-        <div>
+        <>
           <div className={styles.boxText}>
             <h3>{'voter'}</h3>
             {vote?.voter ? <Address address={vote.voter} /> : 'NA'}
@@ -52,7 +52,7 @@ const ProposalVote = () => {
             <h3>{'submit time'}</h3>
             <p>{formatTimestamp(vote['submit_time'])}</p>
           </div>
-        </div>
+        </>
       )}
       <Result error={error} />
     </div>
