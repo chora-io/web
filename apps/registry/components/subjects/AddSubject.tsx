@@ -17,7 +17,7 @@ import { usePermissions } from '@hooks/usePermissions'
 
 import styles from './AddSubject.module.css'
 
-const contextUrl = 'https://schema.chora.io/contexts/geonode.jsonld'
+const contextUrl = 'https://schema.chora.io/contexts/ecosystem_subject.jsonld'
 
 const AddSubject = () => {
   const { chainInfo, network, wallet } = useContext(WalletContext)

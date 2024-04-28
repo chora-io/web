@@ -73,6 +73,7 @@ const MsgAddCreditType = ({ network, setMessage, useWallet, wallet }: any) => {
       <InputNumber
         id="msg-add-credit-type-credit-type-precision"
         label="credit type precision"
+        disabled={true}
         number={creditTypePrecision}
         setNumber={setCreditTypePrecision}
       />

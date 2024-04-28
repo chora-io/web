@@ -8,6 +8,7 @@ const defaultPlaceholder = '1'
 const InputNumber = ({
   id,
   label,
+  disabled,
   placeholder,
   number,
   initNumber,
@@ -28,6 +29,7 @@ const InputNumber = ({
       <input
         id={id ? id : defaultId}
         value={number}
+        disabled={disabled}
         placeholder={placeholder || defaultPlaceholder}
         onChange={(event) => setNumber(event.target.value)}
       />
