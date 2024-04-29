@@ -2,7 +2,7 @@
 
 import { Project } from 'chora/components/boxes'
 import { WalletContext } from 'chora/contexts'
-import { useMetadata, useSubject } from 'chora/hooks'
+import { useMetadata, useProject } from 'chora/hooks'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
@@ -13,7 +13,7 @@ const ProjectContainer = () => {
   const { chainInfo } = useContext(WalletContext)
 
   // fetch project from selected network
-  const [project, projectError] = useSubject(chainInfo, `${id}`)
+  const [project, projectError] = useProject(chainInfo, `${id}`)
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(
