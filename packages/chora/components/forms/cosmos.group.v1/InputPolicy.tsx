@@ -13,9 +13,10 @@ import { SelectPolicyType } from '.'
 const defaultId = 'policy'
 const defaultLabel = 'policy'
 
-const thresholdPlaceholder = '1'
-const percentagePlaceholder = '0.5'
-const periodPlaceholder = '3600'
+const thresholdPlaceholder = '2'
+const percentagePlaceholder = '0.50'
+const votingPeriodPlaceholder = '86400'
+const executionPeriodPlaceholder = '0'
 
 const InputPolicy = ({ id, label, initPolicy, setPolicy }: any) => {
   const [type, setType] = useState<string>('threshold')
@@ -102,7 +103,7 @@ const InputPolicy = ({ id, label, initPolicy, setPolicy }: any) => {
       <InputNumber
         id={(id || defaultId) + '-voting-period'}
         label={(label || defaultLabel) + ' voting period'}
-        placeholder={periodPlaceholder}
+        placeholder={votingPeriodPlaceholder}
         number={votingPeriod}
         initNumber={
           initPolicy &&
@@ -116,7 +117,7 @@ const InputPolicy = ({ id, label, initPolicy, setPolicy }: any) => {
       <InputNumber
         id={(id || defaultId) + '-min-execution-period'}
         label={(label || defaultLabel) + ' min execution period'}
-        placeholder={periodPlaceholder}
+        placeholder={executionPeriodPlaceholder}
         number={minExecutionPeriod}
         initNumber={
           initPolicy &&

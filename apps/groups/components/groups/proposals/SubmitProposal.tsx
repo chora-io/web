@@ -149,8 +149,8 @@ const SubmitProposal = () => {
         />
         <hr />
         <SelectOption
-          id="metadata"
-          label="metadata"
+          id="metadata-input"
+          label="metadata input"
           options={[
             { id: 'schema-form', label: 'schema form' },
             { id: 'custom-json', label: 'custom json' },
