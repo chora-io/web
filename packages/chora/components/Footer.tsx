@@ -41,6 +41,7 @@ const Footer = ({ about, items }: any) => {
                 <li key={item.title}>
                   <Link href={item.link} target={item.target}>
                     {item.title}
+                    {item.target && <span> &#x2197;&#xFE0E;</span>}
                   </Link>
                 </li>
               ))}

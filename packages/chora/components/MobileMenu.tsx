@@ -31,6 +31,7 @@ const MobileMenu = ({ itemsTop, itemsBottom }: any) => {
                     onClick={() => handleLink(item.link)}
                   >
                     {item.title}
+                    {item.target && <span> &#x2197;&#xFE0E;</span>}
                   </button>
                 </li>
               ))}
@@ -38,8 +39,9 @@ const MobileMenu = ({ itemsTop, itemsBottom }: any) => {
             {itemsBottom &&
               itemsBottom.map((item: any) => (
                 <li key={item.title}>
-                  <Link href={item.link} target="_blank">
+                  <Link href={item.link} target={item.target}>
                     {item.title}
+                    {item.target && <span> &#x2197;&#xFE0E;</span>}
                   </Link>
                 </li>
               ))}

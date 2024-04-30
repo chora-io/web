@@ -28,7 +28,8 @@ const GroupsPage = () => {
             <p>{'group governance workspace'}</p>
             <div style={{ textAlign: 'center', padding: '2em 0' }}>
               <a className={styles.button} href={appLink} target="_blank">
-                {'open app ↗'}
+                {'open app'}
+                <span> &#x2197;&#xFE0E;</span>
               </a>
             </div>
           </div>
@@ -54,13 +55,16 @@ const GroupsPage = () => {
             </div>
             <div className={styles.contentLinks}>
               <a href={appLink} target="_blank">
-                {'application ↗'}
+                {'application'}
+                <span> &#x2197;&#xFE0E;</span>
               </a>
               <a href="https://docs.chora.io/guides/groups" target="_blank">
-                {'user guide ↗'}
+                {'user guide'}
+                <span> &#x2197;&#xFE0E;</span>
               </a>
               <a href="https://github.com/chora-io/web" target="_blank">
-                {'source code ↗'}
+                {'source code'}
+                <span> &#x2197;&#xFE0E;</span>
               </a>
             </div>
           </div>

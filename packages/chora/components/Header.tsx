@@ -44,7 +44,10 @@ const Header = ({ title, itemsLeft, itemsRight }: any) => {
               {itemsLeft &&
                 itemsLeft.map((item: any) => (
                   <li key={item.title}>
-                    <Link href={item.link}>{item.title}</Link>
+                    <Link href={item.link} target={item.target}>
+                      {item.title}
+                      {item.target && <span> &#x2197;&#xFE0E;</span>}
+                    </Link>
                   </li>
                 ))}
               {itemsLeft && itemsRight && (
@@ -53,8 +56,9 @@ const Header = ({ title, itemsLeft, itemsRight }: any) => {
               {itemsRight &&
                 itemsRight.map((item: any) => (
                   <li key={item.title}>
-                    <Link href={item.link} target="_blank">
+                    <Link href={item.link} target={item.target}>
                       {item.title}
+                      {item.target && <span> &#x2197;&#xFE0E;</span>}
                     </Link>
                   </li>
                 ))}

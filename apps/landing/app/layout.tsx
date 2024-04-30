@@ -15,21 +15,25 @@ const Layout = ({ children }: any) => (
               itemsTop={[
                 {
                   link: 'chora-groups',
+                  target: '',
                   title: 'groups',
                 },
                 {
                   link: 'chora-registry',
+                  target: '',
                   title: 'registry',
                 },
                 {
                   link: 'chora-ledger',
+                  target: '',
                   title: 'ledger',
                 },
               ]}
               itemsBottom={[
                 {
                   link: 'https://docs.chora.io',
-                  title: 'docs ↗',
+                  target: '_blank',
+                  title: 'docs',
                 },
               ]}
             />
@@ -41,21 +45,25 @@ const Layout = ({ children }: any) => (
               itemsLeft={[
                 {
                   link: 'chora-groups',
+                  target: '',
                   title: 'groups',
                 },
                 {
                   link: 'chora-registry',
+                  target: '',
                   title: 'registry',
                 },
                 {
                   link: 'chora-ledger',
+                  target: '',
                   title: 'ledger',
                 },
               ]}
               itemsRight={[
                 {
                   link: 'https://docs.chora.io',
-                  title: 'docs ↗',
+                  target: '_blank',
+                  title: 'docs',
                 },
               ]}
             />
@@ -100,17 +108,17 @@ const Layout = ({ children }: any) => (
                     {
                       link: 'https://docs.chora.io/guides',
                       target: '_blank',
-                      title: 'user guides ↗',
+                      title: 'user guides',
                     },
                     {
                       link: 'https://docs.chora.io/specs',
                       target: '_blank',
-                      title: 'specifications ↗',
+                      title: 'specifications',
                     },
                     {
                       link: 'https://github.com/chora-io',
                       target: '_blank',
-                      title: 'source code ↗',
+                      title: 'source code',
                     },
                   ],
                 },
