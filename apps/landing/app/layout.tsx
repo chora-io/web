@@ -11,6 +11,37 @@ const Layout = ({ children }: any) => (
         <ThemeContextProvider>
           <MenuContextProvider>
             <Background />
+            <Header
+              title={{
+                link: '/',
+                titleX: '',
+              }}
+              itemsLeft={[
+                {
+                  link: 'chora-groups',
+                  target: '',
+                  title: 'groups',
+                },
+                {
+                  link: 'chora-registry',
+                  target: '',
+                  title: 'registry',
+                },
+                {
+                  link: 'chora-ledger',
+                  target: '',
+                  title: 'ledger',
+                },
+              ]}
+              itemsRight={[
+                {
+                  link: 'https://docs.chora.io',
+                  target: '_blank',
+                  title: 'docs',
+                },
+              ]}
+              showMenuButton={true}
+            />
             <Sidebar
               items={[
                 {
@@ -57,37 +88,6 @@ const Layout = ({ children }: any) => (
                 },
               ]}
               mobile={true}
-            />
-            <Header
-              title={{
-                link: '/',
-                titleX: '',
-              }}
-              itemsLeft={[
-                {
-                  link: 'chora-groups',
-                  target: '',
-                  title: 'groups',
-                },
-                {
-                  link: 'chora-registry',
-                  target: '',
-                  title: 'registry',
-                },
-                {
-                  link: 'chora-ledger',
-                  target: '',
-                  title: 'ledger',
-                },
-              ]}
-              itemsRight={[
-                {
-                  link: 'https://docs.chora.io',
-                  target: '_blank',
-                  title: 'docs',
-                },
-              ]}
-              showMenuButton={true}
             />
             {children}
             <Footer

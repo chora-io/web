@@ -1,5 +1,9 @@
-import { Header } from 'chora/components'
-import { ThemeContextProvider, WalletContextProvider } from 'chora/contexts'
+import { Header, Sidebar } from 'chora/components'
+import {
+  MenuContextProvider,
+  ThemeContextProvider,
+  WalletContextProvider,
+} from 'chora/contexts'
 
 import './globals.css'
 
@@ -8,15 +12,33 @@ const Layout = ({ children }: any) => (
     <body>
       <main>
         <ThemeContextProvider>
-          <WalletContextProvider>
-            <Header
-              title={{
-                link: '/',
-                titleX: 'faucet',
-              }}
-            />
-            {children}
-          </WalletContextProvider>
+          <MenuContextProvider>
+            <WalletContextProvider>
+              <Header
+                title={{
+                  link: '/',
+                  titleX: 'faucet',
+                }}
+                showMenuButton={true}
+              />
+              <Sidebar
+                items={[
+                  {
+                    link: 'chora-testnet-1',
+                    target: '',
+                    title: 'Chora Testnet',
+                  },
+                  {
+                    link: 'regen-redwood-1',
+                    target: '',
+                    title: 'Regen Redwood',
+                  },
+                ]}
+                mobile={true}
+              />
+              {children}
+            </WalletContextProvider>
+          </MenuContextProvider>
         </ThemeContextProvider>
       </main>
     </body>
