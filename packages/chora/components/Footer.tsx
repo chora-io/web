@@ -42,7 +42,7 @@ const Footer = ({ about, items }: any) => {
                 <li key={item.title}>
                   <Link href={item.link} target={item.target}>
                     {item.title}
-                    {item.target && <BlankArrow />}
+                    {item.target && <BlankArrow color={'#00C3A5'} />}
                   </Link>
                 </li>
               ))}

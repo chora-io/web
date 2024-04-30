@@ -1,8 +1,13 @@
 'use client'
 
 import * as React from 'react'
+import { useContext } from 'react'
 
-const BlankArrow = () => {
+import { ThemeContext } from '../contexts'
+
+const BlankArrow = ({ color, useTheme }: any) => {
+  const { darkTheme } = useContext(ThemeContext)
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -16,7 +21,7 @@ const BlankArrow = () => {
         y1="20"
         x2="20"
         y2="0"
-        stroke={'#00C3A5'}
+        stroke={useTheme ? (darkTheme ? '#000' : '#FFF') : color}
         strokeLinecap="round"
         strokeWidth="3"
       />
@@ -25,7 +30,7 @@ const BlankArrow = () => {
         y1="0"
         x2="20"
         y2="0"
-        stroke={'#00C3A5'}
+        stroke={useTheme ? (darkTheme ? '#000' : '#FFF') : color}
         strokeLinecap="round"
         strokeWidth="5"
       />
@@ -34,7 +39,7 @@ const BlankArrow = () => {
         y1="10"
         x2="20"
         y2="0"
-        stroke={'#00C3A5'}
+        stroke={useTheme ? (darkTheme ? '#000' : '#FFF') : color}
         strokeLinecap="round"
         strokeWidth="5"
       />

@@ -30,7 +30,7 @@ const LedgerPage = () => {
             <div style={{ textAlign: 'center', padding: '2em 0' }}>
               <a className={styles.button} href={appLink} target="_blank">
                 {'open app'}
-                <BlankArrow />
+                <BlankArrow useTheme={true} />
               </a>
             </div>
           </div>
@@ -45,15 +45,15 @@ const LedgerPage = () => {
             <div className={styles.contentLinks}>
               <a href={appLink} target="_blank">
                 {'application'}
-                <BlankArrow />
+                <BlankArrow color={'#00C3A5'} />
               </a>
               <a href="https://docs.chora.io/guides/ledger" target="_blank">
                 {'user guide'}
-                <BlankArrow />
+                <BlankArrow color={'#00C3A5'} />
               </a>
               <a href="https://github.com/chora-io/web" target="_blank">
                 {'source code'}
-                <BlankArrow />
+                <BlankArrow color={'#00C3A5'} />
               </a>
             </div>
           </div>
