@@ -2,6 +2,34 @@
   composes: sidebar from 'chora/styles/sidebar.css';
 }
 
+.mobile {
+  composes: sidebar from 'chora/styles/sidebar.css';
+  min-height: calc(100vh - var(--header-height));
+  width: 75vw;
+}
+
+/* cancel sidebar styling */
+@media (max-width: 850px) {
+  .mobile {
+    display: block !important;
+  }
+}
+
+@media (min-width: 850px) {
+  .mobile {
+    display: none !important;
+  }
+}
+
 .active {
   composes: sidebar-link-active from 'chora/styles/sidebar.css';
+}
+
+.divider {
+  margin: 1em 0;
+}
+
+.button {
+  background: none;
+  color: var(--color-theme);
 }

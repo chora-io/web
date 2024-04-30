@@ -1,4 +1,4 @@
-import { Background, Footer, Header, MobileMenu } from 'chora/components'
+import { Background, Footer, Header, Sidebar } from 'chora/components'
 import { MenuContextProvider, ThemeContextProvider } from 'chora/contexts'
 import Link from 'next/link'
 
@@ -11,8 +11,8 @@ const Layout = ({ children }: any) => (
         <ThemeContextProvider>
           <MenuContextProvider>
             <Background />
-            <MobileMenu
-              itemsTop={[
+            <Sidebar
+              items={[
                 {
                   link: 'chora-groups',
                   target: '',
@@ -28,14 +28,24 @@ const Layout = ({ children }: any) => (
                   target: '',
                   title: 'ledger',
                 },
-              ]}
-              itemsBottom={[
+                'divider',
                 {
-                  link: 'https://docs.chora.io',
+                  link: 'https://docs.chora.io/guides',
                   target: '_blank',
-                  title: 'docs',
+                  title: 'user guides',
+                },
+                {
+                  link: 'https://docs.chora.io/specs',
+                  target: '_blank',
+                  title: 'specifications',
+                },
+                {
+                  link: 'https://github.com/chora-io',
+                  target: '_blank',
+                  title: 'source code',
                 },
               ]}
+              mobile={true}
             />
             <Header
               title={{
