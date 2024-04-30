@@ -23,7 +23,7 @@ const Layout = ({ children }: any) => (
                     link: '/',
                     titleX: 'ledger',
                   }}
-                  noUser={true}
+                  showMenuButton={true}
                 />
                 <Sidebar />
                 {children}

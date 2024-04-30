@@ -1,9 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import * as React from 'react'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { MenuContext } from '../contexts'
 import { BlankArrow } from '.'
@@ -12,13 +12,19 @@ import styles from './Sidebar.module.css'
 
 const Sidebar = ({ items, mobile }: any) => {
   const { showMenu, setShowMenu } = useContext(MenuContext)
-  const router = useRouter()
   const currentRoute = usePathname()
 
-  const handleLink = (link: string) => {
-    setShowMenu(false)
-    router.push(link)
-  }
+  const [initRoute, setInitRoute] = useState<string>('')
+
+  useEffect(() => {
+    if (currentRoute && !initRoute) {
+      setInitRoute(currentRoute)
+    }
+    if (initRoute && initRoute !== currentRoute) {
+      setInitRoute(currentRoute)
+      setShowMenu(false)
+    }
+  }, [currentRoute, initRoute, setShowMenu])
 
   return !mobile || showMenu ? (
     <div className={mobile ? styles.mobile : styles.sidebar}>
@@ -26,7 +32,7 @@ const Sidebar = ({ items, mobile }: any) => {
         {items.map((item: any, i: number) =>
           item === 'divider' ? (
             <hr key={i} className={styles.divider} />
-          ) : item.target === '_blank' ? (
+          ) : (
             <li key={item.title}>
               <Link
                 href={item.link}
@@ -36,19 +42,8 @@ const Sidebar = ({ items, mobile }: any) => {
                 target={item.target}
               >
                 {item.title}
-                {item.target && <BlankArrow color={'#00C3A5'} />}
+                {item.target === '_blank' && <BlankArrow color={'#00C3A5'} />}
               </Link>
-            </li>
-          ) : (
-            <li key={item.title}>
-              <button
-                className={
-                  currentRoute === item.link ? styles.active : styles.button
-                }
-                onClick={() => handleLink(item.link)}
-              >
-                {item.title}
-              </button>
             </li>
           ),
         )}

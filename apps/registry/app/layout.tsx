@@ -25,6 +25,8 @@ const Layout = ({ children }: any) => (
                       link: '/',
                       titleX: 'registry',
                     }}
+                    showMenuButton={true}
+                    showUserButton={true}
                   />
                   <Sidebar />
                   <UserSidebar />

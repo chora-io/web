@@ -2,6 +2,16 @@
   composes: sidebar from 'chora/styles/sidebar.css';
 }
 
+.mobile {
+  display: none;
+}
+
+@media (max-width: 850px) {
+  .mobile {
+    display: block;
+  }
+}
+
 .modules {
   font-size: 0.75em !important;
   margin-left: 0.25em;

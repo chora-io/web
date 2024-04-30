@@ -10,7 +10,12 @@ import { SelectNetwork } from './forms'
 
 import styles from './HeaderWallet.module.css'
 
-const HeaderWallet = ({ title, testnets, noUser }: any) => {
+const HeaderWallet = ({
+  title,
+  testnets,
+  showMenuButton,
+  showUserButton,
+}: any) => {
   const { darkTheme, setDarkTheme } = useContext(ThemeContext)
   const { showMenu, setShowMenu, showUser, setShowUser } =
     useContext(MenuContext)
@@ -60,9 +65,11 @@ const HeaderWallet = ({ title, testnets, noUser }: any) => {
     <div className={styles.header}>
       <div style={{ display: 'none' }}>{darkTheme?.toString()}</div>
       <div>
-        <div className={styles.mobile}>
-          <MenuButton darkTheme={darkTheme} toggleMenu={toggleMenu} />
-        </div>
+        {showMenuButton && (
+          <div className={styles.mobile}>
+            <MenuButton darkTheme={darkTheme} toggleMenu={toggleMenu} />
+          </div>
+        )}
         <HeaderTitle darkTheme={darkTheme} title={title} />
         <div className={styles.menu}>
           <form className={styles.form}>
@@ -74,7 +81,7 @@ const HeaderWallet = ({ title, testnets, noUser }: any) => {
               testnets={testnets}
             />
           </form>
-          {!noUser && (
+          {showUserButton && (
             <UserButton darkTheme={darkTheme} toggleUser={toggleUser} />
           )}
           <ThemeButton darkTheme={darkTheme} toggleTheme={toggleTheme} />

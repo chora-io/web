@@ -14,6 +14,11 @@ const Layout = ({ children }: any) => (
             <Sidebar
               items={[
                 {
+                  link: '.',
+                  target: '',
+                  title: 'home',
+                },
+                {
                   link: 'chora-groups',
                   target: '',
                   title: 'groups',
@@ -82,6 +87,7 @@ const Layout = ({ children }: any) => (
                   title: 'docs',
                 },
               ]}
+              showMenuButton={true}
             />
             {children}
             <Footer

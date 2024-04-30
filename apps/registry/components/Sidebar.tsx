@@ -439,6 +439,16 @@ const Sidebar = () => {
   return hasMounted && (desktop || showMenu) ? (
     <div className={styles.sidebar}>
       <ul>
+        <ul className={styles.mobile}>
+          <li>
+            <Link
+              href={`/`}
+              className={currentRoute === `/` ? styles.active : undefined}
+            >
+              {'home'}
+            </Link>
+          </li>
+        </ul>
         <li>{'explore'}</li>
         {!!network && network.includes('chora') && (
           <ul>
