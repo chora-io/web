@@ -1,19 +1,43 @@
 'use client'
 
-import { WalletContext } from 'chora/contexts'
+import { MenuContext, WalletContext } from 'chora/contexts'
 import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import styles from './Sidebar.module.css'
 
 const Sidebar = () => {
-  const { network } = useContext(WalletContext)
   const { denom, id, iri } = useParams()
   const currentRoute = usePathname()
+  const { showMenu, setShowMenu } = useContext(MenuContext)
+  const { network } = useContext(WalletContext)
+
+  const [initRoute, setInitRoute] = useState<string>('')
+
+  // whether component has mounted
+  const [hasMounted, setHasMounted] = useState(false)
+
+  // handle hydration
+  useEffect(() => {
+    setHasMounted(true)
+  }, [])
+
+  // requires hydration
+  const desktop = hasMounted && !window.matchMedia('(max-width: 850px)').matches
+
+  useEffect(() => {
+    if (currentRoute && !initRoute) {
+      setInitRoute(currentRoute)
+    }
+    if (initRoute && initRoute !== currentRoute) {
+      setInitRoute(currentRoute)
+      setShowMenu(false)
+    }
+  }, [currentRoute, initRoute, setShowMenu])
 
   if (currentRoute.includes('claims') && iri) {
-    return (
+    return hasMounted && (desktop || showMenu) ? (
       <div className={styles.sidebar}>
         <ul>
           <ul>
@@ -47,11 +71,13 @@ const Sidebar = () => {
           </ul>
         </ul>
       </div>
+    ) : (
+      <></>
     )
   }
 
   if (currentRoute.includes('classes') && id) {
-    return (
+    return hasMounted && (desktop || showMenu) ? (
       <div className={styles.sidebar}>
         <ul>
           <ul>
@@ -85,11 +111,13 @@ const Sidebar = () => {
           </ul>
         </ul>
       </div>
+    ) : (
+      <></>
     )
   }
 
   if (currentRoute.includes('batches') && denom) {
-    return (
+    return hasMounted && (desktop || showMenu) ? (
       <div className={styles.sidebar}>
         <ul>
           <ul>
@@ -123,11 +151,13 @@ const Sidebar = () => {
           </ul>
         </ul>
       </div>
+    ) : (
+      <></>
     )
   }
 
   if (currentRoute.includes('baskets') && denom) {
-    return (
+    return hasMounted && (desktop || showMenu) ? (
       <div className={styles.sidebar}>
         <ul>
           <ul>
@@ -161,11 +191,13 @@ const Sidebar = () => {
           </ul>
         </ul>
       </div>
+    ) : (
+      <></>
     )
   }
 
   if (currentRoute.includes('monitors') && id) {
-    return (
+    return hasMounted && (desktop || showMenu) ? (
       <div className={styles.sidebar}>
         <ul>
           <ul>
@@ -199,11 +231,13 @@ const Sidebar = () => {
           </ul>
         </ul>
       </div>
+    ) : (
+      <></>
     )
   }
 
   if (currentRoute.includes('projects') && id) {
-    return (
+    return hasMounted && (desktop || showMenu) ? (
       <div className={styles.sidebar}>
         <ul>
           <ul>
@@ -237,11 +271,13 @@ const Sidebar = () => {
           </ul>
         </ul>
       </div>
+    ) : (
+      <></>
     )
   }
 
   if (currentRoute.includes('resolvers') && id) {
-    return (
+    return hasMounted && (desktop || showMenu) ? (
       <div className={styles.sidebar}>
         <ul>
           <ul>
@@ -275,11 +311,13 @@ const Sidebar = () => {
           </ul>
         </ul>
       </div>
+    ) : (
+      <></>
     )
   }
 
   if (currentRoute.includes('subjects') && id) {
-    return (
+    return hasMounted && (desktop || showMenu) ? (
       <div className={styles.sidebar}>
         <ul>
           <ul>
@@ -313,11 +351,13 @@ const Sidebar = () => {
           </ul>
         </ul>
       </div>
+    ) : (
+      <></>
     )
   }
 
   if (currentRoute.includes('verifiers') && id) {
-    return (
+    return hasMounted && (desktop || showMenu) ? (
       <div className={styles.sidebar}>
         <ul>
           <ul>
@@ -351,11 +391,13 @@ const Sidebar = () => {
           </ul>
         </ul>
       </div>
+    ) : (
+      <></>
     )
   }
 
   if (currentRoute.includes('vouchers') && id) {
-    return (
+    return hasMounted && (desktop || showMenu) ? (
       <div className={styles.sidebar}>
         <ul>
           <ul>
@@ -389,10 +431,12 @@ const Sidebar = () => {
           </ul>
         </ul>
       </div>
+    ) : (
+      <></>
     )
   }
 
-  return (
+  return hasMounted && (desktop || showMenu) ? (
     <div className={styles.sidebar}>
       <ul>
         <li>{'explore'}</li>
@@ -587,6 +631,8 @@ const Sidebar = () => {
         </ul>
       </ul>
     </div>
+  ) : (
+    <></>
   )
 }
 
