@@ -13,7 +13,7 @@ const Sidebar = () => {
   const { showMenu, setShowMenu } = useContext(MenuContext)
   const { network } = useContext(WalletContext)
 
-  const [initRoute, setInitRoute] = useState<string>(null)
+  const [initRoute, setInitRoute] = useState<string>('')
 
   // whether component has mounted
   const [hasMounted, setHasMounted] = useState(false)
@@ -34,7 +34,7 @@ const Sidebar = () => {
       setInitRoute(currentRoute)
       setShowMenu(false)
     }
-  }, [currentRoute, initRoute])
+  }, [currentRoute, initRoute, setShowMenu])
 
   if (groupId) {
     return hasMounted && (desktop || showMenu) ? (
