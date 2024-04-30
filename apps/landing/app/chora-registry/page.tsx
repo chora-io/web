@@ -1,3 +1,4 @@
+import { BlankArrow } from 'chora/components'
 import { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -30,7 +31,7 @@ const RegistryPage = () => {
             <div style={{ textAlign: 'center', padding: '2em 0' }}>
               <a className={styles.button} href={appLink} target="_blank">
                 {'open app'}
-                <span> &#x2197;&#xFE0E;</span>
+                <BlankArrow />
               </a>
             </div>
           </div>
@@ -61,15 +62,15 @@ const RegistryPage = () => {
             <div className={styles.contentLinks}>
               <a href={appLink} target="_blank">
                 {'application'}
-                <span> &#x2197;&#xFE0E;</span>
+                <BlankArrow />
               </a>
               <a href="https://docs.chora.io/guides/registry" target="_blank">
                 {'user guide'}
-                <span> &#x2197;&#xFE0E;</span>
+                <BlankArrow />
               </a>
               <a href="https://github.com/chora-io/web" target="_blank">
                 {'source code'}
-                <span> &#x2197;&#xFE0E;</span>
+                <BlankArrow />
               </a>
             </div>
           </div>

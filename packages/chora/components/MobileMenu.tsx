@@ -8,6 +8,7 @@ import { useContext } from 'react'
 import { MenuContext } from '../contexts'
 
 import styles from './MobileMenu.module.css'
+import { BlankArrow } from './index'
 
 const MobileMenu = ({ itemsTop, itemsBottom }: any) => {
   const { showMenu, setShowMenu } = useContext(MenuContext)
@@ -31,7 +32,7 @@ const MobileMenu = ({ itemsTop, itemsBottom }: any) => {
                     onClick={() => handleLink(item.link)}
                   >
                     {item.title}
-                    {item.target && <span> &#x2197;&#xFE0E;</span>}
+                    {item.target && <BlankArrow />}
                   </button>
                 </li>
               ))}
@@ -41,7 +42,7 @@ const MobileMenu = ({ itemsTop, itemsBottom }: any) => {
                 <li key={item.title}>
                   <Link href={item.link} target={item.target}>
                     {item.title}
-                    {item.target && <span> &#x2197;&#xFE0E;</span>}
+                    {item.target && <BlankArrow />}
                   </Link>
                 </li>
               ))}

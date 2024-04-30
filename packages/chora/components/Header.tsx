@@ -5,10 +5,9 @@ import * as React from 'react'
 import { useContext } from 'react'
 
 import { MenuContext, ThemeContext } from '../contexts'
-import { HeaderTitle, ThemeButton } from '.'
+import { BlankArrow, HeaderTitle, MenuButton, ThemeButton } from '.'
 
 import styles from './Header.module.css'
-import MenuButton from './MenuButton'
 
 const Header = ({ title, itemsLeft, itemsRight }: any) => {
   const { showMenu, setShowMenu } = useContext(MenuContext)
@@ -46,7 +45,7 @@ const Header = ({ title, itemsLeft, itemsRight }: any) => {
                   <li key={item.title}>
                     <Link href={item.link} target={item.target}>
                       {item.title}
-                      {item.target && <span> &#x2197;&#xFE0E;</span>}
+                      {item.target && <BlankArrow />}
                     </Link>
                   </li>
                 ))}
@@ -58,7 +57,7 @@ const Header = ({ title, itemsLeft, itemsRight }: any) => {
                   <li key={item.title}>
                     <Link href={item.link} target={item.target}>
                       {item.title}
-                      {item.target && <span> &#x2197;&#xFE0E;</span>}
+                      {item.target && <BlankArrow />}
                     </Link>
                   </li>
                 ))}
