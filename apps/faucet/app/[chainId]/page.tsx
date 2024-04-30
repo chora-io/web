@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const FaucetPage = () => (
   <div className={styles.page}>
     <div>
-      <ConnectWallet testnets={true} />
+      <ConnectWallet testnetsOnly={true} />
       <Faucet />
     </div>
   </div>

@@ -12,8 +12,6 @@ import {
 import * as React from 'react'
 import { createContext, useEffect, useState } from 'react'
 
-const cachedAddressKey = 'chora-web-address'
-const cachedConnectedKey = 'chora-web-connected'
 const cachedNetworkKey = 'chora-web-network'
 
 const defaultNetwork = choraTestnet.chainId
@@ -48,13 +46,60 @@ const WalletContextProvider = (props: any) => {
   useEffect(() => {
     const cachedNetwork = localStorage.getItem(cachedNetworkKey) || ''
 
-    if (cachedNetwork === '' && network === null) {
+    // use default network if none provided
+    if (network === null && cachedNetwork === '') {
       setNetwork(defaultNetwork)
 
       // cache default network to initialize local storage
       localStorage.setItem(cachedNetworkKey, defaultNetwork)
     }
 
+    // connect to keplr using network if network available
+    if (network !== null && network !== chainInfo?.chainId) {
+      switch (network) {
+        case bionLocal.chainId:
+          setChainInfo(bionLocal)
+          break
+        case choraLocal.chainId:
+          setChainInfo(choraLocal)
+          break
+        case choraTestnet.chainId:
+          setChainInfo(choraTestnet)
+          break
+        case regenLocal.chainId:
+          setChainInfo(regenLocal)
+          break
+        case regenMainnet.chainId:
+          setChainInfo(regenMainnet)
+          break
+        case regenRedwood.chainId:
+          setChainInfo(regenRedwood)
+          break
+      }
+
+      // check if network is still enabled
+      window.keplr
+        ?.enable(network)
+        .then(() => {
+          // get wallet from connected network
+          window.keplr
+            ?.getKey(network)
+            .then((wallet) => {
+              setLoading(false)
+              setWallet(wallet)
+            })
+            .catch(() => {
+              setLoading(false)
+            })
+        })
+        .catch(() => {
+          setLoading(false)
+        })
+
+      return // exit effect
+    }
+
+    // connect to keplr using cached network if network not available
     if (
       network === null &&
       cachedNetwork !== '' &&
@@ -90,48 +135,6 @@ const WalletContextProvider = (props: any) => {
           // get wallet from connected network
           window.keplr
             ?.getKey(cachedNetwork)
-            .then((wallet) => {
-              setLoading(false)
-              setWallet(wallet)
-            })
-            .catch(() => {
-              setLoading(false)
-            })
-        })
-        .catch(() => {
-          setLoading(false)
-        })
-    }
-
-    if (network !== null && network !== chainInfo?.chainId) {
-      switch (network) {
-        case bionLocal.chainId:
-          setChainInfo(bionLocal)
-          break
-        case choraLocal.chainId:
-          setChainInfo(choraLocal)
-          break
-        case choraTestnet.chainId:
-          setChainInfo(choraTestnet)
-          break
-        case regenLocal.chainId:
-          setChainInfo(regenLocal)
-          break
-        case regenMainnet.chainId:
-          setChainInfo(regenMainnet)
-          break
-        case regenRedwood.chainId:
-          setChainInfo(regenRedwood)
-          break
-      }
-
-      // check if network is still enabled
-      window.keplr
-        ?.enable(network)
-        .then(() => {
-          // get wallet from connected network
-          window.keplr
-            ?.getKey(network)
             .then((wallet) => {
               setLoading(false)
               setWallet(wallet)
@@ -235,6 +238,7 @@ const WalletContextProvider = (props: any) => {
     setError(null)
     setNetwork(value)
     setWallet(null)
+    localStorage.setItem(cachedNetworkKey, value)
   }
 
   return (
@@ -255,8 +259,6 @@ const WalletContextProvider = (props: any) => {
 }
 
 export {
-  cachedAddressKey,
-  cachedConnectedKey,
   cachedNetworkKey,
   defaultNetwork,
   WalletContext,

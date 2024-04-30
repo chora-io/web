@@ -1,10 +1,9 @@
 'use client'
 
 import * as React from 'react'
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 
 import { ThemeContext, MenuContext, WalletContext } from '../contexts'
-import { cachedNetworkKey, defaultNetwork } from '../contexts/WalletContext'
 import { HeaderTitle, MenuButton, ThemeButton, UserButton } from '.'
 import { SelectNetwork } from './forms'
 
@@ -12,16 +11,14 @@ import styles from './HeaderWallet.module.css'
 
 const HeaderWallet = ({
   title,
-  testnets,
   showMenuButton,
   showUserButton,
+  testnetsOnly,
 }: any) => {
   const { darkTheme, setDarkTheme } = useContext(ThemeContext)
   const { showMenu, setShowMenu, showUser, setShowUser } =
     useContext(MenuContext)
-  const { network, setNetwork, wallet, loading } = useContext(WalletContext)
-
-  const [selected, setSelected] = useState<string>('')
+  const { network, setNetwork } = useContext(WalletContext)
 
   const toggleMenu = () => {
     if (showMenu) {
@@ -47,20 +44,6 @@ const HeaderWallet = ({
     }
   }
 
-  useEffect(() => {
-    if (typeof localStorage !== 'undefined') {
-      if (loading === true) {
-        setSelected(localStorage.getItem(cachedNetworkKey) || defaultNetwork)
-      } else if (!wallet) {
-        setSelected(network || defaultNetwork)
-        localStorage.setItem(cachedNetworkKey, network || defaultNetwork)
-      } else {
-        setSelected(network || defaultNetwork)
-        localStorage.setItem(cachedNetworkKey, network || defaultNetwork)
-      }
-    }
-  }, [network, wallet, loading])
-
   return (
     <div className={styles.header}>
       <div style={{ display: 'none' }}>{darkTheme?.toString()}</div>
@@ -76,9 +59,8 @@ const HeaderWallet = ({
             <SelectNetwork
               label=" "
               network={network}
-              selected={selected}
               setNetwork={setNetwork}
-              testnets={testnets}
+              testnetsOnly={testnetsOnly}
             />
           </form>
           {showUserButton && (

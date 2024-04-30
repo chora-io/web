@@ -16,7 +16,6 @@ const UserSidebar = () => {
     chainInfo,
     getKeplr,
     network,
-    selected,
     setNetwork,
     wallet,
     error: keplrError,
@@ -169,7 +168,6 @@ const UserSidebar = () => {
                   <SelectNetwork
                     label=" "
                     network={network}
-                    selected={selected}
                     setNetwork={handleSetNetwork}
                   />
                 </form>
