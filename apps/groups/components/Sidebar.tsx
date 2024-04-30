@@ -1,19 +1,43 @@
 'use client'
 
-import { WalletContext } from 'chora/contexts'
+import { MenuContext, WalletContext } from 'chora/contexts'
 import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import styles from './Sidebar.module.css'
 
 const Sidebar = () => {
   const { groupId } = useParams()
   const currentRoute = usePathname()
+  const { showMenu, setShowMenu } = useContext(MenuContext)
   const { network } = useContext(WalletContext)
 
+  const [initRoute, setInitRoute] = useState<string>(null)
+
+  // whether component has mounted
+  const [hasMounted, setHasMounted] = useState(false)
+
+  // handle hydration
+  useEffect(() => {
+    setHasMounted(true)
+  }, [])
+
+  // requires hydration
+  const desktop = hasMounted && !window.matchMedia('(max-width: 850px)').matches
+
+  useEffect(() => {
+    if (currentRoute && !initRoute) {
+      setInitRoute(currentRoute)
+    }
+    if (initRoute && initRoute !== currentRoute) {
+      setInitRoute(currentRoute)
+      setShowMenu(false)
+    }
+  }, [currentRoute, initRoute])
+
   if (groupId) {
-    return (
+    return hasMounted && (desktop || showMenu) ? (
       <div className={styles.sidebar}>
         <ul>
           <ul>
@@ -234,10 +258,12 @@ const Sidebar = () => {
           )}
         </ul>
       </div>
+    ) : (
+      <></>
     )
   }
 
-  return (
+  return hasMounted && (desktop || showMenu) ? (
     <div className={styles.sidebar}>
       <ul>
         <li>{'explore'}</li>
@@ -292,6 +318,8 @@ const Sidebar = () => {
         </ul>
       </ul>
     </div>
+  ) : (
+    <></>
   )
 }
 

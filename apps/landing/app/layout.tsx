@@ -44,6 +44,12 @@ const Layout = ({ children }: any) => (
                   target: '_blank',
                   title: 'source code',
                 },
+                'divider',
+                {
+                  link: 'https://chora.studio',
+                  target: '_blank',
+                  title: 'chora studio',
+                },
               ]}
               mobile={true}
             />

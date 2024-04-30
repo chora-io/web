@@ -17,12 +17,6 @@
   display: none; /* Safari and Chrome */
 }
 
-@media (max-width: 850px) {
-  .sidebar {
-    display: none;
-  }
-}
-
 .sidebar ul {
   list-style: none;
   padding: 2em;

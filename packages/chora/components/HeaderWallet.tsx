@@ -5,17 +5,26 @@ import { useContext, useEffect, useState } from 'react'
 
 import { ThemeContext, MenuContext, WalletContext } from '../contexts'
 import { cachedNetworkKey, defaultNetwork } from '../contexts/WalletContext'
-import { HeaderTitle, ThemeButton, UserButton } from '.'
+import { HeaderTitle, MenuButton, ThemeButton, UserButton } from '.'
 import { SelectNetwork } from './forms'
 
 import styles from './HeaderWallet.module.css'
 
 const HeaderWallet = ({ title, testnets, noUser }: any) => {
   const { darkTheme, setDarkTheme } = useContext(ThemeContext)
-  const { showUser, setShowUser } = useContext(MenuContext)
+  const { showMenu, setShowMenu, showUser, setShowUser } =
+    useContext(MenuContext)
   const { network, setNetwork, wallet, loading } = useContext(WalletContext)
 
   const [selected, setSelected] = useState<string>('')
+
+  const toggleMenu = () => {
+    if (showMenu) {
+      setShowMenu(false)
+    } else {
+      setShowMenu(true)
+    }
+  }
 
   const toggleTheme = () => {
     if (darkTheme) {
@@ -51,6 +60,9 @@ const HeaderWallet = ({ title, testnets, noUser }: any) => {
     <div className={styles.header}>
       <div style={{ display: 'none' }}>{darkTheme?.toString()}</div>
       <div>
+        <div className={styles.mobile}>
+          <MenuButton darkTheme={darkTheme} toggleMenu={toggleMenu} />
+        </div>
         <HeaderTitle darkTheme={darkTheme} title={title} />
         <div className={styles.menu}>
           <form className={styles.form}>

@@ -1,15 +1,9 @@
-.header {
-  composes: header from 'chora/styles/header.css';
-}
-
 .title {
   composes: header-title from 'chora/styles/header.css';
 }
 
-.menu {
-  composes: header-menu from 'chora/styles/header.css';
-}
-
-.divider {
-  composes: header-divider from 'chora/styles/header.css';
+@media (max-width: 850px) {
+  .title {
+    display: none !important;
+  }
 }

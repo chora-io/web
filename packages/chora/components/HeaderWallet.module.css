@@ -2,10 +2,6 @@
   composes: header from 'chora/styles/header.css';
 }
 
-.title {
-  composes: header-title from 'chora/styles/header.css';
-}
-
 .menu {
   composes: header-menu from 'chora/styles/header.css';
 }
@@ -16,6 +12,16 @@
 
 .menu > button {
   margin: 0 0.75em;
+}
+
+.mobile {
+  margin-left: 2.5em;
+}
+
+@media (min-width: 850px) {
+  .mobile {
+    display: none !important;
+  }
 }
 
 .form {
