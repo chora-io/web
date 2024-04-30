@@ -5,8 +5,8 @@ import Link from 'next/link'
 import * as React from 'react'
 import { useContext } from 'react'
 
-import choraLogoDark from '../assets//images/chora_dark_small.png'
-import choraLogoLight from '../assets//images/chora_light_small.png'
+import choraDarkSmall from '../assets//images/chora_dark_small.png'
+import choraLightSmall from '../assets//images/chora_light_small.png'
 import { ThemeContext } from '../contexts'
 
 import styles from './Footer.module.css'
@@ -14,13 +14,18 @@ import styles from './Footer.module.css'
 const Footer = ({ about, items }: any) => {
   const { darkTheme } = useContext(ThemeContext)
 
+  const currentYear = new Date().getFullYear()
+
   return (
     <div className={styles.footer}>
       <div style={{ display: 'none' }}>{darkTheme?.toString()}</div>
       <div>
         <div className={styles.title}>
-          <Image alt="chora" src={darkTheme ? choraLogoDark : choraLogoLight} />
-          <h4>{'© 2024 Chora Studio LLC'}</h4>
+          <Image
+            alt="chora"
+            src={darkTheme ? choraDarkSmall : choraLightSmall}
+          />
+          <h4>{`© ${currentYear} Chora Studio LLC`}</h4>
         </div>
         {about && (
           <div className={styles.list}>

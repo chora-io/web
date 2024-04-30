@@ -13,3 +13,13 @@
 .divider {
   composes: header-divider from 'chora/styles/header.css';
 }
+
+.mobile {
+  margin-left: 2.5em;
+}
+
+@media (min-width: 850px) {
+  .mobile {
+    display: none !important;
+  }
+}

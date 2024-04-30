@@ -49,6 +49,7 @@ const HeaderWallet = ({ title, testnets, noUser }: any) => {
 
   return (
     <div className={styles.header}>
+      <div style={{ display: 'none' }}>{darkTheme?.toString()}</div>
       <div>
         <HeaderTitle darkTheme={darkTheme} title={title} />
         <div className={styles.menu}>

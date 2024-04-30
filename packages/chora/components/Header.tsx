@@ -4,13 +4,23 @@ import Link from 'next/link'
 import * as React from 'react'
 import { useContext } from 'react'
 
-import { ThemeContext } from '../contexts'
+import { MenuContext, ThemeContext } from '../contexts'
 import { HeaderTitle, ThemeButton } from '.'
 
 import styles from './Header.module.css'
+import MenuButton from './MenuButton'
 
 const Header = ({ title, itemsLeft, itemsRight }: any) => {
+  const { showMenu, setShowMenu } = useContext(MenuContext)
   const { darkTheme, setDarkTheme } = useContext(ThemeContext)
+
+  const toggleMenu = () => {
+    if (showMenu) {
+      setShowMenu(false)
+    } else {
+      setShowMenu(true)
+    }
+  }
 
   const toggleTheme = () => {
     if (darkTheme) {
@@ -24,6 +34,9 @@ const Header = ({ title, itemsLeft, itemsRight }: any) => {
     <div className={styles.header}>
       <div style={{ display: 'none' }}>{darkTheme?.toString()}</div>
       <div>
+        <div className={styles.mobile}>
+          <MenuButton darkTheme={darkTheme} toggleMenu={toggleMenu} />
+        </div>
         <HeaderTitle darkTheme={darkTheme} title={title} />
         <div className={styles.menu}>
           {(itemsLeft || itemsRight) && (
