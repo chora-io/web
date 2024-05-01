@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const AddPage = () => (
   <div className={styles.page}>
     <div>
-      <Breadcrumb text="← monitors" />
+      <Breadcrumb text="monitors" />
       <h1>{'add monitor'}</h1>
       <AddMonitor />
     </div>

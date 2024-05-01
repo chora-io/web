@@ -1,5 +1,10 @@
 /* form */
 
+.form {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
 .form label {
   display: block;
   margin-bottom: 2em;

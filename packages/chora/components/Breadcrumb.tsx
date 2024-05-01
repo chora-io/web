@@ -3,10 +3,17 @@
 import Link from 'next/link'
 import * as React from 'react'
 
+import { ArrowLeft } from '.'
+
+import styles from './Breadcrumb.module.css'
+
 const Breadcrumb = ({ text }: any) => {
   return (
-    <div style={{ marginBottom: '2em' }}>
-      <Link href={'./'}>{text}</Link>
+    <div className={styles.breadcrumb}>
+      <Link href={'./'}>
+        <ArrowLeft />
+        {text}
+      </Link>
     </div>
   )
 }

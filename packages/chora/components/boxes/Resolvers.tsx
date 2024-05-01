@@ -40,19 +40,21 @@ const Resolvers = ({
       {resolvers && resolvers.length === 0 && <div>{'no resolvers found'}</div>}
       {resolvers && resolvers.length > 0 && (
         <>
-          {view === 'table' ? (
-            <ResolversTable
-              resolvers={resolvers}
-              renderAddress={renderAddress}
-              renderLink={renderLink}
-            />
-          ) : (
-            <ResolversList
-              resolvers={resolvers}
-              renderAddress={renderAddress}
-              renderLink={renderLink}
-            />
-          )}
+          <div className={styles.allowOverflow}>
+            {view === 'table' ? (
+              <ResolversTable
+                resolvers={resolvers}
+                renderAddress={renderAddress}
+                renderLink={renderLink}
+              />
+            ) : (
+              <ResolversList
+                resolvers={resolvers}
+                renderAddress={renderAddress}
+                renderLink={renderLink}
+              />
+            )}
+          </div>
           {limit && (
             <PaginationNav
               length={resolvers ? resolvers.length : 0}

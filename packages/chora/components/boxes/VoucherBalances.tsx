@@ -22,31 +22,33 @@ const VoucherBalances = ({
       {!error && balances && balances.length === 0 && (
         <div>{'no balances found'}</div>
       )}
-      {Array.isArray(balances) &&
-        balances.map((balance) => (
-          <div className={styles.boxItem} key={balance['address']}>
-            <div className={styles.boxText}>
-              <h3>{'address'}</h3>
-              {balance && renderAddress ? (
-                <p>{renderAddress(balance.address)}</p>
-              ) : (
-                <p>
-                  {balance?.address || 'NA'}
-                  {wallet && balance?.address === wallet.bech32Address && (
-                    <span className={styles.activeAccount}>
-                      {'(active account)'}
-                    </span>
-                  )}
-                </p>
-              )}
+      <div className={styles.allowOverflow}>
+        {Array.isArray(balances) &&
+          balances.map((balance) => (
+            <div className={styles.boxItem} key={balance['address']}>
+              <div className={styles.boxText}>
+                <h3>{'address'}</h3>
+                {balance && renderAddress ? (
+                  <p>{renderAddress(balance.address)}</p>
+                ) : (
+                  <p>
+                    {balance?.address || 'NA'}
+                    {wallet && balance?.address === wallet.bech32Address && (
+                      <span className={styles.activeAccount}>
+                        {'(active account)'}
+                      </span>
+                    )}
+                  </p>
+                )}
+              </div>
+              <div className={styles.boxText}>
+                <h3>{'total amount'}</h3>
+                <p>{balance['total_amount']}</p>
+              </div>
+              {renderLink && renderLink(balance.address)}
             </div>
-            <div className={styles.boxText}>
-              <h3>{'total amount'}</h3>
-              <p>{balance['total_amount']}</p>
-            </div>
-            {renderLink && renderLink(balance.address)}
-          </div>
-        ))}
+          ))}
+      </div>
       <Result error={error} />
     </div>
   )

@@ -6,7 +6,7 @@ import * as React from 'react'
 import { useContext, useEffect, useState } from 'react'
 
 import { MenuContext } from '../contexts'
-import { BlankArrow } from '.'
+import { ArrowUpRight } from '.'
 
 import styles from './Sidebar.module.css'
 
@@ -42,7 +42,7 @@ const Sidebar = ({ items, mobile }: any) => {
                 target={item.target}
               >
                 {item.title}
-                {item.target === '_blank' && <BlankArrow color={'#00C3A5'} />}
+                {item.target === '_blank' && <ArrowUpRight />}
               </Link>
             </li>
           ),

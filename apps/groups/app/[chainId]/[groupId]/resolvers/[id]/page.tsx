@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const ResolverPage = () => (
   <div className={styles.page}>
     <div>
-      <Breadcrumb text="← resolvers" />
+      <Breadcrumb text="resolvers" />
       <h1>{'group data resolver'}</h1>
       <Resolver />
     </div>

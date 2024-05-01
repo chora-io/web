@@ -5,8 +5,12 @@ import { useContext } from 'react'
 
 import { ThemeContext } from '../contexts'
 
-const BlankArrow = ({ color, useTheme }: any) => {
+const defaultColor = '#00C3A5'
+
+const ArrowUpRight = ({ color, useTheme }: any) => {
   const { darkTheme } = useContext(ThemeContext)
+
+  const stroke = color || defaultColor
 
   return (
     <svg
@@ -21,7 +25,7 @@ const BlankArrow = ({ color, useTheme }: any) => {
         y1="20"
         x2="20"
         y2="0"
-        stroke={useTheme ? (darkTheme ? '#000' : '#FFF') : color}
+        stroke={useTheme ? (darkTheme ? '#000' : '#FFF') : stroke}
         strokeLinecap="round"
         strokeWidth="3"
       />
@@ -30,7 +34,7 @@ const BlankArrow = ({ color, useTheme }: any) => {
         y1="0"
         x2="20"
         y2="0"
-        stroke={useTheme ? (darkTheme ? '#000' : '#FFF') : color}
+        stroke={useTheme ? (darkTheme ? '#000' : '#FFF') : stroke}
         strokeLinecap="round"
         strokeWidth="5"
       />
@@ -39,7 +43,7 @@ const BlankArrow = ({ color, useTheme }: any) => {
         y1="10"
         x2="20"
         y2="0"
-        stroke={useTheme ? (darkTheme ? '#000' : '#FFF') : color}
+        stroke={useTheme ? (darkTheme ? '#000' : '#FFF') : stroke}
         strokeLinecap="round"
         strokeWidth="5"
       />
@@ -47,4 +51,4 @@ const BlankArrow = ({ color, useTheme }: any) => {
   )
 }
 
-export default BlankArrow
+export default ArrowUpRight

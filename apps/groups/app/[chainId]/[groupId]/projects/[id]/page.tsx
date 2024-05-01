@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const ProjectPage = () => (
   <div className={styles.page}>
     <div>
-      <Breadcrumb text="← projects" />
+      <Breadcrumb text="projects" />
       <h1>{'group class project'}</h1>
       <Project />
     </div>

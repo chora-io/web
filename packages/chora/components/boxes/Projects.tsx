@@ -42,19 +42,21 @@ const Projects = ({
       )}
       {projects && projects.length > 0 && (
         <>
-          {view === 'table' ? (
-            <ProjectsTable
-              projects={projects}
-              renderAddress={renderAddress}
-              renderLink={renderLink}
-            />
-          ) : (
-            <ProjectsList
-              projects={projects}
-              renderAddress={renderAddress}
-              renderLink={renderLink}
-            />
-          )}
+          <div className={styles.allowOverflow}>
+            {view === 'table' ? (
+              <ProjectsTable
+                projects={projects}
+                renderAddress={renderAddress}
+                renderLink={renderLink}
+              />
+            ) : (
+              <ProjectsList
+                projects={projects}
+                renderAddress={renderAddress}
+                renderLink={renderLink}
+              />
+            )}
+          </div>
           {limit && (
             <PaginationNav
               length={projects ? projects.length : 0}

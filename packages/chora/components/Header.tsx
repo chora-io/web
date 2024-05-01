@@ -5,7 +5,7 @@ import * as React from 'react'
 import { useContext } from 'react'
 
 import { MenuContext, ThemeContext } from '../contexts'
-import { BlankArrow, HeaderTitle, MenuButton, ThemeButton } from '.'
+import { ArrowUpRight, HeaderTitle, MenuButton, ThemeButton } from '.'
 
 import styles from './Header.module.css'
 
@@ -57,7 +57,7 @@ const Header = ({
                   <li key={item.title}>
                     <Link href={item.link} target={item.target}>
                       {item.title}
-                      {item.target && <BlankArrow color={'#00C3A5'} />}
+                      {item.target && <ArrowUpRight />}
                     </Link>
                   </li>
                 ))}
@@ -69,7 +69,7 @@ const Header = ({
                   <li key={item.title}>
                     <Link href={item.link} target={item.target}>
                       {item.title}
-                      {item.target && <BlankArrow color={'#00C3A5'} />}
+                      {item.target && <ArrowUpRight />}
                     </Link>
                   </li>
                 ))}

@@ -64,10 +64,12 @@ const Accounts = () => {
       {sortedPolicies && sortedPolicies.length === 0 && (
         <div>{'no accounts found'}</div>
       )}
-      {sortedPolicies &&
-        sortedPolicies.map((policy: any) => (
-          <AccountPreview key={policy['address']} policy={policy} />
-        ))}
+      <div className={styles.allowOverflow}>
+        {sortedPolicies &&
+          sortedPolicies.map((policy: any) => (
+            <AccountPreview key={policy['address']} policy={policy} />
+          ))}
+      </div>
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

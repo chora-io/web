@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const AccountPage = () => (
   <div className={styles.page}>
     <div>
-      <Breadcrumb text="← accounts" />
+      <Breadcrumb text="accounts" />
       <h1>{'group account'}</h1>
       <AccountNav />
       <Account />

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const BalancePage = () => (
   <div className={styles.page}>
     <div>
-      <Breadcrumb text="← vouchers" />
+      <Breadcrumb text="vouchers" />
       <h1>{'balance'}</h1>
       <Balance />
     </div>

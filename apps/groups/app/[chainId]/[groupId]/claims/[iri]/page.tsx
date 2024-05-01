@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const ClaimPage = () => (
   <div className={styles.page}>
     <div>
-      <Breadcrumb text="← claims" />
+      <Breadcrumb text="claims" />
       <h1>{'data anchor'}</h1>
       <Anchor />
       <h1>{'data resolved'}</h1>

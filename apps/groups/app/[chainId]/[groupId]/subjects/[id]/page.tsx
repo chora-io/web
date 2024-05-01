@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const SubjectPage = () => (
   <div className={styles.page}>
     <div>
-      <Breadcrumb text="← subjects" />
+      <Breadcrumb text="subjects" />
       <h1>{'group subject'}</h1>
       <Subject />
     </div>

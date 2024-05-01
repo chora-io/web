@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const MemberPage = () => (
   <div className={styles.page}>
     <div>
-      <Breadcrumb text="← members" />
+      <Breadcrumb text="members" />
       <h1>{'group member'}</h1>
       <Member />
       <h1>{'authorizations'}</h1>

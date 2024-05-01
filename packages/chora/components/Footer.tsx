@@ -8,9 +8,9 @@ import { useContext } from 'react'
 import choraDarkSmall from '../assets//images/chora_dark_small.png'
 import choraLightSmall from '../assets//images/chora_light_small.png'
 import { ThemeContext } from '../contexts'
+import { ArrowUpRight } from '.'
 
 import styles from './Footer.module.css'
-import { BlankArrow } from './index'
 
 const Footer = ({ about, items }: any) => {
   const { darkTheme } = useContext(ThemeContext)
@@ -42,7 +42,7 @@ const Footer = ({ about, items }: any) => {
                 <li key={item.title}>
                   <Link href={item.link} target={item.target}>
                     {item.title}
-                    {item.target && <BlankArrow color={'#00C3A5'} />}
+                    {item.target && <ArrowUpRight />}
                   </Link>
                 </li>
               ))}

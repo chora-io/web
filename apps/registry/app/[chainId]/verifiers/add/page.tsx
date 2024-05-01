@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const AddPage = () => (
   <div className={styles.page}>
     <div>
-      <Breadcrumb text="← verifiers" />
+      <Breadcrumb text="verifiers" />
       <h1>{'add verifier'}</h1>
       <AddVerifier />
     </div>

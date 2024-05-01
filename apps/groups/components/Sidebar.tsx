@@ -6,6 +6,7 @@ import { useParams, usePathname } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
 import styles from './Sidebar.module.css'
+import { ArrowLeft } from 'chora/components'
 
 const Sidebar = () => {
   const { groupId } = useParams()
@@ -48,7 +49,8 @@ const Sidebar = () => {
                   currentRoute === `/${network}` ? styles.active : undefined
                 }
               >
-                {'← groups'}
+                <ArrowLeft />
+                {'groups'}
               </Link>
             </li>
           </ul>
@@ -273,7 +275,8 @@ const Sidebar = () => {
                 href={'/'}
                 className={currentRoute === '/' ? styles.active : undefined}
               >
-                {'← home'}
+                <ArrowLeft />
+                {'home'}
               </Link>
             </li>
           </ul>

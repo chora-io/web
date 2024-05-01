@@ -63,13 +63,15 @@ const Members = () => {
       {sortedMembers && sortedMembers.length === 0 && (
         <div>{'no members found'}</div>
       )}
-      {sortedMembers &&
-        sortedMembers.map((member: any) => (
-          <MemberPreview
-            key={member['member']['address']}
-            member={member['member']}
-          />
-        ))}
+      <div className={styles.allowOverflow}>
+        {sortedMembers &&
+          sortedMembers.map((member: any) => (
+            <MemberPreview
+              key={member['member']['address']}
+              member={member['member']}
+            />
+          ))}
+      </div>
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

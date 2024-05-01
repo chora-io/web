@@ -1,0 +1,12 @@
+.breadcrumb {
+  margin: 1.5em 0;
+}
+
+@media (max-width: 850px) {
+  .breadcrumb {
+    font-size: 0.8em;
+    position: absolute;
+    margin: 0;
+    padding: 1em;
+  }
+}

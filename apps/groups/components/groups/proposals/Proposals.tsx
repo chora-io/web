@@ -134,10 +134,12 @@ const Proposals = () => {
       {filtered && filtered.length === 0 && (
         <div>{`no proposals with status ${filter}`}</div>
       )}
-      {filtered &&
-        filtered.map((proposal: any) => (
-          <ProposalPreview key={proposal['id']} proposal={proposal} />
-        ))}
+      <div className={styles.allowOverflow}>
+        {filtered &&
+          filtered.map((proposal: any) => (
+            <ProposalPreview key={proposal['id']} proposal={proposal} />
+          ))}
+      </div>
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

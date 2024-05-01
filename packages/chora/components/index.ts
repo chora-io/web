@@ -1,5 +1,7 @@
+export { default as ArrowLeft } from './ArrowLeft'
+export { default as ArrowRight } from './ArrowRight'
+export { default as ArrowUpRight } from './ArrowUpRight'
 export { default as Background } from './Background'
-export { default as BlankArrow } from './BlankArrow'
 export { default as Breadcrumb } from './Breadcrumb'
 export { default as ConnectWallet } from './ConnectWallet'
 export { default as Faucet } from './Faucet'

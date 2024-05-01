@@ -9,3 +9,7 @@
 .boxText {
   composes: box-text from 'chora/styles/box.css';
 }
+
+.allowOverflow {
+  overflow-x: scroll;
+}

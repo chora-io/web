@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const CreatePage = () => (
   <div className={styles.page}>
     <div>
-      <Breadcrumb text="← classes" />
+      <Breadcrumb text="classes" />
       <h1>{'create credit class'}</h1>
       <CreateClass />
     </div>

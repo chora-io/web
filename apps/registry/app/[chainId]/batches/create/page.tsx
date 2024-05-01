@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const CreatePage = () => (
   <div className={styles.page}>
     <div>
-      <Breadcrumb text="← batches" />
+      <Breadcrumb text="batches" />
       <h1>{'create credit batch'}</h1>
       <CreateBatch />
     </div>

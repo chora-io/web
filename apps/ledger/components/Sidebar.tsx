@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
 import styles from './Sidebar.module.css'
+import { ArrowLeft } from 'chora/components'
 
 const Sidebar = () => {
   const currentRoute = usePathname()
@@ -48,7 +49,8 @@ const Sidebar = () => {
                 href={'/'}
                 className={currentRoute === '/' ? styles.active : undefined}
               >
-                {'← home'}
+                <ArrowLeft />
+                {'home'}
               </Link>
             </li>
           </ul>

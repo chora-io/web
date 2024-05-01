@@ -6,6 +6,7 @@ import { useParams, usePathname } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
 import styles from './Sidebar.module.css'
+import { ArrowLeft } from 'chora/components'
 
 const Sidebar = () => {
   const { denom, id, iri } = useParams()
@@ -50,7 +51,8 @@ const Sidebar = () => {
                     : undefined
                 }
               >
-                {'← claims'}
+                <ArrowLeft />
+                {'claims'}
               </Link>
             </li>
           </ul>
@@ -90,7 +92,8 @@ const Sidebar = () => {
                     : undefined
                 }
               >
-                {'← classes'}
+                <ArrowLeft />
+                {'classes'}
               </Link>
             </li>
           </ul>
@@ -130,7 +133,8 @@ const Sidebar = () => {
                     : undefined
                 }
               >
-                {'← batches'}
+                <ArrowLeft />
+                {'batches'}
               </Link>
             </li>
           </ul>
@@ -170,7 +174,8 @@ const Sidebar = () => {
                     : undefined
                 }
               >
-                {'← baskets'}
+                <ArrowLeft />
+                {'baskets'}
               </Link>
             </li>
           </ul>
@@ -210,7 +215,8 @@ const Sidebar = () => {
                     : undefined
                 }
               >
-                {'← monitors'}
+                <ArrowLeft />
+                {'monitors'}
               </Link>
             </li>
           </ul>
@@ -250,7 +256,8 @@ const Sidebar = () => {
                     : undefined
                 }
               >
-                {'← projects'}
+                <ArrowLeft />
+                {'projects'}
               </Link>
             </li>
           </ul>
@@ -290,7 +297,8 @@ const Sidebar = () => {
                     : undefined
                 }
               >
-                {'← resolvers'}
+                <ArrowLeft />
+                {'resolvers'}
               </Link>
             </li>
           </ul>
@@ -330,7 +338,8 @@ const Sidebar = () => {
                     : undefined
                 }
               >
-                {'← subjects'}
+                <ArrowLeft />
+                {'subjects'}
               </Link>
             </li>
           </ul>
@@ -370,7 +379,8 @@ const Sidebar = () => {
                     : undefined
                 }
               >
-                {'← verifiers'}
+                <ArrowLeft />
+                {'verifiers'}
               </Link>
             </li>
           </ul>
@@ -410,7 +420,8 @@ const Sidebar = () => {
                     : undefined
                 }
               >
-                {'← vouchers'}
+                <ArrowLeft />
+                {'vouchers'}
               </Link>
             </li>
           </ul>
@@ -446,7 +457,8 @@ const Sidebar = () => {
                 href={'/'}
                 className={currentRoute === '/' ? styles.active : undefined}
               >
-                {'← home'}
+                <ArrowLeft />
+                {'home'}
               </Link>
             </li>
           </ul>
