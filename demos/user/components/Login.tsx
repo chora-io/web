@@ -1,6 +1,7 @@
 'use client'
 
-import { InputString, Result } from 'chora/components'
+import { Result } from 'chora/components'
+import { InputString } from 'chora/components/forms'
 import { ServerContext, WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import { useContext, useState } from 'react'

@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 const CompletionPage = () => (
   <div className={styles.page}>
     <div>
+      <h1>{'text completion'}</h1>
       <Completion />
     </div>
   </div>

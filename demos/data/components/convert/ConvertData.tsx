@@ -1,12 +1,12 @@
 'use client'
 
+import { Result } from 'chora/components'
 import {
   InputJSON,
   InputsFromJSON,
-  Result,
   SelectContext,
   SelectOptionInput,
-} from 'chora/components'
+} from 'chora/components/forms'
 import {
   SelectDigestAlgorithm,
   SelectGraphCanon,

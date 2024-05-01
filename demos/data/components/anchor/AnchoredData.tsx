@@ -1,6 +1,7 @@
 'use client'
 
-import { InputIRI, InputURL, Result } from 'chora/components'
+import { Result } from 'chora/components'
+import { InputIRI, InputURL } from 'chora/components/forms'
 import { InputContentHashJSON } from 'chora/components/forms/regen.data.v1'
 import { WalletContext } from 'chora/contexts'
 import { useContext, useState } from 'react'

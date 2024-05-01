@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 const ServerPage = () => (
   <div className={styles.page}>
     <div>
+      <h1>{'chora server'}</h1>
       <GetData />
       <PostData />
     </div>

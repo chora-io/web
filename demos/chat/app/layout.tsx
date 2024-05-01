@@ -1,5 +1,5 @@
 import { Header, Sidebar } from 'chora/components'
-import { ThemeContextProvider } from 'chora/contexts'
+import { MenuContextProvider, ThemeContextProvider } from 'chora/contexts'
 
 import './globals.css'
 
@@ -8,21 +8,23 @@ const Layout = ({ children }: any) => (
     <body>
       <main>
         <ThemeContextProvider>
-          <Header
-            title={{
-              link: '/',
-              titleX: 'chat',
-            }}
-          />
-          <Sidebar
-            items={[
-              {
-                link: '/completion',
-                title: 'completion',
-              },
-            ]}
-          />
-          {children}
+          <MenuContextProvider>
+            <Header
+              title={{
+                link: '/',
+                titleX: 'chat',
+              }}
+            />
+            <Sidebar
+              items={[
+                {
+                  link: '/completion',
+                  title: 'completion',
+                },
+              ]}
+            />
+            {children}
+          </MenuContextProvider>
         </ThemeContextProvider>
       </main>
     </body>

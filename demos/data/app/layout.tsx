@@ -1,5 +1,9 @@
 import { HeaderWallet as Header, Sidebar } from 'chora/components'
-import { ThemeContextProvider, WalletContextProvider } from 'chora/contexts'
+import {
+  MenuContextProvider,
+  ThemeContextProvider,
+  WalletContextProvider,
+} from 'chora/contexts'
 
 import './globals.css'
 
@@ -8,35 +12,37 @@ const Layout = ({ children }: any) => (
     <body>
       <main>
         <ThemeContextProvider>
-          <WalletContextProvider>
-            <Header
-              title={{
-                link: '/',
-                titleX: 'data',
-              }}
-            />
-            <Sidebar
-              items={[
-                {
+          <MenuContextProvider>
+            <WalletContextProvider>
+              <Header
+                title={{
                   link: '/',
-                  title: 'home',
-                },
-                {
-                  link: '/convert',
-                  title: 'convert',
-                },
-                {
-                  link: '/resolvers',
-                  title: 'resolvers',
-                },
-                {
-                  link: '/server',
-                  title: 'server',
-                },
-              ]}
-            />
-            {children}
-          </WalletContextProvider>
+                  titleX: 'data',
+                }}
+              />
+              <Sidebar
+                items={[
+                  {
+                    link: '/',
+                    title: 'home',
+                  },
+                  {
+                    link: '/convert',
+                    title: 'convert',
+                  },
+                  {
+                    link: '/resolvers',
+                    title: 'resolvers',
+                  },
+                  {
+                    link: '/server',
+                    title: 'server',
+                  },
+                ]}
+              />
+              {children}
+            </WalletContextProvider>
+          </MenuContextProvider>
         </ThemeContextProvider>
       </main>
     </body>

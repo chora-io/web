@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 const AccountPage = () => (
   <div className={styles.page}>
     <div>
+      <h1>{'user account'}</h1>
       <Switch />
       <Auth />
       <Keplr />

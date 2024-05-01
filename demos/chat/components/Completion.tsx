@@ -1,6 +1,7 @@
 'use client'
 
-import { InputString, Result } from 'chora/components'
+import { Result } from 'chora/components'
+import { InputString } from 'chora/components/forms'
 import { useState } from 'react'
 
 import styles from './Completion.module.css'
@@ -43,7 +44,6 @@ const Completion = () => {
   return (
     <div className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>{'text completion'}</h2>
         <p>
           {'return a text completion that matches the instructions or context'}
         </p>

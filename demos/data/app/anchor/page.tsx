@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 const AnchorPage = () => (
   <div className={styles.page}>
     <div>
+      <h1>{'anchor data'}</h1>
       <AnchoredData />
     </div>
   </div>
