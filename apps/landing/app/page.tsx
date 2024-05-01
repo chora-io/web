@@ -25,12 +25,12 @@ const HomePage = () => {
             <h1>{'what is chora?'}</h1>
             <p>
               {
-                'Chora is a placeless place where ideas wax and wane. Chora is also software for commons governance and ecological regeneration.'
+                'Chora is experimental software for commons governance and ecological regeneration built with distributed ledger technology.'
               }
             </p>
             <p>
               {
-                'Chora includes a blockchain application, blockchain modules, a database and API service, and three web applications: '
+                'Chora includes a blockchain application, blockchain modules, an API service, and three web applications: '
               }
               <Link href="/chora-groups">{'Groups'}</Link>
               {', '}
@@ -44,7 +44,7 @@ const HomePage = () => {
                 'Chora also includes demo applications, developer tools, and other software experiments. For more information, see '
               }
               <a href="https://docs.chora.io" target="_blank">
-                {'Chora Documentation'}
+                {'Documentation'}
               </a>
               {'.'}
             </p>
