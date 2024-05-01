@@ -12,6 +12,7 @@ import styles from './HeaderWallet.module.css'
 const HeaderWallet = ({
   title,
   showMenuButton,
+  showMobileTitle,
   showUserButton,
   testnetsOnly,
 }: any) => {
@@ -49,11 +50,15 @@ const HeaderWallet = ({
       <div style={{ display: 'none' }}>{darkTheme?.toString()}</div>
       <div>
         {showMenuButton && (
-          <div className={styles.mobile}>
+          <div className={styles.showOnMobile}>
             <MenuButton darkTheme={darkTheme} toggleMenu={toggleMenu} />
           </div>
         )}
-        <HeaderTitle darkTheme={darkTheme} title={title} />
+        <HeaderTitle
+          darkTheme={darkTheme}
+          title={title}
+          showMobileTitle={showMobileTitle}
+        />
         <div className={styles.menu}>
           <form className={styles.form}>
             <SelectNetwork

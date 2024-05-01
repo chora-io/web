@@ -41,16 +41,18 @@ const Sidebar = () => {
   return hasMounted && (desktop || showMenu) ? (
     <div className={styles.sidebar}>
       <ul>
-        <ul className={styles.mobile}>
-          <li>
-            <Link
-              href={`/`}
-              className={currentRoute === `/` ? styles.active : undefined}
-            >
-              {'home'}
-            </Link>
-          </li>
-        </ul>
+        {currentRoute !== '/' && (
+          <ul className={styles.mobile}>
+            <li style={{ padding: '1em 0' }}>
+              <Link
+                href={'/'}
+                className={currentRoute === '/' ? styles.active : undefined}
+              >
+                {'← home'}
+              </Link>
+            </li>
+          </ul>
+        )}
         <li>{'account'}</li>
         <ul>
           <li>

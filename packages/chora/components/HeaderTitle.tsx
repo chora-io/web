@@ -9,8 +9,8 @@ import choraLogoLight from '../assets/images/chora_light_small.png'
 
 import styles from './HeaderTitle.module.css'
 
-const HeaderTitle = ({ darkTheme, title }: any) => (
-  <div className={styles.title}>
+const HeaderTitle = ({ darkTheme, title, showMobileTitle }: any) => (
+  <div className={showMobileTitle ? styles.mobileTitle : styles.title}>
     <Link href={(title && title.link) || '/'}>
       <Image alt="chora" src={darkTheme ? choraLogoDark : choraLogoLight} />
       <div>

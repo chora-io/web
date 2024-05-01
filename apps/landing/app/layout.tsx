@@ -41,6 +41,7 @@ const Layout = ({ children }: any) => (
                 },
               ]}
               showMenuButton={true}
+              showMobileTitle={true}
             />
             <Sidebar
               items={[

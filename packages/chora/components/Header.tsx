@@ -9,7 +9,13 @@ import { BlankArrow, HeaderTitle, MenuButton, ThemeButton } from '.'
 
 import styles from './Header.module.css'
 
-const Header = ({ title, itemsLeft, itemsRight, showMenuButton }: any) => {
+const Header = ({
+  title,
+  itemsLeft,
+  itemsRight,
+  showMenuButton,
+  showMobileTitle,
+}: any) => {
   const { showMenu, setShowMenu } = useContext(MenuContext)
   const { darkTheme, setDarkTheme } = useContext(ThemeContext)
 
@@ -34,11 +40,15 @@ const Header = ({ title, itemsLeft, itemsRight, showMenuButton }: any) => {
       <div style={{ display: 'none' }}>{darkTheme?.toString()}</div>
       <div>
         {showMenuButton && (
-          <div className={styles.mobile}>
+          <div className={styles.showOnMobile}>
             <MenuButton darkTheme={darkTheme} toggleMenu={toggleMenu} />
           </div>
         )}
-        <HeaderTitle darkTheme={darkTheme} title={title} />
+        <HeaderTitle
+          darkTheme={darkTheme}
+          title={title}
+          showMobileTitle={showMobileTitle}
+        />
         <div className={styles.menu}>
           {(itemsLeft || itemsRight) && (
             <ul>

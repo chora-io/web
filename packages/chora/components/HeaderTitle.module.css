@@ -7,3 +7,7 @@
     display: none !important;
   }
 }
+
+.mobileTitle {
+  composes: header-title from 'chora/styles/header.css';
+}

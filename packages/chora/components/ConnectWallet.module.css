@@ -5,6 +5,12 @@
   height: var(--header-height);
 }
 
+@media (max-width: 850px) {
+  .connect {
+    display: block;
+  }
+}
+
 /* error */
 
 .error {
@@ -21,6 +27,12 @@
   display: flex;
   font-size: 0.9em;
   margin: 0 1em;
+}
+
+@media (max-width: 850px) {
+  .address {
+    display: block;
+  }
 }
 
 /* form */

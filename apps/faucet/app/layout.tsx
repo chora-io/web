@@ -20,6 +20,7 @@ const Layout = ({ children }: any) => (
                   titleX: 'faucet',
                 }}
                 showMenuButton={true}
+                showMobileTitle={true}
               />
               <Sidebar
                 items={[

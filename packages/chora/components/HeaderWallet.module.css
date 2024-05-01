@@ -14,12 +14,8 @@
   margin: 0 0.75em;
 }
 
-.mobile {
-  margin-left: 2.5em;
-}
-
 @media (min-width: 850px) {
-  .mobile {
+  .showOnMobile {
     display: none !important;
   }
 }
