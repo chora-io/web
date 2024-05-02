@@ -1,6 +1,13 @@
 .box {
   composes: box from 'chora/styles/box.css';
-  overflow-x: scroll;
+  overflow: hidden;
+}
+
+@media (max-width: 850px) {
+  .box {
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
 }
 
 .boxOptions {
