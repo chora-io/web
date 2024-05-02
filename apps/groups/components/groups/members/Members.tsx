@@ -4,7 +4,7 @@ import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
 import { useContext, useEffect, useState } from 'react'
 
-import MemberPreview from '@components/groups/members/MemberPreview'
+import MembersListItem from '@components/groups/members/MembersListItem'
 import { GroupContext } from '@contexts/GroupContext'
 
 import styles from './Members.module.css'
@@ -63,15 +63,13 @@ const Members = () => {
       {sortedMembers && sortedMembers.length === 0 && (
         <div>{'no members found'}</div>
       )}
-      <div className={styles.allowOverflow}>
-        {sortedMembers &&
-          sortedMembers.map((member: any) => (
-            <MemberPreview
-              key={member['member']['address']}
-              member={member['member']}
-            />
-          ))}
-      </div>
+      {sortedMembers &&
+        sortedMembers.map((member: any) => (
+          <MembersListItem
+            key={member['member']['address']}
+            member={member['member']}
+          />
+        ))}
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

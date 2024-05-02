@@ -42,21 +42,19 @@ const Vouchers = ({
       )}
       {vouchers && vouchers.length > 0 && (
         <>
-          <div className={styles.allowOverflow}>
-            {view === 'table' ? (
-              <VouchersTable
-                vouchers={vouchers}
-                renderAddress={renderAddress}
-                renderLink={renderLink}
-              />
-            ) : (
-              <VouchersList
-                vouchers={vouchers}
-                renderAddress={renderAddress}
-                renderLink={renderLink}
-              />
-            )}
-          </div>
+          {view === 'table' ? (
+            <VouchersTable
+              vouchers={vouchers}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
+          ) : (
+            <VouchersList
+              vouchers={vouchers}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
+          )}
           {limit && (
             <PaginationNav
               length={vouchers ? vouchers.length : 0}

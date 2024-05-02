@@ -5,9 +5,9 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
-import styles from './AccountPreview.module.css'
+import styles from './AccountsListItem.module.css'
 
-const AccountPreview = ({ policy }: any) => {
+const AccountsListItem = ({ policy }: any) => {
   const { groupId } = useParams()
   const { chainInfo, network } = useContext(WalletContext)
 
@@ -36,4 +36,4 @@ const AccountPreview = ({ policy }: any) => {
   )
 }
 
-export default AccountPreview
+export default AccountsListItem

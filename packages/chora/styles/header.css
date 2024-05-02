@@ -46,13 +46,13 @@
 .header-title div {
   color: var(--color-text);
   font-size: 20px;
-  margin-left: 6px;
+  margin-left: 8px;
 }
 
 @media (max-width: 850px) {
   .header-title div {
     font-size: 15px;
-    margin-left: 4px;
+    margin-left: 6px;
   }
 }
 

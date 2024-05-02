@@ -42,21 +42,19 @@ const Batches = ({
       )}
       {batches && batches.length > 0 && (
         <>
-          <div className={styles.allowOverflow}>
-            {view === 'table' ? (
-              <BatchesTable
-                batches={batches}
-                renderAddress={renderAddress}
-                renderLink={renderLink}
-              />
-            ) : (
-              <BatchesList
-                batches={batches}
-                renderAddress={renderAddress}
-                renderLink={renderLink}
-              />
-            )}
-          </div>
+          {view === 'table' ? (
+            <BatchesTable
+              batches={batches}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
+          ) : (
+            <BatchesList
+              batches={batches}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
+          )}
           {limit && (
             <PaginationNav
               length={batches ? batches.length : 0}

@@ -1,3 +1,7 @@
+.container {
+  composes: table-container from 'chora/styles/table.css';
+}
+
 .table {
   composes: table from 'chora/styles/table.css';
 }

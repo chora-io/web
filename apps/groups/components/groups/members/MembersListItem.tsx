@@ -5,9 +5,9 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
-import styles from './MemberPreview.module.css'
+import styles from './MembersListItem.module.css'
 
-const MemberPreview = ({ member }: any) => {
+const MembersListItem = ({ member }: any) => {
   const { groupId } = useParams()
   const { chainInfo, network } = useContext(WalletContext)
 
@@ -36,4 +36,4 @@ const MemberPreview = ({ member }: any) => {
   )
 }
 
-export default MemberPreview
+export default MembersListItem

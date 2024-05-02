@@ -42,16 +42,14 @@ const Attestations = ({
       )}
       {attestations && attestations.length > 0 && (
         <>
-          <div className={styles.allowOverflow}>
-            {attestations.map((attestation: any) => (
-              <AttestationsListItem
-                key={attestation['iri']}
-                attestation={attestation}
-                renderAddress={renderAddress}
-                renderLink={renderLink}
-              />
-            ))}
-          </div>
+          {attestations.map((attestation: any) => (
+            <AttestationsListItem
+              key={attestation['iri']}
+              attestation={attestation}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
+          ))}
           {limit && (
             <PaginationNav
               length={attestations ? attestations.length : 0}

@@ -11,31 +11,29 @@ import './globals.css'
 const Layout = ({ children }: any) => (
   <html lang="en">
     <body>
-      <main>
-        <ThemeContextProvider>
-          <MenuContextProvider>
-            <WalletContextProvider>
-              <ServerContextProvider>
-                <Header
-                  title={{
-                    link: '/',
-                    titleX: 'user',
-                  }}
-                />
-                <Sidebar
-                  items={[
-                    {
-                      link: '/account',
-                      title: 'account',
-                    },
-                  ]}
-                />
-                {children}
-              </ServerContextProvider>
-            </WalletContextProvider>
-          </MenuContextProvider>
-        </ThemeContextProvider>
-      </main>
+      <ThemeContextProvider>
+        <MenuContextProvider>
+          <WalletContextProvider>
+            <ServerContextProvider>
+              <Header
+                title={{
+                  link: '/',
+                  titleX: 'user',
+                }}
+              />
+              <Sidebar
+                items={[
+                  {
+                    link: '/account',
+                    title: 'account',
+                  },
+                ]}
+              />
+              <main>{children}</main>
+            </ServerContextProvider>
+          </WalletContextProvider>
+        </MenuContextProvider>
+      </ThemeContextProvider>
     </body>
   </html>
 )

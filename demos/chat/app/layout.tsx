@@ -6,27 +6,25 @@ import './globals.css'
 const Layout = ({ children }: any) => (
   <html lang="en">
     <body>
-      <main>
-        <ThemeContextProvider>
-          <MenuContextProvider>
-            <Header
-              title={{
-                link: '/',
-                titleX: 'chat',
-              }}
-            />
-            <Sidebar
-              items={[
-                {
-                  link: '/completion',
-                  title: 'completion',
-                },
-              ]}
-            />
-            {children}
-          </MenuContextProvider>
-        </ThemeContextProvider>
-      </main>
+      <ThemeContextProvider>
+        <MenuContextProvider>
+          <Header
+            title={{
+              link: '/',
+              titleX: 'chat',
+            }}
+          />
+          <Sidebar
+            items={[
+              {
+                link: '/completion',
+                title: 'completion',
+              },
+            ]}
+          />
+          <main>{children}</main>
+        </MenuContextProvider>
+      </ThemeContextProvider>
     </body>
   </html>
 )

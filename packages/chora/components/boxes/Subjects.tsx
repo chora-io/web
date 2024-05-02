@@ -42,21 +42,19 @@ const Subjects = ({
       )}
       {subjects && subjects.length > 0 && (
         <>
-          <div className={styles.allowOverflow}>
-            {view === 'table' ? (
-              <SubjectsTable
-                subjects={subjects}
-                renderAddress={renderAddress}
-                renderLink={renderLink}
-              />
-            ) : (
-              <SubjectsList
-                subjects={subjects}
-                renderAddress={renderAddress}
-                renderLink={renderLink}
-              />
-            )}
-          </div>
+          {view === 'table' ? (
+            <SubjectsTable
+              subjects={subjects}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
+          ) : (
+            <SubjectsList
+              subjects={subjects}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
+          )}
           {limit && (
             <PaginationNav
               length={subjects ? subjects.length : 0}

@@ -135,3 +135,9 @@
   color: var(--color-theme);
   margin: 0.5em 0;
 }
+
+@media (max-width: 850px) {
+  .box-text p {
+    overflow-x: scroll;
+  }
+}

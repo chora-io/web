@@ -42,13 +42,11 @@ const Groups = () => {
       {!error && groups && groups.length === 0 && <p>{'no groups found'}</p>}
       {groups && groups.length > 0 && (
         <>
-          <div className={styles.allowOverflow}>
-            {view === 'table' ? (
-              <GroupsTable groups={groups} />
-            ) : (
-              <GroupsList groups={groups} />
-            )}
-          </div>
+          {view === 'table' ? (
+            <GroupsTable groups={groups} />
+          ) : (
+            <GroupsList groups={groups} />
+          )}
           {limit && (
             <PaginationNav
               length={groups ? groups.length : 0}

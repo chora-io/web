@@ -10,7 +10,7 @@ import { ArrowUpRight } from '.'
 
 import styles from './Sidebar.module.css'
 
-const Sidebar = ({ items, mobile }: any) => {
+const Sidebar = ({ items, mobileOnly }: any) => {
   const { showMenu, setShowMenu } = useContext(MenuContext)
   const currentRoute = usePathname()
 
@@ -26,8 +26,8 @@ const Sidebar = ({ items, mobile }: any) => {
     }
   }, [currentRoute, initRoute, setShowMenu])
 
-  return !mobile || showMenu ? (
-    <div className={mobile ? styles.mobile : styles.sidebar}>
+  return !mobileOnly || showMenu ? (
+    <div className={mobileOnly ? styles.mobileOnly : styles.sidebar}>
       <ul>
         {items.map((item: any, i: number) =>
           item === 'divider' ? (

@@ -34,7 +34,7 @@ const Layout = ({ children }: any) => (
                   title: 'Regen Redwood',
                 },
               ]}
-              mobile={true}
+              mobileOnly={true}
             />
             <main>{children}</main>
           </WalletContextProvider>

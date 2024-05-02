@@ -171,9 +171,10 @@ textarea::placeholder {
   color: var(--color-text-placeholder);
 }
 
-pre {
-  white-space: pre-wrap;
-  word-break: break-all;
+@media (max-width: 850px) {
+  pre {
+    overflow-x: scroll;
+  }
 }
 
 hr {

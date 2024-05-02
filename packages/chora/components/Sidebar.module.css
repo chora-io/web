@@ -2,7 +2,7 @@
   composes: sidebar from 'chora/styles/sidebar.css';
 }
 
-.mobile {
+.mobileOnly {
   composes: sidebar from 'chora/styles/sidebar.css';
   min-height: calc(100vh - var(--header-height));
   width: 75vw;
@@ -10,13 +10,13 @@
 
 /* cancel sidebar styling */
 @media (max-width: 850px) {
-  .mobile {
+  .mobileOnly {
     display: block !important;
   }
 }
 
 @media (min-width: 850px) {
-  .mobile {
+  .mobileOnly {
     display: none !important;
   }
 }

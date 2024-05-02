@@ -21,26 +21,24 @@ const ProposalVotes = () => {
   return (
     <div className={styles.box}>
       {!votes && !error && <div>{'loading...'}</div>}
-      <div className={styles.allowOverflow}>
-        {Array.isArray(votes) &&
-          votes.map((vote) => (
-            <div className={styles.boxItem} key={vote['voter']}>
-              <div className={styles.boxText}>
-                <h3>{'voter'}</h3>
-                <p>{vote?.voter ? <Address address={vote.voter} /> : 'NA'}</p>
-              </div>
-              <div className={styles.boxText}>
-                <h3>{'option'}</h3>
-                <p>{vote['option']}</p>
-              </div>
-              <Link
-                href={`/${network}/${groupId}/proposals/${id}/${vote['voter']}`}
-              >
-                {'view vote'}
-              </Link>
+      {Array.isArray(votes) &&
+        votes.map((vote) => (
+          <div className={styles.boxItem} key={vote['voter']}>
+            <div className={styles.boxText}>
+              <h3>{'voter'}</h3>
+              <p>{vote?.voter ? <Address address={vote.voter} /> : 'NA'}</p>
             </div>
-          ))}
-      </div>
+            <div className={styles.boxText}>
+              <h3>{'option'}</h3>
+              <p>{vote['option']}</p>
+            </div>
+            <Link
+              href={`/${network}/${groupId}/proposals/${id}/${vote['voter']}`}
+            >
+              {'view vote'}
+            </Link>
+          </div>
+        ))}
       {votes && votes.length === 0 && !error && <div>{'no votes found'}</div>}
       <Result error={error} />
     </div>

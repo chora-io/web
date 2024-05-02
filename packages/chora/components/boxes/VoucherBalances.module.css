@@ -15,14 +15,3 @@
   font-weight: 400;
   margin-left: 5px;
 }
-
-.allowOverflow {
-  overflow: hidden;
-}
-
-@media (max-width: 850px) {
-  .allowOverflow {
-    overflow-x: scroll;
-    overflow-y: hidden;
-  }
-}

@@ -4,7 +4,7 @@ import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
 import { useContext, useEffect, useState } from 'react'
 
-import AccountPreview from '@components/groups/accounts/AccountPreview'
+import AccountsListItem from '@components/groups/accounts/AccountsListItem'
 import { GroupContext } from '@contexts/GroupContext'
 
 import styles from './Accounts.module.css'
@@ -64,12 +64,10 @@ const Accounts = () => {
       {sortedPolicies && sortedPolicies.length === 0 && (
         <div>{'no accounts found'}</div>
       )}
-      <div className={styles.allowOverflow}>
-        {sortedPolicies &&
-          sortedPolicies.map((policy: any) => (
-            <AccountPreview key={policy['address']} policy={policy} />
-          ))}
-      </div>
+      {sortedPolicies &&
+        sortedPolicies.map((policy: any) => (
+          <AccountsListItem key={policy['address']} policy={policy} />
+        ))}
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

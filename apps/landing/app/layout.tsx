@@ -15,7 +15,7 @@ const Layout = ({ children }: any) => (
               link: '/',
               titleX: '',
             }}
-            itemsLeft={[
+            items={[
               {
                 link: 'chora-groups',
                 target: '',
@@ -31,8 +31,7 @@ const Layout = ({ children }: any) => (
                 target: '',
                 title: 'ledger',
               },
-            ]}
-            itemsRight={[
+              'divider',
               {
                 link: 'https://docs.chora.io',
                 target: '_blank',
@@ -87,7 +86,7 @@ const Layout = ({ children }: any) => (
                 title: 'chora studio',
               },
             ]}
-            mobile={true}
+            mobileOnly={true}
           />
           <main>{children}</main>
           <Footer
@@ -103,7 +102,7 @@ const Layout = ({ children }: any) => (
                 </p>
               ),
             }}
-            items={[
+            sections={[
               {
                 title: 'applications',
                 items: [

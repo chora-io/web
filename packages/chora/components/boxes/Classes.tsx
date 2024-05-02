@@ -42,21 +42,19 @@ const Classes = ({
       )}
       {classes && classes.length > 0 && (
         <>
-          <div className={styles.allowOverflow}>
-            {view === 'table' ? (
-              <ClassesTable
-                classes={classes}
-                renderAddress={renderAddress}
-                renderLink={renderLink}
-              />
-            ) : (
-              <ClassesList
-                classes={classes}
-                renderAddress={renderAddress}
-                renderLink={renderLink}
-              />
-            )}
-          </div>
+          {view === 'table' ? (
+            <ClassesTable
+              classes={classes}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
+          ) : (
+            <ClassesList
+              classes={classes}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
+          )}
           {limit && (
             <PaginationNav
               length={classes ? classes.length : 0}

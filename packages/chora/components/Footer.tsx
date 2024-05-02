@@ -12,7 +12,7 @@ import { ArrowUpRight } from '.'
 
 import styles from './Footer.module.css'
 
-const Footer = ({ about, items }: any) => {
+const Footer = ({ about, sections }: any) => {
   const { darkTheme } = useContext(ThemeContext)
 
   const currentYear = new Date().getFullYear()
@@ -34,11 +34,11 @@ const Footer = ({ about, items }: any) => {
             <div>{about.text}</div>
           </div>
         )}
-        {items.map((item: any) => (
-          <div className={styles.list} key={item.title}>
-            <h3>{item.title}</h3>
+        {sections.map((section: any) => (
+          <div className={styles.list} key={section.title}>
+            <h3>{section.title}</h3>
             <ul>
-              {item.items.map((item: any) => (
+              {section.items.map((item: any) => (
                 <li key={item.title}>
                   <Link href={item.link} target={item.target}>
                     {item.title}

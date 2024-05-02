@@ -10,41 +10,39 @@ import './globals.css'
 const Layout = ({ children }: any) => (
   <html lang="en">
     <body>
-      <main>
-        <ThemeContextProvider>
-          <MenuContextProvider>
-            <WalletContextProvider>
-              <Header
-                title={{
+      <ThemeContextProvider>
+        <MenuContextProvider>
+          <WalletContextProvider>
+            <Header
+              title={{
+                link: '/',
+                titleX: 'data',
+              }}
+            />
+            <Sidebar
+              items={[
+                {
                   link: '/',
-                  titleX: 'data',
-                }}
-              />
-              <Sidebar
-                items={[
-                  {
-                    link: '/',
-                    title: 'home',
-                  },
-                  {
-                    link: '/convert',
-                    title: 'convert',
-                  },
-                  {
-                    link: '/resolvers',
-                    title: 'resolvers',
-                  },
-                  {
-                    link: '/server',
-                    title: 'server',
-                  },
-                ]}
-              />
-              {children}
-            </WalletContextProvider>
-          </MenuContextProvider>
-        </ThemeContextProvider>
-      </main>
+                  title: 'home',
+                },
+                {
+                  link: '/convert',
+                  title: 'convert',
+                },
+                {
+                  link: '/resolvers',
+                  title: 'resolvers',
+                },
+                {
+                  link: '/server',
+                  title: 'server',
+                },
+              ]}
+            />
+            <main>{children}</main>
+          </WalletContextProvider>
+        </MenuContextProvider>
+      </ThemeContextProvider>
     </body>
   </html>
 )

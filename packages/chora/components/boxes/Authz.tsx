@@ -33,16 +33,14 @@ const Authz = ({
       {!error && !authzGrantee && !authzGranter && <div>{'loading...'}</div>}
       {filter === 'grantee' && (
         <div>
-          <div className={styles.allowOverflow}>
-            {Array.isArray(authzGrantee) &&
-              authzGrantee.map((grant, i) => (
-                <AuthzListItem
-                  key={i}
-                  grant={grant}
-                  renderAddress={renderAddress}
-                />
-              ))}
-          </div>
+          {Array.isArray(authzGrantee) &&
+            authzGrantee.map((grant, i) => (
+              <AuthzListItem
+                key={i}
+                grant={grant}
+                renderAddress={renderAddress}
+              />
+            ))}
           {authzGrantee && authzGrantee.length === 0 && (
             <div>{'no authorizations granted to this account'}</div>
           )}

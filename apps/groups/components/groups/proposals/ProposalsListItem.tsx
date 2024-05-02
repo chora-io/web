@@ -4,9 +4,9 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
 
-import styles from './ProposalPreview.module.css'
+import styles from './ProposalsListItem.module.css'
 
-const ProposalPreview = ({ proposal }: any) => {
+const ProposalsListItem = ({ proposal }: any) => {
   const { groupId } = useParams()
   const { chainInfo, network } = useContext(WalletContext)
 
@@ -40,4 +40,4 @@ const ProposalPreview = ({ proposal }: any) => {
   )
 }
 
-export default ProposalPreview
+export default ProposalsListItem

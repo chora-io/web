@@ -10,21 +10,19 @@ import './globals.css'
 const Layout = ({ children }: any) => (
   <html lang="en">
     <body>
-      <main>
-        <ThemeContextProvider>
-          <MenuContextProvider>
-            <WalletContextProvider>
-              <Header
-                title={{
-                  link: '/',
-                  titleX: 'base',
-                }}
-              />
-              {children}
-            </WalletContextProvider>
-          </MenuContextProvider>
-        </ThemeContextProvider>
-      </main>
+      <ThemeContextProvider>
+        <MenuContextProvider>
+          <WalletContextProvider>
+            <Header
+              title={{
+                link: '/',
+                titleX: 'base',
+              }}
+            />
+            <main>{children}</main>
+          </WalletContextProvider>
+        </MenuContextProvider>
+      </ThemeContextProvider>
     </body>
   </html>
 )

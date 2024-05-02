@@ -9,14 +9,3 @@
 .boxText {
   composes: box-text from 'chora/styles/box.css';
 }
-
-.allowOverflow {
-  overflow: hidden;
-}
-
-@media (max-width: 850px) {
-  .allowOverflow {
-    overflow-x: scroll;
-    overflow-y: hidden;
-  }
-}

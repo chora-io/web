@@ -1,3 +1,15 @@
+/* table-container */
+
+.table-container {
+  overflow: hidden;
+}
+
+@media (max-width: 850px) {
+  .table-container {
+    overflow-x: scroll;
+  }
+}
+
 /* table */
 
 .table {

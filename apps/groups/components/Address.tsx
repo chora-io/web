@@ -1,5 +1,6 @@
 import { WalletContext } from 'chora/contexts'
 import { useMetadata } from 'chora/hooks'
+import { subAddress } from 'chora/utils'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useContext } from 'react'
@@ -39,7 +40,7 @@ const Address = ({ address }: { address: string }) => {
       <Link
         href={`${isPolicyAddress ? `/${network}/${groupId}/accounts` : `/${network}/${groupId}/members`}/${address}`}
       >
-        {address}
+        {subAddress(address)}
       </Link>
       {')'}
     </>

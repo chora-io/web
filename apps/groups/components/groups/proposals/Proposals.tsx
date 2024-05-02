@@ -5,7 +5,7 @@ import { WalletContext } from 'chora/contexts'
 import { useParams } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
-import ProposalPreview from '@components/groups/proposals/ProposalPreview'
+import ProposalsListItem from '@components/groups/proposals/ProposalsListItem'
 import { GroupContext } from '@contexts/GroupContext'
 import { useGroupProposals } from '@hooks/useGroupProposals'
 
@@ -134,12 +134,10 @@ const Proposals = () => {
       {filtered && filtered.length === 0 && (
         <div>{`no proposals with status ${filter}`}</div>
       )}
-      <div className={styles.allowOverflow}>
-        {filtered &&
-          filtered.map((proposal: any) => (
-            <ProposalPreview key={proposal['id']} proposal={proposal} />
-          ))}
-      </div>
+      {filtered &&
+        filtered.map((proposal: any) => (
+          <ProposalsListItem key={proposal['id']} proposal={proposal} />
+        ))}
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

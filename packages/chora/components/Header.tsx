@@ -9,13 +9,7 @@ import { ArrowUpRight, HeaderTitle, MenuButton, ThemeButton } from '.'
 
 import styles from './Header.module.css'
 
-const Header = ({
-  title,
-  itemsLeft,
-  itemsRight,
-  showMenuButton,
-  showMobileTitle,
-}: any) => {
+const Header = ({ title, items, showMenuButton, showMobileTitle }: any) => {
   const { showMenu, setShowMenu } = useContext(MenuContext)
   const { darkTheme, setDarkTheme } = useContext(ThemeContext)
 
@@ -50,31 +44,23 @@ const Header = ({
           showMobileTitle={showMobileTitle}
         />
         <div className={styles.menu}>
-          {(itemsLeft || itemsRight) && (
-            <ul>
-              {itemsLeft &&
-                itemsLeft.map((item: any) => (
+          <ul>
+            {items &&
+              items.map((item: any, i: number) =>
+                item === 'divider' ? (
+                  <li key={i} className={styles.divider}>
+                    {'|'}
+                  </li>
+                ) : (
                   <li key={item.title}>
                     <Link href={item.link} target={item.target}>
                       {item.title}
                       {item.target && <ArrowUpRight />}
                     </Link>
                   </li>
-                ))}
-              {itemsLeft && itemsRight && (
-                <li className={styles.divider}>{'|'}</li>
+                ),
               )}
-              {itemsRight &&
-                itemsRight.map((item: any) => (
-                  <li key={item.title}>
-                    <Link href={item.link} target={item.target}>
-                      {item.title}
-                      {item.target && <ArrowUpRight />}
-                    </Link>
-                  </li>
-                ))}
-            </ul>
-          )}
+          </ul>
           <ThemeButton darkTheme={darkTheme} toggleTheme={toggleTheme} />
         </div>
       </div>

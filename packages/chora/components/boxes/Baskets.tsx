@@ -42,21 +42,19 @@ const Baskets = ({
       )}
       {baskets && baskets.length > 0 && (
         <>
-          <div className={styles.allowOverflow}>
-            {view === 'table' ? (
-              <BasketsTable
-                baskets={baskets}
-                renderAddress={renderAddress}
-                renderLink={renderLink}
-              />
-            ) : (
-              <BasketsList
-                baskets={baskets}
-                renderAddress={renderAddress}
-                renderLink={renderLink}
-              />
-            )}
-          </div>
+          {view === 'table' ? (
+            <BasketsTable
+              baskets={baskets}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
+          ) : (
+            <BasketsList
+              baskets={baskets}
+              renderAddress={renderAddress}
+              renderLink={renderLink}
+            />
+          )}
           {limit && (
             <PaginationNav
               length={baskets ? baskets.length : 0}

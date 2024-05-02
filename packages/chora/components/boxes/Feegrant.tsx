@@ -33,16 +33,14 @@ const Feegrant = ({
       {!error && !feeGrantee && !feeGranter && <div>{'loading...'}</div>}
       {filter === 'grantee' && (
         <div>
-          <div className={styles.allowOverflow}>
-            {Array.isArray(feeGrantee) &&
-              feeGrantee.map((grant, i) => (
-                <FeegrantListItem
-                  key={i}
-                  grant={grant}
-                  renderAddress={renderAddress}
-                />
-              ))}
-          </div>
+          {Array.isArray(feeGrantee) &&
+            feeGrantee.map((grant, i) => (
+              <FeegrantListItem
+                key={i}
+                grant={grant}
+                renderAddress={renderAddress}
+              />
+            ))}
           {feeGrantee && feeGrantee.length === 0 && (
             <div>{'no fee allowances granted to this account'}</div>
           )}
