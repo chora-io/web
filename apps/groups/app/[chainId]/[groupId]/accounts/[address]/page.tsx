@@ -14,16 +14,14 @@ export const metadata: Metadata = {
 
 const AccountPage = () => (
   <div className={styles.page}>
-    <div>
-      <Breadcrumb text="accounts" />
-      <h1>{'group account'}</h1>
-      <AccountNav />
-      <Account />
-      <h1>{'authorizations'}</h1>
-      <Authz />
-      <h1>{'fee allowances'}</h1>
-      <Feegrant />
-    </div>
+    <Breadcrumb text="accounts" />
+    <h1>{'group account'}</h1>
+    <AccountNav />
+    <Account />
+    <h1>{'authorizations'}</h1>
+    <Authz />
+    <h1>{'fee allowances'}</h1>
+    <Feegrant />
   </div>
 )
 

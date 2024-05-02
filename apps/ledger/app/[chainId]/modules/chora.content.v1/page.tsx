@@ -17,17 +17,15 @@ export const metadata: Metadata = {
 
 const ModulePage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'chora.content.v1'}</h1>
-      <ModuleInfo />
-      <MsgCreate />
-      <MsgDelete />
-      <MsgUpdateCurator />
-      <MsgUpdateMetadata />
-      <QueryContent />
-      <QueryContents />
-      <QueryContentsByCurator />
-    </div>
+    <h1>{'chora.content.v1'}</h1>
+    <ModuleInfo />
+    <MsgCreate />
+    <MsgDelete />
+    <MsgUpdateCurator />
+    <MsgUpdateMetadata />
+    <QueryContent />
+    <QueryContents />
+    <QueryContentsByCurator />
   </div>
 )
 

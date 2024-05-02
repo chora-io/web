@@ -13,16 +13,14 @@ export const metadata: Metadata = {
 
 const ClaimPage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'data anchor'}</h1>
-      <Anchor />
-      <h1>{'data resolved'}</h1>
-      <Resolved />
-      <h1>{'data resolvers'}</h1>
-      <Resolvers />
-      <h1>{'data attestations'}</h1>
-      <Attestations />
-    </div>
+    <h1>{'data anchor'}</h1>
+    <Anchor />
+    <h1>{'data resolved'}</h1>
+    <Resolved />
+    <h1>{'data resolvers'}</h1>
+    <Resolvers />
+    <h1>{'data attestations'}</h1>
+    <Attestations />
   </div>
 )
 

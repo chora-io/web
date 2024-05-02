@@ -10,10 +10,8 @@ export const metadata: Metadata = {
 
 const ResolverPage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'data resolver'}</h1>
-      <Resolver />
-    </div>
+    <h1>{'data resolver'}</h1>
+    <Resolver />
   </div>
 )
 

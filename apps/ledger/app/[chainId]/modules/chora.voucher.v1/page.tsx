@@ -20,20 +20,18 @@ export const metadata: Metadata = {
 
 const ModulePage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'chora.voucher.v1'}</h1>
-      <ModuleInfo />
-      <MsgCreate />
-      <MsgIssue />
-      <MsgUpdateIssuer />
-      <MsgUpdateMetadata />
-      <QueryBalance />
-      <QueryBalancesByAddress />
-      <QueryBalancesByVoucher />
-      <QueryVoucher />
-      <QueryVouchers />
-      <QueryVouchersByIssuer />
-    </div>
+    <h1>{'chora.voucher.v1'}</h1>
+    <ModuleInfo />
+    <MsgCreate />
+    <MsgIssue />
+    <MsgUpdateIssuer />
+    <MsgUpdateMetadata />
+    <QueryBalance />
+    <QueryBalancesByAddress />
+    <QueryBalancesByVoucher />
+    <QueryVoucher />
+    <QueryVouchers />
+    <QueryVouchersByIssuer />
   </div>
 )
 

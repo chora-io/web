@@ -26,25 +26,23 @@ export const metadata: Metadata = {
 const ModulePage = () => {
   return (
     <div className={styles.page}>
-      <div>
-        <h1>{'regen.data.v1'}</h1>
-        <ModuleInfo />
-        <ConvertHashToIRI />
-        <ConvertIRIToHash />
-        <MsgAnchor />
-        <MsgAttest />
-        <MsgDefineResolver />
-        <MsgRegisterResolver />
-        <QueryAnchorByHash />
-        <QueryAnchorByIRI />
-        <QueryAttestationsByAttestor />
-        <QueryAttestationsByHash />
-        <QueryAttestationsByIRI />
-        <QueryResolver />
-        <QueryResolversByHash />
-        <QueryResolversByIRI />
-        <QueryResolversByURL />
-      </div>
+      <h1>{'regen.data.v1'}</h1>
+      <ModuleInfo />
+      <ConvertHashToIRI />
+      <ConvertIRIToHash />
+      <MsgAnchor />
+      <MsgAttest />
+      <MsgDefineResolver />
+      <MsgRegisterResolver />
+      <QueryAnchorByHash />
+      <QueryAnchorByIRI />
+      <QueryAttestationsByAttestor />
+      <QueryAttestationsByHash />
+      <QueryAttestationsByIRI />
+      <QueryResolver />
+      <QueryResolversByHash />
+      <QueryResolversByIRI />
+      <QueryResolversByURL />
     </div>
   )
 }

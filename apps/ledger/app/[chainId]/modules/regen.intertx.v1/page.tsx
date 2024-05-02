@@ -13,13 +13,11 @@ export const metadata: Metadata = {
 
 const ModulePage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'regen.intertx.v1'}</h1>
-      <ModuleInfo />
-      <MsgRegisterAccount />
-      <MsgSubmitTx />
-      <QueryInterchainAccount />
-    </div>
+    <h1>{'regen.intertx.v1'}</h1>
+    <ModuleInfo />
+    <MsgRegisterAccount />
+    <MsgSubmitTx />
+    <QueryInterchainAccount />
   </div>
 )
 

@@ -11,11 +11,9 @@ export const metadata: Metadata = {
 
 const CreatePage = () => (
   <div className={styles.page}>
-    <div>
-      <Breadcrumb text="baskets" />
-      <h1>{'create credit basket'}</h1>
-      <CreateBasket />
-    </div>
+    <Breadcrumb text="baskets" />
+    <h1>{'create credit basket'}</h1>
+    <CreateBasket />
   </div>
 )
 

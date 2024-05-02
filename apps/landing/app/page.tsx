@@ -10,45 +10,43 @@ export const metadata: Metadata = {
 const HomePage = () => {
   return (
     <div className={styles.page}>
-      <div>
-        <div className={styles.banner}>
-          <div>
-            <h1>{'chora'}</h1>
-            <p>
-              <i>{'commons governance and ecological regeneration'}</i>
-            </p>
-            <p>{'distributed ledger technology'}</p>
-          </div>
+      <div className={styles.banner}>
+        <div>
+          <h1>{'chora'}</h1>
+          <p>
+            <i>{'commons governance and ecological regeneration'}</i>
+          </p>
+          <p>{'distributed ledger technology'}</p>
         </div>
-        <div className={styles.content}>
-          <div>
-            <h1>{'what is chora?'}</h1>
-            <p>
-              {
-                'Chora is experimental software for commons governance and ecological regeneration built with distributed ledger technology.'
-              }
-            </p>
-            <p>
-              {
-                'Chora includes a blockchain application, blockchain modules, an API service, and three web applications: '
-              }
-              <Link href="/chora-groups">{'Groups'}</Link>
-              {', '}
-              <Link href="/chora-registry">{'Registry'}</Link>
-              {', and '}
-              <Link href="/chora-ledger">{'Ledger'}</Link>
-              {'.'}
-            </p>
-            <p>
-              {
-                'Chora also includes demo applications, developer tools, and other software experiments. For more information, see '
-              }
-              <a href="https://docs.chora.io" target="_blank">
-                {'Documentation'}
-              </a>
-              {'.'}
-            </p>
-          </div>
+      </div>
+      <div className={styles.content}>
+        <div>
+          <h1>{'what is chora?'}</h1>
+          <p>
+            {
+              'Chora is experimental software for commons governance and ecological regeneration built with distributed ledger technology.'
+            }
+          </p>
+          <p>
+            {
+              'Chora includes a blockchain application, blockchain modules, an API service, and three web applications: '
+            }
+            <Link href="/chora-groups">{'Groups'}</Link>
+            {', '}
+            <Link href="/chora-registry">{'Registry'}</Link>
+            {', and '}
+            <Link href="/chora-ledger">{'Ledger'}</Link>
+            {'.'}
+          </p>
+          <p>
+            {
+              'Chora also includes demo applications, developer tools, and other software experiments. For more information, see '
+            }
+            <a href="https://docs.chora.io" target="_blank">
+              {'Chora Documentation'}
+            </a>
+            {'.'}
+          </p>
         </div>
       </div>
     </div>

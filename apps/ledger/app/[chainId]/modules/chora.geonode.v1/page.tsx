@@ -16,16 +16,14 @@ export const metadata: Metadata = {
 
 const ModulePage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'chora.geonode.v1'}</h1>
-      <ModuleInfo />
-      <MsgCreate />
-      <MsgUpdateCurator />
-      <MsgUpdateMetadata />
-      <QueryNode />
-      <QueryNodes />
-      <QueryNodesByCurator />
-    </div>
+    <h1>{'chora.geonode.v1'}</h1>
+    <ModuleInfo />
+    <MsgCreate />
+    <MsgUpdateCurator />
+    <MsgUpdateMetadata />
+    <QueryNode />
+    <QueryNodes />
+    <QueryNodesByCurator />
   </div>
 )
 

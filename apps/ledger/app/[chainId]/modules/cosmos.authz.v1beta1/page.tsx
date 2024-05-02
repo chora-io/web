@@ -16,16 +16,14 @@ export const metadata: Metadata = {
 
 const ModulePage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'cosmos.authz.v1beta1'}</h1>
-      <ModuleInfo />
-      <MsgExec />
-      <MsgGrant />
-      <MsgRevoke />
-      <QueryGranteeGrants />
-      <QueryGranterGrants />
-      <QueryGrants />
-    </div>
+    <h1>{'cosmos.authz.v1beta1'}</h1>
+    <ModuleInfo />
+    <MsgExec />
+    <MsgGrant />
+    <MsgRevoke />
+    <QueryGranteeGrants />
+    <QueryGranterGrants />
+    <QueryGrants />
   </div>
 )
 

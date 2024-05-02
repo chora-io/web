@@ -11,11 +11,9 @@ export const metadata: Metadata = {
 
 const CreatePage = () => (
   <div className={styles.page}>
-    <div>
-      <Breadcrumb text="projects" />
-      <h1>{'create class project'}</h1>
-      <CreateProject />
-    </div>
+    <Breadcrumb text="projects" />
+    <h1>{'create class project'}</h1>
+    <CreateProject />
   </div>
 )
 

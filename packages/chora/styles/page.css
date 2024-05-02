@@ -1,21 +1,8 @@
 /* page */
-/* page-center */
-/* page-with-sidebar */
 
 .page {
-  min-height: 100vh;
-  overflow: hidden;
-}
-
-.page > div {
   margin-top: var(--header-height);
-}
-
-@media (max-width: 850px) {
-  .page h1 {
-    font-size: 1.5em;
-    padding: 1em;
-  }
+  min-height: calc(100vh - var(--header-height) - var(--footer-height));
 }
 
 /* page-center */
@@ -29,51 +16,83 @@
 }
 
 .page-center > div {
-  margin-bottom: 5%;
+  margin-bottom: 10vh;
 }
 
-/* page-with-sidebar */
+/* page-center-faucet */
 
-.page-with-sidebar {
-  composes: page;
-  margin-left: var(--sidebar-width);
+.page-center-faucet {
+  composes: page-center;
+  background: var(--background-primary);
+  min-height: calc(100vh - var(--header-height));
 }
 
-@media (max-width: 850px) {
-  .page-with-sidebar {
-    margin-left: 0;
-  }
-}
+/* page-center-not-found */
 
-.page-with-sidebar > div {
-  padding: 3em 4em;
-}
-
-@media (max-width: 850px) {
-  .page-with-sidebar > div {
-    padding: 0;
-  }
-}
-
-/* page-not-found */
-
-.page-not-found {
+.page-center-not-found {
   composes: page-center;
   background: var(--background-primary);
 }
 
-.page-not-found h1 {
+.page-center-not-found h1 {
   color: var(--color-theme);
   font-size: 3em;
   margin-bottom: 0.25em;
 }
 
-.page-not-found h2 {
+@media (max-width: 850px) {
+  .page-center-not-found h1 {
+    font-size: 2em;
+  }
+}
+
+.page-center-not-found h2 {
   font-size: 2em;
   font-weight: 300;
   margin-bottom: 0.5em;
 }
 
-.page-not-found p {
+@media (max-width: 850px) {
+  .page-center-not-found h2 {
+    font-size: 1.25em;
+  }
+}
+
+.page-center-not-found p {
   font-style: italic;
+}
+
+/* page-sidebar */
+
+.page-sidebar {
+  composes: page;
+  margin-left: var(--sidebar-width);
+  min-height: calc(100vh - var(--header-height) - 4em);
+  padding: 2em 3em;
+}
+
+@media (max-width: 850px) {
+  .page-sidebar {
+    margin-left: 0;
+    padding: 0;
+  }
+
+  .page-sidebar h1 {
+    font-size: 1.5em;
+    padding: 1em;
+  }
+}
+
+/* page-sidebar-not-found */
+
+.page-sidebar-not-found {
+  composes: page-center-not-found;
+  margin-left: var(--sidebar-width);
+  min-height: calc(100vh - var(--header-height));
+}
+
+@media (max-width: 850px) {
+  .page-sidebar-not-found {
+    margin-left: 0;
+  }
 }

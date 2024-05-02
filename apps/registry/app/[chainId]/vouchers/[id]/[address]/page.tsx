@@ -11,11 +11,9 @@ export const metadata: Metadata = {
 
 const BalancePage = () => (
   <div className={styles.page}>
-    <div>
-      <Breadcrumb text="voucher" />
-      <h1>{'balance'}</h1>
-      <Balance />
-    </div>
+    <Breadcrumb text="voucher" />
+    <h1>{'balance'}</h1>
+    <Balance />
   </div>
 )
 

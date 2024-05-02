@@ -18,7 +18,7 @@ const Footer = ({ about, items }: any) => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <div className={styles.footer}>
+    <footer className={styles.footer}>
       <div style={{ display: 'none' }}>{darkTheme?.toString()}</div>
       <div>
         <div className={styles.title}>
@@ -50,7 +50,7 @@ const Footer = ({ about, items }: any) => {
           </div>
         ))}
       </div>
-    </div>
+    </footer>
   )
 }
 

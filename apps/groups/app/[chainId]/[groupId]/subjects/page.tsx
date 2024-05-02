@@ -10,10 +10,8 @@ export const metadata: Metadata = {
 
 const SubjectsPage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'group subjects'}</h1>
-      <Subjects />
-    </div>
+    <h1>{'group subjects'}</h1>
+    <Subjects />
   </div>
 )
 

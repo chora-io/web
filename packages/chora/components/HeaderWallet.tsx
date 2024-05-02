@@ -46,7 +46,7 @@ const HeaderWallet = ({
   }
 
   return (
-    <div className={styles.header}>
+    <header className={styles.header}>
       <div style={{ display: 'none' }}>{darkTheme?.toString()}</div>
       <div>
         {showMenuButton && (
@@ -74,7 +74,7 @@ const HeaderWallet = ({
           <ThemeButton darkTheme={darkTheme} toggleTheme={toggleTheme} />
         </div>
       </div>
-    </div>
+    </header>
   )
 }
 

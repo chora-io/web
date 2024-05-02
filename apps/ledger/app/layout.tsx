@@ -13,25 +13,23 @@ import './globals.css'
 const Layout = ({ children }: any) => (
   <html lang="en">
     <body>
-      <main>
-        <ThemeContextProvider>
-          <MenuContextProvider>
-            <WalletContextProvider>
-              <AccountContextProvider>
-                <Header
-                  title={{
-                    link: '/',
-                    titleX: 'ledger',
-                  }}
-                  showMenuButton={true}
-                />
-                <Sidebar />
-                {children}
-              </AccountContextProvider>
-            </WalletContextProvider>
-          </MenuContextProvider>
-        </ThemeContextProvider>
-      </main>
+      <ThemeContextProvider>
+        <MenuContextProvider>
+          <WalletContextProvider>
+            <AccountContextProvider>
+              <Header
+                title={{
+                  link: '/',
+                  titleX: 'ledger',
+                }}
+                showMenuButton={true}
+              />
+              <Sidebar />
+              <main>{children}</main>
+            </AccountContextProvider>
+          </WalletContextProvider>
+        </MenuContextProvider>
+      </ThemeContextProvider>
     </body>
   </html>
 )

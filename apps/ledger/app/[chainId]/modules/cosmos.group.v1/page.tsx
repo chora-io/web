@@ -37,37 +37,35 @@ export const metadata: Metadata = {
 
 const ModulePage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'cosmos.group.v1'}</h1>
-      <ModuleInfo />
-      <MsgCreateGroup />
-      <MsgCreateGroupWithPolicy />
-      <MsgCreateGroupPolicy />
-      <MsgExec />
-      <MsgLeaveGroup />
-      <MsgSubmitProposal />
-      <MsgUpdateGroupAdmin />
-      <MsgUpdateGroupMembers />
-      <MsgUpdateGroupMetadata />
-      <MsgUpdateGroupPolicyAdmin />
-      <MsgUpdateGroupPolicyDecisionPolicy />
-      <MsgUpdateGroupPolicyMetadata />
-      <MsgVote />
-      <MsgWithdrawProposal />
-      <QueryGroupInfo />
-      <QueryGroupMembers />
-      <QueryGroupPoliciesByAdmin />
-      <QueryGroupPoliciesByGroup />
-      <QueryGroupPolicyInfo />
-      <QueryGroupsByAdmin />
-      <QueryGroupsByMember />
-      <QueryProposal />
-      <QueryProposalsByGroupPolicy />
-      <QueryTallyResult />
-      <QueryVoteByProposalVoter />
-      <QueryVotesByProposal />
-      <QueryVotesByVoter />
-    </div>
+    <h1>{'cosmos.group.v1'}</h1>
+    <ModuleInfo />
+    <MsgCreateGroup />
+    <MsgCreateGroupWithPolicy />
+    <MsgCreateGroupPolicy />
+    <MsgExec />
+    <MsgLeaveGroup />
+    <MsgSubmitProposal />
+    <MsgUpdateGroupAdmin />
+    <MsgUpdateGroupMembers />
+    <MsgUpdateGroupMetadata />
+    <MsgUpdateGroupPolicyAdmin />
+    <MsgUpdateGroupPolicyDecisionPolicy />
+    <MsgUpdateGroupPolicyMetadata />
+    <MsgVote />
+    <MsgWithdrawProposal />
+    <QueryGroupInfo />
+    <QueryGroupMembers />
+    <QueryGroupPoliciesByAdmin />
+    <QueryGroupPoliciesByGroup />
+    <QueryGroupPolicyInfo />
+    <QueryGroupsByAdmin />
+    <QueryGroupsByMember />
+    <QueryProposal />
+    <QueryProposalsByGroupPolicy />
+    <QueryTallyResult />
+    <QueryVoteByProposalVoter />
+    <QueryVotesByProposal />
+    <QueryVotesByVoter />
   </div>
 )
 

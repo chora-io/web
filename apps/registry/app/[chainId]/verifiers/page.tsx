@@ -11,11 +11,9 @@ export const metadata: Metadata = {
 
 const VerifiersPage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'explore verifiers'}</h1>
-      <VerifiersNav />
-      <Verifiers />
-    </div>
+    <h1>{'explore verifiers'}</h1>
+    <VerifiersNav />
+    <Verifiers />
   </div>
 )
 

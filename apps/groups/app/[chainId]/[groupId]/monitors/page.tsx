@@ -10,10 +10,8 @@ export const metadata: Metadata = {
 
 const MonitorsPage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'group monitors'}</h1>
-      <Monitors />
-    </div>
+    <h1>{'group monitors'}</h1>
+    <Monitors />
   </div>
 )
 

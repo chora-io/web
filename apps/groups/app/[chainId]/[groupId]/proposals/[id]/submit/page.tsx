@@ -11,11 +11,9 @@ export const metadata: Metadata = {
 
 const SubmitPage = () => (
   <div className={styles.page}>
-    <div>
-      <Breadcrumb text="proposal" />
-      <h1>{'submit vote'}</h1>
-      <VoteOnProposal />
-    </div>
+    <Breadcrumb text="proposal" />
+    <h1>{'submit vote'}</h1>
+    <VoteOnProposal />
   </div>
 )
 

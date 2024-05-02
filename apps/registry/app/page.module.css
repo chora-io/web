@@ -1,10 +1,10 @@
 .page {
-  composes: page-with-sidebar from 'chora/styles/page.css';
+  composes: page-sidebar from 'chora/styles/page.css';
 }
 
 @media (max-width: 850px) {
-  .page > div {
-    padding: 1.5em;
+  .page {
+    padding: 1.5em !important;
   }
 }
 
@@ -16,7 +16,7 @@
 @media (max-width: 850px) {
   .page h1 {
     font-size: 1.5em;
-    padding: 0;
+    padding: 0 !important;
   }
 }
 

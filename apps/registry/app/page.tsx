@@ -8,25 +8,23 @@ export const metadata: Metadata = {
 
 const HomePage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'chora registry'}</h1>
-      <h2>{'ecological registry workspace'}</h2>
-      <p>
-        {'This application is a '}
-        <span className={styles.beta}>{'beta application'}</span>
-        {'. This application is not ready for production use.'}
-      </p>
-      <p>
-        {
-          'Limiting your interactions with main networks is recommended until the application matures.'
-        }
-      </p>
-      <p>
-        {
-          'Thank you for testing out the application. Please enjoy and use with care and caution.'
-        }
-      </p>
-    </div>
+    <h1>{'chora registry'}</h1>
+    <h2>{'ecological registry workspace'}</h2>
+    <p>
+      {'This application is a '}
+      <span className={styles.beta}>{'beta application'}</span>
+      {'. This application is not ready for production use.'}
+    </p>
+    <p>
+      {
+        'Limiting your interactions with main networks is recommended until the application matures.'
+      }
+    </p>
+    <p>
+      {
+        'Thank you for testing out the application. Please enjoy and use with care and caution.'
+      }
+    </p>
   </div>
 )
 

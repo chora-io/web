@@ -15,15 +15,13 @@ export const metadata: Metadata = {
 
 const ModulePage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'cosmos.bank.v1beta1'}</h1>
-      <ModuleInfo />
-      <MsgMultiSend />
-      <MsgSend />
-      <MsgSetSendEnabled />
-      <QueryAllBalances />
-      <QueryBalance />
-    </div>
+    <h1>{'cosmos.bank.v1beta1'}</h1>
+    <ModuleInfo />
+    <MsgMultiSend />
+    <MsgSend />
+    <MsgSetSendEnabled />
+    <QueryAllBalances />
+    <QueryBalance />
   </div>
 )
 

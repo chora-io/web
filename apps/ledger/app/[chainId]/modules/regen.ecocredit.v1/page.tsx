@@ -59,59 +59,57 @@ export const metadata: Metadata = {
 
 const ModulePage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'regen.ecocredit.v1'}</h1>
-      <ModuleInfo />
-      <MsgAddAllowedBridgeChain />
-      <MsgAddClassCreator />
-      <MsgAddCreditType />
-      <MsgBridge />
-      <MsgBridgeReceive />
-      <MsgCancel />
-      <MsgCreateBatch />
-      <MsgCreateClass />
-      <MsgCreateProject />
-      <MsgMintBatchCredits />
-      <MsgRemoveAllowedBridgeChain />
-      <MsgRemoveClassCreator />
-      <MsgRetire />
-      <MsgSealBatch />
-      <MsgSend />
-      <MsgSetClassCreatorAllowlist />
-      <MsgUpdateBatchMetadata />
-      <MsgUpdateClassAdmin />
-      <MsgUpdateClassFee />
-      <MsgUpdateClassIssuers />
-      <MsgUpdateClassMetadata />
-      <MsgUpdateProjectAdmin />
-      <MsgUpdateProjectMetadata />
-      <QueryAllBalances />
-      <QueryAllowedBridgeChains />
-      <QueryAllowedClassCreators />
-      <QueryBalance />
-      <QueryBalances />
-      <QueryBalancesByBatch />
-      <QueryBatch />
-      <QueryBatches />
-      <QueryBatchesByClass />
-      <QueryBatchesByIssuer />
-      <QueryBatchesByProject />
-      <QueryClass />
-      <QueryClassCreatorAllowlist />
-      <QueryClasses />
-      <QueryClassesByAdmin />
-      <QueryClassFee />
-      <QueryClassIssuers />
-      <QueryCreditType />
-      <QueryCreditTypes />
-      <QueryParams />
-      <QueryProject />
-      <QueryProjects />
-      <QueryProjectsByAdmin />
-      <QueryProjectsByClass />
-      <QueryProjectsByReferenceId />
-      <QuerySupply />
-    </div>
+    <h1>{'regen.ecocredit.v1'}</h1>
+    <ModuleInfo />
+    <MsgAddAllowedBridgeChain />
+    <MsgAddClassCreator />
+    <MsgAddCreditType />
+    <MsgBridge />
+    <MsgBridgeReceive />
+    <MsgCancel />
+    <MsgCreateBatch />
+    <MsgCreateClass />
+    <MsgCreateProject />
+    <MsgMintBatchCredits />
+    <MsgRemoveAllowedBridgeChain />
+    <MsgRemoveClassCreator />
+    <MsgRetire />
+    <MsgSealBatch />
+    <MsgSend />
+    <MsgSetClassCreatorAllowlist />
+    <MsgUpdateBatchMetadata />
+    <MsgUpdateClassAdmin />
+    <MsgUpdateClassFee />
+    <MsgUpdateClassIssuers />
+    <MsgUpdateClassMetadata />
+    <MsgUpdateProjectAdmin />
+    <MsgUpdateProjectMetadata />
+    <QueryAllBalances />
+    <QueryAllowedBridgeChains />
+    <QueryAllowedClassCreators />
+    <QueryBalance />
+    <QueryBalances />
+    <QueryBalancesByBatch />
+    <QueryBatch />
+    <QueryBatches />
+    <QueryBatchesByClass />
+    <QueryBatchesByIssuer />
+    <QueryBatchesByProject />
+    <QueryClass />
+    <QueryClassCreatorAllowlist />
+    <QueryClasses />
+    <QueryClassesByAdmin />
+    <QueryClassFee />
+    <QueryClassIssuers />
+    <QueryCreditType />
+    <QueryCreditTypes />
+    <QueryParams />
+    <QueryProject />
+    <QueryProjects />
+    <QueryProjectsByAdmin />
+    <QueryProjectsByClass />
+    <QueryProjectsByReferenceId />
+    <QuerySupply />
   </div>
 )
 

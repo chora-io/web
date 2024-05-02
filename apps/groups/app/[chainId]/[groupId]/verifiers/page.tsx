@@ -10,10 +10,8 @@ export const metadata: Metadata = {
 
 const VerifiersPage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'group verifiers'}</h1>
-      <Verifiers />
-    </div>
+    <h1>{'group verifiers'}</h1>
+    <Verifiers />
   </div>
 )
 

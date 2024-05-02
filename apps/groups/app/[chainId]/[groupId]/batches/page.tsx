@@ -10,10 +10,8 @@ export const metadata: Metadata = {
 
 const BatchesPage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'group credit batches'}</h1>
-      <Batches />
-    </div>
+    <h1>{'group credit batches'}</h1>
+    <Batches />
   </div>
 )
 

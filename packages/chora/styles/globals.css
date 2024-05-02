@@ -59,7 +59,6 @@
   --color-theme: rgb(0, 195, 165);
   --font-family: 'Ubuntu', sans-serif;
   --footer-height: 320px;
-  --footer-height-mobile: 80px;
   --header-height: 80px;
   --sidebar-width: 240px;
   --transition: 0.25s;
@@ -73,6 +72,12 @@
   --box-shadow-color: rgb(245, 245, 245);
   --color-text: rgb(10, 10, 10);
   --color-text-placeholder: rgba(10, 10, 10, 0.5);
+}
+
+@media (max-width: 850px) {
+  :root {
+    --footer-height: 80px;
+  }
 }
 
 .dark-theme {
@@ -96,13 +101,14 @@ html {
 }
 
 body {
+  color: var(--color-text);
   font-family: var(--font-family);
   font-weight: 300;
   overflow-x: hidden;
 }
 
 main {
-  color: var(--color-text);
+  overflow: hidden;
 }
 
 h1,

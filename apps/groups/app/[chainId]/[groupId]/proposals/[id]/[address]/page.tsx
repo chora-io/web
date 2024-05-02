@@ -11,11 +11,9 @@ import styles from './page.module.css'
 
 const VotePage = () => (
   <div className={styles.page}>
-    <div>
-      <Breadcrumb text="proposal" />
-      <h1>{'group proposal vote'}</h1>
-      <ProposalVote />
-    </div>
+    <Breadcrumb text="proposal" />
+    <h1>{'group proposal vote'}</h1>
+    <ProposalVote />
   </div>
 )
 

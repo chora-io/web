@@ -13,15 +13,13 @@ export const metadata: Metadata = {
 
 const UpdatePage = () => (
   <div className={styles.page}>
-    <div>
-      <Breadcrumb text="account" />
-      <h1>{'update admin'}</h1>
-      <UpdateAccountAdmin />
-      <h1>{'update metadata'}</h1>
-      <UpdateAccountMetadata />
-      <h1>{'update policy'}</h1>
-      <UpdateAccountPolicy />
-    </div>
+    <Breadcrumb text="account" />
+    <h1>{'update admin'}</h1>
+    <UpdateAccountAdmin />
+    <h1>{'update metadata'}</h1>
+    <UpdateAccountMetadata />
+    <h1>{'update policy'}</h1>
+    <UpdateAccountPolicy />
   </div>
 )
 

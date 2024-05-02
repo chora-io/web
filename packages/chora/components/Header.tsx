@@ -36,7 +36,7 @@ const Header = ({
   }
 
   return (
-    <div className={styles.header}>
+    <header className={styles.header}>
       <div style={{ display: 'none' }}>{darkTheme?.toString()}</div>
       <div>
         {showMenuButton && (
@@ -78,7 +78,7 @@ const Header = ({
           <ThemeButton darkTheme={darkTheme} toggleTheme={toggleTheme} />
         </div>
       </div>
-    </div>
+    </header>
   )
 }
 

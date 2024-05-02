@@ -10,10 +10,8 @@ export const metadata: Metadata = {
 
 const ModulePage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'regen.ecocredit.marketplace.v1'}</h1>
-      <ModuleInfo />
-    </div>
+    <h1>{'regen.ecocredit.marketplace.v1'}</h1>
+    <ModuleInfo />
   </div>
 )
 

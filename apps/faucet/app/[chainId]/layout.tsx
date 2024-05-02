@@ -32,7 +32,7 @@ const Layout = ({ children }: any) => {
     }
   }, [chainId, network, initialNetwork, router, setNetwork])
 
-  return <div>{children}</div>
+  return <>{children}</>
 }
 
 export default Layout

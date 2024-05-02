@@ -12,14 +12,12 @@ export const metadata: Metadata = {
 
 const AccountPage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'account'}</h1>
-      <Account />
-      <h1>{'authorizations'}</h1>
-      <Authz />
-      <h1>{'fee allowances'}</h1>
-      <Feegrant />
-    </div>
+    <h1>{'account'}</h1>
+    <Account />
+    <h1>{'authorizations'}</h1>
+    <Authz />
+    <h1>{'fee allowances'}</h1>
+    <Feegrant />
   </div>
 )
 

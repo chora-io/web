@@ -12,13 +12,11 @@ import styles from './page.module.css'
 
 const ProposalPage = () => (
   <div className={styles.page}>
-    <div>
-      <Breadcrumb text="proposals" />
-      <h1>{'group proposal'}</h1>
-      <Proposal />
-      <h1>{'group proposal votes'}</h1>
-      <ProposalVotes />
-    </div>
+    <Breadcrumb text="proposals" />
+    <h1>{'group proposal'}</h1>
+    <Proposal />
+    <h1>{'group proposal votes'}</h1>
+    <ProposalVotes />
   </div>
 )
 

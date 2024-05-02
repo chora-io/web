@@ -13,15 +13,13 @@ export const metadata: Metadata = {
 
 const MemberPage = () => (
   <div className={styles.page}>
-    <div>
-      <Breadcrumb text="members" />
-      <h1>{'group member'}</h1>
-      <Member />
-      <h1>{'authorizations'}</h1>
-      <Authz />
-      <h1>{'fee allowances'}</h1>
-      <Feegrant />
-    </div>
+    <Breadcrumb text="members" />
+    <h1>{'group member'}</h1>
+    <Member />
+    <h1>{'authorizations'}</h1>
+    <Authz />
+    <h1>{'fee allowances'}</h1>
+    <Feegrant />
   </div>
 )
 

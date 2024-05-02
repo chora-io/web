@@ -10,10 +10,8 @@ export const metadata: Metadata = {
 
 const ResolversPage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'group data resolvers'}</h1>
-      <Resolvers />
-    </div>
+    <h1>{'group data resolvers'}</h1>
+    <Resolvers />
   </div>
 )
 

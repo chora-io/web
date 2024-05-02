@@ -12,13 +12,11 @@ export const metadata: Metadata = {
 
 const ClassPage = () => (
   <div className={styles.page}>
-    <div>
-      <Breadcrumb text="classes" />
-      <h1>{'group credit class'}</h1>
-      <Class />
-      <h1>{'class issuers'}</h1>
-      <Issuers />
-    </div>
+    <Breadcrumb text="classes" />
+    <h1>{'group credit class'}</h1>
+    <Class />
+    <h1>{'class issuers'}</h1>
+    <Issuers />
   </div>
 )
 

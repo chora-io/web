@@ -11,11 +11,9 @@ export const metadata: Metadata = {
 
 const ProjectsPage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'explore class projects'}</h1>
-      <ProjectsNav />
-      <Projects />
-    </div>
+    <h1>{'explore class projects'}</h1>
+    <ProjectsNav />
+    <Projects />
   </div>
 )
 

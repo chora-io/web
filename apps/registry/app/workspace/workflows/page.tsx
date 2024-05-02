@@ -10,10 +10,8 @@ export const metadata: Metadata = {
 
 const WorkflowsPage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'manage workflows'}</h1>
-      <Workflows />
-    </div>
+    <h1>{'manage workflows'}</h1>
+    <Workflows />
   </div>
 )
 

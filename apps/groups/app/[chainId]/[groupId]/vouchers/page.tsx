@@ -10,10 +10,8 @@ export const metadata: Metadata = {
 
 const VouchersPage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'group vouchers'}</h1>
-      <Vouchers />
-    </div>
+    <h1>{'group vouchers'}</h1>
+    <Vouchers />
   </div>
 )
 

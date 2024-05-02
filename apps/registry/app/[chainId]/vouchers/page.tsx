@@ -11,11 +11,9 @@ export const metadata: Metadata = {
 
 const VouchersPage = () => (
   <div className={styles.page}>
-    <div>
-      <h1>{'explore vouchers'}</h1>
-      <VouchersNav />
-      <Vouchers />
-    </div>
+    <h1>{'explore vouchers'}</h1>
+    <VouchersNav />
+    <Vouchers />
   </div>
 )
 

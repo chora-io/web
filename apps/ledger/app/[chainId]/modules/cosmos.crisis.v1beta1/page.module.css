@@ -1,5 +1,5 @@
 .page {
-  composes: page-with-sidebar from 'chora/styles/page.css';
+  composes: page-sidebar from 'chora/styles/page.css';
 }
 
 .page h1 {
