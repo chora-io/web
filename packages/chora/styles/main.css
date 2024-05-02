@@ -5,6 +5,7 @@
   display: flex;
   font-size: 1.5em;
   justify-content: center;
+  padding: 2em 0;
   text-align: center;
 }
 
@@ -24,6 +25,18 @@
 
 .banner p > i {
   color: var(--color-theme);
+}
+
+/* banner-full */
+
+.banner-full {
+  composes: banner;
+  min-height: calc(100vh - var(--header-height));
+  padding: 0;
+}
+
+.banner-full > div {
+  margin-bottom: calc(1% + var(--header-height));
 }
 
 /* content */
@@ -63,6 +76,13 @@
 
 .content > div p {
   padding: 1em 0;
+}
+
+/* content-full */
+
+.content-full {
+  composes: content;
+  min-height: calc(100vh - var(--header-height));
 }
 
 /* content-links */

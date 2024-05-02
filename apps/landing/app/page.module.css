@@ -3,15 +3,9 @@
 }
 
 .banner {
-  composes: banner from 'chora/styles/main.css';
-  min-height: calc(100vh - var(--header-height));
-}
-
-.banner > div {
-  margin-bottom: calc(1% + var(--header-height));
+  composes: banner-full from 'chora/styles/main.css';
 }
 
 .content {
-  composes: content from 'chora/styles/main.css';
-  min-height: calc(100vh - var(--header-height));
+  composes: content-full from 'chora/styles/main.css';
 }

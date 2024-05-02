@@ -4,7 +4,6 @@
 
 .banner {
   composes: banner from 'chora/styles/main.css';
-  padding: 2em 0 1em 0;
 }
 
 .content {
