@@ -1,8 +1,14 @@
 /* form */
 
 .form {
-  overflow-x: scroll;
-  overflow-y: hidden;
+  overflow: hidden;
+}
+
+@media (max-width: 850px) {
+  .form {
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
 }
 
 .form label {

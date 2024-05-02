@@ -42,7 +42,7 @@ const Sidebar = () => {
       <div className={styles.sidebar}>
         <ul>
           <ul>
-            <li style={{ padding: '1em 0' }}>
+            <li style={{ padding: '1em 0.5em' }}>
               <Link
                 href={`/${network}/claims`}
                 className={
@@ -83,7 +83,7 @@ const Sidebar = () => {
       <div className={styles.sidebar}>
         <ul>
           <ul>
-            <li style={{ padding: '1em 0' }}>
+            <li style={{ padding: '1em 0.5em' }}>
               <Link
                 href={`/${network}/classes`}
                 className={
@@ -124,7 +124,7 @@ const Sidebar = () => {
       <div className={styles.sidebar}>
         <ul>
           <ul>
-            <li style={{ padding: '1em 0' }}>
+            <li style={{ padding: '1em 0.5em' }}>
               <Link
                 href={`/${network}/batches`}
                 className={
@@ -165,7 +165,7 @@ const Sidebar = () => {
       <div className={styles.sidebar}>
         <ul>
           <ul>
-            <li style={{ padding: '1em 0' }}>
+            <li style={{ padding: '1em 0.5em' }}>
               <Link
                 href={`/${network}/baskets`}
                 className={
@@ -206,7 +206,7 @@ const Sidebar = () => {
       <div className={styles.sidebar}>
         <ul>
           <ul>
-            <li style={{ padding: '1em 0' }}>
+            <li style={{ padding: '1em 0.5em' }}>
               <Link
                 href={`/${network}/monitors`}
                 className={
@@ -247,7 +247,7 @@ const Sidebar = () => {
       <div className={styles.sidebar}>
         <ul>
           <ul>
-            <li style={{ padding: '1em 0' }}>
+            <li style={{ padding: '1em 0.5em' }}>
               <Link
                 href={`/${network}/projects`}
                 className={
@@ -288,7 +288,7 @@ const Sidebar = () => {
       <div className={styles.sidebar}>
         <ul>
           <ul>
-            <li style={{ padding: '1em 0' }}>
+            <li style={{ padding: '1em 0.5em' }}>
               <Link
                 href={`/${network}/resolvers`}
                 className={
@@ -329,7 +329,7 @@ const Sidebar = () => {
       <div className={styles.sidebar}>
         <ul>
           <ul>
-            <li style={{ padding: '1em 0' }}>
+            <li style={{ padding: '1em 0.5em' }}>
               <Link
                 href={`/${network}/subjects`}
                 className={
@@ -370,7 +370,7 @@ const Sidebar = () => {
       <div className={styles.sidebar}>
         <ul>
           <ul>
-            <li style={{ padding: '1em 0' }}>
+            <li style={{ padding: '1em 0.5em' }}>
               <Link
                 href={`/${network}/verifiers`}
                 className={
@@ -411,7 +411,7 @@ const Sidebar = () => {
       <div className={styles.sidebar}>
         <ul>
           <ul>
-            <li style={{ padding: '1em 0' }}>
+            <li style={{ padding: '1em 0.5em' }}>
               <Link
                 href={`/${network}/vouchers`}
                 className={
@@ -452,7 +452,7 @@ const Sidebar = () => {
       <ul>
         {currentRoute !== '/' && (
           <ul className={styles.mobile}>
-            <li style={{ padding: '1em 0' }}>
+            <li style={{ padding: '1em 0.5em' }}>
               <Link
                 href={'/'}
                 className={currentRoute === '/' ? styles.active : undefined}

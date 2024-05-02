@@ -44,7 +44,7 @@ const Sidebar = () => {
       <ul>
         {currentRoute !== '/' && (
           <ul className={styles.mobile}>
-            <li style={{ padding: '1em 0' }}>
+            <li style={{ padding: '1em 0.5em' }}>
               <Link
                 href={'/'}
                 className={currentRoute === '/' ? styles.active : undefined}
