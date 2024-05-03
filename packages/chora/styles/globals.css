@@ -164,6 +164,7 @@ select {
 
 textarea {
   line-height: 1.5;
+  white-space: pre;
 }
 
 input::placeholder,

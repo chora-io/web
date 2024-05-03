@@ -45,6 +45,8 @@
   .box-options {
     margin-bottom: 1.5em;
     padding-bottom: 1.5em;
+    overflow-x: scroll;
+    white-space: nowrap;
   }
 }
 

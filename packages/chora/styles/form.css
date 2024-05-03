@@ -1,16 +1,5 @@
 /* form */
 
-.form {
-  overflow: hidden;
-}
-
-@media (max-width: 850px) {
-  .form {
-    overflow-x: scroll;
-    overflow-y: hidden;
-  }
-}
-
 .form label {
   display: block;
   margin-bottom: 2em;
@@ -28,13 +17,32 @@
   width: 50em;
 }
 
+@media (max-width: 850px) {
+  .form input {
+    width: calc(100% - 2em);
+  }
+}
+
 .form select {
   min-width: 10em;
 }
 
+@media (max-width: 850px) {
+  .form select {
+    width: calc(100% - 2em);
+  }
+}
+
 .form textarea {
   height: 12em;
+  overflow-x: scroll;
   width: 50em;
+}
+
+@media (max-width: 850px) {
+  .form textarea {
+    width: calc(100% - 2em);
+  }
 }
 
 .form button {
