@@ -19,13 +19,13 @@ const Authz = ({
     <div className={styles.box}>
       <div className={styles.boxOptions}>
         <button
-          className={filter === 'grantee' ? styles.boxOptionActive : undefined}
+          className={filter === 'grantee' ? styles.active : undefined}
           onClick={() => setFilter('grantee')}
         >
           {'grantee'}
         </button>
         <button
-          className={filter === 'granter' ? styles.boxOptionActive : undefined}
+          className={filter === 'granter' ? styles.active : undefined}
           onClick={() => setFilter('granter')}
         >
           {'granter'}

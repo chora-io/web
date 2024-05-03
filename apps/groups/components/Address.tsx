@@ -13,6 +13,9 @@ const Address = ({ address }: { address: string }) => {
     useContext(GroupContext)
   const { chainInfo, network } = useContext(WalletContext)
 
+  // error fetching initial parameters
+  const initError = policiesError || membersError
+
   let isPolicyAddress = false
   let unresolvedMetadata = ''
 
@@ -30,8 +33,8 @@ const Address = ({ address }: { address: string }) => {
   const [metadata, metadataError] = useMetadata(chainInfo, unresolvedMetadata)
 
   // TODO: handle error
-  if (policiesError || membersError || metadataError) {
-    console.error(policiesError || membersError || metadataError)
+  if (initError || metadataError) {
+    console.error(initError || metadataError)
   }
 
   return metadata ? (

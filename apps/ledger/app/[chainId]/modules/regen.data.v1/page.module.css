@@ -5,3 +5,9 @@
 .page h1 {
   display: inline-block;
 }
+
+@media (max-width: 850px) {
+  .page h1 {
+    display: block;
+  }
+}

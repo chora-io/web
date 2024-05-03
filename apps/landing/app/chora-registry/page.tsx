@@ -21,13 +21,13 @@ const RegistryPage = () => {
         <div>
           <h1>
             {'chora '}
-            <span style={{ opacity: '0.75' }}>{'registry'}</span>
+            <span className={styles.titleX}>{'registry'}</span>
           </h1>
           <p>
             <i>{'decentralized ecological claims and assets'}</i>
           </p>
           <p>{'ecological registry workspace'}</p>
-          <div style={{ textAlign: 'center', padding: '2em 0' }}>
+          <div className={styles.buttonContainer}>
             <a className={styles.button} href={appLink} target="_blank">
               {'open app'}
               <ArrowUpRight useTheme={true} />
@@ -37,27 +37,25 @@ const RegistryPage = () => {
       </div>
       <div className={styles.content}>
         <div>
-          <div style={{ padding: '1em 0' }}>
-            <p>
-              {
-                'Registry is an explorer for decentralized ecological claims and assets and an open workspace to create and manage registry workflows.'
-              }
-            </p>
-            <p>
-              {
-                'Registry enables registry system actors to collaborate on registry workflows from project registration to credit issuance and retirement.'
-              }
-            </p>
-            <p>
-              {'Registry leverages '}
-              <Link href="https://regen.network" target="_blank">
-                {'Regen Network'}
-              </Link>
-              {
-                "'s blockchain application and network to enable open crediting for ecological regeneration projects."
-              }
-            </p>
-          </div>
+          <p>
+            {
+              'Registry is an explorer for decentralized ecological claims and assets and an open workspace to create and manage registry workflows.'
+            }
+          </p>
+          <p>
+            {
+              'Registry enables registry system actors to collaborate on registry workflows from project registration to credit issuance and retirement.'
+            }
+          </p>
+          <p>
+            {'Registry leverages '}
+            <Link href="https://regen.network" target="_blank">
+              {'Regen Network'}
+            </Link>
+            {
+              "'s blockchain application and network to enable open crediting for ecological regeneration projects."
+            }
+          </p>
           <div className={styles.contentLinks}>
             <a href={appLink} target="_blank">
               {'application'}

@@ -8,21 +8,22 @@ const Layout = ({ children }: any) => {
   const { chainId } = useParams()
   const currentRoute = usePathname()
   const router = useRouter()
+
   const { network, setNetwork } = useContext(WalletContext)
 
-  const [initialNetwork, setInitialNetwork] = useState<string | null>(null)
+  const [initNetwork, setInitNetwork] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!initialNetwork && network) {
-      setInitialNetwork(network)
+    if (network && !initNetwork) {
+      setInitNetwork(network)
     }
-  }, [initialNetwork, network])
+  }, [network, initNetwork])
 
   useEffect(() => {
     // check if route param does not match network
-    if (initialNetwork && chainId !== network) {
+    if (network && initNetwork && chainId !== network) {
       // if network change, update router path
-      if (network !== initialNetwork) {
+      if (network !== initNetwork) {
         const splitRoute = currentRoute.split('/')
 
         // reroute from network page to network page
@@ -37,11 +38,11 @@ const Layout = ({ children }: any) => {
       }
 
       // if route change, update wallet context
-      if (network === initialNetwork) {
+      if (network === initNetwork) {
         setNetwork(chainId)
       }
     }
-  }, [chainId, currentRoute, initialNetwork, network, router, setNetwork])
+  }, [chainId, currentRoute, router, network, setNetwork, initNetwork])
 
   return <>{children}</>
 }

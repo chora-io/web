@@ -6,6 +6,10 @@
   composes: banner from 'chora/styles/main.css';
 }
 
+.titleX {
+  opacity: 0.75;
+}
+
 .content {
   composes: content from 'chora/styles/main.css';
   min-height: 60vh; /* not enough content */
@@ -13,6 +17,10 @@
 
 .contentLinks {
   composes: content-links from 'chora/styles/main.css';
+}
+
+.buttonContainer {
+  margin-top: 1.5em;
 }
 
 .button {

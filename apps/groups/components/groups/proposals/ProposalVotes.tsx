@@ -40,7 +40,11 @@ const ProposalVotes = () => {
           </div>
         ))}
       {votes && votes.length === 0 && !error && <div>{'no votes found'}</div>}
-      <Result error={error} />
+      {error && (
+        <div className={styles.boxText}>
+          <Result error={error} />
+        </div>
+      )}
     </div>
   )
 }

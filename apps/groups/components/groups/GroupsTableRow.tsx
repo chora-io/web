@@ -9,14 +9,14 @@ const GroupsTableRow = ({ group }: any) => {
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // parse metadata or fetch from network server, otherwise resolve
-  const [metadata, error] = useMetadata(
+  const [metadata, metadataError] = useMetadata(
     chainInfo,
     group ? group.metadata : null,
   )
 
   // TODO: handle error
-  if (error) {
-    console.error(error)
+  if (metadataError) {
+    console.error(metadataError)
   }
 
   return (

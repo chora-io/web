@@ -3,12 +3,15 @@
 import { Result } from 'chora/components'
 import { InputIRI } from 'chora/components/forms'
 import { WalletContext } from 'chora/contexts'
+import {useNetworkServer} from "chora/hooks";
 import { useContext, useState } from 'react'
 
 import styles from './GetData.module.css'
 
 const GetData = () => {
-  const { network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
+
+    const [serverUrl] = useNetworkServer(chainInfo)
 
   // data input
   const [iri, setIri] = useState<string>('')
@@ -17,16 +20,6 @@ const GetData = () => {
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<any>(null)
 
-  // TODO: add hook for server url
-
-  // whether network is a local network
-  const localChain = network?.includes('-local')
-
-  // chora server (use local server if local network)
-  let serverUrl = 'http://localhost:3000'
-  if (!localChain) {
-    serverUrl = 'https://server.chora.io'
-  }
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()

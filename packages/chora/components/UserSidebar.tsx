@@ -40,7 +40,7 @@ const UserSidebar = () => {
       return
     }
 
-    // TODO: data to sign
+    // TODO: application data for arbitrary signing
     const data = new Uint8Array(1)
 
     // signature for authentication

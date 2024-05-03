@@ -20,13 +20,13 @@ const LedgerPage = () => {
         <div>
           <h1>
             {'chora '}
-            <span style={{ opacity: '0.75' }}>{'ledger'}</span>
+            <span className={styles.titleX}>{'ledger'}</span>
           </h1>
           <p>
             <i>{'explore and interact with distributed ledgers'}</i>
           </p>
           <p>{'blockchain network dashboard'}</p>
-          <div style={{ textAlign: 'center', padding: '2em 0' }}>
+          <div className={styles.buttonContainer}>
             <a className={styles.button} href={appLink} target="_blank">
               {'open app'}
               <ArrowUpRight useTheme={true} />

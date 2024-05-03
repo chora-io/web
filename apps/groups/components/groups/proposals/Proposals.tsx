@@ -100,21 +100,19 @@ const Proposals = () => {
     <div className={styles.box}>
       <div className={styles.boxOptions}>
         <button
-          className={
-            filter === 'submitted' ? styles.boxOptionActive : undefined
-          }
+          className={filter === 'submitted' ? styles.active : undefined}
           onClick={() => setFilter('submitted')}
         >
           {'submitted'}
         </button>
         <button
-          className={filter === 'accepted' ? styles.boxOptionActive : undefined}
+          className={filter === 'accepted' ? styles.active : undefined}
           onClick={() => setFilter('accepted')}
         >
           {'accepted'}
         </button>
         <button
-          className={filter === 'rejected' ? styles.boxOptionActive : undefined}
+          className={filter === 'rejected' ? styles.active : undefined}
           onClick={() => setFilter('rejected')}
         >
           {'rejected'}

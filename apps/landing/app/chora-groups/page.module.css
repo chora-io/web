@@ -6,12 +6,20 @@
   composes: banner from 'chora/styles/main.css';
 }
 
+.titleX {
+  opacity: 0.75;
+}
+
 .content {
   composes: content from 'chora/styles/main.css';
 }
 
 .contentLinks {
   composes: content-links from 'chora/styles/main.css';
+}
+
+.buttonContainer {
+  margin-top: 1.5em;
 }
 
 .button {

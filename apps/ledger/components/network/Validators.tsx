@@ -41,26 +41,28 @@ const Validators = () => {
 
   return (
     <div className={styles.box}>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <td>{'moniker'}</td>
-            <td>{'tokens'}</td>
-            <td>{'delegator shares'}</td>
-            <td>{'commission rate'}</td>
-            <td>{'max commission rate'}</td>
-            <td>{'max change rate'}</td>
-          </tr>
-        </thead>
-        <tbody>
-          {validators.length > 0 &&
-            validators.map((v: any, i: number) => (
-              <Validator index={i} validator={v} key={i} />
-            ))}
-        </tbody>
-      </table>
+      <div className={styles.tableContainer}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <td>{'moniker'}</td>
+              <td>{'tokens'}</td>
+              <td>{'delegator shares'}</td>
+              <td>{'commission rate'}</td>
+              <td>{'max commission rate'}</td>
+              <td>{'max change rate'}</td>
+            </tr>
+          </thead>
+          <tbody>
+            {validators.length > 0 &&
+              validators.map((v: any, i: number) => (
+                <Validator index={i} validator={v} key={i} />
+              ))}
+          </tbody>
+        </table>
+      </div>
       {error && (
-        <div className={styles.result}>
+        <div className={styles.boxText}>
           <Result error={error} />
         </div>
       )}

@@ -80,7 +80,7 @@ export const useMetadata = (chainInfo: any, unresolved: string) => {
             if (res.error) {
               setError(res.error)
             } else {
-              // TODO: handle other expected responses?
+              // TODO: handle other response formats
               setMetadata(JSON.parse(res['jsonld']))
               setResolverUrl(url)
             }

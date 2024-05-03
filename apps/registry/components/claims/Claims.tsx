@@ -53,7 +53,11 @@ const Claims = () => {
         />
         <button type="submit">{'search'}</button>
       </form>
-      <Result error={error} />
+      {error && (
+        <div className={styles.boxText}>
+          <Result error={error} />
+        </div>
+      )}
     </div>
   )
 }

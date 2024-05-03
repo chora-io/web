@@ -4,6 +4,13 @@
   margin-left: 2em;
 }
 
+@media (max-width: 850px) {
+  .infoButton {
+    display: block;
+    margin: 0 1.5em 1.5em 1.5em;
+  }
+}
+
 .box {
   composes: box from 'chora/styles/box.css';
 }
@@ -13,9 +20,21 @@
   flex-wrap: wrap;
 }
 
+@media (max-width: 850px) {
+  .box ul {
+    display: block;
+  }
+}
+
 .box li {
   flex: 1 0 calc(50% - 2em);
   margin: 1em;
+}
+
+@media (max-width: 850px) {
+  .box li {
+    margin: 2em;
+  }
 }
 
 .inactive a {

@@ -10,15 +10,10 @@ const GroupsListItem = ({ group }: any) => {
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // parse metadata or fetch from network server, otherwise resolve
-  const [metadata, error] = useMetadata(
+  const [metadata, metadataError] = useMetadata(
     chainInfo,
     group ? group.metadata : null,
   )
-
-  // TODO: handle error
-  if (error) {
-    console.error(error)
-  }
 
   return (
     <div className={styles.boxItem}>
@@ -42,9 +37,9 @@ const GroupsListItem = ({ group }: any) => {
         </p>
       </div>
       <Link href={`/${network}/${group.id}`}>{'view group'}</Link>
-      {error && (
+      {metadataError && (
         <div className={styles.boxText}>
-          <Result error={error} />
+          <Result error={metadataError} />
         </div>
       )}
     </div>

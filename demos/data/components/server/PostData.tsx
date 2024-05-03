@@ -13,6 +13,7 @@ import {
   SelectGraphMerkle,
 } from 'chora/components/forms/regen.data.v1'
 import { WalletContext } from 'chora/contexts'
+import {useNetworkServer} from "chora/hooks";
 import * as jsonld from 'jsonld'
 import { useContext, useEffect, useState } from 'react'
 
@@ -21,7 +22,9 @@ import styles from './PostData.module.css'
 const contextUrl = 'https://schema.chora.io/contexts/index.jsonld'
 
 const PostData = () => {
-  const { network } = useContext(WalletContext)
+  const { chainInfo } = useContext(WalletContext)
+
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   // input option
   const [input, setInput] = useState('form')
@@ -38,17 +41,6 @@ const PostData = () => {
   // error and success
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<any>(null)
-
-  // TODO: add hook for server url
-
-  // whether network is a local network
-  const localChain = network?.includes('-local')
-
-  // chora server (use local server if local network)
-  let serverUrl = 'http://localhost:3000'
-  if (!localChain) {
-    serverUrl = 'https://server.chora.io'
-  }
 
   // fetch available contexts
   useEffect(() => {

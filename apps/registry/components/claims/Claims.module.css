@@ -6,6 +6,10 @@
   composes: box-header from 'chora/styles/box.css';
 }
 
+.boxText {
+  composes: box-text from 'chora/styles/box.css';
+}
+
 .form {
   composes: form from 'chora/styles/form.css';
 }

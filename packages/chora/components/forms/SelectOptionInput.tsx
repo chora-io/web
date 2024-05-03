@@ -5,13 +5,13 @@ import styles from './SelectOptionInput.module.css'
 const SelectOptionInput = ({ input, setInput }: any) => (
   <div className={styles.boxOptions}>
     <button
-      className={input == 'form' ? styles.boxOptionActive : undefined}
+      className={input == 'form' ? styles.active : undefined}
       onClick={() => setInput('form')}
     >
       {'form'}
     </button>
     <button
-      className={input == 'json' ? styles.boxOptionActive : undefined}
+      className={input == 'json' ? styles.active : undefined}
       onClick={() => setInput('json')}
     >
       {'json'}

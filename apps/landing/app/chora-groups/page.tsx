@@ -20,13 +20,13 @@ const GroupsPage = () => {
         <div>
           <h1>
             {'chora '}
-            <span style={{ opacity: '0.75' }}>{'groups'}</span>
+            <span className={styles.titleX}>{'groups'}</span>
           </h1>
           <p>
             <i>{'cooperative governance on common ground'}</i>
           </p>
           <p>{'group governance workspace'}</p>
-          <div style={{ textAlign: 'center', padding: '2em 0' }}>
+          <div className={styles.buttonContainer}>
             <a className={styles.button} href={appLink} target="_blank">
               {'open app'}
               <ArrowUpRight useTheme={true} />
@@ -36,23 +36,21 @@ const GroupsPage = () => {
       </div>
       <div className={styles.content}>
         <div>
-          <div style={{ padding: '1em 0' }}>
-            <p>
-              {
-                'Groups is a governance workspace where groups of individuals (or groups of groups) make decisions and manage shared resources.'
-              }
-            </p>
-            <p>
-              {
-                'Groups leverages a dynamic group framework to enable individuals to pool their resources as a group and to govern however they choose.'
-              }
-            </p>
-            <p>
-              {
-                'Groups also enables groups to manage common land, community vouchers, and ecological claims and assets on multiple networks.'
-              }
-            </p>
-          </div>
+          <p>
+            {
+              'Groups is a governance workspace where groups of individuals (or groups of groups) make decisions and manage shared resources.'
+            }
+          </p>
+          <p>
+            {
+              'Groups leverages a dynamic group framework to enable individuals to pool their resources as a group and to govern however they choose.'
+            }
+          </p>
+          <p>
+            {
+              'Groups also enables groups to manage common land, community vouchers, and ecological claims and assets on multiple networks.'
+            }
+          </p>
           <div className={styles.contentLinks}>
             <a href={appLink} target="_blank">
               {'application'}

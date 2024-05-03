@@ -12,11 +12,11 @@ const VouchersTableRow = ({ voucher, renderAddress, renderLink }: any) => {
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // parse metadata or fetch from network server, otherwise resolve
-  const [metadata, error] = useMetadata(chainInfo, voucher.metadata)
+  const [metadata, metadataError] = useMetadata(chainInfo, voucher.metadata)
 
   // TODO: handle error
-  if (error) {
-    console.error(error)
+  if (metadataError) {
+    console.error(metadataError)
   }
 
   return (

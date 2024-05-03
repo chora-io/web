@@ -7,30 +7,31 @@ import { useContext, useState, useEffect } from 'react'
 const Layout = ({ children }: any) => {
   const { chainId } = useParams()
   const router = useRouter()
+
   const { network, setNetwork } = useContext(WalletContext)
 
-  const [initialNetwork, setInitialNetwork] = useState<string | null>(null)
+  const [initNetwork, setInitNetwork] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!initialNetwork && network) {
-      setInitialNetwork(network)
+    if (network && !initNetwork) {
+      setInitNetwork(network)
     }
-  }, [initialNetwork, network])
+  }, [network, initNetwork])
 
   useEffect(() => {
     // check if route param does not match network
-    if (initialNetwork && chainId !== network) {
+    if (network && initNetwork && chainId !== network) {
       // if network change, update router path
-      if (network !== initialNetwork) {
+      if (network !== initNetwork) {
         router.push(`/${network}`)
       }
 
       // if route change, update wallet context
-      if (network === initialNetwork) {
+      if (network === initNetwork) {
         setNetwork(chainId)
       }
     }
-  }, [chainId, network, initialNetwork, router, setNetwork])
+  }, [chainId, router, network, setNetwork, initNetwork])
 
   return <>{children}</>
 }

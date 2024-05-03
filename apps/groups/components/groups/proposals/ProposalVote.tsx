@@ -50,7 +50,11 @@ const ProposalVote = () => {
         <h3>{'submit time'}</h3>
         <p>{vote ? formatTimestamp(vote['submit_time']) : 'NA'}</p>
       </div>
-      <Result error={error} />
+      {error && (
+        <div className={styles.boxText}>
+          <Result error={error} />
+        </div>
+      )}
     </div>
   )
 }

@@ -58,13 +58,13 @@ const AnchoredData = () => {
       </div>
       <div className={styles.boxOptions}>
         <button
-          className={option === 'iri' ? styles.boxOptionActive : undefined}
+          className={option === 'iri' ? styles.active : undefined}
           onClick={() => setOption('iri')}
         >
           {'iri'}
         </button>
         <button
-          className={option === 'hash' ? styles.boxOptionActive : undefined}
+          className={option === 'hash' ? styles.active : undefined}
           onClick={() => setOption('hash')}
         >
           {'hash'}

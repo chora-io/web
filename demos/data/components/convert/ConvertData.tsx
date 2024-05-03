@@ -112,7 +112,7 @@ const ConvertData = () => {
     try {
       doc = JSON.parse(json)
     } catch (err) {
-      setError('invalid json') // TODO: type error null
+      setError('invalid json')
       return
     }
 

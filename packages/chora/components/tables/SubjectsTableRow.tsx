@@ -12,11 +12,11 @@ const SubjectsTableRow = ({ subject, renderAddress, renderLink }: any) => {
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // parse metadata or fetch from network server, otherwise resolve
-  const [metadata, error] = useMetadata(chainInfo, subject.metadata)
+  const [metadata, metadataError] = useMetadata(chainInfo, subject.metadata)
 
   // TODO: handle error
-  if (error) {
-    console.error(error)
+  if (metadataError) {
+    console.error(metadataError)
   }
 
   return (

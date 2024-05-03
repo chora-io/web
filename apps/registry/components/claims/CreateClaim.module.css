@@ -6,7 +6,7 @@
   composes: box-options from 'chora/styles/box.css';
 }
 
-.boxOptionActive {
+.active {
   composes: box-option-active from 'chora/styles/box.css';
 }
 

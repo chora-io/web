@@ -26,7 +26,7 @@ const Keplr = () => {
       return
     }
 
-    // TODO: data to sign
+    // TODO: application data for arbitrary signing
     const data = new Uint8Array(1)
 
     // signature for authentication
@@ -93,7 +93,11 @@ const Keplr = () => {
           {'authenticate'}
         </button>
       )}
-      <Result error={error} />
+      {error && (
+        <div className={styles.boxText}>
+          <Result error={error} />
+        </div>
+      )}
     </div>
   )
 }
