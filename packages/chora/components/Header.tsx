@@ -5,7 +5,8 @@ import * as React from 'react'
 import { useContext } from 'react'
 
 import { MenuContext, ThemeContext } from '../contexts'
-import { ArrowUpRight, HeaderTitle, MenuButton, ThemeButton } from '.'
+import { HeaderTitle } from '.'
+import { ArrowUpRight, MenuIcon, ThemeIcon } from './icons'
 
 import styles from './Header.module.css'
 
@@ -34,9 +35,9 @@ const Header = ({ title, items, showMenuButton, showMobileTitle }: any) => {
       <div style={{ display: 'none' }}>{darkTheme?.toString()}</div>
       <div>
         {showMenuButton && (
-          <div className={styles.showOnMobile}>
-            <MenuButton darkTheme={darkTheme} toggleMenu={toggleMenu} />
-          </div>
+          <button className={styles.buttonMobile} onClick={toggleMenu}>
+            <MenuIcon darkTheme={darkTheme} />
+          </button>
         )}
         <HeaderTitle
           darkTheme={darkTheme}
@@ -61,7 +62,9 @@ const Header = ({ title, items, showMenuButton, showMobileTitle }: any) => {
                 ),
               )}
           </ul>
-          <ThemeButton darkTheme={darkTheme} toggleTheme={toggleTheme} />
+          <button className={styles.button} onClick={toggleTheme}>
+            <ThemeIcon darkTheme={darkTheme} />
+          </button>
         </div>
       </div>
     </header>

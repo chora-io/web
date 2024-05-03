@@ -4,20 +4,34 @@
   width: calc(2 * var(--sidebar-width));
 }
 
-.sidebar i {
-  color: var(--color-theme);
-  display: block;
-  margin: 2em 2em 1em 2em;
+@media (max-width: 850px) {
+  .sidebar {
+    min-height: calc(100vh - var(--header-height));
+    width: 75vw;
+  }
 }
 
-.sidebar p {
-  margin: 1em 2em;
+.sidebar > div {
+  margin: 2em;
 }
 
 @media (max-width: 850px) {
-  .sidebar {
-    display: block !important;
-    width: 100vw;
+  .sidebar > div {
+    margin: 1.5em;
+  }
+}
+
+.sidebar i {
+  color: var(--color-theme);
+}
+
+.sidebar p {
+  margin: 1em;
+}
+
+@media (max-width: 850px) {
+  .sidebar p {
+    overflow-x: scroll;
   }
 }
 
@@ -26,7 +40,7 @@
 }
 
 .button {
-  margin-right: 1em;
+  margin: 1em;
   padding: 0.5em 1em;
 }
 

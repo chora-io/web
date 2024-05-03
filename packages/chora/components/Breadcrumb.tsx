@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import * as React from 'react'
 
-import { ArrowLeft } from '.'
+import { ArrowLeft } from './icons'
 
 import styles from './Breadcrumb.module.css'
 

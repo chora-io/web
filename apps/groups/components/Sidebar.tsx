@@ -6,7 +6,7 @@ import { useParams, usePathname } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
 import styles from './Sidebar.module.css'
-import { ArrowLeft } from 'chora/components'
+import { ArrowLeft } from 'chora/components/icons'
 
 const Sidebar = () => {
   const { groupId } = useParams()

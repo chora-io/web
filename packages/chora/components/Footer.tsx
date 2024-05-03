@@ -8,7 +8,7 @@ import { useContext } from 'react'
 import choraDarkSmall from '../assets//images/chora_dark_small.png'
 import choraLightSmall from '../assets//images/chora_light_small.png'
 import { ThemeContext } from '../contexts'
-import { ArrowUpRight } from '.'
+import { ArrowUpRight } from './icons'
 
 import styles from './Footer.module.css'
 

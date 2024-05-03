@@ -4,8 +4,9 @@ import * as React from 'react'
 import { useContext } from 'react'
 
 import { ThemeContext, MenuContext, WalletContext } from '../contexts'
-import { HeaderTitle, MenuButton, ThemeButton, UserButton } from '.'
+import { HeaderTitle } from '.'
 import { SelectNetwork } from './forms'
+import { MenuIcon, ThemeIcon, UserIcon } from './icons'
 
 import styles from './HeaderWallet.module.css'
 
@@ -26,6 +27,7 @@ const HeaderWallet = ({
       setShowMenu(false)
     } else {
       setShowMenu(true)
+      setShowUser(false)
     }
   }
 
@@ -42,6 +44,7 @@ const HeaderWallet = ({
       setShowUser(false)
     } else {
       setShowUser(true)
+      setShowMenu(false)
     }
   }
 
@@ -50,9 +53,9 @@ const HeaderWallet = ({
       <div style={{ display: 'none' }}>{darkTheme?.toString()}</div>
       <div>
         {showMenuButton && (
-          <div className={styles.showOnMobile}>
-            <MenuButton darkTheme={darkTheme} toggleMenu={toggleMenu} />
-          </div>
+          <button className={styles.buttonMobile} onClick={toggleMenu}>
+            <MenuIcon darkTheme={darkTheme} />
+          </button>
         )}
         <HeaderTitle
           darkTheme={darkTheme}
@@ -69,9 +72,13 @@ const HeaderWallet = ({
             />
           </form>
           {showUserButton && (
-            <UserButton darkTheme={darkTheme} toggleUser={toggleUser} />
+            <button className={styles.button} onClick={toggleUser}>
+              <UserIcon darkTheme={darkTheme} />
+            </button>
           )}
-          <ThemeButton darkTheme={darkTheme} toggleTheme={toggleTheme} />
+          <button className={styles.button} onClick={toggleTheme}>
+            <ThemeIcon darkTheme={darkTheme} />
+          </button>
         </div>
       </div>
     </header>

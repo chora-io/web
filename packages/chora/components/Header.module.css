@@ -10,8 +10,13 @@
   composes: header-divider from 'chora/styles/header.css';
 }
 
+.button {
+  background: none;
+}
+
 @media (min-width: 850px) {
-  .showOnMobile {
+  .buttonMobile {
+    composes: button;
     display: none !important;
   }
 }

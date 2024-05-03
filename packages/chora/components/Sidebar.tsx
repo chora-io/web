@@ -6,7 +6,7 @@ import * as React from 'react'
 import { useContext, useEffect, useState } from 'react'
 
 import { MenuContext } from '../contexts'
-import { ArrowUpRight } from '.'
+import { ArrowUpRight } from './icons'
 
 import styles from './Sidebar.module.css'
 

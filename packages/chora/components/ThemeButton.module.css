@@ -1,8 +1,0 @@
-.button {
-  align-items: center;
-  background: none;
-  display: inline-flex;
-  height: var(--header-height);
-  margin: 0 0.2em;
-  padding: 0;
-}

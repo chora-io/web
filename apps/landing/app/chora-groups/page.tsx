@@ -1,4 +1,4 @@
-import { ArrowUpRight } from 'chora/components'
+import { ArrowUpRight } from 'chora/components/icons'
 import { Metadata } from 'next'
 
 import styles from './page.module.css'

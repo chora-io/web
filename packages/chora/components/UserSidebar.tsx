@@ -102,17 +102,23 @@ const UserSidebar = () => {
     <div className={showUser ? styles.sidebar : styles.hidden}>
       {wallet ? (
         <div>
-          <i>{'keplr wallet network'}</i>
+          <p>
+            <i>{'keplr wallet network'}</i>
+          </p>
           <p>{network && network}</p>
-          <i>{'keplr wallet account address'}</i>
+          <p>
+            <i>{'keplr wallet account address'}</i>
+          </p>
           <p>{wallet && wallet.bech32Address}</p>
         </div>
       ) : (
         <div>
-          <i>{'connect to keplr wallet to access additional features'}</i>
+          <p>
+            <i>{'connect to keplr wallet to access additional features'}</i>
+          </p>
           <p>{'keplr wallet will connect to the following network:'}</p>
           <p>{network}</p>
-          <div style={{ margin: '2em' }}>
+          <div>
             <button className={styles.button} onClick={getKeplr}>
               {'connect'}
             </button>
@@ -123,11 +129,15 @@ const UserSidebar = () => {
       <hr />
       {account ? (
         <div>
-          <i>{'chora server account id'}</i>
+          <p>
+            <i>{'chora server account id'}</i>
+          </p>
           <p>{account && account.id}</p>
-          <i>{'chora server account address'}</i>
+          <p>
+            <i>{'chora server account address'}</i>
+          </p>
           <p>{account && account.address}</p>
-          <div style={{ margin: '2em' }}>
+          <div>
             {switched && (
               <button className={styles.button} onClick={handleSwitchBack}>
                 {'switch back'}
@@ -140,7 +150,9 @@ const UserSidebar = () => {
         </div>
       ) : (
         <div>
-          <i>{'connect to chora server to access additional features'}</i>
+          <p>
+            <i>{'connect to chora server to access additional features'}</i>
+          </p>
           {wallet ? (
             wallet.bech32Address.includes('chora') ? (
               <>
@@ -148,23 +160,18 @@ const UserSidebar = () => {
                   <p>
                     {'The following address will be used for authentication:'}
                   </p>
-                  <p style={{ marginTop: '0.5em' }}>{wallet.bech32Address}</p>
+                  <p>{wallet.bech32Address}</p>
                 </div>
-                <div style={{ margin: '2em' }}>
-                  <button
-                    className={styles.button}
-                    onClick={handleAuthenticate}
-                  >
-                    {'authenticate'}
-                  </button>
-                </div>
+                <button className={styles.button} onClick={handleAuthenticate}>
+                  {'authenticate'}
+                </button>
               </>
             ) : (
               <div>
                 <p>
                   {'Switch networks to authenticate with your chora address.'}
                 </p>
-                <form className={styles.form} style={{ margin: '2em' }}>
+                <form className={styles.form}>
                   <SelectNetwork
                     label=" "
                     network={network}
