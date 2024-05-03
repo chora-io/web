@@ -36,8 +36,10 @@ const Resolvers = ({
           </button>
         </div>
       )}
-      {!resolvers && !error && <div>{'loading...'}</div>}
-      {resolvers && resolvers.length === 0 && <div>{'no resolvers found'}</div>}
+      {!error && !resolvers && <div>{'loading...'}</div>}
+      {!error && resolvers && resolvers.length === 0 && (
+        <div>{'no resolvers found'}</div>
+      )}
       {resolvers && resolvers.length > 0 && (
         <>
           {view === 'table' ? (

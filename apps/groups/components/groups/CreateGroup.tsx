@@ -19,11 +19,14 @@ import styles from './CreateGroup.module.css'
 const contextUrl = 'https://schema.chora.io/contexts/group.jsonld'
 
 const CreateGroup = () => {
-  const { authzGrantee } = useContext(AccountContext) // TODO: error
+  const { authzGrantee, authzError } = useContext(AccountContext)
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
-  const [context, example, template] = useSchema(contextUrl)
+  const [context, example, template, schemaError] = useSchema(contextUrl)
+
+  // error fetching initial parameters
+  const initError = authzError || schemaError
 
   // input option
   const [input, setInput] = useState('schema-form')
@@ -115,6 +118,12 @@ const CreateGroup = () => {
       })
   }
 
+  const handleUseTemplate = () => {
+    if (template) {
+      setJson(template)
+    }
+  }
+
   return (
     <div className={styles.box}>
       <div className={styles.boxOptions}>
@@ -145,8 +154,8 @@ const CreateGroup = () => {
             json={json}
             placeholder={example}
             setJson={setJson}
-            useTemplate={() => setJson(template)}
-            showUseTemplate={context.length > 0}
+            useTemplate={handleUseTemplate}
+            showUseTemplate={context && context.length > 0}
           />
         )}
         <hr />
@@ -165,7 +174,11 @@ const CreateGroup = () => {
         <button type="submit">{'submit'}</button>
       </form>
       <div className={styles.boxText}>
-        <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+        <ResultTx
+          error={error || initError}
+          rest={chainInfo?.rest}
+          success={success}
+        />
       </div>
     </div>
   )

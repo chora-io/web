@@ -13,10 +13,13 @@ import styles from './DefineResolver.module.css'
 const DefineResolver = () => {
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
-  const [isAuthz] = usePermissions(
+  const [isAuthz, permError] = usePermissions(
     wallet,
     '/regen.ecocredit.v1.MsgCreateProject',
   )
+
+  // error fetching initial parameters
+  const initError = permError
 
   // form inputs
   const [message, setMessage] = useState<any>(null)
@@ -61,7 +64,11 @@ const DefineResolver = () => {
         />
         <button type="submit">{'submit'}</button>
       </form>
-      <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+      <ResultTx
+        error={error || initError}
+        rest={chainInfo?.rest}
+        success={success}
+      />
     </div>
   )
 }

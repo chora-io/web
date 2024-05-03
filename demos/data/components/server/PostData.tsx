@@ -212,7 +212,7 @@ const PostData = () => {
             placeholder={example}
             setJson={handleSetJson}
             useTemplate={handleGenJson}
-            showUseTemplate={context.length > 0}
+            showUseTemplate={context && context.length > 0}
           />
           <SelectDigestAlgorithm
             digest={''} // disabled until multiple options exist

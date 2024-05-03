@@ -19,10 +19,12 @@ const UpdateMembers = () => {
   const { members: initMembers, membersError } = useContext(GroupContext)
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
-  const [isAdmin, isPolicy, isAuthz] = usePermissionsAdmin(
+  const [isAdmin, isPolicy, isAuthz, permError] = usePermissionsAdmin(
     wallet,
     '/cosmos.group.v1.MsgUpdateGroupMembers',
   )
+
+  const initError = membersError || permError
 
   // form inputs
   const [members, setMembers] = useState<any[]>([])
@@ -86,14 +88,14 @@ const UpdateMembers = () => {
           id="group-members"
           network={network}
           members={members}
-          initMembers={initMembers.map((m: any) => m.member)}
+          initMembers={initMembers ? initMembers.map((m: any) => m.member) : []}
           setMembers={setMembers}
         />
         <button type="submit">{'submit'}</button>
       </form>
       <div className={styles.boxText}>
         <ResultTx
-          error={membersError || error}
+          error={error || initError}
           rest={chainInfo?.rest}
           success={success}
         />

@@ -35,7 +35,13 @@ const CreateClaim = () => {
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
-  const [isAuthz] = usePermissions(wallet, '/regen.data.v1.MsgAttest')
+  const [isAuthz, permError] = usePermissions(
+    wallet,
+    '/regen.data.v1.MsgAttest',
+  )
+
+  // error fetching initial parameters
+  const initError = permError
 
   // input option
   const [input, setInput] = useState<string>('schema-form')
@@ -319,7 +325,7 @@ const CreateClaim = () => {
               placeholder={example}
               setJson={handleSetJson}
               useTemplate={handleGenJson}
-              showUseTemplate={context.length > 0}
+              showUseTemplate={context && context.length > 0}
             />
           </>
         )}
@@ -355,7 +361,7 @@ const CreateClaim = () => {
         {'finalize claim'}
       </button>
       <div className={styles.boxText}>
-        <Result error={error} />
+        <Result error={error || initError} />
       </div>
       <div className={styles.boxText}>
         <Result

@@ -5,8 +5,11 @@ import { GroupContext } from '@contexts/GroupContext'
 
 // determine group member and member authorized
 export const usePermissionsMember = (wallet: any, msgType: string) => {
-  const { authzGrantee } = useContext(AccountContext) // TODO: error
-  const { members } = useContext(GroupContext) // TODO: errors
+  const { authzGrantee, authzError } = useContext(AccountContext)
+  const { members, membersError } = useContext(GroupContext)
+
+  // error fetching initial parameters
+  const initError = authzError || membersError
 
   const [isMember, setIsMember] = useState<boolean>(false)
   const [isAuthz, setIsAuthz] = useState<boolean>(false)
@@ -31,5 +34,5 @@ export const usePermissionsMember = (wallet: any, msgType: string) => {
     }
   }, [authzGrantee?.length, wallet?.bech32Address])
 
-  return [isMember, isAuthz]
+  return [isMember, isAuthz, initError]
 }

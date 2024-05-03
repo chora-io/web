@@ -31,7 +31,7 @@ const FeegrantContainer = () => {
       feeGranter={feeGranter}
       error={error}
       filter={filter}
-      setFileter={setFilter}
+      setFilter={setFilter}
       renderAddress={renderAddress}
     />
   )

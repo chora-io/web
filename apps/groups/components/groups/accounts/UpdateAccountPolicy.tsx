@@ -18,10 +18,13 @@ const UpdateAccountMetadata = () => {
   const { policies } = useContext(GroupContext)
   const { chainInfo, wallet } = useContext(WalletContext)
 
-  const [isAdmin, isPolicy, isAuthz] = usePermissionsAdmin(
+  const [isAdmin, isPolicy, isAuthz, permError] = usePermissionsAdmin(
     wallet,
     '/cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy',
   )
+
+  // error fetching initial parameters
+  const initError = permError
 
   // form inputs
   const [policy, setPolicy] = useState<any>(undefined)
@@ -90,7 +93,11 @@ const UpdateAccountMetadata = () => {
         <button type="submit">{'submit'}</button>
       </form>
       <div className={styles.boxText}>
-        <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+        <ResultTx
+          error={error || initError}
+          rest={chainInfo?.rest}
+          success={success}
+        />
       </div>
     </div>
   )

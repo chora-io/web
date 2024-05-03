@@ -60,7 +60,7 @@ const Members = () => {
         )}
       </div>
       {!error && !sortedMembers && <div>{'loading...'}</div>}
-      {sortedMembers && sortedMembers.length === 0 && (
+      {!error && sortedMembers && sortedMembers.length === 0 && (
         <div>{'no members found'}</div>
       )}
       {sortedMembers &&

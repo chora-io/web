@@ -61,7 +61,7 @@ const Accounts = () => {
         )}
       </div>
       {!error && !sortedPolicies && <div>{'loading...'}</div>}
-      {sortedPolicies && sortedPolicies.length === 0 && (
+      {!error && sortedPolicies && sortedPolicies.length === 0 && (
         <div>{'no accounts found'}</div>
       )}
       {sortedPolicies &&

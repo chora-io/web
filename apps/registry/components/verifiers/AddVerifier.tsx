@@ -23,9 +23,15 @@ const AddVerifier = () => {
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
-  const [context, example, template] = useSchema(contextUrl)
+  const [context, example, template, schemaError] = useSchema(contextUrl)
 
-  const [isAuthz] = usePermissions(wallet, '/chora.ecosystem.v1.MsgAddVerifier')
+  const [isAuthz, permError] = usePermissions(
+    wallet,
+    '/chora.ecosystem.v1.MsgAddVerifier',
+  )
+
+  // error fetching initial parameters
+  const initError = schemaError || permError
 
   // input option
   const [input, setInput] = useState<string>('schema-form')
@@ -76,6 +82,12 @@ const AddVerifier = () => {
     setSuccess(metadata)
   }
 
+  const handleUseTemplate = () => {
+    if (template) {
+      setJson(template)
+    }
+  }
+
   return (
     <div id="msg-add-verifier" className={styles.box}>
       <div className={styles.boxOptions}>
@@ -106,8 +118,8 @@ const AddVerifier = () => {
             json={json}
             placeholder={example}
             setJson={setJson}
-            useTemplate={() => setJson(template)}
-            showUseTemplate={context.length > 0}
+            useTemplate={handleUseTemplate}
+            showUseTemplate={context && context.length > 0}
           />
         )}
         <hr />
@@ -124,7 +136,11 @@ const AddVerifier = () => {
           {'submit'}
         </button>
       </form>
-      <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+      <ResultTx
+        error={error || initError}
+        rest={chainInfo?.rest}
+        success={success}
+      />
     </div>
   )
 }

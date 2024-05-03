@@ -130,8 +130,8 @@ const Proposals = () => {
           </button>
         )}
       </div>
-      {!filtered && <div>{'loading...'}</div>}
-      {filtered && filtered.length === 0 && (
+      {!error && !filtered && <div>{'loading...'}</div>}
+      {!error && filtered && filtered.length === 0 && (
         <div>{`no proposals with status ${filter}`}</div>
       )}
       {filtered &&

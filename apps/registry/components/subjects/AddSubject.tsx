@@ -24,12 +24,15 @@ const AddSubject = () => {
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
-  const [context, example, template] = useSchema(contextUrl)
+  const [context, example, template, schemaError] = useSchema(contextUrl)
 
-  const [isAuthz] = usePermissions(
+  const [isAuthz, permError] = usePermissions(
     wallet,
     '/regen.ecocredit.v1.MsgCreateProject',
   )
+
+  // error fetching initial parameters
+  const initError = schemaError || permError
 
   // input option
   const [input, setInput] = useState<string>('schema-form')
@@ -96,6 +99,12 @@ const AddSubject = () => {
       })
   }
 
+  const handleUseTemplate = () => {
+    if (template) {
+      setJson(template)
+    }
+  }
+
   return (
     <div id="msg-add-subject" className={styles.box}>
       <div className={styles.boxOptions}>
@@ -126,8 +135,8 @@ const AddSubject = () => {
             json={json}
             placeholder={example}
             setJson={setJson}
-            useTemplate={() => setJson(template)}
-            showUseTemplate={context.length > 0}
+            useTemplate={handleUseTemplate}
+            showUseTemplate={context && context.length > 0}
           />
         )}
         <hr />
@@ -138,7 +147,11 @@ const AddSubject = () => {
         />
         <button type="submit">{'submit'}</button>
       </form>
-      <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+      <ResultTx
+        error={error || initError}
+        rest={chainInfo?.rest}
+        success={success}
+      />
     </div>
   )
 }

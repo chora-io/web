@@ -3,10 +3,13 @@ import { useContext, useEffect, useState } from 'react'
 
 // determine account authorized
 export const usePermissions = (wallet: any, msgType: string) => {
-  const { authzGrantee } = useContext(AccountContext) // TODO: error
+  const { authzGrantee, authzError } = useContext(AccountContext)
 
   // account authorized
   const [isAuthz, setIsAuthz] = useState<boolean>(false)
+
+  // error fetching initial parameters
+  const initError = authzError
 
   useEffect(() => {
     if (authzGrantee && wallet) {
@@ -17,5 +20,5 @@ export const usePermissions = (wallet: any, msgType: string) => {
     }
   }, [authzGrantee?.length, wallet?.bech32Address])
 
-  return [isAuthz]
+  return [isAuthz, initError]
 }

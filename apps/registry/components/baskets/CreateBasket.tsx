@@ -18,10 +18,10 @@ import styles from './CreateBasket.module.css'
 const CreateBasket = () => {
   const { chainInfo, wallet } = useContext(WalletContext)
 
-  const [basketFee] = useBasketFee(chainInfo) // TODO: error
-  const [creditTypes] = useCreditTypes(chainInfo) // TODO: error
+  const [basketFee, basketFeeError] = useBasketFee(chainInfo)
+  const [creditTypes, creditTypesError] = useCreditTypes(chainInfo)
 
-  const [isAuthz] = usePermissions(
+  const [isAuthz, permError] = usePermissions(
     wallet,
     '/regen.ecocredit.basket.v1.MsgCreateBasket',
   )
@@ -35,7 +35,11 @@ const CreateBasket = () => {
   const [success, setSuccess] = useState<any>(null)
 
   // NOTE: must come after credit type form input state is declared
-  const [classes] = useClassesByType(chainInfo, creditTypeAbbrev) // TODO: error
+  const [classes, classesError] = useClassesByType(chainInfo, creditTypeAbbrev)
+
+  // error fetching initial parameters
+  const initError =
+    basketFeeError || creditTypesError || permError || classesError
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
@@ -124,7 +128,11 @@ const CreateBasket = () => {
         />
         <button type="submit">{'submit'}</button>
       </form>
-      <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+      <ResultTx
+        error={error || initError}
+        rest={chainInfo?.rest}
+        success={success}
+      />
     </div>
   )
 }

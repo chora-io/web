@@ -8,10 +8,10 @@ export const usePermissionsIssuer = (
   classId: string,
   msgType: string,
 ) => {
-  const { authzGrantee } = useContext(AccountContext) // TODO: error
+  const { authzGrantee, authzError } = useContext(AccountContext)
   const { chainInfo } = useContext(WalletContext)
 
-  const [issuers, error] = useClassIssuers(chainInfo, classId)
+  const [issuers, issuersError] = useClassIssuers(chainInfo, classId)
 
   // class issuer
   const [isIssuer, setIsIssuer] = useState<boolean>(false)
@@ -22,10 +22,8 @@ export const usePermissionsIssuer = (
   // loading permissions
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  // TODO: handle error
-  if (error) {
-    console.error(error)
-  }
+  // error fetching initial parameters
+  const initError = authzError || issuersError
 
   useEffect(() => {
     if (issuers && wallet) {
@@ -44,5 +42,5 @@ export const usePermissionsIssuer = (
     }
   }, [authzGrantee?.length, wallet?.bech32Address])
 
-  return [isIssuer, isAuthz, isLoading]
+  return [isIssuer, isAuthz, isLoading, initError]
 }

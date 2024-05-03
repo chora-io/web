@@ -29,9 +29,9 @@ const SubmitProposal = () => {
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
-  const [context, example, template] = useSchema(contextUrl)
+  const [context, example, template, schemaError] = useSchema(contextUrl)
 
-  const [isMember, isAuthz] = usePermissionsMember(
+  const [isMember, isAuthz, permError] = usePermissionsMember(
     wallet,
     '/cosmos.group.v1.MsgSubmitProposal',
   )
@@ -41,6 +41,10 @@ const SubmitProposal = () => {
     serverUrl,
     policies,
   )
+
+  // error fetching initial parameters
+  const initError =
+    policiesError || schemaError || permError || withMetadataError
 
   // input option
   const [input, setInput] = useState('schema-form')
@@ -123,6 +127,12 @@ const SubmitProposal = () => {
       })
   }
 
+  const handleUseTemplate = () => {
+    if (template) {
+      setJson(template)
+    }
+  }
+
   return (
     <div className={styles.box}>
       <div className={styles.boxOptions}>
@@ -165,8 +175,8 @@ const SubmitProposal = () => {
             json={json}
             placeholder={example}
             setJson={setJson}
-            useTemplate={() => setJson(template)}
-            showUseTemplate={context.length > 0}
+            useTemplate={handleUseTemplate}
+            showUseTemplate={context && context.length > 0}
           />
         )}
         <hr />
@@ -194,7 +204,7 @@ const SubmitProposal = () => {
       </form>
       <div className={styles.boxText}>
         <ResultTx
-          error={policiesError || withMetadataError || error}
+          error={error || initError}
           rest={chainInfo?.rest}
           success={success}
         />

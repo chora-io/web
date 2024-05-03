@@ -30,12 +30,15 @@ const VoteOnProposal = () => {
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
-  const [context, example, template] = useSchema(contextUrl)
+  const [context, example, template, schemaError] = useSchema(contextUrl)
 
-  const [isMember, isAuthz] = usePermissionsMember(
+  const [isMember, isAuthz, permError] = usePermissionsMember(
     wallet,
     '/cosmos.group.v1.MsgVote',
   )
+
+  // error fetching initial parameters
+  const initError = schemaError || permError
 
   // input option
   const [input, setInput] = useState('schema-form')
@@ -113,6 +116,12 @@ const VoteOnProposal = () => {
       })
   }
 
+  const handleUseTemplate = () => {
+    if (template) {
+      setJson(template)
+    }
+  }
+
   return (
     <div className={styles.box}>
       <div className={styles.boxOptions}>
@@ -150,8 +159,8 @@ const VoteOnProposal = () => {
             json={json}
             placeholder={example}
             setJson={setJson}
-            useTemplate={() => setJson(template)}
-            showUseTemplate={context.length > 0}
+            useTemplate={handleUseTemplate}
+            showUseTemplate={context && context.length > 0}
           />
         )}
         <hr />
@@ -170,7 +179,11 @@ const VoteOnProposal = () => {
         <button type="submit">{'submit'}</button>
       </form>
       <div className={styles.boxText}>
-        <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+        <ResultTx
+          error={error || initError}
+          rest={chainInfo?.rest}
+          success={success}
+        />
       </div>
     </div>
   )

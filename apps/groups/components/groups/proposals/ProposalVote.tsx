@@ -33,27 +33,23 @@ const ProposalVote = () => {
 
   return (
     <div className={styles.box}>
-      {!vote && !metadata && !error && <div>{'loading...'}</div>}
-      {vote && metadata && (
-        <>
-          <div className={styles.boxText}>
-            <h3>{'voter'}</h3>
-            {vote?.voter ? <Address address={vote.voter} /> : 'NA'}
-          </div>
-          <div className={styles.boxText}>
-            <h3>{'option'}</h3>
-            <p>{vote['option']}</p>
-          </div>
-          <div className={styles.boxText}>
-            <h3>{'reason'}</h3>
-            <p>{metadata['reason'] ? metadata['reason'] : 'NA'}</p>
-          </div>
-          <div className={styles.boxText}>
-            <h3>{'submit time'}</h3>
-            <p>{formatTimestamp(vote['submit_time'])}</p>
-          </div>
-        </>
-      )}
+      {!error && !vote && !metadata && <div>{'loading...'}</div>}
+      <div className={styles.boxText}>
+        <h3>{'voter'}</h3>
+        {vote ? <Address address={vote.voter} /> : 'NA'}
+      </div>
+      <div className={styles.boxText}>
+        <h3>{'option'}</h3>
+        <p>{vote ? vote.option : 'NA'}</p>
+      </div>
+      <div className={styles.boxText}>
+        <h3>{'reason'}</h3>
+        <p>{metadata ? metadata.reason : 'NA'}</p>
+      </div>
+      <div className={styles.boxText}>
+        <h3>{'submit time'}</h3>
+        <p>{vote ? formatTimestamp(vote['submit_time']) : 'NA'}</p>
+      </div>
       <Result error={error} />
     </div>
   )

@@ -5,6 +5,7 @@ export const useSchema = (contextUrl: string) => {
   const [context, setContext] = useState<string>('')
   const [example, setExample] = useState<string>('')
   const [template, setTemplate] = useState<string>('')
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     // fetch schema context
@@ -14,7 +15,7 @@ export const useSchema = (contextUrl: string) => {
         setContext(JSON.stringify(data, null, '  '))
       })
       .catch((err) => {
-        setContext(err.message)
+        setError(err.message)
       })
 
     // fetch schema example
@@ -24,7 +25,7 @@ export const useSchema = (contextUrl: string) => {
         setExample(JSON.stringify(data, null, '  '))
       })
       .catch((err) => {
-        setExample(err.message)
+        setError(err.message)
       })
 
     // fetch schema template
@@ -34,9 +35,9 @@ export const useSchema = (contextUrl: string) => {
         setTemplate(JSON.stringify(data, null, '  '))
       })
       .catch((err) => {
-        setTemplate(err.message)
+        setError(err.message)
       })
   }, [contextUrl])
 
-  return [context, example, template]
+  return [context, example, template, error]
 }

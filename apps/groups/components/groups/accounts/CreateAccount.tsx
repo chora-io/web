@@ -27,12 +27,15 @@ const CreateAccount = () => {
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
-  const [context, example, template] = useSchema(contextUrl)
+  const [context, example, template, schemaError] = useSchema(contextUrl)
 
-  const [isAdmin, isPolicy, isAuthz] = usePermissionsAdmin(
+  const [isAdmin, isPolicy, isAuthz, permError] = usePermissionsAdmin(
     wallet,
     '/cosmos.group.v1.MsgCreateGroupPolicy',
   )
+
+  // error fetching initial parameters
+  const initError = schemaError || permError
 
   // input option
   const [input, setInput] = useState('schema-form')
@@ -112,6 +115,12 @@ const CreateAccount = () => {
       })
   }
 
+  const handleUseTemplate = () => {
+    if (template) {
+      setJson(template)
+    }
+  }
+
   return (
     <div className={styles.box}>
       <div className={styles.boxOptions}>
@@ -146,8 +155,8 @@ const CreateAccount = () => {
             json={json}
             placeholder={example}
             setJson={setJson}
-            useTemplate={() => setJson(template)}
-            showUseTemplate={context.length > 0}
+            useTemplate={handleUseTemplate}
+            showUseTemplate={context && context.length > 0}
           />
         )}
         <hr />
@@ -165,7 +174,11 @@ const CreateAccount = () => {
         <button type="submit">{'submit'}</button>
       </form>
       <div className={styles.boxText}>
-        <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+        <ResultTx
+          error={error || initError}
+          rest={chainInfo?.rest}
+          success={success}
+        />
       </div>
     </div>
   )

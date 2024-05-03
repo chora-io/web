@@ -27,9 +27,9 @@ const CreateProject = () => {
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
-  const [context, example, template] = useSchema(contextUrl)
+  const [context, example, template, schemaError] = useSchema(contextUrl)
 
-  const [classes] = useClasses(chainInfo, 0, 0) // TODO: error
+  const [classes, classesError] = useClasses(chainInfo, 0, 0)
 
   // input option
   const [input, setInput] = useState<string>('schema-form')
@@ -48,11 +48,14 @@ const CreateProject = () => {
   const [success, setSuccess] = useState<any>(null)
 
   // NOTE: must come after class id form input state is declared
-  const [isIssuer, isAuthz, isLoading] = usePermissionsIssuer(
+  const [isIssuer, isAuthz, isLoading, permError] = usePermissionsIssuer(
     wallet,
     classId,
     '/regen.ecocredit.v1.MsgCreateProject',
   )
+
+  // error fetching initial parameters
+  const initError = schemaError || classesError || permError
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
@@ -109,6 +112,12 @@ const CreateProject = () => {
       })
   }
 
+  const handleUseTemplate = () => {
+    if (template) {
+      setJson(template)
+    }
+  }
+
   return (
     <div id="msg-create-project" className={styles.box}>
       <div className={styles.boxOptions}>
@@ -147,8 +156,8 @@ const CreateProject = () => {
             json={json}
             placeholder={example}
             setJson={setJson}
-            useTemplate={() => setJson(template)}
-            showUseTemplate={context.length > 0}
+            useTemplate={handleUseTemplate}
+            showUseTemplate={context && context.length > 0}
           />
         )}
         <hr />
@@ -174,7 +183,11 @@ const CreateProject = () => {
         />
         <button type="submit">{'submit'}</button>
       </form>
-      <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+      <ResultTx
+        error={error || initError}
+        rest={chainInfo?.rest}
+        success={success}
+      />
     </div>
   )
 }

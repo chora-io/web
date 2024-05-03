@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react'
 
 // determine class creator and account authorized
 export const usePermissionsClass = (wallet: any, msgType: string) => {
-  const { authzGrantee } = useContext(AccountContext) // TODO: error
+  const { authzGrantee, authzError } = useContext(AccountContext)
   const { chainInfo } = useContext(WalletContext)
 
   const [allowlist, allowlistError] = useClassAllowlist(chainInfo)
@@ -19,12 +19,8 @@ export const usePermissionsClass = (wallet: any, msgType: string) => {
   // loading permissions
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  const error = allowlistError || creatorsError
-
-  // TODO: handle error
-  if (error) {
-    console.error(error)
-  }
+  // error fetching initial parameters
+  const initError = authzError || allowlistError || creatorsError
 
   useEffect(() => {
     if (allowlist === 'disabled') {
@@ -46,5 +42,5 @@ export const usePermissionsClass = (wallet: any, msgType: string) => {
     }
   }, [authzGrantee?.length, wallet?.bech32Address])
 
-  return [isCreator, isAuthz, isLoading]
+  return [isCreator, isAuthz, isLoading, initError]
 }

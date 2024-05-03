@@ -3,6 +3,7 @@
 import * as React from 'react'
 
 import { FeegrantListItem } from '../tables'
+import { Result } from '..'
 
 import styles from './Feegrant.module.css'
 
@@ -48,22 +49,20 @@ const Feegrant = ({
       )}
       {filter === 'granter' && (
         <div>
-          <div className={styles.allowOverflow}>
-            {Array.isArray(feeGranter) &&
-              feeGranter.map((allowance, i) => (
-                <FeegrantListItem
-                  key={i}
-                  allowance={allowance}
-                  renderAddress={renderAddress}
-                />
-              ))}
-          </div>
+          {Array.isArray(feeGranter) &&
+            feeGranter.map((allowance, i) => (
+              <FeegrantListItem
+                key={i}
+                allowance={allowance}
+                renderAddress={renderAddress}
+              />
+            ))}
           {feeGranter && feeGranter.length === 0 && (
             <div>{'no fee allowances granted by this account'}</div>
           )}
         </div>
       )}
-      {error && <div>{error}</div>}
+      <Result error={error} />
     </div>
   )
 }

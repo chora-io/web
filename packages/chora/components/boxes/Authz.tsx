@@ -3,6 +3,7 @@
 import * as React from 'react'
 
 import { AuthzListItem } from '../tables'
+import { Result } from '..'
 
 import styles from './Authz.module.css'
 
@@ -48,22 +49,20 @@ const Authz = ({
       )}
       {filter === 'granter' && (
         <div>
-          <div className={styles.allowOverflow}>
-            {Array.isArray(authzGranter) &&
-              authzGranter.map((grant, i) => (
-                <AuthzListItem
-                  key={i}
-                  grant={grant}
-                  renderAddress={renderAddress}
-                />
-              ))}
-          </div>
+          {Array.isArray(authzGranter) &&
+            authzGranter.map((grant, i) => (
+              <AuthzListItem
+                key={i}
+                grant={grant}
+                renderAddress={renderAddress}
+              />
+            ))}
           {authzGranter && authzGranter.length === 0 && (
             <div>{'no authorizations granted by this account'}</div>
           )}
         </div>
       )}
-      {error && <div>{error}</div>}
+      <Result error={error} />
     </div>
   )
 }

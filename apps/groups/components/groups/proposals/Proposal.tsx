@@ -139,7 +139,7 @@ const Proposal = () => {
         </div>
       )}
       <div className={styles.boxText}>
-        <h3>{'group policy address'}</h3>
+        <h3>{'group account address'}</h3>
         <p>
           {proposal && proposal['group_policy_address'] ? (
             <Address address={proposal['group_policy_address']} />
@@ -210,7 +210,7 @@ const Proposal = () => {
         </p>
       </div>
       <div className={styles.boxText}>
-        <h3>{'group policy version'}</h3>
+        <h3>{'group account version'}</h3>
         <p>
           {proposal && proposal['group_policy_version']
             ? proposal['group_policy_version']

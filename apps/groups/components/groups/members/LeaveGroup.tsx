@@ -16,10 +16,13 @@ const LeaveGroup = () => {
   const { groupId } = useParams()
   const { chainInfo, wallet } = useContext(WalletContext)
 
-  const [isMember, isAuthz] = usePermissionsMember(
+  const [isMember, isAuthz, permError] = usePermissionsMember(
     wallet,
     '/cosmos.group.v1.MsgLeaveGroup',
   )
+
+  // error fetching initial parameters
+  const initError = permError
 
   // error and success
   const [error, setError] = useState<string | null>(null)
@@ -74,7 +77,11 @@ const LeaveGroup = () => {
         <button type="submit">{'submit'}</button>
       </form>
       <div className={styles.boxText}>
-        <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+        <ResultTx
+          error={error || initError}
+          rest={chainInfo?.rest}
+          success={success}
+        />
       </div>
     </div>
   )

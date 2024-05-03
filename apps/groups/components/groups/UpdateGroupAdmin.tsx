@@ -19,10 +19,13 @@ const UpdateGroupAdmin = () => {
   const { group } = useContext(GroupContext)
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
-  const [isAdmin, isPolicy, isAuthz] = usePermissionsAdmin(
+  const [isAdmin, isPolicy, isAuthz, permError] = usePermissionsAdmin(
     wallet,
     '/cosmos.group.v1.MsgUpdateGroupAdmin',
   )
+
+  // error fetching initial parameters
+  const initError = permError
 
   // form inputs
   const [address, setAddress] = useState<string>('')
@@ -93,7 +96,11 @@ const UpdateGroupAdmin = () => {
         <button type="submit">{'submit'}</button>
       </form>
       <div className={styles.boxText}>
-        <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+        <ResultTx
+          error={error || initError}
+          rest={chainInfo?.rest}
+          success={success}
+        />
       </div>
     </div>
   )

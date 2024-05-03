@@ -30,9 +30,9 @@ const CreateBatch = () => {
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
-  const [context, example, template] = useSchema(contextUrl)
+  const [context, example, template, schemaError] = useSchema(contextUrl)
 
-  const [projects] = useProjects(chainInfo, 0, 0) // TODO: error
+  const [projects, projectsError] = useProjects(chainInfo, 0, 0)
 
   // input option
   const [input, setInput] = useState<string>('schema-form')
@@ -52,11 +52,14 @@ const CreateBatch = () => {
   const [success, setSuccess] = useState<any>(null)
 
   // NOTE: must come after class id form input state is declared
-  const [isIssuer, isAuthz, isLoading] = usePermissionsIssuer(
+  const [isIssuer, isAuthz, isLoading, permError] = usePermissionsIssuer(
     wallet,
     projectId ? projectId.split('-')[0] : '',
     '/regen.ecocredit.v1.MsgCreateBatch',
   )
+
+  // error fetching initial parameters
+  const initError = schemaError || projectsError || permError
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()
@@ -114,6 +117,12 @@ const CreateBatch = () => {
       })
   }
 
+  const handleUseTemplate = () => {
+    if (template) {
+      setJson(template)
+    }
+  }
+
   return (
     <div id="msg-create-batch" className={styles.box}>
       <div className={styles.boxOptions}>
@@ -164,8 +173,8 @@ const CreateBatch = () => {
             json={json}
             placeholder={example}
             setJson={setJson}
-            useTemplate={() => setJson(template)}
-            showUseTemplate={context.length > 0}
+            useTemplate={handleUseTemplate}
+            showUseTemplate={context && context.length > 0}
           />
         )}
         <hr />
@@ -183,7 +192,11 @@ const CreateBatch = () => {
         />
         <button type="submit">{'submit'}</button>
       </form>
-      <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+      <ResultTx
+        error={error || initError}
+        rest={chainInfo?.rest}
+        success={success}
+      />
     </div>
   )
 }

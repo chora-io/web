@@ -30,15 +30,19 @@ const CreateClass = () => {
 
   const [serverUrl] = useNetworkServer(chainInfo)
 
-  const [context, example, template] = useSchema(contextUrl)
+  const [context, example, template, schemaError] = useSchema(contextUrl)
 
-  const [classFee] = useClassFee(chainInfo) // TODO: error
-  const [creditTypes] = useCreditTypes(chainInfo) // TODO: error
+  const [classFee, classFeeError] = useClassFee(chainInfo)
+  const [creditTypes, creditTypesError] = useCreditTypes(chainInfo)
 
-  const [isCreator, isAuthz, isLoading] = usePermissionsClass(
+  const [isCreator, isAuthz, isLoading, permError] = usePermissionsClass(
     wallet,
     '/regen.ecocredit.v1.MsgCreateClass',
   )
+
+  // error fetching initial parameters
+  const initError =
+    schemaError || classFeeError || creditTypesError || permError
 
   // input option
   const [input, setInput] = useState<string>('schema-form')
@@ -110,6 +114,12 @@ const CreateClass = () => {
       })
   }
 
+  const handleUseTemplate = () => {
+    if (template) {
+      setJson(template)
+    }
+  }
+
   return (
     <div id="msg-create-class" className={styles.box}>
       <div className={styles.boxOptions}>
@@ -148,8 +158,8 @@ const CreateClass = () => {
             json={json}
             placeholder={example}
             setJson={setJson}
-            useTemplate={() => setJson(template)}
-            showUseTemplate={context.length > 0}
+            useTemplate={handleUseTemplate}
+            showUseTemplate={context && context.length > 0}
           />
         )}
         <hr />
@@ -182,7 +192,11 @@ const CreateClass = () => {
         />
         <button type="submit">{'submit'}</button>
       </form>
-      <ResultTx error={error} rest={chainInfo?.rest} success={success} />
+      <ResultTx
+        error={error || initError}
+        rest={chainInfo?.rest}
+        success={success}
+      />
     </div>
   )
 }
