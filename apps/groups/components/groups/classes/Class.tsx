@@ -10,6 +10,7 @@ import Address from '@components/Address'
 
 const ClassContainer = () => {
   const { id } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch class from selected network

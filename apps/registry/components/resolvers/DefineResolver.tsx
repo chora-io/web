@@ -1,6 +1,6 @@
 'use client'
 
-import { ResultTx } from 'chora/components'
+import { Permissions, ResultTx } from 'chora/components'
 import { MsgDefineResolver as MsgInputs } from 'chora/components/forms/regen.data.v1'
 import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
@@ -34,7 +34,7 @@ const DefineResolver = () => {
     setError(null)
     setSuccess(null)
 
-    await signAndBroadcast(chainInfo, wallet['bech32Address'], [message])
+    await signAndBroadcast(chainInfo, wallet.bech32Address, [message])
       .then((res) => {
         setSuccess(res)
       })
@@ -45,16 +45,18 @@ const DefineResolver = () => {
 
   return (
     <div id="msg-define-resolver" className={styles.box}>
-      <div className={styles.boxOptions}>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{'✓'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'new manager'}</span>
-        </span>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{isAuthz ? '✓' : 'x'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
-        </span>
-      </div>
+      <Permissions
+        permissions={[
+          {
+            label: 'new manager',
+            hasPermission: true,
+          },
+          {
+            label: 'authz grantee',
+            hasPermission: isAuthz,
+          },
+        ]}
+      />
       <form className={styles.form} onSubmit={handleSubmit}>
         <MsgInputs
           network={network}

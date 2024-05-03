@@ -1,6 +1,6 @@
 'use client'
 
-import { ResultTx } from 'chora/components'
+import { Permissions, ResultTx } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
 import { MsgLeaveGroup } from 'cosmos/api/cosmos/group/v1/tx'
@@ -14,6 +14,7 @@ import styles from './LeaveGroup.module.css'
 
 const LeaveGroup = () => {
   const { groupId } = useParams()
+
   const { chainInfo, wallet } = useContext(WalletContext)
 
   const [isMember, isAuthz, permError] = usePermissionsMember(
@@ -37,7 +38,7 @@ const LeaveGroup = () => {
     // set message
     const msg = {
       $type: 'cosmos.group.v1.MsgLeaveGroup',
-      address: wallet['bech32Address'],
+      address: wallet.bech32Address,
       groupId: Long.fromString(`${groupId}` || '0'),
     } as unknown as MsgLeaveGroup
 
@@ -48,7 +49,7 @@ const LeaveGroup = () => {
     }
 
     // sign and broadcast message to selected network
-    await signAndBroadcast(chainInfo, wallet['bech32Address'], [msgAny])
+    await signAndBroadcast(chainInfo, wallet.bech32Address, [msgAny])
       .then((res) => {
         setSuccess(res)
       })
@@ -63,16 +64,18 @@ const LeaveGroup = () => {
 
   return (
     <div className={styles.box}>
-      <div className={styles.boxOptions}>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{isMember ? '✓' : 'x'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'group member'}</span>
-        </span>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{isAuthz ? '✓' : 'x'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
-        </span>
-      </div>
+      <Permissions
+        permissions={[
+          {
+            label: 'group member',
+            hasPermission: isMember,
+          },
+          {
+            label: 'authz grantee',
+            hasPermission: isAuthz,
+          },
+        ]}
+      />
       <form className={styles.form} onSubmit={handleSubmit}>
         <button type="submit">{'submit'}</button>
       </form>

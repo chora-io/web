@@ -1,7 +1,7 @@
 'use client'
 
 import { MsgCreateProject as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
-import { ResultTx } from 'chora/components'
+import { Permissions, ResultTx } from 'chora/components'
 import {
   InputJSON,
   InputsFromJSON,
@@ -103,7 +103,7 @@ const CreateProject = () => {
       value: Msg.encode(msg).finish(),
     }
 
-    await signAndBroadcast(chainInfo, wallet['bech32Address'], [msgAny])
+    await signAndBroadcast(chainInfo, wallet.bech32Address, [msgAny])
       .then((res) => {
         setSuccess(res)
       })
@@ -120,16 +120,19 @@ const CreateProject = () => {
 
   return (
     <div id="msg-create-project" className={styles.box}>
-      <div className={styles.boxOptions}>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{!classId || isLoading ? '?' : isIssuer ? '✓' : 'x'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'class issuer'}</span>
-        </span>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{isAuthz ? '✓' : 'x'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
-        </span>
-      </div>
+      <Permissions
+        permissions={[
+          {
+            label: 'class issuer',
+            hasPermission: isIssuer,
+            isUnknown: !classId || isLoading,
+          },
+          {
+            label: 'authz grantee',
+            hasPermission: isAuthz,
+          },
+        ]}
+      />
       <form className={styles.form} onSubmit={handleSubmit}>
         <SelectCreditClass
           id="msg-create-project-class-id"

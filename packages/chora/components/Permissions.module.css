@@ -1,0 +1,13 @@
+.boxOptions {
+  composes: box-options from 'chora/styles/box.css';
+}
+
+.permission {
+  font-size: 0.9em;
+  margin-right: 1.5em;
+  opacity: 0.5;
+}
+
+.permission b {
+  margin-right: 0.5em;
+}

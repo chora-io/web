@@ -8,6 +8,7 @@ import { useContext } from 'react'
 
 const ResolvedContainer = () => {
   const { iri } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // parse metadata or fetch from network server, otherwise resolve

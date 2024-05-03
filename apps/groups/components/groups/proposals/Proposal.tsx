@@ -20,6 +20,7 @@ import styles from './Proposal.module.css'
 
 const Proposal = () => {
   const { id, groupId } = useParams()
+
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // fetch proposal from selected network or indexer service
@@ -49,7 +50,7 @@ const Proposal = () => {
   // execute proposal
   const handleExecute = async () => {
     const msg = {
-      executor: wallet['bech32Address'],
+      executor: wallet.bech32Address,
       proposalId: Long.fromString(`${id}`),
     } as unknown as MsgExec
 
@@ -58,7 +59,7 @@ const Proposal = () => {
       value: MsgExec.encode(msg).finish(),
     }
 
-    await signAndBroadcast(chainInfo, wallet['bech32Address'], [msgAny])
+    await signAndBroadcast(chainInfo, wallet.bech32Address, [msgAny])
       .then((res) => {
         setExecSuccess(res)
       })
@@ -70,18 +71,18 @@ const Proposal = () => {
   // whether votes have been finalized
   const votesFinalized =
     proposal &&
-    (proposal['status'] === 'PROPOSAL_STATUS_ACCEPTED' ||
-      proposal['status'] === 'PROPOSAL_STATUS_REJECTED')
+    (proposal.status === 'PROPOSAL_STATUS_ACCEPTED' ||
+      proposal.status === 'PROPOSAL_STATUS_REJECTED')
 
   // current vote of active user
   const currentVote = votes?.find(
-    (vote: any) => vote['voter'] === wallet['bech32Address'],
+    (vote: any) => vote.voter === wallet.bech32Address,
   )
 
   // whether proposal is executable
   const proposalExecutable =
     proposal &&
-    proposal['status'] === 'PROPOSAL_STATUS_ACCEPTED' &&
+    proposal.status === 'PROPOSAL_STATUS_ACCEPTED' &&
     (proposal['executor_result'] === 'PROPOSAL_EXECUTOR_RESULT_NOT_RUN' ||
       proposal['executor_result'] === 'PROPOSAL_EXECUTOR_RESULT_FAILURE')
 
@@ -116,22 +117,20 @@ const Proposal = () => {
       )}
       <div className={styles.boxText}>
         <h3>{'status'}</h3>
-        <p>{proposal && proposal['status'] ? proposal['status'] : 'NA'}</p>
+        <p>{proposal ? proposal.status : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'name'}</h3>
-        <p>{metadata && metadata['name'] ? metadata['name'] : 'NA'}</p>
+        <p>{metadata && metadata.name ? metadata.name : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'description'}</h3>
-        <p>
-          {metadata && metadata['description'] ? metadata['description'] : 'NA'}
-        </p>
+        <p>{metadata && metadata.description ? metadata.description : 'NA'}</p>
       </div>
       {proposal && (
         <div className={styles.boxText}>
-          <h3>{proposal['proposers'].length > 1 ? 'proposers' : 'proposer'}</h3>
-          {proposal['proposers'].map((proposer: string) => (
+          <h3>{proposal.proposers.length > 1 ? 'proposers' : 'proposer'}</h3>
+          {proposal.proposers.map((proposer: string) => (
             <p key={proposer}>
               <Address address={proposer} />
             </p>
@@ -141,7 +140,7 @@ const Proposal = () => {
       <div className={styles.boxText}>
         <h3>{'group account address'}</h3>
         <p>
-          {proposal && proposal['group_policy_address'] ? (
+          {proposal ? (
             <Address address={proposal['group_policy_address']} />
           ) : (
             'NA'
@@ -150,28 +149,20 @@ const Proposal = () => {
       </div>
       <div className={styles.boxText}>
         <h3>{'submit time'}</h3>
-        <p>
-          {proposal && proposal['submit_time']
-            ? formatTimestamp(proposal['submit_time'])
-            : 'NA'}
-        </p>
+        <p>{proposal ? formatTimestamp(proposal['submit_time']) : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'voting period end'}</h3>
         <p>
-          {proposal && proposal['voting_period_end']
-            ? formatTimestamp(proposal['voting_period_end'])
-            : 'NA'}
+          {proposal ? formatTimestamp(proposal['voting_period_end']) : 'NA'}
         </p>
       </div>
       <div className={styles.boxText}>
         <h3>{'messages'}</h3>
-        {(!proposal ||
-          (proposal &&
-            (!proposal['messages'] || proposal['messages'].length === 0))) && (
+        {(!proposal || (proposal && proposal['messages'].length === 0)) && (
           <p>{'NA'}</p>
         )}
-        {proposal && proposal['messages']?.length > 0 && (
+        {proposal && proposal['messages'].length > 0 && (
           <pre>
             <p>{JSON.stringify(proposal['messages'], null, ' ')}</p>
           </pre>
@@ -203,19 +194,11 @@ const Proposal = () => {
       )}
       <div className={styles.boxText}>
         <h3>{'group version'}</h3>
-        <p>
-          {proposal && proposal['group_version']
-            ? proposal['group_version']
-            : 'NA'}
-        </p>
+        <p>{proposal ? proposal['group_version'] : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'group account version'}</h3>
-        <p>
-          {proposal && proposal['group_policy_version']
-            ? proposal['group_policy_version']
-            : 'NA'}
-        </p>
+        <p>{proposal ? proposal['group_policy_version'] : 'NA'}</p>
       </div>
     </div>
   )

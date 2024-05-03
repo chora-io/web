@@ -1,6 +1,6 @@
 'use client'
 
-import { ResultTx } from 'chora/components'
+import { Permissions, ResultTx } from 'chora/components'
 import {
   InputJSON,
   InputsFromJSON,
@@ -90,16 +90,18 @@ const AddVerifier = () => {
 
   return (
     <div id="msg-add-verifier" className={styles.box}>
-      <div className={styles.boxOptions}>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{'✓'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'new operator'}</span>
-        </span>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{isAuthz ? '✓' : 'x'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
-        </span>
-      </div>
+      <Permissions
+        permissions={[
+          {
+            label: 'new operator',
+            hasPermission: true,
+          },
+          {
+            label: 'authz grantee',
+            hasPermission: isAuthz,
+          },
+        ]}
+      />
       <form className={styles.form} onSubmit={handleSubmit}>
         <SelectOption
           id="metadata-input"

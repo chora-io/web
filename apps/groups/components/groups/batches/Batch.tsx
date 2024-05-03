@@ -11,6 +11,7 @@ import Address from '@components/Address'
 
 const BatchContainer = () => {
   const { denom, groupId } = useParams()
+
   const { chainInfo, network } = useContext(WalletContext)
 
   // fetch batch from selected network

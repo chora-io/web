@@ -60,9 +60,11 @@ const Accounts = () => {
           </button>
         )}
       </div>
-      {!error && !sortedPolicies && <div>{'loading...'}</div>}
+      {!error && !sortedPolicies && (
+        <div className={styles.boxText}>{'loading...'}</div>
+      )}
       {!error && sortedPolicies && sortedPolicies.length === 0 && (
-        <div>{'no accounts found'}</div>
+        <div className={styles.boxText}>{'no accounts found'}</div>
       )}
       {sortedPolicies &&
         sortedPolicies.map((policy: any) => (

@@ -10,6 +10,7 @@ import Address from '@components/Address'
 
 const ProjectContainer = () => {
   const { id } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch project from selected network

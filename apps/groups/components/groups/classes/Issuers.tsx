@@ -10,6 +10,7 @@ import Address from '@components/Address'
 
 const Issuers = () => {
   const { id } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch class issuers from selected network

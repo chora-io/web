@@ -14,6 +14,7 @@ import styles from './ProposalVote.module.css'
 
 const ProposalVote = () => {
   const { id, address } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch proposal vote from selected network or indexer service
@@ -33,7 +34,6 @@ const ProposalVote = () => {
 
   return (
     <div className={styles.box}>
-      {!error && !vote && !metadata && <div>{'loading...'}</div>}
       <div className={styles.boxText}>
         <h3>{'voter'}</h3>
         {vote ? <Address address={vote.voter} /> : 'NA'}
@@ -44,7 +44,7 @@ const ProposalVote = () => {
       </div>
       <div className={styles.boxText}>
         <h3>{'reason'}</h3>
-        <p>{metadata ? metadata.reason : 'NA'}</p>
+        <p>{metadata && metadata.name ? metadata.reason : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'submit time'}</h3>

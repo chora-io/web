@@ -12,6 +12,7 @@ import { useGroupBaskets } from '@hooks/useGroupBaskets'
 
 const BasketsContainer = () => {
   const { groupId } = useParams()
+
   const { policies, policiesError } = useContext(GroupContext)
   const { chainInfo, network } = useContext(WalletContext)
 

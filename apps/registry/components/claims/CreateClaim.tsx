@@ -7,7 +7,7 @@ import {
   SelectGraphCanon,
   SelectGraphMerkle,
 } from 'chora/components/forms/regen.data.v1'
-import { Result, ResultTx } from 'chora/components'
+import { Permissions, Result, ResultTx } from 'chora/components'
 import {
   InputJSON,
   InputsFromJSON,
@@ -283,16 +283,18 @@ const CreateClaim = () => {
 
   return (
     <div className={styles.box}>
-      <div className={styles.boxOptions}>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{'✓'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'new attestor'}</span>
-        </span>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{isAuthz ? '✓' : 'x'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
-        </span>
-      </div>
+      <Permissions
+        permissions={[
+          {
+            label: 'new attestor',
+            hasPermission: true,
+          },
+          {
+            label: 'authz grantee',
+            hasPermission: isAuthz,
+          },
+        ]}
+      />
       <form className={styles.form}>
         <SelectOption
           id="jsonld-document"

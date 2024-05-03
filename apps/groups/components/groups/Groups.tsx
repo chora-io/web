@@ -38,8 +38,12 @@ const Groups = () => {
           {'list view'}
         </button>
       </div>
-      {!groups && !error && <p>{'loading...'}</p>}
-      {!error && groups && groups.length === 0 && <p>{'no groups found'}</p>}
+      {!error && !groups && (
+        <div className={styles.boxText}>{'loading...'}</div>
+      )}
+      {!error && groups && groups.length === 0 && (
+        <div className={styles.boxText}>{'no groups found'}</div>
+      )}
       {groups && groups.length > 0 && (
         <>
           {view === 'table' ? (

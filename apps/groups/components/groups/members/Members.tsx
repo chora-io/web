@@ -59,9 +59,11 @@ const Members = () => {
           </button>
         )}
       </div>
-      {!error && !sortedMembers && <div>{'loading...'}</div>}
+      {!error && !sortedMembers && (
+        <div className={styles.boxText}>{'loading...'}</div>
+      )}
       {!error && sortedMembers && sortedMembers.length === 0 && (
-        <div>{'no members found'}</div>
+        <div className={styles.boxText}>{'no members found'}</div>
       )}
       {sortedMembers &&
         sortedMembers.map((member: any) => (

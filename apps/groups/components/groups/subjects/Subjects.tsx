@@ -12,6 +12,7 @@ import { useGroupSubjects } from '@hooks/useGroupSubjects'
 
 const SubjectsContainer = () => {
   const { groupId } = useParams()
+
   const { policies, policiesError } = useContext(GroupContext)
   const { chainInfo, network } = useContext(WalletContext)
 

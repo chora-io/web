@@ -1,7 +1,7 @@
 'use client'
 
 import { MsgVote } from 'cosmos/api/cosmos/group/v1/tx'
-import { ResultTx } from 'chora/components'
+import { Permissions, ResultTx } from 'chora/components'
 import {
   InputJSON,
   InputsFromJSON,
@@ -27,9 +27,11 @@ const contextUrl = 'https://schema.chora.io/contexts/group_vote.jsonld'
 
 const VoteOnProposal = () => {
   const { id } = useParams()
+
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
+
   const [context, example, template, schemaError] = useSchema(contextUrl)
 
   const [isMember, isAuthz, permError] = usePermissionsMember(
@@ -107,7 +109,7 @@ const VoteOnProposal = () => {
     }
 
     // sign and broadcast message to selected network
-    await signAndBroadcast(chainInfo, wallet['bech32Address'], [msgAny])
+    await signAndBroadcast(chainInfo, wallet.bech32Address, [msgAny])
       .then((res) => {
         setSuccess(res)
       })
@@ -124,16 +126,18 @@ const VoteOnProposal = () => {
 
   return (
     <div className={styles.box}>
-      <div className={styles.boxOptions}>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{isMember ? '✓' : 'x'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'group member'}</span>
-        </span>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{isAuthz ? '✓' : 'x'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
-        </span>
-      </div>
+      <Permissions
+        permissions={[
+          {
+            label: 'group member',
+            hasPermission: isMember,
+          },
+          {
+            label: 'authz grantee',
+            hasPermission: isAuthz,
+          },
+        ]}
+      />
       <form className={styles.form} onSubmit={handleSubmit}>
         <SelectVote
           id="vote-option"

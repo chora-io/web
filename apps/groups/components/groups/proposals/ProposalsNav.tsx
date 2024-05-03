@@ -9,6 +9,7 @@ import styles from './ProposalsNav.module.css'
 
 const ProposalsNav = () => {
   const { groupId } = useParams()
+
   const { network } = useContext(WalletContext)
 
   return (

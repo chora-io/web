@@ -23,15 +23,15 @@ const SubjectsTableRow = ({ subject, renderAddress, renderLink }: any) => {
     <tr>
       <td>{subject.id}</td>
       <td>
-        {metadata && metadata['name']
-          ? metadata['name'].substring(0, 25) +
-            (metadata['name'].length > 25 ? '...' : '')
+        {metadata && metadata.name
+          ? metadata.name.substring(0, 25) +
+            (metadata.name.length > 25 ? '...' : '')
           : 'NA'}
       </td>
       <td>
-        {metadata && metadata['description']
-          ? metadata['description'].substring(0, 50) +
-            (metadata['description'].length > 50 ? '...' : '')
+        {metadata && metadata.description
+          ? metadata.description.substring(0, 50) +
+            (metadata.description.length > 50 ? '...' : '')
           : 'NA'}
       </td>
       {renderAddress ? (

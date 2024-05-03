@@ -14,6 +14,7 @@ import styles from './Account.module.css'
 
 const Account = () => {
   const { address } = useParams()
+
   const { policies, policiesError } = useContext(GroupContext)
   const { chainInfo } = useContext(WalletContext)
 
@@ -31,24 +32,21 @@ const Account = () => {
     <div className={styles.box}>
       <div className={styles.boxText}>
         <h3>{'name'}</h3>
-        <p>{metadata && metadata['name'] ? metadata['name'] : 'NA'}</p>
+        <p>{metadata && metadata.name ? metadata.name : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'description'}</h3>
-        <p>
-          {metadata && metadata['description'] ? metadata['description'] : 'NA'}
-        </p>
+        <p>{metadata && metadata.description ? metadata.description : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'admin'}</h3>
-        <p>{policy?.admin ? <Address address={policy.admin} /> : 'NA'}</p>
+        <p>{policy ? <Address address={policy.admin} /> : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'address'}</h3>
-        <p>{policy && policy['address'] ? policy['address'] : 'NA'}</p>
+        <p>{policy ? policy.address : 'NA'}</p>
       </div>
       {policy &&
-        policy['decision_policy'] &&
         policy['decision_policy']['@type'] ===
           '/cosmos.group.v1.ThresholdDecisionPolicy' && (
           <div className={styles.boxText}>
@@ -57,7 +55,6 @@ const Account = () => {
           </div>
         )}
       {policy &&
-        policy['decision_policy'] &&
         policy['decision_policy']['@type'] ===
           '/cosmos.group.v1.PercentageDecisionPolicy' && (
           <div className={styles.boxText}>
@@ -68,7 +65,7 @@ const Account = () => {
       <div className={styles.boxText}>
         <h3>{'voting period'}</h3>
         <p>
-          {policy && policy['decision_policy']
+          {policy
             ? policy['decision_policy']['windows']['voting_period']
             : 'NA'}
         </p>
@@ -76,22 +73,18 @@ const Account = () => {
       <div className={styles.boxText}>
         <h3>{'min execution period'}</h3>
         <p>
-          {policy && policy['decision_policy']
+          {policy
             ? policy['decision_policy']['windows']['min_execution_period']
             : 'NA'}
         </p>
       </div>
       <div className={styles.boxText}>
         <h3>{'created at'}</h3>
-        <p>
-          {policy && policy['created_at']
-            ? formatTimestamp(policy['created_at'])
-            : 'NA'}
-        </p>
+        <p>{policy ? formatTimestamp(policy['created_at']) : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'version'}</h3>
-        <p>{policy && policy['version'] ? policy['version'] : 'NA'}</p>
+        <p>{policy ? policy.version : 'NA'}</p>
       </div>
       {error && (
         <div className={styles.boxText}>

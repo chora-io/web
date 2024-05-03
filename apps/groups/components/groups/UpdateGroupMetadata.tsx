@@ -1,7 +1,7 @@
 'use client'
 
 import { MsgUpdateGroupMetadata } from 'cosmos/api/cosmos/group/v1/tx'
-import { ResultTx } from 'chora/components'
+import { Permissions, ResultTx } from 'chora/components'
 import {
   InputJSON,
   InputsFromJSON,
@@ -24,10 +24,12 @@ const contextUrl = 'https://schema.chora.io/contexts/group.jsonld'
 
 const UpdateGroupMetadata = () => {
   const { groupId } = useParams()
-  const { metadata: initMetadata } = useContext(GroupContext)
+
+  const { metadata: initMetadata, metadataError } = useContext(GroupContext)
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [serverUrl] = useNetworkServer(chainInfo)
+
   const [context, example, template, schemaError] = useSchema(contextUrl)
 
   const [isAdmin, isPolicy, isAuthz, permError] = usePermissionsAdmin(
@@ -36,7 +38,7 @@ const UpdateGroupMetadata = () => {
   )
 
   // error fetching initial parameters
-  const initError = schemaError || permError
+  const initError = metadataError || schemaError || permError
 
   // input option
   const [input, setInput] = useState('schema-form')
@@ -94,7 +96,7 @@ const UpdateGroupMetadata = () => {
     // set message
     const msg = {
       $type: 'cosmos.group.v1.MsgUpdateGroupMetadata',
-      admin: wallet['bech32Address'],
+      admin: wallet.bech32Address,
       groupId: Long.fromString(`${groupId}` || '0'),
       metadata: metadata,
     } as unknown as MsgUpdateGroupMetadata
@@ -106,7 +108,7 @@ const UpdateGroupMetadata = () => {
     }
 
     // sign and broadcast message to selected network
-    await signAndBroadcast(chainInfo, wallet['bech32Address'], [msgAny])
+    await signAndBroadcast(chainInfo, wallet.bech32Address, [msgAny])
       .then((res) => {
         setSuccess(res)
       })
@@ -127,20 +129,22 @@ const UpdateGroupMetadata = () => {
 
   return (
     <div className={styles.box}>
-      <div className={styles.boxOptions}>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{isAdmin ? '✓' : 'x'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'admin account'}</span>
-        </span>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{isPolicy ? '✓' : 'x'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'policy + member'}</span>
-        </span>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{isAuthz ? '✓' : 'x'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
-        </span>
-      </div>
+      <Permissions
+        permissions={[
+          {
+            label: 'admin account',
+            hasPermission: isAdmin,
+          },
+          {
+            label: 'policy + member',
+            hasPermission: isPolicy,
+          },
+          {
+            label: 'authz grantee',
+            hasPermission: isAuthz,
+          },
+        ]}
+      />
       <form className={styles.form} onSubmit={handleSubmit}>
         <SelectOption
           id="metadata-input"

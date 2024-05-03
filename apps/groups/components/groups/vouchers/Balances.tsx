@@ -11,6 +11,7 @@ import Address from '@components/Address'
 
 const Balances = () => {
   const { id, groupId } = useParams()
+
   const { chainInfo, network } = useContext(WalletContext)
 
   // fetch voucher balances from selected network

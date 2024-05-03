@@ -13,6 +13,7 @@ import styles from './Member.module.css'
 
 const Member = () => {
   const { address } = useParams()
+
   const { members, membersError } = useContext(GroupContext)
   const { chainInfo } = useContext(WalletContext)
 
@@ -32,23 +33,19 @@ const Member = () => {
       <div>
         <div className={styles.boxText}>
           <h3>{'name'}</h3>
-          <p>{metadata && metadata['name'] ? metadata['name'] : 'NA'}</p>
+          <p>{metadata && metadata.name ? metadata.name : 'NA'}</p>
         </div>
         <div className={styles.boxText}>
           <h3>{'address'}</h3>
-          <p>{member && member['address'] ? member['address'] : 'NA'}</p>
+          <p>{member ? member.address : 'NA'}</p>
         </div>
         <div className={styles.boxText}>
           <h3>{'added at'}</h3>
-          <p>
-            {member && member['added_at']
-              ? formatTimestamp(member['added_at'])
-              : 'NA'}
-          </p>
+          <p>{member ? formatTimestamp(member['added_at']) : 'NA'}</p>
         </div>
         <div className={styles.boxText}>
           <h3>{'weight'}</h3>
-          <p>{member && member['weight'] ? member['weight'] : 'NA'}</p>
+          <p>{member ? member.weight : 'NA'}</p>
         </div>
       </div>
       {error && (

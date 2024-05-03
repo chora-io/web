@@ -10,6 +10,7 @@ import Address from '@components/Address'
 
 const AttestationsContainer = () => {
   const { iri } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch data attestations from selected network

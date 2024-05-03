@@ -10,6 +10,7 @@ import Address from '@components/Address'
 
 const ResolverContainer = () => {
   const { id } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch resolver from selected network

@@ -10,6 +10,7 @@ import Address from '@components/Address'
 
 const BasketContainer = () => {
   const { denom } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch credit basket from selected network

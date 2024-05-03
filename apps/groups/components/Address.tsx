@@ -9,6 +9,7 @@ import { GroupContext } from '@contexts/GroupContext'
 
 const Address = ({ address }: { address: string }) => {
   const { groupId } = useParams()
+
   const { policies, policiesError, members, membersError } =
     useContext(GroupContext)
   const { chainInfo, network } = useContext(WalletContext)
@@ -39,7 +40,7 @@ const Address = ({ address }: { address: string }) => {
 
   return metadata ? (
     <>
-      {`${metadata['name']} (`}
+      {`${metadata.name} (`}
       <Link
         href={`${isPolicyAddress ? `/${network}/${groupId}/accounts` : `/${network}/${groupId}/members`}/${address}`}
       >

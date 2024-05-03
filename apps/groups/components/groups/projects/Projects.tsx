@@ -12,6 +12,7 @@ import { useGroupProjects } from '@hooks/useGroupProjects'
 
 const ProjectsContainer = () => {
   const { groupId } = useParams()
+
   const { policies, policiesError } = useContext(GroupContext)
   const { chainInfo, network } = useContext(WalletContext)
 

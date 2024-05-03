@@ -13,6 +13,7 @@ import styles from './Proposals.module.css'
 
 const Proposals = () => {
   const { groupId } = useParams()
+
   const { policies, policiesError } = useContext(GroupContext)
   const { chainInfo } = useContext(WalletContext)
 
@@ -128,13 +129,17 @@ const Proposals = () => {
           </button>
         )}
       </div>
-      {!error && !filtered && <div>{'loading...'}</div>}
+      {!error && !filtered && (
+        <div className={styles.boxText}>{'loading...'}</div>
+      )}
       {!error && filtered && filtered.length === 0 && (
-        <div>{`no proposals with status ${filter}`}</div>
+        <div className={styles.boxText}>
+          {`no proposals with status ${filter}`}
+        </div>
       )}
       {filtered &&
         filtered.map((proposal: any) => (
-          <ProposalsListItem key={proposal['id']} proposal={proposal} />
+          <ProposalsListItem key={proposal.id} proposal={proposal} />
         ))}
       {error && (
         <div className={styles.boxText}>

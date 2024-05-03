@@ -13,6 +13,7 @@ import styles from './ProposalVotes.module.css'
 
 const ProposalVotes = () => {
   const { id, groupId } = useParams()
+
   const { chainInfo, network } = useContext(WalletContext)
 
   // fetch proposal votes from selected network
@@ -20,7 +21,10 @@ const ProposalVotes = () => {
 
   return (
     <div className={styles.box}>
-      {!votes && !error && <div>{'loading...'}</div>}
+      {!error && !votes && <div className={styles.boxText}>{'loading...'}</div>}
+      {!error && votes && votes.length === 0 && (
+        <div className={styles.boxText}>{'no votes found'}</div>
+      )}
       {Array.isArray(votes) &&
         votes.map((vote) => (
           <div className={styles.boxItem} key={vote['voter']}>
@@ -39,7 +43,6 @@ const ProposalVotes = () => {
             </Link>
           </div>
         ))}
-      {votes && votes.length === 0 && !error && <div>{'no votes found'}</div>}
       {error && (
         <div className={styles.boxText}>
           <Result error={error} />

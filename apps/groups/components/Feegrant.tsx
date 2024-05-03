@@ -10,6 +10,7 @@ import Address from '@components/Address'
 
 const FeegrantContainer = () => {
   const { address } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch feegrant allowances by address from selected network

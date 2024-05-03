@@ -1,7 +1,7 @@
 'use client'
 
 import { MsgCreate as Msg } from 'cosmos/api/chora/content/v1/msg'
-import { ResultTx } from 'chora/components'
+import { Permissions, ResultTx } from 'chora/components'
 import {
   InputJSON,
   InputsFromJSON,
@@ -90,7 +90,7 @@ const CreateVoucher = () => {
       value: Msg.encode(msg).finish(),
     }
 
-    await signAndBroadcast(chainInfo, wallet['bech32Address'], [msgAny])
+    await signAndBroadcast(chainInfo, wallet.bech32Address, [msgAny])
       .then((res) => {
         setSuccess(res)
       })
@@ -107,16 +107,18 @@ const CreateVoucher = () => {
 
   return (
     <div id="msg-create-voucher" className={styles.box}>
-      <div className={styles.boxOptions}>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{'✓'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'new issuer'}</span>
-        </span>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{isAuthz ? '✓' : 'x'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
-        </span>
-      </div>
+      <Permissions
+        permissions={[
+          {
+            label: 'new issuer',
+            hasPermission: true,
+          },
+          {
+            label: 'authz grantee',
+            hasPermission: isAuthz,
+          },
+        ]}
+      />
       <form className={styles.form} onSubmit={handleSubmit}>
         <SelectOption
           id="metadata-input"

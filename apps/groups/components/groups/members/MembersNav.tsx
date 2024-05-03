@@ -9,6 +9,7 @@ import styles from './MembersNav.module.css'
 
 const MembersNav = () => {
   const { groupId } = useParams()
+
   const { network } = useContext(WalletContext)
 
   return (

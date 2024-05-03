@@ -1,6 +1,6 @@
 'use client'
 
-import { ResultTx } from 'chora/components'
+import { Permissions, ResultTx } from 'chora/components'
 import { InputAddress } from 'chora/components/forms'
 import { WalletContext } from 'chora/contexts'
 import { signAndBroadcast } from 'chora/utils'
@@ -16,7 +16,8 @@ import styles from './UpdateGroupAdmin.module.css'
 
 const UpdateGroupAdmin = () => {
   const { groupId } = useParams()
-  const { group } = useContext(GroupContext)
+
+  const { group, groupError } = useContext(GroupContext)
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   const [isAdmin, isPolicy, isAuthz, permError] = usePermissionsAdmin(
@@ -25,7 +26,7 @@ const UpdateGroupAdmin = () => {
   )
 
   // error fetching initial parameters
-  const initError = permError
+  const initError = groupError || permError
 
   // form inputs
   const [address, setAddress] = useState<string>('')
@@ -43,7 +44,7 @@ const UpdateGroupAdmin = () => {
     // set message
     const msg = {
       $type: 'cosmos.group.v1.MsgUpdateGroupAdmin',
-      admin: wallet['bech32Address'],
+      admin: wallet.bech32Address,
       groupId: Long.fromString(`${groupId}` || '0'),
       newAdmin: address,
     } as unknown as MsgUpdateGroupAdmin
@@ -55,7 +56,7 @@ const UpdateGroupAdmin = () => {
     }
 
     // sign and broadcast message to selected network
-    await signAndBroadcast(chainInfo, wallet['bech32Address'], [msgAny])
+    await signAndBroadcast(chainInfo, wallet.bech32Address, [msgAny])
       .then((res) => {
         setSuccess(res)
       })
@@ -70,20 +71,22 @@ const UpdateGroupAdmin = () => {
 
   return (
     <div className={styles.box}>
-      <div className={styles.boxOptions}>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{isAdmin ? '✓' : 'x'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'admin account'}</span>
-        </span>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{isPolicy ? '✓' : 'x'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'policy + member'}</span>
-        </span>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{isAuthz ? '✓' : 'x'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
-        </span>
-      </div>
+      <Permissions
+        permissions={[
+          {
+            label: 'admin account',
+            hasPermission: isAdmin,
+          },
+          {
+            label: 'policy + member',
+            hasPermission: isPolicy,
+          },
+          {
+            label: 'authz grantee',
+            hasPermission: isAuthz,
+          },
+        ]}
+      />
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputAddress
           id="group-admin"

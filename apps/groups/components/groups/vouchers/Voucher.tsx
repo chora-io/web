@@ -10,6 +10,7 @@ import Address from '@components/Address'
 
 const VoucherContainer = () => {
   const { id } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch voucher from selected network

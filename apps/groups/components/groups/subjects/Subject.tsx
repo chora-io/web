@@ -10,6 +10,7 @@ import Address from '@components/Address'
 
 const SubjectContainer = () => {
   const { id } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch subject from selected network

@@ -10,6 +10,7 @@ import Address from '@components/Address'
 
 const AuthzContainer = () => {
   const { address } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch authz grants by address from selected network

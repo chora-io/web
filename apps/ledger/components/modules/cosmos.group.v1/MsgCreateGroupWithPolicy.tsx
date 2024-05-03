@@ -21,7 +21,7 @@ const MsgCreateGroupWithPolicy = () => {
     setError(null)
     setSuccess(null)
 
-    await signAndBroadcast(chainInfo, wallet['bech32Address'], [message])
+    await signAndBroadcast(chainInfo, wallet.bech32Address, [message])
       .then((res) => {
         setSuccess(res)
       })

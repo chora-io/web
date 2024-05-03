@@ -1,7 +1,7 @@
 'use client'
 
 import { MsgCreateClass as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
-import { ResultTx } from 'chora/components'
+import { Permissions, ResultTx } from 'chora/components'
 import {
   InputJSON,
   InputsFromJSON,
@@ -105,7 +105,7 @@ const CreateClass = () => {
       value: Msg.encode(msg).finish(),
     }
 
-    await signAndBroadcast(chainInfo, wallet['bech32Address'], [msgAny])
+    await signAndBroadcast(chainInfo, wallet.bech32Address, [msgAny])
       .then((res) => {
         setSuccess(res)
       })
@@ -122,16 +122,19 @@ const CreateClass = () => {
 
   return (
     <div id="msg-create-class" className={styles.box}>
-      <div className={styles.boxOptions}>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{isLoading ? '?' : isCreator ? '✓' : 'x'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'class creator'}</span>
-        </span>
-        <span style={{ fontSize: '0.9em', marginRight: '1.5em', opacity: 0.5 }}>
-          <b>{isAuthz ? '✓' : 'x'}</b>
-          <span style={{ marginLeft: '0.5em' }}>{'authz grantee'}</span>
-        </span>
-      </div>
+      <Permissions
+        permissions={[
+          {
+            label: 'class creator',
+            hasPermission: isCreator,
+            isUnknown: isLoading,
+          },
+          {
+            label: 'authz grantee',
+            hasPermission: isAuthz,
+          },
+        ]}
+      />
       <form className={styles.form} onSubmit={handleSubmit}>
         <SelectCreditType
           id="msg-create-class-credit-type"

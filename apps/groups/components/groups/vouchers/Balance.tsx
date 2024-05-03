@@ -10,6 +10,7 @@ import Address from '@components/Address'
 
 const Balance = () => {
   const { id, address } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch voucher balance by voucher id and address from selected network

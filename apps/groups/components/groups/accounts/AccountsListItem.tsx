@@ -9,6 +9,7 @@ import styles from './AccountsListItem.module.css'
 
 const AccountsListItem = ({ policy }: any) => {
   const { groupId } = useParams()
+
   const { chainInfo, network } = useContext(WalletContext)
 
   // parse metadata or fetch from network server, otherwise resolve
@@ -18,7 +19,7 @@ const AccountsListItem = ({ policy }: any) => {
     <div className={styles.boxItem}>
       <div className={styles.boxText}>
         <h3>{'name'}</h3>
-        <p>{metadata && metadata['name'] ? metadata['name'] : 'NA'}</p>
+        <p>{metadata && metadata.name ? metadata.name : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'address'}</h3>
