@@ -1,5 +1,6 @@
 'use client'
 
+import { WalletContext } from 'chora/contexts'
 import {
   bionLocal,
   bionLocalX,
@@ -15,11 +16,9 @@ import {
 import * as React from 'react'
 import { useContext, useState } from 'react'
 
-import { WalletContext } from '../contexts'
+import styles from './SubmitRequest.module.css'
 
-import styles from './Faucet.module.css'
-
-const Faucet = () => {
+const SubmitRequest = () => {
   const { chainInfo, wallet } = useContext(WalletContext)
 
   // error and success
@@ -91,4 +90,4 @@ const Faucet = () => {
   )
 }
 
-export default Faucet
+export default SubmitRequest

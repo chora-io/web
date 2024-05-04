@@ -1,10 +1,9 @@
 'use client'
 
+import { WalletContext } from 'chora/contexts'
+import { SelectNetwork } from 'chora/components/forms'
 import * as React from 'react'
 import { useContext, useEffect, useState } from 'react'
-
-import { WalletContext } from '../contexts'
-import { SelectNetwork } from './forms'
 
 import styles from './ConnectWallet.module.css'
 

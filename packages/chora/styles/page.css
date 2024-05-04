@@ -19,14 +19,6 @@
   margin-bottom: 10vh;
 }
 
-/* page-center-faucet */
-
-.page-center-faucet {
-  composes: page-center;
-  background: var(--background-primary);
-  min-height: calc(100vh - var(--header-height));
-}
-
 /* page-center-not-found */
 
 .page-center-not-found {

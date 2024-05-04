@@ -1,0 +1,7 @@
+/* page-center-faucet */
+
+.page-center-faucet {
+  composes: page-center from 'chora/styles/page.css';
+  background: var(--background-primary);
+  min-height: calc(100vh - var(--header-height));
+}
