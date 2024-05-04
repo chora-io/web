@@ -43,11 +43,7 @@ const SubjectsListItem = ({ subject, renderAddress, renderLink }: any) => {
         </p>
       </div>
       {renderLink && renderLink(subject.id)}
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

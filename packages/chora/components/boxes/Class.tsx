@@ -63,11 +63,7 @@ const Class = ({
           </pre>
         </div>
       )}
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

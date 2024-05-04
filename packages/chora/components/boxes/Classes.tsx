@@ -36,9 +36,11 @@ const Classes = ({
           </button>
         </div>
       )}
-      {!classes && !error && <div>{'loading...'}</div>}
+      {!classes && !error && (
+        <div className={styles.boxText}>{'loading...'}</div>
+      )}
       {!error && classes && classes.length === 0 && (
-        <div>{'no classes found'}</div>
+        <div className={styles.boxText}>{'no classes found'}</div>
       )}
       {classes && classes.length > 0 && (
         <>
@@ -65,11 +67,7 @@ const Classes = ({
           )}
         </>
       )}
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

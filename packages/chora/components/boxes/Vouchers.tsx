@@ -36,9 +36,11 @@ const Vouchers = ({
           </button>
         </div>
       )}
-      {!error && !vouchers && <div>{'loading...'}</div>}
+      {!error && !vouchers && (
+        <div className={styles.boxText}>{'loading...'}</div>
+      )}
       {!error && vouchers && vouchers.length === 0 && (
-        <div>{'no vouchers found'}</div>
+        <div className={styles.boxText}>{'no vouchers found'}</div>
       )}
       {vouchers && vouchers.length > 0 && (
         <>
@@ -65,11 +67,7 @@ const Vouchers = ({
           )}
         </>
       )}
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

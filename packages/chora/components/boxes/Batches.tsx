@@ -36,9 +36,11 @@ const Batches = ({
           </button>
         </div>
       )}
-      {!batches && !error && <div>{'loading...'}</div>}
+      {!batches && !error && (
+        <div className={styles.boxText}>{'loading...'}</div>
+      )}
       {!error && batches && batches.length === 0 && (
-        <div>{'no batches found'}</div>
+        <div className={styles.boxText}>{'no batches found'}</div>
       )}
       {batches && batches.length > 0 && (
         <>
@@ -65,11 +67,7 @@ const Batches = ({
           )}
         </>
       )}
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

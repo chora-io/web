@@ -103,7 +103,7 @@ const Proposal = () => {
         {proposal && proposalExecutable && (
           <button onClick={handleExecute}>{'execute proposal'}</button>
         )}
-        {!proposal && !error && <>{'loading...'}</>}
+        {!proposal && !error && <p>{'loading...'}</p>}
         {!proposal && error && <Result error={error} />}
       </div>
       {(execSuccess || execError) && (

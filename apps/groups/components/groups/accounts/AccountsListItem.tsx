@@ -28,11 +28,7 @@ const AccountsListItem = ({ policy }: any) => {
       <Link href={`/${network}/${groupId}/accounts/${policy['address']}`}>
         {'view account'}
       </Link>
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

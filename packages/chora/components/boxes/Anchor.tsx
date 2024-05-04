@@ -12,7 +12,7 @@ const Anchor = ({ anchor, error }: any) => {
     <div className={styles.box}>
       <div className={styles.boxText}>
         <h3>{'iri'}</h3>
-        <p>{anchor?.iri || 'NA'}</p>
+        <p>{anchor ? anchor.iri : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'timestamp'}</h3>
@@ -25,11 +25,7 @@ const Anchor = ({ anchor, error }: any) => {
           <p>{JSON.stringify(anchor, null, ' ')}</p>
         </pre>
       </div>
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

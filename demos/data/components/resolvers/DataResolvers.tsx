@@ -41,9 +41,7 @@ const DataResolvers = () => {
         <p>{`no data resolvers found on ${chainInfo?.chainId}`}</p>
       )}
       {error && (
-        <div className={styles.boxText}>
           <Result error={error} />
-        </div>
       )}
     </div>
   )

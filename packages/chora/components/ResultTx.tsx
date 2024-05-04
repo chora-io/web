@@ -6,21 +6,17 @@ const queryTx = 'cosmos/tx/v1beta1/txs'
 
 const ResultTx = ({ error, rest, success }: any) => {
   const txUrl = rest + '/' + queryTx + '/' + success
-  return (
-    <>
-      {error && (
-        <div>
-          <pre className={styles.error}>{error}</pre>
-        </div>
-      )}
+  return error || success ? (
+    <div className={styles.boxText}>
+      {error && <pre className={styles.error}>{error}</pre>}
       {success && (
-        <div>
-          <pre>
-            <a href={txUrl}>{txUrl}</a>
-          </pre>
-        </div>
+        <pre>
+          <a href={txUrl}>{txUrl}</a>
+        </pre>
       )}
-    </>
+    </div>
+  ) : (
+    <></>
   )
 }
 

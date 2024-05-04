@@ -45,11 +45,7 @@ const Group = () => {
         <h3>{'version'}</h3>
         <p>{group ? group.version : 'NA'}</p>
       </div>
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

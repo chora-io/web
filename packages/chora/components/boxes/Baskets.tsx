@@ -36,9 +36,11 @@ const Baskets = ({
           </button>
         </div>
       )}
-      {!baskets && !error && <div>{'loading...'}</div>}
+      {!baskets && !error && (
+        <div className={styles.boxText}>{'loading...'}</div>
+      )}
       {!error && baskets && baskets.length === 0 && (
-        <div>{'no baskets found'}</div>
+        <div className={styles.boxText}>{'no baskets found'}</div>
       )}
       {baskets && baskets.length > 0 && (
         <>
@@ -65,11 +67,7 @@ const Baskets = ({
           )}
         </>
       )}
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

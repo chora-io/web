@@ -31,7 +31,9 @@ const Feegrant = ({
           {'granter'}
         </button>
       </div>
-      {!error && !feeGrantee && !feeGranter && <div>{'loading...'}</div>}
+      {!error && !feeGrantee && !feeGranter && (
+        <div className={styles.boxText}>{'loading...'}</div>
+      )}
       {filter === 'grantee' && (
         <div>
           {Array.isArray(feeGrantee) &&
@@ -62,11 +64,7 @@ const Feegrant = ({
           )}
         </div>
       )}
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

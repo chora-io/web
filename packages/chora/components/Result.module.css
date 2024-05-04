@@ -1,3 +1,7 @@
+.boxText {
+  composes: box-text from 'chora/styles/box.css';
+}
+
 /* error */
 
 .error {

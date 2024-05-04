@@ -91,9 +91,7 @@ const Email = () => {
         )}
       </div>
       {error && (
-        <div className={styles.boxText}>
           <Result error={error} />
-        </div>
       )}
     </div>
   )

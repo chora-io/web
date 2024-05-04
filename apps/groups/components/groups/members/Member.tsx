@@ -48,11 +48,7 @@ const Member = () => {
           <p>{member ? member.weight : 'NA'}</p>
         </div>
       </div>
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

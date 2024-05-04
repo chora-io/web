@@ -74,9 +74,7 @@ const Switch = () => {
       )}
       {error && (
         <div className={styles.boxItem}>
-          <div className={styles.boxText}>
             <Result error={error} />
-          </div>
         </div>
       )}
     </div>

@@ -14,7 +14,9 @@ const VoucherBalance = ({ balance, error, renderAddress }: any) => {
 
   return (
     <div className={styles.box}>
-      {!balance && !error && <div>{'loading...'}</div>}
+      {!balance && !error && (
+        <div className={styles.boxText}>{'loading...'}</div>
+      )}
       {balance && (
         <div className={styles.boxItem}>
           <div className={styles.boxText}>
@@ -50,11 +52,7 @@ const VoucherBalance = ({ balance, error, renderAddress }: any) => {
           ))}
         </div>
       )}
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

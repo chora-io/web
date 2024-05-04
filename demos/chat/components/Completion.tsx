@@ -58,9 +58,7 @@ const Completion = () => {
         />
         <button type="submit">{'submit'}</button>
       </form>
-      <div className={styles.boxText}>
         <Result error={error} success={result} />
-      </div>
     </div>
   )
 }

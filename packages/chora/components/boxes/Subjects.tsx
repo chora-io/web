@@ -36,9 +36,11 @@ const Subjects = ({
           </button>
         </div>
       )}
-      {!error && !subjects && <div>{'loading...'}</div>}
+      {!error && !subjects && (
+        <div className={styles.boxText}>{'loading...'}</div>
+      )}
       {!error && subjects && subjects.length === 0 && (
-        <div>{'no subjects found'}</div>
+        <div className={styles.boxText}>{'no subjects found'}</div>
       )}
       {subjects && subjects.length > 0 && (
         <>
@@ -65,11 +67,7 @@ const Subjects = ({
           )}
         </>
       )}
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

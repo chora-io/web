@@ -11,8 +11,9 @@ import { ArrowUpRight } from './icons'
 import styles from './Sidebar.module.css'
 
 const Sidebar = ({ items, mobileOnly }: any) => {
-  const { showMenu, setShowMenu } = useContext(MenuContext)
   const currentRoute = usePathname()
+
+  const { showMenu, setShowMenu } = useContext(MenuContext)
 
   const [initRoute, setInitRoute] = useState<string>('')
 

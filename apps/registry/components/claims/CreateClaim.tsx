@@ -363,20 +363,14 @@ const CreateClaim = () => {
       >
         {'finalize claim'}
       </button>
-      <div className={styles.boxText}>
-        <Result error={error || initError} />
-      </div>
+      <Result error={error || initError} />
       <div className={styles.boxText}>
         <Result
           success={contentHash && JSON.stringify(contentHash, null, '  ')}
         />
       </div>
-      <div className={styles.boxText}>
-        <Result success={convertSuccess} />
-      </div>
-      <div className={styles.boxText}>
-        <ResultTx rest={chainInfo?.rest} success={txSuccess} />
-      </div>
+      <Result success={convertSuccess} />
+      <ResultTx rest={chainInfo?.rest} success={txSuccess} />
       {txSuccess && (
         <>
           <hr />
@@ -392,9 +386,7 @@ const CreateClaim = () => {
               {'post to server'}
             </button>
           </div>
-          <div className={styles.boxText}>
-            <Result success={serverSuccess} />
-          </div>
+          <Result success={serverSuccess} />
           <div className={styles.boxText}>
             <p>
               {
@@ -415,9 +407,7 @@ const CreateClaim = () => {
               {'register data'}
             </button>
           </div>
-          <div className={styles.boxText}>
-            <Result success={registerSuccess} />
-          </div>
+          <Result success={registerSuccess} />
         </>
       )}
     </div>

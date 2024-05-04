@@ -86,11 +86,7 @@ const Account = () => {
         <h3>{'version'}</h3>
         <p>{policy ? policy.version : 'NA'}</p>
       </div>
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

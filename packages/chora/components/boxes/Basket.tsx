@@ -71,11 +71,7 @@ const Basket = ({ basket, error, renderAddress }: any) => {
           <p>{JSON.stringify(basket, null, ' ')}</p>
         </pre>
       </div>
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

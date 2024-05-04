@@ -28,11 +28,7 @@ const MembersListItem = ({ member }: any) => {
       <Link href={`/${network}/${groupId}/members/${member['address']}`}>
         {'view member'}
       </Link>
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

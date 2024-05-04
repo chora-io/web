@@ -41,11 +41,7 @@ const Resolver = ({ resolver, error, renderAddress }: any) => {
           <p>{JSON.stringify(resolver, null, ' ')}</p>
         </pre>
       </div>
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

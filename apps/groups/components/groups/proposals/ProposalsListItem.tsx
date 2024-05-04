@@ -34,11 +34,7 @@ const ProposalsListItem = ({ proposal }: any) => {
       <Link href={`/${network}/${groupId}/proposals/${proposal.id}`}>
         {'view proposal'}
       </Link>
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

@@ -19,7 +19,7 @@ const ModuleInfo = () => {
       <button className={styles.infoButton} onClick={handleShowInfo}>
         {showInfo ? 'less info' : 'more info'}
       </button>
-      <div className={styles.box}>
+      <div className={styles.infoBox}>
         {showInfo && <MoreInfo module={cosmosGroupV1} />}
         <ul>
           <li>

@@ -70,11 +70,7 @@ const Accounts = () => {
         sortedPolicies.map((policy: any) => (
           <AccountsListItem key={policy['address']} policy={policy} />
         ))}
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

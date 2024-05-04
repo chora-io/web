@@ -141,11 +141,7 @@ const Proposals = () => {
         filtered.map((proposal: any) => (
           <ProposalsListItem key={proposal.id} proposal={proposal} />
         ))}
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

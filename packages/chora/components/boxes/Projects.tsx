@@ -36,9 +36,11 @@ const Projects = ({
           </button>
         </div>
       )}
-      {!projects && !error && <div>{'loading...'}</div>}
+      {!projects && !error && (
+        <div className={styles.boxText}>{'loading...'}</div>
+      )}
       {!error && projects && projects.length === 0 && (
-        <div>{'no projects found'}</div>
+        <div className={styles.boxText}>{'no projects found'}</div>
       )}
       {projects && projects.length > 0 && (
         <>
@@ -65,11 +67,7 @@ const Projects = ({
           )}
         </>
       )}
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

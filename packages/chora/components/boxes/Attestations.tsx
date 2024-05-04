@@ -36,9 +36,11 @@ const Attestations = ({
           </button>
         </div>
       )}
-      {!error && !attestations && <div>{'loading...'}</div>}
+      {!error && !attestations && (
+        <div className={styles.boxText}>{'loading...'}</div>
+      )}
       {!error && attestations && attestations.length === 0 && (
-        <div>{'no attestations found'}</div>
+        <div className={styles.boxText}>{'no attestations found'}</div>
       )}
       {attestations && attestations.length > 0 && (
         <>
@@ -60,11 +62,7 @@ const Attestations = ({
           )}
         </>
       )}
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }

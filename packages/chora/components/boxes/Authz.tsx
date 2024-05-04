@@ -31,7 +31,9 @@ const Authz = ({
           {'granter'}
         </button>
       </div>
-      {!error && !authzGrantee && !authzGranter && <div>{'loading...'}</div>}
+      {!error && !authzGrantee && !authzGranter && (
+        <div className={styles.boxText}>{'loading...'}</div>
+      )}
       {filter === 'grantee' && (
         <div>
           {Array.isArray(authzGrantee) &&

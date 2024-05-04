@@ -35,11 +35,7 @@ const GroupsListItem = ({ group }: any) => {
         </p>
       </div>
       <Link href={`/${network}/${group.id}`}>{'view group'}</Link>
-      {metadataError && (
-        <div className={styles.boxText}>
-          <Result error={metadataError} />
-        </div>
-      )}
+      <Result error={metadataError} />
     </div>
   )
 }

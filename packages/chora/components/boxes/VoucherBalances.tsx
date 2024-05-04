@@ -18,9 +18,11 @@ const VoucherBalances = ({
 
   return (
     <div className={styles.box}>
-      {!error && !balances && <div>{'loading...'}</div>}
+      {!error && !balances && (
+        <div className={styles.boxText}>{'loading...'}</div>
+      )}
       {!error && balances && balances.length === 0 && (
-        <div>{'no balances found'}</div>
+        <div className={styles.boxText}>{'no balances found'}</div>
       )}
       {Array.isArray(balances) &&
         balances.map((balance) => (
@@ -47,11 +49,7 @@ const VoucherBalances = ({
             {renderLink && renderLink(balance.address)}
           </div>
         ))}
-      {error && (
-        <div className={styles.boxText}>
-          <Result error={error} />
-        </div>
-      )}
+      <Result error={error} />
     </div>
   )
 }
