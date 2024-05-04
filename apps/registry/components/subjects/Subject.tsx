@@ -9,6 +9,7 @@ import { useContext } from 'react'
 
 const SubjectContainer = () => {
   const { id } = useParams()
+
   const { chainInfo, network } = useContext(WalletContext)
 
   // fetch subject from selected network

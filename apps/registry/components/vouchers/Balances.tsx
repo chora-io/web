@@ -9,6 +9,7 @@ import { useContext } from 'react'
 
 const Balances = () => {
   const { id } = useParams()
+
   const { chainInfo, network } = useContext(WalletContext)
 
   // fetch voucher balances from selected network

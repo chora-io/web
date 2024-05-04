@@ -1,5 +1,7 @@
 'use client'
 
+import * as blake from 'blakejs'
+import { Buffer } from 'buffer'
 import { MsgAttest as Msg } from 'cosmos/api/regen/data/v1/tx'
 import { ContentHash_Graph } from 'cosmos/api/regen/data/v1/types'
 import {
@@ -18,8 +20,6 @@ import {
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'
-import * as blake from 'blakejs'
-import { Buffer } from 'buffer'
 import * as jsonld from 'jsonld'
 import { useContext, useEffect, useState } from 'react'
 
@@ -54,6 +54,7 @@ const CreateClaim = () => {
 
   // form inputs
   const [json, setJson] = useState<string>('')
+  const [resolverUrl, setResolverUrl] = useState<string>('')
 
   // error and results
   const [error, setError] = useState<string | null>(null)
@@ -405,8 +406,8 @@ const CreateClaim = () => {
             <InputString
               label={'resolver url'}
               placeholder={'https://server.chora.io/data/'}
-              string={''}
-              setString={() => console.log('')}
+              string={resolverUrl}
+              setString={setResolverUrl}
             />
           </form>
           <div className={styles.boxText}>

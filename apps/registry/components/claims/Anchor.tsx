@@ -8,6 +8,7 @@ import { useContext } from 'react'
 
 const AnchorContainer = () => {
   const { iri } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch data anchor from selected network

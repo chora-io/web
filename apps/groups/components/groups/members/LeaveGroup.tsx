@@ -79,13 +79,11 @@ const LeaveGroup = () => {
       <form className={styles.form} onSubmit={handleSubmit}>
         <button type="submit">{'submit'}</button>
       </form>
-      <div className={styles.boxText}>
-        <ResultTx
-          error={error || initError}
-          rest={chainInfo?.rest}
-          success={success}
-        />
-      </div>
+      <ResultTx
+        error={error || initError}
+        rest={chainInfo?.rest}
+        success={success}
+      />
     </div>
   )
 }

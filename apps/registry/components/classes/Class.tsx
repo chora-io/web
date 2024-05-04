@@ -9,6 +9,7 @@ import { useContext } from 'react'
 
 const ClassContainer = () => {
   const { id } = useParams()
+
   const { chainInfo, network } = useContext(WalletContext)
 
   // fetch credit class from selected network

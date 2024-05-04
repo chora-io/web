@@ -9,6 +9,7 @@ import { useContext } from 'react'
 
 const BatchContainer = () => {
   const { denom } = useParams()
+
   const { chainInfo, network } = useContext(WalletContext)
 
   // fetch credit batch from selected network

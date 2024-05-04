@@ -19,6 +19,7 @@ const CreateBasket = () => {
   const { chainInfo, wallet } = useContext(WalletContext)
 
   const [basketFee, basketFeeError] = useBasketFee(chainInfo)
+
   const [creditTypes, creditTypesError] = useCreditTypes(chainInfo)
 
   const [isAuthz, permError] = usePermissions(

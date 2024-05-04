@@ -9,6 +9,7 @@ import { useContext } from 'react'
 
 const VoucherContainer = () => {
   const { id } = useParams()
+
   const { chainInfo, network } = useContext(WalletContext)
 
   // fetch voucher from selected network

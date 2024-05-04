@@ -9,6 +9,7 @@ import { useContext } from 'react'
 
 const ProjectContainer = () => {
   const { id } = useParams()
+
   const { chainInfo, network } = useContext(WalletContext)
 
   // fetch project from selected network

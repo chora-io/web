@@ -179,13 +179,11 @@ const UpdateAccountMetadata = () => {
         />
         <button type="submit">{'submit'}</button>
       </form>
-      <div className={styles.boxText}>
-        <ResultTx
-          error={error || initError}
-          rest={chainInfo?.rest}
-          success={success}
-        />
-      </div>
+      <ResultTx
+        error={error || initError}
+        rest={chainInfo?.rest}
+        success={success}
+      />
     </div>
   )
 }

@@ -33,6 +33,7 @@ const CreateClass = () => {
   const [context, example, template, schemaError] = useSchema(contextUrl)
 
   const [classFee, classFeeError] = useClassFee(chainInfo)
+
   const [creditTypes, creditTypesError] = useCreditTypes(chainInfo)
 
   const [isCreator, isAuthz, isLoading, permError] = usePermissionsClass(

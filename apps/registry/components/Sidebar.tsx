@@ -11,6 +11,7 @@ import { ArrowLeft } from 'chora/components/icons'
 const Sidebar = () => {
   const { denom, id, iri } = useParams()
   const currentRoute = usePathname()
+
   const { showMenu, setShowMenu } = useContext(MenuContext)
   const { network } = useContext(WalletContext)
 

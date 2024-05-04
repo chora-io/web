@@ -8,6 +8,7 @@ import { useContext } from 'react'
 
 const ResolversContainer = () => {
   const { iri } = useParams()
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch data resolvers from selected network
