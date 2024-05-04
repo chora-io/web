@@ -67,10 +67,7 @@ const Members = () => {
       )}
       {sortedMembers &&
         sortedMembers.map((member: any) => (
-          <MembersListItem
-            key={member['member']['address']}
-            member={member['member']}
-          />
+          <MembersListItem key={member.member.address} member={member.member} />
         ))}
       <Result error={error} />
     </div>

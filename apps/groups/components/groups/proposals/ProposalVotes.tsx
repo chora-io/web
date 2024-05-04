@@ -27,18 +27,16 @@ const ProposalVotes = () => {
       )}
       {Array.isArray(votes) &&
         votes.map((vote) => (
-          <div className={styles.boxItem} key={vote['voter']}>
+          <div className={styles.boxItem} key={vote.voter}>
             <div className={styles.boxText}>
               <h3>{'voter'}</h3>
               <p>{vote?.voter ? <Address address={vote.voter} /> : 'NA'}</p>
             </div>
             <div className={styles.boxText}>
               <h3>{'option'}</h3>
-              <p>{vote['option']}</p>
+              <p>{vote.option}</p>
             </div>
-            <Link
-              href={`/${network}/${groupId}/proposals/${id}/${vote['voter']}`}
-            >
+            <Link href={`/${network}/${groupId}/proposals/${id}/${vote.voter}`}>
               {'view vote'}
             </Link>
           </div>

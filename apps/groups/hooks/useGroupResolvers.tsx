@@ -34,8 +34,8 @@ export const useGroupResolvers = (chainInfo: any, policies: any[]) => {
             } else {
               if (policies) {
                 policies.map((policy: any) => {
-                  if (policy['address'] === res['resolver']['manager']) {
-                    resolvers.push(res['resolver'])
+                  if (policy.address === res.resolver.manager) {
+                    resolvers.push(res.resolver)
                   }
                 })
               }

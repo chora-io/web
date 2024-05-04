@@ -8,10 +8,10 @@ import { MsgUpdateGroupPolicyAdmin } from 'cosmos/api/cosmos/group/v1/tx'
 import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
 
+import { GroupContext } from '@contexts/GroupContext'
 import { usePermissionsAdmin } from '@hooks/usePermissionsAdmin'
 
 import styles from './UpdateAccountAdmin.module.css'
-import { GroupContext } from '@contexts/GroupContext'
 
 const UpdateAccountAdmin = () => {
   const { address } = useParams()
@@ -98,7 +98,7 @@ const UpdateAccountAdmin = () => {
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx
-        error={error || initError}
+        error={initError || error}
         rest={chainInfo?.rest}
         success={success}
       />

@@ -1,6 +1,5 @@
 'use client'
 
-import { MsgVote } from 'cosmos/api/cosmos/group/v1/tx'
 import { Permissions, ResultTx } from 'chora/components'
 import {
   InputJSON,
@@ -15,6 +14,7 @@ import {
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer, useSchema } from 'chora/hooks'
 import { postToServer, signAndBroadcast } from 'chora/utils'
+import { MsgVote } from 'cosmos/api/cosmos/group/v1/tx'
 import * as Long from 'long'
 import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
@@ -183,7 +183,7 @@ const VoteOnProposal = () => {
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx
-        error={error || initError}
+        error={initError || error}
         rest={chainInfo?.rest}
         success={success}
       />

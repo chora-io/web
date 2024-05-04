@@ -1,5 +1,6 @@
 'use client'
 
+import { ArrowLeft } from 'chora/components/icons'
 import { MenuContext, WalletContext } from 'chora/contexts'
 import { useNetworkModules } from 'chora/hooks'
 import Link from 'next/link'
@@ -7,7 +8,6 @@ import { usePathname } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
 import styles from './Sidebar.module.css'
-import { ArrowLeft } from 'chora/components/icons'
 
 const Sidebar = () => {
   const currentRoute = usePathname()

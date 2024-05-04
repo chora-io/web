@@ -159,12 +159,12 @@ const Proposal = () => {
       </div>
       <div className={styles.boxText}>
         <h3>{'messages'}</h3>
-        {(!proposal || (proposal && proposal['messages'].length === 0)) && (
+        {(!proposal || (proposal && proposal.messages.length === 0)) && (
           <p>{'NA'}</p>
         )}
-        {proposal && proposal['messages'].length > 0 && (
+        {proposal && proposal.messages.length > 0 && (
           <pre>
-            <p>{JSON.stringify(proposal['messages'], null, ' ')}</p>
+            <p>{JSON.stringify(proposal.messages, null, ' ')}</p>
           </pre>
         )}
       </div>

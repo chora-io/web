@@ -23,9 +23,9 @@ const MembersListItem = ({ member }: any) => {
       </div>
       <div className={styles.boxText}>
         <h3>{'address'}</h3>
-        <p>{member['address']}</p>
+        <p>{member.address}</p>
       </div>
-      <Link href={`/${network}/${groupId}/members/${member['address']}`}>
+      <Link href={`/${network}/${groupId}/members/${member.address}`}>
         {'view member'}
       </Link>
       <Result error={error} />

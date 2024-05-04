@@ -2,8 +2,6 @@
 
 import * as blake from 'blakejs'
 import { Buffer } from 'buffer'
-import { MsgAttest as Msg } from 'cosmos/api/regen/data/v1/tx'
-import { ContentHash_Graph } from 'cosmos/api/regen/data/v1/types'
 import {
   SelectDigestAlgorithm,
   SelectGraphCanon,
@@ -20,6 +18,8 @@ import {
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'
+import { MsgAttest as Msg } from 'cosmos/api/regen/data/v1/tx'
+import { ContentHash_Graph } from 'cosmos/api/regen/data/v1/types'
 import * as jsonld from 'jsonld'
 import { useContext, useEffect, useState } from 'react'
 
@@ -363,7 +363,7 @@ const CreateClaim = () => {
       >
         {'finalize claim'}
       </button>
-      <Result error={error || initError} />
+      <Result error={initError || error} />
       <div className={styles.boxText}>
         <Result
           success={contentHash && JSON.stringify(contentHash, null, '  ')}

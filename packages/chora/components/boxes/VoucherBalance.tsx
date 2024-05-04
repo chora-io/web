@@ -38,15 +38,15 @@ const VoucherBalance = ({ balance, error, renderAddress }: any) => {
             <h3>{'total amount'}</h3>
             <p>{balance['total_amount']}</p>
           </div>
-          {balance['amounts'].map((balance: any) => (
-            <div className={styles.boxItemSub} key={balance['expiration']}>
+          {balance.amounts.map((balance: any) => (
+            <div className={styles.boxItemSub} key={balance.expiration}>
               <div className={styles.boxText}>
                 <h3>{'amount'}</h3>
-                <p>{balance['amount']}</p>
+                <p>{balance.amount}</p>
               </div>
               <div className={styles.boxText}>
                 <h3>{'expiration'}</h3>
-                <p>{formatTimestamp(balance['expiration'])}</p>
+                <p>{formatTimestamp(balance.expiration)}</p>
               </div>
             </div>
           ))}

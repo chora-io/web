@@ -96,7 +96,7 @@ const UpdateAccountMetadata = () => {
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx
-        error={error || initError}
+        error={initError || error}
         rest={chainInfo?.rest}
         success={success}
       />

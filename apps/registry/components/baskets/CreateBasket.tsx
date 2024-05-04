@@ -1,6 +1,5 @@
 'use client'
 
-import { MsgCreate as Msg } from 'cosmos/api/regen/ecocredit/basket/v1/tx'
 import { Permissions, ResultTx } from 'chora/components'
 import { InputString } from 'chora/components/forms'
 import { SelectCreditType } from 'chora/components/forms/regen.ecocredit.v1'
@@ -8,6 +7,7 @@ import { InputCreditClasses } from 'chora/components/forms/regen.ecocredit.baske
 import { WalletContext } from 'chora/contexts'
 import { useBasketFee, useCreditTypes } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'
+import { MsgCreate as Msg } from 'cosmos/api/regen/ecocredit/basket/v1/tx'
 import { useContext, useState } from 'react'
 
 import { useClassesByType } from '@hooks/useClassesByType'
@@ -132,7 +132,7 @@ const CreateBasket = () => {
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx
-        error={error || initError}
+        error={initError || error}
         rest={chainInfo?.rest}
         success={success}
       />

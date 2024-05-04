@@ -22,8 +22,8 @@ export const usePermissionsIssuer = (
   // loading permissions
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  // error fetching initial parameters
-  const initError = authzError || issuersError
+  // error fetching parameters
+  const error = authzError || issuersError
 
   useEffect(() => {
     if (issuers && wallet) {
@@ -42,5 +42,5 @@ export const usePermissionsIssuer = (
     }
   }, [authzGrantee?.length, wallet?.bech32Address])
 
-  return [isIssuer, isAuthz, isLoading, initError]
+  return [isIssuer, isAuthz, isLoading, error]
 }

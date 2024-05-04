@@ -31,7 +31,7 @@ export const useGroupBaskets = (chainInfo: any, policies: any[]) => {
             if (policies) {
               policies.map((policy: any) => {
                 res['baskets_info'].map((basket: any) => {
-                  if (policy['address'] === basket['curator']) {
+                  if (policy.address === basket.curator) {
                     bs.push(basket)
                   }
                 })

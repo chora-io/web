@@ -1,6 +1,5 @@
 'use client'
 
-import { MsgCreateGroup } from 'cosmos/api/cosmos/group/v1/tx'
 import { Permissions, ResultTx } from 'chora/components'
 import {
   InputJSON,
@@ -12,6 +11,7 @@ import { InputMembers } from 'chora/components/forms/cosmos.group.v1'
 import { AccountContext, WalletContext } from 'chora/contexts'
 import { useNetworkServer, useSchema } from 'chora/hooks'
 import { postToServer, signAndBroadcast } from 'chora/utils'
+import { MsgCreateGroup } from 'cosmos/api/cosmos/group/v1/tx'
 import { useContext, useEffect, useState } from 'react'
 
 import styles from './CreateGroup.module.css'
@@ -177,7 +177,7 @@ const CreateGroup = () => {
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx
-        error={error || initError}
+        error={initError || error}
         rest={chainInfo?.rest}
         success={success}
       />

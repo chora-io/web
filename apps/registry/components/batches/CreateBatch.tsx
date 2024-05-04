@@ -1,6 +1,5 @@
 'use client'
 
-import { MsgCreateBatch as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 import { Permissions, ResultTx } from 'chora/components'
 import {
   InputJSON,
@@ -16,6 +15,7 @@ import {
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer, useSchema } from 'chora/hooks'
 import { postToServer, signAndBroadcast } from 'chora/utils'
+import { MsgCreateBatch as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 import { useContext, useState } from 'react'
 
 import { usePermissionsIssuer } from '@hooks/usePermissionsIssuer'
@@ -196,7 +196,7 @@ const CreateBatch = () => {
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx
-        error={error || initError}
+        error={initError || error}
         rest={chainInfo?.rest}
         success={success}
       />

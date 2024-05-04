@@ -38,8 +38,7 @@ const FeegrantListItem = ({ grant, renderAddress }: any) => {
           </>
         )}
       </div>
-      {grant.grant['@type'] ===
-        '/cosmos.feegrant.v1beta1.BasicAllowance' && (
+      {grant.grant['@type'] === '/cosmos.feegrant.v1beta1.BasicAllowance' && (
         <>
           {grant.grant['spend_limit'].map((token: any, i: number) => (
             <div className={styles.boxText} key={i}>

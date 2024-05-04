@@ -10,7 +10,7 @@ const GroupsListItem = ({ group }: any) => {
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // parse metadata or fetch from network server, otherwise resolve
-  const [metadata, metadataError] = useMetadata(
+  const [metadata, error] = useMetadata(
     chainInfo,
     group ? group.metadata : null,
   )
@@ -28,14 +28,14 @@ const GroupsListItem = ({ group }: any) => {
       <div className={styles.boxText}>
         <h3>{'admin'}</h3>
         <p>
-          {group['admin']}
+          {group.admin}
           {wallet && group.admin === wallet.bech32Address && (
             <span className={styles.activeAccount}>{'(active account)'}</span>
           )}
         </p>
       </div>
       <Link href={`/${network}/${group.id}`}>{'view group'}</Link>
-      <Result error={metadataError} />
+      <Result error={error} />
     </div>
   )
 }

@@ -21,7 +21,7 @@ const Subject = ({
     <div className={styles.box}>
       <div className={styles.boxText}>
         <h3>{'id'}</h3>
-        <p>{subject && subject['id'] ? subject['id'] : 'NA'}</p>
+        <p>{subject && subject.id ? subject.id : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'name'}</h3>
@@ -47,16 +47,16 @@ const Subject = ({
       <div className={styles.boxText}>
         <h3>{'latitude'}</h3>
         <p>
-          {metadata && metadata['geo'] && metadata['geo']['latitude']
-            ? metadata['geo']['latitude']
+          {metadata && metadata.geo && metadata.geo.latitude
+            ? metadata.geo.latitude
             : 'NA'}
         </p>
       </div>
       <div className={styles.boxText}>
         <h3>{'longitude'}</h3>
         <p>
-          {metadata && metadata['geo'] && metadata['geo']['longitude']
-            ? metadata['geo']['longitude']
+          {metadata && metadata.geo && metadata.geo.longitude
+            ? metadata.geo.longitude
             : 'NA'}
         </p>
       </div>

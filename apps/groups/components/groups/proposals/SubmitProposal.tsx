@@ -1,6 +1,5 @@
 'use client'
 
-import { MsgSubmitProposal } from 'cosmos/api/cosmos/group/v1/tx'
 import { Permissions, ResultTx } from 'chora/components'
 import {
   InputJSON,
@@ -14,6 +13,7 @@ import { SelectExecution } from 'chora/components/forms/cosmos.group.v1'
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer, useSchema } from 'chora/hooks'
 import { postToServer, signAndBroadcast } from 'chora/utils'
+import { MsgSubmitProposal } from 'cosmos/api/cosmos/group/v1/tx'
 import { useContext, useState } from 'react'
 
 import { GroupContext } from '@contexts/GroupContext'
@@ -206,7 +206,7 @@ const SubmitProposal = () => {
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx
-        error={error || initError}
+        error={initError || error}
         rest={chainInfo?.rest}
         success={success}
       />

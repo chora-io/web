@@ -1,6 +1,5 @@
 'use client'
 
-import { MsgCreate as Msg } from 'cosmos/api/chora/content/v1/msg'
 import { Permissions, ResultTx } from 'chora/components'
 import {
   InputJSON,
@@ -11,6 +10,7 @@ import {
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer, useSchema } from 'chora/hooks'
 import { postToServer, signAndBroadcast } from 'chora/utils'
+import { MsgCreate as Msg } from 'cosmos/api/chora/content/v1/msg'
 import { useContext, useState } from 'react'
 
 import { usePermissions } from '@hooks/usePermissions'
@@ -150,7 +150,7 @@ const AddSubject = () => {
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx
-        error={error || initError}
+        error={initError || error}
         rest={chainInfo?.rest}
         success={success}
       />

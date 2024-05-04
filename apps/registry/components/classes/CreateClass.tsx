@@ -1,6 +1,5 @@
 'use client'
 
-import { MsgCreateClass as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 import { Permissions, ResultTx } from 'chora/components'
 import {
   InputJSON,
@@ -17,6 +16,7 @@ import { WalletContext } from 'chora/contexts'
 import { useNetworkServer, useSchema } from 'chora/hooks'
 import { useClassFee, useCreditTypes } from 'chora/hooks'
 import { postToServer, signAndBroadcast } from 'chora/utils'
+import { MsgCreateClass as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 import { useContext, useState } from 'react'
 
 import { usePermissionsClass } from '@hooks/usePermissionsClass'
@@ -197,7 +197,7 @@ const CreateClass = () => {
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx
-        error={error || initError}
+        error={initError || error}
         rest={chainInfo?.rest}
         success={success}
       />

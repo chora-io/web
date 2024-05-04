@@ -9,8 +9,8 @@ export const usePermissionsAdmin = (wallet: any, msgType: string) => {
   const { group, groupError, members, membersError, policies, policiesError } =
     useContext(GroupContext)
 
-  // error fetching initial parameters
-  const initError = authzError || groupError || membersError || policiesError
+  // error fetching parameters
+  const error = authzError || groupError || membersError || policiesError
 
   // admin, policy admin and group member, and admin authorized
   const [isAdmin, setIsAdmin] = useState<boolean>(false)
@@ -44,5 +44,5 @@ export const usePermissionsAdmin = (wallet: any, msgType: string) => {
     }
   }, [authzGrantee?.length, wallet?.bech32Address])
 
-  return [isAdmin, isPolicy, isAuthz, initError]
+  return [isAdmin, isPolicy, isAuthz, error]
 }

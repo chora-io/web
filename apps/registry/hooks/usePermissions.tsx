@@ -8,8 +8,7 @@ export const usePermissions = (wallet: any, msgType: string) => {
   // account authorized
   const [isAuthz, setIsAuthz] = useState<boolean>(false)
 
-  // error fetching initial parameters
-  const initError = authzError
+  const error = authzError
 
   useEffect(() => {
     if (authzGrantee && wallet) {
@@ -20,5 +19,5 @@ export const usePermissions = (wallet: any, msgType: string) => {
     }
   }, [authzGrantee?.length, wallet?.bech32Address])
 
-  return [isAuthz, initError]
+  return [isAuthz, error]
 }

@@ -23,9 +23,9 @@ const AccountsListItem = ({ policy }: any) => {
       </div>
       <div className={styles.boxText}>
         <h3>{'address'}</h3>
-        <p>{policy['address']}</p>
+        <p>{policy.address}</p>
       </div>
-      <Link href={`/${network}/${groupId}/accounts/${policy['address']}`}>
+      <Link href={`/${network}/${groupId}/accounts/${policy.address}`}>
         {'view account'}
       </Link>
       <Result error={error} />

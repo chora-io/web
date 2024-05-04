@@ -51,7 +51,7 @@ const Account = () => {
           '/cosmos.group.v1.ThresholdDecisionPolicy' && (
           <div className={styles.boxText}>
             <h3>{'threshold'}</h3>
-            <p>{policy['decision_policy']['threshold']}</p>
+            <p>{policy['decision_policy'].threshold}</p>
           </div>
         )}
       {policy &&
@@ -59,22 +59,20 @@ const Account = () => {
           '/cosmos.group.v1.PercentageDecisionPolicy' && (
           <div className={styles.boxText}>
             <h3>{'percentage'}</h3>
-            <p>{policy['decision_policy']['percentage']}</p>
+            <p>{policy['decision_policy'].percentage}</p>
           </div>
         )}
       <div className={styles.boxText}>
         <h3>{'voting period'}</h3>
         <p>
-          {policy
-            ? policy['decision_policy']['windows']['voting_period']
-            : 'NA'}
+          {policy ? policy['decision_policy'].windows['voting_period'] : 'NA'}
         </p>
       </div>
       <div className={styles.boxText}>
         <h3>{'min execution period'}</h3>
         <p>
           {policy
-            ? policy['decision_policy']['windows']['min_execution_period']
+            ? policy['decision_policy'].windows['min_execution_period']
             : 'NA'}
         </p>
       </div>

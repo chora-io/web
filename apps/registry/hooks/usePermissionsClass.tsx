@@ -19,8 +19,8 @@ export const usePermissionsClass = (wallet: any, msgType: string) => {
   // loading permissions
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
-  // error fetching initial parameters
-  const initError = authzError || allowlistError || creatorsError
+  // error fetching parameters
+  const error = authzError || allowlistError || creatorsError
 
   useEffect(() => {
     if (allowlist === 'disabled') {
@@ -42,5 +42,5 @@ export const usePermissionsClass = (wallet: any, msgType: string) => {
     }
   }, [authzGrantee?.length, wallet?.bech32Address])
 
-  return [isCreator, isAuthz, isLoading, initError]
+  return [isCreator, isAuthz, isLoading, error]
 }

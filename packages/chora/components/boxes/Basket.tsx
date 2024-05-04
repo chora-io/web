@@ -58,7 +58,7 @@ const Basket = ({ basket, error, renderAddress }: any) => {
       )}
       <div className={styles.boxText}>
         <h3>{'exponent'}</h3>
-        <p>{basket ? basket['exponent'] : 'NA'}</p>
+        <p>{basket ? basket.exponent : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'disable auto retire'}</h3>

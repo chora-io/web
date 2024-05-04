@@ -1,6 +1,5 @@
 'use client'
 
-import { MsgUpdateGroupPolicyMetadata } from 'cosmos/api/cosmos/group/v1/tx'
 import { Permissions, ResultTx } from 'chora/components'
 import {
   InputJSON,
@@ -11,6 +10,7 @@ import {
 import { WalletContext } from 'chora/contexts'
 import { useMetadata, useNetworkServer, useSchema } from 'chora/hooks'
 import { postToServer, signAndBroadcast } from 'chora/utils'
+import { MsgUpdateGroupPolicyMetadata } from 'cosmos/api/cosmos/group/v1/tx'
 import { useParams } from 'next/navigation'
 import { useContext, useEffect, useState } from 'react'
 
@@ -180,7 +180,7 @@ const UpdateAccountMetadata = () => {
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx
-        error={error || initError}
+        error={initError || error}
         rest={chainInfo?.rest}
         success={success}
       />

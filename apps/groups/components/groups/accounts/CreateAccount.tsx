@@ -1,6 +1,5 @@
 'use client'
 
-import { MsgCreateGroupPolicy } from 'cosmos/api/cosmos/group/v1/tx'
 import { Permissions, ResultTx } from 'chora/components'
 import {
   InputJSON,
@@ -12,6 +11,7 @@ import { InputPolicy } from 'chora/components/forms/cosmos.group.v1'
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer, useSchema } from 'chora/hooks'
 import { postToServer, signAndBroadcast } from 'chora/utils'
+import { MsgCreateGroupPolicy } from 'cosmos/api/cosmos/group/v1/tx'
 import * as Long from 'long'
 import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
@@ -178,7 +178,7 @@ const CreateAccount = () => {
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx
-        error={error || initError}
+        error={initError || error}
         rest={chainInfo?.rest}
         success={success}
       />

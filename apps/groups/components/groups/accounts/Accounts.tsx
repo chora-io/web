@@ -68,7 +68,7 @@ const Accounts = () => {
       )}
       {sortedPolicies &&
         sortedPolicies.map((policy: any) => (
-          <AccountsListItem key={policy['address']} policy={policy} />
+          <AccountsListItem key={policy.address} policy={policy} />
         ))}
       <Result error={error} />
     </div>

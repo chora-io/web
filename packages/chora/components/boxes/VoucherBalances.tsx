@@ -26,7 +26,7 @@ const VoucherBalances = ({
       )}
       {Array.isArray(balances) &&
         balances.map((balance) => (
-          <div className={styles.boxItem} key={balance['address']}>
+          <div className={styles.boxItem} key={balance.address}>
             <div className={styles.boxText}>
               <h3>{'address'}</h3>
               {balance && renderAddress ? (
