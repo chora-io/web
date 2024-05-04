@@ -46,7 +46,7 @@ const Attestations = ({
         <>
           {attestations.map((attestation: any) => (
             <AttestationsListItem
-              key={attestation['iri']}
+              key={attestation.iri}
               attestation={attestation}
               renderAddress={renderAddress}
               renderLink={renderLink}

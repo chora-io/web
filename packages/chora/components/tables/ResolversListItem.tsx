@@ -14,11 +14,11 @@ const ResolversListItem = ({ resolver, renderAddress, renderLink }: any) => {
     <div className={styles.boxItem}>
       <div className={styles.boxText}>
         <h3>{'id'}</h3>
-        <p>{resolver['id']}</p>
+        <p>{resolver.id}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'url'}</h3>
-        <p>{resolver['url']}</p>
+        <p>{resolver.url}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'manager'}</h3>

@@ -38,18 +38,18 @@ const FeegrantListItem = ({ grant, renderAddress }: any) => {
           </>
         )}
       </div>
-      {grant['grant']['@type'] ===
+      {grant.grant['@type'] ===
         '/cosmos.feegrant.v1beta1.BasicAllowance' && (
         <>
-          {grant['grant']['spend_limit'].map((spendLimit: any, i: number) => (
+          {grant.grant['spend_limit'].map((token: any, i: number) => (
             <div className={styles.boxText} key={i}>
               <h3>{'spend limit'}</h3>
-              <p>{spendLimit['amount'] + spendLimit['denom']}</p>
+              <p>{token.amount + token.denom}</p>
             </div>
           ))}
           <div className={styles.boxText}>
             <h3>{'expiration'}</h3>
-            <p>{formatTimestamp(grant['grant']['expiration'])}</p>
+            <p>{formatTimestamp(grant.grant.expiration)}</p>
           </div>
         </>
       )}

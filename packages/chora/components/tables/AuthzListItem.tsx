@@ -47,16 +47,16 @@ const AuthzListItem = ({ grant, renderAddress }: any) => {
           )}
         </p>
       </div>
-      {grant['authorization']['@type'] ===
+      {grant.authorization['@type'] ===
         '/cosmos.authz.v1beta1.GenericAuthorization' && (
         <div className={styles.boxText}>
           <h3>{'message'}</h3>
-          <p>{grant['authorization']['msg']}</p>
+          <p>{grant.authorization.msg}</p>
         </div>
       )}
       <div className={styles.boxText}>
         <h3>{'expiration'}</h3>
-        <p>{formatTimestamp(grant['expiration'])}</p>
+        <p>{formatTimestamp(grant.expiration)}</p>
       </div>
     </div>
   )

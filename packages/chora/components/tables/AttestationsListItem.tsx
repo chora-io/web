@@ -19,11 +19,11 @@ const AttestationsListItem = ({
     <div className={styles.boxItem}>
       <div className={styles.boxText}>
         <h3>{'iri'}</h3>
-        <p>{attestation['iri'] || 'NA'}</p>
+        <p>{attestation.iri}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'timestamp'}</h3>
-        <p>{attestation ? formatTimestamp(attestation['timestamp']) : 'NA'}</p>
+        <p>{formatTimestamp(attestation.timestamp)}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'attestor'}</h3>
