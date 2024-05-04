@@ -1,4 +1,9 @@
-import { MsgBridgeReceive as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
+import {
+  MsgBridgeReceive_Batch,
+  MsgBridgeReceive_Project,
+  MsgBridgeReceive as Msg,
+} from 'cosmos/api/regen/ecocredit/v1/tx'
+import { OriginTx } from 'cosmos/api/regen/ecocredit/v1/types'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
@@ -21,28 +26,29 @@ const MsgBridgeReceive = ({ network, setMessage, useWallet, wallet }: any) => {
   const [originTxNote, setOriginTxNote] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.ecocredit.v1.MsgBridgeReceive',
       issuer: wallet ? wallet.bech32Address : issuer,
       classId: classId,
-      project: {
+      project: MsgBridgeReceive_Project.fromJSON({
         referenceId: projectReferenceId,
         jurisdiction: projectJurisdiction,
         metadata: projectMetadata,
-      },
-      batch: {
+      }),
+      batch: MsgBridgeReceive_Batch.fromJSON({
         recipient: batchRecipient,
         amount: batchAmount,
         startDate: new Date(batchStartDate),
         endDate: new Date(batchEndDate),
         metadata: batchMetadata,
-      },
-      originTx: {
+      }),
+      originTx: OriginTx.fromJSON({
         id: originTxId,
         source: originTxSource,
         contract: originTxContract,
         note: originTxNote,
-      },
-    } as unknown as Msg
+      }),
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgBridgeReceive',

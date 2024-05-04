@@ -18,7 +18,7 @@ import {
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'
-import { MsgAttest as Msg } from 'cosmos/api/regen/data/v1/tx'
+import { MsgAttest } from 'cosmos/api/regen/data/v1/tx'
 import { ContentHash_Graph } from 'cosmos/api/regen/data/v1/types'
 import * as jsonld from 'jsonld'
 import { useContext, useEffect, useState } from 'react'
@@ -237,14 +237,15 @@ const CreateClaim = () => {
       return
     }
 
-    const msg = {
+    const msg: MsgAttest = {
+      $type: 'regen.data.v1.MsgAttest',
       attestor: wallet.bech32Address,
       contentHashes: [ContentHash_Graph.fromJSON(contentHash.graph)],
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/regen.data.v1.MsgAttest',
-      value: Msg.encode(msg).finish(),
+      value: MsgAttest.encode(msg).finish(),
     }
 
     // sign and broadcast message to selected network

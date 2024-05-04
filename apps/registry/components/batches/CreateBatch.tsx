@@ -15,7 +15,7 @@ import {
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer, useSchema } from 'chora/hooks'
 import { postToServer, signAndBroadcast } from 'chora/utils'
-import { MsgCreateBatch as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
+import { MsgCreateBatch } from 'cosmos/api/regen/ecocredit/v1/tx'
 import { useContext, useState } from 'react'
 
 import { usePermissionsIssuer } from '@hooks/usePermissionsIssuer'
@@ -94,18 +94,20 @@ const CreateBatch = () => {
         })
     }
 
-    const msg = {
+    const msg: MsgCreateBatch = {
+      $type: 'regen.ecocredit.v1.MsgCreateBatch',
       issuer: wallet.bech32Address,
       projectId: projectId,
       issuance: issuance,
       metadata: metadata,
       startDate: new Date(startDate),
       endDate: new Date(endDate),
-    } as unknown as Msg
+      open: false,
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgCreateBatch',
-      value: Msg.encode(msg).finish(),
+      value: MsgCreateBatch.encode(msg).finish(),
     }
 
     await signAndBroadcast(chainInfo, wallet.bech32Address, [msgAny])

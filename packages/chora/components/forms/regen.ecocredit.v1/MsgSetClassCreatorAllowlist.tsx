@@ -14,10 +14,11 @@ const MsgSetClassCreatorAllowlist = ({
   const [enabled, setEnabled] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.ecocredit.v1.MsgSetClassCreatorAllowlist',
       authority: wallet ? wallet.bech32Address : authority,
-      enabled: enabled,
-    } as unknown as Msg
+      enabled: enabled === 'true',
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgSetClassCreatorAllowlist',

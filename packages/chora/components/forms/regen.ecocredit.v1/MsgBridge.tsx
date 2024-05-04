@@ -12,12 +12,13 @@ const MsgBridge = ({ network, setMessage, useWallet, wallet }: any) => {
   const [credits, setCredits] = useState<any[]>([])
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.ecocredit.v1.MsgBridge',
       owner: wallet ? wallet.bech32Address : owner,
       target: target,
       recipient: recipient,
       credits: credits,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgBridge',

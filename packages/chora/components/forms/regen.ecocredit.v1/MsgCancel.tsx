@@ -11,11 +11,12 @@ const MsgCancel = ({ network, setMessage, useWallet, wallet }: any) => {
   const [reason, setReason] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.ecocredit.v1.MsgCancel',
       owner: wallet ? wallet.bech32Address : owner,
       credits: credits,
       reason: reason,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgCancel',

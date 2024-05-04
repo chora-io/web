@@ -10,10 +10,11 @@ const MsgLeaveGroup = ({ network, setMessage, useWallet, wallet }: any) => {
   const [groupId, setGroupId] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'cosmos.group.v1.MsgLeaveGroup',
       address: wallet ? wallet.bech32Address : address,
       groupId: Long.fromString(groupId || '0'),
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/cosmos.group.v1.MsgLeaveGroup',

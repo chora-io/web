@@ -89,15 +89,15 @@ const CreateAccount = () => {
     }
 
     // set message
-    const msg = {
+    const msg: MsgCreateGroupPolicy = {
       $type: 'cosmos.group.v1.MsgCreateGroupPolicy',
       admin: wallet.bech32Address,
       groupId: Long.fromString(`${groupId}` || '0'),
       metadata: metadata,
       decisionPolicy: policy,
-    } as unknown as MsgCreateGroupPolicy
+    }
 
-    // convert message to any message
+    // convert message to protobuf any message
     const msgAny = {
       typeUrl: '/cosmos.group.v1.MsgCreateGroupPolicy',
       value: MsgCreateGroupPolicy.encode(msg).finish(),

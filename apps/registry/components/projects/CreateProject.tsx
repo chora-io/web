@@ -12,7 +12,7 @@ import { SelectCreditClass } from 'chora/components/forms/regen.ecocredit.v1'
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer, useSchema } from 'chora/hooks'
 import { postToServer, signAndBroadcast } from 'chora/utils'
-import { MsgCreateProject as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
+import { MsgCreateProject } from 'cosmos/api/regen/ecocredit/v1/tx'
 import { useContext, useState } from 'react'
 
 import { useClasses } from '@hooks/useClasses'
@@ -90,17 +90,18 @@ const CreateProject = () => {
         })
     }
 
-    const msg = {
+    const msg: MsgCreateProject = {
+      $type: 'regen.ecocredit.v1.MsgCreateProject',
       admin: wallet.bech32Address,
       classId: classId,
       metadata: metadata,
       jurisdiction: jurisdiction,
       referenceId: referenceId,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgCreateProject',
-      value: Msg.encode(msg).finish(),
+      value: MsgCreateProject.encode(msg).finish(),
     }
 
     await signAndBroadcast(chainInfo, wallet.bech32Address, [msgAny])

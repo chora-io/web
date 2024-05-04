@@ -11,11 +11,12 @@ const MsgGrantAllowance = ({ network, setMessage, useWallet, wallet }: any) => {
   const [allowance, setAllowance] = useState<any>(undefined)
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'cosmos.feegrant.v1beta1.MsgGrantAllowance',
       granter: wallet ? wallet.bech32Address : granter,
       grantee: grantee,
       allowance: allowance,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/cosmos.feegrant.v1beta1.MsgGrantAllowance',

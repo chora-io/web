@@ -10,10 +10,11 @@ const MsgDelete = ({ network, setMessage, useWallet, wallet }: any) => {
   const [curator, setCurator] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'chora.content.v1.MsgDelete',
       id: Long.fromString(id || '0'),
       curator: wallet ? wallet.bech32Address : curator,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/chora.content.v1.MsgDelete',

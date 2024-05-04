@@ -15,11 +15,12 @@ const MsgRegisterAccount = ({
   const [version, setVersion] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.intertx.v1.MsgRegisterAccount',
       owner: wallet ? wallet.bech32Address : owner,
       connectionId: connectionId,
       version: version,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/regen.intertx.v1.MsgRegisterAccount',

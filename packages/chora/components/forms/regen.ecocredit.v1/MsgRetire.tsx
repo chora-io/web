@@ -12,12 +12,13 @@ const MsgRetire = ({ network, setMessage, useWallet, wallet }: any) => {
   const [reason, setReason] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.ecocredit.v1.MsgRetire',
       owner: wallet ? wallet.bech32Address : owner,
       credits: credits,
       jurisdiction: jurisdiction,
       reason: reason,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgRetire',

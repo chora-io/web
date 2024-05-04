@@ -1,3 +1,4 @@
+import { Coin } from 'cosmos/api/cosmos/base/v1beta1/coin'
 import { MsgUpdateClassFee as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
@@ -10,13 +11,14 @@ const MsgUpdateClassFee = ({ network, setMessage, useWallet, wallet }: any) => {
   const [feeAmount, setFeeAmount] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.ecocredit.v1.MsgUpdateClassFee',
       authority: wallet ? wallet.bech32Address : authority,
-      fee: {
+      fee: Coin.fromJSON({
         denom: feeDenom,
         amount: feeAmount,
-      },
-    } as unknown as Msg
+      }),
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgUpdateClassFee',

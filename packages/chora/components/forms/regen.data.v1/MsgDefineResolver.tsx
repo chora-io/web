@@ -9,10 +9,11 @@ const MsgDefineResolver = ({ network, setMessage, useWallet, wallet }: any) => {
   const [resolverUrl, setResolverUrl] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.data.v1.MsgDefineResolver',
       manager: wallet ? wallet.bech32Address : manager,
       resolverUrl: resolverUrl,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/regen.data.v1.MsgDefineResolver',

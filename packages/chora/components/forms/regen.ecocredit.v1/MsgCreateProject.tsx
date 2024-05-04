@@ -12,13 +12,14 @@ const MsgCreateProject = ({ network, setMessage, useWallet, wallet }: any) => {
   const [referenceId, setReferenceId] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.ecocredit.v1.MsgCreateProject',
       admin: wallet ? wallet.bech32Address : admin,
       classId: classId,
       metadata: metadata,
       jurisdiction: jurisdiction,
       referenceId: referenceId,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgCreateProject',

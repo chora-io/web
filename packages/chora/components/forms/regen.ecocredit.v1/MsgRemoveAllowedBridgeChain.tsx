@@ -14,10 +14,11 @@ const MsgRemoveAllowedBridgeChain = ({
   const [chainName, setChainName] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.ecocredit.v1.MsgRemoveAllowedBridgeChain',
       authority: wallet ? wallet.bech32Address : authority,
       chainName: chainName,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgRemoveAllowedBridgeChain',

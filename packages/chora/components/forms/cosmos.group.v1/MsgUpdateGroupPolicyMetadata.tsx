@@ -15,11 +15,12 @@ const MsgUpdateGroupPolicyMetadata = ({
   const [metadata, setMetadata] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'cosmos.group.v1.MsgUpdateGroupPolicyMetadata',
       admin: wallet ? wallet.bech32Address : admin,
       groupPolicyAddress: address,
       metadata: metadata,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/cosmos.group.v1.MsgUpdateGroupPolicyMetadata',

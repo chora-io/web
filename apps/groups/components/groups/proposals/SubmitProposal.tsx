@@ -13,7 +13,7 @@ import { SelectExecution } from 'chora/components/forms/cosmos.group.v1'
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer, useSchema } from 'chora/hooks'
 import { postToServer, signAndBroadcast } from 'chora/utils'
-import { MsgSubmitProposal } from 'cosmos/api/cosmos/group/v1/tx'
+import { execFromJSON, MsgSubmitProposal } from 'cosmos/api/cosmos/group/v1/tx'
 import { useContext, useState } from 'react'
 
 import { GroupContext } from '@contexts/GroupContext'
@@ -99,16 +99,16 @@ const SubmitProposal = () => {
     }
 
     // set submit proposal message
-    const msg = {
+    const msg: MsgSubmitProposal = {
       $type: 'cosmos.group.v1.MsgSubmitProposal',
       proposers: [wallet.bech32Address],
       groupPolicyAddress: address,
       metadata: metadata,
       messages: messages,
-      exec: execution,
-    } as unknown as MsgSubmitProposal
+      exec: execFromJSON(execution),
+    }
 
-    // convert message to any message
+    // convert message to protobuf any message
     const msgAny = {
       typeUrl: '/cosmos.group.v1.MsgSubmitProposal',
       value: MsgSubmitProposal.encode(msg).finish(),

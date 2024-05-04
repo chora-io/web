@@ -1,4 +1,5 @@
 import { MsgMintBatchCredits as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
+import { OriginTx } from 'cosmos/api/regen/ecocredit/v1/types'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
@@ -20,17 +21,18 @@ const MsgMintBatchCredits = ({
   const [originTxNote, setOriginTxNote] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.ecocredit.v1.MsgMintBatchCredits',
       issuer: wallet ? wallet.bech32Address : issuer,
       batchDenom: batchDenom,
       issuance: issuance,
-      originTx: {
+      originTx: OriginTx.fromJSON({
         id: originTxId,
         source: originTxSource,
         contract: originTxContract,
         note: originTxNote,
-      },
-    } as unknown as Msg
+      }),
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgMintBatchCredits',

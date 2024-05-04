@@ -94,14 +94,14 @@ const UpdateGroupMetadata = () => {
     }
 
     // set message
-    const msg = {
+    const msg: MsgUpdateGroupMetadata = {
       $type: 'cosmos.group.v1.MsgUpdateGroupMetadata',
       admin: wallet.bech32Address,
       groupId: Long.fromString(`${groupId}` || '0'),
       metadata: metadata,
-    } as unknown as MsgUpdateGroupMetadata
+    }
 
-    // convert message to any message
+    // convert message to protobuf any message
     const msgAny = {
       typeUrl: '/cosmos.group.v1.MsgUpdateGroupMetadata',
       value: MsgUpdateGroupMetadata.encode(msg).finish(),

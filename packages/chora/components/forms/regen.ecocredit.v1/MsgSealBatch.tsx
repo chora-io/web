@@ -9,10 +9,11 @@ const MsgSealBatch = ({ network, setMessage, useWallet, wallet }: any) => {
   const [batchDenom, setBatchDenom] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.ecocredit.v1.MsgSealBatch',
       issuer: wallet ? wallet.bech32Address : issuer,
       batchDenom: batchDenom,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgSealBatch',

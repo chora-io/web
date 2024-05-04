@@ -14,7 +14,8 @@ import {
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer, useSchema } from 'chora/hooks'
 import { postToServer, signAndBroadcast } from 'chora/utils'
-import { MsgVote } from 'cosmos/api/cosmos/group/v1/tx'
+import { execFromJSON, MsgVote } from 'cosmos/api/cosmos/group/v1/tx'
+import { voteOptionFromJSON } from 'cosmos/api/cosmos/group/v1/types'
 import * as Long from 'long'
 import { useParams } from 'next/navigation'
 import { useContext, useState } from 'react'
@@ -93,16 +94,16 @@ const VoteOnProposal = () => {
     }
 
     // set submit proposal message
-    const msg = {
+    const msg: MsgVote = {
       $type: 'cosmos.group.v1.MsgVote',
       voter: wallet.bech32Address,
-      proposalId: Long.fromString(`${id}`),
-      option: vote,
+      proposalId: Long.fromString(`${id}` || '0'),
+      option: voteOptionFromJSON(vote),
       metadata: metadata,
-      exec: execution,
-    } as unknown as MsgVote
+      exec: execFromJSON(execution),
+    }
 
-    // convert message to any message
+    // convert message to protobuf any message
     const msgAny = {
       typeUrl: '/cosmos.group.v1.MsgVote',
       value: MsgVote.encode(msg).finish(),

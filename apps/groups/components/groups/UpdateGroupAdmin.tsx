@@ -42,14 +42,14 @@ const UpdateGroupAdmin = () => {
     setSuccess(null)
 
     // set message
-    const msg = {
+    const msg: MsgUpdateGroupAdmin = {
       $type: 'cosmos.group.v1.MsgUpdateGroupAdmin',
       admin: wallet.bech32Address,
       groupId: Long.fromString(`${groupId}` || '0'),
       newAdmin: address,
-    } as unknown as MsgUpdateGroupAdmin
+    }
 
-    // convert message to any message
+    // convert message to protobuf any message
     const msgAny = {
       typeUrl: '/cosmos.group.v1.MsgUpdateGroupAdmin',
       value: MsgUpdateGroupAdmin.encode(msg).finish(),

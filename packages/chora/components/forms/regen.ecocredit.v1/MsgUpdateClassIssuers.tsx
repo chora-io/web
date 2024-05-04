@@ -17,12 +17,13 @@ const MsgUpdateClassIssuers = ({
   const [removeIssuers, setRemoveIssuers] = useState<any[]>([])
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.ecocredit.v1.MsgUpdateClassIssuers',
       admin: wallet ? wallet.bech32Address : admin,
       classId: classId,
       addIssuers: addIssuers.map((issuer: any) => issuer.address),
       removeIssuers: removeIssuers.map((issuer: any) => issuer.address),
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgUpdateClassIssuers',

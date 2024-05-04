@@ -36,13 +36,13 @@ const LeaveGroup = () => {
     setSuccess(null)
 
     // set message
-    const msg = {
+    const msg: MsgLeaveGroup = {
       $type: 'cosmos.group.v1.MsgLeaveGroup',
       address: wallet.bech32Address,
       groupId: Long.fromString(`${groupId}` || '0'),
-    } as unknown as MsgLeaveGroup
+    }
 
-    // convert message to any message
+    // convert message to protobuf any message
     const msgAny = {
       typeUrl: '/cosmos.group.v1.MsgLeaveGroup',
       value: MsgLeaveGroup.encode(msg).finish(),

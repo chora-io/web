@@ -49,10 +49,11 @@ const Proposal = () => {
 
   // execute proposal
   const handleExecute = async () => {
-    const msg = {
+    const msg: MsgExec = {
+      $type: 'cosmos.group.v1.MsgExec',
       executor: wallet.bech32Address,
-      proposalId: Long.fromString(`${id}`),
-    } as unknown as MsgExec
+      proposalId: Long.fromString(`${id}` || '0'),
+    }
 
     const msgAny = {
       typeUrl: '/cosmos.group.v1.MsgExec',

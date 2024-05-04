@@ -1,3 +1,4 @@
+import { CreditType } from 'cosmos/api/regen/ecocredit/v1/state'
 import { MsgAddCreditType as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
@@ -12,15 +13,16 @@ const MsgAddCreditType = ({ network, setMessage, useWallet, wallet }: any) => {
   const [creditTypePrecision, setCreditTypePrecision] = useState<number>(6)
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.ecocredit.v1.MsgAddCreditType',
       authority: wallet ? wallet.bech32Address : authority,
-      creditType: {
+      creditType: CreditType.fromJSON({
         abbreviation: creditTypeAbbrev,
         name: creditTypeName,
         unit: creditTypeUnit,
         precision: creditTypePrecision,
-      },
-    } as unknown as Msg
+      }),
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgAddCreditType',

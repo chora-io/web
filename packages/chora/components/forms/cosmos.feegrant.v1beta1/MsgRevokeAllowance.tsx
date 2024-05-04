@@ -14,10 +14,11 @@ const MsgRevokeAllowance = ({
   const [grantee, setGrantee] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'cosmos.feegrant.v1beta1.MsgRevokeAllowance',
       granter: wallet ? wallet.bech32Address : granter,
       grantee: grantee,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/cosmos.feegrant.v1beta1.MsgRevokeAllowance',

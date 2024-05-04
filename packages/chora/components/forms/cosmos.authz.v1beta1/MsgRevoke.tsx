@@ -10,11 +10,12 @@ const MsgRevoke = ({ network, setMessage, useWallet, wallet }: any) => {
   const [revokeMessage, setRevokeMessage] = useState<any>(undefined)
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'cosmos.authz.v1beta1.MsgRevoke',
       granter: wallet ? wallet.bech32Address : granter,
       grantee: grantee,
       msgTypeUrl: revokeMessage ? revokeMessage.typeUrl : '',
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/cosmos.authz.v1beta1.MsgRevoke',

@@ -11,11 +11,12 @@ const MsgUpdateCurator = ({ network, setMessage, useWallet, wallet }: any) => {
   const [newCurator, setNewCurator] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'chora.geonode.v1.MsgUpdateCurator',
       id: Long.fromString(id || '0'),
       curator: wallet ? wallet.bech32Address : curator,
       newCurator: newCurator,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/chora.geonode.v1.MsgUpdateCurator',

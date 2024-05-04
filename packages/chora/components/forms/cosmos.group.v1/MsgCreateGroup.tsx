@@ -11,11 +11,12 @@ const MsgCreateGroup = ({ network, setMessage, useWallet, wallet }: any) => {
   const [members, setMembers] = useState<any[]>([])
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'cosmos.group.v1.MsgCreateGroup',
       admin: wallet ? wallet.bech32Address : admin,
       members: members,
       metadata: metadata,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/cosmos.group.v1.MsgCreateGroup',

@@ -11,7 +11,7 @@ const MsgSend = ({ network, setMessage, useWallet, wallet }: any) => {
   const [amount, setAmount] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
       fromAddress: wallet ? wallet.bech32Address : fromAddress,
       toAddress: toAddress,
       amount: [
@@ -20,7 +20,7 @@ const MsgSend = ({ network, setMessage, useWallet, wallet }: any) => {
           amount: amount,
         },
       ],
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/cosmos.bank.v1beta1.MsgSend',

@@ -15,10 +15,11 @@ const MsgWithdrawProposal = ({
   const [proposalId, setProposalId] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'cosmos.group.v1.MsgWithdrawProposal',
       address: wallet ? wallet.bech32Address : address,
       proposalId: Long.fromString(proposalId || '0'),
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/cosmos.group.v1.MsgWithdrawProposal',

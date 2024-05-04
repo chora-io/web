@@ -9,10 +9,11 @@ const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
   const [metadata, setMetadata] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'chora.voucher.v1.MsgCreate',
       issuer: wallet ? wallet.bech32Address : issuer,
       metadata: metadata,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/chora.voucher.v1.MsgCreate',

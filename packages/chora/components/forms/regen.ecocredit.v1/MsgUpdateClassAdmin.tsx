@@ -15,11 +15,12 @@ const MsgUpdateClassAdmin = ({
   const [newAdmin, setNewAdmin] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.ecocredit.v1.MsgUpdateClassAdmin',
       admin: wallet ? wallet.bech32Address : admin,
       classId: classId,
       newAdmin: newAdmin,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgUpdateClassAdmin',

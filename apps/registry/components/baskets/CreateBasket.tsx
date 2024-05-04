@@ -7,7 +7,8 @@ import { InputCreditClasses } from 'chora/components/forms/regen.ecocredit.baske
 import { WalletContext } from 'chora/contexts'
 import { useBasketFee, useCreditTypes } from 'chora/hooks'
 import { signAndBroadcast } from 'chora/utils'
-import { MsgCreate as Msg } from 'cosmos/api/regen/ecocredit/basket/v1/tx'
+import { Coin } from 'cosmos/api/cosmos/base/v1beta1/coin'
+import { MsgCreate } from 'cosmos/api/regen/ecocredit/basket/v1/tx'
 import { useContext, useState } from 'react'
 
 import { useClassesByType } from '@hooks/useClassesByType'
@@ -48,18 +49,23 @@ const CreateBasket = () => {
     setError(null)
     setSuccess(null)
 
-    const msg = {
+    const msg: MsgCreate = {
+      $type: 'regen.ecocredit.basket.v1.MsgCreate',
       curator: wallet.bech32Address,
       name: name,
       description: description,
+      exponent: 0, // deprecated
+      disableAutoRetire: false,
       creditTypeAbbrev: creditTypeAbbrev,
       allowedClasses: allowedClass.map((c: any) => c.id),
-      fee: [{ denom: basketFee.denom, amount: basketFee.amount }],
-    } as unknown as Msg
+      fee: [
+        Coin.fromJSON({ denom: basketFee.denom, amount: basketFee.amount }),
+      ],
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.basket.v1.MsgCreate',
-      value: Msg.encode(msg).finish(),
+      value: MsgCreate.encode(msg).finish(),
     }
 
     await signAndBroadcast(chainInfo, wallet.bech32Address, [msgAny])

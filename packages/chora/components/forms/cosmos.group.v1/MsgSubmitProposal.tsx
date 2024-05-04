@@ -16,14 +16,14 @@ const MsgSubmitProposal = ({ network, setMessage, useWallet, wallet }: any) => {
   const [execution, setExecution] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
       $type: 'cosmos.group.v1.MsgSubmitProposal',
       proposers: wallet ? [wallet.bech32Address] : [proposer],
       groupPolicyAddress: address,
       metadata: metadata,
       messages: messages,
       exec: execFromJSON(execution),
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/cosmos.group.v1.MsgSubmitProposal',

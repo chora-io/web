@@ -19,14 +19,15 @@ const MsgCreateGroupWithPolicy = ({
   const [decisionPolicy, setDecisionPolicy] = useState<any>(undefined)
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'cosmos.group.v1.MsgCreateGroupWithPolicy',
       admin: wallet ? wallet.bech32Address : admin,
       members: members,
       groupMetadata: metadata,
       groupPolicyMetadata: policyMetadata,
       groupPolicyAsAdmin: policyAsAdmin === 'true',
       decisionPolicy: decisionPolicy,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/cosmos.group.v1.MsgCreateGroupWithPolicy',

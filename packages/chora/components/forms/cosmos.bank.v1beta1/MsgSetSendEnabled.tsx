@@ -10,12 +10,12 @@ const MsgSetSendEnabled = ({ network, setMessage, useWallet, wallet }: any) => {
   const [useDefaultFor, setUseDefaultFor] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
       $type: 'cosmos.bank.v1beta1.MsgSetSendEnabled',
       authority: wallet ? wallet.bech32Address : authority,
       sendEnabled: [], // TODO
       useDefaultFor: [], // TODO
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/cosmos.bank.v1beta1.MsgSetSendEnabled',

@@ -10,11 +10,12 @@ const MsgSubmitTx = ({ network, setMessage, useWallet, wallet }: any) => {
   const [txMsg, setTxMsg] = useState<any>(undefined)
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.intertx.v1.MsgSubmitTx',
       owner: wallet ? wallet.bech32Address : owner,
       connectionId: connectionId,
       msg: txMsg,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/regen.intertx.v1.MsgSubmitTx',

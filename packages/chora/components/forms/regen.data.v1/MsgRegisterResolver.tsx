@@ -17,11 +17,12 @@ const MsgRegisterResolver = ({
   const [contentHash, setContentHash] = useState<any>(undefined)
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.data.v1.MsgRegisterResolver',
       manager: wallet ? wallet.bech32Address : manager,
       resolverId: Long.fromString(resolverId || '0'),
       contentHashes: contentHash ? [contentHash] : [],
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/regen.data.v1.MsgRegisterResolver',

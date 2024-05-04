@@ -11,7 +11,7 @@ const MsgMultiSend = ({ network, setMessage, useWallet, wallet }: any) => {
   const [amount, setAmount] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
       inputs: [
         {
           address: wallet ? wallet.bech32Address : fromAddress,
@@ -34,7 +34,7 @@ const MsgMultiSend = ({ network, setMessage, useWallet, wallet }: any) => {
           ],
         },
       ],
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/cosmos.bank.v1beta1.MsgMultiSend',

@@ -14,14 +14,16 @@ const MsgCreateBatch = ({ network, setMessage, useWallet, wallet }: any) => {
   const [endDate, setEndDate] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.ecocredit.v1.MsgCreateBatch',
       issuer: wallet ? wallet.bech32Address : issuer,
       projectId: projectId,
       issuance: issuance,
       metadata: metadata,
       startDate: new Date(startDate),
       endDate: new Date(endDate),
-    } as unknown as Msg
+      open: false,
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgCreateBatch',

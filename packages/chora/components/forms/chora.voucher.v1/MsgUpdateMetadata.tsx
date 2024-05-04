@@ -11,11 +11,12 @@ const MsgUpdateMetadata = ({ network, setMessage, useWallet, wallet }: any) => {
   const [newMetadata, setMetadata] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'chora.voucher.v1.MsgUpdateMetadata',
       id: Long.fromString(id || '0'),
       issuer: wallet ? wallet.bech32Address : issuer,
       newMetadata: newMetadata,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/chora.voucher.v1.MsgUpdateMetadata',

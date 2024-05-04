@@ -15,11 +15,12 @@ const MsgUpdateProjectAdmin = ({
   const [newAdmin, setNewAdmin] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.ecocredit.v1.MsgUpdateProjectAdmin',
       admin: wallet ? wallet.bech32Address : admin,
       projectId: projectId,
       newAdmin: newAdmin,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgUpdateProjectAdmin',

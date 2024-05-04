@@ -16,11 +16,12 @@ const MsgUpdateGroupAdmin = ({
   const [newAdmin, setNewAdmin] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'cosmos.group.v1.MsgUpdateGroupAdmin',
       admin: wallet ? wallet.bech32Address : admin,
       groupId: Long.fromString(groupId || '0'),
       newAdmin: newAdmin,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/cosmos.group.v1.MsgUpdateGroupAdmin',

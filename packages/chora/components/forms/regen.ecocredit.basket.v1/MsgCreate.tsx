@@ -1,3 +1,4 @@
+import { Coin } from 'cosmos/api/cosmos/base/v1beta1/coin'
 import { MsgCreate as Msg } from 'cosmos/api/regen/ecocredit/basket/v1/tx'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
@@ -9,19 +10,22 @@ const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
   const [name, setName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [creditTypeAbbrev, setCreditTypeAbbrev] = useState<string>('')
-  const [allowedClasses, setAllowedClasses] = useState<string>('')
+  const [allowedClass, setAllowedClass] = useState<string>()
   const [feeDenom, setFeeDenom] = useState<string>('')
   const [feeAmount, setFeeAmount] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.ecocredit.basket.v1.MsgCreate',
       curator: wallet ? wallet.bech32Address : curator,
       name: name,
       description: description,
+      exponent: 0, // deprecated
+      disableAutoRetire: false,
       creditTypeAbbrev: creditTypeAbbrev,
-      allowedClasses: allowedClasses,
-      fee: [{ denom: feeDenom, amount: feeAmount }],
-    } as unknown as Msg
+      allowedClasses: allowedClass ? [allowedClass] : [],
+      fee: [Coin.fromJSON({ denom: feeDenom, amount: feeAmount })],
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.basket.v1.MsgCreate',
@@ -68,8 +72,8 @@ const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
         id="msg-create-allowed-classes"
         label="allowed classes"
         placeholder="C03"
-        string={allowedClasses}
-        setString={setAllowedClasses}
+        string={allowedClass}
+        setString={setAllowedClass}
       />
       <InputString
         id="msg-create-fee-denom"

@@ -9,10 +9,11 @@ const MsgExec = ({ network, setMessage, useWallet, wallet }: any) => {
   const [execMsg, setExecMsg] = useState<any>(undefined)
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'cosmos.authz.v1beta1.MsgExec',
       grantee: wallet ? wallet.bech32Address : grantee,
       msgs: execMsg ? [execMsg] : [],
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/cosmos.authz.v1beta1.MsgExec',

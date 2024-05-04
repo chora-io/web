@@ -16,12 +16,13 @@ import { WalletContext } from 'chora/contexts'
 import { useNetworkServer, useSchema } from 'chora/hooks'
 import { useClassFee, useCreditTypes } from 'chora/hooks'
 import { postToServer, signAndBroadcast } from 'chora/utils'
-import { MsgCreateClass as Msg } from 'cosmos/api/regen/ecocredit/v1/tx'
+import { MsgCreateClass } from 'cosmos/api/regen/ecocredit/v1/tx'
 import { useContext, useState } from 'react'
 
 import { usePermissionsClass } from '@hooks/usePermissionsClass'
 
 import styles from './CreateClass.module.css'
+import { Coin } from 'cosmos/api/cosmos/base/v1beta1/coin'
 
 const contextUrl = 'https://schema.chora.io/contexts/ecocredit_class.jsonld'
 
@@ -93,17 +94,18 @@ const CreateClass = () => {
         })
     }
 
-    const msg = {
+    const msg: MsgCreateClass = {
+      $type: 'regen.ecocredit.v1.MsgCreateClass',
       admin: wallet.bech32Address,
       issuers: issuers.map((issuer: any) => issuer.address),
       metadata: metadata,
       creditTypeAbbrev: creditTypeAbbrev,
-      fee: { denom: classFee.denom, amount: classFee.amount },
-    } as unknown as Msg
+      fee: Coin.fromJSON({ denom: classFee.denom, amount: classFee.amount }),
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgCreateClass',
-      value: Msg.encode(msg).finish(),
+      value: MsgCreateClass.encode(msg).finish(),
     }
 
     await signAndBroadcast(chainInfo, wallet.bech32Address, [msgAny])

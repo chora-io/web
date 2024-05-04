@@ -15,14 +15,14 @@ const MsgVote = ({ network, setMessage, useWallet, wallet }: any) => {
   const [execution, setExecution] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
       $type: 'cosmos.group.v1.MsgVote',
       voter: wallet ? wallet.bech32Address : voter,
       proposalId: Long.fromString(proposalId || '0'),
       option: voteOptionFromJSON(option),
       metadata: metadata,
       exec: execFromJSON(execution),
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/cosmos.group.v1.MsgVote',

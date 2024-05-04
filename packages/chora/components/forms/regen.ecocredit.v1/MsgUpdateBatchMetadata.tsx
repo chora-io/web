@@ -15,11 +15,12 @@ const MsgUpdateBatchMetadata = ({
   const [newMetadata, setNewMetadata] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.ecocredit.v1.MsgUpdateBatchMetadata',
       issuer: wallet ? wallet.bech32Address : issuer,
       batchDenom: batchDenom,
       newMetadata: newMetadata,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgUpdateBatchMetadata',

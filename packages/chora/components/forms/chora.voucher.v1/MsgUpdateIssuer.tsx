@@ -11,11 +11,12 @@ const MsgUpdateIssuer = ({ network, setMessage, useWallet, wallet }: any) => {
   const [newIssuer, setNewIssuer] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'chora.voucher.v1.MsgUpdateIssuer',
       id: Long.fromString(id || '0'),
       issuer: wallet ? wallet.bech32Address : issuer,
       newIssuer: newIssuer,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/chora.voucher.v1.MsgUpdateIssuer',

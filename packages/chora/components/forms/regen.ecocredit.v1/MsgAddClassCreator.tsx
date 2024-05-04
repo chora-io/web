@@ -14,10 +14,11 @@ const MsgAddClassCreator = ({
   const [creator, setCreator] = useState<string>('')
 
   useEffect(() => {
-    const msg = {
+    const msg: Msg = {
+      $type: 'regen.ecocredit.v1.MsgAddClassCreator',
       authority: wallet ? wallet.bech32Address : authority,
       creator: creator,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/regen.ecocredit.v1.MsgAddClassCreator',

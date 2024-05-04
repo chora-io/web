@@ -3,6 +3,7 @@ import {
   PercentageDecisionPolicy,
   ThresholdDecisionPolicy,
 } from 'cosmos/api/cosmos/group/v1/types'
+import { Duration } from 'cosmos/api/google/protobuf/duration'
 import * as Long from 'long'
 import * as React from 'react'
 import { useEffect, useState } from 'react'
@@ -30,15 +31,15 @@ const InputPolicy = ({ id, label, initPolicy, setPolicy }: any) => {
   }, [type])
 
   useEffect(() => {
-    const w = {
+    const w: DecisionPolicyWindows = {
       $type: 'cosmos.group.v1.DecisionPolicyWindows',
-      votingPeriod: {
+      votingPeriod: Duration.fromJSON({
         seconds: Long.fromString(votingPeriod || '0'),
-      },
-      minExecutionPeriod: {
+      }),
+      minExecutionPeriod: Duration.fromJSON({
         seconds: Long.fromString(minExecutionPeriod || '0'),
-      },
-    } as DecisionPolicyWindows
+      }),
+    }
 
     let p: any
 

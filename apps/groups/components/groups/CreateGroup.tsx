@@ -92,14 +92,14 @@ const CreateGroup = () => {
     }
 
     // set message
-    const msg = {
+    const msg: MsgCreateGroup = {
       $type: 'cosmos.group.v1.MsgCreateGroup',
       admin: wallet.bech32Address,
       members: members,
       metadata: metadata,
-    } as unknown as MsgCreateGroup
+    }
 
-    // convert message to any message
+    // convert message to protobuf any message
     const msgAny = {
       typeUrl: '/cosmos.group.v1.MsgCreateGroup',
       value: MsgCreateGroup.encode(msg).finish(),

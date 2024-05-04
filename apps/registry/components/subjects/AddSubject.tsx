@@ -10,7 +10,7 @@ import {
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer, useSchema } from 'chora/hooks'
 import { postToServer, signAndBroadcast } from 'chora/utils'
-import { MsgCreate as Msg } from 'cosmos/api/chora/content/v1/msg'
+import { MsgCreate } from 'cosmos/api/chora/content/v1/msg'
 import { useContext, useState } from 'react'
 
 import { usePermissions } from '@hooks/usePermissions'
@@ -80,14 +80,15 @@ const AddSubject = () => {
         })
     }
 
-    const msg = {
+    const msg: MsgCreate = {
+      $type: 'chora.content.v1.MsgCreate',
       curator: wallet?.bech32Address,
       metadata: metadata,
-    } as unknown as Msg
+    }
 
     const msgAny = {
       typeUrl: '/chora.geonode.v1.MsgCreate',
-      value: Msg.encode(msg).finish(),
+      value: MsgCreate.encode(msg).finish(),
     }
 
     await signAndBroadcast(chainInfo, wallet.bech32Address, [msgAny])
