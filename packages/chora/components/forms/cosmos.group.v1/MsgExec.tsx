@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, InputNumber } from '..'
 
-const MsgExec = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgExec = ({ network, message, setMessage, useWallet, wallet }: any) => {
   const [executor, setExecutor] = useState<string>('')
   const [proposalId, setProposalId] = useState<string>('')
 
@@ -17,6 +17,7 @@ const MsgExec = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/cosmos.group.v1.MsgExec',
       value: Msg.encode(msg).finish(),
     }

@@ -5,7 +5,13 @@ import { useEffect, useState } from 'react'
 import { InputIssuances } from '.'
 import { InputAddress, InputIRI, InputString, InputTimestamp } from '..'
 
-const MsgCreateBatch = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgCreateBatch = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [issuer, setIssuer] = useState<string>('')
   const [projectId, setProjectId] = useState<string>('')
   const [issuance, setIssuance] = useState<any[]>([])
@@ -26,6 +32,7 @@ const MsgCreateBatch = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.ecocredit.v1.MsgCreateBatch',
       value: Msg.encode(msg).finish(),
     }

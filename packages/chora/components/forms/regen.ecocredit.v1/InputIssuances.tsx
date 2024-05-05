@@ -23,6 +23,7 @@ const InputIssuances = ({ id, network, issuances, setIssuances }: any) => {
     event?.preventDefault()
     const is = [...issuances]
     is.push({
+      index: issuances.length,
       recipient: '',
       tradableAmount: '',
       retiredAmount: '',

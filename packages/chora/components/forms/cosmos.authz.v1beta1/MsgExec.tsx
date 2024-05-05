@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, SelectMessage } from '..'
 
-const MsgExec = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgExec = ({ network, message, setMessage, useWallet, wallet }: any) => {
   const [grantee, setGrantee] = useState<string>('')
   const [execMsg, setExecMsg] = useState<any>(undefined)
 
@@ -16,6 +16,7 @@ const MsgExec = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/cosmos.authz.v1beta1.MsgExec',
       value: Msg.encode(msg).finish(),
     }

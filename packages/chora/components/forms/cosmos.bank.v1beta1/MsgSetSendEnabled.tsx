@@ -4,7 +4,13 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, InputString } from '..'
 
-const MsgSetSendEnabled = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgSetSendEnabled = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [authority, setAuthority] = useState<string>('')
   const [sendEnabled, setSendEnabled] = useState<string>('')
   const [useDefaultFor, setUseDefaultFor] = useState<string>('')
@@ -18,6 +24,7 @@ const MsgSetSendEnabled = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/cosmos.bank.v1beta1.MsgSetSendEnabled',
       value: Msg.encode(msg).finish(),
     }

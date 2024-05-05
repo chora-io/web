@@ -6,6 +6,7 @@ import { InputAddress, InputString } from '..'
 
 const MsgUpdateClassAdmin = ({
   network,
+  message,
   setMessage,
   useWallet,
   wallet,
@@ -23,6 +24,7 @@ const MsgUpdateClassAdmin = ({
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.ecocredit.v1.MsgUpdateClassAdmin',
       value: Msg.encode(msg).finish(),
     }

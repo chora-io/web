@@ -5,7 +5,13 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, InputIRI, InputNumber } from '..'
 
-const MsgUpdateMetadata = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgUpdateMetadata = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [id, setId] = useState<string>('')
   const [curator, setCurator] = useState<string>('')
   const [newMetadata, setMetadata] = useState<string>('')
@@ -19,6 +25,7 @@ const MsgUpdateMetadata = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/chora.geonode.v1.MsgUpdateMetadata',
       value: Msg.encode(msg).finish(),
     }

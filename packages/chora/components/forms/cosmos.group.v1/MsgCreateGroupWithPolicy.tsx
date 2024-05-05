@@ -7,6 +7,7 @@ import { InputMembers, InputPolicy } from '.'
 
 const MsgCreateGroupWithPolicy = ({
   network,
+  message,
   setMessage,
   useWallet,
   wallet,
@@ -30,6 +31,7 @@ const MsgCreateGroupWithPolicy = ({
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/cosmos.group.v1.MsgCreateGroupWithPolicy',
       value: Msg.encode(msg).finish(),
     }

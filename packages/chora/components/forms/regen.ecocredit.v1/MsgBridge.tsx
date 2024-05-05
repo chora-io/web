@@ -5,7 +5,13 @@ import { useEffect, useState } from 'react'
 import { InputCredits } from '.'
 import { InputAddress, InputString } from '..'
 
-const MsgBridge = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgBridge = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [owner, setOwner] = useState<string>('')
   const [target, setTarget] = useState<string>('')
   const [recipient, setRecipient] = useState<string>('')
@@ -21,6 +27,7 @@ const MsgBridge = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.ecocredit.v1.MsgBridge',
       value: Msg.encode(msg).finish(),
     }

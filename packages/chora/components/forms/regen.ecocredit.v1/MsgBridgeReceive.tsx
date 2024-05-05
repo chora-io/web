@@ -9,7 +9,13 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, InputIRI, InputString, InputTimestamp } from '..'
 
-const MsgBridgeReceive = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgBridgeReceive = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [issuer, setIssuer] = useState<string>('')
   const [classId, setClassId] = useState<string>('')
   const [projectReferenceId, setProjectReferenceId] = useState<string>('')
@@ -51,6 +57,7 @@ const MsgBridgeReceive = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.ecocredit.v1.MsgBridgeReceive',
       value: Msg.encode(msg).finish(),
     }

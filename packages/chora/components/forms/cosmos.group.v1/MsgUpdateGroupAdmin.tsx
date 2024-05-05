@@ -7,6 +7,7 @@ import { InputAddress, InputNumber } from '..'
 
 const MsgUpdateGroupAdmin = ({
   network,
+  message,
   setMessage,
   useWallet,
   wallet,
@@ -24,6 +25,7 @@ const MsgUpdateGroupAdmin = ({
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/cosmos.group.v1.MsgUpdateGroupAdmin',
       value: Msg.encode(msg).finish(),
     }

@@ -5,7 +5,13 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, InputString } from '..'
 
-const MsgUpdateClassFee = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgUpdateClassFee = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [authority, setAuthority] = useState<string>('')
   const [feeDenom, setFeeDenom] = useState<string>('')
   const [feeAmount, setFeeAmount] = useState<string>('')
@@ -21,6 +27,7 @@ const MsgUpdateClassFee = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.ecocredit.v1.MsgUpdateClassFee',
       value: Msg.encode(msg).finish(),
     }

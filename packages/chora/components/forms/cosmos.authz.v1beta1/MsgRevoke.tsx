@@ -4,7 +4,13 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, SelectMessage } from '..'
 
-const MsgRevoke = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgRevoke = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [granter, setGranter] = useState<string>('')
   const [grantee, setGrantee] = useState<string>('')
   const [revokeMessage, setRevokeMessage] = useState<any>(undefined)
@@ -18,6 +24,7 @@ const MsgRevoke = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/cosmos.authz.v1beta1.MsgRevoke',
       value: Msg.encode(msg).finish(),
     }

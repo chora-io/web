@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { InputAddress } from '..'
 import { InputGrant } from '.'
 
-const MsgGrant = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgGrant = ({ network, message, setMessage, useWallet, wallet }: any) => {
   const [granter, setGranter] = useState<string>('')
   const [grantee, setGrantee] = useState<string>('')
   const [grant, setGrant] = useState<any>(undefined)
@@ -19,6 +19,7 @@ const MsgGrant = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/cosmos.authz.v1beta1.MsgGrant',
       value: Msg.encode(msg).finish(),
     }

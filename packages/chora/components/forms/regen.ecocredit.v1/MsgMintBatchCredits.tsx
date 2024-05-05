@@ -8,6 +8,7 @@ import { InputAddress, InputString } from '..'
 
 const MsgMintBatchCredits = ({
   network,
+  message,
   setMessage,
   useWallet,
   wallet,
@@ -35,6 +36,7 @@ const MsgMintBatchCredits = ({
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.ecocredit.v1.MsgMintBatchCredits',
       value: Msg.encode(msg).finish(),
     }

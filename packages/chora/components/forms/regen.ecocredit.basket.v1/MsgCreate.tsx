@@ -5,7 +5,13 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, InputString } from '..'
 
-const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgCreate = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [curator, setCurator] = useState<string>('')
   const [name, setName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
@@ -28,6 +34,7 @@ const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.ecocredit.basket.v1.MsgCreate',
       value: Msg.encode(msg).finish(),
     }

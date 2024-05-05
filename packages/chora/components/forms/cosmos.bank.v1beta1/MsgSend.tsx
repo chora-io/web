@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, InputDenom, InputNumber } from '..'
 
-const MsgSend = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgSend = ({ network, message, setMessage, useWallet, wallet }: any) => {
   const [fromAddress, setFromAddress] = useState<string>('')
   const [toAddress, setToAddress] = useState<string>('')
   const [denom, setDenom] = useState<string>('')
@@ -23,6 +23,7 @@ const MsgSend = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/cosmos.bank.v1beta1.MsgSend',
       value: Msg.encode(msg).finish(),
     }

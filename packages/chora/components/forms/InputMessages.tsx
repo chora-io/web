@@ -11,7 +11,7 @@ const InputMessages = ({ id, network, messages, setMessages }: any) => {
     let ms = [...messages]
     ms = ms.map((m, i) => ({ index: i, ...m }))
     setMessages(ms)
-  }, [messages.length])
+  }, [messages?.length])
 
   const handleSetMessage = (message: any) => {
     const ms = [...messages]
@@ -22,7 +22,7 @@ const InputMessages = ({ id, network, messages, setMessages }: any) => {
   const handleAddMessage = (event: any) => {
     event?.preventDefault()
     const ms = [...messages]
-    ms.push({ typeUrl: '', value: [] })
+    ms.push({ index: messages.length, typeUrl: '', value: [] })
     setMessages(ms)
   }
 

@@ -8,7 +8,13 @@ import { useEffect, useState } from 'react'
 import { InputAddress, InputIRI, InputMessages } from '..'
 import { SelectExecution } from '.'
 
-const MsgSubmitProposal = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgSubmitProposal = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [proposer, setProposer] = useState<string>('')
   const [address, setAddress] = useState<string>('')
   const [metadata, setMetadata] = useState<string>('')
@@ -26,6 +32,7 @@ const MsgSubmitProposal = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/cosmos.group.v1.MsgSubmitProposal',
       value: Msg.encode(msg).finish(),
     }

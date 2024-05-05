@@ -6,6 +6,7 @@ import { InputAddress, InputString } from '..'
 
 const MsgUpdateProjectAdmin = ({
   network,
+  message,
   setMessage,
   useWallet,
   wallet,
@@ -23,6 +24,7 @@ const MsgUpdateProjectAdmin = ({
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.ecocredit.v1.MsgUpdateProjectAdmin',
       value: Msg.encode(msg).finish(),
     }

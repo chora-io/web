@@ -5,7 +5,13 @@ import { useEffect, useState } from 'react'
 import { InputAddress } from '..'
 import { InputAllowance } from '.'
 
-const MsgGrantAllowance = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgGrantAllowance = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [granter, setGranter] = useState<string>('')
   const [grantee, setGrantee] = useState<string>('')
   const [allowance, setAllowance] = useState<any>(undefined)
@@ -19,6 +25,7 @@ const MsgGrantAllowance = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/cosmos.feegrant.v1beta1.MsgGrantAllowance',
       value: Msg.encode(msg).finish(),
     }

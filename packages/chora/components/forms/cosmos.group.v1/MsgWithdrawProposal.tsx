@@ -7,6 +7,7 @@ import { InputAddress, InputNumber } from '..'
 
 const MsgWithdrawProposal = ({
   network,
+  message,
   setMessage,
   useWallet,
   wallet,
@@ -22,6 +23,7 @@ const MsgWithdrawProposal = ({
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/cosmos.group.v1.MsgWithdrawProposal',
       value: Msg.encode(msg).finish(),
     }

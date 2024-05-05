@@ -5,7 +5,13 @@ import { useEffect, useState } from 'react'
 import { InputAddress } from '..'
 import { InputContentHash } from '.'
 
-const MsgAttest = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgAttest = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [attestor, setAttestor] = useState<string>('')
   const [contentHash, setContentHash] = useState<any>(undefined)
 
@@ -17,6 +23,7 @@ const MsgAttest = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.data.v1.MsgAttest',
       value: Msg.encode(msg).finish(),
     }

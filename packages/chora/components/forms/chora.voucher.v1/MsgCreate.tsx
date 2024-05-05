@@ -4,7 +4,13 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, InputIRI } from '..'
 
-const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgCreate = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [issuer, setIssuer] = useState<string>('')
   const [metadata, setMetadata] = useState<string>('')
 
@@ -16,6 +22,7 @@ const MsgCreate = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/chora.voucher.v1.MsgCreate',
       value: Msg.encode(msg).finish(),
     }

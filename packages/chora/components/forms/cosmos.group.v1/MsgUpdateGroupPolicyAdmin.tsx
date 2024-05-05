@@ -6,6 +6,7 @@ import { InputAddress } from '..'
 
 const MsgUpdateGroupPolicyAdmin = ({
   network,
+  message,
   setMessage,
   useWallet,
   wallet,
@@ -23,6 +24,7 @@ const MsgUpdateGroupPolicyAdmin = ({
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/cosmos.group.v1.MsgUpdateGroupPolicyAdmin',
       value: Msg.encode(msg).finish(),
     }

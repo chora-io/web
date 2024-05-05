@@ -6,6 +6,7 @@ import { InputAddress, SelectBoolean } from '..'
 
 const MsgSetClassCreatorAllowlist = ({
   network,
+  message,
   setMessage,
   useWallet,
   wallet,
@@ -21,6 +22,7 @@ const MsgSetClassCreatorAllowlist = ({
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.ecocredit.v1.MsgSetClassCreatorAllowlist',
       value: Msg.encode(msg).finish(),
     }

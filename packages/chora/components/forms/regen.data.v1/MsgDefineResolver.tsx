@@ -4,7 +4,13 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, InputURL } from '..'
 
-const MsgDefineResolver = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgDefineResolver = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [manager, setManager] = useState<string>('')
   const [resolverUrl, setResolverUrl] = useState<string>('')
 
@@ -16,6 +22,7 @@ const MsgDefineResolver = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.data.v1.MsgDefineResolver',
       value: Msg.encode(msg).finish(),
     }

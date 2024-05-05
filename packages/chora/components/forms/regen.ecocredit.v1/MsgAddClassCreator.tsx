@@ -6,6 +6,7 @@ import { InputAddress } from '..'
 
 const MsgAddClassCreator = ({
   network,
+  message,
   setMessage,
   useWallet,
   wallet,
@@ -21,6 +22,7 @@ const MsgAddClassCreator = ({
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.ecocredit.v1.MsgAddClassCreator',
       value: Msg.encode(msg).finish(),
     }

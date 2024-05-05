@@ -4,7 +4,13 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, InputIRI, InputString } from '..'
 
-const MsgCreateProject = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgCreateProject = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [admin, setAdmin] = useState<string>('')
   const [classId, setClassId] = useState<string>('')
   const [metadata, setMetadata] = useState<string>('')
@@ -22,6 +28,7 @@ const MsgCreateProject = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.ecocredit.v1.MsgCreateProject',
       value: Msg.encode(msg).finish(),
     }

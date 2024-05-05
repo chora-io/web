@@ -5,7 +5,13 @@ import { useEffect, useState } from 'react'
 import { InputAddress } from '..'
 import { InputContentHashJSON } from '.'
 
-const MsgAttestJSON = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgAttestJSON = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [attestor, setSender] = useState<string>('')
   const [contentHashJson, setContentHashJson] = useState<string>('')
 
@@ -25,6 +31,7 @@ const MsgAttestJSON = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.data.v1.MsgAttest',
       value: Msg.encode(msg).finish(),
     }

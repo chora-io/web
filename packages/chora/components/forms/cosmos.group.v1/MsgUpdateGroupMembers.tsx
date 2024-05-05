@@ -8,6 +8,7 @@ import { InputMembers } from '.'
 
 const MsgUpdateGroupMembers = ({
   network,
+  message,
   setMessage,
   useWallet,
   wallet,
@@ -25,6 +26,7 @@ const MsgUpdateGroupMembers = ({
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/cosmos.group.v1.MsgUpdateGroupMembers',
       value: Msg.encode(msg).finish(),
     }

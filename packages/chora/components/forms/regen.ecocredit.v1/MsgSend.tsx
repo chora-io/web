@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { InputAddress } from '..'
 import { InputSendCredits } from '.'
 
-const MsgSend = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgSend = ({ network, message, setMessage, useWallet, wallet }: any) => {
   const [sender, setSender] = useState<string>('')
   const [recipient, setRecipient] = useState<string>('')
   const [credits, setCredits] = useState<any[]>([])
@@ -19,6 +19,7 @@ const MsgSend = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.ecocredit.v1.MsgSend',
       value: Msg.encode(msg).finish(),
     }

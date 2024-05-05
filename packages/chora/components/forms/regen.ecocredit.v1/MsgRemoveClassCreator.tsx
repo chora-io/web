@@ -6,6 +6,7 @@ import { InputAddress } from '..'
 
 const MsgRemoveClassCreator = ({
   network,
+  message,
   setMessage,
   useWallet,
   wallet,
@@ -21,6 +22,7 @@ const MsgRemoveClassCreator = ({
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.ecocredit.v1.MsgRemoveClassCreator',
       value: Msg.encode(msg).finish(),
     }

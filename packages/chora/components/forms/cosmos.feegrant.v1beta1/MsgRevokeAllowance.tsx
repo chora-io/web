@@ -6,6 +6,7 @@ import { InputAddress } from '..'
 
 const MsgRevokeAllowance = ({
   network,
+  message,
   setMessage,
   useWallet,
   wallet,
@@ -21,6 +22,7 @@ const MsgRevokeAllowance = ({
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/cosmos.feegrant.v1beta1.MsgRevokeAllowance',
       value: Msg.encode(msg).finish(),
     }

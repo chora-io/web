@@ -22,7 +22,7 @@ const InputCredits = ({ id, network, credits, setCredits }: any) => {
   const handleAddCredit = (event: any) => {
     event?.preventDefault()
     const is = [...credits]
-    is.push({ batchDenom: '', amount: '' })
+    is.push({ index: credits.length, batchDenom: '', amount: '' })
     setCredits(is)
   }
 

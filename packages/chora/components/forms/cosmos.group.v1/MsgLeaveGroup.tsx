@@ -5,7 +5,13 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, InputNumber } from '..'
 
-const MsgLeaveGroup = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgLeaveGroup = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [address, setAdmin] = useState<string>('')
   const [groupId, setGroupId] = useState<string>('')
 
@@ -17,6 +23,7 @@ const MsgLeaveGroup = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/cosmos.group.v1.MsgLeaveGroup',
       value: Msg.encode(msg).finish(),
     }

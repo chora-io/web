@@ -4,7 +4,13 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, InputString } from '..'
 
-const MsgSealBatch = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgSealBatch = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [issuer, setIssuer] = useState<string>('')
   const [batchDenom, setBatchDenom] = useState<string>('')
 
@@ -16,6 +22,7 @@ const MsgSealBatch = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.ecocredit.v1.MsgSealBatch',
       value: Msg.encode(msg).finish(),
     }

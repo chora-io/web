@@ -5,7 +5,13 @@ import { useEffect, useState } from 'react'
 import { InputCredits } from '.'
 import { InputAddress, InputIRI } from '..'
 
-const MsgCancel = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgCancel = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [owner, setOwner] = useState<string>('')
   const [credits, setCredits] = useState<any[]>([])
   const [reason, setReason] = useState<string>('')
@@ -19,6 +25,7 @@ const MsgCancel = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.ecocredit.v1.MsgCancel',
       value: Msg.encode(msg).finish(),
     }

@@ -4,7 +4,13 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, InputDenom, InputNumber } from '..'
 
-const MsgMultiSend = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgMultiSend = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [fromAddress, setFromAddress] = useState<string>('')
   const [toAddress, setToAddress] = useState<string>('')
   const [denom, setDenom] = useState<string>('')
@@ -37,6 +43,7 @@ const MsgMultiSend = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/cosmos.bank.v1beta1.MsgMultiSend',
       value: Msg.encode(msg).finish(),
     }

@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { InputAddress, InputIRI, InputNumber } from '..'
 import { SelectExecution, SelectVote } from '.'
 
-const MsgVote = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgVote = ({ network, message, setMessage, useWallet, wallet }: any) => {
   const [voter, setVoter] = useState<string>('')
   const [proposalId, setProposalId] = useState<string>('')
   const [option, setOption] = useState<string>('')
@@ -25,6 +25,7 @@ const MsgVote = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/cosmos.group.v1.MsgVote',
       value: Msg.encode(msg).finish(),
     }

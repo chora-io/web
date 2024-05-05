@@ -4,7 +4,13 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, InputString, SelectMessage } from '..'
 
-const MsgSubmitTx = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgSubmitTx = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [owner, setOwner] = useState<string>('')
   const [connectionId, setConnectionId] = useState<string>('')
   const [txMsg, setTxMsg] = useState<any>(undefined)
@@ -18,6 +24,7 @@ const MsgSubmitTx = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.intertx.v1.MsgSubmitTx',
       value: Msg.encode(msg).finish(),
     }

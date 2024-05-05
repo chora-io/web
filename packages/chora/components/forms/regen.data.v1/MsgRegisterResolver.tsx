@@ -8,6 +8,7 @@ import { InputContentHash } from '.'
 
 const MsgRegisterResolver = ({
   network,
+  message,
   setMessage,
   useWallet,
   wallet,
@@ -25,6 +26,7 @@ const MsgRegisterResolver = ({
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.data.v1.MsgRegisterResolver',
       value: Msg.encode(msg).finish(),
     }

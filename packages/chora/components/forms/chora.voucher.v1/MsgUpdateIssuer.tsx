@@ -5,7 +5,13 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, InputNumber } from '..'
 
-const MsgUpdateIssuer = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgUpdateIssuer = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [id, setId] = useState<string>('')
   const [issuer, setIssuer] = useState<string>('')
   const [newIssuer, setNewIssuer] = useState<string>('')
@@ -19,6 +25,7 @@ const MsgUpdateIssuer = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/chora.voucher.v1.MsgUpdateIssuer',
       value: Msg.encode(msg).finish(),
     }

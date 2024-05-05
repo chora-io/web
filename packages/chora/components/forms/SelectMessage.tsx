@@ -178,6 +178,7 @@ const SelectMessage = ({
   options,
   typeOnly,
   network,
+  message,
   setMessage,
 }: any) => {
   const opts = options || defaultOptions
@@ -211,103 +212,171 @@ const SelectMessage = ({
       {!typeOnly && selected === 'chora.content.v1.MsgCreate' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <ContentMsgCreate network={network} setMessage={setMessage} />
+          <ContentMsgCreate
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'chora.content.v1.MsgDelete' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <ContentMsgDelete network={network} setMessage={setMessage} />
+          <ContentMsgDelete
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'chora.content.v1.MsgUpdateCurator' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <ContentMsgUpdateCurator network={network} setMessage={setMessage} />
+          <ContentMsgUpdateCurator
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'chora.contContentMsgUpdateMetadata' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <ContentMsgUpdateMetadata network={network} setMessage={setMessage} />
+          <ContentMsgUpdateMetadata
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'chora.geonode.v1.MsgCreate' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <GeonodeMsgCreate network={network} setMessage={setMessage} />
+          <GeonodeMsgCreate
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'chora.geonode.v1.MsgUpdateCurator' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <GeonodeMsgUpdateCurator network={network} setMessage={setMessage} />
+          <GeonodeMsgUpdateCurator
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'chora.geonode.v1.MsgUpdateMetadata' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <GeonodeMsgUpdateMetadata network={network} setMessage={setMessage} />
+          <GeonodeMsgUpdateMetadata
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'chora.voucher.v1.MsgCreate' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <VoucherMsgCreate network={network} setMessage={setMessage} />
+          <VoucherMsgCreate
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'chora.voucher.v1.MsgIssue' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <VoucherMsgIssue network={network} setMessage={setMessage} />
+          <VoucherMsgIssue
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'chora.voucher.v1.MsgUpdateIssuer' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <VoucherMsgUpdateIssuer network={network} setMessage={setMessage} />
+          <VoucherMsgUpdateIssuer
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'chora.voucher.v1.MsgUpdateMetadata' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <VoucherMsgUpdateMetadata network={network} setMessage={setMessage} />
+          <VoucherMsgUpdateMetadata
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'cosmos.authz.v1beta1.MsgExec' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <AuthzMsgExec network={network} setMessage={setMessage} />
+          <AuthzMsgExec
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'cosmos.authz.v1beta1.MsgGrant' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <AuthzMsgGrant network={network} setMessage={setMessage} />
+          <AuthzMsgGrant
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'cosmos.authz.v1beta1.MsgRevoke' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <AuthzMsgRevoke network={network} setMessage={setMessage} />
+          <AuthzMsgRevoke
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'cosmos.bank.v1beta1.MsgMultiSend' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <BankMsgMultiSend network={network} setMessage={setMessage} />
+          <BankMsgMultiSend
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'cosmos.bank.v1beta1.MsgSend' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <BankMsgSend network={network} setMessage={setMessage} />
+          <BankMsgSend
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'cosmos.bank.v1beBankMsgSetSendEnabled' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <BankMsgSetSendEnabled network={network} setMessage={setMessage} />
+          <BankMsgSetSendEnabled
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly &&
@@ -316,6 +385,7 @@ const SelectMessage = ({
             <h3>{selected}</h3>
             <FeegrantMsgGrantAllowance
               network={network}
+              message={message}
               setMessage={setMessage}
             />
           </div>
@@ -326,6 +396,7 @@ const SelectMessage = ({
             <h3>{selected}</h3>
             <FeegrantMsgRevokeAllowance
               network={network}
+              message={message}
               setMessage={setMessage}
             />
           </div>
@@ -333,7 +404,11 @@ const SelectMessage = ({
       {!typeOnly && selected === 'cosmos.group.v1.MsgCreateGroup' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <GroupMsgCreateGroup network={network} setMessage={setMessage} />
+          <GroupMsgCreateGroup
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'cosmos.group.v1.MsgCreateGroupPolicy' && (
@@ -341,6 +416,7 @@ const SelectMessage = ({
           <h3>{selected}</h3>
           <GroupMsgCreateGroupPolicy
             network={network}
+            message={message}
             setMessage={setMessage}
           />
         </div>
@@ -350,6 +426,7 @@ const SelectMessage = ({
           <h3>{selected}</h3>
           <GroupMsgCreateGroupWithPolicy
             network={network}
+            message={message}
             setMessage={setMessage}
           />
         </div>
@@ -357,25 +434,41 @@ const SelectMessage = ({
       {!typeOnly && selected === 'cosmos.group.v1.MsgExec' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <GroupMsgExec network={network} setMessage={setMessage} />
+          <GroupMsgExec
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'cosmos.group.v1.MsgLeaveGroup' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <GroupMsgLeaveGroup network={network} setMessage={setMessage} />
+          <GroupMsgLeaveGroup
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'cosmos.group.v1.MsgSubmitProposal' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <GroupMsgSubmitProposal network={network} setMessage={setMessage} />
+          <GroupMsgSubmitProposal
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'cosmos.group.v1.MsgUpdateGroupAdmin' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <GroupMsgUpdateGroupAdmin network={network} setMessage={setMessage} />
+          <GroupMsgUpdateGroupAdmin
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'cosmos.group.v1.MsgUpdateGroupMembers' && (
@@ -383,6 +476,7 @@ const SelectMessage = ({
           <h3>{selected}</h3>
           <GroupMsgUpdateGroupMembers
             network={network}
+            message={message}
             setMessage={setMessage}
           />
         </div>
@@ -392,6 +486,7 @@ const SelectMessage = ({
           <h3>{selected}</h3>
           <GroupMsgUpdateGroupMetadata
             network={network}
+            message={message}
             setMessage={setMessage}
           />
         </div>
@@ -402,6 +497,7 @@ const SelectMessage = ({
             <h3>{selected}</h3>
             <GroupMsgUpdateGroupPolicyAdmin
               network={network}
+              message={message}
               setMessage={setMessage}
             />
           </div>
@@ -412,6 +508,7 @@ const SelectMessage = ({
             <h3>{selected}</h3>
             <GroupMsgUpdateGroupPolicyDecisionPolicy
               network={network}
+              message={message}
               setMessage={setMessage}
             />
           </div>
@@ -422,6 +519,7 @@ const SelectMessage = ({
             <h3>{selected}</h3>
             <GroupMsgUpdateGroupPolicyMetadata
               network={network}
+              message={message}
               setMessage={setMessage}
             />
           </div>
@@ -429,37 +527,61 @@ const SelectMessage = ({
       {!typeOnly && selected === 'cosmos.group.v1.MsgVote' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <GroupMsgVote network={network} setMessage={setMessage} />
+          <GroupMsgVote
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'cosmos.group.v1.MsgWithdrawProposal' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <GroupMsgWithdrawProposal network={network} setMessage={setMessage} />
+          <GroupMsgWithdrawProposal
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'regen.data.v1.MsgAnchor' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <DataMsgAnchor network={network} setMessage={setMessage} />
+          <DataMsgAnchor
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'regen.data.v1.MsgAttest' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <DataMsgAttest network={network} setMessage={setMessage} />
+          <DataMsgAttest
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'regen.data.v1.MsgDefineResolver' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <DataMsgDefineResolver network={network} setMessage={setMessage} />
+          <DataMsgDefineResolver
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'regen.data.v1.MsgRegisterResolver' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <DataMsgRegisterResolver network={network} setMessage={setMessage} />
+          <DataMsgRegisterResolver
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly &&
@@ -468,6 +590,7 @@ const SelectMessage = ({
             <h3>{selected}</h3>
             <EcocreditMsgAddAllowedBridgeChain
               network={network}
+              message={message}
               setMessage={setMessage}
             />
           </div>
@@ -477,6 +600,7 @@ const SelectMessage = ({
           <h3>{selected}</h3>
           <EcocreditMsgAddClassCreator
             network={network}
+            message={message}
             setMessage={setMessage}
           />
         </div>
@@ -486,6 +610,7 @@ const SelectMessage = ({
           <h3>{selected}</h3>
           <EcocreditMsgAddCreditType
             network={network}
+            message={message}
             setMessage={setMessage}
           />
         </div>
@@ -493,7 +618,11 @@ const SelectMessage = ({
       {!typeOnly && selected === 'regen.ecocredit.v1.MsgBridge' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <EcocreditMsgBridge network={network} setMessage={setMessage} />
+          <EcocreditMsgBridge
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'regen.ecocredit.v1.MsgBridgeReceive' && (
@@ -501,6 +630,7 @@ const SelectMessage = ({
           <h3>{selected}</h3>
           <EcocreditMsgBridgeReceive
             network={network}
+            message={message}
             setMessage={setMessage}
           />
         </div>
@@ -508,19 +638,31 @@ const SelectMessage = ({
       {!typeOnly && selected === 'regen.ecocredit.v1.MsgCancel' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <EcocreditMsgCancel network={network} setMessage={setMessage} />
+          <EcocreditMsgCancel
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'regen.ecocredit.v1.MsgCreateBatch' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <EcocreditMsgCreateBatch network={network} setMessage={setMessage} />
+          <EcocreditMsgCreateBatch
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'regen.ecocredit.v1.MsgCreateClass' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <EcocreditMsgCreateClass network={network} setMessage={setMessage} />
+          <EcocreditMsgCreateClass
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'regen.ecocredit.v1.MsgCreateProject' && (
@@ -528,6 +670,7 @@ const SelectMessage = ({
           <h3>{selected}</h3>
           <EcocreditMsgCreateProject
             network={network}
+            message={message}
             setMessage={setMessage}
           />
         </div>
@@ -537,6 +680,7 @@ const SelectMessage = ({
           <h3>{selected}</h3>
           <EcocreditMsgMintBatchCredits
             network={network}
+            message={message}
             setMessage={setMessage}
           />
         </div>
@@ -547,6 +691,7 @@ const SelectMessage = ({
             <h3>{selected}</h3>
             <EcocreditMsgRemoveAllowedBridgeChain
               network={network}
+              message={message}
               setMessage={setMessage}
             />
           </div>
@@ -556,6 +701,7 @@ const SelectMessage = ({
           <h3>{selected}</h3>
           <EcocreditMsgRemoveClassCreator
             network={network}
+            message={message}
             setMessage={setMessage}
           />
         </div>
@@ -563,19 +709,31 @@ const SelectMessage = ({
       {!typeOnly && selected === 'regen.ecocredit.v1.MsgRetire' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <EcocreditMsgRetire network={network} setMessage={setMessage} />
+          <EcocreditMsgRetire
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'regen.ecocredit.v1.MsgSealBatch' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <EcocreditMsgSealBatch network={network} setMessage={setMessage} />
+          <EcocreditMsgSealBatch
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly && selected === 'regen.ecocredit.v1.MsgSend' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <EcocreditMsgSend network={network} setMessage={setMessage} />
+          <EcocreditMsgSend
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
       {!typeOnly &&
@@ -584,6 +742,7 @@ const SelectMessage = ({
             <h3>{selected}</h3>
             <EcocreditMsgSetClassCreatorAllowlist
               network={network}
+              message={message}
               setMessage={setMessage}
             />
           </div>
@@ -594,6 +753,7 @@ const SelectMessage = ({
             <h3>{selected}</h3>
             <EcocreditMsgUpdateBatchMetadata
               network={network}
+              message={message}
               setMessage={setMessage}
             />
           </div>
@@ -603,6 +763,7 @@ const SelectMessage = ({
           <h3>{selected}</h3>
           <EcocreditMsgUpdateClassAdmin
             network={network}
+            message={message}
             setMessage={setMessage}
           />
         </div>
@@ -612,6 +773,7 @@ const SelectMessage = ({
           <h3>{selected}</h3>
           <EcocreditMsgUpdateClassFee
             network={network}
+            message={message}
             setMessage={setMessage}
           />
         </div>
@@ -621,6 +783,7 @@ const SelectMessage = ({
           <h3>{selected}</h3>
           <EcocreditMsgUpdateClassIssuers
             network={network}
+            message={message}
             setMessage={setMessage}
           />
         </div>
@@ -631,6 +794,7 @@ const SelectMessage = ({
             <h3>{selected}</h3>
             <EcocreditMsgUpdateClassMetadata
               network={network}
+              message={message}
               setMessage={setMessage}
             />
           </div>
@@ -640,6 +804,7 @@ const SelectMessage = ({
           <h3>{selected}</h3>
           <EcocreditMsgUpdateProjectAdmin
             network={network}
+            message={message}
             setMessage={setMessage}
           />
         </div>
@@ -650,6 +815,7 @@ const SelectMessage = ({
             <h3>{selected}</h3>
             <EcocreditMsgUpdateProjectMetadata
               network={network}
+              message={message}
               setMessage={setMessage}
             />
           </div>
@@ -657,7 +823,11 @@ const SelectMessage = ({
       {!typeOnly && selected === 'regen.ecocredit.basket.v1.MsgCreate' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
-          <BasketMsgCreate network={network} setMessage={setMessage} />
+          <BasketMsgCreate
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       )}
     </>

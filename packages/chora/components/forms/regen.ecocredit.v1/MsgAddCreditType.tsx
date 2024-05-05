@@ -5,7 +5,13 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, InputNumber, InputString } from '..'
 
-const MsgAddCreditType = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgAddCreditType = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [authority, setAuthority] = useState<string>('')
   const [creditTypeAbbrev, setCreditTypeAbbrev] = useState<string>('')
   const [creditTypeName, setCreditTypeName] = useState<string>('')
@@ -25,6 +31,7 @@ const MsgAddCreditType = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.ecocredit.v1.MsgAddCreditType',
       value: Msg.encode(msg).finish(),
     }

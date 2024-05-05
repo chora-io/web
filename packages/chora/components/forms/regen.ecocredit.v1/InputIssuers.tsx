@@ -29,7 +29,7 @@ const InputIssuers = ({
   const handleAddIssuer = (event: any) => {
     event?.preventDefault()
     const is = [...issuers]
-    is.push({ address: '' })
+    is.push({ index: issuers.length, address: '' })
     setIssuers(is)
   }
 

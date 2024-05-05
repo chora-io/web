@@ -23,6 +23,7 @@ const InputSendCredits = ({ id, credits, setCredits }: any) => {
     event?.preventDefault()
     const is = [...credits]
     is.push({
+      index: credits.length,
       batchDenom: '',
       tradableAmount: '',
       retiredAmount: '',

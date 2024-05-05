@@ -5,7 +5,13 @@ import { useEffect, useState } from 'react'
 import { InputAddress } from '..'
 import { InputContentHash } from '.'
 
-const MsgAnchor = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgAnchor = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [sender, setSender] = useState<string>('')
   const [contentHash, setContentHash] = useState<any>(undefined)
 
@@ -17,6 +23,7 @@ const MsgAnchor = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.data.v1.MsgAnchor',
       value: Msg.encode(msg).finish(),
     }

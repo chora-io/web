@@ -7,6 +7,7 @@ import { InputIssuers } from '.'
 
 const MsgUpdateClassIssuers = ({
   network,
+  message,
   setMessage,
   useWallet,
   wallet,
@@ -26,6 +27,7 @@ const MsgUpdateClassIssuers = ({
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.ecocredit.v1.MsgUpdateClassIssuers',
       value: Msg.encode(msg).finish(),
     }

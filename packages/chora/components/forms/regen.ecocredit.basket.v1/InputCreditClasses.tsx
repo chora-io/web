@@ -23,6 +23,7 @@ const InputCreditClasses = ({ id, options, classes, setClasses }: any) => {
     event?.preventDefault()
     const cs = [...classes]
     cs.push({
+      index: classes.length,
       admin: '',
       issuers: [],
       metadata: '',

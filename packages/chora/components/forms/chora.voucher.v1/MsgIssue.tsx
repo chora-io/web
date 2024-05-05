@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, InputIRI, InputNumber, InputTimestamp } from '..'
 
-const MsgIssue = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgIssue = ({ network, message, setMessage, useWallet, wallet }: any) => {
   const [id, setId] = useState<string>('')
   const [issuer, setIssuer] = useState<string>('')
   const [recipient, setRecipient] = useState<string>('')
@@ -25,6 +25,7 @@ const MsgIssue = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/chora.voucher.v1.MsgIssue',
       value: Msg.encode(msg).finish(),
     }

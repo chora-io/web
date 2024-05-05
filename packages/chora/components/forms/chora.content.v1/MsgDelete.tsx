@@ -5,7 +5,13 @@ import { useEffect, useState } from 'react'
 
 import { InputAddress, InputNumber } from '..'
 
-const MsgDelete = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgDelete = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [id, setId] = useState<string>('')
   const [curator, setCurator] = useState<string>('')
 
@@ -17,6 +23,7 @@ const MsgDelete = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/chora.content.v1.MsgDelete',
       value: Msg.encode(msg).finish(),
     }

@@ -6,6 +6,7 @@ import { InputAddress, InputString } from '..'
 
 const MsgAddAllowedBridgeChain = ({
   network,
+  message,
   setMessage,
   useWallet,
   wallet,
@@ -21,6 +22,7 @@ const MsgAddAllowedBridgeChain = ({
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.ecocredit.v1.MsgAddAllowedBridgeChain',
       value: Msg.encode(msg).finish(),
     }

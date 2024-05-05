@@ -5,7 +5,13 @@ import { useEffect, useState } from 'react'
 import { InputAddress, InputIRI } from '..'
 import { InputMembers } from '.'
 
-const MsgCreateGroup = ({ network, setMessage, useWallet, wallet }: any) => {
+const MsgCreateGroup = ({
+  network,
+  message,
+  setMessage,
+  useWallet,
+  wallet,
+}: any) => {
   const [admin, setAdmin] = useState<string>('')
   const [metadata, setMetadata] = useState<string>('')
   const [members, setMembers] = useState<any[]>([])
@@ -19,6 +25,7 @@ const MsgCreateGroup = ({ network, setMessage, useWallet, wallet }: any) => {
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/cosmos.group.v1.MsgCreateGroup',
       value: Msg.encode(msg).finish(),
     }

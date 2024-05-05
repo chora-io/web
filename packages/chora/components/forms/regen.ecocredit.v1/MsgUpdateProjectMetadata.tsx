@@ -6,6 +6,7 @@ import { InputAddress, InputIRI, InputString } from '..'
 
 const MsgUpdateProjectMetadata = ({
   network,
+  message,
   setMessage,
   useWallet,
   wallet,
@@ -23,6 +24,7 @@ const MsgUpdateProjectMetadata = ({
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.ecocredit.v1.MsgUpdateProjectMetadata',
       value: Msg.encode(msg).finish(),
     }

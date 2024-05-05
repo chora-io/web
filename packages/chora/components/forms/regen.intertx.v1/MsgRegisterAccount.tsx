@@ -6,6 +6,7 @@ import { InputAddress, InputString } from '..'
 
 const MsgRegisterAccount = ({
   network,
+  message,
   setMessage,
   useWallet,
   wallet,
@@ -23,6 +24,7 @@ const MsgRegisterAccount = ({
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/regen.intertx.v1.MsgRegisterAccount',
       value: Msg.encode(msg).finish(),
     }

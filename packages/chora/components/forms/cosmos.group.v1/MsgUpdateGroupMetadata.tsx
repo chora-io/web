@@ -7,6 +7,7 @@ import { InputAddress, InputIRI, InputNumber } from '..'
 
 const MsgUpdateGroupMetadata = ({
   network,
+  message,
   setMessage,
   useWallet,
   wallet,
@@ -24,6 +25,7 @@ const MsgUpdateGroupMetadata = ({
     }
 
     const msgAny = {
+      index: message ? message.index : undefined,
       typeUrl: '/cosmos.group.v1.MsgUpdateGroupMetadata',
       value: Msg.encode(msg).finish(),
     }
