@@ -1,6 +1,7 @@
 export { default as ArrowLeft } from './ArrowLeft'
 export { default as ArrowRight } from './ArrowRight'
 export { default as ArrowUpRight } from './ArrowUpRight'
+export { default as CheckIcon } from './CheckIcon'
 export { default as MenuIcon } from './MenuIcon'
 export { default as ThemeIcon } from './ThemeIcon'
 export { default as UserIcon } from './UserIcon'
