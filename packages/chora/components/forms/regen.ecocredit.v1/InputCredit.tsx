@@ -8,12 +8,13 @@ import { InputBatchDenom } from '.'
 const defaultId = 'credit'
 const defaultLabel = 'credit'
 
-const InputCredit = ({ id, label, setCredit }: any) => {
+const InputCredit = ({ id, label, credit, setCredit }: any) => {
   const [batchDenom, setBatchDenom] = useState<string>('')
   const [amount, setAmount] = useState<string>('')
 
   useEffect(() => {
     const c = {
+      index: credit ? credit.index : undefined,
       typeUrl: '/regen.ecocredit.v1.Credits',
       value: Credits.encode({
         $type: 'regen.ecocredit.v1.Credits',

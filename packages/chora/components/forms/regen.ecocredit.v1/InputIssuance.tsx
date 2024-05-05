@@ -7,7 +7,7 @@ import { InputAddress, InputNumber, InputString } from '..'
 const defaultId = 'credit'
 const defaultLabel = 'credit'
 
-const InputIssuance = ({ id, label, setIssuance }: any) => {
+const InputIssuance = ({ id, label, issuance, setIssuance }: any) => {
   const [recipient, setRecipient] = useState<string>('')
   const [tradableAmount, setTradableAmount] = useState<string>('')
   const [retiredAmount, setRetiredAmount] = useState<string>('')
@@ -17,6 +17,7 @@ const InputIssuance = ({ id, label, setIssuance }: any) => {
 
   useEffect(() => {
     const c = {
+      index: issuance ? issuance.index : undefined,
       typeUrl: '/regen.ecocredit.v1.BatchIssuance',
       value: BatchIssuance.encode({
         $type: 'regen.ecocredit.v1.BatchIssuance',

@@ -1,4 +1,3 @@
-import { Exec } from 'cosmos/api/cosmos/group/v1/tx'
 import * as React from 'react'
 
 const SelectExecution = ({ id, label, execution, setExecution }: any) => (
@@ -9,8 +8,8 @@ const SelectExecution = ({ id, label, execution, setExecution }: any) => (
       value={execution}
       onChange={(event) => setExecution(event.target.value)}
     >
-      <option value={Exec['EXEC_UNSPECIFIED']}>{'separate'}</option>
-      <option value={Exec['EXEC_TRY']}>{'immediate'}</option>
+      <option value={'EXEC_UNSPECIFIED'}>{'separate'}</option>
+      <option value={'EXEC_TRY'}>{'immediate'}</option>
     </select>
   </label>
 )
