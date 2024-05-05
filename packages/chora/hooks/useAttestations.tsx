@@ -25,7 +25,7 @@ export const useAttestations = (chainInfo: any, iri: string) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setAttestations(res['attestations'])
+            setAttestations(res.attestations)
           }
         })
     }

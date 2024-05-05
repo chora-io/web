@@ -43,7 +43,7 @@ export const useMetadata = (chainInfo: any, unresolved: string) => {
         if (res.error) {
           setError(res.error)
         } else {
-          metadata = JSON.parse(res['jsonld'])
+          metadata = JSON.parse(res.jsonld)
           setResolverUrl(serverUrl + '/data/')
         }
       })
@@ -64,7 +64,7 @@ export const useMetadata = (chainInfo: any, unresolved: string) => {
           if (res.code) {
             setError(res.message)
           } else {
-            resolvers = res['resolvers']
+            resolvers = res.resolvers
           }
         })
 
@@ -81,7 +81,7 @@ export const useMetadata = (chainInfo: any, unresolved: string) => {
               setError(res.error)
             } else {
               // TODO: handle other response formats
-              setMetadata(JSON.parse(res['jsonld']))
+              setMetadata(JSON.parse(res.jsonld))
               setResolverUrl(url)
             }
           })

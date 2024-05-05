@@ -27,7 +27,7 @@ export const useProjects = (chainInfo: any, limit: number, offset: number) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setProjects(res['projects'])
+            setProjects(res.projects)
           }
         })
     }

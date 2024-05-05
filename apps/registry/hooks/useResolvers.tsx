@@ -30,7 +30,7 @@ export const useResolvers = (chainInfo: any, limit: number, offset: number) => {
             if (res.code) {
               nextId = 0
             } else {
-              resolvers.push(res['resolver'])
+              resolvers.push(res.resolver)
               nextId++
             }
           })

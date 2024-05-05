@@ -36,12 +36,22 @@ export const useGroupProposal = (chainInfo: any, proposalId: string) => {
           } else {
             if (!proposal) {
               setError(null)
-              setProposal(res['proposal'])
+              setProposal(res.proposal)
             }
           }
         })
     }
 
+    // only fetch if params available
+    if (chainInfo?.rest && proposalId) {
+      fetchProposal().catch((err) => {
+        setError(err.message)
+      })
+    }
+  }, [chainInfo?.rest, proposalId])
+
+  // fetch on load and param change
+  useEffect(() => {
     // fetch indexed proposal from network server
     const fetchProposalIdx = async () => {
       // fetch idx proposals from network server
@@ -56,16 +66,17 @@ export const useGroupProposal = (chainInfo: any, proposalId: string) => {
         .then((res) => {
           if (res.error) {
             if (!proposal) {
-              setError(res.error)
+              // console log idx error
+              console.error(`idx: ${res.error}`)
             }
           } else {
             if (!proposal) {
               setError(null)
               setProposal({
-                ...res['proposal'],
-                status: proposalStatusToJSON(res['proposal']['status']),
+                ...res.proposal,
+                status: proposalStatusToJSON(res.proposal.status),
                 executor_result: proposalExecutorResultToJSON(
-                  res['proposal']['executor_result'],
+                  res.proposal['executor_result'],
                 ),
               })
             }
@@ -74,15 +85,12 @@ export const useGroupProposal = (chainInfo: any, proposalId: string) => {
     }
 
     // only fetch if params available
-    if (chainInfo?.chainId && chainInfo?.rest && serverUrl && proposalId) {
-      fetchProposal().catch((err) => {
-        setError(err.message)
-      })
+    if (chainInfo?.chainId && serverUrl && proposalId) {
       fetchProposalIdx().catch((err) => {
         setError(err.message)
       })
     }
-  }, [chainInfo?.chainId, chainInfo?.rest, serverUrl, proposalId])
+  }, [chainInfo?.chainId, serverUrl, proposalId])
 
   return [proposal, error]
 }

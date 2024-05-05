@@ -31,7 +31,7 @@ export const useGroupSubjects = (chainInfo: any, policies: any[]) => {
               setError(res.message)
             } else {
               // TODO(mods): refactor geonode to use "subjects" and "stewards"
-              res['nodes'].map((l: any) =>
+              res.nodes.map((l: any) =>
                 ss.push({ curator: policy.address, ...l }),
               )
             }

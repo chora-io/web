@@ -29,7 +29,7 @@ export const useGroupVouchers = (chainInfo: any, policies: any[]) => {
             if (res.code) {
               setError(res.message)
             } else {
-              res['vouchers'].map((v: any) =>
+              res.vouchers.map((v: any) =>
                 vs.push({ issuer: policy.address, ...v }),
               )
             }

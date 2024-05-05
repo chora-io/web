@@ -34,7 +34,7 @@ export const useGroupProposalVotes = (chainInfo: any, proposalId: string) => {
             }
           } else {
             setError(null)
-            res['votes'].map((v: any) => vs.push(v))
+            res.votes.map((v: any) => vs.push(v))
           }
         })
 
@@ -50,10 +50,10 @@ export const useGroupProposalVotes = (chainInfo: any, proposalId: string) => {
             }
           } else {
             setError(null)
-            res['votes']?.map((v: any) =>
+            res.votes?.map((v: any) =>
               vs.push({
                 ...v,
-                option: voteOptionToJSON(v['option']),
+                option: voteOptionToJSON(v.option),
               }),
             )
           }

@@ -27,7 +27,7 @@ export const useClasses = (chainInfo: any, limit: number, offset: number) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setClasses(res['classes'])
+            setClasses(res.classes)
           }
         })
     }

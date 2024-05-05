@@ -29,7 +29,7 @@ export const useGroupClasses = (chainInfo: any, policies: any[]) => {
             if (res.code) {
               setError(res.message)
             } else {
-              res['classes'].map((n: any) =>
+              res.classes.map((n: any) =>
                 cs.push({ admin: policy.address, ...n }),
               )
             }

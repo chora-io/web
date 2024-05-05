@@ -25,7 +25,7 @@ export const useBasketFee = (chainInfo: any) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setBasketFee(res['fee'])
+            setBasketFee(res.fee)
           }
         })
     }

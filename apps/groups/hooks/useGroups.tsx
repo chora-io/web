@@ -30,7 +30,7 @@ export const useGroups = (chainInfo: any, limit: number, offset: number) => {
             if (res.code) {
               nextId = 0
             } else {
-              groups.push(res['info'])
+              groups.push(res.info)
               nextId++
             }
           })

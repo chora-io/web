@@ -29,7 +29,7 @@ export const useDataResolvers = (chainInfo: any) => {
             if (res.code) {
               nextId = 0
             } else {
-              resolvers.push(res['resolver'])
+              resolvers.push(res.resolver)
               nextId++
             }
           })

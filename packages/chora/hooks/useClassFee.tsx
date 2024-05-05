@@ -25,7 +25,7 @@ export const useClassFee = (chainInfo: any) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setClassFee(res['fee'])
+            setClassFee(res.fee)
           }
         })
     }

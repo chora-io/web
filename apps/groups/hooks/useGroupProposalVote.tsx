@@ -39,12 +39,26 @@ export const useGroupProposalVote = (
           } else {
             if (!vote) {
               setError(null)
-              setVote(vote)
+              setVote(res.vote)
             }
           }
         })
     }
 
+    // only fetch if params available
+    if (
+      chainInfo?.rest &&
+      proposalId &&
+      address
+    ) {
+      fetchVote().catch((err) => {
+        setError(err.message)
+      })
+    }
+  }, [chainInfo?.rest, proposalId, address])
+
+  // fetch on load and param change
+  useEffect(() => {
     // fetch indexed vote from network server
     const fetchVoteIdx = async () => {
       await fetch(
@@ -60,14 +74,15 @@ export const useGroupProposalVote = (
         .then((res) => {
           if (res.error) {
             if (!vote) {
-              setError(res.error)
+              // console log idx error
+              console.error(`idx: ${res.error}`)
             }
           } else {
             if (!vote) {
               setError(null)
               setVote({
-                ...res['vote'],
-                option: voteOptionToJSON(res['vote']['option']),
+                ...res.vote,
+                option: voteOptionToJSON(res.vote.option),
               })
             }
           }
@@ -77,19 +92,15 @@ export const useGroupProposalVote = (
     // only fetch if params available
     if (
       chainInfo?.chainId &&
-      chainInfo?.rest &&
       serverUrl &&
       proposalId &&
       address
     ) {
-      fetchVote().catch((err) => {
-        setError(err.message)
-      })
       fetchVoteIdx().catch((err) => {
         setError(err.message)
       })
     }
-  }, [chainInfo?.chainId, chainInfo?.rest, serverUrl, proposalId, address])
+  }, [chainInfo?.chainId, serverUrl, proposalId, address])
 
   return [vote, error]
 }

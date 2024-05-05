@@ -28,7 +28,7 @@ export const useAuthzGrants = (chainInfo: any, address: string) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setAuthzGrantee(res['grants'])
+            setAuthzGrantee(res.grants)
           }
         })
     }
@@ -42,7 +42,7 @@ export const useAuthzGrants = (chainInfo: any, address: string) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setAuthzGranter(res['grants'])
+            setAuthzGranter(res.grants)
           }
         })
     }

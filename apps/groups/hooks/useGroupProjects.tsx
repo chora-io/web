@@ -29,7 +29,7 @@ export const useGroupProjects = (chainInfo: any, policies: any[]) => {
             if (res.code) {
               setError(res.message)
             } else {
-              res['projects'].map((n: any) =>
+              res.projects.map((n: any) =>
                 ps.push({ admin: policy.address, ...n }),
               )
             }

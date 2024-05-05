@@ -28,7 +28,7 @@ export const useClassesByType = (chainInfo: any, creditTypeAbbrev: string) => {
           } else {
             // TODO(regen-ledger): query classes by credit type
             const filtered: any[] = []
-            res['classes'].map((c: any) => {
+            res.classes.map((c: any) => {
               if (c['credit_type_abbrev'] === creditTypeAbbrev) {
                 filtered.push(c)
               }

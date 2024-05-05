@@ -49,7 +49,7 @@ export const useGroupProposals = (
                 setError(res.message)
               }
             } else {
-              res['proposals'].map((p: any) => ps.push(p))
+              res.proposals.map((p: any) => ps.push(p))
             }
           })
       })
@@ -65,10 +65,10 @@ export const useGroupProposals = (
               setError(res.error)
             }
           } else {
-            res['proposals']?.map((p: any) =>
+            res.proposals?.map((p: any) =>
               ps.push({
                 ...p,
-                status: proposalStatusToJSON(p['status']),
+                status: proposalStatusToJSON(p.status),
                 executor_result: proposalExecutorResultToJSON(
                   p['executor_result'],
                 ),

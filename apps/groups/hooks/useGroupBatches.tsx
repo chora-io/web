@@ -29,7 +29,7 @@ export const useGroupBatches = (chainInfo: any, policies: any[]) => {
             if (res.code) {
               setError(res.message)
             } else {
-              res['batches'].map((n: any) =>
+              res.batches.map((n: any) =>
                 bs.push({ issuer: policy.address, ...n }),
               )
             }

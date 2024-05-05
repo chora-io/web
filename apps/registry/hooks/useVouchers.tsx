@@ -27,7 +27,7 @@ export const useVouchers = (chainInfo: any, limit: number, offset: number) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setVouchers(res['vouchers'])
+            setVouchers(res.vouchers)
           }
         })
     }

@@ -25,13 +25,13 @@ export const useGroupMembers = (chainInfo: any, groupId: any) => {
           if (res.code) {
             setError(res.message)
           } else {
-            const ms = res['members']
+            const ms = res.members
 
             // sort ascending by default
             ms.sort(
               (a: any, b: any) =>
-                new Date(b['member']['added_at']).getUTCDate() -
-                new Date(a['member']['added_at']).getUTCDate(),
+                new Date(b.member['added_at']).getUTCDate() -
+                new Date(a.member['added_at']).getUTCDate(),
             )
 
             setMembers(ms)

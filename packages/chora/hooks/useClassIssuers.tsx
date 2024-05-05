@@ -25,7 +25,7 @@ export const useClassIssuers = (chainInfo: any, classId: string) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setIssuers(res['issuers'])
+            setIssuers(res.issuers)
           }
         })
     }

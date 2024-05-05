@@ -29,7 +29,7 @@ export const useSubjects = (chainInfo: any, limit: number, offset: number) => {
             setError(res.message)
           } else {
             // TODO(mods): refactor geonode to use "subjects"
-            setSubjects(res['nodes'])
+            setSubjects(res.nodes)
           }
         })
     }

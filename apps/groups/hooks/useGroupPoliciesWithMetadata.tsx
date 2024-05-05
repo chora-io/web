@@ -41,7 +41,7 @@ export const useGroupPoliciesWithMetadata = (
                 if (res.error) {
                   setError(res.error)
                 } else {
-                  const data = JSON.parse(res['jsonld'])
+                  const data = JSON.parse(res.jsonld)
                   ps[i] = {
                     ...ps[i],
                     ...data,

@@ -30,7 +30,7 @@ export const useFeeGrants = (chainInfo: any, address: string) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setFeeGrantee(res['allowances'])
+            setFeeGrantee(res.allowances)
           }
         })
     }
@@ -46,7 +46,7 @@ export const useFeeGrants = (chainInfo: any, address: string) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setFeeGranter(res['allowances'])
+            setFeeGranter(res.allowances)
           }
         })
     }

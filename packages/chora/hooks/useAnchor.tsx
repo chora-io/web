@@ -25,7 +25,7 @@ export const useAnchor = (chainInfo: any, iri: string) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setAnchor(res['anchor'])
+            setAnchor(res.anchor)
           }
         })
     }

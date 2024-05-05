@@ -25,7 +25,7 @@ export const useBatch = (chainInfo: any, denom: string) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setBatch(res['batch'])
+            setBatch(res.batch)
           }
         })
     }

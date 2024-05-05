@@ -31,7 +31,7 @@ export const useGroupAttestations = (chainInfo: any, policies: any[]) => {
             if (res.code) {
               setError(res.message)
             } else {
-              res['attestations'].map((n: any) =>
+              res.attestations.map((n: any) =>
                 as.push({ attestor: policy.address, ...n }),
               )
             }

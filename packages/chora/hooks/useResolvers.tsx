@@ -25,7 +25,7 @@ export const useResolvers = (chainInfo: any, iri: string) => {
           if (res.code) {
             setError(res.message)
           } else {
-            setResolvers(res['resolvers'])
+            setResolvers(res.resolvers)
           }
         })
     }
