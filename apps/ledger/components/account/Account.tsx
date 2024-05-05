@@ -1,15 +1,32 @@
 'use client'
 
+import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import styles from './Account.module.css'
 
 const Account = () => {
-  const { wallet } = useContext(WalletContext)
+  const { loading, wallet } = useContext(WalletContext)
+
+  const [hasMounted, setHasMounted] = useState<boolean>(false)
+  const [walletError, setWalletError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!hasMounted) {
+      setHasMounted(true)
+    }
+    if (!wallet && !loading && hasMounted) {
+      setWalletError('keplr wallet not found')
+    }
+    if (wallet && hasMounted) {
+      setWalletError(null)
+    }
+  }, [wallet, loading, hasMounted])
 
   return (
     <div className={styles.box}>
+      {loading && <div className={styles.boxText}>{'loading...'}</div>}
       {wallet ? (
         <>
           <div className={styles.boxText}>
@@ -22,9 +39,7 @@ const Account = () => {
           </div>
         </>
       ) : (
-        <div className={styles.boxText}>
-          <p>{'keplr wallet not connected'}</p>
-        </div>
+        <Result error={walletError} />
       )}
     </div>
   )

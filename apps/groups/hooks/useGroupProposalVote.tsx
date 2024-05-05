@@ -46,11 +46,7 @@ export const useGroupProposalVote = (
     }
 
     // only fetch if params available
-    if (
-      chainInfo?.rest &&
-      proposalId &&
-      address
-    ) {
+    if (chainInfo?.rest && proposalId && address) {
       fetchVote().catch((err) => {
         setError(err.message)
       })
@@ -90,12 +86,7 @@ export const useGroupProposalVote = (
     }
 
     // only fetch if params available
-    if (
-      chainInfo?.chainId &&
-      serverUrl &&
-      proposalId &&
-      address
-    ) {
+    if (chainInfo?.chainId && serverUrl && proposalId && address) {
       fetchVoteIdx().catch((err) => {
         setError(err.message)
       })

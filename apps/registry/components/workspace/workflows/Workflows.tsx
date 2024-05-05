@@ -12,7 +12,7 @@ const Workflows = () => {
     return (
       <div className={styles.box}>
         <div className={styles.boxText}>
-          <p>{'Account required to create and manage workflows.'}</p>
+          <p>{'Account required to manage workflows.'}</p>
         </div>
       </div>
     )

@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 import { WalletContext } from '.'
 import { useAuthzGrants, useFeeGrants } from '../hooks'
@@ -9,7 +9,7 @@ import { useAuthzGrants, useFeeGrants } from '../hooks'
 const AccountContext = createContext<any>({})
 
 const AccountContextProvider = (props: any) => {
-  const { chainInfo, wallet } = useContext(WalletContext)
+  const { chainInfo, loading, wallet } = useContext(WalletContext)
 
   const [authzGrantee, authzGranter, authzError] = useAuthzGrants(
     chainInfo,
@@ -21,17 +21,30 @@ const AccountContextProvider = (props: any) => {
     wallet?.bech32Address,
   )
 
-  const walletError = !wallet && 'keplr wallet not found'
+  const [hasMounted, setHasMounted] = useState<boolean>(false)
+  const [walletError, setWalletError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!hasMounted) {
+      setHasMounted(true)
+    }
+    if (!wallet && !loading && hasMounted) {
+      setWalletError('keplr wallet not found')
+    }
+    if (wallet && hasMounted) {
+      setWalletError(null)
+    }
+  }, [wallet, loading, hasMounted])
 
   return (
     <AccountContext.Provider
       value={{
         authzGrantee,
         authzGranter,
-        authzError: authzError || walletError,
-        feeGrantee: feeGrantee || walletError,
+        authzError: walletError || authzError,
+        feeGrantee,
         feeGranter,
-        feeError,
+        feeError: walletError || feeError,
       }}
     >
       {props.children}

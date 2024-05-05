@@ -12,7 +12,7 @@ const Dashboard = () => {
     return (
       <div className={styles.box}>
         <div className={styles.boxText}>
-          <p>{'Account required to access workspace dashboard.'}</p>
+          <p>{'Account required to access dashboard.'}</p>
         </div>
       </div>
     )

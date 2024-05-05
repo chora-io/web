@@ -12,7 +12,7 @@ const Documents = () => {
     return (
       <div className={styles.box}>
         <div className={styles.boxText}>
-          <p>{'Account required to create and manage documents.'}</p>
+          <p>{'Account required to manage documents.'}</p>
         </div>
       </div>
     )
