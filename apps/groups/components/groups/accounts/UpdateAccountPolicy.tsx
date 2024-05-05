@@ -40,6 +40,11 @@ const UpdateAccountMetadata = () => {
     setError(null)
     setSuccess(null)
 
+    if (!wallet) {
+      setError('keplr wallet not found')
+      return // do not continue
+    }
+
     // set message
     const msg: MsgUpdateGroupPolicyDecisionPolicy = {
       $type: 'cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy',

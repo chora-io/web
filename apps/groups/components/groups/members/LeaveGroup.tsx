@@ -35,6 +35,11 @@ const LeaveGroup = () => {
     setError(null)
     setSuccess(null)
 
+    if (!wallet) {
+      setError('keplr wallet not found')
+      return // do not continue
+    }
+
     // set message
     const msg: MsgLeaveGroup = {
       $type: 'cosmos.group.v1.MsgLeaveGroup',

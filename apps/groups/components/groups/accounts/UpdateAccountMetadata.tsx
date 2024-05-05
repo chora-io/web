@@ -70,6 +70,11 @@ const UpdateAccountMetadata = () => {
     setError(null)
     setSuccess(null)
 
+    if (!wallet) {
+      setError('keplr wallet not found')
+      return // do not continue
+    }
+
     let metadata: string = ''
 
     // try to parse JSON

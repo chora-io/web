@@ -40,6 +40,11 @@ const UpdateMembers = () => {
     setError(null)
     setSuccess(null)
 
+    if (!wallet) {
+      setError('keplr wallet not found')
+      return // do not continue
+    }
+
     // set message
     const msg: MsgUpdateGroupMembers = {
       $type: 'cosmos.group.v1.MsgUpdateGroupMembers',

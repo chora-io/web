@@ -231,6 +231,7 @@ const CreateClaim = () => {
     event.preventDefault()
 
     setError(null)
+    setTxSuccess(null)
 
     if (!wallet) {
       setError('keplr not connected')
@@ -268,6 +269,7 @@ const CreateClaim = () => {
     event.preventDefault()
 
     setError(null)
+    setRegisterSuccess(null)
 
     if (!wallet) {
       setError('keplr not connected')

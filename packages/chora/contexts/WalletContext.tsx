@@ -96,7 +96,7 @@ const WalletContextProvider = (props: any) => {
           setLoading(false)
         })
 
-      return // exit effect
+      return // do not continue
     }
 
     // connect to keplr using cached network if network not available
@@ -215,7 +215,7 @@ const WalletContextProvider = (props: any) => {
           })
       }
     } else {
-      setError('keplr not found')
+      setError('keplr wallet not found')
     }
   }
 

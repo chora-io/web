@@ -26,6 +26,11 @@ const MsgAttest = () => {
     setError(null)
     setSuccess(null)
 
+    if (!wallet) {
+      setError('keplr wallet not found')
+      return // do not continue
+    }
+
     await signAndBroadcast(chainInfo, wallet.bech32Address, [message])
       .then((res) => {
         setSuccess(res)

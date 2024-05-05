@@ -21,13 +21,15 @@ const AccountContextProvider = (props: any) => {
     wallet?.bech32Address,
   )
 
+  const walletError = !wallet && 'keplr wallet not found'
+
   return (
     <AccountContext.Provider
       value={{
         authzGrantee,
         authzGranter,
-        authzError,
-        feeGrantee,
+        authzError: authzError || walletError,
+        feeGrantee: feeGrantee || walletError,
         feeGranter,
         feeError,
       }}

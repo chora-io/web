@@ -49,6 +49,11 @@ const CreateBasket = () => {
     setError(null)
     setSuccess(null)
 
+    if (!wallet) {
+      setError('keplr wallet not found')
+      return // do not continue
+    }
+
     const msg: MsgCreate = {
       $type: 'regen.ecocredit.basket.v1.MsgCreate',
       curator: wallet.bech32Address,

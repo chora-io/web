@@ -49,6 +49,14 @@ const Proposal = () => {
 
   // execute proposal
   const handleExecute = async () => {
+    setExecError(null)
+    setExecSuccess(null)
+
+    if (!wallet) {
+      setExecError('keplr wallet not found')
+      return // do not continue
+    }
+
     const msg: MsgExec = {
       $type: 'cosmos.group.v1.MsgExec',
       executor: wallet.bech32Address,
@@ -76,9 +84,10 @@ const Proposal = () => {
       proposal.status === 'PROPOSAL_STATUS_REJECTED')
 
   // current vote of active user
-  const currentVote = votes?.find(
-    (vote: any) => vote.voter === wallet.bech32Address,
-  )
+  const currentVote =
+    !!wallet &&
+    !!votes &&
+    votes.find((vote: any) => vote.voter === wallet.bech32Address)
 
   // whether proposal is executable
   const proposalExecutable =
@@ -94,7 +103,7 @@ const Proposal = () => {
           <p>{'no further action can be taken'}</p>
         )}
         {proposal && currentVote && (
-          <p>{`vote submitted (${currentVote['option']})`}</p>
+          <p>{`vote submitted (${currentVote.option})`}</p>
         )}
         {proposal && !currentVote && !votesFinalized && (
           <Link href={`/${network}/${groupId}/proposals/${id}/submit`}>
