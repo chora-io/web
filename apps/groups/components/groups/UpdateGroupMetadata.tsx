@@ -71,6 +71,11 @@ const UpdateGroupMetadata = () => {
       return // do not continue
     }
 
+    if (dataStorage === 'server' && !serverUrl) {
+      setError('server url not found')
+      return // do not continue
+    }
+
     let metadata: string = ''
 
     // try to parse JSON
@@ -79,12 +84,13 @@ const UpdateGroupMetadata = () => {
       parsed = JSON.parse(json)
     } catch (err) {
       setError('invalid json')
+      return // do not continue
     }
 
     // handle data storage json
     if (dataStorage === 'json') {
       delete parsed['@context']
-      metadata = parsed
+      metadata = JSON.stringify(parsed)
     }
 
     // handle data storage iri

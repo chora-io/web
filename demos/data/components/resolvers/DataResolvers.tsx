@@ -40,9 +40,7 @@ const DataResolvers = () => {
       {chainInfo?.chainId && resolvers?.length === 0 && (
         <p>{`no data resolvers found on ${chainInfo?.chainId}`}</p>
       )}
-      {error && (
-          <Result error={error} />
-      )}
+      {error && <Result error={error} />}
     </div>
   )
 }

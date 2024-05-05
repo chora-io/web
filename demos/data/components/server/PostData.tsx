@@ -13,7 +13,7 @@ import {
   SelectGraphMerkle,
 } from 'chora/components/forms/regen.data.v1'
 import { WalletContext } from 'chora/contexts'
-import {useNetworkServer} from "chora/hooks";
+import { useNetworkServer } from 'chora/hooks'
 import * as jsonld from 'jsonld'
 import { useContext, useEffect, useState } from 'react'
 
@@ -113,7 +113,7 @@ const PostData = () => {
       doc = JSON.parse(json)
     } catch (err) {
       setError('invalid json')
-      return
+      return // do not continue
     }
 
     // check and normalize JSON-LD
@@ -124,12 +124,12 @@ const PostData = () => {
       })
       .catch((err) => {
         setError(err.message)
-        return
+        return // do not continue
       })
 
     if (normalized == '') {
       setError('JSON-LD empty after normalized')
-      return
+      return // do not continue
     }
 
     const body = {

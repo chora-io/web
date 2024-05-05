@@ -89,9 +89,7 @@ const Login = () => {
           </div>
         )}
       </div>
-      {error && (
-          <Result error={error} />
-      )}
+      {error && <Result error={error} />}
     </div>
   )
 }

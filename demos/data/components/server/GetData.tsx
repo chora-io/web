@@ -3,7 +3,7 @@
 import { Result } from 'chora/components'
 import { InputIRI } from 'chora/components/forms'
 import { WalletContext } from 'chora/contexts'
-import {useNetworkServer} from "chora/hooks";
+import { useNetworkServer } from 'chora/hooks'
 import { useContext, useState } from 'react'
 
 import styles from './GetData.module.css'
@@ -11,7 +11,7 @@ import styles from './GetData.module.css'
 const GetData = () => {
   const { chainInfo } = useContext(WalletContext)
 
-    const [serverUrl] = useNetworkServer(chainInfo)
+  const [serverUrl] = useNetworkServer(chainInfo)
 
   // data input
   const [iri, setIri] = useState<string>('')
@@ -19,7 +19,6 @@ const GetData = () => {
   // error and success
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<any>(null)
-
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault()

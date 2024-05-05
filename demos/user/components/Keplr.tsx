@@ -93,9 +93,7 @@ const Keplr = () => {
           {'authenticate'}
         </button>
       )}
-      {error && (
-          <Result error={error} />
-      )}
+      {error && <Result error={error} />}
     </div>
   )
 }

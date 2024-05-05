@@ -137,7 +137,7 @@ const CreateClaim = () => {
       doc = JSON.parse(json)
     } catch (err) {
       setError('invalid json')
-      return
+      return // do not continue
     }
 
     // check and normalize JSON-LD

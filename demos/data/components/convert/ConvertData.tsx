@@ -113,7 +113,7 @@ const ConvertData = () => {
       doc = JSON.parse(json)
     } catch (err) {
       setError('invalid json')
-      return
+      return // do not continue
     }
 
     // check and normalize object
@@ -124,12 +124,12 @@ const ConvertData = () => {
       })
       .catch((err) => {
         setError(err.message)
-        return
+        return // do not continue
       })
 
     if (normalized == '') {
       setError('JSON-LD empty after normalized')
-      return
+      return // do not continue
     }
 
     // generate hash bytes using blake2b
