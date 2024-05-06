@@ -5,6 +5,7 @@ import { useContext } from 'react'
 
 import { WalletContext } from '../../contexts'
 import { useMetadata } from '../../hooks'
+import { subAddress } from '../../utils'
 
 import styles from './SubjectsTableRow.module.css'
 
@@ -38,9 +39,7 @@ const SubjectsTableRow = ({ subject, renderAddress, renderLink }: any) => {
         <td>{renderAddress(subject.curator)}</td>
       ) : (
         <td>
-          {subject.curator.substring(0, 13) +
-            '...' +
-            subject.curator.substring(38, 44)}
+          {subAddress(subject.curator)}
           {wallet && subject.curator === wallet.bech32Address && (
             <span className={styles.activeAccount}>{'(active account)'}</span>
           )}

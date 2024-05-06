@@ -51,7 +51,9 @@ const Project = ({
       </div>
       <div className={styles.boxText}>
         <h3>{'reference id'}</h3>
-        <p>{project ? project['reference_id'] : 'NA'}</p>
+        <p>
+          {project && project['reference_id'] ? project['reference_id'] : 'NA'}
+        </p>
       </div>
       <div className={styles.boxText}>
         <h3>{'metadata'}</h3>

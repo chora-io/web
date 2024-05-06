@@ -2,6 +2,7 @@
 
 import { WalletContext } from 'chora/contexts'
 import { SelectNetwork } from 'chora/components/forms'
+import { subAddress } from 'chora/utils'
 import * as React from 'react'
 import { useContext, useEffect, useState } from 'react'
 
@@ -22,9 +23,7 @@ const ConnectWallet = ({ testnetsOnly }: any) => {
       {error && <span className={styles.error}>{error}</span>}
       {wallet?.bech32Address.length > 0 && (
         <span className={styles.address}>
-          {wallet.bech32Address.substring(0, 13) +
-            '...' +
-            wallet.bech32Address.substring(38, 44)}
+          {subAddress(wallet.bech32Address)}
         </span>
       )}
       <form className={styles.form} onSubmit={getKeplr}>

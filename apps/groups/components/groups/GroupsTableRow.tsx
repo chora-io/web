@@ -1,5 +1,6 @@
 import { WalletContext } from 'chora/contexts'
 import { useMetadata } from 'chora/hooks'
+import { subAddress } from 'chora/utils'
 import Link from 'next/link'
 import { useContext } from 'react'
 
@@ -35,7 +36,7 @@ const GroupsTableRow = ({ group }: any) => {
           : 'NA'}
       </td>
       <td>
-        {group.admin.substring(0, 13) + '...' + group.admin.substring(38, 44)}
+        {subAddress(group.admin)}
         {wallet && group.admin === wallet.bech32Address && (
           <span className={styles.activeAccount}>{'(active account)'}</span>
         )}

@@ -4,7 +4,7 @@ import * as React from 'react'
 import { useContext } from 'react'
 
 import { WalletContext } from '../../contexts'
-import { formatTimestamp } from '../../utils'
+import { formatTimestamp, subAddress } from '../../utils'
 
 import styles from './BatchesTableRow.module.css'
 
@@ -19,9 +19,7 @@ const BatchesTableRow = ({ batch, renderAddress, renderLink }: any) => {
         <td>{renderAddress(batch.issuer)}</td>
       ) : (
         <td>
-          {batch.issuer.substring(0, 13) +
-            '...' +
-            batch.issuer.substring(38, 44)}
+          {subAddress(batch.issuer)}
           {wallet && batch.issuer === wallet.bech32Address && (
             <span className={styles.activeAccount}>{'(active account)'}</span>
           )}

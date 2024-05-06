@@ -5,6 +5,7 @@ import { useContext } from 'react'
 
 import { WalletContext } from '../../contexts'
 import { useMetadata } from '../../hooks'
+import { subAddress } from '../../utils'
 
 import styles from './VouchersTableRow.module.css'
 
@@ -38,9 +39,7 @@ const VouchersTableRow = ({ voucher, renderAddress, renderLink }: any) => {
         <td>{renderAddress(voucher.issuer)}</td>
       ) : (
         <td>
-          {voucher.issuer.substring(0, 13) +
-            '...' +
-            voucher.issuer.substring(38, 44)}
+          {subAddress(voucher.issuer)}
           {wallet && voucher.issuer === wallet.bech32Address && (
             <span className={styles.activeAccount}>{'(active account)'}</span>
           )}

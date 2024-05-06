@@ -134,7 +134,8 @@
 }
 
 .box-text h3 {
-  color: var(--color-theme);
+  color: var(--color-text-placeholder);
+  font-size: 1em;
   margin: 0.5em 0;
 }
 

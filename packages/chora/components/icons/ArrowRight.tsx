@@ -21,28 +21,28 @@ const ArrowRight = ({ color, useTheme }: any) => {
       style={{ marginLeft: '0.5em' }}
     >
       <line
-        x1="0"
+        x1="3"
         y1="10"
-        x2="20"
+        x2="17"
         y2="10"
         stroke={useTheme ? (darkTheme ? '#000' : '#FFF') : stroke}
         strokeLinecap="round"
         strokeWidth="3"
       />
       <line
-        x1="12"
-        y1="3"
-        x2="20"
-        y2="10"
-        stroke={useTheme ? (darkTheme ? '#000' : '#FFF') : stroke}
-        strokeLinecap="round"
-        strokeWidth="3"
-      />
-      <line
-        x1="20"
+        x1="17"
         y1="10"
         x2="12"
-        y2="17"
+        y2="5"
+        stroke={useTheme ? (darkTheme ? '#000' : '#FFF') : stroke}
+        strokeLinecap="round"
+        strokeWidth="3"
+      />
+      <line
+        x1="17"
+        y1="10"
+        x2="12"
+        y2="15"
         stroke={useTheme ? (darkTheme ? '#000' : '#FFF') : stroke}
         strokeLinecap="round"
         strokeWidth="3"

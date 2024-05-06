@@ -21,31 +21,31 @@ const ArrowUpRight = ({ color, useTheme }: any) => {
       style={{ marginLeft: '0.5em' }}
     >
       <line
-        x1="0"
-        y1="20"
-        x2="20"
-        y2="0"
+        x1="3"
+        y1="17"
+        x2="17"
+        y2="3"
         stroke={useTheme ? (darkTheme ? '#000' : '#FFF') : stroke}
         strokeLinecap="round"
         strokeWidth="3"
       />
       <line
-        x1="10"
-        y1="0"
-        x2="20"
-        y2="0"
+        x1="17"
+        y1="3"
+        x2="7"
+        y2="3"
         stroke={useTheme ? (darkTheme ? '#000' : '#FFF') : stroke}
         strokeLinecap="round"
-        strokeWidth="5"
+        strokeWidth="3"
       />
       <line
-        x1="20"
-        y1="10"
-        x2="20"
-        y2="0"
+        x1="17"
+        y1="3"
+        x2="17"
+        y2="12"
         stroke={useTheme ? (darkTheme ? '#000' : '#FFF') : stroke}
         strokeLinecap="round"
-        strokeWidth="5"
+        strokeWidth="3"
       />
     </svg>
   )

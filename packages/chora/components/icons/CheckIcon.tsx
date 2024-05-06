@@ -8,22 +8,22 @@ const CheckIcon = ({ darkTheme }: any) => (
     viewBox="0 0 20 20"
   >
     <line
-      x1="5"
-      y1="20"
-      x2="20"
-      y2="0"
+      x1="7"
+      y1="17"
+      x2="17"
+      y2="3"
       stroke={darkTheme ? '#FFFFFF' : '#111111'}
       strokeLinecap="round"
-      strokeWidth="5"
+      strokeWidth="6"
     />
     <line
-      x1="5"
-      y1="20"
+      x1="7"
+      y1="17"
       x2="3"
       y2="10"
       stroke={darkTheme ? '#FFFFFF' : '#111111'}
       strokeLinecap="round"
-      strokeWidth="5"
+      strokeWidth="6"
     />
   </svg>
 )

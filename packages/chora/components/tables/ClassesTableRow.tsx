@@ -4,6 +4,7 @@ import * as React from 'react'
 import { useContext } from 'react'
 
 import { WalletContext } from '../../contexts'
+import { subAddress } from '../../utils'
 
 import styles from './ClassesTableRow.module.css'
 
@@ -18,7 +19,7 @@ const ClassesTableRow = ({ clazz, renderAddress, renderLink }: any) => {
         <td>{renderAddress(clazz.admin)}</td>
       ) : (
         <td>
-          {clazz.admin.substring(0, 13) + '...' + clazz.admin.substring(38, 44)}
+          {subAddress(clazz.admin)}
           {wallet && clazz.admin === wallet.bech32Address && (
             <span className={styles.activeAccount}>{'(active account)'}</span>
           )}
