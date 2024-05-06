@@ -6,6 +6,10 @@
   composes: active from 'chora/styles/sidebar.css';
 }
 
+.breadcrumb {
+  composes: breadcrumb from 'chora/styles/sidebar.css';
+}
+
 .mobileOnly {
   display: none;
 }

@@ -11,3 +11,7 @@
 .mobileTitle {
   composes: header-title from 'chora/styles/header.css';
 }
+
+.headerTitleText {
+  composes: header-title-text from 'chora/styles/header.css';
+}

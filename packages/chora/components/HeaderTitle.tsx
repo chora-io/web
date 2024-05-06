@@ -13,7 +13,7 @@ const HeaderTitle = ({ darkTheme, title, showMobileTitle }: any) => (
   <div className={showMobileTitle ? styles.mobileTitle : styles.title}>
     <Link href={(title && title.link) || '/'}>
       <Image alt="chora" src={darkTheme ? choraLogoDark : choraLogoLight} />
-      <div>
+      <div className={styles.headerTitleText}>
         {'chora '}
         {title && title.titleX && (
           <span style={{ opacity: '0.75' }}>{title.titleX}</span>

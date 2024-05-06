@@ -43,14 +43,15 @@
   }
 }
 
-.header-title div {
+.header-title-text {
   color: var(--color-text);
   font-size: 20px;
+  font-weight: 300; /* cancel link weight */
   margin-left: 8px;
 }
 
 @media (max-width: 850px) {
-  .header-title div {
+  .header-title-text {
     font-size: 15px;
     margin-left: 6px;
   }

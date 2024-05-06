@@ -104,7 +104,6 @@ body {
   color: var(--color-text);
   font-family: var(--font-family);
   font-weight: 300;
-  overflow-x: hidden;
 }
 
 main {
@@ -116,7 +115,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-weight: 400;
+  font-weight: 300;
 }
 
 p {

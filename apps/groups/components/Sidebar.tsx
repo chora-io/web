@@ -43,7 +43,7 @@ const Sidebar = () => {
       <div className={styles.sidebar}>
         <ul>
           <ul>
-            <li style={{ padding: '1em 0.5em' }}>
+            <li className={styles.breadcrumb}>
               <Link
                 href={`/${network}`}
                 className={
@@ -271,7 +271,7 @@ const Sidebar = () => {
       <ul>
         {currentRoute !== '/' && (
           <ul className={styles.mobileOnly}>
-            <li style={{ padding: '1em 0.5em' }}>
+            <li className={styles.breadcrumb}>
               <Link
                 href={'/'}
                 className={currentRoute === '/' ? styles.active : undefined}

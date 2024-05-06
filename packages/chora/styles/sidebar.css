@@ -7,40 +7,53 @@
   margin-top: var(--header-height);
   overflow-y: scroll;
   position: fixed;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none; /* hide scrollbar - Firefox */
   width: var(--sidebar-width);
   z-index: 1;
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  -ms-overflow-style: none; /* hide scrollbar - Internet Explorer 10+ */
 }
 
 .sidebar::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+  display: none; /* hide scrollbar - Safari and Chrome */
 }
 
 .sidebar ul {
   list-style: none;
-  padding: 2em;
+}
+
+.sidebar > ul {
+  padding: 1.5em;
 }
 
 @media (max-width: 850px) {
-  .sidebar ul {
-    padding: 1.5em;
+  .sidebar > ul {
+    padding: 1em;
   }
 }
 
-.sidebar li {
-  font-size: 1.25em;
-  font-weight: 400;
-  padding: 0.8em;
+.sidebar > ul > li {
+  font-size: 1.2em;
+  padding: 0.75em 1.5em;
 }
 
-.sidebar ul ul {
-  font-size: 0.85em;
-  padding: 0 0 0 0.85em;
+.sidebar > ul > ul {
+  margin-left: 1.75em;
+}
+
+.sidebar > ul > ul > li {
+  font-size: 1.1em;
+  padding: 0.65em 0.5em;
 }
 
 /* active */
 
 .active {
   font-weight: 500;
+}
+
+/* breadcrumb */
+
+.breadcrumb a {
+  font-size: 0.85em;
+  margin-left: -0.5em;
 }
