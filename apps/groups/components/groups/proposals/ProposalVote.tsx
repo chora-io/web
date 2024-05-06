@@ -44,7 +44,7 @@ const ProposalVote = () => {
       </div>
       <div className={styles.boxText}>
         <h3>{'reason'}</h3>
-        <p>{metadata && metadata.name ? metadata.reason : 'NA'}</p>
+        <p>{metadata && metadata.reason ? metadata.reason : 'NA'}</p>
       </div>
       <div className={styles.boxText}>
         <h3>{'submit time'}</h3>
