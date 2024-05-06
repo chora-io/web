@@ -7,7 +7,7 @@ import { useContext, useEffect, useState } from 'react'
 import styles from './Account.module.css'
 
 const Account = () => {
-  const { loading, wallet } = useContext(WalletContext)
+  const { wallet } = useContext(WalletContext)
 
   const [hasMounted, setHasMounted] = useState<boolean>(false)
   const [walletError, setWalletError] = useState<string | null>(null)
@@ -16,18 +16,20 @@ const Account = () => {
     if (!hasMounted) {
       setHasMounted(true)
     }
-    if (!wallet && !loading && hasMounted) {
+    if (!wallet && hasMounted) {
       setWalletError('keplr wallet not found')
     }
     if (wallet && hasMounted) {
       setWalletError(null)
     }
-  }, [wallet, loading, hasMounted])
+  }, [wallet, hasMounted])
 
   return (
     <div className={styles.box}>
-      {loading && <div className={styles.boxText}>{'loading...'}</div>}
-      {wallet ? (
+      {!wallet && !walletError && (
+        <div className={styles.boxText}>{'loading...'}</div>
+      )}
+      {wallet && (
         <>
           <div className={styles.boxText}>
             <h3>{'name'}</h3>
@@ -38,9 +40,8 @@ const Account = () => {
             <p>{wallet.bech32Address}</p>
           </div>
         </>
-      ) : (
-        <Result error={walletError} />
       )}
+      <Result error={walletError} />
     </div>
   )
 }

@@ -9,7 +9,7 @@ import { useAuthzGrants, useFeeGrants } from '../hooks'
 const AccountContext = createContext<any>({})
 
 const AccountContextProvider = (props: any) => {
-  const { chainInfo, loading, wallet } = useContext(WalletContext)
+  const { chainInfo, wallet } = useContext(WalletContext)
 
   const [authzGrantee, authzGranter, authzError] = useAuthzGrants(
     chainInfo,
@@ -28,13 +28,13 @@ const AccountContextProvider = (props: any) => {
     if (!hasMounted) {
       setHasMounted(true)
     }
-    if (!wallet && !loading && hasMounted) {
+    if (!wallet && hasMounted) {
       setWalletError('keplr wallet not found')
     }
     if (wallet && hasMounted) {
       setWalletError(null)
     }
-  }, [wallet, loading, hasMounted])
+  }, [wallet, hasMounted])
 
   return (
     <AccountContext.Provider
