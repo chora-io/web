@@ -168,9 +168,7 @@ const UserSidebar = () => {
               </>
             ) : (
               <div>
-                <p>
-                  {'Switch networks to authenticate with your chora address.'}
-                </p>
+                <p>{'Switch to chora testnet to connect to chora server.'}</p>
                 <form className={styles.form}>
                   <SelectNetwork
                     label=" "
