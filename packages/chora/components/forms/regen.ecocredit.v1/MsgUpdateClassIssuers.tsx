@@ -51,8 +51,8 @@ const MsgUpdateClassIssuers = ({
         id="msg-update-class-issuers-class-id"
         label="class id"
         placeholder="C01"
-        iri={classId}
-        setIri={setClassId}
+        string={classId}
+        setString={setClassId}
       />
       <InputIssuers
         id="msg-update-class-issuers-add-issuers"

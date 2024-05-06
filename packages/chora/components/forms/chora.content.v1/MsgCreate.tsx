@@ -45,6 +45,7 @@ const MsgCreate = ({
       <InputIRI
         id="msg-create-metadata"
         label="metadata"
+        network={network}
         iri={metadata}
         setIri={setMetadata}
       />

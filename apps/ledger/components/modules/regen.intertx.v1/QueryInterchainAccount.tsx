@@ -69,8 +69,8 @@ const QueryInterchainAccount = () => {
           id="query-interchain-account-connection-id"
           label="connection id"
           placeholder="connection-0"
-          number={connectionId}
-          setNumber={setConnectionId}
+          string={connectionId}
+          setString={setConnectionId}
         />
         <button type="submit">{'search'}</button>
       </form>

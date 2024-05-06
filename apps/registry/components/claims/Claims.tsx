@@ -48,7 +48,7 @@ const Claims = () => {
           label=""
           placeholder=""
           network={network}
-          string={iri}
+          iri={iri}
           setIri={setIri}
         />
         <button type="submit">{'search'}</button>

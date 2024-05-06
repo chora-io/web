@@ -55,6 +55,7 @@ const MsgUpdateMetadata = ({
       <InputIRI
         id="msg-update-metadata-new-metadata"
         label="new metadata"
+        network={network}
         iri={newMetadata}
         setIri={setMetadata}
       />

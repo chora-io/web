@@ -10,7 +10,7 @@ import styles from './QueryBalancesByAddress.module.css'
 const queryBalancesByAddress = '/chora/voucher/v1/balances-by-address'
 
 const QueryBalancesByAddress = () => {
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // form inputs
   const [address, setAddress] = useState<string>('')
@@ -49,8 +49,9 @@ const QueryBalancesByAddress = () => {
         <InputAddress
           id="query-balances-by-address-address"
           label="address"
-          number={address}
-          setNumber={setAddress}
+          network={network}
+          address={address}
+          setAddress={setAddress}
         />
         <button type="submit">{'search'}</button>
       </form>

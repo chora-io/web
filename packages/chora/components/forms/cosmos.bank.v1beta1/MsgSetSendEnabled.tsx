@@ -48,15 +48,15 @@ const MsgSetSendEnabled = ({
         id="msg-set-send-enabled-send-enabled"
         label="send enabled"
         placeholder="[ not implemented ]"
-        boolean={sendEnabled}
-        setBoolean={setSendEnabled}
+        string={sendEnabled}
+        setString={setSendEnabled}
       />
       <InputString
         id="msg-set-send-enabled-use-default-for"
         label="use default for"
         placeholder="[ not implemented ]"
-        boolean={useDefaultFor}
-        setBoolean={setUseDefaultFor}
+        string={useDefaultFor}
+        setString={setUseDefaultFor}
       />
     </>
   )

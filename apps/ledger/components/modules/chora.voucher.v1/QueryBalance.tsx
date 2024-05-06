@@ -10,7 +10,7 @@ import styles from './QueryBalance.module.css'
 const queryBalance = '/chora/voucher/v1/balance'
 
 const QueryBalance = () => {
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, network } = useContext(WalletContext)
 
   // form inputs
   const [id, setId] = useState<string>('')
@@ -60,6 +60,7 @@ const QueryBalance = () => {
         <InputAddress
           id="query-balance-address"
           label="address"
+          network={network}
           number={address}
           setNumber={setAddress}
         />

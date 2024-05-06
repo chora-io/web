@@ -41,7 +41,6 @@ const MsgCreateGroupPolicy = ({
       <InputNumber
         id="msg-create-group-policy-group-id"
         label="group id"
-        network={network}
         number={groupId}
         setNumber={setGroupId}
       />
@@ -58,6 +57,7 @@ const MsgCreateGroupPolicy = ({
       <InputIRI
         id="msg-create-group-policy-metadata"
         label="policy metadata"
+        network={network}
         iri={metadata}
         setIri={setMetadata}
       />

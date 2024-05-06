@@ -46,9 +46,9 @@ const QueryAttestationsByAttestor = () => {
         <InputAddress
           id="query-attestations-by-attestor-address"
           label="attestor"
+          network={network}
           address={attestor}
           setAddress={setAttestor}
-          network={network}
         />
         <button type="submit">{'search'}</button>
       </form>

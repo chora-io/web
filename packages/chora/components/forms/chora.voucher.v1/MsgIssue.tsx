@@ -75,6 +75,7 @@ const MsgIssue = ({ network, message, setMessage, useWallet, wallet }: any) => {
       <InputIRI
         id="msg-issue-metadata"
         label="metadata"
+        network={network}
         iri={metadata}
         setIri={setMetadata}
       />

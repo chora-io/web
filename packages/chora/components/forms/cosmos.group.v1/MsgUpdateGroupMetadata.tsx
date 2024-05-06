@@ -55,8 +55,8 @@ const MsgUpdateGroupMetadata = ({
         id="msg-update-group-admin-metadata"
         label="new metadata"
         network={network}
-        address={metadata}
-        setAddress={setMetadata}
+        iri={metadata}
+        setIri={setMetadata}
       />
     </>
   )

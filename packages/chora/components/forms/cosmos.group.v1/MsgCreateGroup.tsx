@@ -48,6 +48,7 @@ const MsgCreateGroup = ({
       <InputIRI
         id="msg-create-group-metadata"
         label="metadata"
+        network={network}
         iri={metadata}
         setIri={setMetadata}
       />

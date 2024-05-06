@@ -77,7 +77,7 @@ const AnchoredData = () => {
             label=""
             placeholder=""
             network={network}
-            string={input}
+            iri={input}
             setIri={setInput}
           />
         )}
@@ -97,8 +97,8 @@ const AnchoredData = () => {
             label=""
             placeholder=""
             network={network}
-            contentHash={input}
-            setContentHash={setInput}
+            url={input}
+            setUrl={setInput}
           />
         )}
         <button type="submit">{'search'}</button>

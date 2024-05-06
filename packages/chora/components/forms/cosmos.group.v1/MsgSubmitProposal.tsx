@@ -63,6 +63,7 @@ const MsgSubmitProposal = ({
       <InputIRI
         id="msg-submit-proposal-metadata"
         label="metadata"
+        network={network}
         iri={metadata}
         setIri={setMetadata}
       />

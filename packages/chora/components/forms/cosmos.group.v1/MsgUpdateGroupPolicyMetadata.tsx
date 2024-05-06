@@ -56,8 +56,8 @@ const MsgUpdateGroupPolicyMetadata = ({
         id="msg-update-group-policy-metadata-metadata"
         label="policy metadata"
         network={network}
-        address={metadata}
-        setAddress={setMetadata}
+        iri={metadata}
+        setIri={setMetadata}
       />
     </>
   )
