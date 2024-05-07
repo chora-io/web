@@ -39,10 +39,10 @@ const Subjects = ({
       {!error && !subjects && (
         <div className={styles.boxText}>{'loading...'}</div>
       )}
-      {!error && subjects && subjects.length === 0 && offset === 0 && (
+      {!error && subjects && subjects.length === 0 && !offset && (
         <div className={styles.boxText}>{'no subjects found'}</div>
       )}
-      {((subjects && subjects.length > 0) || offset > 0) && (
+      {((subjects && subjects.length > 0) || !!offset) && (
         <>
           {view === 'table' ? (
             <SubjectsTable

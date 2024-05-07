@@ -39,10 +39,10 @@ const Vouchers = ({
       {!error && !vouchers && (
         <div className={styles.boxText}>{'loading...'}</div>
       )}
-      {!error && vouchers && vouchers.length === 0 && offset === 0 && (
+      {!error && vouchers && vouchers.length === 0 && !offset && (
         <div className={styles.boxText}>{'no vouchers found'}</div>
       )}
-      {((vouchers && vouchers.length > 0) || offset > 0) && (
+      {((vouchers && vouchers.length > 0) || !!offset) && (
         <>
           {view === 'table' ? (
             <VouchersTable

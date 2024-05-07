@@ -109,10 +109,10 @@ const defaultLabel = 'message'
 
 // all available messages
 const defaultOptions = [
-  'chora.geonode.v1.MsgCreate',
-  'chora.geonode.v1.MsgDelete',
-  'chora.geonode.v1.MsgUpdateCurator',
-  'chora.geonode.v1.MsgUpdateMetadata',
+  'chora.content.v1.MsgCreate',
+  'chora.content.v1.MsgDelete',
+  'chora.content.v1.MsgUpdateCurator',
+  'chora.content.v1.MsgUpdateMetadata',
   'chora.geonode.v1.MsgCreate',
   'chora.geonode.v1.MsgUpdateCurator',
   'chora.geonode.v1.MsgUpdateMetadata',
@@ -123,9 +123,9 @@ const defaultOptions = [
   'cosmos.authz.v1beta1.MsgExec',
   'cosmos.authz.v1beta1.MsgGrant',
   'cosmos.authz.v1beta1.MsgRevoke',
-  'cosmos.bank.v1beta1.BankMsgMultiSend',
+  'cosmos.bank.v1beta1.MsgMultiSend',
   'cosmos.bank.v1beta1.MsgSend',
-  'cosmos.bank.v1beta1.BankMsgSetSendEnabled',
+  'cosmos.bank.v1beta1.MsgSetSendEnabled',
   'cosmos.feegrant.v1beta1.MsgGrantAllowance',
   'cosmos.feegrant.v1beta1.MsgRevokeAllowance',
   'cosmos.group.v1.MsgCreateGroup',
@@ -146,6 +146,7 @@ const defaultOptions = [
   'regen.data.v1.MsgAttest',
   'regen.data.v1.MsgDefineResolver',
   'regen.data.v1.MsgRegisterResolver',
+  'regen.ecocredit.basket.v1.MsgCreate',
   'regen.ecocredit.v1.MsgAddAllowedBridgeChain',
   'regen.ecocredit.v1.MsgAddClassCreator',
   'regen.ecocredit.v1.MsgAddCreditType',
@@ -169,7 +170,6 @@ const defaultOptions = [
   'regen.ecocredit.v1.MsgUpdateClassMetadata',
   'regen.ecocredit.v1.MsgUpdateProjectAdmin',
   'regen.ecocredit.v1.MsgUpdateProjectMetadata',
-  'regen.ecocredit.basket.v1.MsgCreate',
 ]
 
 const SelectMessage = ({
@@ -239,7 +239,7 @@ const SelectMessage = ({
           />
         </div>
       )}
-      {!typeOnly && selected === 'chora.contContentMsgUpdateMetadata' && (
+      {!typeOnly && selected === 'chora.content.v1.MsgUpdateMetadata' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
           <ContentMsgUpdateMetadata
@@ -369,7 +369,7 @@ const SelectMessage = ({
           />
         </div>
       )}
-      {!typeOnly && selected === 'cosmos.bank.v1beBankMsgSetSendEnabled' && (
+      {!typeOnly && selected === 'cosmos.bank.v1beta1.MsgSetSendEnabled' && (
         <div className={styles.message}>
           <h3>{selected}</h3>
           <BankMsgSetSendEnabled
@@ -578,6 +578,16 @@ const SelectMessage = ({
         <div className={styles.message}>
           <h3>{selected}</h3>
           <DataMsgRegisterResolver
+            network={network}
+            message={message}
+            setMessage={setMessage}
+          />
+        </div>
+      )}
+      {!typeOnly && selected === 'regen.ecocredit.basket.v1.MsgCreate' && (
+        <div className={styles.message}>
+          <h3>{selected}</h3>
+          <BasketMsgCreate
             network={network}
             message={message}
             setMessage={setMessage}
@@ -820,16 +830,6 @@ const SelectMessage = ({
             />
           </div>
         )}
-      {!typeOnly && selected === 'regen.ecocredit.basket.v1.MsgCreate' && (
-        <div className={styles.message}>
-          <h3>{selected}</h3>
-          <BasketMsgCreate
-            network={network}
-            message={message}
-            setMessage={setMessage}
-          />
-        </div>
-      )}
     </>
   )
 }

@@ -39,10 +39,10 @@ const Batches = ({
       {!batches && !error && (
         <div className={styles.boxText}>{'loading...'}</div>
       )}
-      {!error && batches && batches.length === 0 && offset === 0 && (
+      {!error && batches && batches.length === 0 && !offset && (
         <div className={styles.boxText}>{'no batches found'}</div>
       )}
-      {((batches && batches.length > 0) || offset > 0) && (
+      {((batches && batches.length > 0) || !!offset) && (
         <>
           {view === 'table' ? (
             <BatchesTable

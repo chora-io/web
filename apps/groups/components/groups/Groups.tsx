@@ -41,10 +41,10 @@ const Groups = () => {
       {!error && !groups && (
         <div className={styles.boxText}>{'loading...'}</div>
       )}
-      {!error && groups && groups.length === 0 && offset === 0 && (
+      {!error && groups && groups.length === 0 && !offset && (
         <div className={styles.boxText}>{'no groups found'}</div>
       )}
-      {((groups && groups.length > 0) || offset > 0) && (
+      {((groups && groups.length > 0) || !!offset) && (
         <>
           {view === 'table' ? (
             <GroupsTable groups={groups} />
