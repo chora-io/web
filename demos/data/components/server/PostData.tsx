@@ -48,7 +48,7 @@ const PostData = () => {
       .then((res) => res.json())
       .then((data) => {
         const urls: string[] = []
-        data['itemListElement'].map((e: any) => urls.push(e.item['@id']))
+        data.itemListElement.map((e: any) => urls.push(e.item['@id']))
         setContexts(urls)
       })
       .catch((err) => {

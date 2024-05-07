@@ -22,13 +22,13 @@ const Validators = () => {
         .then((res) => res.json())
         .then((data) => {
           // sort validators by tokens status
-          const sort1 = data['validators'].sort((a: any, b: any) => {
-            return Number(b['tokens']) - Number(a['tokens'])
+          const sort1 = data.validators.sort((a: any, b: any) => {
+            return Number(b.tokens) - Number(a.tokens)
           })
 
           // sort validators by jailed status
           const sort2 = sort1.sort((a: any, b: any) => {
-            return Number(a['jailed']) - Number(b['jailed'])
+            return Number(a.jailed) - Number(b.jailed)
           })
 
           setValidators(sort2)

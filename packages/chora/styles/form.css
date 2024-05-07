@@ -47,12 +47,13 @@
 
 .form button {
   padding: 0.5em 1em;
-  margin: 1em auto;
+  margin: 1em 1em 1em 0;
 }
 
 @media (max-width: 850px) {
   .form button {
     display: block;
+    margin: 1em auto;
     width: 100%;
   }
 }

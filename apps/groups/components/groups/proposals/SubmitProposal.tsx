@@ -119,6 +119,8 @@ const SubmitProposal = () => {
       exec: execFromJSON(execution),
     }
 
+    console.log('msg', msg)
+
     // convert message to protobuf any message
     const msgAny = {
       typeUrl: '/cosmos.group.v1.MsgSubmitProposal',

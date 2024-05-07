@@ -13,8 +13,8 @@ const SelectAccount = ({ id, label, options, address, setAddress }: any) => (
     >
       <option value="">{'--- select ---'}</option>
       {options?.map((o: any) => (
-        <option key={o['address']} value={o['address']}>
-          {o['name'] || o['address']}
+        <option key={o.address} value={o.address}>
+          {o.name || o.address}
         </option>
       ))}
     </select>

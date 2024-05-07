@@ -29,16 +29,16 @@ const Members = () => {
     if (members && sort === 'ascending') {
       ms.sort(
         (a: any, b: any) =>
-          new Date(b['member']['added_at']).getUTCDate() -
-          new Date(a['member']['added_at']).getUTCDate(),
+          new Date(b.member['added_at']).getUTCDate() -
+          new Date(a.member['added_at']).getUTCDate(),
       )
     }
 
     if (members && sort === 'descending') {
       ms.sort(
         (a: any, b: any) =>
-          new Date(a['member']['added_at']).getUTCDate() -
-          new Date(b['member']['added_at']).getUTCDate(),
+          new Date(a.member['added_at']).getUTCDate() -
+          new Date(b.member['added_at']).getUTCDate(),
       )
     }
 

@@ -43,8 +43,8 @@ export const postToServer = async (
         throw data.message
       } else {
         iri = network.includes('chora')
-          ? data['iri']
-          : network.split('-')[0] + ':' + data['iri'].split(':')[1]
+          ? data.iri
+          : network.split('-')[0] + ':' + data.iri.split(':')[1]
       }
     })
     .catch((err) => {

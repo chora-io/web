@@ -22,18 +22,18 @@ const DataResolvers = () => {
       </div>
       {Array.isArray(resolvers) &&
         resolvers.map((resolver: any) => (
-          <div className={styles.boxItem} key={resolver['id']}>
+          <div className={styles.boxItem} key={resolver.id}>
             <div className={styles.boxText}>
               <h3>{'id'}</h3>
-              <p>{resolver['id']}</p>
+              <p>{resolver.id}</p>
             </div>
             <div className={styles.boxText}>
               <h3>{'url'}</h3>
-              <p>{resolver['url']}</p>
+              <p>{resolver.url}</p>
             </div>
             <div className={styles.boxText}>
               <h3>{'manager'}</h3>
-              <p>{resolver['manager']}</p>
+              <p>{resolver.manager}</p>
             </div>
           </div>
         ))}
