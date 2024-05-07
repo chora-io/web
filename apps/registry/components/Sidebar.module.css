@@ -3,11 +3,11 @@
 }
 
 .active {
-  composes: active from 'chora/styles/sidebar.css';
+  composes: sidebar-active from 'chora/styles/sidebar.css';
 }
 
 .breadcrumb {
-  composes: breadcrumb from 'chora/styles/sidebar.css';
+  composes: sidebar-breadcrumb from 'chora/styles/sidebar.css';
 }
 
 .mobileOnly {

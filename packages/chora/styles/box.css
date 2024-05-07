@@ -144,3 +144,11 @@
     overflow-x: scroll;
   }
 }
+
+/* box-account-active */
+
+.box-account-active {
+  color: var(--color-theme);
+  font-weight: 400;
+  margin-left: 5px;
+}

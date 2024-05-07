@@ -46,9 +46,23 @@
 }
 
 .form button {
-  display: block;
   padding: 0.5em 1em;
-  margin: 3em 0 2em 0;
+  margin: 1em auto;
+}
+
+@media (max-width: 850px) {
+  .form button {
+    display: block;
+    width: 100%;
+  }
+}
+
+.form button[disabled] {
+  opacity: 0.25;
+}
+
+.form button[disabled]:hover {
+  opacity: 0.25 !important;
 }
 
 .form hr {

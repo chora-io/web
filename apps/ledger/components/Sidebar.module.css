@@ -2,8 +2,12 @@
   composes: sidebar from 'chora/styles/sidebar.css';
 }
 
+.active {
+  composes: sidebar-active from 'chora/styles/sidebar.css';
+}
+
 .breadcrumb {
-  composes: breadcrumb from 'chora/styles/sidebar.css';
+  composes: sidebar-breadcrumb from 'chora/styles/sidebar.css';
 }
 
 .mobileOnly {
@@ -19,8 +23,4 @@
 .modules {
   font-size: 0.9em !important;
   margin-left: 2em !important;
-}
-
-.active {
-  composes: active from 'chora/styles/sidebar.css';
 }

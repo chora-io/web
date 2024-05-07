@@ -11,5 +11,5 @@
 }
 
 .activeAccount {
-  composes: active-account from 'chora/styles/account.css';
+  composes: box-account-active from 'chora/styles/box.css';
 }

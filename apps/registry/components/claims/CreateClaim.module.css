@@ -9,17 +9,3 @@
 .form {
   composes: form from 'chora/styles/form.css';
 }
-
-.button {
-  composes: button from 'chora/styles/button.css';
-  margin: 0 1em 1em 0 !important;
-}
-
-.buttonDisabled {
-  composes: button;
-  opacity: 0.25;
-}
-
-.buttonDisabled:hover {
-  opacity: 0.25 !important;
-}

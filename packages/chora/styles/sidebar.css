@@ -45,15 +45,15 @@
   padding: 0.65em 0.5em;
 }
 
-/* active */
+/* sidebar-active */
 
-.active {
+.sidebar-active {
   font-weight: 500;
 }
 
-/* breadcrumb */
+/* sidebar-breadcrumb */
 
-.breadcrumb a {
+.sidebar-breadcrumb a {
   font-size: 0.85em;
   margin-left: -0.5em;
 }

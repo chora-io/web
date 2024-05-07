@@ -348,24 +348,14 @@ const CreateClaim = () => {
           merkle={''} // disabled until multiple options exist
           setMerkle={() => {}} // disabled until multiple options exist
         />
+        <button onClick={handleSubmitGenerate}>{'generate hash'}</button>
+        <button onClick={handleSubmitConvert} disabled={!contentHash}>
+          {'convert to iri'}
+        </button>
+        <button onClick={handleSubmitAnchorAndAttest} disabled={!contentHash}>
+          {'finalize claim'}
+        </button>
       </form>
-      <button className={styles.button} onClick={handleSubmitGenerate}>
-        {'generate hash'}
-      </button>
-      <button
-        className={!contentHash ? styles.buttonDisabled : styles.button}
-        onClick={handleSubmitConvert}
-        disabled={!contentHash}
-      >
-        {'convert to iri'}
-      </button>
-      <button
-        className={!contentHash ? styles.buttonDisabled : styles.button}
-        onClick={handleSubmitAnchorAndAttest}
-        disabled={!contentHash}
-      >
-        {'finalize claim'}
-      </button>
       <Result error={initError || error} />
       <div className={styles.boxText}>
         <Result

@@ -84,6 +84,25 @@
   margin-top: 1em;
 }
 
+/* banner-button */
+
+.banner-button {
+  background: var(--color-theme);
+  border: none;
+  border-radius: 1em;
+  color: var(--background-primary);
+  font-family: var(--font-family);
+  font-size: 1em;
+  outline: none;
+  padding: 0.5em 1em;
+  transition: var(--transition);
+}
+
+.banner-button:hover {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
 /* content */
 
 .content {

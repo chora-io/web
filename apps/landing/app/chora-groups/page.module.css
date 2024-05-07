@@ -10,18 +10,18 @@
   opacity: 0.75;
 }
 
+.buttonContainer {
+  margin-top: 1.5em;
+}
+
+.button {
+  composes: banner-button from 'chora/styles/main.css';
+}
+
 .content {
   composes: content from 'chora/styles/main.css';
 }
 
 .contentLinks {
   composes: content-links from 'chora/styles/main.css';
-}
-
-.buttonContainer {
-  margin-top: 1.5em;
-}
-
-.button {
-  composes: button from 'chora/styles/button.css';
 }
