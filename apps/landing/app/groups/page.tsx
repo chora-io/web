@@ -8,9 +8,9 @@ export const metadata: Metadata = {
 }
 
 const GroupsPage = () => {
-  let appLink = '/groups'
+  let appLink = 'https://groups.chora.io'
 
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV !== 'development') {
     appLink = 'http://localhost:8001'
   }
 

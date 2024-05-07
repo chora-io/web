@@ -17,17 +17,17 @@ const Layout = ({ children }: any) => (
             }}
             items={[
               {
-                link: 'chora-groups',
+                link: '/groups',
                 target: '',
                 title: 'groups',
               },
               {
-                link: 'chora-registry',
+                link: '/registry',
                 target: '',
                 title: 'registry',
               },
               {
-                link: 'chora-ledger',
+                link: '/ledger',
                 target: '',
                 title: 'ledger',
               },
@@ -49,17 +49,17 @@ const Layout = ({ children }: any) => (
                 title: 'home',
               },
               {
-                link: 'chora-groups',
+                link: '/groups',
                 target: '',
                 title: 'groups',
               },
               {
-                link: 'chora-registry',
+                link: '/registry',
                 target: '',
                 title: 'registry',
               },
               {
-                link: 'chora-ledger',
+                link: '/ledger',
                 target: '',
                 title: 'ledger',
               },
@@ -107,17 +107,17 @@ const Layout = ({ children }: any) => (
                 title: 'applications',
                 items: [
                   {
-                    link: '/chora-groups',
+                    link: '/groups',
                     target: '',
                     title: 'groups',
                   },
                   {
-                    link: '/chora-registry',
+                    link: '/registry',
                     target: '',
                     title: 'registry',
                   },
                   {
-                    link: '/chora-ledger',
+                    link: '/ledger',
                     target: '',
                     title: 'ledger',
                   },

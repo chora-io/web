@@ -45,7 +45,7 @@ export const regenRedwood = {
 
 export const regenRedwoodX = {
   faucet: 'https://redwood.chora.io/faucet/',
-  server: 'https://server.chora.io',
+  server: 'https://api.chora.io',
   modules: [
     {
       apiPackage: 'cosmos.auth.v1beta1',

@@ -45,7 +45,7 @@ export const regenMainnet = {
 
 export const regenMainnetX = {
   faucet: undefined,
-  server: 'https://server.chora.io',
+  server: 'https://api.chora.io',
   modules: [
     {
       apiPackage: 'cosmos.auth.v1beta1',

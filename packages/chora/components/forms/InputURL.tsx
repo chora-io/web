@@ -2,7 +2,7 @@ import * as React from 'react'
 
 const defaultId = 'url'
 const defaultLabel = 'url'
-const defaultPlaceholder = 'https://server.chora.io/data/'
+const defaultPlaceholder = 'https://api.chora.io/v1/data/'
 
 const InputURL = ({ id, label, placeholder, url, setUrl }: any) => {
   let noLabel = false

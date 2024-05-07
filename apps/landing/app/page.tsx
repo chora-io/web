@@ -31,11 +31,11 @@ const HomePage = () => {
             {
               'Chora includes a blockchain application, blockchain modules, an API service, and three web applications: '
             }
-            <Link href="/chora-groups">{'Groups'}</Link>
+            <Link href="/groups">{'Groups'}</Link>
             {', '}
-            <Link href="/chora-registry">{'Registry'}</Link>
+            <Link href="/registry">{'Registry'}</Link>
             {', and '}
-            <Link href="/chora-ledger">{'Ledger'}</Link>
+            <Link href="/ledger">{'Ledger'}</Link>
             {'.'}
           </p>
           <p>

@@ -45,7 +45,7 @@ export const choraTestnet = {
 
 export const choraTestnetX = {
   faucet: 'https://testnet.chora.io/faucet/',
-  server: 'https://server.chora.io',
+  server: 'https://api.chora.io',
   modules: [
     {
       apiPackage: 'chora.content.v1',

@@ -1,17 +1,18 @@
 import { ArrowUpRight } from 'chora/components/icons'
 import { Metadata } from 'next'
+import Link from 'next/link'
 
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
-  title: 'chora ledger | blockchain network dashboard',
+  title: 'chora registry | ecological registry workspace',
 }
 
-const LedgerPage = () => {
-  let appLink = '/ledger'
+const RegistryPage = () => {
+  let appLink = 'https://registry.chora.io'
 
   if (process.env.NODE_ENV === 'development') {
-    appLink = 'http://localhost:8003'
+    appLink = 'http://localhost:8002'
   }
 
   return (
@@ -20,12 +21,12 @@ const LedgerPage = () => {
         <div>
           <h1>
             {'chora '}
-            <span className={styles.titleX}>{'ledger'}</span>
+            <span className={styles.titleX}>{'registry'}</span>
           </h1>
           <p>
-            <i>{'explore and interact with distributed ledgers'}</i>
+            <i>{'decentralized ecological claims and assets'}</i>
           </p>
-          <p>{'blockchain network dashboard'}</p>
+          <p>{'ecological registry workspace'}</p>
           <div className={styles.buttonContainer}>
             <a className={styles.button} href={appLink} target="_blank">
               {'open app'}
@@ -38,7 +39,21 @@ const LedgerPage = () => {
         <div>
           <p>
             {
-              'Ledger is a dashboard for multiple blockchain networks enabling network stakeholders to explore and interact with distributed ledgers.'
+              'Registry is an explorer for decentralized ecological claims and assets and an open workspace to create and manage registry workflows.'
+            }
+          </p>
+          <p>
+            {
+              'Registry enables registry system actors to collaborate on registry workflows from project registration to credit issuance and retirement.'
+            }
+          </p>
+          <p>
+            {'Registry leverages '}
+            <Link href="https://regen.network" target="_blank">
+              {'Regen Network'}
+            </Link>
+            {
+              "'s blockchain application and network to enable open crediting for ecological regeneration projects."
             }
           </p>
           <div className={styles.contentLinks}>
@@ -46,7 +61,7 @@ const LedgerPage = () => {
               {'application'}
               <ArrowUpRight />
             </a>
-            <a href="https://docs.chora.io/guides/ledger" target="_blank">
+            <a href="https://docs.chora.io/guides/registry" target="_blank">
               {'user guide'}
               <ArrowUpRight />
             </a>
@@ -61,4 +76,4 @@ const LedgerPage = () => {
   )
 }
 
-export default LedgerPage
+export default RegistryPage

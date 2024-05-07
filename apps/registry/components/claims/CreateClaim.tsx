@@ -11,7 +11,7 @@ import { Permissions, Result, ResultTx } from 'chora/components'
 import {
   InputJSON,
   InputsFromJSON,
-  InputString,
+  InputURL,
   SelectContext,
   SelectOption,
 } from 'chora/components/forms'
@@ -388,11 +388,10 @@ const CreateClaim = () => {
             </p>
           </div>
           <form className={styles.form}>
-            <InputString
+            <InputURL
               label={'resolver url'}
-              placeholder={'https://server.chora.io/data/'}
-              string={resolverUrl}
-              setString={setResolverUrl}
+              url={resolverUrl}
+              setUrl={setResolverUrl}
             />
           </form>
           <div className={styles.boxText}>
