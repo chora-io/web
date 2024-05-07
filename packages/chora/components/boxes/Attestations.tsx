@@ -39,10 +39,10 @@ const Attestations = ({
       {!error && !attestations && (
         <div className={styles.boxText}>{'loading...'}</div>
       )}
-      {!error && attestations && attestations.length === 0 && (
+      {!error && attestations && attestations.length === 0 && offset === 0 && (
         <div className={styles.boxText}>{'no attestations found'}</div>
       )}
-      {attestations && attestations.length > 0 && (
+      {((attestations && attestations.length > 0) || offset > 0) && (
         <>
           {attestations.map((attestation: any) => (
             <AttestationsListItem

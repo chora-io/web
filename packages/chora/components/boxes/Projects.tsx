@@ -39,10 +39,10 @@ const Projects = ({
       {!projects && !error && (
         <div className={styles.boxText}>{'loading...'}</div>
       )}
-      {!error && projects && projects.length === 0 && (
+      {!error && projects && projects.length === 0 && offset === 0 && (
         <div className={styles.boxText}>{'no projects found'}</div>
       )}
-      {projects && projects.length > 0 && (
+      {((projects && projects.length > 0) || offset > 0) && (
         <>
           {view === 'table' ? (
             <ProjectsTable

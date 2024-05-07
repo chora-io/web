@@ -39,10 +39,10 @@ const Classes = ({
       {!classes && !error && (
         <div className={styles.boxText}>{'loading...'}</div>
       )}
-      {!error && classes && classes.length === 0 && (
+      {!error && classes && classes.length === 0 && offset === 0 && (
         <div className={styles.boxText}>{'no classes found'}</div>
       )}
-      {classes && classes.length > 0 && (
+      {((classes && classes.length > 0) || offset > 0) && (
         <>
           {view === 'table' ? (
             <ClassesTable

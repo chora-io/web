@@ -34,6 +34,7 @@ export const useMetadata = (chainInfo: any, unresolved: string) => {
 
   // fetch metadata by iri from network server, otherwise resolve
   const fetchMetadata = async () => {
+    let tmpError: any = null
     let metadata: any = null
 
     // fetch metadata using network server
@@ -41,7 +42,8 @@ export const useMetadata = (chainInfo: any, unresolved: string) => {
       .then((res) => res.json())
       .then((res) => {
         if (res.error) {
-          setError(res.error)
+          // only set error state if both requests fail
+          tmpError = res.error
         } else {
           metadata = JSON.parse(res.jsonld)
           setResolverUrl(serverUrl + '/data/')
@@ -54,7 +56,7 @@ export const useMetadata = (chainInfo: any, unresolved: string) => {
     setMetadata(metadata)
 
     // only resolve if metadata not available on network server
-    if (!metadata) {
+    if (tmpError && !metadata) {
       let resolvers: any[] = []
 
       // fetch data resolvers by iri
@@ -67,6 +69,12 @@ export const useMetadata = (chainInfo: any, unresolved: string) => {
             resolvers = res.resolvers
           }
         })
+
+      // only if no resolvers
+      if (resolvers.length === 0) {
+        setError(tmpError)
+        return // do not continue
+      }
 
       // only if resolvers available
       if (resolvers.length > 0) {
@@ -86,7 +94,7 @@ export const useMetadata = (chainInfo: any, unresolved: string) => {
             }
           })
           .catch((err) => {
-            setError(err.message)
+            setError(`${err.message}\n\n${url}${unresolved}`)
           })
       }
     }

@@ -39,10 +39,10 @@ const Resolvers = ({
       {!error && !resolvers && (
         <div className={styles.boxText}>{'loading...'}</div>
       )}
-      {!error && resolvers && resolvers.length === 0 && (
+      {!error && resolvers && resolvers.length === 0 && offset === 0 && (
         <div className={styles.boxText}>{'no resolvers found'}</div>
       )}
-      {resolvers && resolvers.length > 0 && (
+      {((resolvers && resolvers.length > 0) || offset > 0) && (
         <>
           {view === 'table' ? (
             <ResolversTable

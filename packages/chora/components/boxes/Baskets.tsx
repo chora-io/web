@@ -39,10 +39,10 @@ const Baskets = ({
       {!baskets && !error && (
         <div className={styles.boxText}>{'loading...'}</div>
       )}
-      {!error && baskets && baskets.length === 0 && (
+      {!error && baskets && baskets.length === 0 && offset === 0 && (
         <div className={styles.boxText}>{'no baskets found'}</div>
       )}
-      {baskets && baskets.length > 0 && (
+      {((baskets && baskets.length > 0) || offset > 0) && (
         <>
           {view === 'table' ? (
             <BasketsTable
