@@ -63,6 +63,7 @@
 }
 
 .form button[disabled]:hover {
+  cursor: default;
   opacity: 0.25 !important;
 }
 

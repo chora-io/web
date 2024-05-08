@@ -133,6 +133,7 @@
 }
 
 .content > div > h1 {
+  font-size: 1.8em;
   padding: 0.5em 0;
 }
 
@@ -152,13 +153,6 @@
 
 .content > div > a {
   display: block;
-  margin-bottom: 2em;
-}
-
-@media (max-width: 850px) {
-  .content > div > a {
-    margin-bottom: 1.5em;
-  }
 }
 
 /* content-full */
