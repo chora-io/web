@@ -79,10 +79,12 @@ const UserSidebar = () => {
       })
   }
 
-  // remove account from local storage
+  // disconnect active account
   const handleDisconnect = () => {
-    // TODO: disconnect from chora server
+    // TODO: black list JWT token on chora server ?
+    // TODO: implement server-side session tokens ?
 
+    // remove account from local storage
     removeAccount(activeAccount)
   }
 
