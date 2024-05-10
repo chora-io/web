@@ -13,15 +13,15 @@
   },
   "scripts": {
     "build": "sh ./scripts/build.sh",
-    "lint": "eslint --ext js,jsx,ts,tsx .",
+    "lint": "npx eslint .",
     "format": "prettier --write .",
     "test": "echo 'test not configured'",
     "clean": "rm -rf .turbo api dist node_modules"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6",
-    "@typescript-eslint/parser": "^6",
-    "eslint": "^8",
+    "@typescript-eslint/eslint-plugin": "^7",
+    "@typescript-eslint/parser": "^7",
+    "eslint": "^9",
     "prettier": "^3",
     "ts-proto": "^1",
     "typescript": "^5"
