@@ -3,9 +3,6 @@ import { useEffect, useState } from 'react'
 
 const queryResolvers = 'regen/data/v1/resolvers-by-iri'
 
-const ipfsUrl = 'ipfs://'
-const ipfsGatewayUrl = 'https://dweb.link/ipfs/'
-
 // parse metadata or fetch from network server, otherwise resolve
 export const useMetadata = (chainInfo: any, unresolved: string) => {
   const [serverUrl] = useNetworkServer(chainInfo)
@@ -17,14 +14,14 @@ export const useMetadata = (chainInfo: any, unresolved: string) => {
 
   // fetch metadata from ipfs network
   const fetchFromIpfs = async (cid: string) => {
-    await fetch(ipfsGatewayUrl + cid)
+    await fetch(serverUrl + '/ipfs/' + cid)
       .then((res) => res.json())
       .then((res) => {
         if (res.error) {
           setError(res.error)
         } else {
-          setMetadata(res)
-          setResolverUrl(ipfsGatewayUrl)
+          setMetadata(JSON.parse(res.content))
+          setResolverUrl(serverUrl + '/ipfs/')
         }
       })
       .catch((err) => {
@@ -108,7 +105,7 @@ export const useMetadata = (chainInfo: any, unresolved: string) => {
 
   // fetch on load and param change
   useEffect(() => {
-    if (unresolved) {
+    if (unresolved && serverUrl) {
       // check json string
       try {
         const parsedJson = JSON.parse(unresolved)
@@ -127,7 +124,7 @@ export const useMetadata = (chainInfo: any, unresolved: string) => {
       }
 
       // check ipfs url
-      if (unresolved.includes(ipfsUrl)) {
+      if (unresolved.includes('ipfs://')) {
         fetchFromIpfs(unresolved.split('//')[1]).catch((err) => {
           setError(err.message)
         })
