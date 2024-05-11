@@ -99,6 +99,7 @@ const UpdateMembers = () => {
           initMembers={initMembers ? initMembers.map((m: any) => m.member) : []}
           setMembers={setMembers}
         />
+        <hr />
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx

@@ -1,11 +1,68 @@
 import * as jsonld from 'jsonld'
 
-// postToServer posts a JSON-LD document to network server
-export const postToServer = async (
+// postData posts a JSON-LD document to network server
+export const postData = async (
   parsed: any,
   network: string,
   serverUrl: string,
-  storage: string,
+) => {
+  let iri: string | undefined
+
+  // check and normalize JSON-LD document
+  const normalized = await jsonld
+    .normalize(parsed, {
+      algorithm: 'URDNA2015',
+      format: 'application/n-quads',
+    })
+    .catch((err) => {
+      throw err.message
+    })
+
+  // return error if empty
+  if (normalized == '') {
+    throw 'JSON-LD empty after normalized'
+  }
+
+  const body = {
+    canon: 'URDNA2015',
+    context: 'https://schema.chora.io/contexts/group.jsonld',
+    digest: 'BLAKE2B_256',
+    jsonld: JSON.stringify(parsed),
+    merkle: 'UNSPECIFIED',
+  }
+
+  // post data to network server
+  await fetch(serverUrl + '/data', {
+    method: 'POST',
+    body: JSON.stringify(body),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.code) {
+        throw data.message
+      } else {
+        iri = network.includes('chora')
+          ? data.iri
+          : network.split('-')[0] + ':' + data.iri.split(':')[1]
+      }
+    })
+    .catch((err) => {
+      throw err.message
+    })
+
+  // return error if iri never set
+  if (typeof iri === 'undefined') {
+    throw 'iri is undefined'
+  }
+
+  return iri
+}
+
+// postIpfs posts a JSON-LD document to ipfs network (via network server)
+export const postIpfs = async (
+  parsed: any,
+  network: string,
+  serverUrl: string,
 ) => {
   let cid: string | undefined
 
@@ -24,31 +81,12 @@ export const postToServer = async (
     throw 'JSON-LD empty after normalized'
   }
 
-  let body: any = {}
-  let postUrl: string = ''
-
-  // set ipfs post request body
-  if (storage === 'ipfs') {
-    body = {
-      content: JSON.stringify(parsed),
-    }
-    postUrl = '/ipfs'
-  }
-
-  // set data post request body
-  if (storage === 'server') {
-    body = {
-      canon: 'URDNA2015',
-      context: 'https://schema.chora.io/contexts/group.jsonld',
-      digest: 'BLAKE2B_256',
-      jsonld: JSON.stringify(parsed),
-      merkle: 'UNSPECIFIED',
-    }
-    postUrl = '/data'
+  const body = {
+    content: JSON.stringify(parsed),
   }
 
   // post data to network server
-  await fetch(serverUrl + postUrl, {
+  await fetch(serverUrl + '/ipfs', {
     method: 'POST',
     body: JSON.stringify(body),
   })
@@ -57,14 +95,7 @@ export const postToServer = async (
       if (data.code) {
         throw data.message
       } else {
-        if (storage === 'ipfs') {
-          cid = data.cid
-        }
-        if (storage === 'server') {
-          cid = network.includes('chora')
-            ? data.iri
-            : network.split('-')[0] + ':' + data.iri.split(':')[1]
-        }
+        cid = data.cid
       }
     })
     .catch((err) => {

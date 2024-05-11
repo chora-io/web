@@ -98,6 +98,7 @@ const UpdateAccountMetadata = () => {
           initPolicy={policies?.find((p: any) => p.address === address)}
           setPolicy={setPolicy}
         />
+        <hr />
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx

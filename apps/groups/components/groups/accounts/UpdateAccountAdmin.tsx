@@ -100,6 +100,7 @@ const UpdateAccountAdmin = () => {
           initAddress={policies?.find((p: any) => p.address === address)?.admin}
           setAddress={setNewAdmin}
         />
+        <hr />
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx

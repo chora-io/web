@@ -1,4 +1,5 @@
 export { subAddress } from './address'
-export { postToServer } from './server'
+export { postData } from './server'
+export { postIpfs } from './server'
 export { formatTimestamp } from './timestamp'
 export { signAndBroadcast } from './transaction'

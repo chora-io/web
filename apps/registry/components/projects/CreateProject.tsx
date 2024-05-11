@@ -1,17 +1,11 @@
 'use client'
 
 import { Permissions, ResultTx } from 'chora/components'
-import {
-  InputJSON,
-  InputsFromJSON,
-  InputString,
-  SelectOption,
-  SelectStorage,
-} from 'chora/components/forms'
+import { InputString, MetadataInputs } from 'chora/components/forms'
 import { SelectCreditClass } from 'chora/components/forms/regen.ecocredit.v1'
 import { WalletContext } from 'chora/contexts'
 import { useNetworkServer, useSchema } from 'chora/hooks'
-import { postToServer, signAndBroadcast } from 'chora/utils'
+import { postData, postIpfs, signAndBroadcast } from 'chora/utils'
 import { MsgCreateProject } from 'cosmos/api/regen/ecocredit/v1/tx'
 import { useContext, useState } from 'react'
 
@@ -68,7 +62,7 @@ const CreateProject = () => {
       return // do not continue
     }
 
-    if (dataStorage === 'ipfs' || (dataStorage === 'server' && !serverUrl)) {
+    if ((dataStorage === 'ipfs' || dataStorage === 'server') && !serverUrl) {
       setError('server url not found')
       return // do not continue
     }
@@ -90,9 +84,20 @@ const CreateProject = () => {
       metadata = JSON.stringify(parsed)
     }
 
-    // handle data storage ipfs or server
-    if ((dataStorage === 'ipfs' || dataStorage === 'server') && serverUrl) {
-      await postToServer(parsed, network, serverUrl, dataStorage)
+    // handle data storage ipfs
+    if (dataStorage === 'ipfs' && serverUrl) {
+      await postIpfs(parsed, network, serverUrl)
+        .then((res) => {
+          metadata = res
+        })
+        .catch((err) => {
+          setError(err)
+        })
+    }
+
+    // handle data storage server
+    if (dataStorage === 'server' && serverUrl) {
+      await postData(parsed, network, serverUrl)
         .then((res) => {
           metadata = res
         })
@@ -154,27 +159,18 @@ const CreateProject = () => {
           setSelected={setClassId}
         />
         <hr />
-        <SelectOption
-          id="metadata-input"
-          label="metadata input"
-          options={[
-            { id: 'schema-form', label: 'schema form' },
-            { id: 'custom-json', label: 'custom json' },
-          ]}
-          setSelected={setInput}
+        <MetadataInputs
+          network={network}
+          input={input}
+          setInput={setInput}
+          json={json}
+          setJson={setJson}
+          context={context}
+          example={example}
+          useTemplate={handleUseTemplate}
+          dataStorage={dataStorage}
+          setDataStorage={setDataStorage}
         />
-        {input === 'schema-form' && (
-          <InputsFromJSON example={example} json={json} setJson={setJson} />
-        )}
-        {input === 'custom-json' && (
-          <InputJSON
-            json={json}
-            placeholder={example}
-            setJson={setJson}
-            useTemplate={handleUseTemplate}
-            showUseTemplate={context && context.length > 0}
-          />
-        )}
         <hr />
         <InputString
           id="msg-create-project-jurisdiction"
@@ -191,11 +187,6 @@ const CreateProject = () => {
           setString={setReferenceId}
         />
         <hr />
-        <SelectStorage
-          network={network}
-          dataStorage={dataStorage}
-          setDataStorage={setDataStorage}
-        />
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx

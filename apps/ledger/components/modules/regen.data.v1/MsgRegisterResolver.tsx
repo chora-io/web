@@ -56,6 +56,7 @@ const MsgRegisterResolverView = () => {
       {input == 'form' ? (
         <form className={styles.form} onSubmit={handleSubmit}>
           <MsgInputs setMessage={setMessage} useWallet={true} wallet={wallet} />
+          <hr />
           <button type="submit">{'submit'}</button>
         </form>
       ) : (
@@ -65,6 +66,7 @@ const MsgRegisterResolverView = () => {
             useWallet={true}
             wallet={wallet}
           />
+          <hr />
           <button type="submit">{'submit'}</button>
         </form>
       )}

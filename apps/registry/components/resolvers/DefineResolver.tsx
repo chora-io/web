@@ -69,6 +69,7 @@ const DefineResolver = () => {
           setMessage={setMessage}
           useWallet={true}
         />
+        <hr />
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx

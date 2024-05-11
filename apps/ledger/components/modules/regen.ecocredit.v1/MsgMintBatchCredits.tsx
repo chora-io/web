@@ -48,6 +48,7 @@ const MsgMintBatchCredits = () => {
           useWallet={true}
           wallet={wallet}
         />
+        <hr />
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx error={error} rest={chainInfo?.rest} success={success} />

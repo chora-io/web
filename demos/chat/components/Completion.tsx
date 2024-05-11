@@ -56,6 +56,7 @@ const Completion = () => {
           string={prompt}
           setString={setPrompt}
         />
+        <hr />
         <button type="submit">{'submit'}</button>
       </form>
       <Result error={error} success={result} />

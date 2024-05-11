@@ -101,6 +101,7 @@ const UpdateGroupAdmin = () => {
           initAddress={group?.admin}
           setAddress={setAddress}
         />
+        <hr />
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx

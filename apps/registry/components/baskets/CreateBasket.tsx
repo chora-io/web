@@ -140,6 +140,7 @@ const CreateBasket = () => {
           placeholder="20000000"
           string={basketFee?.amount || ''}
         />
+        <hr />
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx

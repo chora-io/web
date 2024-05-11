@@ -19,7 +19,7 @@ const SelectStorage = ({
     >
       <option value={'json'}>
         {
-          'none (ignore json-ld context and use raw json string for the metadata field)'
+          'json (ignore json-ld context and use raw json string for the metadata field)'
         }
       </option>
       <option value={'ipfs'}>

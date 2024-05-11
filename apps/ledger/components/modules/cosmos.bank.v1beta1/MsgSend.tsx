@@ -43,6 +43,7 @@ const MsgSend = () => {
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <MsgInputs setMessage={setMessage} useWallet={true} wallet={wallet} />
+        <hr />
         <button type="submit">{'submit'}</button>
       </form>
       <ResultTx error={error} rest={chainInfo?.rest} success={success} />
