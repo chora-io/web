@@ -22,6 +22,11 @@ const SelectStorage = ({
           'none (ignore json-ld context and use raw json string for the metadata field)'
         }
       </option>
+      <option value={'ipfs'}>
+        {
+          'ipfs (store json-ld on ipfs network and use ipfs cid for the metadata field)'
+        }
+      </option>
       <option value={'server'}>
         {`server (store json-ld on chora server and use ${network ? network.split('-')[0] + ' iri' : 'network iri'} for the metadata field)`}
       </option>

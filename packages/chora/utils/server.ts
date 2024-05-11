@@ -5,8 +5,9 @@ export const postToServer = async (
   parsed: any,
   network: string,
   serverUrl: string,
+  storage: string,
 ) => {
-  let iri: string | undefined
+  let cid: string | undefined
 
   // check and normalize JSON-LD document
   const normalized = await jsonld
@@ -23,17 +24,31 @@ export const postToServer = async (
     throw 'JSON-LD empty after normalized'
   }
 
-  // set post request body
-  const body = {
-    canon: 'URDNA2015',
-    context: 'https://schema.chora.io/contexts/group.jsonld',
-    digest: 'BLAKE2B_256',
-    jsonld: JSON.stringify(parsed),
-    merkle: 'UNSPECIFIED',
+  let body: any = {}
+  let postUrl: string = ''
+
+  // set ipfs post request body
+  if (storage === 'ipfs') {
+    body = {
+      content: JSON.stringify(parsed),
+    }
+    postUrl = '/ipfs'
+  }
+
+  // set data post request body
+  if (storage === 'server') {
+    body = {
+      canon: 'URDNA2015',
+      context: 'https://schema.chora.io/contexts/group.jsonld',
+      digest: 'BLAKE2B_256',
+      jsonld: JSON.stringify(parsed),
+      merkle: 'UNSPECIFIED',
+    }
+    postUrl = '/data'
   }
 
   // post data to network server
-  await fetch(serverUrl + '/data', {
+  await fetch(serverUrl + postUrl, {
     method: 'POST',
     body: JSON.stringify(body),
   })
@@ -42,19 +57,24 @@ export const postToServer = async (
       if (data.code) {
         throw data.message
       } else {
-        iri = network.includes('chora')
-          ? data.iri
-          : network.split('-')[0] + ':' + data.iri.split(':')[1]
+        if (storage === 'ipfs') {
+          cid = data.cid
+        }
+        if (storage === 'server') {
+          cid = network.includes('chora')
+            ? data.iri
+            : network.split('-')[0] + ':' + data.iri.split(':')[1]
+        }
       }
     })
     .catch((err) => {
       throw err.message
     })
 
-  // return error if iri never set
-  if (typeof iri === 'undefined') {
-    throw 'iri is undefined'
+  // return error if cid never set
+  if (typeof cid === 'undefined') {
+    throw 'cid is undefined'
   }
 
-  return iri
+  return cid
 }

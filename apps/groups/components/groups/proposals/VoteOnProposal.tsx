@@ -71,7 +71,7 @@ const VoteOnProposal = () => {
       return // do not continue
     }
 
-    if (dataStorage === 'server' && !serverUrl) {
+    if (dataStorage === 'ipfs' || (dataStorage === 'server' && !serverUrl)) {
       setError('server url not found')
       return // do not continue
     }
@@ -93,9 +93,9 @@ const VoteOnProposal = () => {
       metadata = JSON.stringify(parsed)
     }
 
-    // handle data storage iri
-    if (dataStorage === 'server' && serverUrl) {
-      await postToServer(parsed, network, serverUrl)
+    // handle data storage ipfs or server
+    if ((dataStorage === 'ipfs' || dataStorage === 'server') && serverUrl) {
+      await postToServer(parsed, network, serverUrl, dataStorage)
         .then((res) => {
           metadata = res
         })
