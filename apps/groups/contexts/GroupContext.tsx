@@ -16,9 +16,12 @@ const GroupContextProvider = (props: any) => {
   const { groupId } = useParams()
   const { chainInfo } = useContext(WalletContext)
 
-  const [group, groupError] = useGroupInfo(chainInfo, groupId)
-  const [policies, policiesError] = useGroupPolicies(chainInfo, groupId)
-  const [members, membersError] = useGroupMembers(chainInfo, groupId)
+  const [group, groupError] = useGroupInfo(chainInfo, groupId.toString())
+  const [policies, policiesError] = useGroupPolicies(
+    chainInfo,
+    groupId.toString(),
+  )
+  const [members, membersError] = useGroupMembers(chainInfo, groupId.toString())
   const [metadata, metadataError] = useMetadata(chainInfo, group?.metadata)
 
   return (
