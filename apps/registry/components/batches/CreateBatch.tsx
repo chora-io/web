@@ -1,7 +1,7 @@
 'use client'
 
 import { Permissions, ResultTx } from 'chora/components'
-import { InputTimestamp, MetadataInputs } from 'chora/components/forms'
+import { InputMetadata, InputTimestamp } from 'chora/components/forms'
 import {
   InputIssuances,
   SelectProject,
@@ -73,41 +73,47 @@ const CreateBatch = () => {
 
     let metadata: string = ''
 
-    // try to parse JSON
-    let parsed: any
-    try {
-      parsed = JSON.parse(json)
-    } catch (err) {
-      setError('invalid json')
-      return // do not continue
-    }
+    // TODO: handle string metadata
 
-    // handle data storage json
-    if (dataStorage === 'json') {
-      delete parsed['@context']
-      metadata = JSON.stringify(parsed)
-    }
+    // handle json metadata
+    if (json.length > 0) {
+      let parsed: any = null
 
-    // handle data storage ipfs
-    if (dataStorage === 'ipfs' && serverUrl) {
-      await postIpfs(parsed, network, serverUrl)
-        .then((res) => {
-          metadata = res
-        })
-        .catch((err) => {
-          setError(err)
-        })
-    }
+      // try to parse JSON
+      try {
+        parsed = JSON.parse(json)
+      } catch (err) {
+        setError('invalid json')
+        return // do not continue
+      }
 
-    // handle data storage server
-    if (dataStorage === 'server' && serverUrl) {
-      await postData(parsed, network, serverUrl)
-        .then((res) => {
-          metadata = res
-        })
-        .catch((err) => {
-          setError(err)
-        })
+      // handle data storage json
+      if (dataStorage === 'json') {
+        delete parsed['@context']
+        metadata = JSON.stringify(parsed)
+      }
+
+      // handle data storage ipfs
+      if (dataStorage === 'ipfs' && serverUrl) {
+        await postIpfs(parsed, network, serverUrl)
+          .then((res) => {
+            metadata = res
+          })
+          .catch((err) => {
+            setError(err)
+          })
+      }
+
+      // handle data storage server
+      if (dataStorage === 'server' && serverUrl) {
+        await postData(parsed, network, serverUrl)
+          .then((res) => {
+            metadata = res
+          })
+          .catch((err) => {
+            setError(err)
+          })
+      }
     }
 
     const msg: MsgCreateBatch = {
@@ -177,7 +183,7 @@ const CreateBatch = () => {
           setTimestamp={setEndDate}
         />
         <hr />
-        <MetadataInputs
+        <InputMetadata
           network={network}
           input={input}
           setInput={setInput}

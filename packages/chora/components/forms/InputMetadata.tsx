@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { InputJSON, InputsFromJSON, SelectOption, SelectStorage } from '.'
 
-const MetadataInputs = ({
+const InputMetadata = ({
   network,
   input,
   setInput,
@@ -51,4 +51,4 @@ const MetadataInputs = ({
   )
 }
 
-export default MetadataInputs
+export default InputMetadata
