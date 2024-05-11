@@ -57,7 +57,7 @@ const Project = ({
       </div>
       <div className={styles.boxText}>
         <h3>{'metadata'}</h3>
-        {metadata && renderMetadata ? (
+        {project && renderMetadata ? (
           <p>{renderMetadata(project.metadata)}</p>
         ) : (
           <p>{project?.metadata || 'NA'}</p>

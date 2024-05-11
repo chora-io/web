@@ -9,14 +9,16 @@ import { useContext } from 'react'
 const ResolvedContainer = () => {
   const { iri } = useParams()
 
+  const iriString = iri.toString().replace('%3A', ':')
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch data from network server, otherwise resolve
-  const [metadata, error, resolverUrl] = useMetadata(chainInfo, `${iri}`)
+  const [metadata, error, resolverUrl] = useMetadata(chainInfo, iriString)
 
   return (
     <Resolved
-      iri={`${iri}`.replace('%3A', ':')}
+      iri={iriString}
       metadata={metadata}
       resolverUrl={resolverUrl}
       error={error}

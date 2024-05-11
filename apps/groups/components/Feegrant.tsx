@@ -14,7 +14,10 @@ const FeegrantContainer = () => {
   const { chainInfo } = useContext(WalletContext)
 
   // fetch feegrant allowances by address from selected network
-  const [feeGrantee, feeGranter, error] = useFeeGrants(chainInfo, `${address}`)
+  const [feeGrantee, feeGranter, error] = useFeeGrants(
+    chainInfo,
+    address.toString(),
+  )
 
   // view options
   const [filter, setFilter] = useState<string>('grantee')

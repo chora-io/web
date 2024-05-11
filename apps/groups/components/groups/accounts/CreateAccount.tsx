@@ -115,7 +115,7 @@ const CreateAccount = () => {
     const msg: MsgCreateGroupPolicy = {
       $type: 'cosmos.group.v1.MsgCreateGroupPolicy',
       admin: wallet.bech32Address,
-      groupId: Long.fromString(`${groupId}` || '0'),
+      groupId: Long.fromString(groupId.toString() || '0'),
       metadata: metadata,
       decisionPolicy: policy,
     }

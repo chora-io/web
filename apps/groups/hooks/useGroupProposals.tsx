@@ -10,7 +10,7 @@ const queryProposals = 'cosmos/group/v1/proposals_by_group_policy'
 // fetch group proposals by policy addresses from selected network or network server
 export const useGroupProposals = (
   chainInfo: any,
-  groupId: any,
+  groupId: string,
   policies: any[],
 ) => {
   const [serverUrl] = useNetworkServer(chainInfo)

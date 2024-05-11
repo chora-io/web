@@ -50,7 +50,7 @@ const UpdateGroupAdmin = () => {
     const msg: MsgUpdateGroupAdmin = {
       $type: 'cosmos.group.v1.MsgUpdateGroupAdmin',
       admin: wallet.bech32Address,
-      groupId: Long.fromString(`${groupId}` || '0'),
+      groupId: Long.fromString(groupId.toString() || '0'),
       newAdmin: address,
     }
 

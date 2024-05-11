@@ -9,10 +9,12 @@ import { useContext } from 'react'
 const AttestationsContainer = () => {
   const { iri } = useParams()
 
+  const iriString = iri.toString().replace('%3A', ':')
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch data attestations from selected network
-  const [attestations, error] = useAttestations(chainInfo, `${iri}`)
+  const [attestations, error] = useAttestations(chainInfo, iriString)
 
   return <Attestations attestations={attestations} error={error} />
 }

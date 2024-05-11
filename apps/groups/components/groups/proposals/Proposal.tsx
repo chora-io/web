@@ -24,7 +24,7 @@ const Proposal = () => {
   const { chainInfo, network, wallet } = useContext(WalletContext)
 
   // fetch proposal from selected network or indexer service
-  const [proposal, proposalError] = useGroupProposal(chainInfo, `${id}`)
+  const [proposal, proposalError] = useGroupProposal(chainInfo, id.toString())
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(
@@ -33,7 +33,7 @@ const Proposal = () => {
   )
 
   // fetch group proposal votes from selected network (to determine available actions)
-  const [votes, votesError] = useGroupProposalVotes(chainInfo, `${id}`)
+  const [votes, votesError] = useGroupProposalVotes(chainInfo, id.toString())
 
   const error = proposalError || metadataError || votesError
 
@@ -60,7 +60,7 @@ const Proposal = () => {
     const msg: MsgExec = {
       $type: 'cosmos.group.v1.MsgExec',
       executor: wallet.bech32Address,
-      proposalId: Long.fromString(`${id}` || '0'),
+      proposalId: Long.fromString(id.toString() || '0'),
     }
 
     const msgAny = {

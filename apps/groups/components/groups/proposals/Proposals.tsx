@@ -20,7 +20,7 @@ const Proposals = () => {
   // fetch group proposals from selected network
   const [proposals, proposalsError] = useGroupProposals(
     chainInfo,
-    groupId,
+    groupId.toString(),
     policies,
   )
 

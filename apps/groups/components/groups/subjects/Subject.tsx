@@ -14,7 +14,7 @@ const SubjectContainer = () => {
   const { chainInfo } = useContext(WalletContext)
 
   // fetch subject from selected network
-  const [subject, subjectError] = useSubject(chainInfo, `${id}`)
+  const [subject, subjectError] = useSubject(chainInfo, id.toString())
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(

@@ -15,7 +15,7 @@ const Balances = () => {
   const { chainInfo, network } = useContext(WalletContext)
 
   // fetch voucher balances from selected network
-  const [balances, error] = useVoucherBalances(chainInfo, `${id}`)
+  const [balances, error] = useVoucherBalances(chainInfo, id.toString())
 
   const renderAddress = (address: string) => <Address address={address} />
 

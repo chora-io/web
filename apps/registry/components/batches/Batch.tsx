@@ -13,7 +13,7 @@ const BatchContainer = () => {
   const { chainInfo, network } = useContext(WalletContext)
 
   // fetch credit batch from selected network
-  const [batch, batchError] = useBatch(chainInfo, `${denom}`)
+  const [batch, batchError] = useBatch(chainInfo, denom.toString())
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(

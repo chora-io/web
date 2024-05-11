@@ -12,7 +12,7 @@ const Issuers = () => {
   const { chainInfo } = useContext(WalletContext)
 
   // fetch class issuers from selected network
-  const [issuers, error] = useClassIssuers(chainInfo, `${id}`)
+  const [issuers, error] = useClassIssuers(chainInfo, id.toString())
 
   return <ClassIssuers issuers={issuers} error={error} />
 }

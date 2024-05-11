@@ -16,7 +16,7 @@ const AuthzContainer = () => {
   // fetch authz grants by address from selected network
   const [authzGrantee, authzGranter, error] = useAuthzGrants(
     chainInfo,
-    `${address}`,
+    address.toString(),
   )
 
   // view options

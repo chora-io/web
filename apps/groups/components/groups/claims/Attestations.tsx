@@ -11,10 +11,15 @@ import Address from '@components/Address'
 const AttestationsContainer = () => {
   const { iri } = useParams()
 
+  const iriString = iri.toString().replace('%3A', ':')
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch data attestations from selected network
-  const [attestations, attestationsError] = useAttestations(chainInfo, `${iri}`)
+  const [attestations, attestationsError] = useAttestations(
+    chainInfo,
+    iriString,
+  )
 
   const renderAddress = (address: string) => <Address address={address} />
 

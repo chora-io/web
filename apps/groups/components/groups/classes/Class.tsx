@@ -14,7 +14,7 @@ const ClassContainer = () => {
   const { chainInfo } = useContext(WalletContext)
 
   // fetch class from selected network
-  const [clazz, classError] = useClass(chainInfo, `${id}`)
+  const [clazz, classError] = useClass(chainInfo, id.toString())
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(

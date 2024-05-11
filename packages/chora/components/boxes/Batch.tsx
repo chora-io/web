@@ -72,7 +72,7 @@ const Batch = ({
       </div>
       <div className={styles.boxText}>
         <h3>{'metadata'}</h3>
-        {metadata && renderMetadata ? (
+        {batch && renderMetadata ? (
           <p>{renderMetadata(batch.metadata)}</p>
         ) : (
           <p>{batch?.metadata || 'NA'}</p>

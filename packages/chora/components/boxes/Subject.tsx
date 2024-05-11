@@ -62,7 +62,7 @@ const Subject = ({
       </div>
       <div className={styles.boxText}>
         <h3>{'metadata'}</h3>
-        {metadata && renderMetadata ? (
+        {subject && renderMetadata ? (
           <p>{renderMetadata(subject.metadata)}</p>
         ) : (
           <p>{subject?.metadata || 'NA'}</p>

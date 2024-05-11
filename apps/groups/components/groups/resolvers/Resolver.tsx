@@ -14,7 +14,7 @@ const ResolverContainer = () => {
   const { chainInfo } = useContext(WalletContext)
 
   // fetch resolver from selected network
-  const [resolver, error] = useResolver(chainInfo, `${id}`)
+  const [resolver, error] = useResolver(chainInfo, id.toString())
 
   const renderAddress = (address: string) => <Address address={address} />
 

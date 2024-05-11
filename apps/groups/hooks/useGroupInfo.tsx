@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 const queryGroupInfo = 'cosmos/group/v1/group_info'
 
 // fetch group by id from selected network
-export const useGroupInfo = (chainInfo: any, groupId: any) => {
+export const useGroupInfo = (chainInfo: any, groupId: string) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [group, setGroup] = useState<any>(null)

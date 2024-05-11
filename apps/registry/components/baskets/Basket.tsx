@@ -12,7 +12,7 @@ const BasketContainer = () => {
   const { chainInfo } = useContext(WalletContext)
 
   // fetch credit basket from selected network
-  const [basket, error] = useBasket(chainInfo, `${denom}`)
+  const [basket, error] = useBasket(chainInfo, denom.toString())
 
   return <Basket basket={basket} error={error} />
 }

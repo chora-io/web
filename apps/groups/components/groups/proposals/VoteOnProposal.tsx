@@ -120,7 +120,7 @@ const VoteOnProposal = () => {
     const msg: MsgVote = {
       $type: 'cosmos.group.v1.MsgVote',
       voter: wallet.bech32Address,
-      proposalId: Long.fromString(`${id}` || '0'),
+      proposalId: Long.fromString(id.toString() || '0'),
       option: voteOptionFromJSON(vote),
       metadata: metadata,
       exec: execFromJSON(execution),

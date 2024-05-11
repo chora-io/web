@@ -17,7 +17,7 @@ const ProposalVotes = () => {
   const { chainInfo, network } = useContext(WalletContext)
 
   // fetch proposal votes from selected network
-  const [votes, error] = useGroupProposalVotes(chainInfo, `${id}`)
+  const [votes, error] = useGroupProposalVotes(chainInfo, id.toString())
 
   return (
     <div className={styles.box}>

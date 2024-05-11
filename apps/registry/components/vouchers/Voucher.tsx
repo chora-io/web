@@ -13,7 +13,7 @@ const VoucherContainer = () => {
   const { chainInfo, network } = useContext(WalletContext)
 
   // fetch voucher from selected network
-  const [voucher, voucherError] = useVoucher(chainInfo, `${id}`)
+  const [voucher, voucherError] = useVoucher(chainInfo, id.toString())
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(

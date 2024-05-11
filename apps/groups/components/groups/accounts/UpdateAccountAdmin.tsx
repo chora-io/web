@@ -49,7 +49,7 @@ const UpdateAccountAdmin = () => {
     const msg: MsgUpdateGroupPolicyAdmin = {
       $type: 'cosmos.group.v1.MsgUpdateGroupPolicyAdmin',
       admin: wallet.bech32Address,
-      groupPolicyAddress: `${address}`,
+      groupPolicyAddress: address.toString(),
       newAdmin: newAdmin,
     }
 

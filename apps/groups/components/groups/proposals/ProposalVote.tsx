@@ -20,8 +20,8 @@ const ProposalVote = () => {
   // fetch proposal vote from selected network or indexer service
   const [vote, voteError] = useGroupProposalVote(
     chainInfo,
-    `${id}`,
-    `${address}`,
+    id.toString(),
+    address.toString(),
   )
 
   // parse metadata or fetch from network server, otherwise resolve

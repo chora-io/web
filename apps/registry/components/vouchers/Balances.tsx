@@ -13,7 +13,7 @@ const Balances = () => {
   const { chainInfo, network } = useContext(WalletContext)
 
   // fetch voucher balances from selected network
-  const [balances, error] = useVoucherBalances(chainInfo, `${id}`)
+  const [balances, error] = useVoucherBalances(chainInfo, id.toString())
 
   const renderLink = (address: string) => (
     <Link href={`/${network}/vouchers/${id}/${address}`}>{'view balance'}</Link>

@@ -120,7 +120,7 @@ const UpdateGroupMetadata = () => {
     const msg: MsgUpdateGroupMetadata = {
       $type: 'cosmos.group.v1.MsgUpdateGroupMetadata',
       admin: wallet.bech32Address,
-      groupId: Long.fromString(`${groupId}` || '0'),
+      groupId: Long.fromString(groupId.toString() || '0'),
       metadata: metadata,
     }
 

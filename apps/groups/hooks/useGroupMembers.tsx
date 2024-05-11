@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 const queryMembers = 'cosmos/group/v1/group_members'
 
 // fetch group members by group id from selected network
-export const useGroupMembers = (chainInfo: any, groupId: any) => {
+export const useGroupMembers = (chainInfo: any, groupId: string) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [members, setMembers] = useState<any>(null)

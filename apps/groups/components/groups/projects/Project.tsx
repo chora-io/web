@@ -14,7 +14,7 @@ const ProjectContainer = () => {
   const { chainInfo } = useContext(WalletContext)
 
   // fetch project from selected network
-  const [project, projectError] = useProject(chainInfo, `${id}`)
+  const [project, projectError] = useProject(chainInfo, id.toString())
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(

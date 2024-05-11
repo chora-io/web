@@ -42,7 +42,7 @@ const Class = ({
       </div>
       <div className={styles.boxText}>
         <h3>{'metadata'}</h3>
-        {metadata && renderMetadata ? (
+        {clazz && renderMetadata ? (
           <p>{renderMetadata(clazz.metadata)}</p>
         ) : (
           <p>{clazz?.metadata || 'NA'}</p>

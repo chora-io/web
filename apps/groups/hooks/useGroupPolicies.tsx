@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 const queryPolicies = 'cosmos/group/v1/group_policies_by_group'
 
 // fetch group policies by group id from selected network
-export const useGroupPolicies = (chainInfo: any, groupId: any) => {
+export const useGroupPolicies = (chainInfo: any, groupId: string) => {
   // fetch error and results
   const [error, setError] = useState<string | null>(null)
   const [policies, setPolicies] = useState<any[] | null>(null)

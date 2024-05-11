@@ -11,10 +11,12 @@ import Address from '@components/Address'
 const ResolversContainer = () => {
   const { iri } = useParams()
 
+  const iriString = iri.toString().replace('%3A', ':')
+
   const { chainInfo } = useContext(WalletContext)
 
   // fetch data resolvers from selected network
-  const [resolvers, resolversError] = useResolvers(chainInfo, `${iri}`)
+  const [resolvers, resolversError] = useResolvers(chainInfo, iriString)
 
   const renderAddress = (address: string) => <Address address={address} />
 

@@ -46,7 +46,7 @@ const Voucher = ({
       </div>
       <div className={styles.boxText}>
         <h3>{'metadata'}</h3>
-        {metadata && renderMetadata ? (
+        {voucher && renderMetadata ? (
           <p>{renderMetadata(voucher.metadata)}</p>
         ) : (
           <p>{voucher?.metadata || 'NA'}</p>

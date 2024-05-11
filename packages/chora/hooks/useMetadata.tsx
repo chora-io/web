@@ -85,13 +85,22 @@ export const useMetadata = (chainInfo: any, unresolved: string) => {
             if (res.error) {
               setError(res.error)
             } else {
-              // TODO: handle other response formats
-              setMetadata(JSON.parse(res.jsonld))
+              let m: any
+
+              // TODO: handle other response formats ?
+              if (res.jsonld) {
+                m = JSON.parse(res.jsonld)
+              } else {
+                m = res
+              }
+
+              setMetadata(m)
               setResolverUrl(url)
             }
           })
           .catch((err) => {
-            setError(`${err.message}\n\n${url}${unresolved}`)
+            setError(err.message)
+            setResolverUrl(url)
           })
       }
     }
@@ -110,7 +119,7 @@ export const useMetadata = (chainInfo: any, unresolved: string) => {
       try {
         const parsedJson = JSON.parse(unresolved)
         setMetadata(parsedJson)
-        return // exit effect
+        return // do not continue
       } catch (e) {
         // continue
       }
@@ -120,7 +129,7 @@ export const useMetadata = (chainInfo: any, unresolved: string) => {
         fetchFromIpfs(unresolved).catch((err) => {
           setError(err.message)
         })
-        return // exit effect
+        return // do not continue
       }
 
       // check ipfs url
@@ -128,7 +137,7 @@ export const useMetadata = (chainInfo: any, unresolved: string) => {
         fetchFromIpfs(unresolved.split('//')[1]).catch((err) => {
           setError(err.message)
         })
-        return // exit effect
+        return // do not continue
       }
     }
 

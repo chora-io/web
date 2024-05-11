@@ -124,7 +124,7 @@ const UpdateAccountMetadata = () => {
     const msg: MsgUpdateGroupPolicyMetadata = {
       $type: 'cosmos.group.v1.MsgUpdateGroupPolicyMetadata',
       admin: wallet.bech32Address,
-      groupPolicyAddress: `${address}`,
+      groupPolicyAddress: address.toString(),
       metadata: metadata,
     }
 
