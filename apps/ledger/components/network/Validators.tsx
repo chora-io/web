@@ -18,7 +18,9 @@ const Validators = () => {
 
   useEffect(() => {
     if (chainInfo?.rest) {
-      fetch(chainInfo.rest + queryValidators)
+      const queryParams = `?pagination.limit=500` // NOTE: default limit 100
+
+      fetch(chainInfo.rest + queryValidators + queryParams)
         .then((res) => res.json())
         .then((data) => {
           // sort validators by tokens status
@@ -45,12 +47,14 @@ const Validators = () => {
         <table className={styles.table}>
           <thead>
             <tr>
+              <td>{'#'}</td>
               <td>{'moniker'}</td>
               <td>{'tokens'}</td>
               <td>{'delegator shares'}</td>
               <td>{'commission rate'}</td>
               <td>{'max commission rate'}</td>
               <td>{'max change rate'}</td>
+              <td>{'more info'}</td>
             </tr>
           </thead>
           <tbody>
