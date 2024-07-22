@@ -148,7 +148,7 @@ const Proposal = () => {
         </div>
       )}
       <div className={styles.boxText}>
-        <h3>{'group account address'}</h3>
+        <h3>{'group account'}</h3>
         <p>
           {proposal ? (
             <Address address={proposal['group_policy_address']} />

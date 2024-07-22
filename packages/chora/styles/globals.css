@@ -171,10 +171,14 @@ textarea::placeholder {
   color: var(--color-text-placeholder);
 }
 
-@media (max-width: 850px) {
-  pre {
-    overflow-x: scroll;
-  }
+pre {
+  overflow-x: scroll;
+  scrollbar-width: none; /* hide scrollbar - Firefox */
+  -ms-overflow-style: none; /* hide scrollbar - Internet Explorer 10+ */
+}
+
+pre::-webkit-scrollbar {
+  display: none; /* hide scrollbar - Safari and Chrome */
 }
 
 hr {
