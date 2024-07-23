@@ -1,4 +1,5 @@
 export { subAddress } from './address'
+export { getMarkdown } from './markdown'
 export { postData } from './server'
 export { postIpfs } from './server'
 export { formatTimestamp } from './timestamp'

@@ -15,7 +15,7 @@ about: Create a feature request.
 
 
 
-## Proposal
+## ProposalTableRow
 
 <!-- describe the requirements for the feature -->
 

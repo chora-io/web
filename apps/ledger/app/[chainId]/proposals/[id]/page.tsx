@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import Network from '@components/network/Network'
+import Proposal from '@components/network/Proposal'
 
 import styles from './page.module.css'
 
@@ -8,11 +8,11 @@ export const metadata: Metadata = {
   title: `chora ledger`,
 }
 
-const NetworkPage = () => (
+const ProposalPage = () => (
   <div className={styles.page}>
-    <h1>{'network'}</h1>
-    <Network />
+    <h1>{'network proposal'}</h1>
+    <Proposal />
   </div>
 )
 
-export default NetworkPage
+export default ProposalPage

@@ -84,6 +84,30 @@ const Sidebar = () => {
               {'overview'}
             </Link>
           </li>
+          <li>
+            <Link
+              href={`/${network}/validators`}
+              className={
+                currentRoute === `/${network}/validators`
+                  ? styles.active
+                  : undefined
+              }
+            >
+              {'validators'}
+            </Link>
+          </li>
+          <li>
+            <Link
+              href={`/${network}/proposals`}
+              className={
+                currentRoute === `/${network}/proposals`
+                  ? styles.active
+                  : undefined
+              }
+            >
+              {'proposals'}
+            </Link>
+          </li>
         </ul>
         <li>{'modules'}</li>
         <ul className={styles.modules}>

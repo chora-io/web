@@ -4,7 +4,7 @@ import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
 import { useContext, useEffect, useState } from 'react'
 
-import Validator from './Validator'
+import ValidatorTableRow from './ValidatorTableRow'
 
 import styles from './Validators.module.css'
 
@@ -60,7 +60,7 @@ const Validators = () => {
           <tbody>
             {validators.length > 0 &&
               validators.map((v: any, i: number) => (
-                <Validator index={i} validator={v} key={i} />
+                <ValidatorTableRow index={i} validator={v} key={i} />
               ))}
           </tbody>
         </table>
