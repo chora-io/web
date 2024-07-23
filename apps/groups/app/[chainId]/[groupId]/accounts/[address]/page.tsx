@@ -4,6 +4,7 @@ import { Metadata } from 'next'
 import Authz from '@components/Authz'
 import Feegrant from '@components/Feegrant'
 import Account from '@components/groups/accounts/Account'
+import AccountBalances from '@components/groups/accounts/AccountBalances'
 import AccountNav from '@components/groups/accounts/AccountNav'
 
 import styles from './page.module.css'
@@ -18,6 +19,8 @@ const AccountPage = () => (
     <h1>{'group account'}</h1>
     <AccountNav />
     <Account />
+    <h1>{'bank balances'}</h1>
+    <AccountBalances />
     <h1>{'authorizations'}</h1>
     <Authz />
     <h1>{'fee allowances'}</h1>

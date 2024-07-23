@@ -1,6 +1,7 @@
 export { useAnchor } from './useAnchor'
 export { useAttestations } from './useAttestations'
 export { useAuthzGrants } from './useAuthzGrants'
+export { useBankBalances } from './useBankBalances'
 export { useBasket } from './useBasket'
 export { useBasketFee } from './useBasketFee'
 export { useBatch } from './useBatch'
