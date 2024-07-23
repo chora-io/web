@@ -2,9 +2,9 @@ import { Breadcrumb } from 'chora/components'
 import { Metadata } from 'next'
 
 import Authz from '@components/Authz'
+import BankBalances from '@components/BankBalances'
 import Feegrant from '@components/Feegrant'
 import Account from '@components/groups/accounts/Account'
-import AccountBalances from '@components/groups/accounts/AccountBalances'
 import AccountNav from '@components/groups/accounts/AccountNav'
 
 import styles from './page.module.css'
@@ -20,7 +20,7 @@ const AccountPage = () => (
     <AccountNav />
     <Account />
     <h1>{'bank balances'}</h1>
-    <AccountBalances />
+    <BankBalances />
     <h1>{'authorizations'}</h1>
     <Authz />
     <h1>{'fee allowances'}</h1>
