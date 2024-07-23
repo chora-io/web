@@ -3,22 +3,17 @@
 import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
 import { useBankBalances } from 'chora/hooks'
-import { useParams } from 'next/navigation'
 import { useContext } from 'react'
-
-import { GroupContext } from '@contexts/GroupContext'
 
 import styles from './BankBalances.module.css'
 
 const BankBalances = () => {
-  const { address } = useParams()
-
-  const { chainInfo } = useContext(WalletContext)
+  const { chainInfo, wallet } = useContext(WalletContext)
 
   // fetch bank balances by address from selected network
   const [balances, balancesError] = useBankBalances(
     chainInfo,
-    address.toString(),
+    wallet ? wallet.bech32Address : null,
   )
 
   return (
