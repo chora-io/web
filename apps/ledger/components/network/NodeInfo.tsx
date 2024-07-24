@@ -1,15 +1,15 @@
 'use client'
 
-import { formatTimestamp } from 'chora/utils'
+import { WalletContext } from 'chora/contexts'
 import { useContext } from 'react'
 
 import { NetworkContext } from '@contexts/NetworkContext'
 
 import styles from './NodeInfo.module.css'
-import { WalletContext } from 'chora/contexts'
 
 const NodeInfo = () => {
   const { chainInfo } = useContext(WalletContext)
+  const { block, nodeInfo, error } = useContext(NetworkContext)
 
   return (
     <div className={styles.box}>
@@ -17,12 +17,16 @@ const NodeInfo = () => {
         <table className={styles.table}>
           <thead>
             <tr>
+              <td>{'node id'}</td>
+              <td>{'moniker'}</td>
               <td>{'rpc endpoint'}</td>
               <td>{'rest endpoint'}</td>
             </tr>
           </thead>
           <tbody>
             <tr>
+              <td>{nodeInfo ? nodeInfo['default_node_id'] : 'loading...'}</td>
+              <td>{nodeInfo ? nodeInfo.moniker : 'loading...'}</td>
               <td>{chainInfo ? chainInfo.rpc : 'loading...'}</td>
               <td>{chainInfo ? chainInfo.rest : 'loading...'}</td>
             </tr>
