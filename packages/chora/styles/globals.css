@@ -184,3 +184,13 @@ pre::-webkit-scrollbar {
 hr {
   border: 0.05em solid var(--box-shadow-color);
 }
+
+td {
+  overflow-x: scroll;
+  scrollbar-width: none; /* hide scrollbar - Firefox */
+  -ms-overflow-style: none; /* hide scrollbar - Internet Explorer 10+ */
+}
+
+td::-webkit-scrollbar {
+  display: none; /* hide scrollbar - Safari and Chrome */
+}

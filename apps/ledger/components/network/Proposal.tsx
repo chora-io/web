@@ -40,23 +40,16 @@ const Proposal = () => {
   const convertSummary = () =>
     getMarkdown(metadata.summary)
       .then((data) => setSummary(data))
-      .catch((e) => console.log(e))
+      .catch((e) => console.error(e))
 
   useEffect(() => {
     if (metadata && metadata.summary && !summary) {
       convertSummary()
     }
   }, [metadata, summary])
-  console.log('summary', summary)
 
   return proposal ? (
     <>
-      {error ||
-        (metadataError && (
-          <div className={styles.box}>
-            <Result error={error || metadataError} />
-          </div>
-        ))}
       <div className={styles.box}>
         <div className={styles.boxText}>
           <h3>{'id'}</h3>
@@ -67,46 +60,46 @@ const Proposal = () => {
           <p>{(proposal && proposal.status) || 'NA'}</p>
         </div>
         <div className={styles.boxText}>
-          <h3>{'title'}</h3>
+          <h3>{'name'}</h3>
           <p>
-            {metadata && metadata.title
-              ? metadata.title
-              : proposal.messages[0].content
+            {metadata
+              ? metadata.name || metadata.title
+              : proposal && proposal.messages.length && proposal.messages[0].content
                 ? proposal.messages[0].content.title
                 : 'NA'}
           </p>
         </div>
         <div className={styles.boxText}>
-          <h3>{'summary'}</h3>
-          <p>
-            {summary ? (
-              <div
-                className={styles.summary}
-                dangerouslySetInnerHTML={{ __html: summary }}
-              />
-            ) : metadata && metadata.summary ? (
-              metadata.summary
-            ) : proposal.messages[0].content ? (
-              proposal.messages[0].content.description
-            ) : (
-              'NA'
-            )}
-          </p>
+          <h3>{'description'}</h3>
+          {summary ? (
+            <div
+              className={styles.summary}
+              dangerouslySetInnerHTML={{ __html: summary }}
+            />
+          ) : (
+            <p>
+              {metadata
+                ? metadata.description || metadata.summary
+                : proposal && proposal.messages.length && proposal.messages[0].content
+                  ? proposal.messages[0].content.description
+                  : 'NA'}
+            </p>
+          )}
         </div>
         <div className={styles.boxText}>
           <h3>{'messages'}</h3>
-          {(!proposal || (proposal && proposal.messages.length === 0)) && (
+          {(!proposal || (proposal && !proposal.messages.length)) && (
             <p>{'NA'}</p>
           )}
-          {proposal && proposal.messages.length > 0 && (
+          {proposal && proposal.messages.length && (
             <pre>
               <p>{JSON.stringify(proposal.messages, null, ' ')}</p>
             </pre>
           )}
         </div>
         {!!proposal && proposal['total_deposit'].length ? (
-          proposal['total_deposit'].map((d: any) => (
-            <div className={styles.boxText}>
+          proposal['total_deposit'].map((d: any, i: number) => (
+            <div key={i} className={styles.boxText}>
               <h3>{'total deposit'}</h3>
               <p>{d.amount + d.denom}</p>
             </div>

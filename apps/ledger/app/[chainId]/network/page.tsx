@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 
-import Network from '@components/network/Network'
+import LatestBlock from '@components/network/LatestBlock'
+import { NetworkContextProvider } from '@contexts/NetworkContext'
 
 import styles from './page.module.css'
 
@@ -9,10 +10,12 @@ export const metadata: Metadata = {
 }
 
 const NetworkPage = () => (
-  <div className={styles.page}>
-    <h1>{'network'}</h1>
-    <Network />
-  </div>
+  <NetworkContextProvider>
+    <div className={styles.page}>
+      <h1>{'latest block'}</h1>
+      <LatestBlock />
+    </div>
+  </NetworkContextProvider>
 )
 
 export default NetworkPage

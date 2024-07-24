@@ -40,7 +40,7 @@ const BankBalances = () => {
         ))
       ) : (
         <div className={styles.boxText}>
-          <p>{'no balances found'}</p>
+          <p>{'no bank balances for this account'}</p>
         </div>
       )}
       <Result error={balancesError} />
