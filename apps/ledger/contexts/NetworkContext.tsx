@@ -23,6 +23,9 @@ const NetworkContextProvider = (props: any) => {
 
   useEffect(() => {
     setCount(0)
+    setBlock(null)
+    setAppInfo(null)
+    setNodeInfo(null)
     setError(null)
   }, [chainInfo])
 
@@ -43,7 +46,6 @@ const NetworkContextProvider = (props: any) => {
         fetch(chainInfo.rest + queryNodeInfo)
           .then((res) => res.json())
           .then((data) => {
-            console.log('data', data)
             setAppInfo(data['application_version'])
             setNodeInfo(data['default_node_info'])
           })

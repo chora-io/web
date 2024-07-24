@@ -17,16 +17,16 @@ const NodeInfo = () => {
         <table className={styles.table}>
           <thead>
             <tr>
-              <td>{'node id'}</td>
               <td>{'moniker'}</td>
+              <td>{'node id'}</td>
               <td>{'rpc endpoint'}</td>
               <td>{'rest endpoint'}</td>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>{nodeInfo ? nodeInfo['default_node_id'] : 'loading...'}</td>
               <td>{nodeInfo ? nodeInfo.moniker : 'loading...'}</td>
+              <td>{nodeInfo ? nodeInfo['default_node_id'] : 'loading...'}</td>
               <td>{chainInfo ? chainInfo.rpc : 'loading...'}</td>
               <td>{chainInfo ? chainInfo.rest : 'loading...'}</td>
             </tr>

@@ -18,7 +18,7 @@ const AppInfo = () => {
               <td>{'app name'}</td>
               <td>{'app version'}</td>
               <td>{'cosmos sdk version'}</td>
-              <td>{'cometbft version'}</td>
+              <td>{'comet bft version'}</td>
             </tr>
           </thead>
           <tbody>
