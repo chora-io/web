@@ -38,7 +38,7 @@ const Proposals = () => {
           <thead>
             <tr>
               <td>{'id'}</td>
-              <td>{'title'}</td>
+              <td>{'name'}</td>
               <td>{'status'}</td>
               <td>{'submit time'}</td>
               <td>{'voting start time'}</td>

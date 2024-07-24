@@ -1,6 +1,5 @@
 'use client'
 
-import { Result } from 'chora/components'
 import { WalletContext } from 'chora/contexts'
 import { useMetadata } from 'chora/hooks'
 import { getMarkdown, formatTimestamp } from 'chora/utils'
@@ -18,7 +17,6 @@ const Proposal = () => {
 
   const [proposal, setProposal] = useState<any>(null)
   const [summary, setSummary] = useState<string | null>(null)
-  const [error, setError] = useState<string | null>(null)
 
   // parse metadata or fetch from network server, otherwise resolve
   const [metadata, metadataError] = useMetadata(
@@ -32,7 +30,7 @@ const Proposal = () => {
         .then((res) => res.json())
         .then((data) => setProposal(data.proposal))
         .catch((err) => {
-          setError(err.message)
+          console.error(err.message)
         })
     }
   }, [chainInfo?.rest, proposal])
@@ -64,7 +62,9 @@ const Proposal = () => {
           <p>
             {metadata
               ? metadata.name || metadata.title
-              : proposal && proposal.messages.length && proposal.messages[0].content
+              : proposal &&
+                  proposal.messages.length &&
+                  proposal.messages[0].content
                 ? proposal.messages[0].content.title
                 : 'NA'}
           </p>
@@ -80,7 +80,9 @@ const Proposal = () => {
             <p>
               {metadata
                 ? metadata.description || metadata.summary
-                : proposal && proposal.messages.length && proposal.messages[0].content
+                : proposal &&
+                    proposal.messages.length &&
+                    proposal.messages[0].content
                   ? proposal.messages[0].content.description
                   : 'NA'}
             </p>
