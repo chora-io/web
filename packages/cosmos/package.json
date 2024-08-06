@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7",
-    "@typescript-eslint/parser": "^7",
+    "@typescript-eslint/parser": "^8",
     "eslint": "^9",
     "prettier": "^3",
     "ts-proto": "^1",
