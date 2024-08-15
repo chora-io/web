@@ -70,6 +70,6 @@
     "clean:registry": "turbo run clean --filter=registry"
   },
   "devDependencies": {
-    "turbo": "^1.10.14"
+    "turbo": "^2.0.14"
   }
 }
