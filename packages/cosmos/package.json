@@ -23,7 +23,7 @@
     "@typescript-eslint/parser": "^8",
     "eslint": "^9",
     "prettier": "^3",
-    "ts-proto": "^1",
+    "ts-proto": "^2",
     "typescript": "^5"
   }
 }
