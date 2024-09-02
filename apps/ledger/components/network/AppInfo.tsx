@@ -24,9 +24,27 @@ const AppInfo = () => {
           <tbody>
             <tr>
               <td>{appInfo ? appInfo['app_name'] : 'loading...'}</td>
-              <td>{appInfo ? `v${appInfo.version}` : 'loading...'}</td>
-              <td>{appInfo ? appInfo['cosmos_sdk_version'] : 'loading...'}</td>
-              <td>{nodeInfo ? `v${nodeInfo['version']}` : 'loading...'}</td>
+              <td>
+                {appInfo
+                  ? appInfo.version[0] === 'v'
+                    ? appInfo.version
+                    : `v${appInfo.version}`
+                  : 'loading...'}
+              </td>
+              <td>
+                {appInfo
+                  ? appInfo['cosmos_sdk_version'][0] === 'v'
+                    ? appInfo['cosmos_sdk_version']
+                    : `v${appInfo['cosmos_sdk_version']}`
+                  : 'loading...'}
+              </td>
+              <td>
+                {nodeInfo
+                  ? nodeInfo['version'][0] === 'v'
+                    ? nodeInfo['version']
+                    : `v${nodeInfo['version']}`
+                  : 'loading...'}
+              </td>
             </tr>
           </tbody>
         </table>
