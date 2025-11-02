@@ -1,0 +1,3 @@
+.page {
+  composes: page-center-not-found from 'chora/styles/page.css';
+}

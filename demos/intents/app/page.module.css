@@ -1,0 +1,3 @@
+.page {
+  composes: page-center from 'chora/styles/page.css';
+}

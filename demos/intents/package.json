@@ -1,0 +1,42 @@
+{
+  "name": "intents",
+  "private": true,
+  "description": "demo application",
+  "version": "0.0.0",
+  "homepage": "https://chora.io",
+  "bugs": {
+    "url": "https://github.com/chora-io/web/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chora-io/web"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "npx eslint .",
+    "format": "prettier --write .",
+    "test": "echo 'test not configured'",
+    "clean": "rm -rf .next node_modules"
+  },
+  "dependencies": {
+    "chora": "npm:@chora-io/chora@v0.1.0-beta12",
+    "next": "^14",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/react": "^18.3",
+    "@types/react-dom": "^18.3",
+    "@typescript-eslint/eslint-plugin": "^8",
+    "@typescript-eslint/parser": "^8",
+    "autoprefixer": "^10",
+    "eslint": "^9",
+    "eslint-config-next": "^14",
+    "postcss": "^8",
+    "prettier": "^3",
+    "typescript": "^5"
+  }
+}
