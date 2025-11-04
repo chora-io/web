@@ -4,9 +4,9 @@ import { Result } from 'chora/components'
 import { InputString } from 'chora/components/forms'
 import { useState } from 'react'
 
-import styles from './SubmitIntent.module.css'
+import styles from './VerifyTx.module.css'
 
-const SubmitIntent = () => {
+const VerifyTx = () => {
   // input and options
   const [input, setInput] = useState<string>('')
 
@@ -17,12 +17,12 @@ const SubmitIntent = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault()
 
-    fetch('http://localhost:4000/intents', {
+    fetch('http://localhost:4000/transactions/verify', {
       headers: {
         'Content-Type': 'application/json',
       },
       method: 'POST',
-      body: JSON.stringify({ intent: input }),
+      body: JSON.stringify({ transaction: input }),
     })
       .then((res) => res.json())
       .then((res) => {
@@ -40,17 +40,17 @@ const SubmitIntent = () => {
   return (
     <div className={styles.box}>
       <div className={styles.boxHeader}>
-        <h2>{'submit intent'}</h2>
-        <p>{'submit intent to the intent pool'}</p>
+        <h2>{'verify transaction'}</h2>
+        <p>{'determine whether a transaction is valid'}</p>
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputString
-          id="intent"
-          label="intent"
+          id="transaction"
+          label="transaction"
           placeholder="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
           string={input}
           initString={
-            'BcDTAMg41PQVEIpNQ4aM44KCAASA+Q5zaJJkRBdoPrP94fjaAz9RGUzSOFJqLIvgUaMsliwoqGlaWQBkdDL6CgjFpiFDxnFBQQACwHyHOTRJMqILNJ/Z/nB87YGfqAwmaRwpNZZF8KhRFksWFFSrYaAHhGJT08qqYaA3cyjGTQCGFID/FuPxlBs2TyS5cgFnbXQgSHKk/RMz4TV9i8zKyzu8rCsyNTUV'
+            'BcDRAIg41PQVEIpNQ4aM44KCAPq9lWc/fPuCjJkVcoMs5Fjd4nZ7YqlBsIYfJ2FNfQmx8oKCmqZVADQcavoKCMWmIUPGcUFBAPnJSEF4dBw2TnpX25kOG0lONyWVjWTz5UoH2U2VwJ0yWlBQzWoY5AGh2NS0sqyGQT6U4ALQowD8txiPp9yweSLJlQs4a6MDQZIj7Z+YCa/pW2RWXt7hZV05NTXLAiCik9FXQCg2DRkyjgsKAuj3Vp798O0LMmZWyA2ykGN1i9vtiaUGwRp+nIQ19SXEygsKqtVwKx0K8LSyariVNnMowU0AhhSA/xbj8ZQbNk8kuXIBZ210IEhypP0TM+E1fYvMyss7vKwrMjU1FQ=='
           }
           setString={setInput}
         />
@@ -61,4 +61,4 @@ const SubmitIntent = () => {
   )
 }
 
-export default SubmitIntent
+export default VerifyTx

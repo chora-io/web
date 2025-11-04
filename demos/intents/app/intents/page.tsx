@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 
 import ListIntents from '@components/intents/ListIntents'
 import SubmitIntent from '@components/intents/SubmitIntent'
+import VerifyTx from '@components/intents/VerifyTx'
 
 import styles from './page.module.css'
 
@@ -15,6 +16,7 @@ const IntentsPage = () => (
       <h1>{'intents'}</h1>
       <ListIntents />
       <SubmitIntent />
+      <VerifyTx />
     </div>
   </div>
 )
