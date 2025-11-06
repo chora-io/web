@@ -5,6 +5,9 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
+    "anoma#build": {
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    },
     "chora#build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]

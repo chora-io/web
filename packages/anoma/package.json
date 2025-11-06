@@ -1,0 +1,29 @@
+{
+  "name": "anoma",
+  "private": true,
+  "description": "anoma webkit",
+  "version": "0.0.0",
+  "homepage": "https://chora.io",
+  "bugs": {
+    "url": "https://github.com/chora-io/web/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chora-io/web"
+  },
+  "scripts": {
+    "build": "sh ./scripts/build.sh",
+    "lint": "npx eslint .",
+    "format": "prettier --write .",
+    "test": "echo 'test not configured'",
+    "clean": "rm -rf .turbo api dist node_modules"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8",
+    "@typescript-eslint/parser": "^8",
+    "eslint": "^9",
+    "prettier": "^3",
+    "ts-proto": "^2",
+    "typescript": "^5"
+  }
+}

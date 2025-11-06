@@ -1,0 +1,13 @@
+{
+  "name": "@chora-io/anoma",
+  "description": "anoma webkit",
+  "version": "0.1.0-alpha1",
+  "homepage": "https://chora.io",
+  "bugs": {
+    "url": "https://github.com/chora-io/web/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chora-io/web"
+  }
+}
